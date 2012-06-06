@@ -3,7 +3,9 @@
 /* -------------------- WPMU DEV Dashboard Notice -------------------- */
 if ( !class_exists('WPMUDEV_Dashboard_Notice') ) {
 	class WPMUDEV_Dashboard_Notice {
-	
+		
+		var $version = '2.0';
+		
 		function WPMUDEV_Dashboard_Notice() {
 			add_action( 'plugins_loaded', array( &$this, 'init' ) ); 
 		}
@@ -15,7 +17,7 @@ if ( !class_exists('WPMUDEV_Dashboard_Notice') ) {
 				if ( file_exists(WP_PLUGIN_DIR . '/wpmudev-updates/update-notifications.php') ) {
 					add_action( 'all_admin_notices', array( &$this, 'activate_notice' ), 5 );
 				} else {
-					add_action( 'all_admin_notices', array( &$this, 'notice' ), 5 );
+					add_action( 'all_admin_notices', array( &$this, 'install_notice' ), 5 );
 					add_filter( 'plugins_api', array( &$this, 'filter_plugin_info' ), 10, 3 );
 				}
 			}
@@ -51,8 +53,8 @@ if ( !class_exists('WPMUDEV_Dashboard_Notice') ) {
 			return wp_nonce_url($function('plugins.php?action=activate&plugin=wpmudev-updates%2Fupdate-notifications.php'), 'activate-plugin_wpmudev-updates/update-notifications.php');
 		}
 		
-		function notice() {
-			echo '<div class="error fade"><p>' . sprintf(__('Please install <a href="%s" title="Install Now &raquo;">our free WPMU DEV Dashboard plugin</a> which helps you stay up-to-date with the most stable, secure versions of WPMU DEV themes and plugins. <a href="http://premium.wpmudev.org/wpmu-dev/update-notifications-plugin-information/">More information &raquo;</a>', 'wpmudev'), $this->auto_install_url()) . '</a></p></div>';
+		function install_notice() {
+			echo '<div class="error fade"><p>' . sprintf(__('Please <a href="%s" title="Install Now &raquo;">install our free WPMU DEV Dashboard plugin</a> which helps you stay up-to-date with the most stable, secure versions of WPMU DEV themes and plugins. <a href="http://premium.wpmudev.org/wpmu-dev/update-notifications-plugin-information/">More information &raquo;</a>', 'wpmudev'), $this->auto_install_url()) . '</a></p></div>';
 		}
 		
 		function activate_notice() {
