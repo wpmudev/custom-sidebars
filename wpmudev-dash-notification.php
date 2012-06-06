@@ -54,11 +54,11 @@ if ( !class_exists('WPMUDEV_Dashboard_Notice') ) {
 		}
 		
 		function install_notice() {
-			echo '<div class="error fade"><p>' . sprintf(__('Please <a href="%s" title="Install Now &raquo;">install our free WPMU DEV Dashboard plugin</a> which helps you stay up-to-date with the most stable, secure versions of WPMU DEV themes and plugins. <a href="http://premium.wpmudev.org/wpmu-dev/update-notifications-plugin-information/">More information &raquo;</a>', 'wpmudev'), $this->auto_install_url()) . '</a></p></div>';
+			echo '<div class="error fade"><p>' . sprintf(__('Easily get updates, support, and one-click WPMU DEV plugin/theme installations right from in your dashboard - <a href="%s" title="Install Now &raquo;">install the free WPMU DEV Dashboard plugin</a>. <small><a href="http://premium.wpmudev.org/wpmu-dev/update-notifications-plugin-information/">(find out more)</a></small>', 'wpmudev'), $this->auto_install_url()) . '</a></p></div>';
 		}
 		
 		function activate_notice() {
-			echo '<div class="updated fade"><p>' . sprintf(__('Please <a href="%s" title="Activate Now &raquo;">activate the WPMU DEV Dashboard plugin</a> which helps you stay up-to-date with the most stable, secure versions of WPMU DEV themes and plugins.', 'wpmudev'), $this->activate_url()) . '</a></p></div>';
+			echo '<div class="updated fade"><p>' . sprintf(__('Updates, Support, Premium Plugins, Community - <a href="%s" title="Activate Now &raquo;">activate the WPMU DEV Dashboard plugin now</a>.', 'wpmudev'), $this->activate_url()) . '</a></p></div>';
 		}
 	
 	}
