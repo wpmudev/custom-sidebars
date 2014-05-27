@@ -38,8 +38,11 @@ if ( ! class_exists( 'CustomSidebars' ) ) {
 	// used for more readable i18n functions: __( 'text', CSB_LANG );
 	define( 'CSB_LANG', 'custom-sidebars' );
 
-	$views_dir = dirname( __FILE__ ) . '/views/';
-	define( 'CSB_VIEWS_DIR', $views_dir );
+	$plugin_dir = dirname( __FILE__ );
+	$plugin_url = plugin_dir_url( __FILE__ );
+	define( 'CSB_VIEWS_DIR', $plugin_dir . '/views/' );
+	define( 'CSB_JS_URL', $plugin_url . '/js/' );
+	define( 'CSB_CSS_URL', $plugin_url . '/css/' );
 
 	// Load the actual core.
 	require_once 'inc/class-custom-sidebars.php';
@@ -48,7 +51,7 @@ if ( ! class_exists( 'CustomSidebars' ) ) {
 
 
 if ( ! isset( $plugin_sidebars ) ){
-	$plugin_sidebars = new CustomSidebars();
+	$plugin_sidebars = CustomSidebars::instance();
 	add_action( 'widgets_init', array( $plugin_sidebars, 'registerCustomSidebars') );
 	add_action( 'widgets_admin_page', array( $plugin_sidebars, 'widgetSidebarContent' ) );
 	add_action( 'admin_menu', array( $plugin_sidebars, 'addSubMenus' ) );

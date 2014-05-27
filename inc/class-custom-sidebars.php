@@ -1,10 +1,14 @@
 <?php
+
+// Load additional Pro-modules.
+require_once( 'class-custom-sidebars-visibility.php' );
+
+
 /**
- * Main plugin file. The CustomSidebars class encapsulates all our plugin logic.
+ * Main plugin file.
+ * The CustomSidebars class encapsulates all our plugin logic.
  */
-
 class CustomSidebars {
-
 	var $message = '';
 	var $message_class = '';
 
@@ -27,8 +31,26 @@ class CustomSidebars {
 	var $replacements = array();
 	var $replacements_todo;
 
+	/**
+	 * Returns the singleton instance of the custom sidebars class.
+	 *
+	 * @since 1.6
+	 */
+	public static function instance() {
+		static $Inst = null;
 
-	public function __construct() {
+		if ( null === $Inst ) {
+			$Inst = new CustomSidebars();
+		}
+
+		return $Inst;
+	}
+
+	/**
+	 * Private, since it is a singleton.
+	 * We directly initialize sidebar options when class is created.
+	 */
+	private function __construct() {
 		$this->retrieve_options();
 		$this->replaceable_sidebars = $this->getModifiableSidebars();
 		$this->replacements_todo = sizeof( $this->replaceable_sidebars );
@@ -36,6 +58,9 @@ class CustomSidebars {
 		foreach ( $this->replaceable_sidebars as $sb ) {
 			$this->replacements[$sb] = FALSE;
 		}
+
+		// Also initialize the Pro-modules
+		CustomSidebarsVisibility::instance();
 	}
 
 	public function retrieve_options() {
@@ -509,13 +534,12 @@ class CustomSidebars {
 	}
 
 	public function addStyles( $hook ) {
-		$dir = dirname( __FILE__ );
 		if ( 'widgets.php' == $hook || 'appearance_page_customsidebars' == $hook ) {
-			wp_enqueue_script( 'cs_script', plugins_url( '/js/cs.js', $dir ) );
+			wp_enqueue_script( 'cs_script', CSB_JS_URL . 'cs.js' );
 			wp_enqueue_script( 'thickbox', null, array( 'jquery' ) );
 			wp_enqueue_style( 'thickbox.css', includes_url() . 'js/thickbox/thickbox.css', null, '1.6' );
 		}
-		wp_enqueue_style( 'cs_style', plugins_url( '/css/cs_style.css', $dir ) );
+		wp_enqueue_style( 'cs_style', CSB_CSS_URL . 'cs_style.css' );
 	}
 
 	/**
