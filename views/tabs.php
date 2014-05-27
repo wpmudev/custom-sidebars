@@ -11,22 +11,22 @@ if(!empty($_GET['p'])){
 	else if($_GET['p']=='removebanner')
 		$tabdonation = TRUE;
 	else
-		$tabconfig = 'nav-tab-active';	
-		
+		$tabconfig = 'nav-tab-active';
+
 }
-else		
-		$tabconfig = 'nav-tab-active';	
+else
+		$tabconfig = 'nav-tab-active';
 ?>
 <div id="icon-themes" class="icon32"><br /></div>
 <h2 class="nav-tab-wrapper">
-<a class="nav-tab <?php echo $tabconfig; ?>" href="themes.php?page=customsidebars"><?php _e('Custom Sidebars','custom-sidebars'); ?></a>
-<a class="nav-tab <?php echo $tabdefaults; ?>" href="themes.php?page=customsidebars&p=defaults"><?php _e('Default Sidebars','custom-sidebars'); ?></a>
+<a class="nav-tab <?php echo $tabconfig; ?>" href="themes.php?page=customsidebars"><?php _e('Custom Sidebars', CSB_LANG ); ?></a>
+<a class="nav-tab <?php echo $tabdefaults; ?>" href="themes.php?page=customsidebars&p=defaults"><?php _e('Default Sidebars', CSB_LANG ); ?></a>
 <?php do_action('cs_additionalTabs'); ?>
 <?php if($tabedit): ?>
-<a class="nav-tab nav-tab-active" href="#"><?php _e('Edit Sidebar','custom-sidebars'); ?></a>
+<a class="nav-tab nav-tab-active" href="#"><?php _e('Edit Sidebar', CSB_LANG ); ?></a>
 <?php endif; ?>
 <?php if(isset($tabdonation)): ?>
-<a class="nav-tab nav-tab-active" href="#"><?php _e('Thanks for donate','custom-sidebars'); ?></a>
+<a class="nav-tab nav-tab-active" href="#"><?php _e('Thanks for donate', CSB_LANG ); ?></a>
 <?php endif; ?>
 </h2>
-<?php $this->message(); ?>	
+<?php $this->message(); ?>

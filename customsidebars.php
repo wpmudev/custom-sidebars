@@ -6,7 +6,7 @@ Description: Allows to create your own widgetized areas and custom sidebars, and
 Version: 1.5
 Author: WPMU DEV
 Author URI: http://premium.wpmudev.org/
-Textdomain: csb
+Textdomain: custom-sidebars
 WDP ID: 132456
 */
 
@@ -36,7 +36,7 @@ http://arqex.com/
 if ( ! class_exists( 'CustomSidebars' ) ) {
 
 	// used for more readable i18n functions: __( 'text', CSB_LANG );
-	define( 'CSB_LANG', 'csb' );
+	define( 'CSB_LANG', 'custom-sidebars' );
 
 	$views_dir = dirname( __FILE__ ) . '/views/';
 	define( 'CSB_VIEWS_DIR', $views_dir );

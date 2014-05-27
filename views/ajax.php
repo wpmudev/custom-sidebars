@@ -3,22 +3,22 @@
 
 <h2><?php echo $current_sidebar['name'] ?></h2>
 <div id="defaultsidebarspage">
-    
+
     <form action="themes.php?page=customsidebars&p=defaults" method="post">
 
 <div id="poststuff" class="defaultscontainer">
 
 <div  class="postbox closed">
-<div class="handlediv" title="Click to toggle"><br></div><h3 class="hndle"><span><?php _e('In a singular post or page','custom-sidebars'); ?></span></h3>
+<div class="handlediv" title="Click to toggle"><br></div><h3 class="hndle"><span><?php _e('In a singular post or page', CSB_LANG ); ?></span></h3>
 <div class="inside" id="defaultsforposts">
-<p><?php _e('To set the sidebar for a single post or page just set it when creating/editing the post.','custom-sidebars'); ?></p>
+<p><?php _e('To set the sidebar for a single post or page just set it when creating/editing the post.', CSB_LANG ); ?></p>
 </div></div>
-    
+
 <div  class="postbox closed">
-<div class="handlediv" title="Click to toggle"><br></div><h3 class="hndle"><span><?php _e('As the default sidebar for single entries','custom-sidebars'); ?></span></h3>
+<div class="handlediv" title="Click to toggle"><br></div><h3 class="hndle"><span><?php _e('As the default sidebar for single entries', CSB_LANG ); ?></span></h3>
 <div class="inside" id="defaultsforposts">
-<p><?php _e('These replacements will be applied to every single post that matches a certain post type or category.','custom-sidebars'); ?></p>
-<p><?php _e('The sidebars by categories work in a hierarchycal way, if a post belongs to a parent and a child category it will show the child category sidebars if they are defined, otherwise it will show the parent ones. If no category sidebar for post are defined, the post will show the post post-type sidebar. If none of those sidebars are defined, the theme default sidebar is shown.','custom-sidebars'); ?></p>
+<p><?php _e('These replacements will be applied to every single post that matches a certain post type or category.', CSB_LANG ); ?></p>
+<p><?php _e('The sidebars by categories work in a hierarchycal way, if a post belongs to a parent and a child category it will show the child category sidebars if they are defined, otherwise it will show the parent ones. If no category sidebar for post are defined, the post will show the post post-type sidebar. If none of those sidebars are defined, the theme default sidebar is shown.', CSB_LANG ); ?></p>
 
         <?php include 'defaults/single_category.php' ?>
 
@@ -30,10 +30,10 @@
 
 
 <div  class="postbox closed">
-<div class="handlediv" title="Click to toggle"><br></div><h3 class="hndle"><span><?php _e('As the default sidebars for archives','custom-sidebars'); ?></span></h3>
+<div class="handlediv" title="Click to toggle"><br></div><h3 class="hndle"><span><?php _e('As the default sidebars for archives', CSB_LANG ); ?></span></h3>
 <div class="inside" id="defaultsforpages">
 
-<p><?php _e('You can define specific sidebars for the different Wordpress pages. Sidebars for lists of posts pages work in the same hierarchycal way than the one for single posts.','custom-sidebars'); ?></p>
+<p><?php _e('You can define specific sidebars for the different Wordpress pages. Sidebars for lists of posts pages work in the same hierarchycal way than the one for single posts.', CSB_LANG ); ?></p>
 
 <?php include 'defaults/archive_blog.php' ?>
 <?php include 'defaults/archive_posttype.php' ?>
@@ -50,7 +50,7 @@
         <?php wp_nonce_field( 'cs-set-defaults', '_where_nonce');?>
 <div id="submitwhere" class="submit">
     <img src="<?php echo admin_url() ?>/images/wpspin_light.gif" class="ajax-feedback" title="" alt="">
-    <input type="submit" class="button-primary" name="update-defaults-pages" value="<?php _e('Save Changes','custom-sidebars'); ?>" />
+    <input type="submit" class="button-primary" name="update-defaults-pages" value="<?php _e('Save Changes', CSB_LANG ); ?>" />
 </div>
 </form>
 
@@ -60,7 +60,7 @@
 </div>
 </div>
     <script>
-    
+
     jQuery('.defaultsContainer').hide();
     jQuery('#defaultsidebarspage').on('click', '.csh3title', function(){
         jQuery(this).siblings('.defaultsContainer').toggle();
@@ -92,10 +92,10 @@
         });
         return false;
     })
-    
+
     showsavebutton = function(){
         if(!jQuery('#submitwhere').is(':visible'))
             jQuery('#submitwhere').slideDown();
     }
-    
+
 </script>

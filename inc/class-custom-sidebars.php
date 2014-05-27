@@ -321,7 +321,7 @@ class CustomSidebars{
 
 	function deleteSidebar(){
 		if(! current_user_can($this->cap_required) )
-			return new WP_Error('cscantdelete', __('You do not have permission to delete sidebars','custom-sidebars'));
+			return new WP_Error('cscantdelete', __('You do not have permission to delete sidebars', CSB_LANG ));
 
 				if(! DOING_AJAX && ! wp_verify_nonce($_REQUEST['_n'], 'custom-sidebars-delete') )
 						die('Security check stop your request.');
@@ -347,9 +347,9 @@ class CustomSidebars{
 		$this->refreshSidebarsWidgets();
 
 		if($deleted)
-			$this->setMessage(sprintf(__('The sidebar "%s" has been deleted.','custom-sidebars'), $_REQUEST['delete']));
+			$this->setMessage(sprintf(__('The sidebar "%s" has been deleted.', CSB_LANG ), $_REQUEST['delete']));
 		else
-			$this->setError(sprintf(__('There was not any sidebar called "%s" and it could not been deleted.','custom-sidebars'), $_GET['delete']));
+			$this->setError(sprintf(__('There was not any sidebar called "%s" and it could not been deleted.', CSB_LANG ), $_GET['delete']));
 	}
 
 	function createPage(){
@@ -387,7 +387,7 @@ class CustomSidebars{
 			if($_GET['p']=='edit' && !empty($_GET['id'])){
 				$customsidebars = $this->getCustomSidebars();
 				if(! $sb = $this->getSidebar($_GET['id'], $customsidebars))
-					return new WP_Error('cscantdelete', __('You do not have permission to delete sidebars','custom-sidebars'));
+					return new WP_Error('cscantdelete', __('You do not have permission to delete sidebars', CSB_LANG ));
 				include( CSB_VIEWS_DIR . 'edit.php');
 				return;
 			}
@@ -424,7 +424,7 @@ class CustomSidebars{
 	}
 
 	function addSubMenus(){
-		$page = add_submenu_page('themes.php', __('Custom sidebars','custom-sidebars'), __('Custom sidebars','custom-sidebars'), $this->cap_required, 'customsidebars', array($this, 'createPage'));
+		$page = add_submenu_page('themes.php', __('Custom Sidebars Pro', CSB_LANG ), __('Custom sidebars', CSB_LANG ), $this->cap_required, 'customsidebars', array($this, 'createPage'));
 
 		add_action('admin_print_scripts-' . $page, array($this, 'addScripts'));
 	}
@@ -476,7 +476,7 @@ class CustomSidebars{
 	}
 
 	function loadTextDomain(){
-		load_plugin_textdomain( 'custom-sidebars', false, dirname(plugin_basename( __FILE__ )) . "/lang/");
+		load_plugin_textdomain(  CSB_LANG , false, dirname(plugin_basename( __FILE__ )) . "/lang/");
 	}
 
 	function getReplacements($postid){
@@ -517,7 +517,7 @@ class CustomSidebars{
 		else
 			add_option($this->option_modifiable, $options);
 
-		$this->setMessage(__('The custom sidebars settings has been updated successfully.','custom-sidebars'));
+		$this->setMessage(__('The custom sidebars settings has been updated successfully.', CSB_LANG ));
 	}
 
 	function storeDefaults(){
@@ -654,7 +654,7 @@ class CustomSidebars{
 			add_option($this->option_modifiable, $options);
 		}
 
-		$this->setMessage(__('The default sidebars have been updated successfully.','custom-sidebars'));
+		$this->setMessage(__('The default sidebars have been updated successfully.', CSB_LANG ));
 
 	}
 
@@ -705,7 +705,7 @@ class CustomSidebars{
 		$name = stripslashes(trim($_POST['sidebar_name']));
 		$description = stripslashes(trim($_POST['sidebar_description']));
 		if(empty($name) OR empty($description))
-			$this->setError(__('You have to fill all the fields to create a new sidebar.','custom-sidebars'));
+			$this->setError(__('You have to fill all the fields to create a new sidebar.', CSB_LANG ));
 		else{
 			$id = $this->sidebar_prefix . sanitize_html_class(sanitize_title_with_dashes($name));
 			$sidebars = get_option($this->option_name, FALSE);
@@ -714,9 +714,9 @@ class CustomSidebars{
 				if(! $this->getSidebar($id,$sidebars) ){
 					//Create a new sidebar
 					$sidebars[] = array(
-						'name' => __( $name ,'custom-sidebars'),
+						'name' => __( $name , CSB_LANG ),
 						'id' => $id,
-						'description' => __( $description ,'custom-sidebars'),
+						'description' => __( $description , CSB_LANG ),
 						'before_widget' => '', //all these fields are not needed, theme ones will be used
 						'after_widget' => '',
 						'before_title' => '',
@@ -729,19 +729,19 @@ class CustomSidebars{
 
 					$this->refreshSidebarsWidgets();
 
-					$this->setMessage( __('The sidebar has been created successfully.','custom-sidebars'));
+					$this->setMessage( __('The sidebar has been created successfully.', CSB_LANG ));
 
 
 				}
 				else
-					$this->setError(__('There is already a sidebar registered with that name, please choose a different one.','custom-sidebars'));
+					$this->setError(__('There is already a sidebar registered with that name, please choose a different one.', CSB_LANG ));
 			}
 			else{
 				$id = $this->sidebar_prefix . sanitize_html_class(sanitize_title_with_dashes($name));
 				$sidebars= array(array(
-						'name' => __( $name ,'custom-sidebars'),
+						'name' => __( $name , CSB_LANG ),
 						'id' => $id,
-						'description' => __( $description ,'custom-sidebars'),
+						'description' => __( $description , CSB_LANG ),
 						'before_widget' => '',
 						'after_widget' => '',
 						'before_title' => '',
@@ -752,7 +752,7 @@ class CustomSidebars{
 
 				$this->refreshSidebarsWidgets();
 
-				$this->setMessage( __('The sidebar has been created successfully.','custom-sidebars'));
+				$this->setMessage( __('The sidebar has been created successfully.', CSB_LANG ));
 			}
 		}
 	}
@@ -774,10 +774,10 @@ class CustomSidebars{
 					if(isset($url['query'])){
 							parse_str($url['query'], $args);
 							if($args['id'] != $id)
-									return new WP_Error(__('The operation is not secure and it cannot be completed.','custom-sidebars'));
+									return new WP_Error(__('The operation is not secure and it cannot be completed.', CSB_LANG ));
 					}
 					else
-							return new WP_Error(__('The operation is not secure and it cannot be completed.','custom-sidebars'));
+							return new WP_Error(__('The operation is not secure and it cannot be completed.', CSB_LANG ));
 				}
 
 		$newsidebars = array();
@@ -786,13 +786,13 @@ class CustomSidebars{
 				$newsidebars[] = $sb;
 			else
 				$newsidebars[] = array(
-						'name' => __( $name ,'custom-sidebars'),
+						'name' => __( $name , CSB_LANG ),
 						'id' => $id,
-						'description' => __( $description ,'custom-sidebars'),
-						'before_widget' =>  __( $before_widget ,'custom-sidebars'),
-						'after_widget' => __( $after_widget ,'custom-sidebars'),
-						'before_title' =>  __( $before_title ,'custom-sidebars'),
-						'after_title' =>  __( $after_title ,'custom-sidebars'),
+						'description' => __( $description , CSB_LANG ),
+						'before_widget' =>  __( $before_widget , CSB_LANG ),
+						'after_widget' => __( $after_widget , CSB_LANG ),
+						'before_title' =>  __( $before_title , CSB_LANG ),
+						'after_title' =>  __( $after_title , CSB_LANG ),
 						) ;
 		}
 
@@ -800,7 +800,7 @@ class CustomSidebars{
 		update_option( $this->option_name, $newsidebars );
 		$this->refreshSidebarsWidgets();
 
-		$this->setMessage( sprintf(__('The sidebar "%s" has been updated successfully.','custom-sidebars'), $id ));
+		$this->setMessage( sprintf(__('The sidebar "%s" has been updated successfully.', CSB_LANG ), $id ));
 	}
 
 	function widgetSidebarContent(){
@@ -897,7 +897,7 @@ class CustomSidebars{
 
 	function resetSidebars(){
 		if(! current_user_can($this->cap_required) )
-			return new WP_Error('cscantdelete', __('You do not have permission to delete sidebars','custom-sidebars'));
+			return new WP_Error('cscantdelete', __('You do not have permission to delete sidebars', CSB_LANG ));
 
 		if (! wp_verify_nonce($_REQUEST['reset-n'], 'custom-sidebars-delete') ) die('Security check stopped your request.');
 
@@ -928,7 +928,7 @@ class CustomSidebars{
 
 		update_option('sidebars_widgets', $widgetized_sidebars);
 
-		$this->setMessage( __('The Custom Sidebars data has been removed successfully,','custom-sidebars'));
+		$this->setMessage( __('The Custom Sidebars data has been removed successfully,', CSB_LANG ));
 	}
 
 	function getSortedCategories(){
@@ -971,7 +971,7 @@ class CustomSidebars{
 			if(! wp_verify_nonce($nonce, $action)){
 				$response = array(
 				   'success' => false,
-				   'message' => __('The operation is not secure and it cannot be completed.','custom-sidebars'),
+				   'message' => __('The operation is not secure and it cannot be completed.', CSB_LANG ),
 				   'nonce' => wp_create_nonce($action)
 				);
 				$this->jsonResponse( $response );
@@ -1003,7 +1003,7 @@ class CustomSidebars{
 			} catch(Exception $e) {
 				return array(
 					'success' => false,
-					'message' => __('There has been an error storing the sidebars. Please, try again.', 'custom-sidebars')
+					'message' => __('There has been an error storing the sidebars. Please, try again.',  CSB_LANG )
 				);
 			}
 			return array(
@@ -1023,7 +1023,7 @@ class CustomSidebars{
 
 			return array(
 				'success' => true,
-				'message' => __('The sidebar has been created successfully.','custom-sidebars'),
+				'message' => __('The sidebar has been created successfully.', CSB_LANG ),
 				'name' => stripslashes(trim($_POST['sidebar_name'])),
 				'description' => stripslashes(trim($_POST['sidebar_description'])),
 				'id' => $this->sidebar_prefix . sanitize_html_class(sanitize_title_with_dashes($_POST['sidebar_name']))
@@ -1065,7 +1065,7 @@ class CustomSidebars{
 			if(!isset($allsidebars[$sidebarId])){
 				echo urlencode($_GET['id']);
 				var_dump($allsidebars);
-				die(__('Unknown sidebar.' , 'custom-sidebars'));
+				die(__('Unknown sidebar.' ,  CSB_LANG ));
 			}
 			foreach($allsidebars as $key => $sb){
 				if(strlen($sb['name']) > 30)
