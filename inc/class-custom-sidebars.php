@@ -419,10 +419,8 @@ class CustomSidebars{
 				include( CSB_VIEWS_DIR . 'settings.php');
 
 		}
-		else {
-			echo 'File: ' . (CSB_VIEWS_DIR . 'settings.php') . (is_file(CSB_VIEWS_DIR . 'settings.php') ? ' :)' : ' :(') . '<br>';
+		else
 			include( CSB_VIEWS_DIR . 'settings.php');
-		}
 	}
 
 	function addSubMenus(){
@@ -438,11 +436,11 @@ class CustomSidebars{
 	function addStyles($hook){
 		$dir = dirname(__FILE__);
 		if( 'widgets.php' == $hook || 'appearance_page_customsidebars' == $hook){
-			wp_enqueue_script( 'cs_script', plugins_url('/cs.js', $dir ) );
+			wp_enqueue_script( 'cs_script', plugins_url('/js/cs.js', $dir ) );
 			wp_enqueue_script('thickbox', null, array('jquery'));
-			wp_enqueue_style('thickbox.css', includes_url() . 'js/thickbox/thickbox.css', null, '1.0');
+			wp_enqueue_style('thickbox.css', includes_url() . 'js/thickbox/thickbox.css', null, '1.6');
 		}
-		wp_enqueue_style( 'cs_style', plugins_url( 'cs_style.css', $dir ) );
+		wp_enqueue_style( 'cs_style', plugins_url( '/css/cs_style.css', $dir ) );
 	}
 
 	function addMetaBox(){
