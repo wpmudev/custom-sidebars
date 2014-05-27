@@ -1,0 +1,553 @@
+msgid ""
+msgstr ""
+"Project-Id-Version: customsidebars\n"
+"Report-Msgid-Bugs-To: \n"
+"POT-Creation-Date: 2010-12-27 10:59+0100\n"
+"PO-Revision-Date: 2012-11-04 09:45+0200\n"
+"Last-Translator: \n"
+"Language-Team: \n"
+"MIME-Version: 1.0\n"
+"Content-Type: text/plain; charset=UTF-8\n"
+"Content-Transfer-Encoding: 8bit\n"
+"Plural-Forms: nplurals=2; plural=n != 1;\n"
+"X-Poedit-SourceCharset: utf-8\n"
+"X-Poedit-KeywordsList: __;_e;__ngettext:1,2;_n:1,2;__ngettext_noop:1,2;"
+"_n_noop:1,2;_c,_nc:4c,1,2;_x:1,2c;_ex:1,2c;_nx:4c,1,2;_nx_noop:4c,1,2\n"
+"X-Poedit-Basepath: ..\n"
+"X-Textdomain-Support: yes\n"
+"X-Poedit-SearchPath-0: .\n"
+
+# @ custom-sidebars
+#: customsidebars.php:312 customsidebars.php:378 customsidebars.php:896
+msgid "You do not have permission to delete sidebars"
+msgstr "אין לך הרשאה למחוק סיידברים"
+
+# @ custom-sidebars
+#: customsidebars.php:338
+#, php-format
+msgid "The sidebar \"%s\" has been deleted."
+msgstr "הסיידבר \"%s\" נחמק בהצלחה."
+
+# @ custom-sidebars
+#: customsidebars.php:340
+#, php-format
+msgid "There was not any sidebar called \"%s\" and it could not been deleted."
+msgstr "אין סיידבר שנקרא \"%s\" וכמובן שהוא לא יכול להימחק."
+
+# @ custom-sidebars
+#: customsidebars.php:417
+msgid "Custom sidebars"
+msgstr "סיידברים מותאים אישית"
+
+# @ custom-sidebars
+#: customsidebars.php:516
+msgid "The custom sidebars settings has been updated successfully."
+msgstr "הגדרות הסיידברים מותאים אישית עודכנו בהצלחה."
+
+# @ custom-sidebars
+#: customsidebars.php:653
+msgid "The default sidebars have been updated successfully."
+msgstr "הסיידברים ברירת המחדל עודכנו בהצלחה."
+
+# @ custom-sidebars
+#: customsidebars.php:704
+msgid "You have to fill all the fields to create a new sidebar."
+msgstr "אתה חייב למלא את כל השדות על מנת ליצור סיידבר חדש"
+
+# @ custom-sidebars
+#: customsidebars.php:728 customsidebars.php:751 customsidebars.php:1056
+msgid "The sidebar has been created successfully."
+msgstr "הסיידבר נוצר בהצלחה"
+
+# @ custom-sidebars
+#: customsidebars.php:733
+msgid ""
+"There is already a sidebar registered with that name, please choose a "
+"different one."
+msgstr "יש כבר סיידבר רשום תחת שם זה. אנא בחר שם אחר."
+
+# @ custom-sidebars
+#: customsidebars.php:773 customsidebars.php:776 customsidebars.php:1004
+msgid "The operation is not secure and it cannot be completed."
+msgstr "הפעולה לא בטוחה ולא יכולה להיות מושלמת."
+
+# @ custom-sidebars
+#: customsidebars.php:799
+#, php-format
+msgid "The sidebar \"%s\" has been updated successfully."
+msgstr "הסיידרבר \"%s\" עודכן בהצלחה."
+
+# @ custom-sidebars
+#: views/widgets.php:14
+msgid "Create a new sidebar"
+msgstr "צור סיידבר חדש"
+
+# @ custom-sidebars
+#: customsidebars.php:927
+msgid "The Custom Sidebars data has been removed successfully,"
+msgstr "תוכן הסיידברים המותאים אישית נמחק בהצלחה,"
+
+# @ custom-sidebars
+#: metabox.php:1
+msgid ""
+"You can assign specific sidebars to this post, just select a sidebar and the "
+"default one will be replaced, if it is available on your template."
+msgstr ""
+"אתה יכול לשייך סיידברים ספציפיים לפוסט זה. אתה רק צריך לבחור איזה סיידבר אתה "
+"רוצה והסיידבר ברירת מחדל יוחלף. זה מותנה בכך שהדבר מאופשר בתבנית שלך."
+
+# @ custom-sidebars
+#: metabox.php:14
+msgid ""
+"There are not replaceable sidebars selected. You can define what sidebar "
+"will be able for replacement in the <a href=\"themes.php?page=customsidebars"
+"\">Custom Sidebars config page</a>."
+msgstr ""
+"אין כרגע סיידברים חלופיים זמינים. אתה יכול להגדיר זאת <a href=\"themes.php?"
+"page=customsidebars\">פה</a>."
+
+# @ custom-sidebars
+#: views/ajax.php:20
+msgid ""
+"These replacements will be applied to every single post that matches a "
+"certain post type or category."
+msgstr "חלופות אלה יהיו שמישות לכל פוסט ספציפי שמתאים לפוסט-טייפ או קטגוריה"
+
+# @ custom-sidebars
+#: views/ajax.php:21 views/defaults.php:16
+msgid ""
+"The sidebars by categories work in a hierarchycal way, if a post belongs to "
+"a parent and a child category it will show the child category sidebars if "
+"they are defined, otherwise it will show the parent ones. If no category "
+"sidebar for post are defined, the post will show the post post-type sidebar. "
+"If none of those sidebars are defined, the theme default sidebar is shown."
+msgstr ""
+"הסייבררים לפי קטגוריה מוגדרות על פי היררכיה. לדוגמה- אם פוסט שייך לקטגוריה "
+"וגם לתת קטגוריה, הסיידבר שיוצג הוא זה שהותאם לתת קטגוריה ואם לא אז זה יראה "
+"את הסיידבר של הקטגוריה."
+
+# @ custom-sidebars
+#: views/defaults/single_category.php:2
+msgid "By category"
+msgstr "לפי קטגוריה"
+
+# @ custom-sidebars
+#: views/defaults/archive_author.php:20 views/defaults/archive_blog.php:19
+#: views/defaults/archive_category.php:25 views/defaults/archive_date.php:19
+#: views/defaults/archive_posttype.php:27 views/defaults/archive_search.php:19
+#: views/defaults/archive_tag.php:19 views/defaults/single_category.php:25
+#: views/defaults/single_posttype.php:25
+msgid ""
+"There are no replaceable sidebars selected. You must select some of them in "
+"the form above to be able for replacing them in all the post type entries."
+msgstr ""
+"אין סיידברים חלופיים שנבחרו. אתה חייב לבחור לפחות אחד מהטופס למעלה בשביל "
+"שתהיה לך אפשרות להשתמש בהם בפוסטים וכדומה."
+
+# @ custom-sidebars
+#: views/defaults/archive_category.php:32
+#: views/defaults/single_category.php:32
+msgid "There are no categories available."
+msgstr "אין לך קטגוריות זמינות."
+
+# @ custom-sidebars
+#: views/defaults/single_posttype.php:2
+msgid "By post type"
+msgstr "לפי סוג פוסט"
+
+# @ custom-sidebars
+#: views/ajax.php:53 views/defaults.php:34 views/defaults.php:60
+#: views/edit.php:52 views/settings.php:61
+msgid "Save Changes"
+msgstr "שמור שינויים"
+
+# @ custom-sidebars
+#: views/ajax.php:36
+msgid ""
+"You can define specific sidebars for the different Wordpress pages. Sidebars "
+"for lists of posts pages work in the same hierarchycal way than the one for "
+"single posts."
+msgstr "אתה יכול להגדיר סיידברים מותאים אישית לכל עמוד."
+
+# @ custom-sidebars
+#: views/edit.php:22 views/settings.php:17 views/settings.php:91
+#: views/widgets.php:27
+msgid "Name"
+msgstr "שם"
+
+# @ custom-sidebars
+#: views/edit.php:27 views/settings.php:25 views/settings.php:92
+#: views/widgets.php:33
+msgid "Description"
+msgstr "תיאור"
+
+# @ custom-sidebars
+#: views/edit.php:30
+#, php-format
+msgid ""
+"<b>Caution:</b> Before-after title-widget properties define the html code "
+"that will wrap the widgets and their titles in the sidebars, more info about "
+"them on the <a href=\"http://justintadlock.com/archives/2010/11/08/sidebars-"
+"in-wordpress?utm_source=feedburner&utm_medium=feed&utm_campaign=Feed %3A"
+"+JustinTadlock+%28Justin+Tadlock%29&utm_content=Google+Reader\">Justin "
+"Tadlock Blog</a>. Do not use these fields if you are not sure what you are "
+"doing, it can break the design of your site. Leave these fields blank to use "
+"the theme sidebars design."
+msgstr ""
+"<b>אזהרה:</b> לפני-אחרי כותרת מוגדרים בתגי HTML. אנא השתמשו בפרמטרים האלה רק "
+"במידה ואתה יודעים מה אתם עושים אחרת זה יעשה לכם בעיות בסיידרבר."
+
+# @ custom-sidebars
+#: views/edit.php:33
+msgid "After Title"
+msgstr "אחרי כותרת"
+
+# @ custom-sidebars
+#: views/edit.php:36
+msgid "After Widget"
+msgstr "אחרי ווידגט"
+
+# @ custom-sidebars
+#: views/edit.php:44
+msgid "Before Title"
+msgstr "לפני כותרת"
+
+# @ custom-sidebars
+#: views/edit.php:47
+msgid "Before Widget"
+msgstr "לפני ווידגט"
+
+# @ custom-sidebars
+#: views/tabs.php:22
+msgid "Custom Sidebars"
+msgstr "סיידברים מותאים אישית"
+
+# @ custom-sidebars
+#: views/tabs.php:23
+msgid "Default Sidebars"
+msgstr "סיידברים ברירת מחדל"
+
+# @ custom-sidebars
+#: views/tabs.php:26
+msgid "Edit Sidebar"
+msgstr "ערוך סיידבר"
+
+# @ custom-sidebars
+#: views/settings.php:12 views/widgets.php:20
+msgid "New Sidebar"
+msgstr "סיידבר חדש"
+
+# @ custom-sidebars
+#: views/settings.php:13
+msgid ""
+"When a custom sidebar is created, it is shown in the widgets page. There you "
+"will be able to configure it."
+msgstr ""
+"כשסיידבר מותאם אישית חדש נוצר הוא יופיע בעמוד הווידגטים שם תוכל להכניס אליו "
+"וודגטים ולהגדיר אותו כרצונך."
+
+# @ custom-sidebars
+#: views/settings.php:20 views/widgets.php:29
+msgid "The name has to be unique."
+msgstr "השם חייב להיות ייחודי."
+
+# @ custom-sidebars
+#: views/settings.php:31 views/widgets.php:38
+msgid "Create Sidebar"
+msgstr "יצר סיידבר"
+
+# @ custom-sidebars
+#: views/settings.php:45
+msgid "Replaceable Sidebars"
+msgstr "סיידברים חלופיים"
+
+# @ custom-sidebars
+#: views/settings.php:46
+msgid ""
+"Select here the sidebars available for replacing. They will appear for "
+"replace when a post or page is edited or created. They will be also "
+"available in the default sidebars page. You can select several bars holding "
+"the SHIFT key when clicking on them."
+msgstr ""
+"בחר כאן את כל הסיידברים שניתנים לחילוף. הם יופיעו ברגע שפוסט או עמוד נוצר או "
+"נערך. אתה יכול לבחור מספר סיידברים על ידי לחיצה על SHIFT."
+
+# @ custom-sidebars
+#: views/settings.php:48
+msgid "Select the boxes available for substitution"
+msgstr "בחר תיבות זמינות להחלפה"
+
+# @ custom-sidebars
+#: views/settings.php:85
+msgid "All the Custom Sidebars"
+msgstr "כל הסיידברים המותאים אישית"
+
+# @ custom-sidebars
+#: views/settings.php:86
+msgid ""
+"If a sidebar is deleted and is currently on use, the posts and pages which "
+"uses it will show the default sidebar instead."
+msgstr "אם הסיידבר שנמחק כרגע בשימוש, יוצג במקומו סיידבר ברירת המחדל"
+
+# @ custom-sidebars
+#: views/settings.php:81
+msgid "Are you sure to delete this sidebar?"
+msgstr "האם אתה בטוח שאתה רוצה למחוק את הסיידבר?"
+
+# @ custom-sidebars
+#: views/settings.php:106
+msgid "Configure Widgets"
+msgstr "הגדר ווידגטים"
+
+# @ custom-sidebars
+#: views/settings.php:107 views/widgets.php:44
+msgid "Edit"
+msgstr "ערוך"
+
+# @ custom-sidebars
+#: views/settings.php:108 views/widgets.php:44
+msgid "Delete"
+msgstr "מחק"
+
+# @ custom-sidebars
+#: views/settings.php:112
+msgid ""
+"There are no custom sidebars available. You can create a new one using the "
+"left form."
+msgstr "אין סיידברים מותאמים אישית זמינים כרגע. אתה יכול ליצור אחד משמאלך."
+
+# @ custom-sidebars
+#: views/settings.php:133 views/settings.php:136
+msgid "Reset Sidebars"
+msgstr "אפס סיידברים"
+
+# @ custom-sidebars
+#: views/settings.php:134
+msgid ""
+"Click on the button below to delete all the Custom Sidebars data from the "
+"database. Keep in mind that once the button is clicked you will have to "
+"create new sidebars and customize them to restore your current sidebars "
+"configuration.</p><p>If you are going to uninstall the plugin permanently, "
+"you should use this button before, so there will be no track about the "
+"plugin left in the database."
+msgstr ""
+"לחת על הכפתור למטה על מנת למחוק את כל הסיידברים המותאמים אישית מהמערכת. זכור "
+"כי לאחר שתעשה זאת תצטרך להגדיר את הסיידברים מחדש."
+
+# @ custom-sidebars
+#: views/settings.php:136
+msgid "Are you sure to reset the sidebars?"
+msgstr "האם אתה בטוח שאתה רוצה לאפס את כל הסיידברים?"
+
+# @ custom-sidebars
+#: customsidebars.php:1036
+msgid "There has been an error storing the sidebars. Please, try again."
+msgstr "אירעה שגיאה בעת שמירת הסיידברים. אנא נסה שנית."
+
+# @ custom-sidebars
+#: customsidebars.php:1095
+msgid "Unknown sidebar."
+msgstr "סיידבר לא ידוע."
+
+# @ custom-sidebars
+#: views/ajax.php:12
+msgid "In a singular post or page"
+msgstr "בתוך פוסט או עמוד יחיד"
+
+# @ custom-sidebars
+#: views/ajax.php:14
+msgid ""
+"To set the sidebar for a single post or page just set it when creating/"
+"editing the post."
+msgstr "בשביל להגדיר סיידבר לפוסט פסציפי, עשה זאת מעמוד עריכת פוסט"
+
+# @ custom-sidebars
+#: views/ajax.php:18
+msgid "As the default sidebar for single entries"
+msgstr "סיידבר ברירת מחדל לדף פוסט"
+
+# @ custom-sidebars
+#: views/ajax.php:33
+msgid "As the default sidebars for archives"
+msgstr "סיידבר ברירת מחדל לארכיונים"
+
+# @ custom-sidebars
+#: views/defaults/archive_author.php:3 views/defaults/archive_blog.php:2
+#: views/defaults/archive_category.php:3 views/defaults/archive_date.php:2
+#: views/defaults/archive_posttype.php:4 views/defaults/archive_search.php:2
+#: views/defaults/archive_tag.php:3 views/defaults/single_category.php:2
+#: views/defaults/single_posttype.php:2
+msgid "Click to toogle"
+msgstr "לחץ לפתיחה או סגירה"
+
+# @ custom-sidebars
+#: views/defaults/archive_author.php:16 views/defaults/archive_blog.php:15
+#: views/defaults/archive_category.php:21 views/defaults/archive_date.php:15
+#: views/defaults/archive_posttype.php:23 views/defaults/archive_search.php:15
+#: views/defaults/archive_tag.php:15 views/defaults/single_category.php:21
+#: views/defaults/single_posttype.php:21
+#, php-format
+msgid "<- Set %s here."
+msgstr "<- הגדר %s פה."
+
+# @ custom-sidebars
+#: views/defaults.php:13
+msgid "Default sidebars for single entries"
+msgstr "סיידברים ברירת מחדל עבור פוסטים יחידים"
+
+# @ custom-sidebars
+#: views/defaults.php:15
+msgid ""
+"These replacements will be applied to every entry post that matches a "
+"certain post type or category."
+msgstr ""
+"סיידברים אלה יהיו ניתנים לבחירה בכל פוסט שמתאים לפוסט-טייפ או לקטגוריה."
+
+# @ custom-sidebars
+#: views/defaults.php:38
+msgid "Default sidebars for archives"
+msgstr "סיידברים ברירת מחדל עבור ארכיונים"
+
+# @ custom-sidebars
+#: views/defaults.php:40
+msgid ""
+"You can define specific sidebars for the different Wordpress archive pages. "
+"Sidebars for archives pages work in the same hierarchycal way than the one "
+"for single posts."
+msgstr "אתה יכול להגדיר סיידברים מותאים אישית לדפי ארכיונים."
+
+# @ custom-sidebars
+#: views/footer.php:18
+msgid ""
+"Do you like this free plugin? Support its development with a donation and "
+"<b>get rid of this banner</b> :)"
+msgstr ""
+"אתה אוהב את הפלאגין הזה? תמוך בפיתוח, תרום לי וכך תיפטר גם מהבאנר הזה :)"
+
+# @ custom-sidebars
+#: views/removeBanner.php:6
+msgid "Your banner has been removed"
+msgstr "הבאנר שלך נחמק"
+
+# @ custom-sidebars
+#: views/removeBanner.php:7
+msgid ""
+"Thanks so much for your donation, that stupid banner won't disturb you any "
+"longer!"
+msgstr "תודה רבה על התרומה! הבאנר כבר לא יפריע לך יותר.."
+
+# @ custom-sidebars
+#: views/removeBanner.php:10
+msgid "Ooops! The code seems to be wrong"
+msgstr "אופס! הקוד כנראה שגוי"
+
+# @ custom-sidebars
+#: views/removeBanner.php:11
+msgid ""
+"You must follow the link as provided in the plugin website to remove your "
+"banner."
+msgstr "אתה חייה לעקוב אחרי הלינק שניתן בפלאגין על מנת למחוק את הבאנר"
+
+# @ custom-sidebars
+#: views/removeBanner.php:12
+msgid ""
+"If you did so and it did not work, try to <a href=\"http://marquex.es/contact"
+"\" target=\"_blank\">contact the author of the plugin</a>."
+msgstr ""
+"אם עשית את זה וזה עדיין לא עובד, <a href=\"http://marquex.es/contact\" "
+"target=\"_blank\">צור קשר עם מפתח התוסף</a>."
+
+# @ custom-sidebars
+#: views/tabs.php:29
+msgid "Thanks for donate"
+msgstr "תודה על התרומה"
+
+# @ custom-sidebars
+#: views/widgets.php:10
+msgid ""
+"You are using an old browser that doesn't support draggin widgets to a "
+"recently created sidebar. Refresh the page to add widgets to this sidebar "
+"and think about to update your browser."
+msgstr ""
+"אתה משתמש בדפדפן ישן שלא תומך בגרירת וודגטים לסיידבר שנוצר עכשיו.. רענן את "
+"הדף והוסף את הוודגטים."
+
+# @ custom-sidebars
+#: views/widgets.php:12
+msgid "Sidebars"
+msgstr "סיידברים"
+
+# @ custom-sidebars
+#: views/widgets.php:44
+msgid "Where do you want the sidebar?"
+msgstr "איפה אתה רוצה את הסיידבר?"
+
+# @ custom-sidebars
+#: views/widgets.php:44
+msgid "Where?"
+msgstr "איפה?"
+
+# @ custom-sidebars
+#: views/widgets.php:45
+msgid "Advanced Edit"
+msgstr "עריכה מתקדמת"
+
+# @ custom-sidebars
+#: views/widgets.php:45
+msgid "Cancel"
+msgstr "בטל"
+
+# @ custom-sidebars
+#: views/widgets.php:46
+msgid "Save"
+msgstr "שמור"
+
+# @ custom-sidebars
+#: views/widgets.php:47
+msgid "Are you sure that you want to delete the sidebar"
+msgstr "האם אתה בטוח שאתה רוצה למחוק את הסיידבר"
+
+# @ custom-sidebars
+#: views/widgets.php:58
+msgid ""
+"You are using an old browser and some features of custom sidebars are not "
+"available. You will be notified when you try to use them but, have you ever "
+"think about update your browser?"
+msgstr ""
+"אתה משתמש בדפדפן ישן וחלק מהפונקציות אינן זמינות עבורך? אתה תקבל הודעה כשאתה "
+"מנסה להשתמש באחת כזו אבל תחשוב ברצינות על לעדכן את הדפדפן שלך..."
+
+# @ custom-sidebars
+#: views/defaults/archive_blog.php:2
+msgid "Main blog page"
+msgstr "עמוד בלוג ראשי"
+
+# @ custom-sidebars
+#: views/defaults/archive_category.php:3
+msgid "Category archives"
+msgstr "ארכיוני קטגוריה"
+
+# @ custom-sidebars
+#: views/defaults/archive_posttype.php:4
+msgid "Post-type archives"
+msgstr "ארכיונים לסוגי פוסטים"
+
+# @ custom-sidebars
+#: views/defaults/archive_tag.php:3
+msgid "Tag archives"
+msgstr "ארכיוני תגיות"
+
+# @ custom-sidebars
+#: views/defaults/archive_author.php:3
+msgid "Author archives"
+msgstr "ארכיוני כותבים"
+
+# @ custom-sidebars
+#: views/defaults/archive_date.php:2
+msgid "Date archives"
+msgstr "ארכיונים לפי תאריך"
+
+# @ custom-sidebars
+#: views/defaults/archive_search.php:2
+msgid "Search results page"
+msgstr "עמוד תוצאות חיפוש"
