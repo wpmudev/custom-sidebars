@@ -33,10 +33,13 @@ This plugin was originally developed by Javier Marquez.
 http://arqex.com/
 */
 
-// used for more readable i18n functions: __( 'text', LANG_CSB );
-define( 'LANG_CSB', 'csb' );
-
 if ( ! class_exists( 'CustomSidebars' ) ) {
+
+	// used for more readable i18n functions: __( 'text', CSB_LANG );
+	define( 'CSB_LANG', 'csb' );
+
+	$views_dir = dirname( __FILE__ ) . '/views/';
+	define( 'CSB_VIEWS_DIR', $views_dir );
 
 	// Load the actual core.
 	require_once 'inc/class-custom-sidebars.php';

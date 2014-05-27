@@ -101,7 +101,7 @@ class CustomSidebars{
 							$wp_registered_sidebars[$sb_name] = $sidebar_for_replacing;
 						}
 					}
-                    $wp_registered_sidebars[$sb_name]['class'] = $replacement;
+					$wp_registered_sidebars[$sb_name]['class'] = $replacement;
 				}
 			}
 		}
@@ -128,16 +128,16 @@ class CustomSidebars{
 					$this->replacements_todo--;
 				}
 			}
-            //Parent sidebar
-            if($post->post_parent != 0 && $this->replacements_todo > 0){
-                $replacements = get_post_meta($post->post_parent, $this->postmeta_key, TRUE);
-                foreach($this->replaceable_sidebars as $sidebar){
-                        if(!$this->replacements[$sidebar] && is_array($replacements) && !empty($replacements[$sidebar])){
-                                $this->replacements[$sidebar] = array($replacements[$sidebar], 'particular', -1);
-                                $this->replacements_todo--;
-                        }
-                }
-            }
+			//Parent sidebar
+			if($post->post_parent != 0 && $this->replacements_todo > 0){
+				$replacements = get_post_meta($post->post_parent, $this->postmeta_key, TRUE);
+				foreach($this->replaceable_sidebars as $sidebar){
+						if(!$this->replacements[$sidebar] && is_array($replacements) && !empty($replacements[$sidebar])){
+								$this->replacements[$sidebar] = array($replacements[$sidebar], 'particular', -1);
+								$this->replacements_todo--;
+						}
+				}
+			}
 			//Category sidebar
 			global $sidebar_category;
 			if($this->replacements_todo > 0){
@@ -185,14 +185,14 @@ class CustomSidebars{
 			return;
 		}
 
-        //Search comes before because searches with no results are recognized as post types archives
-        if(is_search()){
-            foreach($this->replaceable_sidebars as $sidebar){
-                    if(! empty($defaults['search'][$sidebar]))
-                            $this->replacements[$sidebar] = array($defaults['search'][$sidebar], 'search', -1);
-            }
-            return;
-        }
+		//Search comes before because searches with no results are recognized as post types archives
+		if(is_search()){
+			foreach($this->replaceable_sidebars as $sidebar){
+					if(! empty($defaults['search'][$sidebar]))
+							$this->replacements[$sidebar] = array($defaults['search'][$sidebar], 'search', -1);
+			}
+			return;
+		}
 
 		//post type archive
 		if(!is_category() && !is_singular() && get_post_type()!='post'){
@@ -216,16 +216,16 @@ class CustomSidebars{
 				}
 			}
 
-                        //Parent sidebar
-                        if($post->post_parent != 0 && $this->replacements_todo > 0){
-                            $replacements = get_post_meta($post->post_parent, $this->postmeta_key, TRUE);
-                            foreach($this->replaceable_sidebars as $sidebar){
-                                    if(!$this->replacements[$sidebar] && is_array($replacements) && !empty($replacements[$sidebar])){
-                                            $this->replacements[$sidebar] = array($replacements[$sidebar], 'particular', -1);
-                                            $this->replacements_todo--;
-                                    }
-                            }
-                        }
+						//Parent sidebar
+						if($post->post_parent != 0 && $this->replacements_todo > 0){
+							$replacements = get_post_meta($post->post_parent, $this->postmeta_key, TRUE);
+							foreach($this->replaceable_sidebars as $sidebar){
+									if(!$this->replacements[$sidebar] && is_array($replacements) && !empty($replacements[$sidebar])){
+											$this->replacements[$sidebar] = array($replacements[$sidebar], 'particular', -1);
+											$this->replacements_todo--;
+									}
+							}
+						}
 
 			//Page Post-type sidebar
 			if($this->replacements_todo > 0){
@@ -264,13 +264,13 @@ class CustomSidebars{
 		}
 
 
-                if(is_date()){
-                    foreach($this->replaceable_sidebars as $sidebar){
-                            if(! empty($defaults['date'][$sidebar]))
-                                    $this->replacements[$sidebar] = array($defaults['date'][$sidebar], 'date', -1);
-                    }
-                    return;
-                }
+				if(is_date()){
+					foreach($this->replaceable_sidebars as $sidebar){
+							if(! empty($defaults['date'][$sidebar]))
+									$this->replacements[$sidebar] = array($defaults['date'][$sidebar], 'date', -1);
+					}
+					return;
+				}
 	}
 	/**
 	 * Stores the original post id before any plugin (buddypress) can modify this data, to show the proper sidebar.
@@ -323,8 +323,8 @@ class CustomSidebars{
 		if(! current_user_can($this->cap_required) )
 			return new WP_Error('cscantdelete', __('You do not have permission to delete sidebars','custom-sidebars'));
 
-                if(! DOING_AJAX && ! wp_verify_nonce($_REQUEST['_n'], 'custom-sidebars-delete') )
-                        die('Security check stop your request.');
+				if(! DOING_AJAX && ! wp_verify_nonce($_REQUEST['_n'], 'custom-sidebars-delete') )
+						die('Security check stop your request.');
 
 		$newsidebars = array();
 		$deleted = FALSE;
@@ -366,9 +366,9 @@ class CustomSidebars{
 			}
 			else if(isset($_POST['update-modifiable'])){
 				$this->updateModifiable();
-                                $this->retrieveOptions();
-                                $this->replaceable_sidebars =  $this->getModifiableSidebars();
-                        }
+								$this->retrieveOptions();
+								$this->replaceable_sidebars =  $this->getModifiableSidebars();
+						}
 			else if(isset($_POST['update-defaults-posts']) OR isset($_POST['update-defaults-pages'])){
 				$this->storeDefaults();
 
@@ -388,7 +388,7 @@ class CustomSidebars{
 				$customsidebars = $this->getCustomSidebars();
 				if(! $sb = $this->getSidebar($_GET['id'], $customsidebars))
 					return new WP_Error('cscantdelete', __('You do not have permission to delete sidebars','custom-sidebars'));
-				include('views/edit.php');
+				include( CSB_VIEWS_DIR . 'edit.php');
 				return;
 			}
 		}
@@ -411,22 +411,24 @@ class CustomSidebars{
 				if(sizeof($categories)==1 && $categories[0]->cat_ID == 1)
 					unset($categories[0]);
 
-				include('views/defaults.php');
+				include( CSB_VIEWS_DIR . 'defaults.php');
 			}
 			else if($_GET['p']=='edit')
-				include('views/edit.php');
+				include( CSB_VIEWS_DIR . 'edit.php');
 			else
-				include('views/settings.php');
+				include( CSB_VIEWS_DIR . 'settings.php');
 
 		}
-		else
-                    include('views/settings.php');
+		else {
+			echo 'File: ' . (CSB_VIEWS_DIR . 'settings.php') . (is_file(CSB_VIEWS_DIR . 'settings.php') ? ' :)' : ' :(') . '<br>';
+			include( CSB_VIEWS_DIR . 'settings.php');
+		}
 	}
 
 	function addSubMenus(){
 		$page = add_submenu_page('themes.php', __('Custom sidebars','custom-sidebars'), __('Custom sidebars','custom-sidebars'), $this->cap_required, 'customsidebars', array($this, 'createPage'));
 
-        add_action('admin_print_scripts-' . $page, array($this, 'addScripts'));
+		add_action('admin_print_scripts-' . $page, array($this, 'addScripts'));
 	}
 
 	function addScripts(){
@@ -434,13 +436,13 @@ class CustomSidebars{
 	}
 
 	function addStyles($hook){
-        $dir = basename(dirname(__FILE__));
-        if( 'widgets.php' == $hook || 'appearance_page_customsidebars' == $hook){
-        	wp_enqueue_script( 'cs_script', plugins_url('/cs.js', __FILE__) );
-            wp_enqueue_script('thickbox', null, array('jquery'));
-            wp_enqueue_style('thickbox.css', includes_url() . 'js/thickbox/thickbox.css', null, '1.0');
-        }
-		wp_enqueue_style( 'cs_style', plugins_url( 'cs_style.css', __FILE__ ) );
+		$dir = dirname(__FILE__);
+		if( 'widgets.php' == $hook || 'appearance_page_customsidebars' == $hook){
+			wp_enqueue_script( 'cs_script', plugins_url('/cs.js', $dir ) );
+			wp_enqueue_script('thickbox', null, array('jquery'));
+			wp_enqueue_style('thickbox.css', includes_url() . 'js/thickbox/thickbox.css', null, '1.0');
+		}
+		wp_enqueue_style( 'cs_style', plugins_url( 'cs_style.css', $dir ) );
 	}
 
 	function addMetaBox(){
@@ -472,7 +474,7 @@ class CustomSidebars{
 			}
 		}
 
-		include('views/metabox.php');
+		include( CSB_VIEWS_DIR . 'metabox.php');
 	}
 
 	function loadTextDomain(){
@@ -619,8 +621,8 @@ class CustomSidebars{
 			}
 		}
 
-                // Search page
-                $options['search'] = array();
+				// Search page
+				$options['search'] = array();
 		if(!empty($modifiable)){
 			foreach($modifiable as $m){
 				if(isset($_POST["search_page_$m"]) && $_POST["search_page_$m"]!=''){
@@ -632,8 +634,8 @@ class CustomSidebars{
 			}
 		}
 
-                // Date archive
-                $options['date'] = array();
+				// Date archive
+				$options['date'] = array();
 		if(!empty($modifiable)){
 			foreach($modifiable as $m){
 				if(isset($_POST["date_page_$m"]) && $_POST["date_page_$m"]!=''){
@@ -771,14 +773,14 @@ class CustomSidebars{
 		//Check the id
 		$url = parse_url($_POST['_wp_http_referer']);
 		if(! DOING_AJAX){
-                    if(isset($url['query'])){
-                            parse_str($url['query'], $args);
-                            if($args['id'] != $id)
-                                    return new WP_Error(__('The operation is not secure and it cannot be completed.','custom-sidebars'));
-                    }
-                    else
-                            return new WP_Error(__('The operation is not secure and it cannot be completed.','custom-sidebars'));
-                }
+					if(isset($url['query'])){
+							parse_str($url['query'], $args);
+							if($args['id'] != $id)
+									return new WP_Error(__('The operation is not secure and it cannot be completed.','custom-sidebars'));
+					}
+					else
+							return new WP_Error(__('The operation is not secure and it cannot be completed.','custom-sidebars'));
+				}
 
 		$newsidebars = array();
 		foreach($sidebars as $sb){
@@ -804,8 +806,8 @@ class CustomSidebars{
 	}
 
 	function widgetSidebarContent(){
-		include 'views/widgets.php';
-        }
+		include  CSB_VIEWS_DIR . 'widgets.php';
+		}
 
 	function getSidebar($id, $sidebars){
 		$sidebar = false;
@@ -954,139 +956,139 @@ class CustomSidebars{
 		return 1 + $this->getCategoryLevel($cat->category_parent);
 	}
 
-        function jsonResponse($obj){
-            header('Content-Type: application/json');
-            echo json_encode($obj);
-            die();
-        }
+		function jsonResponse($obj){
+			header('Content-Type: application/json');
+			echo json_encode($obj);
+			die();
+		}
 
-        function ajaxHandler(){
-            if($_REQUEST['cs_action'] == 'where'){
-                $this->ajaxShowWhere();
-                die;
-            }
+		function ajaxHandler(){
+			if($_REQUEST['cs_action'] == 'where'){
+				$this->ajaxShowWhere();
+				die;
+			}
 
-            $nonce = $_POST['nonce'];
-            $action = $_POST['cs_action'];
-            if(! wp_verify_nonce($nonce, $action)){
-                $response = array(
-                   'success' => false,
-                   'message' => __('The operation is not secure and it cannot be completed.','custom-sidebars'),
-                   'nonce' => wp_create_nonce($action)
-                );
-                $this->jsonResponse( $response );
-            }
+			$nonce = $_POST['nonce'];
+			$action = $_POST['cs_action'];
+			if(! wp_verify_nonce($nonce, $action)){
+				$response = array(
+				   'success' => false,
+				   'message' => __('The operation is not secure and it cannot be completed.','custom-sidebars'),
+				   'nonce' => wp_create_nonce($action)
+				);
+				$this->jsonResponse( $response );
+			}
 
-            $response = array();
-            if($action == 'cs-create-sidebar'){
-                $response = $this->ajaxCreateSidebar();
-            }
-            else if($action == 'cs-edit-sidebar'){
-                $response = $this->ajaxEditSidebar();
-            }
-            else if($action == 'cs-set-defaults'){
-                $response = $this->ajaxSetDefaults();
-            }
-            else if($action == 'cs-delete-sidebar'){
-                $response = $this->ajaxDeleteSidebar();
-            }
-
-
-            $response['nonce'] = wp_create_nonce($action);
-            $this->jsonResponse($response);
-        }
+			$response = array();
+			if($action == 'cs-create-sidebar'){
+				$response = $this->ajaxCreateSidebar();
+			}
+			else if($action == 'cs-edit-sidebar'){
+				$response = $this->ajaxEditSidebar();
+			}
+			else if($action == 'cs-set-defaults'){
+				$response = $this->ajaxSetDefaults();
+			}
+			else if($action == 'cs-delete-sidebar'){
+				$response = $this->ajaxDeleteSidebar();
+			}
 
 
-        function ajaxSetDefaults(){
-            try{
-                $this->storeDefaults();
-            } catch(Exception $e) {
-                return array(
-                    'success' => false,
-                    'message' => __('There has been an error storing the sidebars. Please, try again.', 'custom-sidebars')
-                );
-            }
-            return array(
-                'success' => true,
-                'message' => $this->message
-            );
-        }
+			$response['nonce'] = wp_create_nonce($action);
+			$this->jsonResponse($response);
+		}
 
-        function ajaxCreateSidebar(){
-            $this->storeSidebar();
 
-            if($this->message_class == 'error')
-                return array(
-                   'success' => false,
-                   'message' => $this->message
-                );
+		function ajaxSetDefaults(){
+			try{
+				$this->storeDefaults();
+			} catch(Exception $e) {
+				return array(
+					'success' => false,
+					'message' => __('There has been an error storing the sidebars. Please, try again.', 'custom-sidebars')
+				);
+			}
+			return array(
+				'success' => true,
+				'message' => $this->message
+			);
+		}
 
-            return array(
-                'success' => true,
-                'message' => __('The sidebar has been created successfully.','custom-sidebars'),
-                'name' => stripslashes(trim($_POST['sidebar_name'])),
-                'description' => stripslashes(trim($_POST['sidebar_description'])),
-                'id' => $this->sidebar_prefix . sanitize_html_class(sanitize_title_with_dashes($_POST['sidebar_name']))
-            );
-        }
+		function ajaxCreateSidebar(){
+			$this->storeSidebar();
 
-        function ajaxDeleteSidebar(){
-            $this->deleteSidebar();
+			if($this->message_class == 'error')
+				return array(
+				   'success' => false,
+				   'message' => $this->message
+				);
 
-            return array(
-                'message' => $this->message,
-                'success' => $this->message_class != 'error'
-            );
-        }
+			return array(
+				'success' => true,
+				'message' => __('The sidebar has been created successfully.','custom-sidebars'),
+				'name' => stripslashes(trim($_POST['sidebar_name'])),
+				'description' => stripslashes(trim($_POST['sidebar_description'])),
+				'id' => $this->sidebar_prefix . sanitize_html_class(sanitize_title_with_dashes($_POST['sidebar_name']))
+			);
+		}
 
-        function ajaxEditSidebar(){
-            $id = trim($_POST['cs_id']);
-            $sidebar = $this->getSidebar($id, $this->getCustomSidebars());
-            $_POST['cs_before_widget'] = $sidebar['cs_before_widget'];
-            $_POST['cs_after_widget'] = $sidebar['cs_after_widget'];
-            $_POST['cs_before_title'] = $sidebar['cs_before_title'];
-            $_POST['cs_after_title'] = $sidebar['cs_after_title'];
-            $this->updateSidebar();
+		function ajaxDeleteSidebar(){
+			$this->deleteSidebar();
 
-            $sidebar = $this->getSidebar($id, $this->getCustomSidebars());
-            return array(
-                'message' => $this->message,
-                'success' => $this->message_class != 'error',
-                'name' => $sidebar['name'],
-                'description' => $sidebar['description']
-            );
-        }
+			return array(
+				'message' => $this->message,
+				'success' => $this->message_class != 'error'
+			);
+		}
 
-        function ajaxShowWhere(){
-            $customsidebars = $this->getCustomSidebars();
-            $themesidebars = $this->getThemeSidebars();
-            $allsidebars = $this->getThemeSidebars(TRUE);
-            $sidebarId = strtolower(urlencode($_GET['id']));
-            if(!isset($allsidebars[$sidebarId])){
+		function ajaxEditSidebar(){
+			$id = trim($_POST['cs_id']);
+			$sidebar = $this->getSidebar($id, $this->getCustomSidebars());
+			$_POST['cs_before_widget'] = $sidebar['cs_before_widget'];
+			$_POST['cs_after_widget'] = $sidebar['cs_after_widget'];
+			$_POST['cs_before_title'] = $sidebar['cs_before_title'];
+			$_POST['cs_after_title'] = $sidebar['cs_after_title'];
+			$this->updateSidebar();
+
+			$sidebar = $this->getSidebar($id, $this->getCustomSidebars());
+			return array(
+				'message' => $this->message,
+				'success' => $this->message_class != 'error',
+				'name' => $sidebar['name'],
+				'description' => $sidebar['description']
+			);
+		}
+
+		function ajaxShowWhere(){
+			$customsidebars = $this->getCustomSidebars();
+			$themesidebars = $this->getThemeSidebars();
+			$allsidebars = $this->getThemeSidebars(TRUE);
+			$sidebarId = strtolower(urlencode($_GET['id']));
+			if(!isset($allsidebars[$sidebarId])){
 				echo urlencode($_GET['id']);
 				var_dump($allsidebars);
-                die(__('Unknown sidebar.' , 'custom-sidebars'));
-            }
-            foreach($allsidebars as $key => $sb){
-                if(strlen($sb['name']) > 30)
-                    $allsidebars[$key]['name'] = substr($sb['name'], 0, 27) . '...';
-            }
-            $current_sidebar = $allsidebars[$_GET['id']];
-            $defaults = $this->getDefaultReplacements();
-            $modifiable = $this->replaceable_sidebars;
-            $post_types = $this->getPostTypes();
-            $categories = get_categories(array('hide_empty' => 0));
-            if(sizeof($categories)==1 && $categories[0]->cat_ID == 1)
-                    unset($categories[0]);
-            include 'views/ajax.php';
-        }
+				die(__('Unknown sidebar.' , 'custom-sidebars'));
+			}
+			foreach($allsidebars as $key => $sb){
+				if(strlen($sb['name']) > 30)
+					$allsidebars[$key]['name'] = substr($sb['name'], 0, 27) . '...';
+			}
+			$current_sidebar = $allsidebars[$_GET['id']];
+			$defaults = $this->getDefaultReplacements();
+			$modifiable = $this->replaceable_sidebars;
+			$post_types = $this->getPostTypes();
+			$categories = get_categories(array('hide_empty' => 0));
+			if(sizeof($categories)==1 && $categories[0]->cat_ID == 1)
+					unset($categories[0]);
+			include  CSB_VIEWS_DIR . 'ajax.php';
+		}
 
-    function checkMP6($classes){
+	function checkMP6($classes){
 		global $wp_version;
 
 		if ( !( defined( 'MP6' ) && MP6 ) && !version_compare( $wp_version, '3.8', '>=' ) ) {
 			$classes .= 'cs-no-mp6';
 		}
 		return $classes;
-    }
+	}
 };
