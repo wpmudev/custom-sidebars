@@ -10,6 +10,7 @@ class CustomSidebars {
 
 	//The name of the option that stores the info of the new bars.
 	var $option_name = 'cs_sidebars';
+
 	//The name of the option that stores which bars are replaceable, and the default
 	//replacements. The value is stored in $this->options
 	var $option_modifiable = 'cs_modifiable';
@@ -18,6 +19,7 @@ class CustomSidebars {
 	var $sidebar_prefix = 'cs-';
 	var $postmeta_key = '_cs_replacements';
 	var $cap_required = 'switch_themes';
+	// What is 'pt-widget'?
 	var $ignore_post_types = array( 'attachment', 'revision', 'nav_menu_item', 'pt-widget' );
 	var $options = array();
 
@@ -25,16 +27,18 @@ class CustomSidebars {
 	var $replacements = array();
 	var $replacements_todo;
 
-	public function CustomSidebars() {
-		$this->retrieveOptions();
+
+	public function __construct() {
+		$this->retrieve_options();
 		$this->replaceable_sidebars = $this->getModifiableSidebars();
 		$this->replacements_todo = sizeof( $this->replaceable_sidebars );
+
 		foreach ( $this->replaceable_sidebars as $sb ) {
 			$this->replacements[$sb] = FALSE;
 		}
 	}
 
-	public function retrieveOptions() {
+	public function retrieve_options() {
 		$this->options = get_option( $this->option_modifiable );
 	}
 
@@ -93,7 +97,7 @@ class CustomSidebars {
 				if ( $this->checkAndFixSidebar( $sb_name, $replacement, $replacement_type, $extra_index ) ) {
 					if ( sizeof( $original_widgets[$replacement] ) == 0 ) {
 						// No widgets on custom bar, show nothing.
-						$wp_registered_widgets['csemptywidget'] = $this->getEmptyWidget();
+						$wp_registered_widgets['csemptywidget'] = $this->get_empty_widget();
 						$_wp_sidebars_widgets[$sb_name] = array( 'csemptywidget' );
 					} else {
 						$_wp_sidebars_widgets[$sb_name] = $original_widgets[$replacement];
@@ -375,6 +379,9 @@ class CustomSidebars {
 		);
 	}
 
+	/**
+	 * Removes a single custom sidebar from the options.
+	 */
 	public function deleteSidebar() {
 		if ( ! current_user_can( $this->cap_required ) ) {
 			return new WP_Error( 'cscantdelete', __( 'You do not have permission to delete sidebars', CSB_LANG ) );
@@ -390,7 +397,6 @@ class CustomSidebars {
 		$custom = $this->getCustomSidebars();
 
 		if ( ! empty( $custom ) ) {
-
 			foreach ( $custom as $sb ) {
 				if ( $sb['id'] != $_REQUEST['delete'] ) {
 					$newsidebars[] = $sb;
@@ -412,7 +418,11 @@ class CustomSidebars {
 		}
 	}
 
-	public function createPage() {
+	/**
+	 * Renders the admin page for custom sidebars.
+	 * Also eventual actions such as delete or update are executed if required.
+	 */
+	public function create_page() {
 		//$this->refreshSidebarsWidgets();
 		if ( ! empty( $_POST) ) {
 			if ( isset( $_POST['create-sidebars'] ) ) {
@@ -423,7 +433,7 @@ class CustomSidebars {
 				$this->updateSidebar();
 			} else if ( isset( $_POST['update-modifiable'] ) ) {
 				$this->updateModifiable();
-				$this->retrieveOptions();
+				$this->retrieve_options();
 				$this->replaceable_sidebars = $this->getModifiableSidebars();
 			} else if ( isset( $_POST['update-defaults-posts'] ) OR isset( $_POST['update-defaults-pages'] ) ) {
 				$this->storeDefaults();
@@ -431,10 +441,10 @@ class CustomSidebars {
 				$this->resetSidebars();
 			}
 
-			$this->retrieveOptions();
+			$this->retrieve_options();
 		} else if ( ! empty( $_GET['delete'] ) ) {
 			$this->deleteSidebar();
-			$this->retrieveOptions();
+			$this->retrieve_options();
 		} else if ( ! empty( $_GET['p'] ) ) {
 			if ( $_GET['p'] == 'edit' && ! empty( $_GET['id'] ) ) {
 				$customsidebars = $this->getCustomSidebars();
@@ -478,6 +488,9 @@ class CustomSidebars {
 		}
 	}
 
+	/**
+	 * Adds the "Custom Sidebars Pro" menu item to the "Appearance" menu.
+	 */
 	public function addSubMenus() {
 		$page = add_submenu_page(
 			'themes.php',
@@ -485,7 +498,7 @@ class CustomSidebars {
 			__( 'Custom Sidebars Pro', CSB_LANG ),
 			$this->cap_required,
 			'customsidebars',
-			array( $this, 'createPage' )
+			array( $this, 'create_page' )
 		);
 
 		add_action( 'admin_print_scripts-' . $page, array( $this, 'addScripts' ) );
@@ -505,6 +518,9 @@ class CustomSidebars {
 		wp_enqueue_style( 'cs_style', plugins_url( '/css/cs_style.css', $dir ) );
 	}
 
+	/**
+	 * Registers the "Sidebars" meta box in the post-editor.
+	 */
 	public function addMetaBox() {
 		global $post;
 		$post_type = get_post_type( $post );
@@ -514,7 +530,7 @@ class CustomSidebars {
 				add_meta_box(
 					'customsidebars-mb',
 					__( 'Sidebars', CSB_LANG ),
-					array( $this, 'printMetabox' ),
+					array( $this, 'print_metabox' ),
 					$post_type,
 					'side'
 				);
@@ -522,7 +538,10 @@ class CustomSidebars {
 		}
 	}
 
-	public function printMetabox() {
+	/**
+	 * Renders the Custom Sidebars meta box in the post-editor.
+	 */
+	public function print_metabox() {
 		global $post, $wp_registered_sidebars;
 
 		$replacements = $this->getReplacements( $post->ID );
@@ -942,7 +961,7 @@ class CustomSidebars {
 		return $ptok;
 	}
 
-	public function getEmptyWidget() {
+	public function get_empty_widget() {
 		$widget = new CustomSidebarsEmptyPlugin();
 		return array(
 			'name' => 'CS Empty Widget',
@@ -1180,6 +1199,8 @@ class CustomSidebars {
 		include CSB_VIEWS_DIR . 'ajax.php';
 	}
 
+	/*
+	// Not used.
 	public function checkMP6( $classes ) {
 		global $wp_version;
 
@@ -1188,4 +1209,5 @@ class CustomSidebars {
 		}
 		return $classes;
 	}
+	*/
 };

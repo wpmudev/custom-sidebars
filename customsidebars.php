@@ -64,7 +64,8 @@ if ( ! isset( $plugin_sidebars ) ){
     //AJAX actions
     add_action( 'wp_ajax_cs-ajax', array( $plugin_sidebars, 'ajaxHandler' ) );
 
-    add_filter( 'admin_body_class', array( $plugin_sidebars, 'checkMP6' ) );
+    // Not used.
+    //add_filter( 'admin_body_class', array( $plugin_sidebars, 'checkMP6' ) );
 }
 
 if ( ! class_exists( 'CustomSidebarsEmptyPlugin' ) ) :
