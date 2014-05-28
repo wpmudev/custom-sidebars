@@ -5,54 +5,64 @@
 jQuery(function init_visibility() {
 
 	/**
-	 * Moves the "Visibility" button next to the save button
+	 * Moves the "Visibility" button next to the save button.
 	 */
-	var move_button = function move_button() {
+	var init_widget = function init_widget() {
 		var $widget = jQuery( this ),
-			$btn = jQuery( '.csb-visibility', $widget ),
-			$target = jQuery( '.widget-control-actions .alignright', $widget );
+			$btn = jQuery( '.csb-visibility-button', $widget ),
+			$target = jQuery( '.widget-control-actions .widget-control-save', $widget ),
+			$spinner = jQuery( '.widget-control-actions .spinner', $widget );
 
-		$target.prepend( $btn );
+		$spinner.insertBefore( $target ).css({ 'float': 'left' });
+		$btn.insertBefore( $target ).click( toggle_section );
+		$widget.on( 'click', '.toggle-action', toggle_action );
 	};
 
 	/**
-	 * When a widget is saved the ajax response contains a duplicate of the
-	 * visibility-button. This function removes the duplicate button again.
+	 * Shows or hides the visibility-options for the current widget.
 	 */
-	var ajax_remove_button = function ajax_remove_button(event, jqxhr, data) {
-		var res, id, $widget,
-			args = decodeURIComponent( data.data );
+	var toggle_section = function toggle_section( ev ) {
+		var $me = jQuery( this ),
+			$widget = $me.closest( '.widget' ),
+			$section = $widget.find( '.csb-visibility-inner' ),
+			$flag = $section.find( '.csb-visible-flag' );
 
-		// If the ajax action was not "save-widget" then ignore the ajax call.
-		if ( ! args.match(/&?action=save-widget&?/) ) {
-			return;
+		ev.preventDefault();
+		if ( $flag.val() == '0' ) {
+			$flag.val(1);
+			$section.show();
+		} else {
+			$flag.val(0);
+			$section.hide();
 		}
 
-		// Try to extract the widget-ID
-		res = args.match(/&?widget-id=([^&]*)/);
-		if ( res.length > 1 ) {
-			id = res[1];
-
-			// Find the widget-element:
-			// The ID has to start with "widget" and end with "_" + ID
-			$widget = jQuery( '.widget[id^=widget][id$=_' + id + ']', '.widgets-holder-wrap' );
-
-			// Remove the visibility-button from the widget-form again
-			jQuery( '.widget-content .csb-visibility', $widget ).remove();
-		}
+		return false;
 	};
 
-	jQuery( '.widgets-holder-wrap .widget' ).each( move_button );
-
 	/**
-	 * This small trick allows us to observe all the ajax traffic of WordPress.
-	 * We need to know when a widget was saved so we can update the "Visibility"
-	 * button of the specific widget.
+	 * Toggles the widget state between "show if" / "hide if"
 	 */
-	jQuery.ajaxSetup({
-		"global": true
-	});
+	var toggle_action = function toggle_action( ev ) {
+		var $me = jQuery( this ),
+			$widget = $me.closest( '.widget' ),
+			sel = '#' + $me.attr( 'for' ),
+			$action = $widget.find( sel ),
+			state = $action.val(),
+			$lbl_show = $widget.find( '.lbl-show-if' ),
+			$lbl_hide = $widget.find( '.lbl-hide-if' );
 
-	jQuery( document ).ajaxSuccess( ajax_remove_button );
+		ev.preventDefault();
+		if ( 'show' != state ) {
+			$lbl_show.show();
+			$lbl_hide.hide();
+			$action.val( 'show' );
+		} else {
+			$lbl_show.hide();
+			$lbl_hide.show();
+			$action.val( 'hide' );
+		}
+		return false;
+	}
 
+	jQuery( '.widgets-holder-wrap .widget' ).each( init_widget );
 });

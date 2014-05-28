@@ -9,7 +9,36 @@
 	margin-right: 6px;
 }
 
-.widget-control-actions .csb-visibility {
-	float: left;
-	margin-right: 5px;
+.widget-control-actions .csb-visibility-button {
+	margin: 0 5px;
 }
+
+.csb-visibility {
+	margin: 0 -15px 15px;
+}
+
+.csb-option-row {
+	margin-bottom: 12px;
+}
+
+.csb-visibility-inner {
+	border: 1px solid #E5E5E5;
+	border-left: 0;
+	border-right: 0;
+	padding: 12px 15px 0;
+	background: #FAFAFA;
+}
+
+.csb-visibility-inner .toggle-action {
+	display: block;
+	margin: -15px -15px 0;
+	padding: 15px;
+	cursor: pointer;
+	color: #0074A2;
+}
+
+.csb-visibility-inner .toggle-action:hover {
+	background: #F0F0F0;
+	color: #2EA2CC;
+}
+
