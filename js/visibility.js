@@ -24,7 +24,6 @@ jQuery(function init_visibility() {
 	 */
 	var init_ui = function init_ui( ev ) {
 		var $widget = jQuery( this );
-		console.log('init ui', $widget);
 		jQuery( '.csb-visibility select[multiple]', $widget ).chosen();
 	};
 
