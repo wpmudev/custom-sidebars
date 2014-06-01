@@ -49,7 +49,7 @@
 				<div class="inside">
 					<select name="modifiable[]" multiple="multiple" size="5" style="height:auto;">
 					<?php foreach ( $themesidebars as $key => $ts ) : ?>
-						<option value="<?php esc_attr_e( $key ); ?>" <?php echo ( ! empty( $modifiable ) && array_search( $key, $modifiable ) !== FALSE ) ? 'selected="selected"' : ''; ?>>
+						<option value="<?php echo esc_attr( $key ); ?>" <?php echo ( ! empty( $modifiable ) && array_search( $key, $modifiable ) !== FALSE ) ? 'selected="selected"' : ''; ?>>
 						<?php esc_html_e( $ts['name'] ); ?>
 						</option>
 					<?php endforeach; ?>
@@ -106,7 +106,7 @@
 			<td class="email column-email"><?php esc_html_e( $cs['description'] ); ?></td>
 			<td class="role column-date"><a href="widgets.php"><?php _e( 'Configure Widgets', CSB_LANG ); ?></a></td>
 			<td class="role column-rating"><a href="themes.php?page=customsidebars&p=edit&id=<?php esc_html_e( $cs['id'] ); ?>"><?php _e( 'Edit', CSB_LANG ); ?></a></td>
-			<td class="role column-rating"><a class="csdeletelink" href="themes.php?page=customsidebars&delete=<?php esc_attr_e( $cs['id'] ); ?>&_n=<?php esc_attr_e( $deletenonce ); ?>"><?php _e( 'Delete', CSB_LANG ); ?></a></td>
+			<td class="role column-rating"><a class="csdeletelink" href="themes.php?page=customsidebars&delete=<?php echo esc_attr( $cs['id'] ); ?>&_n=<?php echo esc_attr( $deletenonce ); ?>"><?php _e( 'Delete', CSB_LANG ); ?></a></td>
 		</tr>
 		<?php endforeach; else : ?>
 		<tr id="cs-1" class="alternate">
@@ -132,12 +132,12 @@
 ?>
 <div id="resetsidebarsdiv">
 	<form action="themes.php?page=customsidebars" method="post">
-	<input type="hidden" name="reset-n" value="<?php esc_attr_e( $deletenonce ); ?>" />
+	<input type="hidden" name="reset-n" value="<?php echo esc_attr( $deletenonce ); ?>" />
 	<h2><?php _e( 'Reset Sidebars', CSB_LANG ); ?></h2>
 	<p><?php _e( 'Click on the button below to delete all the Custom Sidebars data from the database. Keep in mind that once the button is clicked you will have to create new sidebars and customize them to restore your current sidebars configuration.</p><p>If you are going to uninstall the plugin permanently, you should use this button before, so there will be no track about the plugin left in the database.', CSB_LANG ); ?></p>
 
 	<p class="submit">
-		<input onclick="return confirm('<?php echo esc_js( 'Are you sure to reset the sidebars?', CSB_LANG ); ?>')" type="submit" class="button-primary" name="reset-sidebars" value="<?php esc_attr_e( 'Reset Sidebars', CSB_LANG ); ?>" />
+		<input onclick="return confirm('<?php echo esc_js( 'Are you sure to reset the sidebars?', CSB_LANG ); ?>')" type="submit" class="button-primary" name="reset-sidebars" value="<?php echo esc_attr( 'Reset Sidebars', CSB_LANG ); ?>" />
 	</p>
 	</form>
 </div>

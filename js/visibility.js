@@ -16,6 +16,16 @@ jQuery(function init_visibility() {
 		$spinner.insertBefore( $target ).css({ 'float': 'left' });
 		$btn.insertBefore( $target ).click( toggle_section );
 		$widget.on( 'click', '.toggle-action', toggle_action );
+		$widget.on( 'csb:ui', init_ui ).trigger( 'csb:ui' );
+	};
+
+	/**
+	 * Initialize the UI components (i.e. chosen select-list, etc)
+	 */
+	var init_ui = function init_ui( ev ) {
+		var $widget = jQuery( this );
+		console.log('init ui', $widget);
+		jQuery( '.csb-visibility select[multiple]', $widget ).chosen();
 	};
 
 	/**

@@ -18,7 +18,8 @@
 }
 
 .csb-option-row {
-	margin-bottom: 12px;
+	margin: 0 -15px;
+	padding: 0 15px 12px;
 }
 
 .csb-visibility-inner {
@@ -32,13 +33,29 @@
 .csb-visibility-inner .toggle-action {
 	display: block;
 	margin: -15px -15px 0;
-	padding: 15px;
+	padding: 15px 15px 0;
 	cursor: pointer;
+	border: 0;
 	color: #0074A2;
 }
 
-.csb-visibility-inner .toggle-action:hover {
+.csb-visibility-inner .csb-option-row:hover {
 	background: #F0F0F0;
 	color: #2EA2CC;
 }
 
+.csb-visibility-inner .csb-action {
+	margin-bottom: 0;
+}
+
+.csb-visibility-inner label {
+	display: block;
+	border-top: 1px solid #E8E8E8;
+	margin: 0 -15px 5px;
+	padding: 5px 15px;
+}
+
+.csb-visibility-inner .chosen-container {
+	display: block !important;
+	width: 100% !important;
+}
