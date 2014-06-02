@@ -49,6 +49,12 @@ class CustomSidebarsVisibility {
 				'admin_enqueue_scripts',
 				array( $this, 'admin_scripts' )
 			);
+		} else {
+			// Filters the list of widget-areas and their widgets
+			add_action(
+				'sidebars_widgets',
+				array( $this, 'sidebars_widgets' )
+			);
 		}
 	}
 
@@ -60,25 +66,51 @@ class CustomSidebarsVisibility {
 	 * @return array Sanitized CSB visibility data.
 	 */
 	protected function get_widget_data( $instance ) {
+		static $Condition_keys = null;
 		$data = array();
+
+		if ( null === $Condition_keys ) {
+			$tax_list = get_taxonomies( array( 'public' => true ), 'objects' );
+			$type_list = get_post_types( array( 'public' => true ), 'objects' );
+			$Condition_keys = array(
+				'date' => '',
+				'roles' => array(),
+				'pagetypes' => array(),
+				'posttypes' => array(),
+				'membership' => '',
+				'prosite' => '',
+			);
+			foreach ( $type_list as $type_item ) {
+				$Condition_keys[ 'pt-' . $type_item->name ] = array();
+			}
+			foreach ( $tax_list as $tax_item ) {
+				$Condition_keys[ 'tax-' . $tax_item->name ] = array();
+			}
+		}
 
 		if ( isset( $instance['csb_visibility'] ) ) {
 			$data = $instance['csb_visibility'];
 		}
 
-		$valid_action = array( 'hide', 'show' );
-		if ( ! array_search( @$data['action'], $valid_action ) ) {
+		$valid_action = array( 'show', 'hide' );
+		if ( ! in_array( @$data['action'], $valid_action ) ) {
 			$data['action'] = reset( $valid_action );
 		}
 
-		if ( ! is_array( @$data['conditions'] ) ) {
-			$data['conditions'] = array(
-				array(),
-			);
+		$conditions = @$data['conditions'];
+		if ( ! is_array( $conditions ) ) {
+			$conditions = array();
 		}
+		$data['conditions'] = array();
 
-		foreach ( $data['conditions'] as $index => $cond ) {
-
+		$data['always'] = true;
+		foreach ( $Condition_keys as $key => $def_value ) {
+			$val = $def_value;
+			if ( isset( $conditions[ $key ] ) && ! empty( $conditions[ $key ] ) ) {
+				$data['always'] = false;
+				$val = $conditions[ $key ];
+			}
+			$data['conditions'][ $key ] = $val;
 		}
 
 		return $data;
@@ -97,13 +129,27 @@ class CustomSidebarsVisibility {
 		$pagetype_list = array(
 			'frontpage' => 'Frontpage',
 			'single' => 'Single page',
-			'archives' => 'Archives',
+			'posts' => 'Posts page',
+			'archive' => 'Archives',
 			'search' => 'Search results',
-			'e404' => 'Not found',
+			'e404' => 'Not found (404)',
+			'preview' => 'Preview',
+			'day' => 'Archive: Day',
+			'month' => 'Archive: Month',
+			'year' => 'Archive: Year',
 		);
+
+		// Remove taxonomies without values.
+		foreach ( $tax_list as $index => $tax_item ) {
+			$tags = get_terms( $tax_item->name, array( 'hide_empty' => false ) );
+			if ( empty( $tags ) ) {
+				unset( $tax_list[ $index ] );
+			}
+		}
 
 		$data = $this->get_widget_data( $instance );
 		$action_show = ($data['action'] == 'show');
+		$cond = $data['conditions'];
 
 		?>
 		<div class="csb-visibility csb-visibility-<?php echo esc_attr( $widget->id ); ?>">
@@ -125,75 +171,143 @@ class CustomSidebarsVisibility {
 			<label for="<?php echo esc_attr( $widget->id ); ?>-action" class="lbl-show-if toggle-action" <?php if ( ! $action_show ) : ?>style="display:none"<?php endif; ?>><?php _e( '<b>Show</b> widget if:', CSB_LANG ); ?></label>
 			<label for="<?php echo esc_attr( $widget->id ); ?>-action" class="lbl-hide-if toggle-action" <?php if ( $action_show ) : ?>style="display:none"<?php endif; ?>><?php _e( '<b>Hide</b> widget if:', CSB_LANG ); ?></label>
 			<input type="hidden" id="<?php echo esc_attr( $widget->id ); ?>-action" name="csb_visibility[action]" value="<?php echo esc_attr( $data['action'] ); ?>" />
+			<i class="dashicons dashicons-plus choose-filters show-on-hover action"></i>
+			<ul class="dropdown" style="display:none">
+				<li class="csb-group">Filters</li>
+				<li class="add-filter" data-for=".csb-date" style="display:none">Date</li>
+				<li class="add-filter" data-for=".csb-roles" <?php if ( ! empty( $cond['roles'] ) ) : ?>style="display:none"<?php endif; ?>>Roles</li>
+				<li class="add-filter" data-for=".csb-membership" style="display:none">Membership</li>
+				<li class="add-filter" data-for=".csb-prosite" style="display:none">ProSite</li>
+				<li class="add-filter" data-for=".csb-pagetypes" <?php if ( ! empty( $cond['pagetypes'] ) ) : ?>style="display:none"<?php endif; ?>>Special pages</li>
+				<li class="add-filter" data-for=".csb-posttypes" <?php if ( ! empty( $cond['posttypes'] ) ) : ?>style="display:none"<?php endif; ?>>For posttype</li>
+				<li class="csb-group">Taxonomy</li>
+				<?php foreach ( $tax_list as $tax_item ) :
+					$row_id = 'tax-' . $tax_item->name;
+					?>
+					<li class="add-filter" data-for=".csb-<?php echo esc_attr( $row_id ); ?>" <?php if ( ! empty( $cond[ $row_id ] ) ) : ?>style="display:none"<?php endif; ?>>
+						<?php echo esc_html( $tax_item->labels->name ); ?>
+					</li>
+					<?php
+				endforeach; ?>
+			</ul>
 		</div>
 
-		<?php foreach ( $data['conditions'] as $index => $cond ) : ?>
-			<?php $block_name = 'csb_visibility[conditions][' . $index . ']'; ?>
+		<?php $block_name = 'csb_visibility[conditions]'; ?>
 
-			<div class="csb-option-row csb-date" <?php if ( empty( $cond['date'] ) ) : ?>style="display:none"<?php endif; ?>>
-				<label for="<?php echo esc_attr( $widget->id ); ?>-date"><?php _e( 'Date', CSB_LANG ); ?></label>
-				<input type="text" id="<?php echo esc_attr( $widget->id ); ?>-date" name="<?php echo esc_attr( $block_name ); ?>[date]" value="<?php echo esc_attr( @$cond['date'] ); ?>" />
-			</div>
-			<div class="csb-option-row csb-roles" <?php if ( empty( $cond['roles'] ) ) : ?>style="display:none"<?php endif; ?>>
-				<label for="<?php echo esc_attr( $widget->id ); ?>-roles"><?php _e( 'Current user has roles', CSB_LANG ); ?></label>
-				<select id="<?php echo esc_attr( $widget->id ); ?>-roles" name="<?php echo esc_attr( $block_name ); ?>[roles][]" multiple="multiple">
-				<?php foreach ( $role_list as $role => $details ) : ?>
-					<?php $name = translate_user_role( $details['name'] ); ?>
-					<?php $is_selected = false !== array_search( $role, $cond['roles'] ); ?>
-					<option <?php selected( $is_selected, true ); ?> value="<?php echo esc_attr( $role ); ?>"><?php echo esc_html( $name ); ?></option>
-				<?php endforeach; ?>
-				</select>
-			</div>
-			<div class="csb-option-row csb-membership" <?php if ( empty( $cond['membership'] ) ) : ?>style="display:none"<?php endif; ?>>
-				<label for="<?php echo esc_attr( $widget->id ); ?>-membership"><?php _e( 'Membership Level', CSB_LANG ); ?></label>
-				<input type="text" id="<?php echo esc_attr( $widget->id ); ?>-membership" name="<?php echo esc_attr( $block_name ); ?>[membership]" value="<?php echo esc_attr( @$cond['membership'] ); ?>" />
-			</div>
-			<div class="csb-option-row csb-prosite" <?php if ( empty( $cond['prosite'] ) ) : ?>style="display:none"<?php endif; ?>>
-				<label for="<?php echo esc_attr( $widget->id ); ?>-prosite"><?php _e( 'Pro Sites Level', CSB_LANG ); ?></label>
-				<input type="text" id="<?php echo esc_attr( $widget->id ); ?>-prosite" name="<?php echo esc_attr( $block_name ); ?>[prosite]" value="<?php echo esc_attr( @$cond['prosite'] ); ?>" />
-			</div>
-			<div class="csb-option-row csb-posttypes" <?php if ( empty( $cond['posttypes'] ) ) : ?>style="display:none"<?php endif; ?>>
-				<label for="<?php echo esc_attr( $widget->id ); ?>-posttypes"><?php _e( 'Posttypes', CSB_LANG ); ?></label>
-				<input type="text" id="<?php echo esc_attr( $widget->id ); ?>-posttypes" name="<?php echo esc_attr( $block_name ); ?>[posttypes]" value="<?php echo esc_attr( @$cond['posttypes'] ); ?>" />
-			</div>
-			<?php
-			foreach ( $type_list as $type_item ) {
+		<div class="csb-option-row csb-always" <?php if ( ! $data['always'] ) : ?>style="display:none"<?php endif; ?>>
+			<label><?php _e( 'Always', CSB_LANG ); ?></label>
+		</div>
+
+		<?php /* DATE */ ?>
+		<div class="csb-option-row csb-date" <?php if ( empty( $cond['date'] ) ) : ?>style="display:none"<?php endif; ?>>
+			<label for="<?php echo esc_attr( $widget->id ); ?>-date"><span class="csb-and" style="display:none"><?php _e( 'AND', CSB_LANG ); ?></span> <?php _e( 'On these dates', CSB_LANG ); ?></label>
+			<i class="dashicons dashicons-trash clear-filter show-on-hover action"></i>
+			<input type="text" id="<?php echo esc_attr( $widget->id ); ?>-date" name="<?php echo esc_attr( $block_name ); ?>[date]" value="<?php echo esc_attr( @$cond['date'] ); ?>" />
+		</div>
+
+		<?php /* ROLES */ ?>
+		<div class="csb-option-row csb-roles" <?php if ( empty( $cond['roles'] ) ) : ?>style="display:none"<?php endif; ?>>
+			<label for="<?php echo esc_attr( $widget->id ); ?>-roles"><span class="csb-and" style="display:none"><?php _e( 'AND', CSB_LANG ); ?></span> <?php _e( 'User has role', CSB_LANG ); ?></label>
+			<i class="dashicons dashicons-trash clear-filter show-on-hover action"></i>
+			<select id="<?php echo esc_attr( $widget->id ); ?>-roles" name="<?php echo esc_attr( $block_name ); ?>[roles][]" multiple="multiple">
+			<?php foreach ( $role_list as $role => $details ) : ?>
+				<?php $name = translate_user_role( $details['name'] ); ?>
+				<?php $is_selected = in_array( $role, $cond['roles'] ); ?>
+				<option <?php selected( $is_selected, true ); ?> value="<?php echo esc_attr( $role ); ?>"><?php echo esc_html( $name ); ?></option>
+			<?php endforeach; ?>
+			</select>
+		</div>
+
+		<?php /* MEMBERSHIP */ ?>
+		<div class="csb-option-row csb-membership" <?php if ( empty( $cond['membership'] ) ) : ?>style="display:none"<?php endif; ?>>
+			<label for="<?php echo esc_attr( $widget->id ); ?>-membership"><span class="csb-and" style="display:none"><?php _e( 'AND', CSB_LANG ); ?></span> <?php _e( 'User has Membership Level', CSB_LANG ); ?></label>
+			<i class="dashicons dashicons-trash clear-filter show-on-hover action"></i>
+			<input type="text" id="<?php echo esc_attr( $widget->id ); ?>-membership" name="<?php echo esc_attr( $block_name ); ?>[membership]" value="<?php echo esc_attr( @$cond['membership'] ); ?>" />
+		</div>
+
+		<?php /* PRO-SITE */ ?>
+		<div class="csb-option-row csb-prosite" <?php if ( empty( $cond['prosite'] ) ) : ?>style="display:none"<?php endif; ?>>
+			<label for="<?php echo esc_attr( $widget->id ); ?>-prosite"><span class="csb-and" style="display:none"><?php _e( 'AND', CSB_LANG ); ?></span> <?php _e( 'Pro Sites Level', CSB_LANG ); ?></label>
+			<i class="dashicons dashicons-trash clear-filter show-on-hover action"></i>
+			<input type="text" id="<?php echo esc_attr( $widget->id ); ?>-prosite" name="<?php echo esc_attr( $block_name ); ?>[prosite]" value="<?php echo esc_attr( @$cond['prosite'] ); ?>" />
+		</div>
+
+		<?php /* PAGE TYPES */ ?>
+		<div class="csb-option-row csb-pagetypes" <?php if ( empty( $cond['pagetypes'] ) ) : ?>style="display:none"<?php endif; ?>>
+			<label for="<?php echo esc_attr( $widget->id ); ?>-pagetypes"><span class="csb-and" style="display:none"><?php _e( 'AND', CSB_LANG ); ?></span> <?php _e( 'On these special pages', CSB_LANG ); ?></label>
+			<i class="dashicons dashicons-trash clear-filter show-on-hover action"></i>
+			<select id="<?php echo esc_attr( $widget->id ); ?>-pagetypes" name="<?php echo esc_attr( $block_name ); ?>[pagetypes][]" multiple="multiple">
+			<?php foreach ( $pagetype_list as $type => $name ) : ?>
+				<?php $is_selected = in_array( $type, $cond['pagetypes'] ); ?>
+				<option <?php selected( $is_selected ); ?> value="<?php echo esc_attr( $type ); ?>"><?php echo esc_html( $name ); ?></option>
+			<?php endforeach; ?>
+			</select>
+		</div>
+
+		<?php /* POSTTYPES */ ?>
+		<div class="csb-option-row csb-posttypes" <?php if ( empty( $cond['posttypes'] ) ) : ?>style="display:none"<?php endif; ?>>
+			<label for="<?php echo esc_attr( $widget->id ); ?>-posttypes"><span class="csb-and" style="display:none"><?php _e( 'AND', CSB_LANG ); ?></span> <?php _e( 'On any page of these types', CSB_LANG ); ?></label>
+			<i class="dashicons dashicons-trash clear-filter show-on-hover action"></i>
+			<select class="posttype" id="<?php echo esc_attr( $widget->id ); ?>-posttypes" name="<?php echo esc_attr( $block_name ); ?>[posttypes][]" multiple="multiple">
+			<?php foreach ( $type_list as $type_item ) : ?>
+				<?php $is_selected = in_array( $type_item->name, $cond['posttypes'] ); ?>
+				<option <?php selected( $is_selected ); ?> value="<?php echo esc_attr( $type_item->name ); ?>"><?php echo esc_html( $type_item->labels->name ); ?></option>
+			<?php endforeach; ?>
+			</select>
+
+			<?php /* SPECIFIC POSTS */ ?>
+			<?php foreach ( $type_list as $type_item ) :
 				$row_id = 'pt-' . $type_item->name;
+				$lbl_all = sprintf( __( 'Only for specific %s', CSB_LANG ), $type_item->labels->name );
+				$lbl_single = sprintf( __( 'Only these %s:', CSB_LANG ), $type_item->labels->name );
+				$is_selected = in_array( $type_item->name, $cond['posttypes'] );
+				$posts = get_posts(
+					array(
+						'post_type' => $type_item->name,
+						'order_by' => 'title',
+						'order' => 'ASC',
+						'numberposts' => '0',
+					)
+				);
 				?>
-				<div class="csb-option-row csb-<?php echo esc_attr( $row_id ); ?>" <?php if ( empty( $cond[ $row_id ] ) ) : ?>style="display:none"<?php endif; ?>>
-					<label for="<?php echo esc_attr( $widget->id ); ?>-<?php echo esc_attr( $row_id ); ?>"><?php esc_html_e( $type_item->labels->name ); ?></label>
-					<input type="text" id="<?php echo esc_attr( $widget->id ); ?>-<?php echo esc_attr( $row_id ); ?>" name="<?php echo esc_attr( $block_name ); ?>[<?php echo esc_attr( $row_id ); ?>]" value="<?php echo esc_attr( @$cond[ $row_id ] ); ?>" />
+				<div class="csb-detail-row csb-<?php echo esc_attr( $row_id ); ?>" <?php if ( ! $is_selected ) : ?>style="display:none"<?php endif; ?>>
+					<label for="<?php echo esc_attr( $widget->id ); ?>-<?php echo esc_attr( $row_id ); ?>">
+						<input type="checkbox" id="<?php echo esc_attr( $widget->id ); ?>-<?php echo esc_attr( $row_id ); ?>" <?php checked( ! empty( $cond[ $row_id ] ) ); ?> data-lbl-all="<?php echo esc_attr( $lbl_all ); ?>" data-lbl-single="<?php echo esc_attr( $lbl_single ); ?>" />
+						<span class="lbl"><?php echo esc_html( empty( $cond[ $row_id ] ) ? $lbl_all : $lbl_single ); ?></span>
+					</label>
+					<div class="detail" <?php if ( empty( $cond[ $row_id ] ) ) : ?>style="display:none"<?php endif; ?>>
+						<select name="<?php echo esc_attr( $block_name ); ?>[<?php echo esc_attr( $row_id ); ?>][]" multiple="multiple">
+						<?php foreach ( $posts as $post ) : ?>
+							<option <?php selected( in_array( $post->ID, $cond[ $row_id ] ) ); ?> value="<?php echo esc_attr( $post->ID ); ?>"><?php echo esc_html( $post->post_title ); ?></option>
+						<?php endforeach; ?>
+						</select>
+					</div>
 				</div>
-				<?php
-			}
-			?>
+			<?php endforeach; ?>
+		</div>
 
-			<?php
-			foreach ( $tax_list as $tax_item ) {
-				$row_id = 'tax-' . $tax_item->name;
-				?>
-				<div class="csb-option-row csb-<?php echo esc_attr( $row_id ); ?>" <?php if ( empty( $cond[ $row_id ] ) ) : ?>style="display:none"<?php endif; ?>>
-					<label for="<?php echo esc_attr( $widget->id ); ?>-<?php echo esc_attr( $row_id ); ?>"><?php esc_html_e( $tax_item->labels->name ); ?></label>
-					<input type="text" id="<?php echo esc_attr( $widget->id ); ?>-<?php echo esc_attr( $row_id ); ?>" name="<?php echo esc_attr( $block_name ); ?>[<?php echo esc_attr( $row_id ); ?>]" value="<?php echo esc_attr( @$cond[ $row_id ] ); ?>" />
-				</div>
-				<?php
-			}
+		<?php /* SPECIFIC TAXONOMY */ ?>
+		<?php
+		foreach ( $tax_list as $tax_item ) {
+			$row_id = 'tax-' . $tax_item->name;
+			$tags = get_terms( $tax_item->name, array( 'hide_empty' => false ) );
 			?>
-
-			<div class="csb-option-row csb-pagetypes" <?php if ( empty( $cond['pagetypes'] ) ) : ?>style="display:none"<?php endif; ?>>
-				<label for="<?php echo esc_attr( $widget->id ); ?>-pagetypes"><?php _e( 'On these page types', CSB_LANG ); ?></label>
-				<select id="<?php echo esc_attr( $widget->id ); ?>-pagetypes" name="<?php echo esc_attr( $block_name ); ?>[pagetypes][]" multiple="multiple">
-				<?php foreach ( $pagetype_list as $type => $name ) : ?>
-					<?php $is_selected = false !== array_search( $type, $cond['pagetypes'] ); ?>
-					<option <?php selected( $is_selected, true ); ?> value="<?php echo esc_attr( $type ); ?>"><?php echo esc_html( $name ); ?></option>
-				<?php endforeach; ?>
+			<div class="csb-option-row csb-<?php echo esc_attr( $row_id ); ?>" <?php if ( empty( $cond[ $row_id ] ) ) : ?>style="display:none"<?php endif; ?>>
+				<label for="<?php echo esc_attr( $widget->id ); ?>-<?php echo esc_attr( $row_id ); ?>"><span class="csb-and" style="display:none"><?php _e( 'AND', CSB_LANG ); ?></span> <?php echo esc_html( $tax_item->labels->name ); ?></label>
+				<i class="dashicons dashicons-trash clear-filter show-on-hover action"></i>
+				<select id="<?php echo esc_attr( $widget->id ); ?>-<?php echo esc_attr( $row_id ); ?>" name="<?php echo esc_attr( $block_name ); ?>[<?php echo esc_attr( $row_id ); ?>][]" multiple="multiple">
+					<?php foreach ( $tags as $tag ) : ?>
+						<option <?php selected( in_array( $tag->term_id, $cond[ $row_id ] ) ); ?>value="<?php echo esc_attr( $tag->term_id ); ?>"><?php echo esc_html( $tag->name ); ?></option>
+					<?php endforeach; ?>
 				</select>
 			</div>
+			<?php
+		}
+		?>
 
-		<?php endforeach; ?>
 
 		<?php if ( isset( $_POST[ 'csb-visibility-button' ] ) ) : ?>
-			<script>jQuery(function() { jQuery('.csb-visibility-<?php echo esc_js( $widget->id ); ?>').closest('.widget').trigger('csb:ui'); }); </script>
+			<script>jQuery(function() { jQuery('.csb-visibility-<?php echo esc_js( $widget->id ); ?>').closest('.widget').trigger('csb:ui').trigger('csb:update'); }); </script>
 		<?php endif; ?>
 
 		</div>
@@ -210,13 +324,9 @@ class CustomSidebarsVisibility {
 	 * @return array Modified settings.
 	 */
 	public function admin_widget_update( $instance, $new_instance, $old_instance ) {
-		if ( isset( $_POST['csb_visibility'] ) ) {
-			$instance['csb_visibility'] = $_POST['csb_visibility'];
-		}
+		$data = $this->get_widget_data( $_POST );
 
-		if ( ! isset( $instance['csb_visibility'] ) ) {
-			$instance['csb_visibility'] = array();
-		}
+		$instance['csb_visibility'] = $data;
 
 		return $instance;
 	}
@@ -258,5 +368,232 @@ class CustomSidebarsVisibility {
 			array(),
 			'1.6'
 		);
+	}
+
+	// == Front-end functions
+
+	/**
+	 * Filter the list of widgets for a sidebar so that active sidebars work as expected.
+	 *
+	 * @since  1.6
+	 * @param  array $widget_areas An array of widget areas and their widgets.
+	 * @return array The modified $widget_area array.
+	 */
+	public function sidebars_widgets( $widget_areas ) {
+		static $Settings = array();
+
+		foreach ( $widget_areas as $widget_area => $widgets ) {
+			if ( empty( $widgets ) ) {
+				continue;
+			}
+
+			if ( 'wp_inactive_widgets' == $widget_area ) {
+				continue;
+			}
+
+			foreach ( $widgets as $position => $widget_id ) {
+				// Find the conditions for this widget.
+				if ( preg_match( '/^(.+?)-(\d+)$/', $widget_id, $matches ) ) {
+					$id_base = $matches[1];
+					$widget_number = intval( $matches[2] );
+				} else {
+					$id_base = $widget_id;
+					$widget_number = null;
+				}
+
+				if ( ! isset( $Settings[ $id_base ] ) ) {
+					$Settings[ $id_base ] = get_option( 'widget_' . $id_base );
+				}
+
+				// New multi widget (WP_Widget)
+				if ( ! is_null( $widget_number ) ) {
+					if ( isset( $Settings[ $id_base ][ $widget_number ] ) && false === $this->maybe_display_widget( $Settings[ $id_base ][ $widget_number ] ) ) {
+						unset( $widget_areas[ $widget_area ][ $position ] );
+					}
+				}
+
+				// Old single widget
+				else if ( ! empty( $Settings[ $id_base ] ) && false === $this->maybe_display_widget( $Settings[ $id_base ] ) ) {
+					unset( $widget_areas[ $widget_area ][ $position ] );
+				}
+			}
+		}
+
+		return $widget_areas;
+	}
+
+	public function maybe_display_widget( $instance ) {
+		global $post, $wp_query;
+		static $Type_list = null;
+		static $Tax_list = null;
+
+		$show_widget = true;
+		$condition_true = true;
+		$action = 'show';
+
+		if ( empty( $instance['csb_visibility'] ) || empty( $instance['csb_visibility']['conditions'] ) ) {
+			return $show_widget;
+		}
+
+		$cond = $instance['csb_visibility']['conditions'];
+		$action = 'hide' != $instance['csb_visibility']['action'] ? 'show' : 'hide';
+
+		if ( $instance['csb_visibility']['always'] ) {
+			return ( 'hide' == $action ? false : true );
+		}
+
+		if ( null === $Type_list ) {
+			$Tax_list = get_taxonomies( array( 'public' => true ), 'objects' );
+			$Type_list = get_post_types( array( 'public' => true ), 'objects' );
+		}
+
+		// Filter for DATE-RANGE.
+		if ( $condition_true && ! empty( $cond['date'] ) ) {
+			// not implemented yet...
+		}
+
+		// Filter for USER ROLES.
+		if ( $condition_true && ! empty( $cond['roles'] ) && is_array( $cond['roles'] ) ) {
+			if ( ! is_user_logged_in() ) {
+				$condition_true = false;
+			} else {
+				global $current_user;
+				$has_role = false;
+				foreach ( $current_user->roles as $user_role ) {
+					if ( in_array( $user_role, $cond['roles'] ) ) {
+						$has_role = true;
+						break;
+					}
+				}
+				if ( ! $has_role ) {
+					$condition_true = false;
+				}
+			}
+		}
+
+		// Filter for MEMBERSHIP Level.
+		if ( $condition_true && ! empty( $cond['membership'] ) ) {
+			// not implemented yet...
+		}
+
+		// Filter for PRO-SITE Level.
+		if ( $condition_true && ! empty( $cond['prosite'] ) ) {
+			// not implemented yet...
+		}
+
+		// Filter for SPECIAL PAGES.
+		if ( $condition_true && ! empty( $cond['pagetypes'] ) && is_array( $cond['pagetypes'] ) ) {
+			$is_type = false;
+			foreach ( $cond['pagetypes'] as $type ) {
+				if ( $is_type ) {
+					break;
+				}
+
+				switch ( $type ) {
+					case 'e404':
+						$is_type = $is_type || is_404();
+						break;
+					case 'single':
+						$is_type = $is_type || is_singular();
+						break;
+					case 'search':
+						$is_type = $is_type || is_search();
+						break;
+					case 'archive':
+						$is_type = $is_type || is_archive();
+						break;
+					case 'posts':
+						$is_type = $is_type || $wp_query->is_posts_page;
+						break;
+					case 'preview':
+						$is_type = $is_type || is_preview();
+						break;
+					case 'day':
+						$is_type = $is_type || is_day();
+						break;
+					case 'month':
+						$is_type = $is_type || is_month();
+						break;
+					case 'year':
+						$is_type = $is_type || is_year();
+						break;
+					case 'frontpage':
+						if ( current_theme_supports( 'infinite-scroll' ) )
+							$is_type = $is_type || is_front_page();
+						else {
+							$is_type = $is_type ||  ( is_front_page() && ! is_paged() );
+						}
+						break;
+				}
+			}
+			if ( ! $is_type ) {
+				$condition_true = false;
+			}
+		}
+
+		// Filter for POST-TYPE.
+		if ( $condition_true && ! empty( $cond['posttypes'] ) ) {
+			$posttype = get_post_type();
+			if ( ! in_array( $posttype, $cond['posttypes'] ) ) {
+				$condition_true = false;
+			} else {
+				// Filter for SPECIFIC POSTS.
+				if ( ! empty( $cond[ 'pt-' . $posttype ] ) ) {
+					if ( ! in_array( get_the_ID(), $cond[ 'pt-' . $posttype ] ) ) {
+						$condition_true = false;
+					}
+				}
+			}
+		}
+
+		if ( $condition_true ) {
+			// TAXONOMY condition.
+			$tax_query = $wp_query->tax_query->queries;
+			if ( is_array( $tax_query ) ) {
+				$tax_type = $tax_query[0]['taxonomy'];
+				$tax_terms = $tax_query[0]['terms'];
+			} else {
+				$tax_type = false;
+				$tax_terms = false;
+			}
+
+			foreach ( $Tax_list as $tax_item ) {
+				if ( ! $condition_true ) {
+					break;
+				}
+
+				$tax_key = 'tax-' . $tax_item->name;
+				if ( isset( $cond[ $tax_key ] ) && ! empty( $cond[ $tax_key ] ) ) {
+					$has_term = false;
+
+					if ( $tax_type && $tax_type == $tax_item->name ) {
+						// Check if we did filter for the specific taxonomy.
+						foreach ( $tax_terms as $slug ) {
+							$term_data = get_term_by( 'slug', $slug, $tax_type );
+							if ( in_array( $term_data->term_id, $cond[ $tax_key ] ) ) {
+								$has_term = true;
+							}
+						}
+					} else {
+						// Check if current post has the specific taxonomy.
+						foreach ( $cond[ $tax_key ] as $term ) {
+							if ( has_term( $term, $tax_item->name ) ) {
+								$has_term = true;
+								break;
+							}
+						}
+					}
+					if ( ! $has_term ) {
+						$condition_true = false;
+					}
+				}
+			}
+		}
+
+		if ( ( 'show' == $action && ! $condition_true ) || ( 'hide' == $action && $condition_true ) ) {
+			$show_widget = false;
+		}
+
+		return $show_widget;
 	}
 };

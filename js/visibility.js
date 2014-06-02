@@ -3,6 +3,7 @@
  */
 
 jQuery(function init_visibility() {
+	var $doc = jQuery( document );
 
 	/**
 	 * Moves the "Visibility" button next to the save button.
@@ -15,8 +16,14 @@ jQuery(function init_visibility() {
 
 		$spinner.insertBefore( $target ).css({ 'float': 'left' });
 		$btn.insertBefore( $target ).click( toggle_section );
-		$widget.on( 'click', '.toggle-action', toggle_action );
+		$widget.on( 'click', '.toggle-action b', toggle_action );
 		$widget.on( 'csb:ui', init_ui ).trigger( 'csb:ui' );
+		$widget.on( 'csb:update', update_hints ).trigger( 'csb:update' );
+		$widget.on( 'click', '.clear-filter', remove_filter );
+		$widget.on( 'click', '.choose-filters', show_filter_menu );
+		$widget.on( 'click', '.add-filter', add_filter );
+		$widget.on( 'change', 'input[data-lbl-all][data-lbl-single]', toggle_label );
+		$widget.on( 'change', 'select.posttype', update_posttypes );
 	};
 
 	/**
@@ -26,6 +33,85 @@ jQuery(function init_visibility() {
 		var $widget = jQuery( this );
 		jQuery( '.csb-visibility select[multiple]', $widget ).chosen();
 	};
+
+	/**
+	 * Removes the current filter row from the conditions
+	 */
+	var remove_filter = function remove_filter( ev ) {
+		var $me = jQuery( this ),
+			$row = $me.closest( '.csb-option-row' ),
+			$widget = $me.closest( '.widget' ),
+			sel = '.' + jQuery.trim( $row.attr( 'class' ).replace( 'csb-option-row', '') ),
+			$add_item = $widget.find( '[data-for="' + sel + '"]' ),
+			$input = $row.find( 'input, select, textarea' );
+
+		ev.preventDefault();
+		$add_item.show();
+		$row.fadeOut( 400, function clear_values() {
+			// After row is hidden clear the input values.
+			$input.val('').trigger('chosen:updated');
+			$widget.trigger('csb:update');
+		} );
+		return false;
+	};
+
+	/**
+	 * User clicks on a new filter option in the "Add filter" dropdown.
+	 * Show the filter row.
+	 */
+	var add_filter = function add_filter( ev ) {
+		var $me = jQuery( this ),
+			sel = $me.data( 'for' ),
+			$widget = $me.closest( '.widget' ),
+			$always = $widget.find( '.csb-always' ),
+			$filter = $widget.find( sel );
+
+		ev.preventDefault();
+		$filter.show();
+		$me.hide();
+		$always.hide();
+		hide_filter_menu();
+		$widget.trigger('csb:update');
+		return false;
+	}
+
+	/**
+	 * When a filter block is added or removed we need to show/hide some hints.
+	 */
+	var update_hints = function update_hints() {
+		var $widget = jQuery( this ).closest( '.widget' ),
+			$always = $widget.find( '.csb-always' ),
+			$rows = $widget.find( '.csb-option-row:visible:not(.csb-action,.csb-always)' );
+
+		if ( $rows.length == 0 ) {
+			$always.show();
+		} else {
+			$always.hide();
+			$rows.find( '.csb-and' ).show();
+			$rows.first().find( '.csb-and' ).hide();
+		}
+	}
+
+	/**
+	 * Let user add a new filter.
+	 */
+	var show_filter_menu = function show_filter_menu( ev ) {
+		var $me = jQuery( this ),
+			$row = $me.closest( '.csb-option-row' ),
+			$menu = $row.find( '.dropdown' );
+
+		ev.preventDefault();
+		$menu.show();
+		$doc.one( 'click', hide_filter_menu );
+		return false;
+	};
+
+	/**
+	 * Close the filter menu again.
+	 */
+	var hide_filter_menu = function hide_filter_menu( ev ) {
+		jQuery( '.csb-action .dropdown:visible' ).hide();
+	}
 
 	/**
 	 * Shows or hides the visibility-options for the current widget.
@@ -40,6 +126,7 @@ jQuery(function init_visibility() {
 		if ( $flag.val() == '0' ) {
 			$flag.val(1);
 			$section.show();
+			$widget.trigger('csb:update');
 		} else {
 			$flag.val(0);
 			$section.hide();
@@ -52,7 +139,7 @@ jQuery(function init_visibility() {
 	 * Toggles the widget state between "show if" / "hide if"
 	 */
 	var toggle_action = function toggle_action( ev ) {
-		var $me = jQuery( this ),
+		var $me = jQuery( this ).closest( 'label' ),
 			$widget = $me.closest( '.widget' ),
 			sel = '#' + $me.attr( 'for' ),
 			$action = $widget.find( sel ),
@@ -71,6 +158,58 @@ jQuery(function init_visibility() {
 			$action.val( 'hide' );
 		}
 		return false;
+	};
+
+	/**
+	 * Used for the posttype filter: When user changes the "All posts" checkbox
+	 * the label will toggle between "All posts" and "Only these posts".
+	 */
+	var toggle_label = function toggle_label( ev ) {
+		var $me = jQuery( this ).closest( 'label' ),
+			$row = $me.closest( '.csb-detail-row' ),
+			$inp = $me.find( 'input[type=checkbox]' ),
+			$lbl = $me.find( '.lbl' ),
+			$detail = $row.find( '.detail' ),
+			$detail_inp = $detail.find( 'input,select,textarea' );
+
+		if ( $inp.prop( 'checked' ) ) {
+			$lbl.text( $inp.data( 'lbl-single' ) );
+			$detail.show();
+		} else {
+			$lbl.text( $inp.data( 'lbl-all' ) );
+			$detail.hide();
+			$detail_inp.val('').trigger('chosen:updated');
+		}
+	};
+
+	/**
+	 * When the user changes the posttype-filter show or hide the detail-rows
+	 * for each posttype.
+	 */
+	var update_posttypes = function update_posttypes( ev ) {
+		var $me = jQuery( this ),
+			$row = $me.closest( '.csb-option-row' ),
+			$types = $row.find( '.csb-detail-row' ),
+			types = $me.val(),
+			i;
+
+		$types.addClass( 'csb-hide' );
+		for ( i = 0; i < types.length; i += 1 ) {
+			$types.filter( '.csb-pt-' + types[i] ).removeClass( 'csb-hide ');
+		}
+
+		$types.each(function check_detail_row() {
+			var $detail = jQuery( this ),
+				$check = $detail.find( 'input[type=checkbox]' );;
+
+			if ( $detail.hasClass( 'csb-hide' ) ) {
+				$detail.hide();
+				$check.prop( 'checked', false );
+				toggle_label.call( $check );
+			} else {
+				$detail.show();
+			}
+		});
 	}
 
 	jQuery( '.widgets-holder-wrap .widget' ).each( init_widget );
