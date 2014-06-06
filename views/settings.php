@@ -1,7 +1,14 @@
-<div class="themes-php">
+<?php
+/**
+ * The default screen of the custom-sidebar section.
+ * User can create new custom sidebars here.
+ */
+?>
+
+<div class="themes-php csb">
 <div class="wrap">
 
-<?php include( 'tabs.php' ); ?>
+<?php include 'part-tabs.php'; ?>
 
 <div id="customsidebarspage">
 <div id="poststuff">
@@ -49,7 +56,7 @@
 				<div class="inside">
 					<select name="modifiable[]" multiple="multiple" size="5" style="height:auto;">
 					<?php foreach ( $themesidebars as $key => $ts ) : ?>
-						<option value="<?php echo esc_attr( $key ); ?>" <?php echo ( ! empty( $modifiable ) && array_search( $key, $modifiable ) !== FALSE ) ? 'selected="selected"' : ''; ?>>
+						<option value="<?php echo esc_attr( $key ); ?>" <?php selected( ! empty( $modifiable ) && array_search( $key, $modifiable ) !== FALSE ); ?>>
 						<?php esc_html_e( $ts['name'] ); ?>
 						</option>
 					<?php endforeach; ?>
@@ -142,7 +149,7 @@
 	</form>
 </div>
 
-<?php include( 'footer.php' ); ?>
+<?php include 'part-footer.php'; ?>
 
 </div>
 </div>

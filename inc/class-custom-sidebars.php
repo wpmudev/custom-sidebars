@@ -2,6 +2,7 @@
 
 // Load additional Pro-modules.
 require_once( 'class-custom-sidebars-visibility.php' );
+require_once( 'class-custom-sidebars-export.php' );
 
 
 /**
@@ -9,27 +10,29 @@ require_once( 'class-custom-sidebars-visibility.php' );
  * The CustomSidebars class encapsulates all our plugin logic.
  */
 class CustomSidebars {
-	var $message = '';
-	var $message_class = '';
+	private $message = '';
+	private $message_class = '';
 
 	//The name of the option that stores the info of the new bars.
-	var $option_name = 'cs_sidebars';
+	private $option_name = 'cs_sidebars';
 
 	//The name of the option that stores which bars are replaceable, and the default
 	//replacements. The value is stored in $this->options
-	var $option_modifiable = 'cs_modifiable';
+	private $option_modifiable = 'cs_modifiable';
 
-
-	var $sidebar_prefix = 'cs-';
-	var $postmeta_key = '_cs_replacements';
-	var $cap_required = 'switch_themes';
+	private $sidebar_prefix = 'cs-';
+	private $postmeta_key = '_cs_replacements';
+	private $cap_required = 'switch_themes';
 	// What is 'pt-widget'?
-	var $ignore_post_types = array( 'attachment', 'revision', 'nav_menu_item', 'pt-widget' );
-	var $options = array();
+	private $ignore_post_types = array( 'attachment', 'revision', 'nav_menu_item', 'pt-widget' );
+	private $options = array();
 
-	var $replaceable_sidebars = array();
-	var $replacements = array();
-	var $replacements_todo;
+	private $replaceable_sidebars = array();
+	private $replacements = array();
+	private $replacements_todo;
+
+	// @since 1.6
+	private $screen_id = '';
 
 	/**
 	 * Returns the singleton instance of the custom sidebars class.
@@ -41,6 +44,10 @@ class CustomSidebars {
 
 		if ( null === $Inst ) {
 			$Inst = new CustomSidebars();
+
+			// PRO-modules are initialized now.
+			CustomSidebarsVisibility::instance();
+			CustomSidebarsExport::instance();
 		}
 
 		return $Inst;
@@ -51,31 +58,42 @@ class CustomSidebars {
 	 * We directly initialize sidebar options when class is created.
 	 */
 	private function __construct() {
-		$this->retrieve_options();
-		$this->replaceable_sidebars = $this->getModifiableSidebars();
+		$this->get_sidebar_options();
+		$this->replaceable_sidebars = $this->get_modifiable_sidebars();
 		$this->replacements_todo = sizeof( $this->replaceable_sidebars );
 
 		foreach ( $this->replaceable_sidebars as $sb ) {
-			$this->replacements[$sb] = FALSE;
+			$this->replacements[ $sb ] = FALSE;
 		}
-
-		// Also initialize the Pro-modules
-		CustomSidebarsVisibility::instance();
 	}
 
-	public function retrieve_options() {
-		$this->options = get_option( $this->option_modifiable );
+	/**
+	 * Returns a list with sidebars that were marked as "modifiable".
+	 * Also contains information on the default replacements of these sidebars.
+	 */
+	public function get_sidebar_options() {
+		$this->options = get_option( 'cs_modifiable', array() );
+		return $this->options;
 	}
 
-	public function getCustomSidebars() {
-		$sidebars = get_option( $this->option_name );
-		if ( $sidebars ) {
-			return $sidebars;
-		}
-		return array();
+	/**
+	 * Returns a list with all custom sidebars that were created by the user.
+	 */
+	public function get_custom_sidebars() {
+		//return wp_get_sidebars_widgets();
+		return get_option( 'cs_sidebars', array() );
 	}
 
-	public function getThemeSidebars( $include_custom_sidebars = FALSE ) {
+	/**
+	 * Returns a list of the default sidebars (this is a WordPress core option).
+	 *
+	 * @since  1.6.0
+	 */
+	public function get_default_sidebars() {
+		return get_option( 'sidebars_widgets', array() );
+	}
+
+	public function get_theme_sidebars( $include_custom_sidebars = FALSE ) {
 		global $wp_registered_sidebars;
 		$allsidebars = $wp_registered_sidebars;
 		ksort( $allsidebars );
@@ -93,8 +111,8 @@ class CustomSidebars {
 		return $themesidebars;
 	}
 
-	public function registerCustomSidebars() {
-		$sb = $this->getCustomSidebars();
+	public function register_custom_sidebars() {
+		$sb = $this->get_custom_sidebars();
 		if ( ! empty( $sb ) ) {
 			foreach ( $sb as $sidebar ) {
 				register_sidebar( $sidebar );
@@ -102,7 +120,7 @@ class CustomSidebars {
 		}
 	}
 
-	public function replaceSidebars() {
+	public function replace_sidebars() {
 		global $_wp_sidebars_widgets, $post, $wp_registered_sidebars, $wp_registered_widgets;
 
 		$original_widgets = $_wp_sidebars_widgets;
@@ -110,16 +128,16 @@ class CustomSidebars {
 		$updated = FALSE;
 
 		$replaceables = $this->replaceable_sidebars;
-		$defaults = $this->getDefaultReplacements();
+		$defaults = $this->get_default_replacements();
 
 		do_action( 'cs_predetermineReplacements' );
 
-		$this->determineReplacements( $defaults );
+		$this->determine_replacements( $defaults );
 
 		foreach ( $this->replacements as $sb_name => $replacement_info ) {
 			if ( $replacement_info ) {
 				list( $replacement, $replacement_type, $extra_index ) = $replacement_info;
-				if ( $this->checkAndFixSidebar( $sb_name, $replacement, $replacement_type, $extra_index ) ) {
+				if ( $this->check_and_fix_sidebar( $sb_name, $replacement, $replacement_type, $extra_index ) ) {
 					if ( sizeof( $original_widgets[$replacement] ) == 0 ) {
 						// No widgets on custom bar, show nothing.
 						$wp_registered_widgets['csemptywidget'] = $this->get_empty_widget();
@@ -147,7 +165,7 @@ class CustomSidebars {
 		return $sidebar;
 	}
 
-	public function determineReplacements( $defaults ) {
+	public function determine_replacements( $defaults ) {
 		//posts
 		if ( is_single() ) {
 			//Post sidebar
@@ -178,7 +196,7 @@ class CustomSidebars {
 			//Category sidebar
 			global $sidebar_category;
 			if ( $this->replacements_todo > 0 ) {
-				$categories = $this->getSortedCategories();
+				$categories = $this->get_sorted_categories();
 				$i = 0;
 				while ( $this->replacements_todo > 0 && $i < sizeof( $categories ) ) {
 					foreach ( $this->replaceable_sidebars as $sidebar ) {
@@ -360,12 +378,12 @@ class CustomSidebars {
 	 * Stores the original post id before any plugin (buddypress) can modify this data, to show the proper sidebar.
 	 * @return null
 	 */
-	public function storeOriginalPostId() {
+	public function store_original_post_id() {
 		global $post;
 		$this->originalPostId = $post->ID;
 	}
 
-	public function checkAndFixSidebar( $sidebar, $replacement, $method, $extra_index ) {
+	public function check_and_fix_sidebar( $sidebar, $replacement, $method, $extra_index ) {
 		global $wp_registered_sidebars;
 
 		if ( isset( $wp_registered_sidebars[$replacement] ) )
@@ -407,7 +425,7 @@ class CustomSidebars {
 	/**
 	 * Removes a single custom sidebar from the options.
 	 */
-	public function deleteSidebar() {
+	public function delete_sidebar() {
 		if ( ! current_user_can( $this->cap_required ) ) {
 			return new WP_Error( 'cscantdelete', __( 'You do not have permission to delete sidebars', CSB_LANG ) );
 		}
@@ -419,7 +437,7 @@ class CustomSidebars {
 		$newsidebars = array();
 		$deleted = FALSE;
 
-		$custom = $this->getCustomSidebars();
+		$custom = $this->get_custom_sidebars();
 
 		if ( ! empty( $custom ) ) {
 			foreach ( $custom as $sb ) {
@@ -434,12 +452,12 @@ class CustomSidebars {
 		//update option
 		update_option( $this->option_name, $newsidebars );
 
-		$this->refreshSidebarsWidgets();
+		$this->refresh_sidebars_widgets();
 
 		if ( $deleted ) {
-			$this->setMessage( sprintf( __( 'The sidebar "%s" has been deleted.', CSB_LANG ), $_REQUEST['delete'] ) );
+			$this->set_message( sprintf( __( 'The sidebar "%s" has been deleted.', CSB_LANG ), $_REQUEST['delete'] ) );
 		} else {
-			$this->setError( sprintf( __( 'There was not any sidebar called "%s" and it could not been deleted.', CSB_LANG ), $_GET['delete'] ) );
+			$this->set_error( sprintf( __( 'There was not any sidebar called "%s" and it could not been deleted.', CSB_LANG ), $_GET['delete'] ) );
 		}
 	}
 
@@ -448,32 +466,32 @@ class CustomSidebars {
 	 * Also eventual actions such as delete or update are executed if required.
 	 */
 	public function create_page() {
-		//$this->refreshSidebarsWidgets();
+		//$this->refresh_sidebars_widgets();
 		if ( ! empty( $_POST) ) {
 			if ( isset( $_POST['create-sidebars'] ) ) {
 				check_admin_referer( 'custom-sidebars-new' );
-				$this->storeSidebar();
+				$this->store_sidebar();
 			} else if ( isset( $_POST['update-sidebar'] ) ) {
 				check_admin_referer( 'custom-sidebars-update' );
-				$this->updateSidebar();
+				$this->update_sidebar();
 			} else if ( isset( $_POST['update-modifiable'] ) ) {
-				$this->updateModifiable();
-				$this->retrieve_options();
-				$this->replaceable_sidebars = $this->getModifiableSidebars();
+				$this->update_modifiable();
+				$this->get_sidebar_options();
+				$this->replaceable_sidebars = $this->get_modifiable_sidebars();
 			} else if ( isset( $_POST['update-defaults-posts'] ) OR isset( $_POST['update-defaults-pages'] ) ) {
-				$this->storeDefaults();
+				$this->store_defaults();
 			} else if ( isset( $_POST['reset-sidebars'] ) ) {
-				$this->resetSidebars();
+				$this->reset_sidebars();
 			}
 
-			$this->retrieve_options();
+			$this->get_sidebar_options();
 		} else if ( ! empty( $_GET['delete'] ) ) {
-			$this->deleteSidebar();
-			$this->retrieve_options();
+			$this->delete_sidebar();
+			$this->get_sidebar_options();
 		} else if ( ! empty( $_GET['p'] ) ) {
 			if ( $_GET['p'] == 'edit' && ! empty( $_GET['id'] ) ) {
-				$customsidebars = $this->getCustomSidebars();
-				$sb = $this->getSidebar( $_GET['id'], $customsidebars );
+				$customsidebars = $this->get_custom_sidebars();
+				$sb = $this->get_sidebar( $_GET['id'], $customsidebars );
 				if ( ! $sb ) {
 					return new WP_Error( 'cscantdelete', __( 'You do not have permission to delete sidebars', CSB_LANG ) );
 				}
@@ -482,41 +500,45 @@ class CustomSidebars {
 			}
 		}
 
-		$customsidebars = $this->getCustomSidebars();
-		$themesidebars = $this->getThemeSidebars();
-		$allsidebars = $this->getThemeSidebars( TRUE );
-		$defaults = $this->getDefaultReplacements();
+		$customsidebars = $this->get_custom_sidebars();
+		$themesidebars = $this->get_theme_sidebars();
+		$allsidebars = $this->get_theme_sidebars( TRUE );
+		$defaults = $this->get_default_replacements();
 		$modifiable = $this->replaceable_sidebars;
-		$post_types = $this->getPostTypes();
+		$post_types = $this->get_post_types();
 
 		$deletenonce = wp_create_nonce( 'custom-sidebars-delete' );
 
 		//var_dump( $defaults);
 
 		//Form
-		if ( ! empty( $_GET['p'] ) ) {
-			if ( $_GET['p'] == 'defaults' ) {
+		switch ( @$_GET['p'] ) {
+			case 'defaults':
 				$categories = get_categories( array( 'hide_empty' => 0 ) );
 				if ( sizeof( $categories ) == 1 && $categories[0]->cat_ID == 1 ) {
 					unset( $categories[0] );
 				}
+				include CSB_VIEWS_DIR . 'defaults.php';
+				break;
 
-				include( CSB_VIEWS_DIR . 'defaults.php' );
-			} else if ( $_GET['p'] == 'edit' ) {
-				include( CSB_VIEWS_DIR . 'edit.php' );
-			} else {
-				include( CSB_VIEWS_DIR . 'settings.php' );
-			}
-		}
-		else {
-			include( CSB_VIEWS_DIR . 'settings.php' );
+			case 'edit':
+				include CSB_VIEWS_DIR . 'edit.php';
+				break;
+
+			case 'export':
+				include CSB_VIEWS_DIR . 'export.php';
+				break;
+
+			default:
+				include CSB_VIEWS_DIR . 'settings.php';
+				break;
 		}
 	}
 
 	/**
 	 * Adds the "Custom Sidebars Pro" menu item to the "Appearance" menu.
 	 */
-	public function addSubMenus() {
+	public function add_sub_menus() {
 		$page = add_submenu_page(
 			'themes.php',
 			__( 'Custom Sidebars Pro', CSB_LANG ),
@@ -526,14 +548,25 @@ class CustomSidebars {
 			array( $this, 'create_page' )
 		);
 
-		add_action( 'admin_print_scripts-' . $page, array( $this, 'addScripts' ) );
+		$this->screen_id = $page;
+
+		add_action( 'admin_print_scripts-' . $page, array( $this, 'add_scripts' ) );
 	}
 
-	public function addScripts() {
+	/**
+	 * Returns the screen_id of the custom sidebars section.
+	 *
+	 * @since  1.6.0
+	 */
+	public function get_screen_id() {
+		return $this->screen_id;
+	}
+
+	public function add_scripts() {
 		wp_enqueue_script( 'post' );
 	}
 
-	public function addStyles( $hook ) {
+	public function add_styles( $hook ) {
 		if ( 'widgets.php' == $hook || 'appearance_page_customsidebars' == $hook ) {
 			wp_enqueue_script( 'cs_script', CSB_JS_URL . 'cs.js' );
 			wp_enqueue_script( 'thickbox', null, array( 'jquery' ) );
@@ -545,7 +578,7 @@ class CustomSidebars {
 	/**
 	 * Registers the "Sidebars" meta box in the post-editor.
 	 */
-	public function addMetaBox() {
+	public function add_meta_box() {
 		global $post;
 		$post_type = get_post_type( $post );
 		if ( $post_type && ! (array_search( $post_type, $this->ignore_post_types ) ) ) {
@@ -568,9 +601,9 @@ class CustomSidebars {
 	public function print_metabox() {
 		global $post, $wp_registered_sidebars;
 
-		$replacements = $this->getReplacements( $post->ID );
+		$replacements = $this->get_replacements( $post->ID );
 
-		//$available = array_merge(array( '' ), $this->getThemeSidebars( TRUE) );
+		//$available = array_merge(array( '' ), $this->get_theme_sidebars( TRUE) );
 		$available = $wp_registered_sidebars;
 		ksort( $available );
 		$sidebars = $this->replaceable_sidebars;
@@ -585,14 +618,14 @@ class CustomSidebars {
 			}
 		}
 
-		include( CSB_VIEWS_DIR . 'metabox.php' );
+		include CSB_VIEWS_DIR . 'metabox.php';
 	}
 
-	public function loadTextDomain() {
+	public function load_text_domain() {
 		load_plugin_textdomain( CSB_LANG, false, dirname( plugin_basename( __FILE__ ) ) . '/lang/' );
 	}
 
-	public function getReplacements( $postid ) {
+	public function get_replacements( $postid ) {
 		$replacements = get_post_meta( $postid, $this->postmeta_key, TRUE );
 		if ( $replacements == '' ) {
 			$replacements = array();
@@ -602,15 +635,15 @@ class CustomSidebars {
 		return $replacements;
 	}
 
-	public function getModifiableSidebars() {
-		if ( $modifiable = $this->options ) { //get_option( $this->option_modifiable) )
+	public function get_modifiable_sidebars() {
+		if ( $modifiable = $this->options ) {
 			return $modifiable['modifiable'];
 		}
 		return array();
 	}
 
-	public function getDefaultReplacements() {
-		if ( $defaults = $this->options ) { //get_option( $this->option_modifiable) )
+	public function get_default_replacements() {
+		if ( $defaults = $this->options ) {
 			$defaults['post_type_posts'] = isset( $defaults['defaults'] ) ? $defaults['defaults'] : array();
 			unset( $defaults['modifiable'] );
 			unset( $defaults['defaults'] );
@@ -619,7 +652,7 @@ class CustomSidebars {
 		return array();
 	}
 
-	public function updateModifiable() {
+	public function update_modifiable() {
 		check_admin_referer( 'custom-sidebars-options', 'options_wpnonce' );
 		$options = $this->options ? $this->options : array();
 
@@ -634,10 +667,10 @@ class CustomSidebars {
 			add_option( $this->option_modifiable, $options );
 		}
 
-		$this->setMessage( __( 'The custom sidebars settings has been updated successfully.', CSB_LANG ) );
+		$this->set_message( __( 'The custom sidebars settings has been updated successfully.', CSB_LANG ) );
 	}
 
-	public function storeDefaults() {
+	public function store_defaults() {
 		$options = $this->options;
 		$modifiable = $this->replaceable_sidebars;
 
@@ -646,7 +679,7 @@ class CustomSidebars {
 		$options['defaults'] = array();
 		$options['post_type_pages'] = array();
 
-		foreach ( $this->getPostTypes() as $pt ) {
+		foreach ( $this->get_post_types() as $pt ) {
 			if ( ! empty( $modifiable ) ) {
 				foreach ( $modifiable as $m ) {
 					if ( isset( $_POST["type_posts_{$pt}_$m"] ) && $_POST["type_posts_{$pt}_$m"] != '' ) {
@@ -774,11 +807,11 @@ class CustomSidebars {
 			add_option( $this->option_modifiable, $options );
 		}
 
-		$this->setMessage( __( 'The default sidebars have been updated successfully.', CSB_LANG ) );
+		$this->set_message( __( 'The default sidebars have been updated successfully.', CSB_LANG ) );
 
 	}
 
-	public function storeReplacements( $post_id ) {
+	public function store_replacements( $post_id ) {
 		if ( ! current_user_can( $this->cap_required ) ) {
 			return;
 		}
@@ -829,17 +862,17 @@ class CustomSidebars {
 		}
 	}
 
-	public function storeSidebar() {
+	public function store_sidebar() {
 		$name = stripslashes( trim( $_POST['sidebar_name'] ) );
 		$description = stripslashes( trim( $_POST['sidebar_description'] ) );
 		if ( empty( $name ) OR empty( $description ) ) {
-			$this->setError( __( 'You have to fill all the fields to create a new sidebar.', CSB_LANG ) );
+			$this->set_error( __( 'You have to fill all the fields to create a new sidebar.', CSB_LANG ) );
 		} else {
 			$id = $this->sidebar_prefix . sanitize_html_class( sanitize_title_with_dashes( $name ) );
-			$sidebars = get_option( $this->option_name, FALSE );
+			$sidebars = $this->get_custom_sidebars();
 			if ( $sidebars !== FALSE ) {
 				$sidebars = $sidebars;
-				if ( ! $this->getSidebar( $id, $sidebars ) ) {
+				if ( ! $this->get_sidebar( $id, $sidebars ) ) {
 					//Create a new sidebar
 					$sidebars[] = array(
 						'name' => __( $name, CSB_LANG ),
@@ -854,12 +887,12 @@ class CustomSidebars {
 					//update option
 					update_option( $this->option_name, $sidebars );
 
-					$this->refreshSidebarsWidgets();
+					$this->refresh_sidebars_widgets();
 
-					$this->setMessage( __( 'The sidebar has been created successfully.', CSB_LANG ) );
+					$this->set_message( __( 'The sidebar has been created successfully.', CSB_LANG ) );
 
 				} else {
-					$this->setError( __( 'There is already a sidebar registered with that name, please choose a different one.', CSB_LANG ) );
+					$this->set_error( __( 'There is already a sidebar registered with that name, please choose a different one.', CSB_LANG ) );
 				}
 			} else {
 				$id = $this->sidebar_prefix . sanitize_html_class( sanitize_title_with_dashes( $name ) );
@@ -876,14 +909,14 @@ class CustomSidebars {
 				);
 				add_option( $this->option_name, $sidebars );
 
-				$this->refreshSidebarsWidgets();
+				$this->refresh_sidebars_widgets();
 
-				$this->setMessage( __( 'The sidebar has been created successfully.', CSB_LANG ) );
+				$this->set_message( __( 'The sidebar has been created successfully.', CSB_LANG ) );
 			}
 		}
 	}
 
-	public function updateSidebar() {
+	public function update_sidebar() {
 		$id = stripslashes( trim( $_POST['cs_id'] ) );
 		$name = stripslashes( trim( $_POST['sidebar_name'] ) );
 		$description = stripslashes( trim( $_POST['sidebar_description'] ) );
@@ -892,7 +925,7 @@ class CustomSidebars {
 		$before_title = stripslashes( trim( $_POST['cs_before_title'] ) );
 		$after_title = stripslashes( trim( $_POST['cs_after_title'] ) );
 
-		$sidebars = $this->getCustomSidebars();
+		$sidebars = $this->get_custom_sidebars();
 
 		//Check the id
 		$url = parse_url( $_POST['_wp_http_referer'] );
@@ -926,16 +959,16 @@ class CustomSidebars {
 
 		//update option
 		update_option( $this->option_name, $newsidebars );
-		$this->refreshSidebarsWidgets();
+		$this->refresh_sidebars_widgets();
 
-		$this->setMessage( sprintf( __( 'The sidebar "%s" has been updated successfully.', CSB_LANG ), $id ) );
+		$this->set_message( sprintf( __( 'The sidebar "%s" has been updated successfully.', CSB_LANG ), $id ) );
 	}
 
-	public function widgetSidebarContent() {
+	public function widget_sidebar_content() {
 		include CSB_VIEWS_DIR . 'widgets.php';
 	}
 
-	public function getSidebar( $id, $sidebars ) {
+	public function get_sidebar( $id, $sidebars ) {
 		$sidebar = false;
 		$nsidebars = sizeof( $sidebars );
 		$i = 0;
@@ -962,17 +995,17 @@ class CustomSidebars {
 		}
 	}
 
-	public function setMessage( $text ) {
+	public function set_message( $text ) {
 		$this->message = $text;
 		$this->message_class = 'updated';
 	}
 
-	public function setError( $text ) {
+	public function set_error( $text ) {
 		$this->message = $text;
 		$this->message_class = 'error';
 	}
 
-	public function getPostTypes() {
+	public function get_post_types() {
 		$pt = get_post_types();
 		$ptok = array();
 
@@ -997,10 +1030,10 @@ class CustomSidebars {
 		);
 	}
 
-	public function refreshSidebarsWidgets() {
-		$widgetized_sidebars = get_option( 'sidebars_widgets' );
+	public function refresh_sidebars_widgets() {
+		$widgetized_sidebars = $this->get_default_sidebars();
 		$delete_widgetized_sidebars = array();
-		$cs_sidebars = get_option( $this->option_name );
+		$cs_sidebars = $this->get_custom_sidebars();
 
 		foreach ( $widgetized_sidebars as $id => $bar ) {
 			if ( substr( $id, 0, 3 ) == 'cs-' ) {
@@ -1028,10 +1061,9 @@ class CustomSidebars {
 		}
 
 		update_option( 'sidebars_widgets', $widgetized_sidebars );
-
 	}
 
-	public function resetSidebars() {
+	public function reset_sidebars() {
 		if ( ! current_user_can( $this->cap_required ) ) {
 			return new WP_Error( 'cscantdelete', __( 'You do not have permission to delete sidebars', CSB_LANG ) );
 		}
@@ -1043,7 +1075,7 @@ class CustomSidebars {
 		delete_option( $this->option_modifiable );
 		delete_option( $this->option_name );
 
-		$widgetized_sidebars = get_option( 'sidebars_widgets' );
+		$widgetized_sidebars = $this->get_default_sidebars();
 		$delete_widgetized_sidebars = array();
 		foreach ( $widgetized_sidebars as $id => $bar ) {
 			if ( substr( $id, 0, 3 ) == 'cs-' ) {
@@ -1069,18 +1101,18 @@ class CustomSidebars {
 
 		update_option( 'sidebars_widgets', $widgetized_sidebars );
 
-		$this->setMessage( __( 'The Custom Sidebars data has been removed successfully,', CSB_LANG ) );
+		$this->set_message( __( 'The Custom Sidebars data has been removed successfully,', CSB_LANG ) );
 	}
 
-	public function getSortedCategories() {
+	public function get_sorted_categories() {
 		$unorderedcats = get_the_category();
-		@usort( $unorderedcats, array( $this, 'cmpCatLevel' ) );
+		@usort( $unorderedcats, array( $this, 'cmp_cat_level' ) );
 		return $unorderedcats;
 	}
 
-	public function cmpCatLevel( $cat1, $cat2 ) {
-		$l1 = $this->getCategoryLevel( $cat1->cat_ID );
-		$l2 = $this->getCategoryLevel( $cat2->cat_ID );
+	public function cmp_cat_level( $cat1, $cat2 ) {
+		$l1 = $this->get_category_level( $cat1->cat_ID );
+		$l2 = $this->get_category_level( $cat2->cat_ID );
 		if ( $l1 == $l2 ) {
 			return strcasecmp( $cat1->name, $cat1->name );
 		} else {
@@ -1088,24 +1120,24 @@ class CustomSidebars {
 		}
 	}
 
-	public function getCategoryLevel( $catid ) {
+	public function get_category_level( $catid ) {
 		if ( $catid == 0 ) {
 			return 0;
 		}
 
 		$cat = &get_category( $catid );
-		return 1 + $this->getCategoryLevel( $cat->category_parent );
+		return 1 + $this->get_category_level( $cat->category_parent );
 	}
 
-	public function jsonResponse( $obj ) {
+	public function json_response( $obj ) {
 			header( 'Content-Type: application/json' );
 			echo json_encode( $obj );
 			die();
 		}
 
-	public function ajaxHandler() {
+	public function ajax_handler() {
 		if ( $_REQUEST['cs_action'] == 'where' ) {
-			$this->ajaxShowWhere();
+			$this->ajax_show_where();
 			die;
 		}
 
@@ -1117,28 +1149,28 @@ class CustomSidebars {
 				'message' => __( 'The operation is not secure and it cannot be completed.', CSB_LANG ),
 				'nonce' => wp_create_nonce( $action ),
 			);
-			$this->jsonResponse( $response );
+			$this->json_response( $response );
 		}
 
 		$response = array();
 		if ( $action == 'cs-create-sidebar' ) {
-			$response = $this->ajaxCreateSidebar();
+			$response = $this->ajax_create_sidebar();
 		} else if ( $action == 'cs-edit-sidebar' ) {
-			$response = $this->ajaxEditSidebar();
+			$response = $this->ajax_edit_sidebar();
 		} else if ( $action == 'cs-set-defaults' ) {
-			$response = $this->ajaxSetDefaults();
+			$response = $this->ajax_set_defaults();
 		} else if ( $action == 'cs-delete-sidebar' ) {
-			$response = $this->ajaxDeleteSidebar();
+			$response = $this->ajax_delete_sidebar();
 		}
 
 		$response['nonce'] = wp_create_nonce( $action );
-		$this->jsonResponse( $response );
+		$this->json_response( $response );
 	}
 
 
-	public function ajaxSetDefaults() {
+	public function ajax_set_defaults() {
 		try {
-			$this->storeDefaults();
+			$this->store_defaults();
 		} catch( Exception $e ) {
 			return array(
 				'success' => false,
@@ -1151,8 +1183,8 @@ class CustomSidebars {
 		);
 	}
 
-	public function ajaxCreateSidebar() {
-		$this->storeSidebar();
+	public function ajax_create_sidebar() {
+		$this->store_sidebar();
 
 		if ( $this->message_class == 'error' ) {
 			return array(
@@ -1170,8 +1202,8 @@ class CustomSidebars {
 		);
 	}
 
-	public function ajaxDeleteSidebar() {
-		$this->deleteSidebar();
+	public function ajax_delete_sidebar() {
+		$this->delete_sidebar();
 
 		return array(
 			'message' => $this->message,
@@ -1179,16 +1211,16 @@ class CustomSidebars {
 		);
 	}
 
-	public function ajaxEditSidebar() {
+	public function ajax_edit_sidebar() {
 		$id = trim( $_POST['cs_id'] );
-		$sidebar = $this->getSidebar( $id, $this->getCustomSidebars() );
+		$sidebar = $this->get_sidebar( $id, $this->get_custom_sidebars() );
 		$_POST['cs_before_widget'] = $sidebar['cs_before_widget'];
 		$_POST['cs_after_widget'] = $sidebar['cs_after_widget'];
 		$_POST['cs_before_title'] = $sidebar['cs_before_title'];
 		$_POST['cs_after_title'] = $sidebar['cs_after_title'];
-		$this->updateSidebar();
+		$this->update_sidebar();
 
-		$sidebar = $this->getSidebar( $id, $this->getCustomSidebars() );
+		$sidebar = $this->get_sidebar( $id, $this->get_custom_sidebars() );
 		return array(
 			'message' => $this->message,
 			'success' => $this->message_class != 'error',
@@ -1197,10 +1229,10 @@ class CustomSidebars {
 		);
 	}
 
-	public function ajaxShowWhere() {
-		$customsidebars = $this->getCustomSidebars();
-		$themesidebars = $this->getThemeSidebars();
-		$allsidebars = $this->getThemeSidebars( TRUE );
+	public function ajax_show_where() {
+		$customsidebars = $this->get_custom_sidebars();
+		$themesidebars = $this->get_theme_sidebars();
+		$allsidebars = $this->get_theme_sidebars( TRUE );
 		$sidebarId = strtolower( urlencode( $_GET['id'] ) );
 		if ( ! isset( $allsidebars[$sidebarId] ) ) {
 			echo urlencode( $_GET['id'] );
@@ -1212,10 +1244,10 @@ class CustomSidebars {
 				$allsidebars[$key]['name'] = substr( $sb['name'], 0, 27 ) . '...';
 			}
 		}
-		$current_sidebar = $allsidebars[$_GET['id']];
-		$defaults = $this->getDefaultReplacements();
+		$current_sidebar = $allsidebars[ $_GET['id'] ];
+		$defaults = $this->get_default_replacements();
 		$modifiable = $this->replaceable_sidebars;
-		$post_types = $this->getPostTypes();
+		$post_types = $this->get_post_types();
 		$categories = get_categories( array( 'hide_empty' => 0) );
 		if ( sizeof( $categories ) == 1 && $categories[0]->cat_ID == 1 ) {
 			unset( $categories[0] );

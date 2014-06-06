@@ -1,11 +1,11 @@
 <?php
-
 /**
- * The view for the widgets page of the admin area.
+ * Updates the default widgets page of the admin area.
  * There are some HTML to be added for having all the functionality, so we
  * include it at the begining of the page, and it's placed later via js.
  */
 ?>
+
 <div id="cs-widgets-extra">
     <div id="oldbrowsererror" class="message error"><?php _e('You are using an old browser that doesn\'t support draggin widgets to a recently created sidebar. Refresh the page to add widgets to this sidebar and think about to update your browser.',  CSB_LANG ); ?></div>
     <div id="cs-title-options">
@@ -47,16 +47,16 @@
     <div id="cs-save"><?php echo _e('Save', CSB_LANG ); ?></div>
     <span id="cs-confirm-delete"><?php _e('Are you sure that you want to delete the sidebar',  CSB_LANG ) ?></span>
     <form id="cs-wpnonces">
-        <?php wp_nonce_field( 'cs-delete-sidebar', '_delete_nonce', false);?>
-        <?php wp_nonce_field( 'cs-edit-sidebar', '_edit_nonce', false);?>
+        <?php wp_nonce_field( 'cs-delete-sidebar', '_delete_nonce', false ); ?>
+        <?php wp_nonce_field( 'cs-edit-sidebar', '_edit_nonce', false ); ?>
     </form>
-    <?php include('footer.php'); ?>
+    <?php include( 'part-footer.php' ); ?>
  </div>
 
 <!--[if lt IE 8]>
 <script type="text/javascript">
 jQuery(function(){
-    csSidebars.showMessage('<?php _e('You are using an old browser and some features of custom sidebars are not available. You will be notified when you try to use them but, have you ever think about update your browser?',  CSB_LANG ) ?>');
+    csSidebars.showMessage('<?php _e( 'You are using an old browser and some features of custom sidebars are not available. You will be notified when you try to use them but, have you ever think about update your browser?',  CSB_LANG ) ?>');
 });
 </script>
 <![endif]-->

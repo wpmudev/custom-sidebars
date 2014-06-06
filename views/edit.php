@@ -1,7 +1,14 @@
-<div class="themes-php">
+<?php
+/**
+ * Edit a custom sidebar.
+ */
+?>
+
+
+<div class="themes-php csb">
 <div class="wrap">
 
-<?php include('tabs.php'); ?>
+<?php include( 'part-tabs.php' ); ?>
 
 <div id="editsidebarpage">
 <div id="poststuff">
@@ -57,7 +64,7 @@ global $wp_registered_sidebars;
 </div>
 
 
-<?php include('footer.php'); ?>
+<?php include( 'part-footer.php' ); ?>
 
 </div>
 </div>

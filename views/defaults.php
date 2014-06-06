@@ -1,7 +1,13 @@
-<div class="themes-php">
+<?php
+/**
+ * Set default-replacements for the theme sidebars.
+ */
+?>
+
+<div class="themes-php csb">
 <div class="wrap">
 
-<?php include('tabs.php'); ?>
+<?php include( 'part-tabs.php' ); ?>
 
 <?php $cs_is_defaults = true; //This make disappear sidebar selection link in the defaults page.?>
 
@@ -66,7 +72,7 @@ category_posts_{$id_category}_{$id_modifiable} : Posts by category
 
 </div>
 
-<?php include('footer.php'); ?>
+<?php include( 'part-footer.php' ); ?>
 
 </div>
 </div>

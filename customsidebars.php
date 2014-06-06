@@ -50,22 +50,22 @@ if ( ! class_exists( 'CustomSidebars' ) ) {
 } //exists class
 
 
-if ( ! isset( $plugin_sidebars ) ){
+if ( ! isset( $plugin_sidebars ) ) {
 	$plugin_sidebars = CustomSidebars::instance();
-	add_action( 'widgets_init', array( $plugin_sidebars, 'registerCustomSidebars') );
-	add_action( 'widgets_admin_page', array( $plugin_sidebars, 'widgetSidebarContent' ) );
-	add_action( 'admin_menu', array( $plugin_sidebars, 'addSubMenus' ) );
-	add_action( 'add_meta_boxes',  array( $plugin_sidebars, 'addMetaBox' ) );
-	add_action( 'save_post', array( $plugin_sidebars, 'storeReplacements' ) );
-	add_action( 'init', array( $plugin_sidebars, 'loadTextDomain' ) );
-	add_action( 'admin_enqueue_scripts', array( $plugin_sidebars, 'addStyles' ) );
+	add_action( 'widgets_init', array( $plugin_sidebars, 'register_custom_sidebars') );
+	add_action( 'widgets_admin_page', array( $plugin_sidebars, 'widget_sidebar_content' ) );
+	add_action( 'admin_menu', array( $plugin_sidebars, 'add_sub_menus' ) );
+	add_action( 'add_meta_boxes',  array( $plugin_sidebars, 'add_meta_box' ) );
+	add_action( 'save_post', array( $plugin_sidebars, 'store_replacements' ) );
+	add_action( 'init', array( $plugin_sidebars, 'load_text_domain' ) );
+	add_action( 'admin_enqueue_scripts', array( $plugin_sidebars, 'add_styles' ) );
 
 	//Frontend
-	add_action( 'wp_head', array( $plugin_sidebars, 'replaceSidebars' ) );
-	add_action( 'wp', array( $plugin_sidebars, 'storeOriginalPostId' ) );
+	add_action( 'wp_head', array( $plugin_sidebars, 'replace_sidebars' ) );
+	add_action( 'wp', array( $plugin_sidebars, 'store_original_post_id' ) );
 
     //AJAX actions
-    add_action( 'wp_ajax_cs-ajax', array( $plugin_sidebars, 'ajaxHandler' ) );
+    add_action( 'wp_ajax_cs-ajax', array( $plugin_sidebars, 'ajax_handler' ) );
 
     // Not used.
     //add_filter( 'admin_body_class', array( $plugin_sidebars, 'checkMP6' ) );

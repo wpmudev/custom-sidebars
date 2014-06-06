@@ -99,8 +99,6 @@ div.widget-liquid-right {
     text-align:right
 }
 
-
-
 .widget-liquid-right .scrollbar { position: relative; float: right; width: 10px; }
 .widget-liquid-right .track {  height: 100%; width:10px; position: relative; padding: 0 1px; }
 .widget-liquid-right .thumb { height: 20px; width: 10px; cursor: pointer; overflow: hidden; position: absolute; top: 0;  background-color: #666; margin-top:10px;}
@@ -323,5 +321,12 @@ body.appearance_page_customsidebars #poststuff h2 {
 }
 
 
-.rtl #TB_ajaxWindowTitle { float:right; } 
+.rtl #TB_ajaxWindowTitle { float:right; }
 .rtl #TB_closeAjaxWindow { float: left; }
+
+.csb .button > .dashicons,
+.csb .button-primary > .dashicons,
+.csb .button-secondary > .dashicons {
+    line-height: 26px;
+    margin-right: 5px;
+}
