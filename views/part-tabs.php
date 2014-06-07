@@ -10,6 +10,7 @@ switch ( @$_GET['p'] ) {
 	case 'defaults':
 	case 'edit':
 	case 'export':
+	case 'import':
 		$active = $_GET['p'];
 		break;
 }
@@ -23,6 +24,7 @@ switch ( @$_GET['p'] ) {
 <?php do_action( 'cs_additionalTabs' ); ?>
 
 <?php if ( 'edit' == $active ) : ?><a class="nav-tab nav-tab-active" href="#"><?php _e( 'Edit Sidebar', CSB_LANG ); ?></a><?php endif; ?>
+<?php if ( 'import' == $active ) : ?><a class="nav-tab nav-tab-active" href="#"><?php _e( 'Preview Import', CSB_LANG ); ?></a><?php endif; ?>
 
 </h2>
 <?php $this->message(); ?>

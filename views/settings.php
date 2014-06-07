@@ -97,10 +97,10 @@
 	<thead>
 		<tr class="thead">
 			<th scope="col" id="name" class="manage-column column-name" style=""><?php _e( 'Name', CSB_LANG ); ?></th>
-			<th scope="col" id="email" class="manage-column column-email" style=""><?php _e( 'Description', CSB_LANG ); ?></th>
-			<th scope="col" id="config" class="manage-column column-date" style=""></th>
-			<th scope="col" id="edit" class="manage-column column-rating" style=""></th>
-			<th scope="col" id="delete" class="manage-column column-rating" style=""></th>
+			<th scope="col" id="description" class="manage-column column-description" style=""><?php _e( 'Description', CSB_LANG ); ?></th>
+			<th scope="col" id="widgets" class="manage-column column-widgets" style=""></th>
+			<th scope="col" id="edit" class="manage-column column-edit" style=""></th>
+			<th scope="col" id="delete" class="manage-column column-delete" style=""></th>
 		</tr>
 	</thead>
 
@@ -110,10 +110,10 @@
 		<?php if ( sizeof( $customsidebars ) > 0 ) : foreach ( $customsidebars as $cs ) : ?>
 		<tr id="cs-1" class="alternate">
 			<td class="name column-name"><?php esc_html_e( $cs['name'] ); ?></td>
-			<td class="email column-email"><?php esc_html_e( $cs['description'] ); ?></td>
-			<td class="role column-date"><a href="widgets.php"><?php _e( 'Configure Widgets', CSB_LANG ); ?></a></td>
-			<td class="role column-rating"><a href="themes.php?page=customsidebars&p=edit&id=<?php esc_html_e( $cs['id'] ); ?>"><?php _e( 'Edit', CSB_LANG ); ?></a></td>
-			<td class="role column-rating"><a class="csdeletelink" href="themes.php?page=customsidebars&delete=<?php echo esc_attr( $cs['id'] ); ?>&_n=<?php echo esc_attr( $deletenonce ); ?>"><?php _e( 'Delete', CSB_LANG ); ?></a></td>
+			<td class="description column-description"><?php esc_html_e( $cs['description'] ); ?></td>
+			<td class="role column-widgets"><a href="widgets.php"><?php _e( 'Configure Widgets', CSB_LANG ); ?></a></td>
+			<td class="role column-edit"><a href="themes.php?page=customsidebars&p=edit&id=<?php esc_html_e( $cs['id'] ); ?>"><?php _e( 'Edit', CSB_LANG ); ?></a></td>
+			<td class="role column-delete"><a class="csdeletelink" href="themes.php?page=customsidebars&delete=<?php echo esc_attr( $cs['id'] ); ?>&_n=<?php echo esc_attr( $deletenonce ); ?>"><?php _e( 'Delete', CSB_LANG ); ?></a></td>
 		</tr>
 		<?php endforeach; else : ?>
 		<tr id="cs-1" class="alternate">

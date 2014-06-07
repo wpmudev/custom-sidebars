@@ -330,3 +330,17 @@ body.appearance_page_customsidebars #poststuff h2 {
     line-height: 26px;
     margin-right: 5px;
 }
+
+
+/* Export/Import */
+
+.csb-export-head {
+    min-width: 450px;
+}
+
+.csb-export-head th {
+    vertical-align: top;
+    text-align: right;
+    background: #FFF;
+    width: 150px;
+}

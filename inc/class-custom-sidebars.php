@@ -495,7 +495,7 @@ class CustomSidebars {
 				if ( ! $sb ) {
 					return new WP_Error( 'cscantdelete', __( 'You do not have permission to delete sidebars', CSB_LANG ) );
 				}
-				include( CSB_VIEWS_DIR . 'edit.php' );
+				include CSB_VIEWS_DIR . 'edit.php';
 				return;
 			}
 		}
@@ -527,6 +527,10 @@ class CustomSidebars {
 
 			case 'export':
 				include CSB_VIEWS_DIR . 'export.php';
+				break;
+
+			case 'import':
+				include CSB_VIEWS_DIR . 'import.php';
 				break;
 
 			default:
@@ -1254,16 +1258,4 @@ class CustomSidebars {
 		}
 		include CSB_VIEWS_DIR . 'ajax.php';
 	}
-
-	/*
-	// Not used.
-	public function checkMP6( $classes ) {
-		global $wp_version;
-
-		if ( ! ( defined( 'MP6' ) && MP6 ) && ! version_compare( $wp_version, '3.8', '>=' ) ) {
-			$classes .= 'cs-no-mp6';
-		}
-		return $classes;
-	}
-	*/
 };

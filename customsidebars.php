@@ -3,7 +3,7 @@
 Plugin Name: Custom Sidebars Pro
 Plugin URI: http://premium.wpmudev.org/project/custom-sidebars/
 Description: Allows to create your own widgetized areas and custom sidebars, and select what sidebars to use for each post or page.
-Version: 1.5
+Version: 1.6-BETA
 Author: WPMU DEV
 Author URI: http://premium.wpmudev.org/
 Textdomain: custom-sidebars
@@ -43,6 +43,7 @@ if ( ! class_exists( 'CustomSidebars' ) ) {
 	define( 'CSB_VIEWS_DIR', $plugin_dir . '/views/' );
 	define( 'CSB_JS_URL', $plugin_url . '/js/' );
 	define( 'CSB_CSS_URL', $plugin_url . '/css/' );
+	define( 'CSB_VERSION', '1.6' );
 
 	// Load the actual core.
 	require_once 'inc/class-custom-sidebars.php';
@@ -66,9 +67,6 @@ if ( ! isset( $plugin_sidebars ) ) {
 
     //AJAX actions
     add_action( 'wp_ajax_cs-ajax', array( $plugin_sidebars, 'ajax_handler' ) );
-
-    // Not used.
-    //add_filter( 'admin_body_class', array( $plugin_sidebars, 'checkMP6' ) );
 }
 
 if ( ! class_exists( 'CustomSidebarsEmptyPlugin' ) ) :
