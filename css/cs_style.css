@@ -344,3 +344,12 @@ body.appearance_page_customsidebars #poststuff h2 {
     background: #FFF;
     width: 150px;
 }
+
+.csb-export-head ul {
+    margin: 0;
+}
+
+.csb-export-head .dashicons.hint {
+    font-size: 12px;
+    line-height: 22px;
+}

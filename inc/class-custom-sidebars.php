@@ -74,7 +74,7 @@ class CustomSidebars {
 	 *
 	 * @since 1.6.0
 	 */
-	private function set_sidebar_options( $value ) {
+	public function set_sidebar_options( $value ) {
 		update_option( 'cs_modifiable', $value );
 	}
 
@@ -694,9 +694,11 @@ class CustomSidebars {
 		$options['defaults'] = array();
 		$options['post_type_pages'] = array();
 
+		// "By post type"
 		foreach ( $this->get_post_types() as $pt ) {
 			if ( ! empty( $modifiable ) ) {
 				foreach ( $modifiable as $m ) {
+					// single-posttype
 					if ( isset( $_POST["type_posts_{$pt}_$m"] ) && $_POST["type_posts_{$pt}_$m"] != '' ) {
 						if ( ! isset( $options['defaults'][$pt] ) ) {
 							$options['defaults'][$pt] = array();
@@ -705,6 +707,7 @@ class CustomSidebars {
 						$options['defaults'][$pt][$m] = $_POST["type_posts_{$pt}_$m"];
 					}
 
+					// archive-posttype
 					if ( isset( $_POST["type_page_{$pt}_$m"] ) && $_POST["type_page_{$pt}_$m"] != '' ) {
 						if ( ! isset( $options['post_type_pages'][$pt] ) ) {
 							$options['post_type_pages'][$pt] = array();
@@ -716,7 +719,7 @@ class CustomSidebars {
 			}
 		}
 
-		//Category posts and post lists.
+		// Category posts and post lists.
 		$options['category_posts'] = array();
 		$options['category_pages'] = array();
 		$categories = get_categories( array( 'hide_empty' => 0 ) );
@@ -724,6 +727,7 @@ class CustomSidebars {
 			if ( ! empty( $modifiable ) ) {
 				foreach ( $modifiable as $m ) {
 					$catid = $c->cat_ID;
+					// single-categories
 					if ( isset( $_POST["category_posts_{$catid}_$m"] ) && $_POST["category_posts_{$catid}_$m"] != '' ) {
 						if ( ! isset( $options['category_posts'][$catid] ) ) {
 							$options['category_posts'][$catid] = array();
@@ -732,6 +736,7 @@ class CustomSidebars {
 						$options['category_posts'][$catid][$m] = $_POST["category_posts_{$catid}_$m"];
 					}
 
+					// archive-category
 					if ( isset( $_POST["category_page_{$catid}_$m"] ) && $_POST["category_page_{$catid}_$m"] != '' ) {
 						if ( ! isset( $options['category_pages'][$catid] ) ) {
 							$options['category_pages'][$catid] = array();
@@ -1242,7 +1247,7 @@ class CustomSidebars {
 		$defaults = $this->get_default_replacements();
 		$modifiable = $this->replaceable_sidebars;
 		$post_types = $this->get_post_types();
-		$categories = get_categories( array( 'hide_empty' => 0) );
+		$categories = get_categories( array( 'hide_empty' => 0 ) );
 		if ( sizeof( $categories ) == 1 && $categories[0]->cat_ID == 1 ) {
 			unset( $categories[0] );
 		}
