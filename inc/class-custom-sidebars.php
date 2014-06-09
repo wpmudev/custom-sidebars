@@ -13,13 +13,6 @@ class CustomSidebars {
 	private $message = '';
 	private $message_class = '';
 
-	//The name of the option that stores the info of the new bars.
-	private $option_name = 'cs_sidebars';
-
-	//The name of the option that stores which bars are replaceable, and the default
-	//replacements. The value is stored in $this->options
-	private $option_modifiable = 'cs_modifiable';
-
 	private $sidebar_prefix = 'cs-';
 	private $postmeta_key = '_cs_replacements';
 	private $cap_required = 'switch_themes';
@@ -77,11 +70,33 @@ class CustomSidebars {
 	}
 
 	/**
+	 * Saves the sidebar options to DB.
+	 *
+	 * @since 1.6.0
+	 */
+	private function set_sidebar_options( $value ) {
+		update_option( 'cs_modifiable', $value );
+	}
+
+	/**
 	 * Returns a list with all custom sidebars that were created by the user.
 	 */
 	public function get_custom_sidebars() {
+		$sidebars = get_option( 'cs_sidebars', array() );
+		if ( ! is_array( $sidebars ) ) {
+			$sidebars = array();
+		}
+		return $sidebars;
 		//return wp_get_sidebars_widgets();
-		return get_option( 'cs_sidebars', array() );
+	}
+
+	/**
+	 * Saves the custom sidebars to DB.
+	 *
+	 * @since 1.6.0
+	 */
+	public function set_custom_sidebars( $value ) {
+		update_option( 'cs_sidebars', $value );
 	}
 
 	/**
@@ -400,12 +415,12 @@ class CustomSidebars {
 			if ( isset( $this->options[$method] ) ) {
 				if ( $extra_index != -1 && isset( $this->options[$method][$extra_index] ) && isset( $this->options[$method][$extra_index][$sidebar] ) ) {
 					unset( $this->options[$method][$extra_index][$sidebar] );
-					update_option( $this->option_modifiable, $this->options );
+					$this->set_sidebar_options( $this->options );
 				}
 
 				if ( $extra_index == 1 && isset( $this->options[$method] ) && isset( $this->options[$method][$sidebar] ) ) {
 					unset( $this->options[$method][$sidebar] );
-					update_option( $this->option_modifiable, $this->options );
+					$this->set_sidebar_options( $this->options );
 				}
 			}
 		}
@@ -450,7 +465,7 @@ class CustomSidebars {
 		}//endif custom
 
 		//update option
-		update_option( $this->option_name, $newsidebars );
+		$this->set_custom_sidebars( $newsidebars );
 
 		$this->refresh_sidebars_widgets();
 
@@ -500,6 +515,7 @@ class CustomSidebars {
 			}
 		}
 
+		// FIXME: These are global variables. Move this to a (static) function instead
 		$customsidebars = $this->get_custom_sidebars();
 		$themesidebars = $this->get_theme_sidebars();
 		$allsidebars = $this->get_theme_sidebars( TRUE );
@@ -509,7 +525,6 @@ class CustomSidebars {
 
 		$deletenonce = wp_create_nonce( 'custom-sidebars-delete' );
 
-		//var_dump( $defaults);
 
 		//Form
 		switch ( @$_GET['p'] ) {
@@ -665,11 +680,7 @@ class CustomSidebars {
 			$options['modifiable'] = $_POST['modifiable'];
 		}
 
-		if ( $this->options !== FALSE ) {
-			update_option( $this->option_modifiable, $options );
-		} else {
-			add_option( $this->option_modifiable, $options );
-		}
+		$this->set_sidebar_options( $options );
 
 		$this->set_message( __( 'The custom sidebars settings has been updated successfully.', CSB_LANG ) );
 	}
@@ -804,12 +815,10 @@ class CustomSidebars {
 
 
 		//Store defaults
-		if ( $this->options !== FALSE ) {
-			update_option( $this->option_modifiable, $options );
-		} else {
+		if ( $this->options === FALSE ) {
 			$options['modifiable'] = array();
-			add_option( $this->option_modifiable, $options );
 		}
+		$this->set_sidebar_options( $options );
 
 		$this->set_message( __( 'The default sidebars have been updated successfully.', CSB_LANG ) );
 
@@ -874,48 +883,26 @@ class CustomSidebars {
 		} else {
 			$id = $this->sidebar_prefix . sanitize_html_class( sanitize_title_with_dashes( $name ) );
 			$sidebars = $this->get_custom_sidebars();
-			if ( $sidebars !== FALSE ) {
-				$sidebars = $sidebars;
-				if ( ! $this->get_sidebar( $id, $sidebars ) ) {
-					//Create a new sidebar
-					$sidebars[] = array(
-						'name' => __( $name, CSB_LANG ),
-						'id' => $id,
-						'description' => __( $description, CSB_LANG ),
-						'before_widget' => '', //all these fields are not needed, theme ones will be used
-						'after_widget' => '',
-						'before_title' => '',
-						'after_title' => '',
-					) ;
 
-					//update option
-					update_option( $this->option_name, $sidebars );
+			if ( ! $this->get_sidebar( $id, $sidebars ) ) {
+				//Create a new sidebar
+				$sidebars[] = array(
+					'name' => $name,
+					'id' => $id,
+					'description' => $description,
+					'before_widget' => '', //all these fields are not needed, theme ones will be used
+					'after_widget' => '',
+					'before_title' => '',
+					'after_title' => '',
+				) ;
 
-					$this->refresh_sidebars_widgets();
-
-					$this->set_message( __( 'The sidebar has been created successfully.', CSB_LANG ) );
-
-				} else {
-					$this->set_error( __( 'There is already a sidebar registered with that name, please choose a different one.', CSB_LANG ) );
-				}
-			} else {
-				$id = $this->sidebar_prefix . sanitize_html_class( sanitize_title_with_dashes( $name ) );
-				$sidebars = array(
-					array(
-						'name' => __( $name, CSB_LANG ),
-						'id' => $id,
-						'description' => __( $description, CSB_LANG ),
-						'before_widget' => '',
-						'after_widget' => '',
-						'before_title' => '',
-						'after_title' => '',
-					),
-				);
-				add_option( $this->option_name, $sidebars );
-
+				//update option
+				$this->set_custom_sidebars( $sidebars );
 				$this->refresh_sidebars_widgets();
-
 				$this->set_message( __( 'The sidebar has been created successfully.', CSB_LANG ) );
+
+			} else {
+				$this->set_error( __( 'There is already a sidebar registered with that name, please choose a different one.', CSB_LANG ) );
 			}
 		}
 	}
@@ -950,21 +937,20 @@ class CustomSidebars {
 				$newsidebars[] = $sb;
 			} else {
 				$newsidebars[] = array(
-					'name' => __( $name, CSB_LANG ),
+					'name' => $name,
 					'id' => $id,
-					'description' => __( $description, CSB_LANG ),
-					'before_widget' => __( $before_widget, CSB_LANG ),
-					'after_widget' => __( $after_widget, CSB_LANG ),
-					'before_title' => __( $before_title, CSB_LANG ),
-					'after_title' => __( $after_title, CSB_LANG ),
+					'description' => $description,
+					'before_widget' => $before_widget,
+					'after_widget' => $after_widget,
+					'before_title' => $before_title,
+					'after_title' => $after_title,
 				);
 			}
 		}
 
 		//update option
-		update_option( $this->option_name, $newsidebars );
+		$this->set_custom_sidebars( $newsidebars );
 		$this->refresh_sidebars_widgets();
-
 		$this->set_message( sprintf( __( 'The sidebar "%s" has been updated successfully.', CSB_LANG ), $id ) );
 	}
 
@@ -1076,8 +1062,8 @@ class CustomSidebars {
 			die( 'Security check stopped your request.' );
 		}
 
-		delete_option( $this->option_modifiable );
-		delete_option( $this->option_name );
+		$this->set_sidebar_options( array() );
+		$this->set_custom_sidebars( array() );
 
 		$widgetized_sidebars = $this->get_default_sidebars();
 		$delete_widgetized_sidebars = array();
@@ -1234,10 +1220,12 @@ class CustomSidebars {
 	}
 
 	public function ajax_show_where() {
+		// FIXME: These are global variables. Move this to a (static) function instead
 		$customsidebars = $this->get_custom_sidebars();
 		$themesidebars = $this->get_theme_sidebars();
 		$allsidebars = $this->get_theme_sidebars( TRUE );
 		$sidebarId = strtolower( urlencode( $_GET['id'] ) );
+
 		if ( ! isset( $allsidebars[$sidebarId] ) ) {
 			echo urlencode( $_GET['id'] );
 			var_dump( $allsidebars );
@@ -1248,6 +1236,8 @@ class CustomSidebars {
 				$allsidebars[$key]['name'] = substr( $sb['name'], 0, 27 ) . '...';
 			}
 		}
+
+		// FIXME: These are global variables. Move this to a (static) function instead
 		$current_sidebar = $allsidebars[ $_GET['id'] ];
 		$defaults = $this->get_default_replacements();
 		$modifiable = $this->replaceable_sidebars;
@@ -1256,6 +1246,7 @@ class CustomSidebars {
 		if ( sizeof( $categories ) == 1 && $categories[0]->cat_ID == 1 ) {
 			unset( $categories[0] );
 		}
+
 		include CSB_VIEWS_DIR . 'ajax.php';
 	}
 };

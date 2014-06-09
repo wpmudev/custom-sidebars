@@ -27,13 +27,13 @@
 category_posts_{$id_category}_{$id_modifiable} : Posts by category
 *********************************************/?>
 
-<?php include CSB_VIEWS_DIR . 'defaults/single_category.php' ?>
+<?php include CSB_VIEWS_DIR . 'defaults/single-category.php' ?>
 
 </div>
 
 <div class="cscolleft">
 
-<?php include CSB_VIEWS_DIR . 'defaults/single_posttype.php' ?>
+<?php include CSB_VIEWS_DIR . 'defaults/single-posttype.php' ?>
 
 </div>
 
@@ -48,18 +48,18 @@ category_posts_{$id_category}_{$id_modifiable} : Posts by category
 <div class="cscolright">
 
 
-<?php include CSB_VIEWS_DIR . 'defaults/archive_category.php' ?>
-<?php include CSB_VIEWS_DIR . 'defaults/archive_tag.php' ?>
-<?php include CSB_VIEWS_DIR . 'defaults/archive_search.php' ?>
+<?php include CSB_VIEWS_DIR . 'defaults/archive-category.php' ?>
+<?php include CSB_VIEWS_DIR . 'defaults/archive-tag.php' ?>
+<?php include CSB_VIEWS_DIR . 'defaults/archive-search.php' ?>
 
 </div>
 
 <div class="cscolleft">
 
-<?php include CSB_VIEWS_DIR . 'defaults/archive_blog.php' ?>
-<?php include CSB_VIEWS_DIR . 'defaults/archive_posttype.php' ?>
-<?php include CSB_VIEWS_DIR . 'defaults/archive_date.php' ?>
-<?php include CSB_VIEWS_DIR . 'defaults/archive_author.php' ?>
+<?php include CSB_VIEWS_DIR . 'defaults/archive-blog.php' ?>
+<?php include CSB_VIEWS_DIR . 'defaults/archive-posttype.php' ?>
+<?php include CSB_VIEWS_DIR . 'defaults/archive-date.php' ?>
+<?php include CSB_VIEWS_DIR . 'defaults/archive-author.php' ?>
 
 </div>
 

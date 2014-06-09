@@ -28,9 +28,9 @@
 <p><?php _e('These replacements will be applied to every single post that matches a certain post type or category.', CSB_LANG ); ?></p>
 <p><?php _e('The sidebars by categories work in a hierarchycal way, if a post belongs to a parent and a child category it will show the child category sidebars if they are defined, otherwise it will show the parent ones. If no category sidebar for post are defined, the post will show the post post-type sidebar. If none of those sidebars are defined, the theme default sidebar is shown.', CSB_LANG ); ?></p>
 
-    <?php include CSB_VIEWS_DIR . 'defaults/single_category.php' ?>
+    <?php include CSB_VIEWS_DIR . 'defaults/single-category.php' ?>
 
-    <?php include CSB_VIEWS_DIR . 'defaults/single_posttype.php' ?>
+    <?php include CSB_VIEWS_DIR . 'defaults/single-posttype.php' ?>
 
 
 </div></div>
@@ -43,13 +43,13 @@
 
 <p><?php _e('You can define specific sidebars for the different Wordpress pages. Sidebars for lists of posts pages work in the same hierarchycal way than the one for single posts.', CSB_LANG ); ?></p>
 
-<?php include CSB_VIEWS_DIR . 'defaults/archive_blog.php' ?>
-<?php include CSB_VIEWS_DIR . 'defaults/archive_posttype.php' ?>
-<?php include CSB_VIEWS_DIR . 'defaults/archive_category.php' ?>
-<?php include CSB_VIEWS_DIR . 'defaults/archive_tag.php' ?>
-<?php include CSB_VIEWS_DIR . 'defaults/archive_search.php' ?>
-<?php include CSB_VIEWS_DIR . 'defaults/archive_date.php' ?>
-<?php include CSB_VIEWS_DIR . 'defaults/archive_author.php' ?>
+<?php include CSB_VIEWS_DIR . 'defaults/archive-blog.php' ?>
+<?php include CSB_VIEWS_DIR . 'defaults/archive-posttype.php' ?>
+<?php include CSB_VIEWS_DIR . 'defaults/archive-category.php' ?>
+<?php include CSB_VIEWS_DIR . 'defaults/archive-tag.php' ?>
+<?php include CSB_VIEWS_DIR . 'defaults/archive-search.php' ?>
+<?php include CSB_VIEWS_DIR . 'defaults/archive-date.php' ?>
+<?php include CSB_VIEWS_DIR . 'defaults/archive-author.php' ?>
 
 
 </div>
