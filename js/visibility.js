@@ -8,11 +8,15 @@ jQuery(function init_visibility() {
 	/**
 	 * Moves the "Visibility" button next to the save button.
 	 */
-	var init_widget = function init_widget() {
-		var $widget = jQuery( this ),
+	var init_widget = function init_widget( ev, el ) {
+		var $widget = jQuery( el ).closest( '.widget' ),
 			$btn = jQuery( '.csb-visibility-button', $widget ),
 			$target = jQuery( '.widget-control-actions .widget-control-save', $widget ),
 			$spinner = jQuery( '.widget-control-actions .spinner', $widget );
+
+		if ( $widget.data( '_csb_visibility' ) == true ) {
+			return;
+		}
 
 		$spinner.insertBefore( $target ).css({ 'float': 'left' });
 		$btn.insertBefore( $target ).click( toggle_section );
@@ -24,6 +28,8 @@ jQuery(function init_visibility() {
 		$widget.on( 'click', '.add-filter', add_filter );
 		$widget.on( 'change', 'input[data-lbl-all][data-lbl-single]', toggle_label );
 		$widget.on( 'change', 'select.posttype', update_posttypes );
+
+		$widget.data( '_csb_visibility', true );
 	};
 
 	/**
@@ -212,5 +218,6 @@ jQuery(function init_visibility() {
 		});
 	}
 
-	jQuery( '.widgets-holder-wrap .widget' ).each( init_widget );
+	jQuery( '.viewport .widget' ).each( init_widget );
+	$doc.on( 'widget-added', init_widget );
 });

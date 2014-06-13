@@ -183,15 +183,6 @@ class CustomSidebarsExport {
 					break;
 			}
 
-			$finfo = new finfo( FILEINFO_MIME_TYPE );
-			$infos = $finfo->file( $_FILES['data']['tmp_name'] );
-			if (
-				false === $error &&
-				$finfo->file( $_FILES['data']['tmp_name'] ) !== 'text/plain'
-			) {
-				$error = 'The uploaded file does not contain valid export-data from the custom sidebars plugin...';
-			}
-
 			if ( false === $error ) {
 				$content = file_get_contents( $_FILES['data']['tmp_name'] );
 				$data = json_decode( $content, true );
