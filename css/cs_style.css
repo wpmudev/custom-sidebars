@@ -353,3 +353,69 @@ body.appearance_page_customsidebars #poststuff h2 {
     font-size: 12px;
     line-height: 22px;
 }
+
+.csb-form {
+    padding-left: 15px;
+}
+
+.csb-form h2,
+.csb-form h3,
+.csb-form .form-buttons,
+#poststuff .csb-form h2,
+#poststuff .csb-form h3,
+#poststuff .csb-form .form-buttons {
+    padding-left: 0;
+    margin-left: -15px;
+}
+
+.show-infos {
+    position: relative;
+    display: inline-block;
+    margin: 0 5px;
+}
+
+h2 .show-infos {
+    top: 4px;
+}
+
+.show-infos .export-infos {
+    position: absolute;
+    top: -5px;
+    left: 30px;
+    font-size: 13px;
+    line-height: 1.4em;
+    font-weight: normal;
+    background: #F5F5F5;
+    box-shadow: 0 1px 8px rgba(0, 0, 0, 0.2);
+    border: 3px solid #FAFAFA;
+    padding: 5px;
+    z-index: 10;
+}
+
+.show-infos .export-infos:before,
+.show-infos .export-infos:after {
+    content: '';
+    position: absolute;
+    left: -17px;
+    top: 5px;
+    border: 7px solid rgba(0, 0, 0, 0);
+    border-right-color: #FAFAFA;
+    z-index: 1;
+}
+
+.show-infos .export-infos:after {
+    left: -18px;
+    top: 5px;
+    border-right-color: rgba(0,0,0,0.15);
+    z-index: 0;
+}
+
+.show-infos:hover .export-infos {
+    display: block !important;
+}
+
+.export-infos .section {
+    font-weight: bold;
+    margin: 10px 0 5px -2px;
+    color: #666;
+}

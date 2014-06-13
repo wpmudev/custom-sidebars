@@ -57,12 +57,8 @@ function list_sidebar_replacement( $list ) {
 	<div id="editsidebarpage">
 		<div id="poststuff">
 
-			<h2 class="title"><?php echo esc_html( @$import['meta']['filename'] ); ?></h2>
 
 <?php if ( ! empty ( $import ) ) : ?>
-	<form method="post">
-	<input type="hidden" name="process-import-data" value="1" />
-
 	<?php
 	/* *****************************************************************
 	 *
@@ -71,48 +67,61 @@ function list_sidebar_replacement( $list ) {
 	 */
 	?>
 
-	<table cellspacing="1" cellpadding="4" class="csb-export-head">
-		<tbody>
-			<tr>
-				<th><?php _e( 'Export date', CSB_LANG ); ?></th>
-				<td><?php echo esc_html( date( $date_format, $import['meta']['created'] ) ); ?></td>
-			</tr>
-			<tr>
-				<th><?php _e( 'Export notes' ); ?></th>
-				<td><?php echo nl2br( esc_html( $import['meta']['description'] ) ); ?></td>
-			</tr>
-		</tbody>
-	</table>
+	<h2 class="title"><?php _e( 'Import', CSB_LANG ); ?>
+	<div class="show-infos">
+		<i class="dashicons dashicons-info"></i>
+		<div class="export-infos" style="display:none">
+			<table cellspacing="1" cellpadding="4" class="csb-export-head">
+				<tbody>
+					<tr>
+						<th><?php _e( 'Filename', CSB_LANG ); ?></th>
+						<td colspan="2"><?php echo esc_html( @$import['meta']['filename'] ); ?></td>
+					</tr>
+					<tr>
+						<th><?php _e( 'Exported on', CSB_LANG ); ?></th>
+						<td colspan="2"><?php echo esc_html( ' ' . date( $date_format, $import['meta']['created'] ) ); ?></td>
+					</tr>
+				</tbody>
+			</table>
 
-	<h3><?php _e( 'Export details', CSB_LANG ); ?></h3>
-	<table cellspacing="1" cellpadding="4" class="csb-export-head">
-		<thead>
-			<tr>
-				<th></th>
-				<td>Export</td>
-				<td>Current</td>
-			</tr>
-		</thead>
-		<tbody>
-			<tr>
-				<th><?php _e( 'WordPress version' ); ?></th>
-				<td><?php echo esc_html( $import['meta']['wp_version'] ); ?></td>
-				<td><?php echo esc_html( $wp_version ); ?></td>
-			</tr>
-			<tr>
-				<th><?php _e( 'Plugin version' ); ?></th>
-				<td><?php echo esc_html( $import['meta']['csb_version'] ); ?></td>
-				<td><?php echo esc_html( CSB_VERSION ); ?></td>
-			</tr>
-			<tr>
-				<th><?php _e( 'Theme' ); ?></th>
-				<td><?php echo esc_html( $import['meta']['theme_name'] . ' (' . $import['meta']['theme_version'] . ')' ); ?></td>
-				<td><?php echo esc_html( $theme->get( 'Name' ) . ' (' . $theme->get( 'Version' ) . ')' ); ?></td>
-			</tr>
-		</tbody>
-	</table>
-	<p>&nbsp;</p>
+			<div class="section"><?php _e( 'WordPress settings', CSB_LANG ); ?></div>
+			<table cellspacing="1" cellpadding="4" class="csb-export-head">
+				<thead>
+					<tr>
+						<th></th>
+						<td>Export</td>
+						<td>Current</td>
+					</tr>
+				</thead>
+				<tbody>
+					<tr>
+						<th><?php _e( 'WordPress version', CSB_LANG ); ?></th>
+						<td><?php echo esc_html( $import['meta']['wp_version'] ); ?></td>
+						<td><?php echo esc_html( $wp_version ); ?></td>
+					</tr>
+					<tr>
+						<th><?php _e( 'Plugin version', CSB_LANG ); ?></th>
+						<td><?php echo esc_html( $import['meta']['csb_version'] ); ?></td>
+						<td><?php echo esc_html( CSB_VERSION ); ?></td>
+					</tr>
+					<tr>
+						<th><?php _e( 'Theme', CSB_LANG ); ?></th>
+						<td><?php echo esc_html( $import['meta']['theme_name'] . ' (' . $import['meta']['theme_version'] . ')' ); ?></td>
+						<td><?php echo esc_html( $theme->get( 'Name' ) . ' (' . $theme->get( 'Version' ) . ')' ); ?></td>
+					</tr>
+				</tbody>
+			</table>
+		</div>
 
+	</div></h2>
+
+	<?php if ( ! empty( $import['meta']['description'] ) ) : ?>
+		<pre><?php echo esc_html( $import['meta']['description'] ); ?></pre>
+	<?php endif; ?>
+
+
+	<form method="post" class="csb-form">
+	<input type="hidden" name="process-import-data" value="1" />
 
 
 	<?php
@@ -122,7 +131,7 @@ function list_sidebar_replacement( $list ) {
 	 */
 	$alternate = '';
 	?>
-	<h2 class="title"><?php _e( 'Custom Sidebars', CSB_LANG ); ?></h2>
+	<h3 class="title"><?php _e( 'Custom Sidebars', CSB_LANG ); ?></h3>
 	<p>
 		<?php _e( 'Mark the sidebars that you want to import.', CSB_LANG ); ?>
 	</p>
@@ -174,8 +183,6 @@ function list_sidebar_replacement( $list ) {
 			</td>
 		</tr>
 	<?php endforeach; ?>
-		</tbody>
-	</table>
 
 
 
@@ -184,24 +191,8 @@ function list_sidebar_replacement( $list ) {
 	 *
 	 * List all default theme sidebars that exist in the import file
 	 */
-	$alternate = '';
 	?>
-	<div class="import-widgets" style="display:none">
-	<p>&nbsp;</p>
-	<h2 class="title"><?php _e( 'Theme Sidebars', CSB_LANG ); ?></h2>
-	<p>
-		<?php _e( 'You can import widget-configuration for these theme sidebars.', CSB_LANG ); ?>
-	</p>
-	<table class="widefat">
-		<thead>
-			<tr>
-				<th scope="col" id="cb" class="manage-column column-cb check-column"><input type="checkbox" /></th>
-				<th scope="col" id="name" class="manage-column column-name"><?php _e( 'Name', CSB_LANG ); ?></th>
-				<th scope="col" id="description" class="manage-column column-description"><?php _e( 'Description', CSB_LANG ); ?></th>
-				<th scope="col" id="widgets" class="manage-column column-widgets"><?php _e( 'Widgets', CSB_LANG ); ?></th>
-			</tr>
-		</thead>
-		<tbody>
+
 	<?php foreach ( $theme_sidebars as $sidebar ) : ?>
 
 		<?php if ( isset( $import['widgets'][ $sidebar['id'] ] ) ) : ?>
@@ -215,12 +206,13 @@ function list_sidebar_replacement( $list ) {
 				continue;
 			}
 			?>
-			<tr class="<?php echo esc_attr( $alternate ); ?>">
+			<tr class="import-widgets <?php echo esc_attr( $alternate ); ?>" style="display: none">
 				<th scope="row" class="check-column">
 					<input type="checkbox" name="import_sb_<?php echo esc_attr( $sidebar['id'] ); ?>" />
 				</th>
 				<td class="name column-name"><?php echo esc_html( $sidebar['name'] ); ?></td>
 				<td class="description column-description"><?php echo esc_html( $sidebar['description'] ); ?></td>
+				<td><em><?php _e( '(Theme sidebar)', CSB_LANG ); ?></em></td>
 				<td class="widgets column-widgets">
 			<?php if ( count( $import_sidebar ) ) : ?>
 				<?php foreach ( $import_sidebar as $key => $data ) : ?>
@@ -236,7 +228,6 @@ function list_sidebar_replacement( $list ) {
 	<?php endforeach; ?>
 		</tbody>
 	</table>
-	</div>
 
 
 
@@ -247,19 +238,11 @@ function list_sidebar_replacement( $list ) {
 	 */
 	?>
 	<p>&nbsp;</p>
-	<h2 class="title"><?php _e( 'Configuration', CSB_LANG ); ?></h2>
-	<p>
-		<label for="import-config">
-			<input type="checkbox" id="import-config" name="import_plugin_config" />
-			<?php _e( 'Replace the current plugin configuration with the imported configuration.', CSB_LANG ); ?>
-		</label>
-	</p>
-
-	<div class="import-config" style="display:none">
-	<p>
-		<?php _e( 'Preview of the imported configuration:', CSB_LANG ); ?>
-	</p>
-	<div><strong><?php _e( 'Replaceable sidebars', CSB_LANG ); ?></strong></div>
+	<h3 class="title"><?php _e( 'Configuration', CSB_LANG ); ?>
+	<div class="show-infos">
+		<i class="dashicons dashicons-info"></i>
+		<div class="export-infos" style="display:none">
+	<div class="section"><?php _e( 'Replaceable sidebars', CSB_LANG ); ?></div>
 	<table cellspacing="1" cellpadding="4" class="csb-export-head">
 		<tr>
 			<th scope="row"><?php _e( 'Replaceable Sidebars', CSB_LANG ); ?></th>
@@ -272,7 +255,7 @@ function list_sidebar_replacement( $list ) {
 	</table>
 
 	<?php /* single-posttype */ ?>
-	<div><strong><?php _e( 'By post type', CSB_LANG ); ?></strong></div>
+	<div class="section"><?php _e( 'By post type', CSB_LANG ); ?></div>
 	<table cellspacing="1" cellpadding="4" class="csb-export-head">
 	<?php
 	$list = $import['options']['defaults'];
@@ -291,7 +274,7 @@ function list_sidebar_replacement( $list ) {
 	</table>
 
 	<?php /* archive-posttype */ ?>
-	<div><strong><?php _e( 'Post-type archives', CSB_LANG ); ?></strong></div>
+	<div class="section"><?php _e( 'Post-type archives', CSB_LANG ); ?></div>
 	<table cellspacing="1" cellpadding="4" class="csb-export-head">
 	<?php
 	$list = $import['options']['post_type_pages'];
@@ -310,7 +293,7 @@ function list_sidebar_replacement( $list ) {
 	</table>
 
 	<?php /* single-category */ ?>
-	<div><strong><?php _e( 'By category', CSB_LANG ); ?></strong></div>
+	<div class="section"><?php _e( 'By category', CSB_LANG ); ?></div>
 	<table cellspacing="1" cellpadding="4" class="csb-export-head">
 	<?php
 	$list = $import['options']['category_posts'];
@@ -329,7 +312,7 @@ function list_sidebar_replacement( $list ) {
 	</table>
 
 	<?php /* archive-category */ ?>
-	<div><strong><?php _e( 'Category archives', CSB_LANG ); ?></strong></div>
+	<div class="section"><?php _e( 'Category archives', CSB_LANG ); ?></div>
 	<table cellspacing="1" cellpadding="4" class="csb-export-head">
 	<?php
 	$list = $import['options']['category_pages'];
@@ -348,7 +331,7 @@ function list_sidebar_replacement( $list ) {
 	</table>
 
 	<?php /* special pages */ ?>
-	<div><strong><?php _e( 'Special pages', CSB_LANG ); ?></strong></div>
+	<div class="section"><?php _e( 'Special pages', CSB_LANG ); ?></div>
 	<table cellspacing="1" cellpadding="4" class="csb-export-head">
 		<tr>
 			<?php $rows = count( $import['options']['blog'] ); ?>
@@ -377,15 +360,24 @@ function list_sidebar_replacement( $list ) {
 		</tr>
 	</table>
 	</div>
+	</div>
+	</h3>
+
+	<p>
+		<label for="import-config">
+			<input type="checkbox" id="import-config" name="import_plugin_config" />
+			<?php _e( 'Replace the current plugin configuration with the imported configuration.', CSB_LANG ); ?>
+		</label>
+	</p>
 	<p>&nbsp;</p>
 
 
 	<input type="hidden" name="import_data" value="<?php echo esc_attr( base64_encode( json_encode( $import ) ) ); ?>" />
-	<p>
+	<p class="form-buttons">
 		<button class="button-primary"><i class="dashicons dashicons-migrate"></i> Import selected items</button>
 		<button class="button-secondary btn-cancel">Cancel</button>
 	</p>
-
+	</form>
 
 	<?php
 	/* *****************************************************************
@@ -393,9 +385,10 @@ function list_sidebar_replacement( $list ) {
 	 * Overview of ignored/missing data
 	 */
 	?>
+	<div class="ignored" style="display:none">
 	<p>&nbsp;</p>
 	<?php if ( ! empty( $import['ignore'] ) ) : ?>
-	<h2 class="title"><?php _e( 'Ignored items', CSB_LANG ); ?></h2>
+	<h3 class="title"><?php _e( 'Ignored items', CSB_LANG ); ?></h3>
 	<em><?php _e( 'These itmems do not exist in current theme or blog, settings for these items will not be imported:', CSB_LANG ); ?></em>
 	<table cellspacing="1" cellpadding="4" class="csb-export-head">
 		<?php
@@ -419,8 +412,8 @@ function list_sidebar_replacement( $list ) {
 		<?php endforeach; ?>
 	</table>
 	<?php endif; ?>
+	</div>
 
-	</form>
 	<?php endif; ?>
 
 		</div>
@@ -429,37 +422,26 @@ function list_sidebar_replacement( $list ) {
 
 	<?php include 'part-footer.php'; ?>
 
-<script>
-jQuery( function init_import() {
-	var $chk_widget = jQuery( '#import-widgets'),
-		$chk_config = jQuery( '#import-config'),
-		$btn_cancel = jQuery( '.btn-cancel' );
+	<script>
+	jQuery( function init_import() {
+		var $chk_widget = jQuery( '#import-widgets'),
+			$btn_cancel = jQuery( '.btn-cancel' );
 
-	// Toggle the widget columns
-	$chk_widget.change( function toggle_widget_cols() {
-		var $context = jQuery( '.column-widgets, .import-widgets' );
-		if ( $chk_widget.prop('checked') ) {
-			$context.show();
-		} else {
-			$context.hide();
-		}
-	});
+		// Toggle the widget columns
+		$chk_widget.change( function toggle_widget_cols() {
+			var $context = jQuery( '.column-widgets, .import-widgets' );
+			if ( $chk_widget.prop('checked') ) {
+				$context.show();
+			} else {
+				$context.hide();
+			}
+		});
 
-	// Toggle the config details
-	$chk_config.change( function toggle_config_info() {
-		var $context = jQuery( '.import-config' );
-		if ( $chk_config.prop('checked') ) {
-			$context.show();
-		} else {
-			$context.hide();
-		}
+		// Cancel
+		$btn_cancel.click( function do_cancel() {
+			window.location.href = window.location.href.replace( 'p=import', 'p=export' );
+		});
 	});
-
-	// Cancel
-	$btn_cancel.click( function do_cancel() {
-		window.location.href = window.location.href.replace( 'p=import', 'p=export' );
-	});
-});
-</script>
+	</script>
 </div>
 </div>
