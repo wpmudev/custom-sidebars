@@ -3,6 +3,7 @@
 // Load additional Pro-modules.
 require_once( 'class-custom-sidebars-visibility.php' );
 require_once( 'class-custom-sidebars-export.php' );
+require_once( 'class-custom-sidebars-posts.php' );
 
 
 /**
@@ -14,15 +15,9 @@ class CustomSidebars {
 	private $message_class = '';
 
 	private $sidebar_prefix = 'cs-';
-	private $postmeta_key = '_cs_replacements';
 	private $cap_required = 'switch_themes';
-	// What is 'pt-widget'?
-	private $ignore_post_types = array( 'attachment', 'revision', 'nav_menu_item', 'pt-widget' );
 	private $options = array();
-
-	private $replaceable_sidebars = array();
-	private $replacements = array();
-	private $replacements_todo;
+	private $current_page = '';
 
 	// @since 1.6
 	private $screen_id = '';
@@ -41,6 +36,7 @@ class CustomSidebars {
 			// PRO-modules are initialized now.
 			CustomSidebarsVisibility::instance();
 			CustomSidebarsExport::instance();
+			CustomSidebarsPosts::instance();
 		}
 
 		return $Inst;
@@ -52,12 +48,6 @@ class CustomSidebars {
 	 */
 	private function __construct() {
 		$this->get_sidebar_options();
-		$this->replaceable_sidebars = $this->get_modifiable_sidebars();
-		$this->replacements_todo = sizeof( $this->replaceable_sidebars );
-
-		foreach ( $this->replaceable_sidebars as $sb ) {
-			$this->replacements[ $sb ] = FALSE;
-		}
 	}
 
 	/**
@@ -87,7 +77,6 @@ class CustomSidebars {
 			$sidebars = array();
 		}
 		return $sidebars;
-		//return wp_get_sidebars_widgets();
 	}
 
 	/**
@@ -100,11 +89,12 @@ class CustomSidebars {
 	}
 
 	/**
-	 * Returns a list of the default sidebars (this is a WordPress core option).
+	 * Returns a list of all registered sidebars including a list of their
+	 * widgets (this is stored inside a WordPress core option).
 	 *
 	 * @since  1.6.0
 	 */
-	public function get_default_sidebars() {
+	public function get_sidebar_widgets() {
 		return get_option( 'sidebars_widgets', array() );
 	}
 
@@ -126,32 +116,105 @@ class CustomSidebars {
 		return $themesidebars;
 	}
 
+	/**
+	 * Returns the custom sidebar metadata of a single post.
+	 *
+	 * @since  1.6
+	 */
+	public function get_post_meta( $post_id ) {
+		$data = get_post_meta( $post_id, '_cs_replacements', TRUE );
+		if ( ! is_array( $data ) ) {
+			$data = array();
+		}
+		return $data;
+	}
+
+	/**
+	 * Saves custom sidebar metadata to a single post.
+	 *
+	 * @since 1.6
+	 * @param int $post_id
+	 * @param array $data When array is empty the meta data will be deleted.
+	 */
+	public function set_post_meta( $post_id, $data ) {
+		if ( ! empty( $data ) ) {
+			update_post_meta( $post_id, '_cs_replacements', $data );
+		} else {
+			delete_post_meta( $post_id, '_cs_replacements' );
+		}
+	}
+
+	/**
+	 * Tell WordPress about the custom sidebars.
+	 */
 	public function register_custom_sidebars() {
 		$sb = $this->get_custom_sidebars();
 		if ( ! empty( $sb ) ) {
 			foreach ( $sb as $sidebar ) {
+				/**
+				 * i18n support for custom sidebars.
+				 */
+				$sidebar['name'] = __( $sidebar['name'], CSB_LANG );
+				$sidebar['description'] = __( $sidebar['description'], CSB_LANG );
+				$sidebar['before_widget'] = __( $sidebar['before_widget'], CSB_LANG );
+				$sidebar['after_widget'] = __( $sidebar['after_widget'], CSB_LANG );
+				$sidebar['before_title'] = __( $sidebar['before_title'], CSB_LANG );
+				$sidebar['after_title'] = __( $sidebar['after_title'], CSB_LANG );
+
+				/**
+				 * Filter sidebar options for custom sidebars.
+				 *
+				 * @since  1.6
+				 *
+				 * @param  array $sidebar Options used by WordPress to display
+				 *           the sidebar.
+				 */
+				$sidebar = apply_filters( 'cs_sidebar_params', $sidebar );
+
 				register_sidebar( $sidebar );
 			}
 		}
 	}
 
+	/**
+	 * Replace the sidebars on current page with some custom sidebars.
+	 * Sidebars are replaced by directly modifying the WordPress globals
+	 * `$_wp_sidebars_widgets` and `$wp_registered_sidebars`
+	 *
+	 * What it really does it not replacing a specific *sidebar* but simply
+	 * replacing all widgets inside the theme sidebars with the widgets of the
+	 * custom defined sidebars.
+	 */
 	public function replace_sidebars() {
-		global $_wp_sidebars_widgets, $post, $wp_registered_sidebars, $wp_registered_widgets;
+		global $post, $_wp_sidebars_widgets, $wp_registered_sidebars,
+		$wp_registered_widgets;
 
+		/**
+		 * Original sidebar configuration by WordPress:
+		 * Lists sidebars and all widgets inside each sidebar.
+		 */
 		$original_widgets = $_wp_sidebars_widgets;
 
 		$updated = FALSE;
 
-		$replaceables = $this->replaceable_sidebars;
+		$replaceables = $replaceable_sidebars;
 		$defaults = $this->get_default_replacements();
 
-		do_action( 'cs_predetermineReplacements' );
+		/**
+		 * Fires before determining sidebar replacements.
+		 *
+		 * @param  array $defaults Array of the default sidebars for the page.
+		 */
+		do_action( 'cs_predetermine_replacements', $defaults );
+		// Legacy handler with camelCase
+		do_action( 'cs_predetermineReplacements', $defaults );
 
-		$this->determine_replacements( $defaults );
+		$replacements = $this->determine_replacements( $defaults );
 
-		foreach ( $this->replacements as $sb_name => $replacement_info ) {
+		foreach ( $replacements as $sb_name => $replacement_info ) {
 			if ( $replacement_info ) {
 				list( $replacement, $replacement_type, $extra_index ) = $replacement_info;
+
 				if ( $this->check_and_fix_sidebar( $sb_name, $replacement, $replacement_type, $extra_index ) ) {
 					if ( sizeof( $original_widgets[$replacement] ) == 0 ) {
 						// No widgets on custom bar, show nothing.
@@ -167,10 +230,12 @@ class CustomSidebars {
 						}
 					}
 					$wp_registered_sidebars[$sb_name]['class'] = $replacement;
-				}
-			}
-		}
+				}  // endif: check_and_fix_sidebar
+
+			} // endif: replacement_info
+		} // endforeach
 	}
+
 	/* v1.2 clean the slashes of before and after */
 	public function clean_before_after_widget( $sidebar ) {
 		$sidebar['before_widget'] = stripslashes( $sidebar['before_widget'] );
@@ -180,50 +245,69 @@ class CustomSidebars {
 		return $sidebar;
 	}
 
+	/**
+	 * Find out if some sidebars should be replaced.
+	 *
+	 * @return  array List of the replaced sidebars.
+	 */
 	public function determine_replacements( $defaults ) {
+		$replaceable_sidebars = $this->get_modifiable_sidebars();
+		$replacements_todo = sizeof( $replaceable_sidebars );
+		$replacements = array();
+
+		foreach ( $replaceable_sidebars as $sb ) {
+			$replacements[ $sb ] = FALSE;
+		}
+
+
 		//posts
 		if ( is_single() ) {
 			//Post sidebar
 			global $post;
+			$post_type = get_post_type( $post );
 
-			$replacements = get_post_meta( $this->originalPostId, $this->postmeta_key, TRUE );
-			foreach ( $this->replaceable_sidebars as $sidebar ) {
+			if ( ! $this->supported_post_type( $post_type ) ) {
+				return $defaults;
+			}
+
+			$replacements = $this->get_post_meta( $this->originalPostId );
+			foreach ( $replaceable_sidebars as $sidebar ) {
 				if ( is_array( $replacements ) && ! empty( $replacements[$sidebar] ) ) {
-					$this->replacements[$sidebar] = array( $replacements[$sidebar], 'particular', -1 );
-					$this->replacements_todo -= 1;
+					$replacements[$sidebar] = array( $replacements[$sidebar], 'particular', -1 );
+					$replacements_todo -= 1;
 				}
 			}
 
 			//Parent sidebar
-			if ( $post->post_parent != 0 && $this->replacements_todo > 0 ) {
-				$replacements = get_post_meta( $post->post_parent, $this->postmeta_key, TRUE );
-				foreach ( $this->replaceable_sidebars as $sidebar ) {
-					if ( ! $this->replacements[$sidebar]
+			if ( $post->post_parent != 0 && $replacements_todo > 0 ) {
+				$replacements = $this->get_post_meta( $post->post_parent );
+				foreach ( $replaceable_sidebars as $sidebar ) {
+					if ( ! $replacements[$sidebar]
 						&& is_array( $replacements )
 						&& ! empty( $replacements[$sidebar] )
 					) {
-						$this->replacements[$sidebar] = array( $replacements[$sidebar], 'particular', -1 );
-						$this->replacements_todo -= 1;
+						$replacements[$sidebar] = array( $replacements[$sidebar], 'particular', -1 );
+						$replacements_todo -= 1;
 					}
 				}
 			}
 
 			//Category sidebar
 			global $sidebar_category;
-			if ( $this->replacements_todo > 0 ) {
+			if ( $replacements_todo > 0 ) {
 				$categories = $this->get_sorted_categories();
 				$i = 0;
-				while ( $this->replacements_todo > 0 && $i < sizeof( $categories ) ) {
-					foreach ( $this->replaceable_sidebars as $sidebar ) {
-						if ( ! $this->replacements[$sidebar]
+				while ( $replacements_todo > 0 && $i < sizeof( $categories ) ) {
+					foreach ( $replaceable_sidebars as $sidebar ) {
+						if ( ! $replacements[$sidebar]
 							&& ! empty( $defaults['category_posts'][$categories[$i]->cat_ID][$sidebar] )
 						) {
-							$this->replacements[$sidebar] = array(
+							$replacements[$sidebar] = array(
 								$defaults['category_posts'][$categories[$i]->cat_ID][$sidebar],
 								'category_posts',
 								$sidebar_category,
 							);
-							$this->replacements_todo -= 1;
+							$replacements_todo -= 1;
 						}
 					}
 					$i += 1;
@@ -231,42 +315,39 @@ class CustomSidebars {
 			}
 
 			//Post-type sidebar
-			if ( $this->replacements_todo > 0 ) {
-				$post_type = get_post_type( $post );
-				foreach ( $this->replaceable_sidebars as $sidebar ) {
-					if ( ! $this->replacements[$sidebar]
+			if ( $replacements_todo > 0 ) {
+				foreach ( $replaceable_sidebars as $sidebar ) {
+					if ( ! $replacements[$sidebar]
 						&& isset( $defaults['post_type_posts'][$post_type] )
 						&& isset( $defaults['post_type_posts'][$post_type][$sidebar] )
 					) {
-						$this->replacements[$sidebar] = array(
+						$replacements[$sidebar] = array(
 							$defaults['post_type_posts'][$post_type][$sidebar],
 							'defaults',
 							$post_type,
 						);
+						$replacements_todo -= 1;
 					}
-					//FIXME: Does the next line belong into the condition????
-					$this->replacements_todo -= 1;
 				}
 			}
-			return;
-		}
-
+		} else
 		//Category archive
 		if ( is_category() ) {
 			global $sidebar_category;
+
 			$category_object = get_queried_object();
 			$current_category = $category_object->term_id;
-			while ( $current_category != 0 && $this->replacements_todo > 0 ) {
-				foreach ( $this->replaceable_sidebars as $sidebar ) {
-					if ( ! $this->replacements[$sidebar]
+			while ( $current_category != 0 && $replacements_todo > 0 ) {
+				foreach ( $replaceable_sidebars as $sidebar ) {
+					if ( ! $replacements[$sidebar]
 						&& ! empty( $defaults['category_pages'][$current_category][$sidebar] )
 					) {
-						$this->replacements[$sidebar] = array(
+						$replacements[$sidebar] = array(
 							$defaults['category_pages'][$current_category][$sidebar],
 							'category_pages',
 							$current_category,
 						);
-						$this->replacements_todo -= 1;
+						$replacements_todo -= 1;
 					}
 				}
 				$current_category = $category_object->category_parent;
@@ -274,142 +355,150 @@ class CustomSidebars {
 					$category_object = get_category( $current_category );
 				}
 			}
-			return;
-		}
-
+		} else
 		//Search comes before because searches with no results are recognized as post types archives
 		if ( is_search() ) {
-			foreach ( $this->replaceable_sidebars as $sidebar ) {
+			foreach ( $replaceable_sidebars as $sidebar ) {
 				if ( ! empty( $defaults['search'][$sidebar] ) ) {
-					$this->replacements[$sidebar] = array( $defaults['search'][$sidebar], 'search', -1 );
+					$replacements[$sidebar] = array( $defaults['search'][$sidebar], 'search', -1 );
 				}
 			}
-			return;
-		}
-
+		} else
 		//post type archive
 		if ( ! is_category() && ! is_singular() && get_post_type() != 'post' ) {
 			$post_type = get_post_type();
-			foreach ( $this->replaceable_sidebars as $sidebar ) {
+			if ( ! $this->supported_post_type( $post_type ) ) {
+				return $defaults;
+			}
+
+			foreach ( $replaceable_sidebars as $sidebar ) {
 				if ( isset( $defaults['post_type_pages'][$post_type] )
 					&& isset( $defaults['post_type_pages'][$post_type][$sidebar] )
 				) {
-					$this->replacements[$sidebar] = array(
+					$replacements[$sidebar] = array(
 						$defaults['post_type_pages'][$post_type][$sidebar],
 						'post_type_pages',
 						$post_type,
 					);
-					$this->replacements_todo -= 1;
+					$replacements_todo -= 1;
 				}
 			}
-			return;
-		}
-
+		} else
 		//Page sidebar
 		if ( is_page() ) {
 			global $post;
-			$replacements = get_post_meta( $this->originalPostId, $this->postmeta_key, TRUE );
-			foreach ( $this->replaceable_sidebars as $sidebar ) {
+
+			$post_type = get_post_type( $post );
+			if ( ! $this->supported_post_type( $post_type ) ) {
+				return $defaults;
+			}
+
+			$replacements = $this->get_post_meta( $this->originalPostId );
+			foreach ( $replaceable_sidebars as $sidebar ) {
 				if ( is_array( $replacements )
 					&& ! empty( $replacements[$sidebar] )
 				) {
-					$this->replacements[$sidebar] = array( $replacements[$sidebar], 'particular', -1 );
-					$this->replacements_todo -= 1;
+					$replacements[$sidebar] = array( $replacements[$sidebar], 'particular', -1 );
+					$replacements_todo -= 1;
 				}
 			}
 
 			//Parent sidebar
-			if ( $post->post_parent != 0 && $this->replacements_todo > 0 ) {
-				$replacements = get_post_meta( $post->post_parent, $this->postmeta_key, TRUE );
-				foreach ( $this->replaceable_sidebars as $sidebar ) {
-					if ( ! $this->replacements[$sidebar]
+			if ( $post->post_parent != 0 && $replacements_todo > 0 ) {
+				$replacements = $this->get_post_meta( $post->post_parent );
+				foreach ( $replaceable_sidebars as $sidebar ) {
+					if ( ! $replacements[$sidebar]
 						&& is_array( $replacements )
 						&& ! empty( $replacements[$sidebar] )
 					) {
-						$this->replacements[$sidebar] = array( $replacements[$sidebar], 'particular', -1 );
-						$this->replacements_todo -= 1;
+						$replacements[$sidebar] = array( $replacements[$sidebar], 'particular', -1 );
+						$replacements_todo -= 1;
 					}
 				}
 			}
 
 			//Page Post-type sidebar
-			if ( $this->replacements_todo > 0 ) {
-				$post_type = get_post_type( $post );
-				foreach ( $this->replaceable_sidebars as $sidebar ) {
-					if ( ! $this->replacements[$sidebar]
+			if ( $replacements_todo > 0 ) {
+				foreach ( $replaceable_sidebars as $sidebar ) {
+					if ( ! $replacements[$sidebar]
 						&& isset( $defaults['post_type_posts'][$post_type] )
 						&& isset( $defaults['post_type_posts'][$post_type][$sidebar] )
 					) {
-						$this->replacements[$sidebar] = array(
+						$replacements[$sidebar] = array(
 							$defaults['post_type_posts'][$post_type][$sidebar],
 							'defaults',
 							$post_type,
 						);
+						$replacements_todo -= 1;
 					}
-					//FIXME: Does the next line belong into the condition????
-					$this->replacements_todo -= 1;
 				}
 			}
-			return;
-		}
-
+		} else
 		if ( is_home() ) {
-			foreach ( $this->replaceable_sidebars as $sidebar ) {
+			foreach ( $replaceable_sidebars as $sidebar ) {
 				if ( ! empty( $defaults['blog'][$sidebar] ) ) {
-					$this->replacements[$sidebar] = array( $defaults['blog'][$sidebar], 'blog', -1 );
+					$replacements[$sidebar] = array( $defaults['blog'][$sidebar], 'blog', -1 );
 				}
 			}
-			return;
-		}
-
+		} else
 		if ( is_tag() ) {
-			foreach ( $this->replaceable_sidebars as $sidebar ) {
+			foreach ( $replaceable_sidebars as $sidebar ) {
 				if ( ! empty( $defaults['tags'][$sidebar] ) ) {
-					$this->replacements[$sidebar] = array( $defaults['tags'][$sidebar], 'tags', -1 );
+					$replacements[$sidebar] = array( $defaults['tags'][$sidebar], 'tags', -1 );
 				}
 			}
-			return;
-		}
-
+		} else
 		if ( is_author() ) {
-			foreach ( $this->replaceable_sidebars as $sidebar ) {
+			foreach ( $replaceable_sidebars as $sidebar ) {
 				if ( ! empty( $defaults['authors'][$sidebar] ) ) {
-					$this->replacements[$sidebar] = array( $defaults['authors'][$sidebar], 'authors', -1 );
+					$replacements[$sidebar] = array( $defaults['authors'][$sidebar], 'authors', -1 );
 				}
 			}
-			return;
+		} else
+		if ( is_date() ) {
+			foreach ( $replaceable_sidebars as $sidebar ) {
+				if ( ! empty( $defaults['date'][$sidebar] ) ) {
+					$replacements[$sidebar] = array( $defaults['date'][$sidebar], 'date', -1);
+				}
+			}
 		}
 
-		if ( is_date() ) {
-			foreach ( $this->replaceable_sidebars as $sidebar ) {
-				if ( ! empty( $defaults['date'][$sidebar] ) ) {
-					$this->replacements[$sidebar] = array( $defaults['date'][$sidebar], 'date', -1);
-				}
-			}
-			return;
-		}
+		/**
+		 * Filter the replaced sidebars before they are processed by the plugin.
+		 *
+		 * @since  1.6
+		 *
+		 * @param  array $replacements List of the final/replaced sidebars.
+		 */
+		$replacements = apply_filters( 'cs_replace_sidebars', $replacements );
+
+		return $replacements;
 	}
+
 	/**
 	 * Stores the original post id before any plugin (buddypress) can modify this data, to show the proper sidebar.
 	 * @return null
 	 */
 	public function store_original_post_id() {
 		global $post;
-		$this->originalPostId = $post->ID;
+		if ( isset( $post->ID ) ) {
+			$this->originalPostId = $post->ID;
+		}
 	}
 
 	public function check_and_fix_sidebar( $sidebar, $replacement, $method, $extra_index ) {
 		global $wp_registered_sidebars;
 
-		if ( isset( $wp_registered_sidebars[$replacement] ) )
+		if ( isset( $wp_registered_sidebars[$replacement] ) ) {
 			return true;
+		}
 
 		if ( $method == 'particular' ) {
 			global $post;
-			$sidebars = get_post_meta( $post->ID, $this->postmeta_key, TRUE );
+			$sidebars = $this->get_post_meta( $post->ID );
 			if ( $sidebars && isset( $sidebars[$sidebar] ) ) {
 				unset( $sidebars[$sidebar] );
-				update_post_meta( $post->ID, $this->postmeta_key, $sidebars );
+				$this->set_post_meta( $post->ID, $sidebars );
 			}
 		} else {
 			if ( isset( $this->options[$method] ) ) {
@@ -476,6 +565,34 @@ class CustomSidebars {
 		}
 	}
 
+	public function current_page() {
+		if ( @$_GET['page'] != 'customsidebars' ) {
+			return '';
+		}
+
+		// These are the default option pages by the custom sidebars plugin
+		$option_pages = array(
+			'defaults',
+			'edit',
+			'conf',
+		);
+
+		/**
+		 * Filters the pages that are recognized by the custom sidebar options
+		 * page. This filter is used in combination with the hook
+		 * 'cs_additional_tabs' to recognize the new tabs.
+		 *
+		 * @var array $option_pages A list of all pages (URL param 'p').
+		 */
+		$option_pages = apply_filters( 'cs_register_tabs', $option_pages );
+
+		if ( in_array( @$_GET['p'], $option_pages ) ) {
+			return $_GET['p'];
+		} else {
+			return 'conf';
+		}
+	}
+
 	/**
 	 * Renders the admin page for custom sidebars.
 	 * Also eventual actions such as delete or update are executed if required.
@@ -492,7 +609,6 @@ class CustomSidebars {
 			} else if ( isset( $_POST['update-modifiable'] ) ) {
 				$this->update_modifiable();
 				$this->get_sidebar_options();
-				$this->replaceable_sidebars = $this->get_modifiable_sidebars();
 			} else if ( isset( $_POST['update-defaults-posts'] ) OR isset( $_POST['update-defaults-pages'] ) ) {
 				$this->store_defaults();
 			} else if ( isset( $_POST['reset-sidebars'] ) ) {
@@ -503,16 +619,17 @@ class CustomSidebars {
 		} else if ( ! empty( $_GET['delete'] ) ) {
 			$this->delete_sidebar();
 			$this->get_sidebar_options();
-		} else if ( ! empty( $_GET['p'] ) ) {
-			if ( $_GET['p'] == 'edit' && ! empty( $_GET['id'] ) ) {
-				$customsidebars = $this->get_custom_sidebars();
-				$sb = $this->get_sidebar( $_GET['id'], $customsidebars );
-				if ( ! $sb ) {
-					return new WP_Error( 'cscantdelete', __( 'You do not have permission to delete sidebars', CSB_LANG ) );
-				}
-				include CSB_VIEWS_DIR . 'edit.php';
-				return;
+		} else if (
+			'edit' == $this->current_page()
+			&& ! empty( $_GET['id'] )
+		) {
+			$customsidebars = $this->get_custom_sidebars();
+			$sb = $this->get_sidebar( $_GET['id'], $customsidebars );
+			if ( ! $sb ) {
+				return new WP_Error( 'cscantdelete', __( 'You do not have permission to delete sidebars', CSB_LANG ) );
 			}
+			include CSB_VIEWS_DIR . 'edit.php';
+			return;
 		}
 
 		// FIXME: These are global variables. Move this to a (static) function instead
@@ -520,14 +637,12 @@ class CustomSidebars {
 		$themesidebars = $this->get_theme_sidebars();
 		$allsidebars = $this->get_theme_sidebars( TRUE );
 		$defaults = $this->get_default_replacements();
-		$modifiable = $this->replaceable_sidebars;
-		$post_types = $this->get_post_types();
+		$modifiable = $this->get_modifiable_sidebars();
 
 		$deletenonce = wp_create_nonce( 'custom-sidebars-delete' );
 
-
-		//Form
-		switch ( @$_GET['p'] ) {
+		$tab = $this->current_page();
+		switch ( $tab ) {
 			case 'defaults':
 				$categories = get_categories( array( 'hide_empty' => 0 ) );
 				if ( sizeof( $categories ) == 1 && $categories[0]->cat_ID == 1 ) {
@@ -540,16 +655,19 @@ class CustomSidebars {
 				include CSB_VIEWS_DIR . 'edit.php';
 				break;
 
-			case 'export':
-				include CSB_VIEWS_DIR . 'export.php';
-				break;
-
-			case 'import':
-				include CSB_VIEWS_DIR . 'import.php';
+			case 'conf':
+				include CSB_VIEWS_DIR . 'settings.php';
 				break;
 
 			default:
-				include CSB_VIEWS_DIR . 'settings.php';
+				/**
+				 * Allow other extensions to render their own settings page.
+				 *
+				 * @see    filter 'cs_additional_tabs' and hook 'cs_additional_tabs'.
+				 * @since  1.6
+				 * @param  string $tab slug of the current settings tab.
+				 */
+				do_action( 'cs_render_tab_content', $tab );
 				break;
 		}
 	}
@@ -582,6 +700,21 @@ class CustomSidebars {
 	}
 
 	public function add_scripts() {
+		if ( 'posts' === $this->current_page() ) {
+			/**
+			 * PRO feature: Directly assign sidebars to multiple pages/posts.
+			 *
+			 * @since  1.6
+			 */
+			wp_enqueue_script(
+				'csb-posts',
+				CSB_JS_URL . 'posts.js',
+				array( 'jquery' ),
+				'1.6',
+				true
+			);
+		}
+
 		wp_enqueue_script( 'post' );
 	}
 
@@ -599,19 +732,69 @@ class CustomSidebars {
 	 */
 	public function add_meta_box() {
 		global $post;
+
 		$post_type = get_post_type( $post );
-		if ( $post_type && ! (array_search( $post_type, $this->ignore_post_types ) ) ) {
-			$post_type_object = get_post_type_object( $post_type );
-			if ( $post_type_object->publicly_queryable || $post_type_object->public ) {
-				add_meta_box(
-					'customsidebars-mb',
-					__( 'Sidebars', CSB_LANG ),
-					array( $this, 'print_metabox' ),
-					$post_type,
-					'side'
-				);
-			}
+		if ( ! $post_type ) { return false; }
+		if ( ! $this->supported_post_type( $post_type ) ) { return false; }
+
+		/**
+		 * Option that can be set in wp-config.php to remove the custom sidebar
+		 * meta box for certain post types.
+		 *
+		 * @since  1.6
+		 *
+		 * @option bool TRUE will hide all meta boxes.
+		 */
+		if (
+			defined( 'CUSTOM_SIDEBAR_DISABLE_METABOXES' ) &&
+			CUSTOM_SIDEBAR_DISABLE_METABOXES == true
+		) {
+			return false;
 		}
+
+		$post_type_object = get_post_type_object( $post_type );
+		if ( $post_type_object->publicly_queryable || $post_type_object->public ) {
+			add_meta_box(
+				'customsidebars-mb',
+				__( 'Sidebars', CSB_LANG ),
+				array( $this, 'print_metabox' ),
+				$post_type,
+				'side'
+			);
+		}
+	}
+
+	/**
+	 * Returns true, when the specified post type supports custom sidebars.
+	 *
+	 * @since  1.6.0
+	 */
+	public function supported_post_type( $posttype ) {
+		$Ignored_types = null;
+		$Response = array();
+
+		if ( null === $Ignored_types ) {
+			$Ignored_types = get_post_types( array( 'public' => false ), 'names' );
+			$Ignored_types[] = 'attachment';
+		}
+
+		if ( ! isset( $Response[ $posttype ] ) ) {
+			$response = ! in_array( $posttype, $Ignored_types );
+
+			/**
+			 * Filters the support-flag. The flag defines if the posttype supports
+			 * custom sidebars or not.
+			 *
+			 * @since 1.6
+			 *
+			 * @param  bool $response Flag if the posttype is supported.
+			 * @param  string $posttype Name of the posttype that is checked.
+			 */
+			$response = apply_filters( 'cs_support_posttype', $response, $posttype );
+			$Response[ $posttype ] = $response;
+		}
+
+		return $Response[ $posttype ];
 	}
 
 	/**
@@ -625,7 +808,7 @@ class CustomSidebars {
 		//$available = array_merge(array( '' ), $this->get_theme_sidebars( TRUE) );
 		$available = $wp_registered_sidebars;
 		ksort( $available );
-		$sidebars = $this->replaceable_sidebars;
+		$sidebars = $this->get_modifiable_sidebars();
 		$selected = array();
 		if ( ! empty( $sidebars ) ) {
 			foreach ( $sidebars as $s ) {
@@ -645,7 +828,7 @@ class CustomSidebars {
 	}
 
 	public function get_replacements( $postid ) {
-		$replacements = get_post_meta( $postid, $this->postmeta_key, TRUE );
+		$replacements = $this->get_post_meta( $postid );
 		if ( $replacements == '' ) {
 			$replacements = array();
 		} else {
@@ -687,7 +870,7 @@ class CustomSidebars {
 
 	public function store_defaults() {
 		$options = $this->options;
-		$modifiable = $this->replaceable_sidebars;
+		$modifiable = $this->get_modifiable_sidebars();
 
 		//Post-types posts and lists. Posts data are called default in order to keep backwards compatibility;
 
@@ -853,31 +1036,21 @@ class CustomSidebars {
 			$post_id = $the_post;
 		}
 
-		$sidebars = $this->replaceable_sidebars;
+		$sidebars = $this->get_modifiable_sidebars();
 		$data = array();
 		if ( ! empty( $sidebars ) ) {
 			foreach ( $sidebars as $s ) {
 				if ( isset( $_POST["cs_replacement_$s"] ) ) {
 					$it = $_POST["cs_replacement_$s"];
-					if ( ! empty( $it) && $it != '' ) {
+					if ( ! empty( $it ) && $it != '' ) {
 						$data[$s] = $it;
 					}
 				}
 			}
 		}//endif sidebars
 
-		$old_data = get_post_meta( $post_id, $this->postmeta_key, TRUE );
-		if ( $old_data == '' ) {
-			if ( ! empty( $data) ) {
-				add_post_meta( $post_id, $this->postmeta_key, $data, TRUE );
-			}
-		} else {
-			if ( ! empty( $data ) ) {
-				update_post_meta( $post_id, $this->postmeta_key, $data );
-			} else {
-				delete_post_meta( $post_id, $this->postmeta_key );
-			}
-		}
+		$this->set_post_meta( $post_id, $data );
+		$old_data = $this->get_post_meta( $post_id );
 	}
 
 	public function store_sidebar() {
@@ -1000,17 +1173,58 @@ class CustomSidebars {
 		$this->message_class = 'error';
 	}
 
+	/**
+	 * Returns a list of all post types that support custom sidebars.
+	 *
+	 * @return array List of posttype names.
+	 */
 	public function get_post_types() {
-		$pt = get_post_types();
-		$ptok = array();
+		$Valid = null;
 
-		foreach ( $pt as $t ) {
-			if ( array_search( $t, $this->ignore_post_types ) === FALSE ) {
-				$ptok[] = $t;
+		if ( null === $Valid ) {
+			$all = get_post_types( array(), 'names' );
+			$Valid = array();
+
+			foreach ( $all as $post_type ) {
+				if ( $this->supported_post_type( $post_type ) ) {
+					$Valid[] = $post_type;
+				}
 			}
 		}
 
-		return $ptok;
+		return $Valid;
+	}
+
+	/**
+	 * Returns a full list with all published posts that support custom sidebars.
+	 *
+	 * @since  1.6.0
+	 * @return array List of published posts, categorized by post-type.
+	 */
+	public function get_all_posts() {
+		$Post_list = null;
+
+		if ( null === $Post_list ) {
+			$Post_list = array();
+			$post_types = $this->get_post_types();
+
+			foreach ( $post_types as $ind => $post_type ) {
+				$Post_list[ $post_type ] = array();
+				$posts = get_posts(
+					array(
+						'post_type' => $post_type,
+						'orderby' => 'title',
+						'order' => 'ASC',
+						'posts_per_page' => -1,
+					)
+				);
+				foreach ( $posts as $post ) {
+					$Post_list[ $post_type ][ $post->ID ] = $post->post_title;
+				}
+			}
+		}
+
+		return $Post_list;
 	}
 
 	public function get_empty_widget() {
@@ -1026,7 +1240,7 @@ class CustomSidebars {
 	}
 
 	public function refresh_sidebars_widgets() {
-		$widgetized_sidebars = $this->get_default_sidebars();
+		$widgetized_sidebars = $this->get_sidebar_widgets();
 		$delete_widgetized_sidebars = array();
 		$cs_sidebars = $this->get_custom_sidebars();
 
@@ -1070,7 +1284,7 @@ class CustomSidebars {
 		$this->set_sidebar_options( array() );
 		$this->set_custom_sidebars( array() );
 
-		$widgetized_sidebars = $this->get_default_sidebars();
+		$widgetized_sidebars = $this->get_sidebar_widgets();
 		$delete_widgetized_sidebars = array();
 		foreach ( $widgetized_sidebars as $id => $bar ) {
 			if ( substr( $id, 0, 3 ) == 'cs-' ) {
@@ -1234,7 +1448,7 @@ class CustomSidebars {
 		if ( ! isset( $allsidebars[$sidebarId] ) ) {
 			echo urlencode( $_GET['id'] );
 			var_dump( $allsidebars );
-			die(__( 'Unknown sidebar.', CSB_LANG ) );
+			die( __( 'Unknown sidebar.', CSB_LANG ) );
 		}
 		foreach ( $allsidebars as $key => $sb ) {
 			if ( strlen( $sb['name'] ) > 30 ) {
@@ -1245,8 +1459,7 @@ class CustomSidebars {
 		// FIXME: These are global variables. Move this to a (static) function instead
 		$current_sidebar = $allsidebars[ $_GET['id'] ];
 		$defaults = $this->get_default_replacements();
-		$modifiable = $this->replaceable_sidebars;
-		$post_types = $this->get_post_types();
+		$modifiable = $this->get_modifiable_sidebars();
 		$categories = get_categories( array( 'hide_empty' => 0 ) );
 		if ( sizeof( $categories ) == 1 && $categories[0]->cat_ID == 1 ) {
 			unset( $categories[0] );

@@ -368,6 +368,10 @@ body.appearance_page_customsidebars #poststuff h2 {
     margin-left: -15px;
 }
 
+.form-buttons {
+    clear: both;
+}
+
 .show-infos {
     position: relative;
     display: inline-block;
@@ -419,3 +423,95 @@ h2 .show-infos {
     margin: 10px 0 5px -2px;
     color: #666;
 }
+
+
+/* Select Posts */
+.csb-meta {
+    width: 280px;
+    float: left;
+    margin-right: 20px;
+}
+.csb-postlist {
+    width: 320px;
+    float: left;
+    margin-right: 20px;
+}
+
+.csb-list {
+    width: 100%;
+}
+.csb-list label {
+    display: block;
+}
+.csb-list th {
+    text-align: left;
+    padding: 15px 0 5px;
+    border-bottom: 1px solid #EEE;
+}
+.csb-list td {
+    border-bottom: 1px solid #EEE;
+}
+.csb-list tr:hover td {
+    background: #FFC;
+}
+
+.csb-list .sb-col {
+    position: relative;
+    width: 20px;
+    text-align: center;
+    color: #999;
+}
+
+.csb-list td.sb-col {
+    border-left: 1px solid #EEE;
+}
+
+.csb-list .is-def {
+    color: #CCC;
+    background: #F1F1F1 !important;
+}
+.csb-list .is-def:hover {
+    color: #AAA;
+    background: #E1E1E1 !important;
+}
+.csb-list .is-def:before {
+    content: '-';
+}
+
+.csb-list .is-cust {
+    color: #EEE;
+    background: #0074A2 !important;
+}
+.csb-list .is-cust:hover {
+    color: #FFF;
+    background: #006090 !important;
+}
+.csb-list .is-cust:before {
+    content: "\f147";
+    font-family: 'dashicons';
+}
+
+.csb-list .sb-col:before,
+.csb-list .sb-col:after {
+    display: block;
+}
+
+.csb-list .sb-col:after {
+    content: attr(data-hint);
+    position: absolute;
+    color: #EEE;
+    background: #333;
+    padding: 4px;
+    font-size: 13px;
+    font-weight: normal;
+    bottom: 30px;
+    width: 200px;
+    left: -50%;
+    margin-left: -100px;
+    opacity: .9;
+    display: none;
+}
+.csb-list .sb-col:hover:after {
+    display: block;
+}
+

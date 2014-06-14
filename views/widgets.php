@@ -56,7 +56,7 @@
 <!--[if lt IE 8]>
 <script type="text/javascript">
 jQuery(function(){
-    csSidebars.showMessage('<?php _e( 'You are using an old browser and some features of custom sidebars are not available. You will be notified when you try to use them but, have you ever think about update your browser?',  CSB_LANG ) ?>');
+    csSidebars.showMessage('<?php _e( 'You are using an old browser and some features of custom sidebars are not available. You will be notified when you try to use them. Did you ever think about updating your browser?',  CSB_LANG ) ?>');
 });
 </script>
 <![endif]-->

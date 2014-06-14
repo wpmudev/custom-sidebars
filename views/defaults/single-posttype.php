@@ -1,4 +1,9 @@
+<?php
+$post_types = CustomSidebars::instance()->get_post_types();
+?>
+
 <div class="defaultsSelector">
+
 <h3 class="csh3title" title="<?php _e( 'Click to toogle',  CSB_LANG ); ?>"><?php _e( 'By post type', CSB_LANG ); ?></h3>
 <div id="posttypes-default" class="meta-box-holder defaultsContainer">
 

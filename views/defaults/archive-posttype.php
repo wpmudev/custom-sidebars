@@ -1,3 +1,6 @@
+<?php
+$post_types = CustomSidebars::instance()->get_post_types();
+?>
 
 <div class="defaultsSelector">
 

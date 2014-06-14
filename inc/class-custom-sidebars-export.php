@@ -45,6 +45,72 @@ class CustomSidebarsExport {
 				'current_screen',
 				array( $this, 'do_actions' )
 			);
+
+			// Add new "Export/Import" tabs.
+			add_action(
+				'cs_additional_tabs',
+				array( $this, 'show_tabs' )
+			);
+
+			// Add new "Export/Import" tabs.
+			add_filter(
+				'cs_register_tabs',
+				array( $this, 'register_tab' )
+			);
+
+			// Add new "Export/Import" tabs.
+			add_action(
+				'cs_render_tab_content',
+				array( $this, 'render_page' )
+			);
+		}
+	}
+
+	/**
+	 * This is called when the tab list is displayed. We output the export-
+	 * tabs at this point
+	 *
+	 * @since  1.6.0
+	 * @param  string $active The currently active tab.
+	 */
+	public function show_tabs( $active ) {
+		?>
+		<a class="nav-tab <?php if ( 'export' == $active ) : ?>nav-tab-active<?php endif; ?>" href="themes.php?page=customsidebars&p=export"><?php _e( 'Export/Import', CSB_LANG ); ?></a>
+
+		<?php if ( 'import' == $active ) : ?>
+			<a class="nav-tab nav-tab-active" href="#"><?php _e( 'Preview Import', CSB_LANG ); ?></a>
+		<?php endif;
+	}
+
+	/**
+	 * Filter that adds the new tab-parameters to the list of recognized option
+	 * pages. This filter is used in combination with the action
+	 * "cs_additional_tabs" above.
+	 *
+	 * @since  1.6.0
+	 */
+	public function register_tab( $recognized_pages ) {
+		$recognized_pages[] = 'export';
+		$recognized_pages[] = 'import';
+
+		return $recognized_pages;
+	}
+
+	/**
+	 * Allows us to render the export/import option pages.
+	 *
+	 * @since  1.6.0
+	 * @param  string $active The currently active tab.
+	 */
+	public function render_page( $active ) {
+		switch ( $active ) {
+			case 'export':
+				include CSB_VIEWS_DIR . 'export.php';
+				break;
+
+			case 'import':
+				include CSB_VIEWS_DIR . 'import.php';
+				break;
 		}
 	}
 
@@ -115,7 +181,7 @@ class CustomSidebarsExport {
 		 * will be a list with two option-arrays.
 		 */
 		$data['widgets'] = array();
-		foreach ( $this->csb->get_default_sidebars() as $sidebar => $widgets ) {
+		foreach ( $this->csb->get_sidebar_widgets() as $sidebar => $widgets ) {
 			if ( 'wp_inactive_widgets' === $sidebar ) { continue; }
 			if ( is_array( $widgets ) ) {
 				$data['widgets'][ $sidebar ] = array();

@@ -7,6 +7,10 @@ Change Log:
 1.6
 ----------------------------------------------------------------------
 - Update to Pro version.
+- Pro: Export/Import features.
+- Pro: Widget visibility options.
+- Pro: Custom sidebars are fully translate-able (name, description, etc).
+- Pro: Directly assign sidebars to multiple posts and pages.
 
 ----------------------------------------------------------------------
 ----------------------------------------------------------------------
