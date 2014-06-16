@@ -1,5 +1,7 @@
 <?php
 
+add_action( 'cs_init', array( 'CustomSidebarsVisibility', 'instance' ) );
+
 /**
  * Adds visibility options to all widgets: Hide or show widgets only when
  * specific conditions are met.
@@ -161,7 +163,9 @@ class CustomSidebarsVisibility {
 		?>
 		<input type="hidden" name="csb-visibility-button" value="0" />
 		<?php if ( ! isset( $_POST[ 'csb-visibility-button' ] ) ) : ?>
-		<a href="#" class="button csb-visibility-button"><span class="dashicons dashicons-visibility"></span> <?php _e( 'Visibility', CSB_LANG ); ?></a>
+			<a href="#" class="button csb-visibility-button"><span class="dashicons dashicons-visibility"></span> <?php _e( 'Visibility', CSB_LANG ); ?></a>
+		<?php else : ?>
+			<script>jQuery(function() { jQuery('.csb-visibility-<?php echo esc_js( $widget->id ); ?>').closest('.widget').trigger('csb:ui').trigger('csb:update'); }); </script>
 		<?php endif; ?>
 
 		<div class="csb-visibility-inner" <?php if ( ! $is_visible ) : ?>style="display:none"<?php endif; ?>>
@@ -304,11 +308,6 @@ class CustomSidebarsVisibility {
 			<?php
 		}
 		?>
-
-
-		<?php if ( isset( $_POST[ 'csb-visibility-button' ] ) ) : ?>
-			<script>jQuery(function() { jQuery('.csb-visibility-<?php echo esc_js( $widget->id ); ?>').closest('.widget').trigger('csb:ui').trigger('csb:update'); }); </script>
-		<?php endif; ?>
 
 		</div>
 		</div>
@@ -548,7 +547,7 @@ class CustomSidebarsVisibility {
 
 		if ( $condition_true ) {
 			// TAXONOMY condition.
-			$tax_query = $wp_query->tax_query->queries;
+			$tax_query = @$wp_query->tax_query->queries;
 			if ( is_array( $tax_query ) ) {
 				$tax_type = $tax_query[0]['taxonomy'];
 				$tax_terms = $tax_query[0]['terms'];

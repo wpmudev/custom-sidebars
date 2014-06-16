@@ -60,7 +60,7 @@ margin-bottom:30px;
 
 div.widget-liquid-right {
 	position: fixed;
-	background: #ECECEC url('img/menu-shadow.png') left top repeat-y;
+	background: #ECECEC url('../img/menu-shadow.png') left top repeat-y;
 	right:0;
 	top:0;
 	padding: 32px 5px;
@@ -281,7 +281,7 @@ body.appearance_page_customsidebars #poststuff h2 {
     float:left;
     right: auto;
     left:0;
-    background: #ECECEC url('../../../wp-admin/images/menu-shadow.png') right top repeat-y;
+    background: #ECECEC url('../img/menu-shadow.png') right top repeat-y;
 }
 
 .rtl.widgets-php #widgets-left {

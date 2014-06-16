@@ -1,5 +1,7 @@
 <?php
 
+add_action( 'cs_init', array( 'CustomSidebarsExport', 'instance' ) );
+
 /**
  * Provides functionality to export and import sidebar settings.
  *

@@ -10,7 +10,7 @@
 }
 
 .widget-control-actions .csb-visibility-button {
-	margin: 0 5px;
+	margin: 0 5px 0 0;
 }
 
 .csb-visibility {
@@ -74,6 +74,11 @@
 .csb-visibility-inner .csb-always label {
 	margin-bottom: 0;
 	color: #AAA;
+	cursor: default;
+}
+
+.csb-visibility-inner .csb-option-row.csb-always:hover {
+	background: transparent;
 }
 
 .csb-visibility-inner .csb-and {

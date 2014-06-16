@@ -41,8 +41,8 @@ if ( ! class_exists( 'CustomSidebars' ) ) {
 	$plugin_dir = dirname( __FILE__ );
 	$plugin_url = plugin_dir_url( __FILE__ );
 	define( 'CSB_VIEWS_DIR', $plugin_dir . '/views/' );
-	define( 'CSB_JS_URL', $plugin_url . '/js/' );
-	define( 'CSB_CSS_URL', $plugin_url . '/css/' );
+	define( 'CSB_JS_URL', $plugin_url . 'js/' );
+	define( 'CSB_CSS_URL', $plugin_url . 'css/' );
 	define( 'CSB_VERSION', '1.6' );
 
 	// Load the actual core.

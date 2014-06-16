@@ -218,6 +218,6 @@ jQuery(function init_visibility() {
 		});
 	}
 
-	jQuery( '.viewport .widget' ).each( init_widget );
+	jQuery( '#widgets-right .widget' ).each( init_widget );
 	$doc.on( 'widget-added', init_widget );
 });

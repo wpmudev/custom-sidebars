@@ -1,5 +1,7 @@
 <?php
 
+add_action( 'cs_init', array( 'CustomSidebarsPosts', 'instance' ) );
+
 /**
  * Provides functionality for the "Assign pages" options section.
  *
@@ -69,7 +71,7 @@ class CustomSidebarsPosts {
 	 */
 	public function show_tabs( $active ) {
 		?>
-		<a class="nav-tab <?php if ( 'posts' == $active ) : ?>nav-tab-active<?php endif; ?>" href="themes.php?page=customsidebars&p=posts"><?php _e( 'Select posts', CSB_LANG ); ?></a>
+		<a class="nav-tab <?php if ( 'posts' == $active ) : ?>nav-tab-active<?php endif; ?>" href="themes.php?page=customsidebars&p=posts"><?php _e( 'Assign Sidebars', CSB_LANG ); ?></a>
 		<?php
 	}
 

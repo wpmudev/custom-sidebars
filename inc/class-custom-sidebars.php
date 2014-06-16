@@ -1,9 +1,10 @@
 <?php
 
 // Load additional Pro-modules.
+require_once( 'class-custom-sidebars-posts.php' );
+require_once( 'class-custom-sidebars-cloning.php' );
 require_once( 'class-custom-sidebars-visibility.php' );
 require_once( 'class-custom-sidebars-export.php' );
-require_once( 'class-custom-sidebars-posts.php' );
 
 
 /**
@@ -33,10 +34,8 @@ class CustomSidebars {
 		if ( null === $Inst ) {
 			$Inst = new CustomSidebars();
 
-			// PRO-modules are initialized now.
-			CustomSidebarsVisibility::instance();
-			CustomSidebarsExport::instance();
-			CustomSidebarsPosts::instance();
+			// Extensions use this hook to initialize themselfs.
+			do_action( 'cs_init' );
 		}
 
 		return $Inst;
@@ -1245,7 +1244,7 @@ class CustomSidebars {
 		$cs_sidebars = $this->get_custom_sidebars();
 
 		foreach ( $widgetized_sidebars as $id => $bar ) {
-			if ( substr( $id, 0, 3 ) == 'cs-' ) {
+			if ( substr( $id, 0, 3 ) == $this->sidebar_prefix ) {
 				$found = FALSE;
 				foreach ( $cs_sidebars as $csbar ) {
 					if ( $csbar['id'] == $id ) {
@@ -1287,7 +1286,7 @@ class CustomSidebars {
 		$widgetized_sidebars = $this->get_sidebar_widgets();
 		$delete_widgetized_sidebars = array();
 		foreach ( $widgetized_sidebars as $id => $bar ) {
-			if ( substr( $id, 0, 3 ) == 'cs-' ) {
+			if ( substr( $id, 0, 3 ) == $this->sidebar_prefix ) {
 				$found = FALSE;
 				if ( empty( $cs_sidebars ) ) {
 					$found = TRUE;
@@ -1347,7 +1346,7 @@ class CustomSidebars {
 	public function ajax_handler() {
 		if ( $_REQUEST['cs_action'] == 'where' ) {
 			$this->ajax_show_where();
-			die;
+			die();
 		}
 
 		$nonce = $_POST['nonce'];
