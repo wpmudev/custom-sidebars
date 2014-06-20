@@ -1,82 +1,61 @@
-/*@import url('rtl.css');*/
 
-#defaultsidebarspage p.submit{
-	padding : 0 0 10px;
+#defaultsidebarspage p.submit {
+	padding: 0 0 10px;
 	clear: both;
 }
 
-#poststuff.defaultsdetailscontainer h2{
-	border-bottom:0;
-	margin-bottom:5px;
+#poststuff.defaultsdetailscontainer h2 {
+	border-bottom: 0;
+	margin-bottom: 5px;
 }
 
-#defaultsforposts, #defaultsforpages{
-padding:0 10px;
-background:#fcfcfc;
-overflow: hidden;
+#defaultsforposts,
+#defaultsforpages {
+	padding: 0 10px;
+	background: #fcfcfc;
+	overflow: hidden;
 }
 
-.defaultsSelector{
-margin-bottom:30px;
+.defaultsSelector {
+	margin-bottom: 30px;
 }
 
-.cscolright{
-	clear:right;
-	float:right;
-	margin:0;
-	overflow:hidden;
-	padding:0;
-	width:49%;
+.cscolright {
+	clear: right;
+	float: right;
+	margin: 0;
+	overflow: hidden;
+	padding: 0;
+	width: 49%;
 }
 
-.cscolleft{
-	margin:0;
-	overflow:hidden;
-	padding:0;
-	width:49%;
-}
-
-#poststuff h3.csh3title{
-	clear:left;
-	font-size:1.3em;
-	margin-bottom:15px;
-	margin-top:20px;
-	padding:0 0 3px;
-        background:none;
-	font-family: Georgia,"Times New Roman","Bitstream Charter",Times,serif;
-	font-style: italic;
-	font-weight: normal;
-	margin-top:10px;
-	border-bottom:1px solid #ccc;
-}
-
-#poststuff h3.csh3title:hover{
-    background: url('/wp-admin/images/arrows.png') no-repeat top right;
+.cscolleft {
+	margin: 0;
+	overflow: hidden;
+	padding: 0;
+	width: 49%;
 }
 
 .widgets-php div.widget-liquid-left {
-    width: 100%;
+	width: 100%;
 }
 
 div.widget-liquid-right {
 	position: fixed;
-	background: #ECECEC url('../img/menu-shadow.png') left top repeat-y;
-	right:0;
-	top:0;
+	background: #E4E4E4;
+	right: 0;
+	top: 0;
 	padding: 32px 5px;
 }
 
-.widgets-php #wpcontent, .widgets-php #wpfooter {
-    margin-right: 59%;
-    position:relative;
-}
-
-.cs-no-mp6.widgets-php #wpcontent, .cs-no-mp6.widgets-php #wpfooter{
-    margin-right: 320px;
+.widgets-php #wpcontent,
+.widgets-php #wpfooter {
+	margin-right: 59%;
+	position: relative;
 }
 
 .widgets-php #widgets-left {
-    margin-right: 0 !important;
+	margin-right: 0 !important;
 }
 
 .widgets-php #footer{
@@ -85,277 +64,404 @@ div.widget-liquid-right {
 	padding-right: 20px;
 }
 
-
-.widgets-php .wrap{
-
-}
-
 .widgets-php .wrap h2{
-    margin-bottom: 10px;
+	margin-bottom: 10px;
 }
 
-.cs-options{
-    margin-top: 12px;
-    text-align:right
+.widget-liquid-right .scrollbar {
+	position: relative;
+	float: right;
+	width: 10px;
 }
 
-.widget-liquid-right .scrollbar { position: relative; float: right; width: 10px; }
-.widget-liquid-right .track {  height: 100%; width:10px; position: relative; padding: 0 1px; }
-.widget-liquid-right .thumb { height: 20px; width: 10px; cursor: pointer; overflow: hidden; position: absolute; top: 0;  background-color: #666; margin-top:10px;}
-.cs-no-mp6 .widget-liquid-right .thumb {-webkit-border-radius: 5px; -moz-border-radius: 5px; border-radius: 5px;}
-.widget-liquid-right .thumb .end { overflow: hidden; height: 5px; width: 13px; }
-.widget-liquid-right .viewport { position: relative; margin-right: 20px;}
-.widget-liquid-right .overview { list-style: none; position: absolute; left: 0; top: 0; width: 99%; margin-left:1%;}
-.disable .thumb { cursor:default; background: #ccc }
-
-/* For modern browsers */
-.cf:before,
-.cf:after {
-    content:"";
-    display:table;
+.widget-liquid-right .track {
+	height: 100%;
+	width: 10px;
+	position: relative;
+	padding: 0 1px;
 }
 
-.cf:after {
-    clear:both;
+.widget-liquid-right .thumb {
+	height: 20px;
+	width: 10px;
+	cursor: pointer;
+	overflow: hidden;
+	position: absolute;
+	top: 0;
+	background-color: #666;
+	margin-top:10px;
 }
 
-/* For IE 6/7 (trigger hasLayout) */
-.cf {
-    zoom:1;
+.widget-liquid-right .thumb .end {
+	overflow: hidden;
+	height: 5px;
+	width: 13px;
 }
 
-
-#cs-widgets-extra{
-    display:none;
-}
-#cs-title-options {
-    overflow: hidden;
-    zoom: 1;
-    margin-top: 10px;
-}
-#cs-title-options h2{
-    margin-left: 5px;
-    float: left;
-    margin-bottom: 0;
-    border:none;
+.widget-liquid-right .viewport {
+	position: relative;
+	margin-right: 20px;
 }
 
-.sidebar-form{
-    margin: 0 15px;
+.widget-liquid-right .overview {
+	list-style: none;
+	position: absolute;
+	left: 0;
+	top: 0;
+	width: 99%;
+	margin-left: 1%;
 }
+
+.disable .thumb {
+	cursor: default;
+	background: #ccc;
+}
+
+#cs-options .cs-action {
+	line-height: 26px;
+	margin-right: 20px;
+}
+
+.sidebar-form {
+	margin: 0 15px;
+}
+
 .sidebar-form label {
-    display:block;
-}
-.sidebar-form .submit{
-    text-align: right;
-    margin: 0;
-    padding: 1em 0;
-}
-.sidebar-form .description{
-    margin-top: 5px;
-    text-align: right;
+	display: block;
 }
 
-.sidebar_name, .sidebar_description{
-    width: 100%;
+.sidebar-form .submit {
+	text-align: right;
+	margin: 0;
+	padding: 1em 0;
 }
 
-div#widgets-right .sidebar-name>h3{
-    padding: 15px;
+.sidebar-form .description {
+	margin-top: 5px;
+	text-align: right;
 }
 
-div#widgets-right .widgets-sortables .sidebar-name>h3{
-    padding: 15px 7px;
+.sidebar_name, .sidebar_description {
+	width: 100%;
 }
 
-.widgets-holder-wrap.closed>div:nth-child(2){
-    display: none;
+div#widgets-right .sidebar-name>h3 {
+	padding: 15px;
 }
 
-.cs-message{
-    margin: .5em 0;
-    padding: 10px;
-    font-weight:bolder;
-    -webkit-border-radius: 3px;
-    -moz-border-radius: 3px;
-    border-radius: 3px;
+div#widgets-right .widgets-sortables .sidebar-name>h3 {
+	padding: 15px 7px;
 }
 
-.cs-update{
-background: lightYellow;
-border: 1px solid #E6DB55;
+.widgets-holder-wrap.closed>div:nth-child(2) {
+	display: none;
 }
 
-.cs-error{
-background: #FFEBE8;
-border: 1px solid #C00;
-}
-
-.cs-edit-sidebar{
-    color: #DFDFDF;
-    text-shadow: 0 1px 0 #FFFFFF;
-    text-align: right;
-    padding: 2px 10px;
-    background: #F1F1F1;
-}
-
-.closed .cs-edit-sidebar{
-    display: none;
-}
-.cs-edit-sidebar a{
-    text-decoration: none;
-}
-
-#defaultsidebarspage .hndle, #defaultsidebarspage .csh3title {
-    cursor: pointer;
+#defaultsidebarspage .hndle {
+	cursor: pointer;
 }
 
 #submitwhere{
-    position:absolute;
-    bottom:0;
-    right: 35px;
-    display: none;
-    padding:0;
+	position:absolute;
+	bottom:0;
+	right: 35px;
+	display: none;
+	padding:0;
 }
 
 #customsidebarspage #col-right{
-    width: 62%;
+	width: 62%;
 }
 
 .widgets_access .widget-liquid-right{
-    position: static;
+	position: static;
 }
 
-
 #oldbrowsererror{
-    display:none;
+	display:none;
 }
 
 #defaultsidebarspage .postbox{
-    position:static;
+	position:static;
 }
 
 #defaultsidebarspage .inside{
-    position:static;
+	position:static;
 }
 
 .cs-options .ajax-feedback,
 #new-sidebar-holder .ajax-feedback {
-    height:16px;
-    vertical-align: middle;
-    margin: 0 5px;
+	height:16px;
+	vertical-align: middle;
+	margin: 0 5px;
 }
 
 #new-sidebar-holder h3 .ajax-feedback {
-    vertical-align: bottom;
+	vertical-align: bottom;
 }
 
 .sidebar-name h3 .ajax-feedback {
-    height:16px;
-    vertical-align: bottom;
-    margin: 0 5px;
+	height: 16px;
+	vertical-align: bottom;
+	margin: 0 5px;
 }
 
 body.appearance_page_customsidebars .wrap h2 {
-    float: none;
+	float: none;
 }
+
 body.appearance_page_customsidebars #poststuff h2 {
-    margin-top: 0;
+	margin-top: 0;
 }
 
 .widgets-php #TB_ajaxContent #poststuff {
-    min-width: 0;
+	min-width: 0;
 }
 
 .widgets-php #TB_ajaxContent h2 {
-    float: none;
+	float: none;
 }
 
 .widgets-php #TB_ajaxContent select {
-    clear: left;
-}
-
-/* RTL Styles */
-
-.rtl div.widget-liquid-right {
-    float:left;
-    right: auto;
-    left:0;
-    background: #ECECEC url('../img/menu-shadow.png') right top repeat-y;
-}
-
-.rtl.widgets-php #widgets-left {
-    margin-left: 0 !important;
-}
-
-.rtl.widgets-php #wpcontent, .rtl.widgets-php #wpfooter {
-    margin-left: 325px;
-    margin-right: 165px;
-}
-
-.rtl.widgets-php.folded #wpcontent, .rtl.widgets-php.folded #wpfooter {
-    margin-left: 325px;
-    margin-right: 52px;
-}
-
-.rtl #cs-title-options h2 {
-    float: right;
-    margin-right: 5px;
-}
-
-.rtl .widget-liquid-right .viewport {
-    margin-right: 5px;
-    margin-left: 14px;
-}
-
-.rtl .widget-liquid-right .scrollbar {
-    float:left;
-}
-
-.rtl .cs-options{
-    text-align:left;
-}
-
-.rtl .sidebar-form .submit {
-    text-align: left;
+	clear: left;
 }
 
 
-.rtl #TB_ajaxWindowTitle { float:right; }
-.rtl #TB_closeAjaxWindow { float: left; }
+/**
+ * =============================================================================
+ * == Custom elements on widget screen
+ * =============================================================================
+ */
+
+
+#cs-widgets-extra {
+	display: none;
+}
+
+#cs-title-options {
+	zoom: 1;
+	margin-top: 10px;
+	margin-bottom: 20px;
+}
+
+
+/**
+ * =============================================================================
+ * == Message box
+ * =============================================================================
+ */
+
+
+.cs-message {
+    margin: .5em 0;
+    padding: 10px;
+    position: absolute;
+    left: 0;
+    right: 0;
+    box-shadow: 0 1px 10px rgba(0,0,0,0.2);
+    z-index: 100;
+}
+
+.cs-message .close {
+	position: absolute;
+	top: .5em;
+	right: .5em;
+	opacity: .3;
+	color: #000;
+	cursor: pointer;
+	text-decoration: none;
+	font-size: 14px;
+	line-height: 26px;
+	width: 26px;
+	text-align: center;
+	background: rgba(0,0,0,0.1);
+}
+
+.cs-message .close:hover,
+.cs-message .close:focus,
+.cs-message .close:active {
+	opacity: 1;
+}
+
+.cs-update{
+	background: lightYellow;
+	border: 1px solid #E6DB55;
+}
+
+.cs-error{
+	background: #FFEBE8;
+	border: 1px solid #C00;
+}
+
+
+/**
+ * =============================================================================
+ * == Toolbar
+ * =============================================================================
+ */
+
+
+.cs-toolbar {
+	color: #333;
+	padding: 0;
+	border-top: 1px solid #E5E5E5;
+	background: #FCFCFC;
+}
+
+.closed .cs-toolbar {
+	display: none;
+}
+
+.cs-toolbar .cs-tool {
+	text-decoration: none;
+	line-height: 40px;
+	padding: 0 10px;
+	white-space: nowrap;
+	background: #FFF;
+}
+
+.cs-toolbar .cs-separator {
+	border-left: 1px solid #E5E5E5;
+	width: 1px;
+	padding: 0;
+	margin: 0;
+	height: 40px;
+	overflow: hidden;
+	display: inline-block;
+	color: #DDD;
+}
+
+.cs-custom-sidebar .cs-tool,
+.cs-custom-sidebar .cs-separator {
+	float: right;
+}
+
+.cs-theme-sidebar .cs-tool,
+.cs-theme-sidebar .cs-separator {
+	float: left;
+}
+
+
+/**
+ * =============================================================================
+ * == Button styles
+ * =============================================================================
+ */
+
+
+.csb .button {
+	outline: 0;
+}
 
 .csb .button > .dashicons,
 .csb .button-primary > .dashicons,
 .csb .button-secondary > .dashicons {
-    line-height: 26px;
-    margin-right: 5px;
+	opacity: .75;
+	line-height: 26px;
+	margin-right: 5px;
+
+	-webkit-transition: opacity .2s;
+	-moz-transition: opacity .2s;
+	-o-transition: opacity .2s;
+	transition: opacity .2s;
+}
+
+.csb .button:hover > .dashicons,
+.csb .button-primary:hover > .dashicons,
+.csb .button-secondary:hover > .dashicons {
+	opacity: 1;
 }
 
 
-/* Export/Import */
+/**
+ * =============================================================================
+ * == RTL Styles
+ * =============================================================================
+ */
+
+
+.rtl div.widget-liquid-right {
+	float: left;
+	right: auto;
+	left: 0;
+}
+
+.rtl.widgets-php #widgets-left {
+	margin-left: 0 !important;
+}
+
+.rtl.widgets-php #wpcontent,
+.rtl.widgets-php #wpfooter {
+	margin-left: 325px;
+	margin-right: 165px;
+}
+
+.rtl.widgets-php.folded #wpcontent,
+.rtl.widgets-php.folded #wpfooter {
+	margin-left: 325px;
+	margin-right: 52px;
+}
+
+.rtl #cs-title-options h2 {
+	float: right;
+	margin-right: 5px;
+}
+
+.rtl .widget-liquid-right .viewport {
+	margin-right: 5px;
+	margin-left: 14px;
+}
+
+.rtl .widget-liquid-right .scrollbar {
+	float:left;
+}
+
+.rtl .cs-options{
+	text-align:left;
+}
+
+.rtl .sidebar-form .submit {
+	text-align: left;
+}
+
+.rtl #TB_ajaxWindowTitle {
+	float: right;
+}
+
+.rtl #TB_closeAjaxWindow {
+	float: left;
+}
+
+
+/**
+ * =============================================================================
+ * == Export/Import
+ * =============================================================================
+ */
+
 
 .csb-export-head {
-    min-width: 450px;
+	min-width: 450px;
 }
 
 .csb-export-head th {
-    vertical-align: top;
-    text-align: right;
-    background: #FFF;
-    width: 150px;
+	vertical-align: top;
+	text-align: right;
+	background: #FFF;
+	width: 150px;
 }
 
 .csb-export-head ul {
-    margin: 0;
+	margin: 0;
 }
 
 .csb-export-head .dashicons.hint {
-    font-size: 12px;
-    line-height: 22px;
+	font-size: 12px;
+	line-height: 22px;
 }
 
 .csb-form {
-    padding-left: 15px;
+	padding-left: 15px;
 }
 
 .csb-form h2,
@@ -364,154 +470,80 @@ body.appearance_page_customsidebars #poststuff h2 {
 #poststuff .csb-form h2,
 #poststuff .csb-form h3,
 #poststuff .csb-form .form-buttons {
-    padding-left: 0;
-    margin-left: -15px;
+	padding-left: 0;
+	margin-left: -15px;
 }
 
 .form-buttons {
-    clear: both;
+	clear: both;
 }
 
 .show-infos {
-    position: relative;
-    display: inline-block;
-    margin: 0 5px;
+	position: relative;
+	display: inline-block;
+	margin: 0 5px;
 }
 
 h2 .show-infos {
-    top: 4px;
+	top: 4px;
 }
 
 .show-infos .export-infos {
-    position: absolute;
-    top: -5px;
-    left: 30px;
-    font-size: 13px;
-    line-height: 1.4em;
-    font-weight: normal;
-    background: #F5F5F5;
-    box-shadow: 0 1px 8px rgba(0, 0, 0, 0.2);
-    border: 3px solid #FAFAFA;
-    padding: 5px;
-    z-index: 10;
+	position: absolute;
+	top: -5px;
+	left: 30px;
+	font-size: 13px;
+	line-height: 1.4em;
+	font-weight: normal;
+	background: #F5F5F5;
+	box-shadow: 0 1px 8px rgba(0, 0, 0, 0.2);
+	border: 3px solid #FAFAFA;
+	padding: 5px;
+	z-index: 10;
 }
 
 .show-infos .export-infos:before,
 .show-infos .export-infos:after {
-    content: '';
-    position: absolute;
-    left: -17px;
-    top: 5px;
-    border: 7px solid rgba(0, 0, 0, 0);
-    border-right-color: #FAFAFA;
-    z-index: 1;
+	content: '';
+	position: absolute;
+	left: -17px;
+	top: 5px;
+	border: 7px solid rgba(0, 0, 0, 0);
+	border-right-color: #FAFAFA;
+	z-index: 1;
 }
 
 .show-infos .export-infos:after {
-    left: -18px;
-    top: 5px;
-    border-right-color: rgba(0,0,0,0.15);
-    z-index: 0;
+	left: -18px;
+	top: 5px;
+	border-right-color: rgba(0,0,0,0.15);
+	z-index: 0;
 }
 
 .show-infos:hover .export-infos {
-    display: block !important;
+	display: block !important;
 }
 
 .export-infos .section {
-    font-weight: bold;
-    margin: 10px 0 5px -2px;
-    color: #666;
+	font-weight: bold;
+	margin: 10px 0 5px -2px;
+	color: #666;
 }
 
 
-/* Select Posts */
-.csb-meta {
-    width: 280px;
-    float: left;
-    margin-right: 20px;
-}
-.csb-postlist {
-    width: 320px;
-    float: left;
-    margin-right: 20px;
+/**
+ * =============================================================================
+ * == Patterns
+ * =============================================================================
+ */
+
+
+.cf:before,
+.cf:after {
+	content: '';
+	display: table;
 }
 
-.csb-list {
-    width: 100%;
+.cf:after {
+	clear:both;
 }
-.csb-list label {
-    display: block;
-}
-.csb-list th {
-    text-align: left;
-    padding: 15px 0 5px;
-    border-bottom: 1px solid #EEE;
-}
-.csb-list td {
-    border-bottom: 1px solid #EEE;
-}
-.csb-list tr:hover td {
-    background: #FFC;
-}
-
-.csb-list .sb-col {
-    position: relative;
-    width: 20px;
-    text-align: center;
-    color: #999;
-}
-
-.csb-list td.sb-col {
-    border-left: 1px solid #EEE;
-}
-
-.csb-list .is-def {
-    color: #CCC;
-    background: #F1F1F1 !important;
-}
-.csb-list .is-def:hover {
-    color: #AAA;
-    background: #E1E1E1 !important;
-}
-.csb-list .is-def:before {
-    content: '-';
-}
-
-.csb-list .is-cust {
-    color: #EEE;
-    background: #0074A2 !important;
-}
-.csb-list .is-cust:hover {
-    color: #FFF;
-    background: #006090 !important;
-}
-.csb-list .is-cust:before {
-    content: "\f147";
-    font-family: 'dashicons';
-}
-
-.csb-list .sb-col:before,
-.csb-list .sb-col:after {
-    display: block;
-}
-
-.csb-list .sb-col:after {
-    content: attr(data-hint);
-    position: absolute;
-    color: #EEE;
-    background: #333;
-    padding: 4px;
-    font-size: 13px;
-    font-weight: normal;
-    bottom: 30px;
-    width: 200px;
-    left: -50%;
-    margin-left: -100px;
-    opacity: .9;
-    display: none;
-}
-.csb-list .sb-col:hover:after {
-    display: block;
-}
-

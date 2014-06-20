@@ -8,8 +8,6 @@
 <div class="themes-php csb">
 <div class="wrap">
 
-<?php include( 'part-tabs.php' ); ?>
-
 <div id="editsidebarpage">
 <div id="poststuff">
 
@@ -63,8 +61,6 @@ global $wp_registered_sidebars;
 </div>
 </div>
 
-
-<?php include( 'part-footer.php' ); ?>
 
 </div>
 </div>

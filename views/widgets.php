@@ -6,19 +6,38 @@
  */
 ?>
 
-<div id="cs-widgets-extra">
-    <div id="oldbrowsererror" class="message error"><?php _e('You are using an old browser that doesn\'t support draggin widgets to a recently created sidebar. Refresh the page to add widgets to this sidebar and think about to update your browser.',  CSB_LANG ); ?></div>
+<div id="cs-widgets-extra" class="csb">
+    <div id="oldbrowsererror" class="message error">
+        <?php _e( 'You are using an old browser that doesn\'t support draggin widgets to a recently created sidebar. Refresh the page to add widgets to this sidebar and think about to update your browser.',  CSB_LANG ); ?>
+    </div>
+
     <div id="cs-title-options">
-        <h2><?php _e('Sidebars', CSB_LANG ) ?></h2>
-        <div id="cs-options" class="cs-options">
-            <span><img src="<?php echo esc_url( admin_url( 'images/wpspin_light.gif' ) ); ?>" class="ajax-feedback" title="" alt=""></span><a href="themes.php?page=customsidebars" class="button create-sidebar-button"><?php _e('Create a new sidebar', CSB_LANG ) ?></a>
+        <h2><?php _e( 'Sidebars', CSB_LANG ); ?></h2>
+        <div id="cs-options" class="csb cs-options">
+            <button type="button" class="button button-primary cs-action btn-create-sidebar">
+                <i class="dashicons dashicons-plus-alt"></i>
+                <?php _e( 'Create a new sidebar', CSB_LANG ); ?>
+            </button>
+            <?php
+            /**
+             * Other extensions use this hook to display additional buttons.
+             *
+             * @since  1.6
+             */
+            do_action( 'cs_widgets_additional_buttons' );
+            ?>
+            <img src="<?php echo esc_url( admin_url( 'images/wpspin_light.gif' ) ); ?>" class="ajax-feedback" title="" alt="" />
         </div>
     </div>
-    <div id="cs-new-sidebar" class="widgets-holder-wrap">
 
+    <div class="cs-title-col1"><h3><?php _e( 'Custom Sidebars', CSB_LANG ); ?></h3></div>
+    <div class="cs-title-col2"><h3><?php _e( 'Theme Sidebars', CSB_LANG ); ?></h3></div>
+
+    <?php /*
+    <div id="cs-new-sidebar" class="widgets-holder-wrap">
         <div class="sidebar-name">
             <div class="sidebar-name-arrow"><br></div>
-            <h3><?php _e('New Sidebar', CSB_LANG ) ?><span><img src="<?php echo admin_url() ?>/images/wpspin_light.gif" class="ajax-feedback" title="" alt=""></span></h3>
+            <h3><?php _e( 'New Sidebar', CSB_LANG ) ?><span><img src="<?php echo admin_url() ?>/images/wpspin_light.gif" class="ajax-feedback" title="" alt=""></span></h3>
         </div>
         <div class="_widgets-sortables" style="min-height: 50px; ">
             <div class="sidebar-form">
@@ -42,15 +61,47 @@
             </div>
         </div>
     </div>
-    <div class="cs-edit-sidebar"><a class="where-sidebar thickbox" href="<?php echo admin_url('admin-ajax.php'); ?>?action=cs-ajax&cs_action=where&id=" title="<?php _e('Where do you want the sidebar?', CSB_LANG ) ?>"><?php _e('Where?', CSB_LANG )?></a><span class="cs-edit-separator"> | </span><a class="edit-sidebar" href="themes.php?page=customsidebars&p=edit&id="><?php _e('Edit', CSB_LANG )?></a><span class="cs-edit-separator"> | </span><a class="delete-sidebar" href="themes.php?page=customsidebars&p=delete&id="><?php _e('Delete', CSB_LANG )?></a></div>
-    <div class="cs-cancel-edit-bar"><a class="cs-advanced-edit" href="themes.php?page=customsidebars&p=edit&id="><?php _e('Advanced Edit',  CSB_LANG ) ?></a><span class="cs-edit-separator"> | </span><a class="cs-cancel-edit" href="#"><?php _e('Cancel',  CSB_LANG ) ?></a></div>
-    <div id="cs-save"><?php echo _e('Save', CSB_LANG ); ?></div>
-    <span id="cs-confirm-delete"><?php _e('Are you sure that you want to delete the sidebar',  CSB_LANG ) ?></span>
+    */ ?>
+
+    <div class="cs-custom-sidebar cs-toolbar cf">
+        <a class="cs-tool delete-sidebar" href="themes.php?page=customsidebars&p=delete&id="><?php _e( 'Delete', CSB_LANG ); ?></a>
+        <span class="cs-separator"> | </span>
+        <a class="cs-tool edit-sidebar" href="themes.php?page=customsidebars&p=edit&id="><?php _e( 'Edit', CSB_LANG ); ?></a>
+        <span class="cs-separator"> | </span>
+        <a class="cs-tool where-sidebar thickbox" href="<?php echo esc_url( admin_url( 'admin-ajax.php' ) ); ?>?action=cs-ajax&cs_action=where&id=" title="<?php _e( 'Where do you want the sidebar?', CSB_LANG ); ?>"><?php _e( 'Where?', CSB_LANG ); ?></a>
+        <span class="cs-separator"> | </span>
+    </div>
+
+    <div class="cs-theme-sidebar cs-toolbar cf">
+        <label for="cs-replaceable" class="cs-tool">
+            <input type="checkbox" id="" class="has-label" />
+            <?php _e( 'Make Replaceable', CSB_LANG ); ?>
+        </label>
+        <span class="cs-separator"> | </span>
+    </div>
+
+    <div class="cs-cancel-edit-bar">
+        <a class="cs-tool cs-advanced-edit" href="themes.php?page=customsidebars&p=edit&id=">
+            <?php _e( 'Advanced Edit',  CSB_LANG ); ?>
+        </a>
+        <span class="cs-separator"> | </span>
+        <a class="cs-tool cs-cancel-edit" href="#">
+            <?php _e( 'Cancel',  CSB_LANG ) ?>
+        </a>
+    </div>
+
+    <div id="cs-save">
+        <?php _e( 'Save', CSB_LANG ); ?>
+    </div>
+
+    <span id="cs-confirm-delete">
+        <?php _e( 'Are you sure that you want to delete the sidebar',  CSB_LANG ) ?>
+    </span>
+
     <form id="cs-wpnonces">
         <?php wp_nonce_field( 'cs-delete-sidebar', '_delete_nonce', false ); ?>
         <?php wp_nonce_field( 'cs-edit-sidebar', '_edit_nonce', false ); ?>
     </form>
-    <?php include( 'part-footer.php' ); ?>
  </div>
 
 <!--[if lt IE 8]>

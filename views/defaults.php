@@ -7,8 +7,6 @@
 <div class="themes-php csb">
 <div class="wrap">
 
-<?php include( 'part-tabs.php' ); ?>
-
 <?php $cs_is_defaults = true; //This make disappear sidebar selection link in the defaults page.?>
 
 <div id="defaultsidebarspage">
@@ -71,8 +69,6 @@ category_posts_{$id_category}_{$id_modifiable} : Posts by category
 </form>
 
 </div>
-
-<?php include( 'part-footer.php' ); ?>
 
 </div>
 </div>

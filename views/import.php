@@ -52,8 +52,6 @@ function list_sidebar_replacement( $list ) {
 <div class="themes-php csb">
 <div class="wrap">
 
-	<?php include 'part-tabs.php'; ?>
-
 	<div id="editsidebarpage">
 		<div id="poststuff">
 
@@ -418,9 +416,6 @@ function list_sidebar_replacement( $list ) {
 
 		</div>
 	</div>
-
-
-	<?php include 'part-footer.php'; ?>
 
 	<script>
 	jQuery( function init_import() {

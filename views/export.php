@@ -7,8 +7,6 @@
 <div class="themes-php csb">
 <div class="wrap">
 
-	<?php include 'part-tabs.php'; ?>
-
 	<div id="editsidebarpage">
 		<div id="poststuff">
 
@@ -50,8 +48,6 @@
 		</div>
 	</div>
 
-
-	<?php include 'part-footer.php'; ?>
 
 </div>
 </div>

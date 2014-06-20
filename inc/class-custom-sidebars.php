@@ -1,6 +1,7 @@
 <?php
 
 // Load additional Pro-modules.
+require_once( 'class-custom-sidebars-widgets.php' );
 require_once( 'class-custom-sidebars-replacer.php' );
 require_once( 'class-custom-sidebars-cloning.php' );
 require_once( 'class-custom-sidebars-visibility.php' );
@@ -39,7 +40,6 @@ class CustomSidebars {
 		/**
 		 * Hook up the plugin with WordPress.
 		 */
-		add_action( 'widgets_admin_page', array( $this, 'widget_sidebar_content' ) );
 		add_action( 'add_meta_boxes',  array( $this, 'add_meta_box' ) );
 		add_action( 'save_post', array( $this, 'store_replacements' ) );
 		add_action( 'init', array( $this, 'load_text_domain' ) );
@@ -67,7 +67,8 @@ class CustomSidebars {
 	 */
 	public function add_styles( $hook ) {
 		if ( 'widgets.php' == $hook ) {
-			wp_enqueue_script( 'cs_script', CSB_JS_URL . 'cs.js' );
+			wp_enqueue_script( 'tiny-scrollbar', CSB_JS_URL . 'tiny-scrollbar.js', array( 'jquery' ) );
+			wp_enqueue_script( 'cs_script', CSB_JS_URL . 'cs.dev.js', array( 'tiny-scrollbar') );
 			wp_enqueue_script( 'thickbox', null, array( 'jquery' ) );
 
 			wp_enqueue_style( 'thickbox.css', includes_url() . 'js/thickbox/thickbox.css', null, '1.6' );
@@ -783,14 +784,6 @@ class CustomSidebars {
 		$this->set_custom_sidebars( $newsidebars );
 		$this->refresh_sidebars_widgets();
 		$this->set_message( sprintf( __( 'The sidebar "%s" has been updated successfully.', CSB_LANG ), $id ) );
-	}
-
-
-
-
-
-	public function widget_sidebar_content() {
-		include CSB_VIEWS_DIR . 'widgets.php';
 	}
 
 	public function get_empty_widget() {

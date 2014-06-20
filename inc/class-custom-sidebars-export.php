@@ -43,12 +43,29 @@ class CustomSidebarsExport extends CustomSidebars {
 				array( $this, 'do_actions' )
 			);
 
+			// Show the "Export/Import" button in the widget area.
+			add_action(
+				'cs_widgets_additional_buttons',
+				array( $this, 'render_button' )
+			);
+
 			// Add new "Export/Import" tabs.
 			add_action(
 				'cs_render_tab_content',
 				array( $this, 'render_page' )
 			);
 		}
+	}
+
+	/**
+	 * Output the Export/Import button on the widget screen.
+	 *
+	 * @since  1.6
+	 */
+	public function render_button() {
+		?>
+		<a href="#" class="cs-action btn-export"><?php _e( 'Import / Export Sidebars', CSB_LANG ); ?></a>
+		<?php
 	}
 
 	/**

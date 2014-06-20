@@ -8,8 +8,6 @@
 <div class="themes-php csb">
 <div class="wrap">
 
-<?php include 'part-tabs.php'; ?>
-
 <div id="customsidebarspage">
 <div id="poststuff">
 
@@ -148,8 +146,6 @@
 	</p>
 	</form>
 </div>
-
-<?php include 'part-footer.php'; ?>
 
 </div>
 </div>
