@@ -7,10 +7,7 @@ add_action( 'cs_init', array( 'CustomSidebarsExport', 'instance' ) );
  *
  * @since 1.6
  */
-class CustomSidebarsExport {
-
-	// Main instance of the custom-sidebars class.
-	private $csb = null;
+class CustomSidebarsExport extends CustomSidebars {
 
 	// Holds the contents of the import-file during preview/import.
 	private $import_data = null;
@@ -41,23 +38,9 @@ class CustomSidebarsExport {
 	 */
 	private function __construct() {
 		if ( is_admin() ) {
-			$this->csb = CustomSidebars::instance();
-
 			add_action(
 				'current_screen',
 				array( $this, 'do_actions' )
-			);
-
-			// Add new "Export/Import" tabs.
-			add_action(
-				'cs_additional_tabs',
-				array( $this, 'show_tabs' )
-			);
-
-			// Add new "Export/Import" tabs.
-			add_filter(
-				'cs_register_tabs',
-				array( $this, 'register_tab' )
 			);
 
 			// Add new "Export/Import" tabs.
@@ -66,36 +49,6 @@ class CustomSidebarsExport {
 				array( $this, 'render_page' )
 			);
 		}
-	}
-
-	/**
-	 * This is called when the tab list is displayed. We output the export-
-	 * tabs at this point
-	 *
-	 * @since  1.6.0
-	 * @param  string $active The currently active tab.
-	 */
-	public function show_tabs( $active ) {
-		?>
-		<a class="nav-tab <?php if ( 'export' == $active ) : ?>nav-tab-active<?php endif; ?>" href="themes.php?page=customsidebars&p=export"><?php _e( 'Export/Import', CSB_LANG ); ?></a>
-
-		<?php if ( 'import' == $active ) : ?>
-			<a class="nav-tab nav-tab-active" href="#"><?php _e( 'Preview Import', CSB_LANG ); ?></a>
-		<?php endif;
-	}
-
-	/**
-	 * Filter that adds the new tab-parameters to the list of recognized option
-	 * pages. This filter is used in combination with the action
-	 * "cs_additional_tabs" above.
-	 *
-	 * @since  1.6.0
-	 */
-	public function register_tab( $recognized_pages ) {
-		$recognized_pages[] = 'export';
-		$recognized_pages[] = 'import';
-
-		return $recognized_pages;
 	}
 
 	/**
@@ -123,10 +76,6 @@ class CustomSidebarsExport {
 	 * @since  1.6.0
 	 */
 	public function do_actions( $current_screen ) {
-		if ( $this->csb->get_screen_id() != $current_screen->id ) {
-			return;
-		}
-
 		if ( isset( $_POST['export-sidebars'] ) ) {
 			$this->download_export_file();
 		}
@@ -161,10 +110,10 @@ class CustomSidebarsExport {
 		);
 
 		// Export the custom sidebars.
-		$data['sidebars'] = $this->csb->get_custom_sidebars();
+		$data['sidebars'] = self::get_custom_sidebars();
 
 		// Export the sidebar options (e.g. default replacement).
-		$data['options'] = $this->csb->get_sidebar_options();
+		$data['options'] = self::get_options();
 
 		// Export category-information.
 		$data['categories'] = get_categories( array( 'hide_empty' => 0 ) );
@@ -183,7 +132,7 @@ class CustomSidebarsExport {
 		 * will be a list with two option-arrays.
 		 */
 		$data['widgets'] = array();
-		foreach ( $this->csb->get_sidebar_widgets() as $sidebar => $widgets ) {
+		foreach ( self::get_sidebar_widgets() as $sidebar => $widgets ) {
 			if ( 'wp_inactive_widgets' === $sidebar ) { continue; }
 			if ( is_array( $widgets ) ) {
 				$data['widgets'][ $sidebar ] = array();
@@ -274,7 +223,7 @@ class CustomSidebarsExport {
 			}
 
 			if ( false !== $error ) {
-				$this->csb->set_error( __( $error, CSB_LANG ) );
+				self::set_error( __( $error, CSB_LANG ) );
 
 				// Redirect the user to the "Upload export file" section again.
 				$_GET['p'] = 'export';
@@ -334,7 +283,7 @@ class CustomSidebarsExport {
 			// Finally: Import the config!
 			$this->do_import();
 		} else {
-			$this->csb->set_error(
+			self::set_error(
 				__( 'Something unexpected happened and we could not finish the import. Please try again.', CSB_LANG )
 			);
 		}
@@ -352,7 +301,7 @@ class CustomSidebarsExport {
 	 */
 	private function prepare_data() {
 		global $wp_registered_widgets;
-		$theme_sidebars = $this->csb->get_theme_sidebars();
+		$theme_sidebars = self::get_theme_sidebars();
 		$valid_categories = array();
 		$valid_sidebars = array();
 		$valid_widgets = array();
@@ -482,7 +431,7 @@ class CustomSidebarsExport {
 		// =====================================================================
 		// Import custom sidebars
 
-		$sidebars = $this->csb->get_custom_sidebars();
+		$sidebars = self::get_custom_sidebars();
 		$sidebar_count = 0;
 		// First replace existing sidebars.
 		foreach ( $sidebars as $idx => $sidebar ) {
@@ -516,7 +465,7 @@ class CustomSidebarsExport {
 			$sidebar_count += 1;
 		}
 		if ( $sidebar_count > 0 ) {
-			$this->csb->set_custom_sidebars( $sidebars );
+			self::set_custom_sidebars( $sidebars );
 			$msg[] = sprintf( __( 'Imported %d custom sidebar(s)!', CSB_LANG ), $sidebar_count );
 		}
 
@@ -524,7 +473,7 @@ class CustomSidebarsExport {
 		// =====================================================================
 		// Import plugin settings
 		if ( ! empty( $data['options'] ) ) {
-			$this->csb->set_sidebar_options( $data['options'] );
+			self::set_options( $data['options'] );
 			$msg[] = __( 'Plugin options were imported!', CSB_LANG );
 		}
 
@@ -573,7 +522,7 @@ class CustomSidebarsExport {
 			$msg[] = sprintf( __( 'Imported %d widget(s)!', CSB_LANG ), $widget_count );
 		}
 
-		$this->csb->set_message( implode( '<br />', $msg ) );
+		self::set_message( implode( '<br />', $msg ) );
 		// Redirect user to the "Select import file" screen.
 		$_GET['p'] = 'export';
 	}
