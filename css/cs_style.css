@@ -45,7 +45,7 @@ div.widget-liquid-right {
 	background: #E4E4E4;
 	right: 0;
 	top: 0;
-	padding: 32px 5px;
+	padding: 32px 0 0;
 }
 
 .widgets-php #wpcontent,
@@ -72,6 +72,7 @@ div.widget-liquid-right {
 	position: relative;
 	float: right;
 	width: 10px;
+	z-index: 10;
 }
 
 .widget-liquid-right .track {
@@ -108,8 +109,10 @@ div.widget-liquid-right {
 	position: absolute;
 	left: 0;
 	top: 0;
-	width: 99%;
-	margin-left: 1%;
+	width: auto;
+	right: 0;
+	padding-left: 20px;
+	border-left: 1px solid #DDD;
 }
 
 .disable .thumb {
@@ -240,8 +243,51 @@ body.appearance_page_customsidebars #poststuff h2 {
 
 #cs-title-options {
 	zoom: 1;
-	margin-top: 10px;
-	margin-bottom: 20px;
+	background: #E8E8E8;
+	margin: 0 -20px 0 -20px;
+	padding: 10px 20px 20px;
+	border-bottom: 1px solid #DDD;
+}
+
+.cs-title h3 {
+	font-weight: 100;
+}
+
+.replaceable {
+	position: relative;
+}
+
+.replaceable .replace-marker {
+	position: absolute;
+	left: 0;
+	top: 0;
+	bottom: 0;
+	width: 5px;
+	margin: 0 5px 0 0;
+	border-left: 2px solid #05c944;
+	z-index: 10;
+}
+
+.replaceable .replace-marker:hover:before {
+	content: attr(data-label);
+	background: #333;
+	color: #EEE;
+	font-size: 13px;
+	white-space: nowrap;
+	padding: 5px;
+	position: absolute;
+	top: 7px;
+	right: 13px;
+	line-height: 20px;
+}
+
+.replaceable .replace-marker:hover:after {
+	content: '';
+	position: absolute;
+	top: 16px;
+	right: 3px;
+	border: 6px solid transparent;
+	border-left-color: #333;
 }
 
 
@@ -304,9 +350,42 @@ body.appearance_page_customsidebars #poststuff h2 {
 .cs-toolbar {
 	color: #333;
 	padding: 0;
-	border-top: 1px solid #E5E5E5;
 	background: #FCFCFC;
+	/*
+	z-index: -1;
+	position: absolute;
+	bottom: -41px;
+	left: -1px;
+	right: -1px;
+	opacity: 0;
+	*/
+	/*box-shadow: 0 1px 0 0px #999, 1px 0 0 0px #999, -1px 0px 0 0px #999;*/
+	/*border: 1px solid #E5E5E5;*/
+	border-top: 1px solid #E5E5E5;
 }
+.cs-toolbar:after {
+	display: table;
+	content: '';
+	clear: both;
+}
+/*
+.cs-toolbar:before,
+.cs-toolbar:after {
+	content: '';
+	position: absolute;
+	left: 50%;
+	margin-left: -5px;
+	border: 5px solid transparent;
+	border-bottom-color: #FCFCFC;
+	top: -10px;
+	z-index: 4;
+}
+.cs-toolbar:after {
+	border-bottom-color: #CCC;
+	top: -11px;
+	z-index: 3;
+}
+*/
 
 .closed .cs-toolbar {
 	display: none;
@@ -318,6 +397,10 @@ body.appearance_page_customsidebars #poststuff h2 {
 	padding: 0 10px;
 	white-space: nowrap;
 	background: #FFF;
+}
+
+.cs-toolbar .dashicons {
+	line-height: 40px;
 }
 
 .cs-toolbar .cs-separator {
@@ -340,6 +423,47 @@ body.appearance_page_customsidebars #poststuff h2 {
 .cs-theme-sidebar .cs-separator {
 	float: left;
 }
+
+.cs-toolbar .delete-sidebar {
+	color: #A00;
+}
+
+.cs-toolbar .delete-sidebar:hover,
+.cs-toolbar .delete-sidebar:focus,
+.cs-toolbar .delete-sidebar:active {
+	color: #F00;
+}
+
+/*
+.widgets-holder-wrap {
+	position: relative;
+}
+
+.widgets-holder-wrap:hover {
+	box-shadow: 0 0 0 1px #999;
+}
+
+.widgets-holder-wrap.closed:hover {
+	box-shadow: none;
+}
+
+.widgets-holder-wrap:hover .replace-marker {
+	border-left-width: 3px;
+	left: -1px;
+	top: -1px;
+}
+
+.widgets-holder-wrap.closed:hover .replace-marker {
+	border-left-width: 2px;
+	left: 0;
+	top: 0;
+}
+
+.widgets-holder-wrap:hover .cs-toolbar {
+	opacity: 1;
+	z-index: 10;
+}
+*/
 
 
 /**

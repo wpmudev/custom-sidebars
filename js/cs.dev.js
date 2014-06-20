@@ -3,7 +3,7 @@
  *
  * This adds new functionality to each sidebar.
  */
-function CsSidebar(id, type){
+function CsSidebar(id, type) {
 	/**
 	 * Replace % to fix bug http://wordpress.org/support/topic/in-wp-35-sidebars-are-not-collapsable-anymore?replies=16#post-3990447
 	 * We'll use this.id to select and the original id for html
@@ -149,10 +149,6 @@ CsSidebar.prototype.showWhere = function(){
 
 };
 
-CsSidebar.prototype.where = function(){
-
-};
-
 
 /**
  * =============================================================================
@@ -178,7 +174,7 @@ var csSidebars, msgTimer;
 				.addCSControls()
 				.showCreateSidebar()
 				.createCsSidebars()
-				.setEditbarsUp()
+				.setupToolbars()
 				.setupColumns();
 		},
 
@@ -246,9 +242,11 @@ var csSidebars, msgTimer;
 			});
 		},
 
-		showCreateSidebar: function(){
-			$('.btn-create-sidebar').click(function(){
-				if($('#new-sidebar-holder').length == 0){ //If there is no form displayed
+		showCreateSidebar: function() {
+			var btn_create = jQuery( '.btn-create-sidebar' );
+
+			btn_create.click(function() {
+				if($('#new-sidebar-holder').length == 0) { // If there is no form displayed
 
 					var sbname,
 						holder = $('#cs-new-sidebar').clone(true, true)
@@ -282,7 +280,6 @@ var csSidebars, msgTimer;
 							h.sortable("enable").sortable("refresh");
 						}
 					});
-
 
 					csSidebars.setCreateSidebar();
 				}
@@ -370,36 +367,67 @@ var csSidebars, msgTimer;
 		 * Hook up all the functions in the sidebar toolbar.
 		 * Toolbar is in the bottom of each sidebar.
 		 */
-		setEditbarsUp: function(){
-			// DELETE sidebar
-			$('#widgets-right').on('click', 'a.delete-sidebar', function(){
-				var sbname = trim($(this).parent().siblings('.sidebar-name').text());
-				if(confirm($('#cs-confirm-delete').text() + ' ' + sbname)){
-					var sb = csSidebars.find($(this).parent().siblings('.widgets-sortables').attr('id')).remove($);
+		setupToolbars: function() {
+			var context = jQuery( '#widgets-right' );
+
+			var tool_action = function( ev ) {
+				var me = jQuery( ev.srcElement ),
+					id = getIdFromEditbar( me ),
+					sb = csSidebars.find( id );
+
+				// DELETE sidebar
+				if ( me.hasClass( 'delete-sidebar' ) ) {
+					var sbname = trim(me.parent().siblings('.sidebar-name').text());
+					if ( confirm( $('#cs-confirm-delete').text() + ' ' + sbname ) ) {
+						sb.remove($);
+					}
+					return false;
+				} else
+
+				// EDIT dialog
+				if ( me.hasClass( 'edit-sidebar' ) ) {
+					sb.showEdit($);
+					return false;
+				} else
+
+				// LOCATION popup
+				if ( me.hasClass( 'where-sidebar' ) ) {
+					// Popup is opened by the "thickbox" plugin...
+					return true;
+				} else
+
+				// CANCEL EDIT dialog
+				if ( me.hasClass( 'cs-cancel-edit' ) ) {
+					sb.cancelEdit($);
+					me.parent().html( this.editbar );
+					this.editbar = '';
+					return false;
+				} else
+
+				// TOGGLE REPLACEABLE flag
+				if ( me.hasClass( 'btn-replaceable' ) ) {
+					var the_bar = jQuery( sb.sb ).closest( '.widgets-holder-wrap' ),
+						marker = the_bar.find( '.replace-marker' );
+
+					if ( me.prop('checked') ) {
+						if ( ! marker.length ) {
+							jQuery( '<div></div>' )
+								.appendTo( the_bar )
+								.addClass( 'replace-marker' )
+								.attr( 'data-label', me.attr( 'data-label' ) );
+						}
+						the_bar.addClass( 'replaceable' );
+					} else {
+						marker.remove();
+						the_bar.removeClass( 'replaceable' );
+					}
+					// TODO: Make ajax call to save flag
+					return true;
 				}
-				return false;
-			});
+			};
 
-			// EDIT dialog
-			$('#widgets-right').on('click', 'a.edit-sidebar', function(){
-				id = getIdFromEditbar($(this));
-				csSidebars.find(id).showEdit($);
-				return false;
-			});
-
-			// LOCATION popup
-			$('#widgets-right').on('click', 'a.where-sidebar', function(){
-				// Popup is opened by the "thickbox" plugin...
-			});
-
-			// CANCEL EDIT dialog
-			$('#widgets-right').on('click', 'a.cs-cancel-edit', function(){
-				id = getIdFromEditbar($(this));
-				csSidebars.find(id).cancelEdit($);
-				$(this).parent().html(this.editbar);
-				this.editbar ='';
-				return false;
-			});
+			context.on('click', '.cs-tool', tool_action);
+			context.on('change', '.cs-tool', tool_action);
 
 			return csSidebars;
 		},
@@ -408,13 +436,15 @@ var csSidebars, msgTimer;
 		 * Show a message to the user.
 		 */
 		showMessage: function(message, error){
-			var html, btn_close,
-				msgclass = 'cs-update',
+			var html, btn_close, msgclass,
 				msgdiv = jQuery( '#cs-message' );
 
 			if (error) {
 				msgclass = 'cs-error';
+			} else {
+				msgclass = 'cs-update';
 			}
+
 			if (msgdiv.length != 0) {
 				clearTimeout(msgTimer);
 				msgdiv.removeClass('cs-error cs-update').addClass(msgclass);
@@ -518,8 +548,11 @@ function trim( str ) {
 	return str;
 }
 
-function getIdFromEditbar( $ob ){
-	return $ob.parent().siblings( '.widgets-sortables' ).attr( 'id' );
+function getIdFromEditbar( $obj ){
+	var wrapper = $obj.closest( '.widgets-holder-wrap' ),
+		sb = wrapper.find( '.widgets-sortables:first' ),
+		id = sb.attr( 'id' );
+	return id;
 }
 
 function getSidebarTitle( title ) {

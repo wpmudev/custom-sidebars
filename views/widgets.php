@@ -30,8 +30,8 @@
         </div>
     </div>
 
-    <div class="cs-title-col1"><h3><?php _e( 'Custom Sidebars', CSB_LANG ); ?></h3></div>
-    <div class="cs-title-col2"><h3><?php _e( 'Theme Sidebars', CSB_LANG ); ?></h3></div>
+    <div class="cs-title-col1 cs-title"><h3><?php _e( 'Custom Sidebars', CSB_LANG ); ?></h3></div>
+    <div class="cs-title-col2 cs-title"><h3><?php _e( 'Theme Sidebars', CSB_LANG ); ?></h3></div>
 
     <?php /*
     <div id="cs-new-sidebar" class="widgets-holder-wrap">
@@ -63,18 +63,24 @@
     </div>
     */ ?>
 
-    <div class="cs-custom-sidebar cs-toolbar cf">
-        <a class="cs-tool delete-sidebar" href="themes.php?page=customsidebars&p=delete&id="><?php _e( 'Delete', CSB_LANG ); ?></a>
+    <div class="cs-custom-sidebar cs-toolbar">
+        <a class="cs-tool delete-sidebar" href="themes.php?page=customsidebars&p=delete&id=" title="<?php _e( 'Delete', CSB_LANG ); ?>">
+            <i class="dashicons dashicons-trash"></i>
+        </a>
         <span class="cs-separator"> | </span>
-        <a class="cs-tool edit-sidebar" href="themes.php?page=customsidebars&p=edit&id="><?php _e( 'Edit', CSB_LANG ); ?></a>
+        <a class="cs-tool edit-sidebar" href="themes.php?page=customsidebars&p=edit&id=">
+            <?php _e( 'Edit', CSB_LANG ); ?>
+        </a>
         <span class="cs-separator"> | </span>
-        <a class="cs-tool where-sidebar thickbox" href="<?php echo esc_url( admin_url( 'admin-ajax.php' ) ); ?>?action=cs-ajax&cs_action=where&id=" title="<?php _e( 'Where do you want the sidebar?', CSB_LANG ); ?>"><?php _e( 'Where?', CSB_LANG ); ?></a>
+        <a class="cs-tool where-sidebar thickbox" href="<?php echo esc_url( admin_url( 'admin-ajax.php' ) ); ?>?action=cs-ajax&cs_action=where&id=" title="<?php _e( 'Where do you want the sidebar?', CSB_LANG ); ?>">
+            <?php _e( 'Sidebar Location', CSB_LANG ); ?>
+        </a>
         <span class="cs-separator"> | </span>
     </div>
 
-    <div class="cs-theme-sidebar cs-toolbar cf">
+    <div class="cs-theme-sidebar cs-toolbar">
         <label for="cs-replaceable" class="cs-tool">
-            <input type="checkbox" id="" class="has-label" />
+            <input type="checkbox" id="" class="has-label btn-replaceable" data-label="<?php echo esc_attr( __( 'This sidebar can be replaced', CSB_LANG ) ); ?>" />
             <?php _e( 'Make Replaceable', CSB_LANG ); ?>
         </label>
         <span class="cs-separator"> | </span>
