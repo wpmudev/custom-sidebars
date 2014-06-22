@@ -197,8 +197,8 @@
 	============================================================================
 	*/ ?>
 	<div class="cs-theme-sidebar cs-toolbar">
-		<label for="cs-replaceable" class="cs-tool">
-			<input type="checkbox" id="" class="has-label btn-replaceable" data-label="<?php echo esc_attr( __( 'This sidebar can be replaced', CSB_LANG ) ); ?>" />
+		<label for="cs-replaceable" class="cs-tool btn-replaceable">
+			<input type="checkbox" id="" class="has-label" data-label="<?php echo esc_attr( __( 'This sidebar can be replaced', CSB_LANG ) ); ?>" />
 			<?php _e( 'Make Replaceable', CSB_LANG ); ?>
 		</label>
 		<span class="cs-separator"> | </span>

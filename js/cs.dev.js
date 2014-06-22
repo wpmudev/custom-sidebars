@@ -648,15 +648,16 @@ var csSidebars, msgTimer;
 
 				// TOGGLE REPLACEABLE flag
 				if ( me.hasClass( 'btn-replaceable' ) ) {
-					var the_bar = jQuery( sb.sb ).closest( '.widgets-holder-wrap' ),
+					var chk = me.find( 'input[type=checkbox]' ),
+						the_bar = jQuery( sb.sb ).closest( '.widgets-holder-wrap' ),
 						marker = the_bar.find( '.replace-marker' );
 
-					if ( me.prop('checked') ) {
+					if ( chk.prop('checked') ) {
 						if ( ! marker.length ) {
 							jQuery( '<div></div>' )
 								.appendTo( the_bar )
 								.addClass( 'replace-marker' )
-								.attr( 'data-label', me.attr( 'data-label' ) );
+								.attr( 'data-label', chk.attr( 'data-label' ) );
 						}
 						the_bar.addClass( 'replaceable' );
 					} else {
@@ -669,7 +670,6 @@ var csSidebars, msgTimer;
 			};
 
 			csSidebars.right.on('click', '.cs-tool', tool_action);
-			csSidebars.right.on('change', '.cs-tool', tool_action);
 
 			return csSidebars;
 		},
