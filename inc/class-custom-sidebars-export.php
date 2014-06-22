@@ -10,7 +10,7 @@ add_action( 'cs_init', array( 'CustomSidebarsExport', 'instance' ) );
 class CustomSidebarsExport extends CustomSidebars {
 
 	// Holds the contents of the import-file during preview/import.
-	private $import_data = null;
+	static private $import_data = null;
 
 	// Used after preview. This holds only the items that were selected for import.
 	private $selected_data = null;
@@ -39,50 +39,9 @@ class CustomSidebarsExport extends CustomSidebars {
 	private function __construct() {
 		if ( is_admin() ) {
 			add_action(
-				'current_screen',
+				'cs_ajax_request',
 				array( $this, 'do_actions' )
 			);
-
-			// Show the "Export/Import" button in the widget area.
-			add_action(
-				'cs_widgets_additional_buttons',
-				array( $this, 'render_button' )
-			);
-
-			// Add new "Export/Import" tabs.
-			add_action(
-				'cs_render_tab_content',
-				array( $this, 'render_page' )
-			);
-		}
-	}
-
-	/**
-	 * Output the Export/Import button on the widget screen.
-	 *
-	 * @since  1.6
-	 */
-	public function render_button() {
-		?>
-		<a href="#" class="cs-action btn-export"><?php _e( 'Import / Export Sidebars', CSB_LANG ); ?></a>
-		<?php
-	}
-
-	/**
-	 * Allows us to render the export/import option pages.
-	 *
-	 * @since  1.6.0
-	 * @param  string $active The currently active tab.
-	 */
-	public function render_page( $active ) {
-		switch ( $active ) {
-			case 'export':
-				include CSB_VIEWS_DIR . 'export.php';
-				break;
-
-			case 'import':
-				include CSB_VIEWS_DIR . 'import.php';
-				break;
 		}
 	}
 
@@ -92,13 +51,20 @@ class CustomSidebarsExport extends CustomSidebars {
 	 *
 	 * @since  1.6.0
 	 */
-	public function do_actions( $current_screen ) {
-		if ( isset( $_POST['export-sidebars'] ) ) {
-			$this->download_export_file();
-		}
+	public function do_actions( $ajax_action ) {
+		switch ( $ajax_action ) {
+			case 'export':
+				$this->download_export_file();
+				break;
 
-		if ( isset( $_POST['upload-import-file'] ) ) {
-			$this->read_import_file();
+			case 'preview-import':
+				// Prepare data
+				$this->read_import_file();
+
+				// Generate output
+				include CSB_VIEWS_DIR . 'import.php';
+				die();
+				break;
 		}
 		if ( isset( $_POST['process-import-data'] ) ) {
 			$this->prepare_import_data();
@@ -175,7 +141,7 @@ class CustomSidebarsExport extends CustomSidebars {
 	}
 
 	/**
-	 * Generates the export file.
+	 * Generates the export file and sends it as a download to the browser.
 	 *
 	 * @since  1.6.0
 	 */
@@ -191,7 +157,7 @@ class CustomSidebarsExport extends CustomSidebars {
 
 	/**
 	 * Checks if a valid export-file was uploaded and stores the file contents
-	 * inside $this->import_data. The data is de-serialized.
+	 * inside self::$import_data. The data is de-serialized.
 	 *
 	 * @since  1.6.0
 	 */
@@ -230,7 +196,7 @@ class CustomSidebarsExport extends CustomSidebars {
 				) {
 					$data['meta']['filename'] = $_FILES['data']['name'];
 					$data['ignore'] = array();
-					$this->import_data = $data;
+					self::$import_data = $data;
 
 					// Remove details that does not exist on current blog.
 					$this->prepare_data();
@@ -249,7 +215,7 @@ class CustomSidebarsExport extends CustomSidebars {
 	}
 
 	/**
-	 * Loads the import-data into the $this->import_data property.
+	 * Loads the import-data into the self::$import_data property.
 	 * The data was prepared by the import-preview screen.
 	 *
 	 * @since  1.6.0
@@ -266,13 +232,13 @@ class CustomSidebarsExport extends CustomSidebars {
 			is_array( $data['categories'] )
 		) {
 			$data['ignore'] = array();
-			$this->import_data = $data;
+			self::$import_data = $data;
 
 			// Remove details that does not exist on current blog.
 			$this->prepare_data();
 
 			// "selected_data" only contains the items that were selected for import.
-			$this->selected_data = $this->import_data;
+			$this->selected_data = self::$import_data;
 			unset( $this->selected_data['meta'] );
 			unset( $this->selected_data['categories'] );
 			unset( $this->selected_data['ignore'] );
@@ -318,7 +284,7 @@ class CustomSidebarsExport extends CustomSidebars {
 	 */
 	private function prepare_data() {
 		global $wp_registered_widgets;
-		$theme_sidebars = self::get_theme_sidebars();
+		$theme_sidebars = self::get_sidebars();
 		$valid_categories = array();
 		$valid_sidebars = array();
 		$valid_widgets = array();
@@ -326,42 +292,42 @@ class CustomSidebarsExport extends CustomSidebars {
 		// =====
 		// Normalize the sidebar list (change numeric index to sidebar-id).
 		$sidebars_remapped = array();
-		foreach ( $this->import_data['sidebars'] as $sidebar ) {
+		foreach ( self::$import_data['sidebars'] as $sidebar ) {
 			$sidebars_remapped[ $sidebar['id'] ] = $sidebar;
 		}
-		$this->import_data['sidebars'] = $sidebars_remapped;
+		self::$import_data['sidebars'] = $sidebars_remapped;
 
 		// =====
 		// Get a list of existing/valid sidebar-IDs.
 		$valid_sidebars = array_merge(
 			array_keys( $theme_sidebars ),
-			array_keys( $this->import_data['sidebars'] )
+			array_keys( self::$import_data['sidebars'] )
 		);
 
 		// =====
 		// Check for theme-sidebars that do not exist.
-		foreach ( $this->import_data['options']['modifiable'] as $id => $sb_id ) {
+		foreach ( self::$import_data['options']['modifiable'] as $id => $sb_id ) {
 			if ( ! isset( $theme_sidebars[ $sb_id ] ) ) {
-				if ( ! isset( $this->import_data['ignore']['sidebars'] ) ) {
-					$this->import_data['ignore']['sidebars'] = array();
+				if ( ! isset( self::$import_data['ignore']['sidebars'] ) ) {
+					self::$import_data['ignore']['sidebars'] = array();
 				}
-				$this->import_data['ignore']['sidebars'][] = $sb_id;
-				unset( $this->import_data['options']['modifiable'][ $id ] );
+				self::$import_data['ignore']['sidebars'][] = $sb_id;
+				unset( self::$import_data['options']['modifiable'][ $id ] );
 			}
 		}
 
 		// =====
 		// Remove invalid sidebars from the default replacement options.
 		foreach ( array( 'defaults', 'post_type_pages', 'category_posts', 'category_pages' ) as $key ) {
-			foreach ( $this->import_data['options'][ $key ] as $id => $list ) {
+			foreach ( self::$import_data['options'][ $key ] as $id => $list ) {
 				$list = $this->_remove_sidebar_from_list( $list, $valid_sidebars );
-				$this->import_data['options'][ $key ][ $id ] = $list;
+				self::$import_data['options'][ $key ][ $id ] = $list;
 			}
 		}
 		foreach ( array( 'blog', 'tags', 'authors', 'search', 'date' ) as $key ) {
-			$list = $this->import_data['options'][ $key ];
+			$list = self::$import_data['options'][ $key ];
 			$list = $this->_remove_sidebar_from_list( $list, $valid_sidebars );
-			$this->import_data['options'][ $key ] = $list;
+			self::$import_data['options'][ $key ] = $list;
 		}
 
 		// =====
@@ -369,21 +335,21 @@ class CustomSidebarsExport extends CustomSidebars {
 		foreach ( get_categories( array( 'hide_empty' => 0 ) ) as $cat ) {
 			$valid_categories[ $cat->term_id ] = $cat;
 		}
-		foreach ( $this->import_data['categories'] as $infos ) {
+		foreach ( self::$import_data['categories'] as $infos ) {
 			$id = $infos['term_id'];
 			if (
 				empty( $valid_categories[ $id ] ) ||
 				$valid_categories[ $id ]->slug != $infos['slug']
 			) {
-				if ( ! isset( $this->import_data['ignore']['categories'] ) ) {
-					$this->import_data['ignore']['categories'] = array();
+				if ( ! isset( self::$import_data['ignore']['categories'] ) ) {
+					self::$import_data['ignore']['categories'] = array();
 				}
-				$this->import_data['ignore']['categories'][] = $infos['name'];
-				unset( $this->import_data['categories'][ $id ] );
+				self::$import_data['ignore']['categories'][] = $infos['name'];
+				unset( self::$import_data['categories'][ $id ] );
 
 				// Remove the categories from the config array.
-				unset( $this->import_data['options']['category_posts'][ $id ] );
-				unset( $this->import_data['options']['category_pages'][ $id ] );
+				unset( self::$import_data['options']['category_posts'][ $id ] );
+				unset( self::$import_data['options']['category_pages'][ $id ] );
 			}
 		}
 
@@ -393,19 +359,19 @@ class CustomSidebarsExport extends CustomSidebars {
 			$classname = get_class( $widget['callback'][0] );
 			$valid_widgets[ $classname ] = true;
 		}
-		foreach ( $this->import_data['widgets'] as $sb_id => $sidebar ) {
+		foreach ( self::$import_data['widgets'] as $sb_id => $sidebar ) {
 			foreach ( $sidebar as $id => $widget_instance ) {
 				$instance_class = $widget_instance['classname'];
 				$exists = (true === @$valid_widgets[ $instance_class ]);
 				if ( ! $exists ) {
-					if ( ! isset( $this->import_data['ignore']['widgets'] ) ) {
-						$this->import_data['ignore']['widgets'] = array();
+					if ( ! isset( self::$import_data['ignore']['widgets'] ) ) {
+						self::$import_data['ignore']['widgets'] = array();
 					}
-					$this->import_data['ignore']['widgets'][] = $widget_instance['name'];
+					self::$import_data['ignore']['widgets'][] = $widget_instance['name'];
 					unset( $sidebar[ $id ] );
 				}
 			}
-			$this->import_data['widgets'][ $sb_id ] = $sidebar;
+			self::$import_data['widgets'][ $sb_id ] = $sidebar;
 		}
 	}
 
@@ -430,12 +396,12 @@ class CustomSidebarsExport extends CustomSidebars {
 	 *
 	 * @since  1.6.0
 	 */
-	public function get_import_data() {
-		return $this->import_data;
+	static public function get_import_data() {
+		return self::$import_data;
 	}
 
 	/**
-	 * Process the import data provided in $this->import_data.
+	 * Process the import data provided in self::$import_data.
 	 * Save the configuration to database.
 	 *
 	 * @since  1.6.0

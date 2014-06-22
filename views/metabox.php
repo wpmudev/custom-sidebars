@@ -3,20 +3,44 @@
  * Metabox inside posts/pages where user can define custom sidebars for an
  * individual post.
  */
+
+global $wp_registered_sidebars;
+
+$available = $wp_registered_sidebars;
+$sidebars = CustomSidebars::get_options( 'modifiable' );
 ?>
 
-<p><?php _e( 'You can assign specific sidebars to this post, just select a sidebar and the default one will be replaced, if it is available on your template.', CSB_LANG )?></p>
-<?php if ( ! empty( $sidebars ) ) : foreach ( $sidebars as $s ) : $sb_name = $available[ $s ]['name']; ?>
-	<p><b><?php echo esc_html( $sb_name ); ?></b>:
-	<select name="cs_replacement_<?php echo esc_attr( $s ); ?>">
-		<option value=""></option>
-		<?php foreach ( $available as $a ) : ?>
-		<option value="<?php echo esc_attr( $a['id'] ); ?>" <?php selected( $selected[ $s ], $a['id'] ); ?>>
-			<?php echo esc_html( $a['name'] ); ?>
-		</option>
-		<?php endforeach; ?>
-	</select>
+<p>
+	<?php _e(
+		'Here you can replace the default sidebars. Simply select what ' .
+		'sidebar you want to show for this post!', CSB_LANG
+	); ?>
+</p>
+
+<?php if ( ! empty( $sidebars ) ) { ?>
+	<?php foreach ( $sidebars as $s ) { ?>
+		<?php $sb_name = $available[ $s ]['name']; ?>
+		<p>
+			<b><?php echo esc_html( $sb_name ); ?></b>:
+			<select name="cs_replacement_<?php echo esc_attr( $s ); ?>">
+				<option value=""></option>
+				<?php foreach ( $available as $a ) : ?>
+				<option value="<?php echo esc_attr( $a['id'] ); ?>" <?php selected( $selected[ $s ], $a['id'] ); ?>>
+					<?php echo esc_html( $a['name'] ); ?>
+				</option>
+				<?php endforeach; ?>
+			</select>
+		</p>
+	<?php
+	}
+} else {
+	?>
+	<p id="message" class="updated">
+		<?php _e(
+			'All sidebars have been locked, you cannot replace them.' .
+			'Go to <a href="widgets.php">the widgets page</a> to unlock a ' .
+			'sidebar', CSB_LANG
+		); ?>
 	</p>
-<?php endforeach; else : ?>
-	<p id="message" class="updated"><?php _e( 'There are not replaceable sidebars selected. You can define what sidebar will be able for replacement in the <a href="themes.php?page=customsidebars">Custom Sidebars config page</a>.', CSB_LANG ); ?></p>
-<?php endif; ?>
+	<?php
+}

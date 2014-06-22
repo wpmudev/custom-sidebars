@@ -1,0 +1,3 @@
+<p>
+Sidebar location details will be displayed here...
+</p>

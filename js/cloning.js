@@ -182,7 +182,7 @@ jQuery(function init_cloning() {
 		var $state = $widget.find( 'input.csb-clone-state' );
 
 		if ( $state.val() == 'empty' ) {
-			$widget.addClass( 'csb-loading' );
+			$widget.addClass( 'wpmui-loading' );
 			wpWidgets.save( $widget, 0, 1, 0 );
 		}
 	};
@@ -199,7 +199,7 @@ jQuery(function init_cloning() {
 			var $item = jQuery( this ),
 				$state = $item.find( 'input.csb-clone-state' );
 
-			$item.addClass('csb-loading').attr( 'data-reload', true );
+			$item.addClass('wpmui-loading').attr( 'data-reload', true );
 		});
 	}
 
@@ -224,7 +224,7 @@ jQuery(function init_cloning() {
 	 * out when a new widget is saved for the first time.
 	 */
 	var ajax_observer = function ajax_observer( ev, xhr, opt, resp ) {
-		var data = opt.data || '',
+		var data = ( 'string' == typeof opt.data ? opt.data : '' ),
 			find_action = data.match( /^.*&action=([^&]+).*$/ );
 			find_widget = data.match( /^.*&widget-id=([^&]+).*$/ );
 			action = (find_action && find_action.length == 2 ? find_action[1] : ''),
@@ -239,7 +239,7 @@ jQuery(function init_cloning() {
 
 		switch ( action ) {
 			case 'save-widget':
-				$widget.removeClass( 'csb-loading' );
+				$widget.removeClass( 'wpmui-loading' );
 				if ( ! resp.length ) {
 					// Populate widget with data from group, if required.
 					populate_widget( $widget );

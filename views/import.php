@@ -5,12 +5,12 @@
 
 global $wp_version;
 
-$import = CustomSidebarsExport::instance()->get_import_data();
+$import = CustomSidebarsExport::get_import_data();
 
 $date_format = get_option( 'date_format' ) . ', ' . get_option( 'time_format' );
 $theme = wp_get_theme();
-$current_sidebars = CustomSidebars::instance()->get_custom_sidebars();
-$theme_sidebars = CustomSidebars::instance()->get_theme_sidebars();
+$current_sidebars = CustomSidebars::get_custom_sidebars();
+$theme_sidebars = CustomSidebars::get_sidebars();
 $current_keys = array();
 foreach ( $current_sidebars as $c_sidebar ) {
 	$current_keys[] = $c_sidebar['id'];
@@ -21,8 +21,8 @@ foreach ( $current_sidebars as $c_sidebar ) {
  * It renders a list with sidebar-replacement details
  */
 function list_sidebar_replacement( $list ) {
-	$import = CustomSidebarsExport::instance()->get_import_data();
-	$theme_sidebars = CustomSidebars::instance()->get_theme_sidebars();
+	$import = CustomSidebarsExport::get_import_data();
+	$theme_sidebars = CustomSidebars::get_sidebars();
 	$first = true;
 
 	foreach ( $list as $from_id => $to_id ) {
@@ -49,12 +49,8 @@ function list_sidebar_replacement( $list ) {
 
 ?>
 
-<div class="themes-php csb">
-<div class="wrap">
-
-	<div id="editsidebarpage">
-		<div id="poststuff">
-
+<div>
+<div class="wpmui-form">
 
 <?php if ( ! empty ( $import ) ) : ?>
 	<?php
@@ -65,7 +61,7 @@ function list_sidebar_replacement( $list ) {
 	 */
 	?>
 
-	<h2 class="title"><?php _e( 'Import', CSB_LANG ); ?>
+	<h2 class="no-pad-top"><?php _e( 'Import', CSB_LANG ); ?>
 	<div class="show-infos">
 		<i class="dashicons dashicons-info"></i>
 		<div class="export-infos" style="display:none">
@@ -118,7 +114,7 @@ function list_sidebar_replacement( $list ) {
 	<?php endif; ?>
 
 
-	<form method="post" class="csb-form">
+	<form class="frm-import csb-form">
 	<input type="hidden" name="process-import-data" value="1" />
 
 
@@ -367,76 +363,14 @@ function list_sidebar_replacement( $list ) {
 			<?php _e( 'Replace the current plugin configuration with the imported configuration.', CSB_LANG ); ?>
 		</label>
 	</p>
-	<p>&nbsp;</p>
-
 
 	<input type="hidden" name="import_data" value="<?php echo esc_attr( base64_encode( json_encode( $import ) ) ); ?>" />
-	<p class="form-buttons">
+	<p class="buttons">
+		<button type="button" class="btn-cancel button-link">Cancel</button>
 		<button class="button-primary"><i class="dashicons dashicons-migrate"></i> Import selected items</button>
-		<button class="button-secondary btn-cancel">Cancel</button>
 	</p>
 	</form>
 
-	<?php
-	/* *****************************************************************
-	 *
-	 * Overview of ignored/missing data
-	 */
-	?>
-	<div class="ignored" style="display:none">
-	<p>&nbsp;</p>
-	<?php if ( ! empty( $import['ignore'] ) ) : ?>
-	<h3 class="title"><?php _e( 'Ignored items', CSB_LANG ); ?></h3>
-	<em><?php _e( 'These itmems do not exist in current theme or blog, settings for these items will not be imported:', CSB_LANG ); ?></em>
-	<table cellspacing="1" cellpadding="4" class="csb-export-head">
-		<?php
-		$list = $import['ignore'];
-		foreach ( $list as $type => $values ) : ?>
-			<?php
-			/* $type can be:
-			 *  - sidebars
-			 *  - categories
-			 *  - widgets
-			 */
-			?>
-			<tr>
-				<th scope="row"><?php _e( $type ); ?></th>
-				<td><ul>
-				<?php foreach ( $values as $value ) : ?>
-					<li><?php echo esc_html( $value ); ?></li>
-				<?php endforeach; ?>
-				</ul></td>
-			</tr>
-		<?php endforeach; ?>
-	</table>
 	<?php endif; ?>
-	</div>
-
-	<?php endif; ?>
-
-		</div>
-	</div>
-
-	<script>
-	jQuery( function init_import() {
-		var $chk_widget = jQuery( '#import-widgets'),
-			$btn_cancel = jQuery( '.btn-cancel' );
-
-		// Toggle the widget columns
-		$chk_widget.change( function toggle_widget_cols() {
-			var $context = jQuery( '.column-widgets, .import-widgets' );
-			if ( $chk_widget.prop('checked') ) {
-				$context.show();
-			} else {
-				$context.hide();
-			}
-		});
-
-		// Cancel
-		$btn_cancel.click( function do_cancel() {
-			window.location.href = window.location.href.replace( 'p=import', 'p=export' );
-		});
-	});
-	</script>
 </div>
 </div>

@@ -6,6 +6,7 @@ add_action( 'cs_init', array( 'CustomSidebarsWidgets', 'instance' ) );
  * Extends the widgets section to add the custom sidebars UI elements.
  */
 class CustomSidebarsWidgets extends CustomSidebars {
+
 	/**
 	 * Returns the singleton object.
 	 *
@@ -28,7 +29,10 @@ class CustomSidebarsWidgets extends CustomSidebars {
 	 */
 	private function __construct() {
 		if ( is_admin() ) {
-			add_action( 'widgets_admin_page', array( $this, 'widget_sidebar_content' ) );
+			add_action(
+				'widgets_admin_page',
+				array( $this, 'widget_sidebar_content' )
+			);
 		}
 	}
 

@@ -1,0 +1,375 @@
+/**
+ * WPMU Dev UI library
+ * (Philipp Stracker for WPMU Dev)
+ *
+ * This library provides a Javascript API via the global wpmuUI object.
+ *
+ * Content:
+ *   1. Modal overlays
+ */
+
+
+/**
+ * =============================================================================
+ * == MODAL OVERLAYS
+ * =============================================================================
+ */
+
+.wpmui-loading {
+	position: relative;
+}
+
+.wpmui-loading:after {
+	content: '';
+	position: absolute;
+	left: 0;
+	top: 0;
+	right: 0;
+	bottom: 0;
+	background: rgba(255,255,255,0.8) url(../img/spinner.gif) center no-repeat;
+	z-index: 1000;
+	cursor: default;
+}
+
+.wpmui-overlay {
+	background: #000;
+	opacity: 0.7;
+	position: fixed;
+	top: 0;
+	right: 0;
+	bottom: 0;
+	left: 0;
+	z-index: 100050;
+	display: none;
+}
+
+.wpmui-has-overlay .wpmui-overlay {
+	display: block;
+}
+
+.wpmui-has-overlay #wpwrap {
+	-webkit-filter: grayscale(75%);
+	-moz-filter: grayscale(75%);
+	filter: gray;
+	filter: grayscale(75%);
+}
+
+
+/**
+ * =============================================================================
+ * == POPUP WINDOWS
+ * =============================================================================
+ */
+
+
+.wpmui-wnd {
+	background: #F5F5F5;
+	position: fixed;
+	box-shadow: 0 2px 20px rgba(0,0,0,0.4);
+	z-index: 100051;
+	top: 50%;
+	left: 50%;
+	box-sizing: border-box;
+}
+
+.wpmui-wnd-title {
+	line-height: 50px;
+	white-space: nowrap;
+	overflow: hidden;
+	text-overflow: ellipsis;
+	padding: 0 70px 0 20px;
+	border-bottom: 1px solid #E5E5E5;
+	background: #F8F8F8;
+	height: 50px;
+	display: block;
+	font-size: 23px;
+	font-weight: 100;
+	z-index: 5;
+}
+
+.wpmui-wnd-close {
+	position: absolute;
+	top: 0;
+	right: 0;
+	width: 50px;
+	line-height: 50px;
+	height: 50px;
+	text-align: center;
+	text-decoration: none;
+	color: #666;
+	border-left: 1px solid #E5E5E5;
+	cursor: pointer;
+	z-index: 10;
+}
+
+.wpmui-wnd-close .dashicons {
+	line-height: 50px;
+}
+
+.wpmui-wnd-close:hover,
+.wpmui-wnd-close:focus,
+.wpmui-wnd-close:active {
+	background: #FCFCFC;
+	color: #333;
+}
+
+.wpmui-wnd-content {
+	position: absolute;
+	top: 51px;
+	left: 0;
+	right: 0;
+	bottom: 50px;
+	overflow: auto;
+	padding: 20px;
+}
+
+.no-buttons .wpmui-wnd-content {
+	bottom: 0;
+}
+
+.wpmui-wnd hr {
+	margin: 15px -20px;
+	border: 0;
+	border-top: 1px solid #E5E5E5;
+}
+
+.wpmui-wnd .buttons {
+	text-align: right;
+	position: absolute;
+	bottom: 0;
+	right: 0;
+	background: #F8F8F8;
+	padding: 10px 20px 10px;
+	left: 0;
+	height: 50px;
+	box-sizing: border-box;
+	border-top: 1px solid #E5E5E5;
+	margin: 0;
+}
+
+
+/**
+ * =============================================================================
+ * == FORM LAYOUT
+ * =============================================================================
+ */
+
+
+.wpmui-form label {
+	display: block;
+	line-height: 26px;
+	font-size: 14px;
+	font-weight: 500;
+}
+
+.wpmui-form input[type='text'],
+.wpmui-form input[type='password'],
+.wpmui-form textarea,
+.wpmui-form select {
+	-webkit-box-sizing: border-box;
+	-moz-box-sizing: border-box;
+	box-sizing: border-box;
+	width: 100%;
+	margin: 0;
+	display: block;
+}
+
+.wpmui-form .hint {
+	color: #666;
+	font-size: 12px;
+}
+
+.wpmui-form .button-link,
+.wpmui-wnd .button-link {
+	display: inline-block;
+	text-decoration: underline;
+	font-size: 13px;
+	line-height: 26px;
+	height: 28px;
+	margin: 0;
+	padding: 0 10px 1px;
+	cursor: pointer;
+	white-space: nowrap;
+	-webkit-box-sizing: border-box;
+	-moz-box-sizing: border-box;
+	box-sizing: border-box;
+	color: #0074A2;
+	background: transparent;
+	border: 0;
+
+	-webkit-transition-property: border, background, color;
+	transition-property: border, background, color;
+	-webkit-transition-duration: .05s;
+	transition-duration: .05s;
+	-webkit-transition-timing-function: ease-in-out;
+	transition-timing-function: ease-in-out;
+}
+
+.wpmui-form .button-link:hover,
+.wpmui-form .button-link:active,
+.wpmui-form .button-link:focus {
+	color: #2EA2CC;
+}
+
+
+/**
+ * =============================================================================
+ * == SIMPLE GRID (modified)
+ *    Project Page - http://thisisdallas.github.com/Simple-Grid/
+ *    Author - Dallas Bass
+ * =============================================================================
+ */
+
+
+.wpmui-grid-8 *,
+.wpmui-grid-12 *,
+.wpmui-grid-8 *:after,
+.wpmui-grid-12 *:after,
+.wpmui-grid-8 *:before,
+.wpmui-grid-12 *:before {
+	-webkit-box-sizing: border-box;
+	-moz-box-sizing: border-box;
+	box-sizing: border-box;
+}
+
+.wpmui-grid-8 [class*='col-'],
+.wpmui-grid-12 [class*='col-'] {
+	float: left;
+	padding-right: 20px;
+}
+
+.wpmui-grid-8 [class*='col-']:last-of-type,
+.wpmui-grid-12 [class*='col-']:last-of-type {
+	padding-right: 0px;
+}
+
+.wpmui-grid-8,
+.wpmui-grid-12 {
+	width: 100%;
+	max-width: 1140px;
+	margin: 0 auto;
+	overflow: hidden;
+	padding: 10px 0 0;
+}
+
+.wpmui-grid-8:after,
+.wpmui-grid-12:after {
+	content: '';
+	display: table;
+	clear: both;
+}
+
+.wpmui-grid-8 .col-8,
+.wpmui-grid-12 .col-12 {
+	width: 100%;
+}
+
+.wpmui-grid-12 .col-11 {
+	width: 91.66%
+}
+
+.wpmui-grid-8 .col-7 {
+	width: 87.5%;
+}
+
+.wpmui-grid-12 .col-10 {
+	width: 83.333%;
+}
+
+.wpmui-grid-8 .col-6,
+.wpmui-grid-12 .col-9 {
+	width: 75%;
+}
+
+.wpmui-grid-12 .col-8 {
+	width: 66.66%;
+}
+
+.wpmui-grid-8 .col-5 {
+	width: 62.5%;
+}
+
+.wpmui-grid-12 .col-7 {
+	width: 58.33%
+}
+
+.wpmui-grid-8 .col-4,
+.wpmui-grid-12 .col-6 {
+	width: 50%;
+}
+
+.wpmui-grid-12 .col-5 {
+	width: 41.66%;
+}
+
+.wpmui-grid-8 .col-3 {
+	width: 37.5%;
+}
+
+.wpmui-grid-12 .col-4 {
+	width: 33.33%;
+}
+
+.wpmui-grid-8 .col-2,
+.wpmui-grid-12 .col-3 {
+	width: 25%;
+}
+
+.wpmui-grid-12 .col-2 {
+	width: 16.667%;
+}
+
+.wpmui-grid-8 .col-1 {
+	width: 12.5%;
+}
+
+.wpmui-grid-12 .col-1 {
+	width: 8.33%
+}
+
+@media handheld, only screen and (max-width: 767px) {
+	.wpmui-grid-8,
+	.wpmui-grid-12 {
+		width: 100%;
+		min-width: 0;
+		margin-left: 0px;
+		margin-right: 0px;
+		padding-left: 0px;
+		padding-right: 0px;
+	}
+
+	.wpmui-grid-8 [class*='col-'],
+	.wpmui-grid-12 [class*='col-'] {
+		width: auto;
+		float: none;
+		margin-left: 0px;
+		margin-right: 0px;
+		margin-top: 10px;
+		margin-bottom: 10px;
+		padding-left: 20px;
+		padding-right: 20px;
+	}
+}
+
+/**
+ * =============================================================================
+ * == GENERAL STYLES
+ * =============================================================================
+ */
+
+.no-pad-top {
+	padding-top: 0 !important;
+	margin-top: 0 !important;
+}
+
+.no-pad-bottom {
+	padding-bottom: 0  !important;
+	margin-bottom: 0  !important;
+}
+
+.no-pad {
+	padding-top: 0  !important;
+	padding-bottom: 0  !important;
+	margin-top: 0  !important;
+	margin-bottom: 0  !important;
+}

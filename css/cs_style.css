@@ -229,6 +229,20 @@ body.appearance_page_customsidebars #poststuff h2 {
 	clear: left;
 }
 
+/**
+ * =============================================================================
+ * == POPUP WINDOW: Add/Edit sidebar
+ * =============================================================================
+ */
+
+.csb-more-content {
+	display: none;
+}
+
+.csb-has-more .csb-more-content {
+	display: block;
+}
+
 
 /**
  * =============================================================================
@@ -351,41 +365,14 @@ body.appearance_page_customsidebars #poststuff h2 {
 	color: #333;
 	padding: 0;
 	background: #FCFCFC;
-	/*
-	z-index: -1;
-	position: absolute;
-	bottom: -41px;
-	left: -1px;
-	right: -1px;
-	opacity: 0;
-	*/
-	/*box-shadow: 0 1px 0 0px #999, 1px 0 0 0px #999, -1px 0px 0 0px #999;*/
-	/*border: 1px solid #E5E5E5;*/
 	border-top: 1px solid #E5E5E5;
 }
+
 .cs-toolbar:after {
 	display: table;
 	content: '';
 	clear: both;
 }
-/*
-.cs-toolbar:before,
-.cs-toolbar:after {
-	content: '';
-	position: absolute;
-	left: 50%;
-	margin-left: -5px;
-	border: 5px solid transparent;
-	border-bottom-color: #FCFCFC;
-	top: -10px;
-	z-index: 4;
-}
-.cs-toolbar:after {
-	border-bottom-color: #CCC;
-	top: -11px;
-	z-index: 3;
-}
-*/
 
 .closed .cs-toolbar {
 	display: none;
@@ -433,37 +420,6 @@ body.appearance_page_customsidebars #poststuff h2 {
 .cs-toolbar .delete-sidebar:active {
 	color: #F00;
 }
-
-/*
-.widgets-holder-wrap {
-	position: relative;
-}
-
-.widgets-holder-wrap:hover {
-	box-shadow: 0 0 0 1px #999;
-}
-
-.widgets-holder-wrap.closed:hover {
-	box-shadow: none;
-}
-
-.widgets-holder-wrap:hover .replace-marker {
-	border-left-width: 3px;
-	left: -1px;
-	top: -1px;
-}
-
-.widgets-holder-wrap.closed:hover .replace-marker {
-	border-left-width: 2px;
-	left: 0;
-	top: 0;
-}
-
-.widgets-holder-wrap:hover .cs-toolbar {
-	opacity: 1;
-	z-index: 10;
-}
-*/
 
 
 /**
@@ -571,8 +527,13 @@ body.appearance_page_customsidebars #poststuff h2 {
 .csb-export-head th {
 	vertical-align: top;
 	text-align: right;
-	background: #FFF;
+	/*background: #F9FAFB;*/
+	color: #679;
 	width: 150px;
+}
+
+.csb-export-head tr:hover {
+	background: #FAFAFA;
 }
 
 .csb-export-head ul {
@@ -619,7 +580,7 @@ h2 .show-infos {
 	font-size: 13px;
 	line-height: 1.4em;
 	font-weight: normal;
-	background: #F5F5F5;
+	background: #FFF;
 	box-shadow: 0 1px 8px rgba(0, 0, 0, 0.2);
 	border: 3px solid #FAFAFA;
 	padding: 5px;

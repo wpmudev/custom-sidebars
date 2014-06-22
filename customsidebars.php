@@ -52,7 +52,7 @@ if ( ! class_exists( 'CustomSidebars' ) ) {
 	$plugin_sidebars = CustomSidebars::instance();
 }
 
-if ( ! class_exists( 'CustomSidebarsEmptyPlugin' ) ) :
+if ( ! class_exists( 'CustomSidebarsEmptyPlugin' ) ) {
 	class CustomSidebarsEmptyPlugin extends WP_Widget {
 		public function CustomSidebarsEmptyPlugin() {
 			parent::WP_Widget( false, $name = 'CustomSidebarsEmptyPlugin' );
@@ -67,4 +67,4 @@ if ( ! class_exists( 'CustomSidebarsEmptyPlugin' ) ) :
 			echo '';
 		}
 	} //end class
-endif; //end if class exists
+} //end if class exists
