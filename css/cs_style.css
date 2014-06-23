@@ -618,17 +618,26 @@ h2 .show-infos {
 
 /**
  * =============================================================================
- * == Patterns
+ * == Location popup
  * =============================================================================
  */
 
-
-.cf:before,
-.cf:after {
-	content: '';
-	display: table;
+.cs-half {
+	float: left;
+	width: 49%;
+	margin-right: 1%;
 }
 
-.cf:after {
-	clear:both;
+.cs-replaceable {
+	margin-bottom: 5px;
 }
+
+.cs-replaceable > .details {
+	display: none;
+	margin: 5px 0;
+}
+
+.cs-replaceable.open > .details {
+	display: block;
+}
+

@@ -73,7 +73,7 @@ class CustomSidebarsVisibility {
 
 		if ( null === $Condition_keys ) {
 			$tax_list = get_taxonomies( array( 'public' => true ), 'objects' );
-			$type_list = get_post_types( array( 'public' => true ), 'objects' );
+			$type_list = CustomSidebars::get_post_types( 'objects' );
 			$Condition_keys = array(
 				'date' => '',
 				'roles' => array(),
@@ -126,7 +126,7 @@ class CustomSidebarsVisibility {
 	public function admin_widget_button( $widget, $return, $instance ) {
 		$is_visible = ('1' == @$_POST['csb_visible'] ? 1 : 0);
 		$tax_list = get_taxonomies( array( 'public' => true ), 'objects' );
-		$type_list = get_post_types( array( 'public' => true ), 'objects' );
+		$type_list = CustomSidebars::get_post_types( 'objects' );
 		$role_list = array_reverse( get_editable_roles() );
 		$pagetype_list = array(
 			'frontpage' => 'Frontpage',

@@ -96,6 +96,12 @@ var csSidebars, msgTimer;
 		export_form: null,
 
 		/**
+		 * Form for the location popup.
+		 * @type: jQuery object
+		 */
+		location_form: null,
+
+		/**
 		 * Shortcut to '#widgets-right'
 		 * @type: jQuery object
 		 */
@@ -194,6 +200,11 @@ var csSidebars, msgTimer;
 			if ( null == csSidebars.export_form ) {
 				csSidebars.export_form = csSidebars.extras.find( '.cs-export' ).clone();
 				csSidebars.extras.find( '.cs-export' ).remove();
+			}
+
+			if ( null == csSidebars.location_form ) {
+				csSidebars.location_form = csSidebars.extras.find( '.cs-location' ).clone();
+				csSidebars.extras.find( '.cs-location' ).remove();
 			}
 
 			jQuery('#cs-title-options')
@@ -307,7 +318,11 @@ var csSidebars, msgTimer;
 				popup.loading( false );
 
 				// Ignore error responses from Ajax.
-				if ( ! okay ) { return false; }
+				if ( ! okay || ! data ) { return false; }
+
+				if ( undefined !== data.sidebar ) {
+					data = data.sidebar;
+				}
 
 				// Populate known fields.
 				if ( undefined !== data.id ) {
@@ -389,6 +404,7 @@ var csSidebars, msgTimer;
 			// Add event hooks to the editor.
 			popup.$().on( 'click', '#csb-more', toggle_extras );
 			popup.$().on( 'click', '.btn-save', save_data );
+			popup.$().on( 'click', '.btn-cancel', popup.close );
 
 			return csSidebars;
 		},
@@ -415,7 +431,7 @@ var csSidebars, msgTimer;
 			};
 
 			// Ajax handler after import file was uploaded.
-			var handle_upload_done = function handle_upload_done( resp, okay, xhr ) {
+			var handle_done_upload = function handle_done_upload( resp, okay, xhr ) {
 				popup.loading( false );
 
 				if ( okay ) {
@@ -432,7 +448,7 @@ var csSidebars, msgTimer;
 
 				popup.loading( true );
 				ajax.data( form )
-					.ondone( handle_upload_done )
+					.ondone( handle_done_upload )
 					.load_text( 'cs-ajax' );
 
 				ev.preventDefault();
@@ -559,12 +575,179 @@ var csSidebars, msgTimer;
 				id = sb.getID();
 
 			// Display the location data after it was loaded by ajax.
-			var show_data = function show_data( resp, okay, xhr ) {
+			var handle_done_load = function handle_done_load( resp, okay, xhr ) {
+				popup.loading( false );
+
+				if ( ! okay ) { return false; }
+
+				// Display the sidebar name.
+				popup.$().find( '.sidebar-name' ).text( resp.sidebar.name );
+				var sb_id = resp.sidebar.id;
+
+				// Only show settings for replaceable sidebars
+				var sidebars = popup.$().find( '.cs-replaceable' );
+				sidebars.hide();
+				for ( var ind = resp.replaceable.length - 1; ind >= 0; ind -= 1 ) {
+					sidebars.filter( '.' + resp.replaceable[ind] ).show();
+				}
+
+				// Add a new option to the replacement list.
+				var _add_option = function _add_option( item, lists ) {
+					var opt = jQuery( '<option></option>' );
+					opt.attr( 'value', key ).text( item.name );
+					lists.append( opt );
+				};
+
+				// Check if the current sidebar is a replacement in the list.
+				var _select_option = function _select_option( replacement, sidebar, key, lists ) {
+					var row = lists
+							.closest( '.cs-replaceable' )
+							.filter('.' + sidebar),
+						option = row
+							.find( 'option[value="' + key + '"]' ),
+						group = row.find( 'optgroup.used' );
+
+					if ( replacement == sb_id ) {
+						option.prop( 'selected', true );
+						row.find( '.detail-toggle' ).prop( 'checked', true );
+						row.addClass( 'open' );
+					} else {
+						if ( ! group.length ) {
+							group = jQuery( '<optgroup class="used">' )
+								.attr( 'label', row.data( 'lbl-used' ) )
+								.appendTo( row.find( '.details select' ) );
+						}
+						option.detach().appendTo( group );
+					}
+				};
+
+				// ----- Category ----------------------------------------------
+				// Refresh list for single categories and category archives.
+				var lst_cat = popup.$().find( '.cs-datalist.cs-cat' );
+				var lst_act = popup.$().find( '.cs-datalist.cs-arc-cat' );
+				var data = resp.categories;
+				lst_act.empty();
+				lst_cat.empty();
+				// Add the options
+				for ( var key in data ) {
+					_add_option( data[ key ], lst_act );
+					_add_option( data[ key ], lst_cat );
+				}
+
+				// Select options
+				for ( var key in data ) {
+					if ( data[ key ].single ) {
+						for ( var theme_sb in data[ key ].single ) {
+							_select_option(
+								data[ key ].single[ theme_sb ],
+								theme_sb,
+								key,
+								lst_cat
+							);
+						}
+					}
+					if ( data[ key ].archive ) {
+						for ( var theme_sb in data[ key ].archive ) {
+							_select_option(
+								data[ key ].archive[ theme_sb ],
+								theme_sb,
+								key,
+								lst_act
+							);
+						}
+					}
+				}
+
+				// ----- Post Type ---------------------------------------------
+				// Refresh list for single posttypes.
+				var lst_pst = popup.$().find( '.cs-datalist.cs-pt' );
+				var data = resp.posttypes;
+				lst_pst.empty();
+				// Add the options
+				for ( var key in data ) {
+					var opt = jQuery( '<option></option>' ),
+						name = data[ key ].name;
+					opt.attr( 'value', key ).text( name );
+					lst_pst.append( opt );
+				}
+
+				// Select options
+				for ( var key in data ) {
+					if ( data[ key ].single ) {
+						for ( var theme_sb in data[ key ].single ) {
+							_select_option(
+								data[ key ].single[ theme_sb ],
+								theme_sb,
+								key,
+								lst_pst
+							);
+						}
+					}
+				}
+
+				// ----- Archives ----------------------------------------------
+				// Refresh list for archive types.
+				var lst_arc = popup.$().find( '.cs-datalist.cs-arc' );
+				var data = resp.archives;
+				lst_arc.empty();
+				// Add the options
+				for ( var key in data ) {
+					var opt = jQuery( '<option></option>' ),
+						name = data[ key ].name;
+					opt.attr( 'value', key ).text( name );
+					lst_arc.append( opt );
+				}
+
+				// Select options
+				for ( var key in data ) {
+					if ( data[ key ].archive ) {
+						for ( var theme_sb in data[ key ].archive ) {
+							_select_option(
+								data[ key ].archive[ theme_sb ],
+								theme_sb,
+								key,
+								lst_arc
+							);
+						}
+					}
+				}
+
+				wpmUi.upgrade_multiselect();
+
+			};
+
+			// User clicks on "replace <sidebar> for <category>" checkbox.
+			var toggle_details = function toggle_details( ev ) {
+				var inp = jQuery( this ),
+					row = inp.closest( '.cs-replaceable' );
+
+				if ( inp.prop( 'checked' ) ) {
+					row.addClass( 'open' )
+				} else {
+					row.removeClass( 'open' );
+					row.find( 'select' ).val( [] ).trigger( 'chosen:updated' );
+				}
+			};
+
+			// After saving data via ajax is done.
+			var handle_done_save = function handle_done_save( resp, okay, xhr ) {
 				popup.loading( false );
 
 				if ( okay ) {
-					popup.content( resp );
+					popup.close();
 				}
+			};
+
+			// Submit the data and close the popup.
+			var save_data = function save_data() {
+				var form = popup.$().find( '.frm-location' );
+
+				popup.loading( true );
+
+				ajax.reset()
+					.data( form )
+					.ondone( handle_done_save )
+					.load_json();
 			};
 
 			// Show the popup.
@@ -572,6 +755,7 @@ var csSidebars, msgTimer;
 				.modal( true )
 				.size( null, 500 )
 				.title( csSidebars.lang.data( 'title-location' ) )
+				.content( csSidebars.location_form )
 				.show();
 
 			popup.loading( true );
@@ -583,8 +767,13 @@ var csSidebars, msgTimer;
 					'do': 'get-location',
 					'sb': id
 				})
-				.ondone( show_data )
-				.load_text();
+				.ondone( handle_done_load )
+				.load_json();
+
+			// Attach events.
+			popup.$().on( 'click', '.detail-toggle', toggle_details );
+			popup.$().on( 'click', '.btn-save', save_data );
+			popup.$().on( 'click', '.btn-cancel', popup.close );
 
 			return false;
 		},

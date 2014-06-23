@@ -45,7 +45,7 @@ class CustomSidebars {
 		add_action( 'init', array( $this, 'load_text_domain' ) );
 		add_action( 'admin_enqueue_scripts', array( $this, 'add_styles' ) );
 
-		//AJAX actions
+		// AJAX actions
 		add_action( 'wp_ajax_cs-ajax', array( $this, 'ajax_handler' ) );
 
 		// Extensions use this hook to initialize themselfs.
@@ -85,14 +85,107 @@ class CustomSidebars {
 	// =========================================================================
 
 
+	/**
+	 *
+	 * ==1== PLUGIN OPTIONS
+	 *   Option-Key: cs_modifiable
+	 *
+	 *   {
+	 *       // Sidebars that can be replaced:
+	 *       'modifiable': [
+	 *           'sidebar_1',
+	 *           'sidebar_2'
+	 *       ],
+	 *
+	 *       // Default replacements:
+	 *       'post_type_single': [ // Former "defaults"
+	 *           'post_type1': <replacement-def>,
+	 *           'post_type2': <replacement-def>
+	 *       ],
+	 *       'post_type_archive': [  // Former "post_type_pages"
+	 *           'post_type1': <replacement-def>,
+	 *           'post_type2': <replacement-def>
+	 *       ],
+	 *       'category_single': [ // Former "category_posts"
+	 *           'category_id1': <replacement-def>,
+	 *           'category_id2': <replacement-def>
+	 *       ],
+	 *       'category_archive': [ // Former "category_pages"
+	 *           'category_id1': <replacement-def>,
+	 *           'category_id2': <replacement-def>
+	 *       ],
+	 *       'blog': <replacement-def>,
+	 *       'tags': <replacement-def>,
+	 *       'authors': <replacement-def>,
+	 *       'search': <replacement-def>,
+	 *       'date': <replacement-def>
+	 *   }
+	 *
+	 * ==2== REPLACEMENT-DEF
+	 *   Meta-Key: _cs_replacements
+	 *   Option-Key: cs_modifiable <replacement-def>
+	 *
+	 *   {
+	 *       'sidebar_1': 'custom_sb_id1',
+	 *       'sidebar_2': 'custom_sb_id2'
+	 *   }
+	 *
+	 * ==3== SIDEBAR DEFINITION
+	 *   Option-Key: cs_sidebars
+	 *
+	 *   Array of these objects
+	 *   {
+	 *       id: '', // sidebar-id
+	 *       name: '',
+	 *       description: '',
+	 *       before_title: '',
+	 *       after_title: '',
+	 *       before_widget: '',
+	 *       after_widget: ''
+	 *   }
+	 *
+	 * ==4== WIDGET LIST
+	 *   Option-Key: sidebars_widgets
+	 *
+	 *   {
+	 *       'sidebar_id': [
+	 *           'widget_id1',
+	 *           'widget_id2'
+	 *       ],
+	 *       'sidebar_2': [
+	 *       ],
+	 *       'sidebar_3': [
+	 *           'widget_id1',
+	 *           'widget_id3'
+	 *       ],
+	 *   }
+	 */
 
 
+	/**
+	 * If the specified variable is an array it will be returned. Otherwise
+	 * an empty array is returned.
+	 *
+	 * @since  1.6.0
+	 * @param  mixed $val1 Value that maybe is an array.
+	 * @param  mixed $val2 Optional, Second value that maybe is an array.
+	 * @return array
+	 */
+	static public function get_array( $val1, $val2 = array() ) {
+		if ( is_array( $val1 ) ) {
+			return $val1;
+		} else if ( is_array( $val2 ) ) {
+			return $val2;
+		} else {
+			return array();
+		}
+	}
 
 	/**
 	 * Returns a list with sidebars that were marked as "modifiable".
 	 * Also contains information on the default replacements of these sidebars.
 	 *
-	 * Option-Key: 'cs_modifiable'
+	 * Option-Key: 'cs_modifiable' (1)
 	 */
 	static public function get_options( $key = null ) {
 		static $Options = null;
@@ -102,17 +195,46 @@ class CustomSidebars {
 			if ( ! is_array( $Options ) ) {
 				$Options = array();
 			}
-			if ( ! is_array( @$Options['modifiable'] ) ) {
-				$Options['modifiable'] = array();
-			}
-			if ( ! is_array( @$Options['defaults'] ) ) {
-				$Options['defaults'] = array();
-			}
+
+			// List of modifiable sidebars.
+			$Options['modifiable'] = self::get_array( @$Options['modifiable'] );
+
+			/**
+			 * In version 1.6.0 four config values have been renamed and are
+			 * migrated in the following block:
+			 */
+
+			// Single/Archive pages - new names
+			$Options['post_type_single'] = self::get_array(
+				@$Options['post_type_single'], // new name
+				@$Options['defaults']          // old name
+			);
+			$Options['post_type_archive'] = self::get_array(
+				@$Options['post_type_archive'], // new name
+				@$Options['post_type_pages']    // old name
+			);
+			$Options['category_single'] = self::get_array(
+				@$Options['category_single'], // new name
+				@$Options['category_posts']   // old name
+			);
+			$Options['category_archive'] = self::get_array(
+				@$Options['category_archive'], // new name
+				@$Options['category_pages']    // old name
+			);
+
+			// Remove old item names from the array.
+			unset( $Options['defaults'] );
+			unset( $Options['post_type_pages'] );
+			unset( $Options['category_posts'] );
+			unset( $Options['category_pages'] );
+
+			// Special archive pages
+			$Options['blog'] = self::get_array( @$Options['blog'] );
+			$Options['tags'] = self::get_array( @$Options['tags'] );
+			$Options['authors'] = self::get_array( @$Options['authors'] );
+			$Options['search'] = self::get_array( @$Options['search'] );
+			$Options['date'] = self::get_array( @$Options['date'] );
 		}
-			// ----- DEBUG START
-			function_exists( 'wp_describe' ) && wp_debug( 'class-custom-sidebars.php:109', $Options );
-			//die();
-			// ----- DEBUG END
 
 		if ( ! empty( $key ) ) {
 			return @$Options[ $key ];
@@ -124,7 +246,7 @@ class CustomSidebars {
 	/**
 	 * Saves the sidebar options to DB.
 	 *
-	 * Option-Key: 'cs_modifiable'
+	 * Option-Key: 'cs_modifiable' (1)
 	 * @since 1.6.0
 	 */
 	static public function set_options( $value ) {
@@ -134,16 +256,8 @@ class CustomSidebars {
 	/**
 	 * Returns a list with all custom sidebars that were created by the user.
 	 * Array of custom sidebars
-	 * Each sidebar is an array with following fields
-	 *   - name
-	 *   - id
-	 *   - description
-	 *   - before_title
-	 *   - after_title
-	 *   - before_widget
-	 *   - after_widget
 	 *
-	 * Option-Key: 'cs_sidebars'
+	 * Option-Key: 'cs_sidebars' (3)
 	 */
 	static public function get_custom_sidebars() {
 		$sidebars = get_option( 'cs_sidebars', array() );
@@ -156,7 +270,7 @@ class CustomSidebars {
 	/**
 	 * Saves the custom sidebars to DB.
 	 *
-	 * Option-Key: 'cs_sidebars'
+	 * Option-Key: 'cs_sidebars' (3)
 	 * @since 1.6.0
 	 */
 	static public function set_custom_sidebars( $value ) {
@@ -167,7 +281,7 @@ class CustomSidebars {
 	 * Returns a list of all registered sidebars including a list of their
 	 * widgets (this is stored inside a WordPress core option).
 	 *
-	 * Option-Key: 'sidebars_widgets'
+	 * Option-Key: 'sidebars_widgets' (4)
 	 * @since  1.6.0
 	 */
 	static public function get_sidebar_widgets() {
@@ -179,7 +293,7 @@ class CustomSidebars {
 	 * 1. Add empty widget information for new sidebars.
 	 * 2. Remove widget information for sidebars that no longer exist.
 	 *
-	 * Option-Key: 'sidebars_widgets'
+	 * Option-Key: 'sidebars_widgets' (4)
 	 */
 	static public function refresh_sidebar_widgets() {
 		// Contains an array of all sidebars and widgets inside each sidebar.
@@ -219,6 +333,36 @@ class CustomSidebars {
 	}
 
 	/**
+	 * Returns the custom sidebar metadata of a single post.
+	 *
+	 * Meta-Key: '_cs_replacements' (2)
+	 * @since  1.6
+	 */
+	static public function get_post_meta( $post_id ) {
+		$data = get_post_meta( $post_id, '_cs_replacements', TRUE );
+		if ( ! is_array( $data ) ) {
+			$data = array();
+		}
+		return $data;
+	}
+
+	/**
+	 * Saves custom sidebar metadata to a single post.
+	 *
+	 * Meta-Key: '_cs_replacements' (2)
+	 * @since 1.6
+	 * @param int $post_id
+	 * @param array $data When array is empty the meta data will be deleted.
+	 */
+	static public function set_post_meta( $post_id, $data ) {
+		if ( ! empty( $data ) ) {
+			update_post_meta( $post_id, '_cs_replacements', $data );
+		} else {
+			delete_post_meta( $post_id, '_cs_replacements' );
+		}
+	}
+
+	/**
 	 * Returns a list of all sidebars available.
 	 * Depending on the parameter this will be either all sidebars or only
 	 * sidebars defined by the current theme.
@@ -227,6 +371,13 @@ class CustomSidebars {
 		global $wp_registered_sidebars;
 		$allsidebars = $wp_registered_sidebars;
 		$result = array();
+
+		// Remove inactive sidebars.
+		foreach ( $allsidebars as $sb_id => $sidebar ) {
+			if ( false !== strpos( $sidebar['class'], 'inactive-sidebar' ) ) {
+				unset( $allsidebars[$sb_id] );
+			}
+		}
 
 		ksort( $allsidebars );
 		if ( $include_custom_sidebars ) {
@@ -246,32 +397,19 @@ class CustomSidebars {
 	}
 
 	/**
-	 * Returns the custom sidebar metadata of a single post.
-	 *
-	 * Meta-Key: '_cs_replacements'
-	 * @since  1.6
+	 * Returns the sidebar with the specified ID.
+	 * Sidebar can be both a custom sidebar or theme sidebar.
 	 */
-	static public function get_post_meta( $post_id ) {
-		$data = get_post_meta( $post_id, '_cs_replacements', TRUE );
-		if ( ! is_array( $data ) ) {
-			$data = array();
-		}
-		return $data;
-	}
+	static public function get_sidebar( $id  ) {
+		if ( empty( $id ) ) { return false; }
 
-	/**
-	 * Saves custom sidebar metadata to a single post.
-	 *
-	 * Meta-Key: '_cs_replacements'
-	 * @since 1.6
-	 * @param int $post_id
-	 * @param array $data When array is empty the meta data will be deleted.
-	 */
-	static public function set_post_meta( $post_id, $data ) {
-		if ( ! empty( $data ) ) {
-			update_post_meta( $post_id, '_cs_replacements', $data );
+		// Get all sidebars
+		$sidebars = self::get_sidebars( true );
+
+		if ( isset( $sidebars[ $id ] ) ) {
+			return $sidebars[ $id ];
 		} else {
-			delete_post_meta( $post_id, '_cs_replacements' );
+			return false;
 		}
 	}
 
@@ -292,14 +430,24 @@ class CustomSidebars {
 	 * Returns true, when the specified post type supports custom sidebars.
 	 *
 	 * @since  1.6.0
+	 * @param  object|string $posttype The posttype to validate. Either the
+	 *                posttype name or the full posttype object.
+	 * @return bool
 	 */
 	static public function supported_post_type( $posttype ) {
 		$Ignored_types = null;
 		$Response = array();
 
 		if ( null === $Ignored_types ) {
-			$Ignored_types = get_post_types( array( 'public' => false ), 'names' );
+			$Ignored_types = get_post_types(
+				array( 'public' => false ),
+				'names'
+			);
 			$Ignored_types[] = 'attachment';
+		}
+
+		if ( is_object( $posttype ) ) {
+			$posttype = $posttype->name;
 		}
 
 		if ( ! isset( $Response[ $posttype ] ) ) {
@@ -322,42 +470,46 @@ class CustomSidebars {
 	}
 
 	/**
-	 * Returns the sidebar with the specified ID from the sidebar-array.
-	 */
-	static public function get_sidebar( $id, $sidebars ) {
-		$sidebar = false;
-		$nsidebars = sizeof( $sidebars );
-		$i = 0;
-		while ( ! $sidebar && $i < $nsidebars ) {
-			if ( $sidebars[$i]['id'] == $id ) {
-				$sidebar = $sidebars[$i];
-			}
-			$i++;
-		}
-		return $sidebar;
-	}
-
-	/**
 	 * Returns a list of all post types that support custom sidebars.
 	 *
-	 * @uses self::supported_post_type()
-	 * @return array List of posttype names.
+	 * @uses   self::supported_post_type()
+	 * @param  string $type [names|objects] Defines details of return data.
+	 * @return array List of posttype names or objects, depending on the param.
 	 */
-	static public function get_post_types() {
-		$Valid = null;
+	static public function get_post_types( $type = 'names' ) {
+		$Valid = array();
 
-		if ( null === $Valid ) {
-			$all = get_post_types( array(), 'names' );
-			$Valid = array();
+		if ( $type != 'objects' ) {
+			$type = 'names';
+		}
+
+		if ( ! isset( $Valid[ $type ] ) ) {
+			$all = get_post_types( array(), $type );
+			$Valid[ $type ] = array();
 
 			foreach ( $all as $post_type ) {
 				if ( self::supported_post_type( $post_type ) ) {
-					$Valid[] = $post_type;
+					$Valid[ $type ][] = $post_type;
 				}
 			}
 		}
 
-		return $Valid;
+		return $Valid[ $type ];
+	}
+
+	/**
+	 * Returns an array of all categories.
+	 *
+	 * @since  1.6.0
+	 * @return array List of categories, including empty ones.
+	 */
+	static public function get_all_categories() {
+		$args = array(
+			'hide_empty' => 0,
+			'taxonomy' => 'category',
+		);
+
+		return get_categories( $args );
 	}
 
 	/**
@@ -366,14 +518,17 @@ class CustomSidebars {
 	 *
 	 * @uses  self::cmp_cat_level()
 	 */
-	static public function get_sorted_categories() {
-		static $Sorted = null;
+	static public function get_sorted_categories( $post_id = null ) {
+		static $Sorted = array();
 
-		if ( null === $Sorted ) {
-			$Sorted = get_the_category();
-			@usort( $Sorted, array( self, 'cmp_cat_level' ) );
+		// Return categories of current post when no post_id is specified.
+		$post_id = empty( $post_id ) ? get_the_ID() : $post_id;
+
+		if ( ! isset( $Sorted[ $post_id ] ) ) {
+			$Sorted[ $post_id ] = get_the_category( $post_id );
+			@usort( $Sorted[ $post_id ], array( self, 'cmp_cat_level' ) );
 		}
-		return $Sorted;
+		return $Sorted[ $post_id ];
 	}
 
 	/**
@@ -454,130 +609,5 @@ class CustomSidebars {
 		 * @param  string $action The specified ajax action.
 		 */
 		do_action( 'cs_ajax_request', $action );
-
-		/*
-		if ( $_REQUEST['cs_action'] == 'where' ) {
-			$this->ajax_show_where();
-			die();
-		}
-
-		$nonce = $_POST['nonce'];
-		$action = $_POST['cs_action'];
-		if ( ! wp_verify_nonce( $nonce, $action ) ) {
-			$response = array(
-				'success' => false,
-				'message' => __( 'The operation is not secure and it cannot be completed.', CSB_LANG ),
-				'nonce' => wp_create_nonce( $action ),
-			);
-			self::json_response( $response );
-		}
-
-		$response = array();
-		if ( $action == 'cs-create-sidebar' ) {
-			$response = $this->ajax_create_sidebar();
-		} else if ( $action == 'cs-edit-sidebar' ) {
-			$response = $this->ajax_edit_sidebar();
-		} else if ( $action == 'cs-set-defaults' ) {
-			$response = $this->ajax_set_defaults();
-		} else if ( $action == 'cs-delete-sidebar' ) {
-			$response = $this->ajax_delete_sidebar();
-		}
-
-		$response['nonce'] = wp_create_nonce( $action );
-		self::json_response( $response );
-		*/
 	}
-
-	/*
-	public function ajax_set_defaults() {
-		try {
-			$this->store_defaults();
-		} catch( Exception $e ) {
-			return array(
-				'success' => false,
-				'message' => __( 'There has been an error storing the sidebars. Please, try again.', CSB_LANG ),
-			);
-		}
-		return array(
-			'success' => true,
-			'message' => $this->message,
-		);
-	}
-
-	public function ajax_create_sidebar() {
-		$this->store_sidebar();
-
-		if ( $this->message_class == 'error' ) {
-			return array(
-				'success' => false,
-				'message' => $this->message,
-			);
-		}
-
-		return array(
-			'success' => true,
-			'message' => __( 'The sidebar has been created successfully.', CSB_LANG ),
-			'name' => stripslashes( trim( $_POST['sidebar_name'] ) ),
-			'description' => stripslashes( trim( $_POST['sidebar_description'] ) ),
-			'id' => self::$sidebar_prefix . sanitize_html_class( sanitize_title_with_dashes( $_POST['sidebar_name'] ) ),
-		);
-	}
-
-	public function ajax_delete_sidebar() {
-		$this->delete_sidebar();
-
-		return array(
-			'message' => $this->message,
-			'success' => $this->message_class != 'error',
-		);
-	}
-
-	public function ajax_edit_sidebar() {
-		$id = trim( $_POST['cs_id'] );
-		$sidebar = $this->get_sidebar( $id, self::get_custom_sidebars() );
-		$_POST['cs_before_widget'] = $sidebar['cs_before_widget'];
-		$_POST['cs_after_widget'] = $sidebar['cs_after_widget'];
-		$_POST['cs_before_title'] = $sidebar['cs_before_title'];
-		$_POST['cs_after_title'] = $sidebar['cs_after_title'];
-		$this->update_sidebar();
-
-		$sidebar = $this->get_sidebar( $id, self::get_custom_sidebars() );
-		return array(
-			'message' => $this->message,
-			'success' => $this->message_class != 'error',
-			'name' => $sidebar['name'],
-			'description' => $sidebar['description'],
-		);
-	}
-
-	public function ajax_show_where() {
-		// FIXME: These are global variables. Move this to a (static) function instead
-		$customsidebars = self::get_custom_sidebars();
-		$themesidebars = self::get_sidebars();
-		$allsidebars = self::get_sidebars( TRUE );
-		$sidebarId = strtolower( urlencode( $_GET['id'] ) );
-
-		if ( ! isset( $allsidebars[$sidebarId] ) ) {
-			echo urlencode( $_GET['id'] );
-			var_dump( $allsidebars );
-			die( __( 'Unknown sidebar.', CSB_LANG ) );
-		}
-		foreach ( $allsidebars as $key => $sb ) {
-			if ( strlen( $sb['name'] ) > 30 ) {
-				$allsidebars[$key]['name'] = substr( $sb['name'], 0, 27 ) . '...';
-			}
-		}
-
-		// FIXME: These are global variables. Move this to a (static) function instead
-		$current_sidebar = $allsidebars[ $_GET['id'] ];
-		$defaults = self::get_options( 'defaults' );
-		$modifiable = self::get_options( 'modifiable' );
-		$categories = get_categories( array( 'hide_empty' => 0 ) );
-		if ( sizeof( $categories ) == 1 && $categories[0]->cat_ID == 1 ) {
-			unset( $categories[0] );
-		}
-
-		include CSB_VIEWS_DIR . 'ajax.php';
-	}
-	*/
 };

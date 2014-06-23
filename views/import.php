@@ -252,7 +252,7 @@ function list_sidebar_replacement( $list ) {
 	<div class="section"><?php _e( 'By post type', CSB_LANG ); ?></div>
 	<table cellspacing="1" cellpadding="4" class="csb-export-head">
 	<?php
-	$list = $import['options']['defaults'];
+	$list = $import['options']['post_type_single'];
 	foreach ( $list as $key => $values ) {
 		$type = get_post_type_object( $key );
 		$rows = count( $values );
@@ -271,7 +271,7 @@ function list_sidebar_replacement( $list ) {
 	<div class="section"><?php _e( 'Post-type archives', CSB_LANG ); ?></div>
 	<table cellspacing="1" cellpadding="4" class="csb-export-head">
 	<?php
-	$list = $import['options']['post_type_pages'];
+	$list = $import['options']['post_type_archives'];
 	foreach ( $list as $key => $values ) {
 		$type = get_post_type_object( $key );
 		$rows = count( $values );
@@ -290,7 +290,7 @@ function list_sidebar_replacement( $list ) {
 	<div class="section"><?php _e( 'By category', CSB_LANG ); ?></div>
 	<table cellspacing="1" cellpadding="4" class="csb-export-head">
 	<?php
-	$list = $import['options']['category_posts'];
+	$list = $import['options']['category_single'];
 	foreach ( $list as $key => $values ) {
 		$cat = get_category( $key );
 		$rows = count( $values );
@@ -309,7 +309,7 @@ function list_sidebar_replacement( $list ) {
 	<div class="section"><?php _e( 'Category archives', CSB_LANG ); ?></div>
 	<table cellspacing="1" cellpadding="4" class="csb-export-head">
 	<?php
-	$list = $import['options']['category_pages'];
+	$list = $import['options']['category_archives'];
 	foreach ( $list as $key => $values ) {
 		$cat = get_category( $key );
 		$rows = count( $values );

@@ -13,6 +13,15 @@
 (function( wpmUi ) {
 
 	/**
+	 * The html element.
+	 *
+	 * @type   jQuery object
+	 * @since  1.0.0
+	 * @private
+	 */
+	var _html = null;
+
+	/**
 	 * The body element.
 	 *
 	 * @type   jQuery object
@@ -58,7 +67,28 @@
 	 */
 	wpmUi.ajax = function ajax( ajaxurl, default_action ) {
 		return new wpmUiAjaxData( ajaxurl, default_action );
-	}
+	};
+
+	/**
+	 * Upgrades normal multiselect fields to chosen-input fields.
+	 *
+	 * @since  1.0.0
+	 * @param  jQuery|string base All children of this base element will be
+	 *                checked. If empty then the body element is used.
+	 */
+	wpmUi.upgrade_multiselect = function upgrade_multiselect( base ) {
+		base = jQuery( base || _body );
+
+		var options = {
+			'placeholder_text_multiple': '-',
+			'placeholder_text_single': '-',
+			'inherit_select_classes': true,
+			'search_contains': true,
+			'width': '100%'
+		};
+
+		base.find( 'select[multiple]' ).chosen(options);
+	};
 
 
 	// ==========
@@ -73,7 +103,11 @@
 	 * @private
 	 */
 	function _init() {
+		_html = jQuery( 'html' );
 		_body = jQuery( 'body' );
+
+		_init_boxes();
+		_init_tabs();
 	}
 
 	/**
@@ -89,6 +123,7 @@
 				.appendTo( _body );
 		}
 		_body.addClass( 'wpmui-has-overlay' );
+		_html.addClass( 'wpmui-no-scroll' );
 	}
 
 	/**
@@ -99,6 +134,59 @@
 	 */
 	function _close_modal() {
 		_body.removeClass( 'wpmui-has-overlay' );
+		_html.removeClass( 'wpmui-no-scroll' );
+	}
+
+	/**
+	 * Initialize the WordPress-ish accordeon boxes:
+	 * Open or close boxes when user clicks the toggle icon.
+	 *
+	 * @since  1.0.0
+	 */
+	function _init_boxes() {
+		// Toggle the box state (open/closed)
+		var toggle_box = function toggle_box() {
+			var box = jQuery( this ).closest( '.wpmui-box' );
+			box.toggleClass( 'closed' );
+		};
+
+		_body.on( 'click', '.wpmui-box > .toggle', toggle_box );
+		_body.on( 'click', '.wpmui-box > h3', toggle_box );
+	}
+
+	/**
+	 * Initialize the WordPress-ish tab navigation:
+	 * Change the tab on click.
+	 *
+	 * @since  1.0.0
+	 */
+	function _init_tabs() {
+		// Toggle the box state (open/closed)
+		var activate_tab = function activate_tab( ev ) {
+			var tab = jQuery( this ),
+				all_tabs = tab.closest( '.wpmui-tabs' ),
+				content = all_tabs.next( '.wpmui-tab-contents' ),
+				active = all_tabs.find( '.active.tab' ),
+				sel_tab = tab.attr( 'href' ),
+				sel_active = active.attr( 'href' ),
+				content_tab = content.find( sel_tab );
+				content_active = content.find( sel_active );
+
+			// Close previous tab.
+			if ( ! tab.hasClass( 'active' ) ) {
+				active.removeClass( 'active' );
+				content_active.removeClass( 'active' );
+			}
+
+			// Open selected tab.
+			tab.addClass( 'active' );
+			content_tab.addClass( 'active' );
+
+			ev.preventDefault();
+			return false;
+		};
+
+		_body.on( 'click', '.wpmui-tabs .tab', activate_tab );
 	}
 
 	// Initialize the object.
@@ -193,6 +281,16 @@
 		 */
 		var _content_changed = false;
 
+		/**
+		 * Flag is set to true when the window size was changed.
+		 * After the window was updated we will additionally check if it is
+		 * visible in the current viewport.
+		 *
+		 * @since 1.0.0
+		 * @private
+		 */
+		var _need_check_size = false;
+
 
 		/**
 		 * Called after the window is made visible.
@@ -272,7 +370,7 @@
 			_modal = ( state ? true : false );
 
 			_update_window()
-			return this;
+			return _me;
 		};
 
 		/**
@@ -287,8 +385,9 @@
 			if ( ! isNaN( new_width ) ) { _width = new_width; }
 			if ( ! isNaN( new_height ) ) { _height = new_height; }
 
+			_need_check_size = true;
 			_update_window();
-			return this;
+			return _me;
 		};
 
 		/**
@@ -300,7 +399,7 @@
 			_title = title;
 
 			_update_window();
-			return this;
+			return _me;
 		};
 
 		/**
@@ -310,10 +409,11 @@
 		 */
 		this.content = function content( data ) {
 			_content = data;
+			_need_check_size = true;
 			_content_changed = true;
 
 			_update_window();
-			return this;
+			return _me;
 		};
 
 		/**
@@ -323,7 +423,7 @@
 		 */
 		this.onshow = function onshow( callback ) {
 			_onshow = callback;
-			return this;
+			return _me;
 		}
 
 		/**
@@ -333,7 +433,7 @@
 		 */
 		this.onhide = function onhide( callback ) {
 			_onhide = callback;
-			return this;
+			return _me;
 		}
 
 		/**
@@ -343,7 +443,7 @@
 		 */
 		this.onclose = function onclose( callback ) {
 			_onclose = callback;
-			return this;
+			return _me;
 		}
 
 		/**
@@ -358,7 +458,7 @@
 			} else {
 				_wnd.removeClass( 'wpmui-loading' );
 			}
-			return this;
+			return _me;
 		}
 
 		/**
@@ -368,13 +468,14 @@
 		 */
 		this.show = function show() {
 			_visible = true;
+			_need_check_size = true;
 
 			_update_window();
 
 			if ( typeof _onshow == 'function' ) {
 				_onshow.apply( _me, [ _me.$() ] )
 			}
-			return this;
+			return _me;
 		};
 
 		/**
@@ -390,7 +491,7 @@
 			if ( typeof _onhide == 'function' ) {
 				_onhide.apply( _me, [ _me.$() ] )
 			}
-			return this;
+			return _me;
 		};
 
 		/**
@@ -399,12 +500,13 @@
 		 * @since  1.0.0
 		 */
 		this.close = function close() {
-			this.hide();
+			_me.hide();
 
 			if ( typeof _onclose == 'function' ) {
 				_onclose.apply( _me, [ _me.$() ] )
 			}
 
+			_unhook();
 			_wnd.remove();
 			_wnd = null;
 		}
@@ -443,12 +545,35 @@
 			_wnd.appendTo( _body ).hide();
 
 			// Add event handlers.
-			_wnd.on( 'click', '.wpmui-wnd-close', function() { _me.close() } );
-			jQuery( window ).resize( _check_size );
+			_hook();
 
 			// Refresh the window layout.
 			_visible = false;
 			_update_window();
+		}
+
+		/**
+		 * Add event listeners.
+		 *
+		 * @since  1.0.0
+		 */
+		function _hook() {
+			if ( _wnd ) {
+				_wnd.on( 'click', '.wpmui-wnd-close', _me.close );
+				jQuery( window ).on( 'resize', _check_size );
+			}
+		}
+
+		/**
+		 * Remove all event listeners.
+		 *
+		 * @since  1.0.0
+		 */
+		function _unhook() {
+			if ( _wnd ) {
+				_wnd.off( 'click', '.wpmui-wnd-close', _me.close );
+				jQuery( window ).off( 'resize', _check_size );
+			}
 		}
 
 		/**
@@ -458,6 +583,8 @@
 		 * @private
 		 */
 		function _update_window( width, height ) {
+			if ( ! _wnd ) { return false; }
+
 			width = width || _width;
 			height = height || _height;
 
@@ -505,6 +632,11 @@
 			if ( _visible ) {
 				_wnd.show();
 				_modal && _make_modal();
+
+				if ( _need_check_size ) {
+					_need_check_size = false;
+					_check_size()
+				}
 			} else {
 				_wnd.hide();
 				_close_modal();
@@ -517,6 +649,8 @@
 		 * @since  1.0.0
 		 */
 		function _check_size() {
+			if ( ! _wnd ) { return false; }
+
 			var me = jQuery( this ), // this is jQuery( window )
 				window_width = me.innerWidth(),
 				window_height = me.innerHeight(),
@@ -653,7 +787,7 @@
 		 */
 		this.data = function data( obj ) {
 			_data = obj;
-			return this;
+			return _me;
 		};
 
 		/**
@@ -664,7 +798,7 @@
 		 */
 		this.onprogress = function onprogress( callback ) {
 			_onprogress = callback;
-			return this;
+			return _me;
 		};
 
 		/**
@@ -675,7 +809,7 @@
 		 */
 		this.ondone = function ondone( callback ) {
 			_ondone = callback;
-			return this;
+			return _me;
 		};
 
 		/**
@@ -687,7 +821,7 @@
 			_data = {};
 			_onprogress = null;
 			_ondone = null;
-			return this;
+			return _me;
 		};
 
 		/**
@@ -701,7 +835,7 @@
 			action = action || _default_action;
 			_load( action, 'text' );
 
-			return this;
+			return _me;
 		};
 
 		/**
@@ -715,7 +849,7 @@
 			action = action || _default_action;
 			_load( action, 'json' );
 
-			return this;
+			return _me;
 		};
 
 		/**
@@ -731,7 +865,7 @@
 			action = action || _default_action;
 			_form_submit( action );
 
-			return this;
+			return _me;
 		};
 
 

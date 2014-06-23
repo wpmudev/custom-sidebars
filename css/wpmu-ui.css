@@ -54,6 +54,10 @@
 	filter: grayscale(75%);
 }
 
+.wpmui-no-scroll {
+	overflow: hidden;
+}
+
 
 /**
  * =============================================================================
@@ -69,6 +73,9 @@
 	z-index: 100051;
 	top: 50%;
 	left: 50%;
+
+	-webkit-box-sizing: border-box;
+	-moz-box-sizing: border-box;
 	box-sizing: border-box;
 }
 
@@ -118,13 +125,14 @@
 	top: 51px;
 	left: 0;
 	right: 0;
-	bottom: 50px;
+	bottom: 0;
 	overflow: auto;
-	padding: 20px;
+	padding: 20px 20px 70px 20px;
+	z-index: 1;
 }
 
-.no-buttons .wpmui-wnd-content {
-	bottom: 0;
+.wpmui-wnd.no-buttons .wpmui-wnd-content {
+	padding-bottom: 20px;
 }
 
 .wpmui-wnd hr {
@@ -138,13 +146,25 @@
 	position: absolute;
 	bottom: 0;
 	right: 0;
-	background: #F8F8F8;
+	background: rgba(245,245,245,.8);
 	padding: 10px 20px 10px;
 	left: 0;
 	height: 50px;
-	box-sizing: border-box;
 	border-top: 1px solid #E5E5E5;
 	margin: 0;
+	z-index: 2;
+
+	-webkit-box-sizing: border-box;
+	-moz-box-sizing: border-box;
+	box-sizing: border-box;
+}
+
+.wpmui-wnd .chosen-container .chosen-drop {
+	margin-bottom: 70px;
+}
+
+.wpmui-wnd.no-buttons .chosen-container .chosen-drop {
+	margin-bottom: 20px;
 }
 
 
@@ -166,12 +186,13 @@
 .wpmui-form input[type='password'],
 .wpmui-form textarea,
 .wpmui-form select {
-	-webkit-box-sizing: border-box;
-	-moz-box-sizing: border-box;
-	box-sizing: border-box;
 	width: 100%;
 	margin: 0;
 	display: block;
+
+	-webkit-box-sizing: border-box;
+	-moz-box-sizing: border-box;
+	box-sizing: border-box;
 }
 
 .wpmui-form .hint {
@@ -190,12 +211,13 @@
 	padding: 0 10px 1px;
 	cursor: pointer;
 	white-space: nowrap;
-	-webkit-box-sizing: border-box;
-	-moz-box-sizing: border-box;
-	box-sizing: border-box;
 	color: #0074A2;
 	background: transparent;
 	border: 0;
+
+	-webkit-box-sizing: border-box;
+	-moz-box-sizing: border-box;
+	box-sizing: border-box;
 
 	-webkit-transition-property: border, background, color;
 	transition-property: border, background, color;
@@ -353,9 +375,200 @@
 
 /**
  * =============================================================================
+ * == WORDPRESS ACCORDEON BOX
+ * =============================================================================
+ *
+ * Example:
+ *
+ *   <div class="wpmui-box">
+ *     <h3>
+ *       <a href="#" class="toggle" title="<?php _e( 'Click to toggle' ); ?>"><br></a>
+ *       <span>Title</span>
+ *     </h3>
+ *     <div class="inside">
+ *       <p>Content...</p>
+ *     </div>
+ *   </div>
+ */
+
+.wpmui-box {
+	margin-bottom: 10px;
+	padding: 0;
+	line-height: 1;
+	position: relative;
+	min-width: 255px;
+	border: 1px solid #E5E5E5;
+	-webkit-box-shadow: 0 1px 1px rgba(0, 0, 0, 0.04);
+	box-shadow: 0 1px 1px rgba(0, 0, 0, 0.04);
+	background: #FFF;
+}
+
+.wpmui-box > h3 {
+	font-size: 14px;
+	padding: 8px 12px;
+	margin: 0;
+	line-height: 1.4;
+	border-bottom: 1px solid #EEE;
+	cursor: pointer;
+}
+
+.wpmui-box > h3 .toggle {
+	cursor: pointer;
+	float: right;
+	width: 36px;
+	height: 36px;
+	color: #AAA;
+	text-decoration: none;
+	margin: -8px -12px;
+	text-align: center;
+	position: relative;
+	line-height: 36px;
+}
+
+.wpmui-box > h3:hover .toggle,
+.wpmui-box .toggle:hover,
+.wpmui-box .toggle:focus,
+.wpmui-box .toggle:active {
+	color: #777;
+}
+
+.wpmui-box > h3 .toggle:before {
+	content: '\f142';
+	font: 400 20px/36px dashicons;
+	speak: none;
+	display: inline-block;
+	position: absolute;
+	-webkit-font-smoothing: antialiased;
+	-moz-osx-font-smoothing: grayscale;
+	text-decoration: none!important;
+	width: 100%;
+	height: 100%;
+	top: 0;
+	right: 0;
+}
+
+.wpmui-box > .inside {
+	margin: 6px 0 0;
+	position: relative;
+	padding: 0 12px 12px;
+	line-height: 1.4em;
+	font-size: 13px;
+}
+
+.wpmui-box > .inside:after {
+	content: '';
+	display: table;
+	clear: both;
+}
+
+.wpmui-box.closed > h3 .toggle:before {
+	content: '\f140';
+}
+
+.wpmui-box.closed > .inside {
+	display: none;
+}
+
+
+/**
+ * =============================================================================
+ * == WORDPRESS TAB-BOX
+ * =============================================================================
+ *
+ * Example:
+ *
+ *   <div class="wpmui-tabs">
+ *     <a href="#config" class="tab active">Config</a>
+ *     <a href="#archive" class="tab">Archive</a>
+ *   </div>
+ *   <div class="wpmui-tab-contents">
+ *     <div class="tab active" id="config"></div>
+ *     <div class="tab" id="archive"></div>
+ *   </div>
+ */
+
+
+.wpmui-tabs {
+	border-bottom: 1px solid #EEE;
+	padding-bottom: 0;
+	padding-left: 10px;
+	list-style: none;
+	margin: 20px 0 0;
+}
+
+.wpmui-tabs .tab {
+	border: 1px solid #EEE;
+	background: #F0F0F0;
+	color: #999;
+	display: inline-block;
+	text-decoration: none;
+	margin: 0 4px -1px 0;
+	padding: 0 12px;
+	font-weight: 600;
+	font-size: 13px;
+	line-height: 34px;
+}
+
+.wpmui-tabs .tab:hover,
+.wpmui-tabs .tab:focus,
+.wpmui-tabs .tab:active {
+	background: #F4F4F4;
+	color: #777;
+}
+
+.wpmui-tabs .tab.active {
+	border-bottom: 1px solid #FFF;
+	background: #FFF;
+	color: #444;
+}
+
+.wpmui-tab-contents {
+	padding: 12px;
+}
+
+.wpmui-tab-contents .tab {
+	display: none;
+}
+
+.wpmui-tab-contents .tab.active {
+	display: block;
+}
+
+.wpmui-box > .inside > .wpmui-tabs {
+	margin-left: -12px;
+	margin-right: -12px;
+	padding-left: 22px;
+}
+
+.wpmui-box > .inside > .wpmui-tab-contents {
+	margin-left: -12px;
+	margin-right: -12px;
+	margin-bottom: -12px;
+}
+
+
+/**
+ * =============================================================================
+ * == CHOSEN
+ * =============================================================================
+ */
+
+
+.chosen-container-multi .chosen-choices {
+	min-height: 29px;
+}
+
+.chosen-container-multi .chosen-choices li.search-field {
+	line-height: 27px;
+}
+
+
+/**
+ * =============================================================================
  * == GENERAL STYLES
  * =============================================================================
  */
+
 
 .no-pad-top {
 	padding-top: 0 !important;
@@ -372,4 +585,18 @@
 	padding-bottom: 0  !important;
 	margin-top: 0  !important;
 	margin-bottom: 0  !important;
+}
+
+.dashicons.light {
+	opacity: .5;
+}
+
+.cf:before,
+.cf:after {
+	content: '';
+	display: table;
+}
+
+.cf:after {
+	clear: both;
 }

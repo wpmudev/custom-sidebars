@@ -37,7 +37,7 @@ jQuery(function init_visibility() {
 	 */
 	var init_ui = function init_ui( ev ) {
 		var $widget = jQuery( this );
-		jQuery( '.csb-visibility select[multiple]', $widget ).chosen();
+		wpmUi.upgrade_multiselect( $widget );
 	};
 
 	/**
@@ -200,8 +200,10 @@ jQuery(function init_visibility() {
 			i;
 
 		$types.addClass( 'csb-hide' );
-		for ( i = 0; i < types.length; i += 1 ) {
-			$types.filter( '.csb-pt-' + types[i] ).removeClass( 'csb-hide ');
+		if ( types ) {
+			for ( i = 0; i < types.length; i += 1 ) {
+				$types.filter( '.csb-pt-' + types[i] ).removeClass( 'csb-hide ');
+			}
 		}
 
 		$types.each(function check_detail_row() {

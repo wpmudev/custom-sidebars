@@ -318,7 +318,7 @@ class CustomSidebarsExport extends CustomSidebars {
 
 		// =====
 		// Remove invalid sidebars from the default replacement options.
-		foreach ( array( 'defaults', 'post_type_pages', 'category_posts', 'category_pages' ) as $key ) {
+		foreach ( array( 'post_type_single', 'post_type_archive', 'category_single', 'category_archive' ) as $key ) {
 			foreach ( self::$import_data['options'][ $key ] as $id => $list ) {
 				$list = $this->_remove_sidebar_from_list( $list, $valid_sidebars );
 				self::$import_data['options'][ $key ][ $id ] = $list;

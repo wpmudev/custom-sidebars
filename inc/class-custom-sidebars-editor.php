@@ -47,7 +47,7 @@ class CustomSidebarsEditor extends CustomSidebars {
 	 * Handles the ajax requests.
 	 */
 	public function handle_ajax( $action ) {
-		$resp = (object) array(
+		$req = (object) array(
 			'status' => 'ERR',
 		);
 		$is_json = true;
@@ -55,53 +55,58 @@ class CustomSidebarsEditor extends CustomSidebars {
 		$view_file = '';
 
 		$sb_id = @$_POST['sb'];
+		$sb_data = self::get_sidebar( $sb_id );
 
 		switch ( $action ) {
 			case 'get':
 				// Return details for the specified sidebar.
 				$handle_it = true;
-				$resp->status = 'OK';
-				$resp->action = 'get';
-				$resp->sidebar = $sb_id;
+				$req->status = 'OK';
+				$req->action = 'get';
+				$req->id = $sb_id;
+				$req->sidebar = $sb_data;
 				break;
 
 			case 'save':
 				// Save or insert the specified sidebar.
 				$handle_it = true;
-				$resp->status = 'OK';
-				$resp->action = 'save';
-				$resp->sidebar = $sb_id;
+				$req->status = 'OK';
+				$req->action = 'save';
+				$req->id = $sb_id;
 				break;
 
 			case 'delete':
 				// Delete the specified sidebar.
 				$handle_it = true;
-				$resp->status = 'OK';
-				$resp->action = 'delete';
-				$resp->sidebar = $sb_id;
+				$req->status = 'OK';
+				$req->action = 'delete';
+				$req->id = $sb_id;
 				break;
 
 			case 'get-location':
 				// Get the location data.
 				$handle_it = true;
-				$is_json = false;
-				$view_file = 'location.php';
+				$req->status = 'OK';
+				$req->action = 'get-location';
+				$req->id = $sb_id;
+				$req->sidebar = $sb_data;
+				$req = $this::get_location_data( $req );
 				break;
 
 			case 'set-location':
 				// Update the location data.
 				$handle_it = true;
-				$resp->status = 'OK';
-				$resp->action = 'set-location';
-				$resp->sidebar = $sb_id;
+				$req->status = 'OK';
+				$req->action = 'set-location';
+				$req->id = $sb_id;
 				break;
 
 			case 'replacable':
 				// Toggle theme sidebar replacable-flag.
 				$handle_it = true;
-				$resp->status = 'OK';
-				$resp->action = 'replacable';
-				$resp->sidebar = $sb_id;
+				$req->status = 'OK';
+				$req->action = 'replacable';
+				$req->id = $sb_id;
 				break;
 		}
 
@@ -112,7 +117,7 @@ class CustomSidebarsEditor extends CustomSidebars {
 
 		// Make the ajax response either as JSON or plain text.
 		if ( $is_json ) {
-			self::json_response( $resp );
+			self::json_response( $req );
 		} else {
 			ob_start();
 			include CSB_VIEWS_DIR . $view_file;
@@ -120,6 +125,83 @@ class CustomSidebarsEditor extends CustomSidebars {
 
 			self::plain_response( $resp );
 		}
+	}
+
+	/**
+	 * Populates the response object for the "get-location" ajax call.
+	 *
+	 * @since  1.6.0
+	 * @param  object $req Initial response object.
+	 * @return object Updates response object.
+	 */
+	private function get_location_data( $req ) {
+		$defaults = CustomSidebars::get_options();
+		$raw_posttype = CustomSidebars::get_post_types( 'objects' );
+		$raw_cat = CustomSidebars::get_all_categories();
+
+		$archive_type = array(
+			'_blog' => __( 'Front Page', CSB_LANG ),
+			'_search' => __( 'Search Results', CSB_LANG ),
+			'_authors' => __( 'Author Archives', CSB_LANG ),
+			'_tags' => __( 'Tag Archives', CSB_LANG ),
+			'_date' => __( 'Date Archives', CSB_LANG ),
+		);
+
+		// Collect required data for all posttypes.
+		$posttypes = array();
+		foreach ( $raw_posttype as $item ) {
+			$sel_single = $defaults['post_type_single'][$item->name];
+
+			$posttypes[ $item->name ] = array(
+				'name' => $item->labels->name,
+				'single' => $sel_single,
+			);
+		}
+
+		// Extract the data from categories list that we need.
+		$categories = array();
+		foreach ( $raw_cat as $item ) {
+			$sel_single = $defaults['category_single'][$item->name];
+			$sel_archive = $defaults['category_archive'][$item->name];
+
+			$categories[ $item->term_id ] = array(
+				'name' => $item->name,
+				'count' => $item->count,
+				'single' => $sel_single,
+				'archive' => $sel_archive,
+			);
+		}
+
+		// Build a list of archive types.
+		$archives = array(); // Start with a copy of the posttype list.
+		foreach ( $raw_posttype as $item ) {
+			$sel_archive = $defaults['post_type_archive'][$item->name];
+
+			$label = sprintf(
+				__( '%1$s Archives', CSB_LANG ),
+				$item->labels->singular_name
+			);
+
+			$archives[ $item->name ] = array(
+				'name' => $label,
+				'archive' => $sel_archive,
+			);
+		}
+
+		foreach ( $archive_type as $key => $name ) {
+			$sel_archive = $defaults[substr( $key, 1 ) ];
+
+			$archives[ $key ] = array(
+				'name' => $name,
+				'archive' => $sel_archive,
+			);
+		}
+
+		$req->replaceable = $defaults['modifiable'];
+		$req->posttypes = $posttypes;
+		$req->categories = $categories;
+		$req->archives = $archives;
+		return $req;
 	}
 
 	/**
@@ -243,8 +325,8 @@ class CustomSidebarsEditor extends CustomSidebars {
 
 		//Post-types posts and lists. Posts data are called default in order to keep backwards compatibility;
 
-		$options['defaults'] = array();
-		$options['post_type_pages'] = array();
+		$options['post_type_single'] = array();
+		$options['post_type_archive'] = array();
 
 		// "By post type"
 		foreach ( self::get_post_types() as $pt ) {
@@ -252,20 +334,20 @@ class CustomSidebarsEditor extends CustomSidebars {
 				foreach ( $modifiable as $m ) {
 					// single-posttype
 					if ( isset( $_POST["type_posts_{$pt}_$m"] ) && $_POST["type_posts_{$pt}_$m"] != '' ) {
-						if ( ! isset( $options['defaults'][$pt] ) ) {
-							$options['defaults'][$pt] = array();
+						if ( ! isset( $options['post_type_single'][$pt] ) ) {
+							$options['post_type_single'][$pt] = array();
 						}
 
-						$options['defaults'][$pt][$m] = $_POST["type_posts_{$pt}_$m"];
+						$options['post_type_single'][$pt][$m] = $_POST["type_posts_{$pt}_$m"];
 					}
 
 					// archive-posttype
 					if ( isset( $_POST["type_page_{$pt}_$m"] ) && $_POST["type_page_{$pt}_$m"] != '' ) {
-						if ( ! isset( $options['post_type_pages'][$pt] ) ) {
-							$options['post_type_pages'][$pt] = array();
+						if ( ! isset( $options['post_type_archive'][$pt] ) ) {
+							$options['post_type_archive'][$pt] = array();
 						}
 
-						$options['post_type_pages'][$pt][$m] = $_POST["type_page_{$pt}_$m"];
+						$options['post_type_archive'][$pt][$m] = $_POST["type_page_{$pt}_$m"];
 					}
 				}
 			}
@@ -428,7 +510,7 @@ class CustomSidebarsEditor extends CustomSidebars {
 			$id = self::$sidebar_prefix . sanitize_html_class( sanitize_title_with_dashes( $name ) );
 			$sidebars = self::get_custom_sidebars();
 
-			if ( ! $this->get_sidebar( $id, $sidebars ) ) {
+			if ( ! self::get_sidebar( $id ) ) {
 				//Create a new sidebar
 				$sidebars[] = array(
 					'name' => $name,
