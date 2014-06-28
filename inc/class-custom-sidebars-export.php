@@ -40,7 +40,7 @@ class CustomSidebarsExport extends CustomSidebars {
 		if ( is_admin() ) {
 			add_action(
 				'cs_ajax_request',
-				array( $this, 'do_actions' )
+				array( $this, 'handle_ajax' )
 			);
 		}
 	}
@@ -51,25 +51,76 @@ class CustomSidebarsExport extends CustomSidebars {
 	 *
 	 * @since  1.6.0
 	 */
-	public function do_actions( $ajax_action ) {
+	public function handle_ajax( $ajax_action ) {
+		$req = (object) array(
+			'status' => 'ERR',
+		);
+		$is_json = true;
+		$handle_it = false;
+		$view_file = '';
+
 		switch ( $ajax_action ) {
 			case 'export':
-				$this->download_export_file();
-				break;
-
+			case 'import':
 			case 'preview-import':
-				// Prepare data
-				$this->read_import_file();
-
-				// Generate output
-				include CSB_VIEWS_DIR . 'import.php';
-				die();
+				$handle_it = true;
+				$req->status = 'OK';
+				$req->action = $ajax_action;
 				break;
 		}
-		if ( isset( $_POST['process-import-data'] ) ) {
-			$this->prepare_import_data();
+
+		// The ajax request was not meant for us...
+		if ( ! $handle_it ) {
+			return false;
+		}
+
+		if ( ! current_user_can( self::$cap_required ) ) {
+			$req = self::req_err(
+				$req,
+				__( 'You do not have permission for this', CSB_LANG )
+			);
+		} else {
+			switch ( $ajax_action ) {
+				case 'export':
+					$this->download_export_file();
+					break;
+
+				case 'preview-import':
+					$req = $this->read_import_file( $req );
+					if ( 'OK' == $req->status ) {
+						ob_start();
+						include CSB_VIEWS_DIR . 'import.php';
+						$req->html = ob_get_clean();
+					}
+					break;
+
+				case 'import':
+					$req = $this->prepare_import_data( $req );
+					break;
+			}
+		}
+
+		// Make the ajax response either as JSON or plain text.
+		if ( $is_json ) {
+			self::json_response( $req );
+		} else {
+			ob_start();
+			include CSB_VIEWS_DIR . $view_file;
+			$resp = ob_get_clean();
+
+			self::plain_response( $resp );
 		}
 	}
+
+
+	/*============================*\
+	================================
+	==                            ==
+	==           EXPORT           ==
+	==                            ==
+	================================
+	\*============================*/
+
 
 	/**
 	 * Collects the plugin details for export.
@@ -155,73 +206,94 @@ class CustomSidebarsExport extends CustomSidebars {
 		die();
 	}
 
+
+	/*=============================*\
+	=================================
+	==                             ==
+	==           PREVIEW           ==
+	==                             ==
+	=================================
+	\*=============================*/
+
+
 	/**
 	 * Checks if a valid export-file was uploaded and stores the file contents
 	 * inside self::$import_data. The data is de-serialized.
+	 * In error case the response object will be set to error status.
 	 *
 	 * @since  1.6.0
+	 * @param  object $req Initial response object for JSON response.
+	 * @return object Updated response object.
 	 */
-	private function read_import_file() {
-		$error = false;
-
+	private function read_import_file( $req ) {
 		if ( is_array( $_FILES['data'] ) ) {
 			switch ( $_FILES['data']['error'] ) {
 				case UPLOAD_ERR_OK:
+					// This is the expeted status!
 					break;
 
 				case UPLOAD_ERR_NO_FILE:
-					$error = 'No file was uploaded';
-					break;
+					return self::req_err(
+						$req,
+						__( 'No file was uploaded', CSB_LANG )
+					);
 
 				case UPLOAD_ERR_INI_SIZE:
 				case UPLOAD_ERR_FORM_SIZE:
-					$error = 'Import file is too big';
-					break;
+					return self::req_err(
+						$req,
+						__( 'Import file is too big', CSB_LANG )
+					);
 
 				default:
-					$error = 'Something went wrong';
-					break;
+					return self::req_err(
+						$req,
+						__( 'Something went wrong', CSB_LANG )
+					);
 			}
 
-			if ( false === $error ) {
-				$content = file_get_contents( $_FILES['data']['tmp_name'] );
-				$data = json_decode( $content, true );
+			$content = file_get_contents( $_FILES['data']['tmp_name'] );
+			$data = json_decode( $content, true );
 
-				if (
-					is_array( $data['meta'] ) &&
-					is_array( $data['sidebars'] ) &&
-					is_array( $data['options'] ) &&
-					is_array( $data['widgets'] ) &&
-					is_array( $data['categories'] )
-				) {
-					$data['meta']['filename'] = $_FILES['data']['name'];
-					$data['ignore'] = array();
-					self::$import_data = $data;
+			if (
+				is_array( $data['meta'] ) &&
+				is_array( $data['sidebars'] ) &&
+				is_array( $data['options'] ) &&
+				is_array( $data['widgets'] ) &&
+				is_array( $data['categories'] )
+			) {
+				$data['meta']['filename'] = $_FILES['data']['name'];
+				$data['ignore'] = array();
+				self::$import_data = $data;
 
-					// Remove details that does not exist on current blog.
-					$this->prepare_data();
-				} else {
-					$error = 'The import file was not readable';
-				}
+				// Remove details that does not exist on current blog.
+				$this->prepare_data();
+			} else {
+				return self::req_err(
+					$req,
+					__( 'Unexpected import format', CSB_LANG )
+				);
 			}
-
-			if ( false !== $error ) {
-				self::set_error( __( $error, CSB_LANG ) );
-
-				// Redirect the user to the "Upload export file" section again.
-				$_GET['p'] = 'export';
-			}
+		} else {
+			return self::req_err(
+				$req,
+				__( 'No file uploaded', CSB_LANG )
+			);
 		}
+
+		return $req;
 	}
 
 	/**
 	 * Loads the import-data into the self::$import_data property.
 	 * The data was prepared by the import-preview screen.
+	 * Populates the response object.
 	 *
 	 * @since  1.6.0
+	 * @param  object $req Initial response object for JSON response.
+	 * @return object Updated response object.
 	 */
-	private function prepare_import_data() {
-		$error = false;
+	private function prepare_import_data( $req ) {
 		$data = json_decode( base64_decode( @$_POST['import_data'] ), true );
 
 		if (
@@ -264,15 +336,18 @@ class CustomSidebarsExport extends CustomSidebars {
 			}
 
 			// Finally: Import the config!
-			$this->do_import();
+			$req = $this->do_import( $req );
 		} else {
-			self::set_error(
-				__( 'Something unexpected happened and we could not finish the import. Please try again.', CSB_LANG )
+			return self::req_err(
+				$req,
+				__(
+					'Something unexpected happened and we could not finish ' .
+					'the import. Please try again.', CSB_LANG
+				)
 			);
 		}
 
-		// Redirect the user to the "Upload export file" section again.
-		//$_GET['p'] = 'export';
+		return $req;
 	}
 
 	/**
@@ -400,13 +475,25 @@ class CustomSidebarsExport extends CustomSidebars {
 		return self::$import_data;
 	}
 
+
+	/*============================*\
+	================================
+	==                            ==
+	==           IMPORT           ==
+	==                            ==
+	================================
+	\*============================*/
+
 	/**
 	 * Process the import data provided in self::$import_data.
 	 * Save the configuration to database.
+	 * Populates the response object.
 	 *
 	 * @since  1.6.0
+	 * @param  object $req Initial response object for JSON response.
+	 * @return object Updated response object.
 	 */
-	private function do_import() {
+	private function do_import( $req ) {
 		global $wp_registered_widgets;
 		$data = $this->selected_data;
 		$msg = array();
@@ -449,7 +536,10 @@ class CustomSidebarsExport extends CustomSidebars {
 		}
 		if ( $sidebar_count > 0 ) {
 			self::set_custom_sidebars( $sidebars );
-			$msg[] = sprintf( __( 'Imported %d custom sidebar(s)!', CSB_LANG ), $sidebar_count );
+			$msg[] = sprintf(
+				__( 'Imported %d custom sidebar(s)!', CSB_LANG ),
+				$sidebar_count
+			);
 		}
 
 
@@ -483,7 +573,12 @@ class CustomSidebarsExport extends CustomSidebars {
 			}
 			foreach ( $old_widgets as $widget_id ) {
 				$id_base = preg_replace( '/-[0-9]+$/', '', $widget_id );
-				$_POST = array('sidebar' => $sb_id, 'widget-' . $id_base => array(), 'the-widget-id' => $widget_id, 'delete_widget' => '1');
+				$_POST = array(
+					'sidebar' => $sb_id,
+					'widget-' . $id_base => array(),
+					'the-widget-id' => $widget_id,
+					'delete_widget' => '1',
+				);
 				$this->_refresh_widget_settings( $id_base );
 			}
 
@@ -502,12 +597,14 @@ class CustomSidebarsExport extends CustomSidebars {
 		$_POST = $orig_POST;
 		if ( $widget_count > 0 ) {
 			wp_set_sidebars_widgets( $def_sidebars );
-			$msg[] = sprintf( __( 'Imported %d widget(s)!', CSB_LANG ), $widget_count );
+			$msg[] = sprintf(
+				__( 'Imported %d widget(s)!', CSB_LANG ),
+				$widget_count
+			);
 		}
 
-		self::set_message( implode( '<br />', $msg ) );
-		// Redirect user to the "Select import file" screen.
-		$_GET['p'] = 'export';
+		$req->message = $msg;
+		return $req;
 	}
 
 	/**

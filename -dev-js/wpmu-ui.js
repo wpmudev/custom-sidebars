@@ -72,6 +72,8 @@
 	/**
 	 * Upgrades normal multiselect fields to chosen-input fields.
 	 *
+	 * This function is a bottle-neck in Firefox -> el.chosen() takes quite long
+	 *
 	 * @since  1.0.0
 	 * @param  jQuery|string base All children of this base element will be
 	 *                checked. If empty then the body element is used.
@@ -87,8 +89,105 @@
 			'width': '100%'
 		};
 
-		base.find( 'select[multiple]' ).chosen(options);
+		base.find( 'select[multiple]' ).each( function() {
+			var el = jQuery( this );
+
+			if ( el.data( 'wpmui-chosen' ) == '1' ) { return; }
+			el.data( 'wpmui-chosen', '1' );
+
+			// Prevent lags during page load by making this asynchronous.
+			window.setTimeout( function() {
+				el.chosen(options);
+			}, 1);
+		});
 	};
+
+	/**
+	 * Displays a WordPress-like message to the user.
+	 *
+	 * @since  1.0.0
+	 * @param  string|object args Message options object or message-text.
+	 *             args: {
+	 *               'message': '...'
+	 *               'type': 'ok|err'  // Style
+	 *               'close': true     // Show close button?
+	 *               'parent': '.wrap' // Element that displays the message
+	 *               'insert_after': 'h2' // Inside the parent the message
+	 *                                    // will be displayed after the
+	 *                                    // first element of this type.
+	 *                                    // Set to false to insert at top.
+	 *                'id': 'msg-ok'   // When set to a string value then the
+	 *                                 // the first call to "message()" will
+	 *                                 // insert a new message and the next
+	 *                                 // call will update the existing element.
+	 *                'class': 'msg1'  // Additional CSS class.
+	 *             }
+	 */
+	wpmUi.message = function message( args ) {
+		var parent, msg_box, btn_close, need_insert;
+
+		// Hides the message again, e.g. when user clicks the close icon.
+		var hide_message = function hide_message( ev ) {
+			ev.preventDefault();
+			msg_box.remove();
+			return false;
+		}
+
+		if ( 'undefined' == typeof args ) { return false; }
+
+		if ( 'string' == typeof args || args instanceof Array ) {
+			args = { 'message': args };
+		}
+
+		if ( args.message instanceof Array ){
+			args.message = args.message.join( '<br />' );
+		}
+
+		if ( ! args.message ) { return false; }
+
+		args.type = undefined == args.type ? 'ok' : args.type.toString().toLowerCase();
+		args.close = undefined == args.close ? true : args.close;
+		args.parent = undefined == args.parent ? '.wrap' : args.parent;
+		args.insert_after = undefined == args.insert_after ? 'h2' : args.insert_after;
+		args.id = undefined == args.id ? '' : args.id.toString().toLowerCase();
+		args.class = undefined == args.class ? '' : args.class.toString().toLowerCase();
+
+		parent = jQuery( args.parent ).first();
+		if ( ! parent.length ) { return false; }
+
+		if ( args.id && jQuery( '.wpmui-msg[data-id="' + args.id + '"]' ).length ) {
+			msg_box = jQuery( '.wpmui-msg[data-id="' + args.id + '"]' ).first();
+			need_insert = false;
+		} else {
+			msg_box = jQuery( '<div><p></p></div>' );
+			args.id && msg_box.attr( 'data-id', args.id );
+			need_insert = true;
+		}
+		msg_box.find( 'p' ).html( args.message );
+
+		msg_box.removeClass().addClass( 'updated wpmui-msg ' + args.class );
+		if ( 'err' == args.type ) {
+			msg_box.addClass( 'error' );
+		}
+
+		if ( need_insert ) {
+			if ( args.close ) {
+				btn_close = jQuery( '<a href="#" class="wpmui-close">&times;</a>' );
+				btn_close.prependTo( msg_box );
+
+				btn_close.click( hide_message );
+			}
+
+			if ( args.insert_after && parent.find( args.insert_after ).length ) {
+				parent = parent.find( args.insert_after ).first();
+				parent.after( msg_box );
+			} else {
+				parent.prepend( msg_box );
+			}
+		}
+
+		return true;
+	}
 
 
 	// ==========
@@ -202,10 +301,14 @@
 
 
 
+	/*============================*\
+	================================
+	==                            ==
+	==           WINDOW           ==
+	==                            ==
+	================================
+	\*============================*/
 
-	// ==========
-	// == UI Object: WINDOW ====================================================
-	// ==========
 
 
 	/**
@@ -556,10 +659,14 @@
 		 * Add event listeners.
 		 *
 		 * @since  1.0.0
+		 * @private
 		 */
 		function _hook() {
 			if ( _wnd ) {
 				_wnd.on( 'click', '.wpmui-wnd-close', _me.close );
+				_wnd.on( 'click', 'thead .check-column :checkbox', _toggle_checkboxes );
+				_wnd.on( 'click', 'tfoot .check-column :checkbox', _toggle_checkboxes );
+				_wnd.on( 'click', 'tbody .check-column :checkbox', _check_checkboxes );
 				jQuery( window ).on( 'resize', _check_size );
 			}
 		}
@@ -568,10 +675,12 @@
 		 * Remove all event listeners.
 		 *
 		 * @since  1.0.0
+		 * @private
 		 */
 		function _unhook() {
 			if ( _wnd ) {
 				_wnd.off( 'click', '.wpmui-wnd-close', _me.close );
+				_wnd.off( 'click', '.check-column :checkbox', _toggle_checkboxes );
 				jQuery( window ).off( 'resize', _check_size );
 			}
 		}
@@ -647,6 +756,7 @@
 		 * Makes sure that the popup window is not bigger than the viewport.
 		 *
 		 * @since  1.0.0
+		 * @private
 		 */
 		function _check_size() {
 			if ( ! _wnd ) { return false; }
@@ -666,6 +776,52 @@
 			_update_window( real_width, real_height );
 		}
 
+		/**
+		 * Toggle all checkboxes in a WordPress-ish table when the user clicks
+		 * the check-all checkbox in the header or footer.
+		 *
+		 * @since  1.0.0
+		 * @private
+		 */
+		function _toggle_checkboxes( ev ) {
+			var chk = jQuery( this ),
+				c = chk.prop( 'checked' ),
+				toggle = (ev.shiftKey);
+
+			// Toggle checkboxes inside the table body
+			chk
+				.closest( 'table' )
+				.children( 'tbody, thead, tfoot' )
+				.filter( ':visible' )
+				.children()
+				.children( '.check-column' )
+				.find( ':checkbox' )
+				.prop( 'checked', c);
+		}
+
+		/**
+		 * Toggle the check-all checkexbox in the header/footer in a
+		 * WordPress-ish table when a single checkbox in the body is changed.
+		 *
+		 * @since  1.0.0
+		 */
+		function _check_checkboxes( ev ) {
+			var chk = jQuery( this ),
+				unchecked = chk
+					.closest( 'tbody' )
+					.find( ':checkbox' )
+					.filter( ':visible' )
+					.not( ':checked' );
+
+			chk
+				.closest( 'table' )
+				.children( 'thead, tfoot' )
+				.find( ':checkbox' )
+				.prop( 'checked',  ( 0 === unchecked.length ) );
+
+			return true;
+		}
+
 		// Initialize the popup window.
 		_me = this;
 		_init();
@@ -680,10 +836,16 @@
 
 
 
+	/*===============================*\
+	===================================
+	==                               ==
+	==           AJAX-DATA           ==
+	==                               ==
+	===================================
+	\*===============================*/
 
-	// ==
-	// == UI Object: FORMDATA ==================================================
-	// ==
+
+
 
 
 	/**
@@ -1009,6 +1171,7 @@
 		 * support for FormData.
 		 *
 		 * @since  1.0.0
+		 * @private
 		 * @param  string action
 		 * @param  boolean use_formdata If set to true then we return FormData
 		 *                when the browser supports it. If support is missing or
@@ -1106,6 +1269,7 @@
 		 * Submit the data.
 		 *
 		 * @since  1.0.0
+		 * @private
 		 * @param  string action The ajax action to execute.
 		 */
 		function _load( action, type ) {
@@ -1152,6 +1316,7 @@
 		 * Send data via a normal form submit targeted at the invisible iframe.
 		 *
 		 * @since  1.0.0
+		 * @private
 		 * @param  string action The ajax action to execute.
 		 */
 		function _form_submit( action ) {

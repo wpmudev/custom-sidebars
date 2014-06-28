@@ -332,7 +332,7 @@ class CustomSidebarsCloning {
 	public function admin_scripts() {
 		wp_enqueue_script(
 			'csb-clone',
-			CSB_JS_URL . 'cloning.js',
+			CSB_JS_URL . 'cloning.min.js',
 			array( 'jquery' ),
 			'1.6',
 			true

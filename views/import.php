@@ -20,10 +20,9 @@ foreach ( $current_sidebars as $c_sidebar ) {
  * Helper function used only in this view.
  * It renders a list with sidebar-replacement details
  */
-function list_sidebar_replacement( $list ) {
+function list_sidebar_replacement( $label, $list ) {
 	$import = CustomSidebarsExport::get_import_data();
 	$theme_sidebars = CustomSidebars::get_sidebars();
-	$first = true;
 
 	foreach ( $list as $from_id => $to_id ) {
 		$from = $theme_sidebars[ $from_id ];
@@ -34,15 +33,13 @@ function list_sidebar_replacement( $list ) {
 			$to = $import['sidebars'][ $to_id ];
 		}
 		?>
-		<?php if ( ! $first ) : ?>
-			</tr>
-			<tr>
-		<?php endif; ?>
-		<td><?php echo esc_html( $from['name'] ); ?></td>
-		<td><i class="dashicons dashicons-arrow-right-alt hint"></i></td>
-		<td><?php echo esc_html( $to['name'] ); ?></td>
+		<tr>
+			<th scope="row"><?php echo esc_html( $label ); ?></th>
+			<td><?php echo esc_html( $from['name'] ); ?></td>
+			<td><i class="dashicons dashicons-arrow-right-alt hint"></i></td>
+			<td><?php echo esc_html( $to['name'] ); ?></td>
+		</tr>
 		<?php
-		$first = false;
 	}
 }
 
@@ -110,12 +107,12 @@ function list_sidebar_replacement( $list ) {
 	</div></h2>
 
 	<?php if ( ! empty( $import['meta']['description'] ) ) : ?>
-		<pre><?php echo esc_html( $import['meta']['description'] ); ?></pre>
+		<pre><?php echo esc_html( stripslashes( $import['meta']['description'] ) ); ?></pre>
 	<?php endif; ?>
 
 
 	<form class="frm-import csb-form">
-	<input type="hidden" name="process-import-data" value="1" />
+	<input type="hidden" name="do" value="import" />
 
 
 	<?php
@@ -255,14 +252,8 @@ function list_sidebar_replacement( $list ) {
 	$list = $import['options']['post_type_single'];
 	foreach ( $list as $key => $values ) {
 		$type = get_post_type_object( $key );
-		$rows = count( $values );
-		if ( $rows == 0 ) { continue; }
-		?>
-		<tr>
-			<th scope="row" rowspan="<?php echo esc_attr( $rows ) ?>"><?php echo esc_html( $type->labels->name ); ?></th>
-			<?php list_sidebar_replacement( $values ); ?>
-		</tr>
-		<?php
+		if ( ! count( $values ) ) { continue; }
+		list_sidebar_replacement( $type->labels->name, $values );
 	}
 	?>
 	</table>
@@ -271,17 +262,11 @@ function list_sidebar_replacement( $list ) {
 	<div class="section"><?php _e( 'Post-type archives', CSB_LANG ); ?></div>
 	<table cellspacing="1" cellpadding="4" class="csb-export-head">
 	<?php
-	$list = $import['options']['post_type_archives'];
+	$list = $import['options']['post_type_archive'];
 	foreach ( $list as $key => $values ) {
 		$type = get_post_type_object( $key );
-		$rows = count( $values );
-		if ( $rows == 0 ) { continue; }
-		?>
-		<tr>
-			<th scope="row" rowspan="<?php echo esc_attr( $rows ) ?>"><?php echo esc_html( $type->labels->name ); ?></th>
-			<?php list_sidebar_replacement( $values ); ?>
-		</tr>
-		<?php
+		if ( ! count( $values ) ) { continue; }
+		list_sidebar_replacement( $type->labels->name, $values );
 	}
 	?>
 	</table>
@@ -293,14 +278,8 @@ function list_sidebar_replacement( $list ) {
 	$list = $import['options']['category_single'];
 	foreach ( $list as $key => $values ) {
 		$cat = get_category( $key );
-		$rows = count( $values );
-		if ( $rows == 0 ) { continue; }
-		?>
-		<tr>
-			<th scope="row" rowspan="<?php echo esc_attr( $rows ) ?>"><?php echo esc_html( $cat->name ); ?></th>
-			<?php list_sidebar_replacement( $values ); ?>
-		</tr>
-		<?php
+		if ( ! count( $values ) ) { continue; }
+		list_sidebar_replacement( $cat->name, $values );
 	}
 	?>
 	</table>
@@ -309,17 +288,11 @@ function list_sidebar_replacement( $list ) {
 	<div class="section"><?php _e( 'Category archives', CSB_LANG ); ?></div>
 	<table cellspacing="1" cellpadding="4" class="csb-export-head">
 	<?php
-	$list = $import['options']['category_archives'];
+	$list = $import['options']['category_archive'];
 	foreach ( $list as $key => $values ) {
 		$cat = get_category( $key );
-		$rows = count( $values );
-		if ( $rows == 0 ) { continue; }
-		?>
-		<tr>
-			<th scope="row" rowspan="<?php echo esc_attr( $rows ) ?>"><?php echo esc_html( $cat->name ); ?></th>
-			<?php list_sidebar_replacement( $values ); ?>
-		</tr>
-		<?php
+		if ( ! count( $values ) ) { continue; }
+		list_sidebar_replacement( $cat->name, $values );
 	}
 	?>
 	</table>
@@ -327,31 +300,13 @@ function list_sidebar_replacement( $list ) {
 	<?php /* special pages */ ?>
 	<div class="section"><?php _e( 'Special pages', CSB_LANG ); ?></div>
 	<table cellspacing="1" cellpadding="4" class="csb-export-head">
-		<tr>
-			<?php $rows = count( $import['options']['blog'] ); ?>
-			<th scope="row" rowspan="<?php echo esc_attr( $rows ) ?>"><?php _e( 'Main blog page', CSB_LANG ); /* blog */ ?></th>
-			<?php list_sidebar_replacement( $import['options']['blog'] ); ?>
-		</tr>
-		<tr>
-			<?php $rows = count( $import['options']['date'] ); ?>
-			<th scope="row" rowspan="<?php echo esc_attr( $rows ) ?>"><?php _e( 'Date archives', CSB_LANG ); /* date */ ?></th>
-			<?php list_sidebar_replacement( $import['options']['date'] ); ?>
-		</tr>
-		<tr>
-			<?php $rows = count( $import['options']['authors'] ); ?>
-			<th scope="row" rowspan="<?php echo esc_attr( $rows ) ?>"><?php _e( 'Author archives', CSB_LANG ); /* authors */ ?></th>
-			<?php list_sidebar_replacement( $import['options']['authors'] ); ?>
-		</tr>
-		<tr>
-			<?php $rows = count( $import['options']['tags'] ); ?>
-			<th scope="row" rowspan="<?php echo esc_attr( $rows ) ?>"><?php _e( 'Tag archives', CSB_LANG ); /* tags */ ?></th>
-			<?php list_sidebar_replacement( $import['options']['tags'] ); ?>
-		</tr>
-		<tr>
-			<?php $rows = count( $import['options']['search'] ); ?>
-			<th scope="row" rowspan="<?php echo esc_attr( $rows ) ?>"><?php _e( 'Search results page', CSB_LANG ); /* search */ ?></th>
-			<?php list_sidebar_replacement( $import['options']['search'] ); ?>
-		</tr>
+		<?php
+		list_sidebar_replacement( __( 'Main blog page', CSB_LANG ), $import['options']['blog'] );
+		list_sidebar_replacement( __( 'Date archives', CSB_LANG ), $import['options']['date'] );
+		list_sidebar_replacement( __( 'Author archives', CSB_LANG ), $import['options']['authors'] );
+		list_sidebar_replacement( __( 'Tag archives', CSB_LANG ), $import['options']['tags'] );
+		list_sidebar_replacement( __( 'Search results page', CSB_LANG ), $import['options']['search'] );
+		?>
 	</table>
 	</div>
 	</div>
@@ -367,7 +322,7 @@ function list_sidebar_replacement( $list ) {
 	<input type="hidden" name="import_data" value="<?php echo esc_attr( base64_encode( json_encode( $import ) ) ); ?>" />
 	<p class="buttons">
 		<button type="button" class="btn-cancel button-link">Cancel</button>
-		<button class="button-primary"><i class="dashicons dashicons-migrate"></i> Import selected items</button>
+		<button class="button-primary btn-import"><i class="dashicons dashicons-migrate"></i> Import selected items</button>
 	</p>
 	</form>
 

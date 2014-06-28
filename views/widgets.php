@@ -30,18 +30,20 @@
 	===== LANGUAGE
 	============================================================================
 	*/ ?>
-	<div class="cs-lang"
-		data-title-edit="<?php _e( 'Edit', CSB_LANG ); ?>"
-		data-title-new="<?php _e( 'New Custom Sidebar', CSB_LANG ); ?>"
-		data-btn-edit="<?php _e( 'Save Changes', CSB_LANG ); ?>"
-		data-btn-new="<?php _e( 'Create Sidebar', CSB_LANG ); ?>"
-		data-title-delete="<?php _e( 'Delete Sidebar', CSB_LANG ); ?>"
-		data-title-location="<?php _e( 'Define where you want this sidebar to appear.', CSB_LANG ); ?>"
-		data-title-export="<?php _e( 'Import / Export Sidebars', CSB_LANG ); ?>"
-	>
-		<div class="cs-title-col1 cs-title"><h3><?php _e( 'Custom Sidebars', CSB_LANG ); ?></h3></div>
-		<div class="cs-title-col2 cs-title"><h3><?php _e( 'Theme Sidebars', CSB_LANG ); ?></h3></div>
-	</div>
+	<script>
+	csSidebarsData = {
+		'title_edit': "<?php _e( 'Edit', CSB_LANG ); ?>",
+		'title_new': "<?php _e( 'New Custom Sidebar', CSB_LANG ); ?>",
+		'btn_edit': "<?php _e( 'Save Changes', CSB_LANG ); ?>",
+		'btn_new': "<?php _e( 'Create Sidebar', CSB_LANG ); ?>",
+		'title_delete': "<?php _e( 'Delete Sidebar', CSB_LANG ); ?>",
+		'title_location': "<?php _e( 'Define where you want this sidebar to appear.', CSB_LANG ); ?>",
+		'title_export': "<?php _e( 'Import / Export Sidebars', CSB_LANG ); ?>",
+		'custom_sidebars': "<?php _e( 'Custom Sidebars', CSB_LANG ); ?>",
+		'theme_sidebars': "<?php _e( 'Theme Sidebars', CSB_LANG ); ?>",
+		'replaceable': <?php echo json_encode( CustomSidebars::get_options( 'modifiable' ) ); ?>
+	};
+	</script>
 
 
 	<?php /*
@@ -58,7 +60,7 @@
 			<?php _e( 'Edit', CSB_LANG ); ?>
 		</a>
 		<span class="cs-separator"> | </span>
-		<a class="cs-tool where-sidebar thickbox" href="<?php echo esc_url( admin_url( 'admin-ajax.php' ) ); ?>?action=cs-ajax&cs_action=where&id=" title="<?php _e( 'Where do you want the sidebar?', CSB_LANG ); ?>">
+		<a class="cs-tool where-sidebar" href="#" title="<?php _e( 'Where do you want the sidebar?', CSB_LANG ); ?>">
 			<?php _e( 'Sidebar Location', CSB_LANG ); ?>
 		</a>
 		<span class="cs-separator"> | </span>
@@ -72,7 +74,7 @@
 	*/ ?>
 	<div class="cs-theme-sidebar cs-toolbar">
 		<label for="cs-replaceable" class="cs-tool btn-replaceable">
-			<input type="checkbox" id="" class="has-label" data-label="<?php echo esc_attr( __( 'This sidebar can be replaced', CSB_LANG ) ); ?>" />
+			<input type="checkbox" id="" class="has-label chk-replaceable" data-label="<?php echo esc_attr( __( 'This sidebar can be replaced', CSB_LANG ) ); ?>" />
 			<?php _e( 'Make Replaceable', CSB_LANG ); ?>
 		</label>
 		<span class="cs-separator"> | </span>

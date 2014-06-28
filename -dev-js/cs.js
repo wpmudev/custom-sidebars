@@ -23,7 +23,6 @@ function CsSidebar(id, type) {
 	this.type = type;
 
 	this.sb = jQuery('#' + this.id);
-
 	this.widgets = '';
 	this.name = trim(this.sb.find('.sidebar-name h3').text());
 	this.description = trim(this.sb.find('.sidebar-description').text());
@@ -113,11 +112,14 @@ var csSidebars, msgTimer;
 		 */
 		extras: null,
 
-		/**
-		 * Shortcut to '#cs-widgets-extra .cs-lang'
-		 * @type: jQuery object
-		 */
-		lang: null,
+
+		/*====================================*\
+		========================================
+		==                                    ==
+		==           INITIALIZATION           ==
+		==                                    ==
+		========================================
+		\*====================================*/
 
 		init: function(){
 			csSidebars
@@ -131,53 +133,6 @@ var csSidebars, msgTimer;
 
 		/**
 		 * =====================================================================
-		 * Initialize the custom scrollbars on the right side.
-		 *
-		 * @since  1.0.0
-		 */
-		initScrollbar: function(){
-			var viewport = jQuery( '.viewport' ),
-				right_side = jQuery( '.widget-liquid-right' );
-
-			csSidebars.right
-				.addClass('overview')
-				.wrap('<div class="viewport" />');
-
-			viewport
-				.height($(window).height() - 60);
-
-			right_side
-				.height($(window).height())
-				.prepend('<div class="scrollbar"><div class="track"><div class="thumb"><div class="end"></div></div></div></div>')
-				.tinyscrollbar();
-
-			// Re-calculate the scrollbar size.
-			var update_scrollbars = function update_scrollbars() {
-				right_side.tinyscrollbar_update('relative');
-			};
-
-			$(window).resize(function() {
-				right_side.height($(window).height());
-				viewport.height($(window).height() - 60);
-				right_side.tinyscrollbar_update('relative');
-			});
-
-			right_side.click(function(){
-				setTimeout( update_scrollbars, 400 );
-			});
-
-			right_side.hover(
-				function() {
-					$('.scrollbar').fadeIn();
-				}, function() {
-					$('.scrollbar').fadeOut();
-				}
-			);
-			return csSidebars;
-		},
-
-		/**
-		 * =====================================================================
 		 * Initialize DOM and find jQuery objects
 		 *
 		 * @since 1.0.0
@@ -185,7 +140,6 @@ var csSidebars, msgTimer;
 		initControls: function(){
 			csSidebars.right = jQuery( '#widgets-right' );
 			csSidebars.extras = jQuery( '#cs-widgets-extra' );
-			csSidebars.lang = csSidebars.extras.find( '.cs-lang' );
 
 			if ( null == csSidebars.edit_form ) {
 				csSidebars.edit_form = csSidebars.extras.find( '.cs-editor' ).clone();
@@ -216,6 +170,57 @@ var csSidebars, msgTimer;
 
 		/**
 		 * =====================================================================
+		 * Initialize the custom scrollbars on the right side.
+		 *
+		 * @since  1.0.0
+		 */
+		initScrollbar: function(){
+			var right_side = jQuery( '.widget-liquid-right' )
+				wnd = jQuery( window ),
+				viewport = null,
+				scrollbar = null;
+
+			csSidebars.right
+				.addClass('overview')
+				.wrap('<div class="viewport" />');
+
+			viewport = jQuery( '.viewport' )
+				.height( wnd.height() - 60 );
+
+			right_side
+				.height( wnd.height() )
+				.prepend('<div class="scrollbar"><div class="track"><div class="thumb"><div class="end"></div></div></div></div>')
+				.tinyscrollbar();
+
+			scrollbar = right_side.data( 'plugin_tinyscrollbar' );
+
+			// Re-calculate the scrollbar size.
+			var update_scrollbars = function update_scrollbars() {
+				scrollbar.update( 'relative' );
+			};
+
+			wnd.resize(function() {
+				right_side.height( wnd.height() );
+				viewport.height( wnd.height() - 60 );
+				scrollbar.update( 'relative' );
+			});
+
+			right_side.click(function(){
+				setTimeout( update_scrollbars, 400 );
+			});
+
+			right_side.hover(
+				function() {
+					$('.scrollbar').fadeIn();
+				}, function() {
+					$('.scrollbar').fadeOut();
+				}
+			);
+			return csSidebars;
+		},
+
+		/**
+		 * =====================================================================
 		 * Arrange sidebars in left/right columns.
 		 * Left column: Custom sidebars. Right column: Theme sidebars.
 		 *
@@ -224,8 +229,8 @@ var csSidebars, msgTimer;
 		initColumns: function() {
 			var col1 = csSidebars.right.find( '.sidebars-column-1' ),
 				col2 = csSidebars.right.find( '.sidebars-column-2' ),
-				title1 = csSidebars.extras.find( '.cs-title-col1' ),
-				title2 = csSidebars.extras.find( '.cs-title-col2' ),
+				title1 = jQuery( '<div class="cs-title"><h3></h3></div>' ),
+				title2 = jQuery( '<div class="cs-title"><h3></h3></div>' ),
 				sidebars = csSidebars.right.find( '.widgets-holder-wrap' );
 
 			if ( ! col2.length ) {
@@ -233,6 +238,8 @@ var csSidebars, msgTimer;
 				col2.appendTo( csSidebars.right );
 			}
 
+			title1.find('h3').text( csSidebarsData.custom_sidebars );
+			title2.find('h3').text( csSidebarsData.theme_sidebars );
 			col1.prepend( title1 );
 			col2.prepend( title2 );
 
@@ -262,8 +269,8 @@ var csSidebars, msgTimer;
 			// Button: Add new sidebar.
 			btn_create.click(function() {
 				data.id = '';
-				data.title = csSidebars.lang.data( 'title-new' );
-				data.button = csSidebars.lang.data( 'btn-new' );
+				data.title = csSidebarsData.title_new;
+				data.button = csSidebarsData.btn_new;
 				data.description = '';
 				data.name = '';
 
@@ -275,6 +282,97 @@ var csSidebars, msgTimer;
 
 			return csSidebars;
 		},
+
+		/**
+		 * =====================================================================
+		 * Initialization function, creates a CsSidebar object for each sidebar.
+		 *
+		 * @since  1.0.0
+		 */
+		initSidebars: function(){
+			csSidebars.right.find('.widgets-sortables').each(function() {
+				var sb, state, i,
+					me = jQuery( this ),
+					id = me.attr('id');
+
+				if ( me.data( 'cs-init' ) === true ) { return; }
+				me.data( 'cs-init', true );
+
+				if ( csSidebars.isCustomSidebar( this ) ) {
+					sb = csSidebars.add( id, 'custom' );
+				} else {
+					sb = csSidebars.add( id, 'theme' );
+					state = false;
+					for ( i = 0; i < csSidebarsData.replaceable.length; i += 1 ) {
+						if ( csSidebarsData.replaceable[i] == id ) {
+							state = true;
+							break;
+						}
+					}
+					csSidebars.setReplaceable( sb, state, false );
+				}
+			});
+			return csSidebars;
+		},
+
+		/**
+		 * =====================================================================
+		 * Hook up all the functions in the sidebar toolbar.
+		 * Toolbar is in the bottom of each sidebar.
+		 *
+		 * @since  1.0.0
+		 */
+		initToolbars: function() {
+			var tool_action = function( ev ) {
+				var me = jQuery( ev.target ).closest( '.cs-tool' ),
+					id = csSidebars.getIdFromEditbar( me ),
+					sb = csSidebars.find( id );
+
+				// DELETE sidebar
+				if ( me.hasClass( 'delete-sidebar' ) ) {
+					csSidebars.showRemove( sb );
+
+					return false;
+				} else
+
+				// EDIT dialog
+				if ( me.hasClass( 'edit-sidebar' ) ) {
+					var data = {
+						id: sb.getID(),
+						title: csSidebarsData.title_edit + ' ' + sb.name,
+						button: csSidebarsData.btn_edit
+					};
+					csSidebars.showEditor( data );
+
+					return false;
+				} else
+
+				// LOCATION popup
+				if ( me.hasClass( 'where-sidebar' ) ) {
+					csSidebars.showLocations( sb );
+					return false;
+				} else
+
+				// TOGGLE REPLACEABLE flag
+				if ( me.hasClass( 'btn-replaceable' ) ) {
+					csSidebars.setReplaceable( sb )
+					return true;
+				}
+			};
+
+			csSidebars.right.on('click', '.cs-tool', tool_action);
+
+			return csSidebars;
+		},
+
+
+		/*============================*\
+		================================
+		==                            ==
+		==           EDITOR           ==
+		==                            ==
+		================================
+		\*============================*/
 
 		/**
 		 * =====================================================================
@@ -295,13 +393,13 @@ var csSidebars, msgTimer;
 			// Hide the "extra" fields
 			var hide_extras = function hide_extras() {
 				popup.$().removeClass( 'csb-has-more' );
-				popup.size( null, 280 );
+				popup.size( null, 205 );
 			};
 
 			// Show the "extra" fields
 			var show_extras = function show_extras() {
 				popup.$().addClass( 'csb-has-more' );
-				popup.size( null, 580 );
+				popup.size( null, 540 );
 			};
 
 			// Toggle the "extra" fields based on the checkbox state.
@@ -351,26 +449,45 @@ var csSidebars, msgTimer;
 				}
 			};
 
+			// Close popup after ajax request
+			var handle_done_save = function handle_done_save( resp, okay, xhr ) {
+				var msg = {}, sb;
+
+				popup
+					.loading( false )
+					.close();
+
+				msg.message = resp.message;
+				msg.parent = '#widgets-right';
+				msg.insert_after = '#cs-title-options';
+				msg.id = 'editor';
+
+				if ( okay ) {
+					if ( 'update' == resp.action ) {
+						// Update the name/description of the sidebar.
+						sb = csSidebars.find( resp.data.id );
+						csSidebars.updateSidebar( sb, resp.data );
+					} else if ( 'insert' == resp.action ) {
+						// Insert a brand new sidebar container.
+						csSidebars.insertSidebar( resp.data );
+					}
+				} else {
+					msg.type = 'err';
+				}
+				wpmUi.message( msg );
+			};
+
 			// Submit the data via ajax.
 			var save_data = function save_data() {
 				var form = popup.$().find( 'form' );
 
-				// Close popup after ajax request
-				var handle_done = function handle_done( resp, okay, xhr ) {
-					// Remove animation.
-					popup.loading( false );
-
-					if ( okay ) {
-						popup.close();
-					}
-				};
 
 				// Start loading-animation.
 				popup.loading( true );
 
 				ajax.reset()
 					.data( form )
-					.ondone( handle_done )
+					.ondone( handle_done_save )
 					.load_json();
 
 				return false;
@@ -410,13 +527,83 @@ var csSidebars, msgTimer;
 		},
 
 		/**
-		 * =====================================================================
+		 * Update the name/description of an existing sidebar container.
+		 *
+		 * @since  1.0.0
+		 */
+		updateSidebar: function( sb, data ) {
+			// Update the title.
+			sb.sb
+				.find( '.sidebar-name h3' )
+				.text( data.name );
+
+			// Update description.
+			sb.sb
+				.find( '.sidebar-description' )
+				.html( '<p class="description">' + data.description + '</p>' );
+
+			return csSidebars;
+		},
+
+		/**
+		 * Insert a brand new sidebar container.
+		 *
+		 * @since  1.0.0
+		 */
+		insertSidebar: function( data ) {
+			var box = jQuery( '<div class="widgets-holder-wrap"></div>' ),
+				inner = jQuery( '<div class="widgets-sortables ui-sortable"></div>' ),
+				name = jQuery( '<div class="sidebar-name"><div class="sidebar-name-arrow"><br></div><h3></h3></div>' ),
+				desc = jQuery( '<div class="sidebar-description"></div>' ),
+				col = csSidebars.right.find( '.sidebars-column-1' );
+
+			// Set sidebar specific values.
+			inner.attr( 'id', data.id );
+			name.find( 'h3' ).text( data.name );
+			desc.html( '<p class="description">' + data.description + '</p>' );
+
+			// Assemble the new sidebar box in correct order.
+			name.appendTo( inner );
+			desc.appendTo( inner );
+			inner.appendTo( box );
+
+			// Display the new sidebar on screen.
+			box.appendTo( col );
+
+			// Remove hooks added by wpWidgets.init()
+			jQuery( '#widgets-right .sidebar-name' ).unbind( 'click' );
+			jQuery( '#widgets-left .sidebar-name' ).unbind( 'click' );
+			jQuery( document.body ).unbind('click.widgets-toggle');
+			jQuery('.widgets-chooser')
+				.off( 'click.widgets-chooser' )
+				.off( 'keyup.widgets-chooser' );
+
+			// Re-Init the page using wpWidgets.init()
+			wpWidgets.init();
+
+			// Add the plugin toolbar to the new sidebar.
+			csSidebars.initSidebars();
+
+			return csSidebars;
+		},
+
+
+		/*============================*\
+		================================
+		==                            ==
+		==           EXPORT           ==
+		==                            ==
+		================================
+		\*============================*/
+
+		/**
 		 * Shows a popup window with the export/import form.
 		 *
 		 * @since  1.6.0
 		 */
 		showExport: function() {
-			var popup = null;
+			var popup = null,
+				ajax = null;
 
 			// Download export file.
 			var do_export = function do_export( ev ) {
@@ -432,12 +619,21 @@ var csSidebars, msgTimer;
 
 			// Ajax handler after import file was uploaded.
 			var handle_done_upload = function handle_done_upload( resp, okay, xhr ) {
+				var msg = {};
 				popup.loading( false );
 
 				if ( okay ) {
 					popup
 						.size( 900, 600 )
-						.content( resp );
+						.content( resp.html );
+				} else {
+					msg.message = resp.message;
+					msg.parent = popup.$().find( '.wpmui-wnd-content' );
+					msg.insert_after = false;
+					msg.id = 'export';
+					msg.class = 'wpmui-wnd-err';
+					msg.type = 'err';
+					wpmUi.message( msg );
 				}
 			};
 
@@ -449,7 +645,7 @@ var csSidebars, msgTimer;
 				popup.loading( true );
 				ajax.data( form )
 					.ondone( handle_done_upload )
-					.load_text( 'cs-ajax' );
+					.load_json( 'cs-ajax' );
 
 				ev.preventDefault();
 				return false;
@@ -468,20 +664,52 @@ var csSidebars, msgTimer;
 				}
 			};
 
-			// Import preview: Cancel
+			// Import preview: Cancel.
 			var show_overview = function show_overview() {
 				popup
 					.size( 740, 480 )
 					.content( csSidebars.export_form );
 			};
 
+			// Ajax handler after import was done.
+			var handle_done_import = function handle_done_import( resp, okay, xhr ) {
+				var msg = {};
+				popup
+					.loading( false )
+					.close();
+
+				msg.message = resp.message;
+				msg.parent = '#widgets-right';
+				msg.insert_after = '#cs-title-options';
+				msg.id = 'import';
+
+				if ( ! okay ) {
+					msg.type = 'err';
+				}
+				wpmUi.message( msg );
+			};
+
+			// Import preview: Import the data.
+			var do_import = function do_import() {
+				var form = popup.$().find( '.frm-import' );
+
+				popup.loading( true );
+
+				ajax.reset()
+					.data( form )
+					.ondone( handle_done_import )
+					.load_json();
+			};
+
 			// Show the popup.
 			popup = wpmUi.popup()
 				.modal( true )
 				.size( 740, 480 )
-				.title( csSidebars.lang.data( 'title-export' ) )
+				.title( csSidebarsData.title_export )
 				.content( csSidebars.export_form )
 				.show();
+
+			ajax = wpmUi.ajax( null, 'cs-ajax' );
 
 			// Events for the Import / Export view.
 			popup.$().on( 'submit', '.frm-export', do_export );
@@ -490,9 +718,19 @@ var csSidebars, msgTimer;
 			// Events for the Import preview.
 			popup.$().on( 'change', '#import-widgets', toggle_widgets );
 			popup.$().on( 'click', '.btn-cancel', show_overview );
+			popup.$().on( 'click', '.btn-import', do_import );
 
 			return false;
 		},
+
+
+		/*============================*\
+		================================
+		==                            ==
+		==           REMOVE           ==
+		==                            ==
+		================================
+		\*============================*/
 
 		/**
 		 * =====================================================================
@@ -511,12 +749,23 @@ var csSidebars, msgTimer;
 
 			// Closes the delete confirmation.
 			var close_popup = function close_popup() {
-				popup.close();
+				popup
+					.loading( false )
+					.close();
 			};
 
 			// Handle response of the delete ajax-call.
 			var handle_done = function handle_done( resp, okay, xhr ) {
-				popup.loading( false );
+				var msg = {};
+
+				popup
+					.loading( false )
+					.close();
+
+				msg.message = resp.message;
+				msg.parent = '#widgets-right';
+				msg.insert_after = '#cs-title-options';
+				msg.id = 'editor';
 
 				if ( okay ) {
 					// Remove the Sidebar from the page.
@@ -527,9 +776,11 @@ var csSidebars, msgTimer;
 
 					// Remove object from internal collection.
 					csSidebars.remove( id );
-
-					popup.close();
+				} else {
+					msg.type = 'err';
 				}
+
+				wpmUi.message( msg );
 			}
 
 			// Deletes the sidebar and closes the confirmation popup.
@@ -549,7 +800,7 @@ var csSidebars, msgTimer;
 			popup = wpmUi.popup()
 				.modal( true )
 				.size( null, 160 )
-				.title( csSidebars.lang.data( 'title-delete' ) )
+				.title( csSidebarsData.title_delete )
 				.content( csSidebars.delete_form )
 				.onshow( insert_name )
 				.show();
@@ -563,6 +814,15 @@ var csSidebars, msgTimer;
 			return false;
 		},
 
+
+		/*==============================*\
+		==================================
+		==                              ==
+		==           LOCATION           ==
+		==                              ==
+		==================================
+		\*==============================*/
+
 		/**
 		 * =====================================================================
 		 * Show popup to assign sidebar to default categories.
@@ -572,6 +832,7 @@ var csSidebars, msgTimer;
 		showLocations: function( sb ){
 			var popup = null,
 				ajax = null,
+				form = null,
 				id = sb.getID();
 
 			// Display the location data after it was loaded by ajax.
@@ -712,9 +973,9 @@ var csSidebars, msgTimer;
 					}
 				}
 
-				wpmUi.upgrade_multiselect();
+				wpmUi.upgrade_multiselect( popup.$() );
 
-			};
+			}; // end: handle_done_load()
 
 			// User clicks on "replace <sidebar> for <category>" checkbox.
 			var toggle_details = function toggle_details( ev ) {
@@ -731,17 +992,26 @@ var csSidebars, msgTimer;
 
 			// After saving data via ajax is done.
 			var handle_done_save = function handle_done_save( resp, okay, xhr ) {
-				popup.loading( false );
+				var msg = {};
 
-				if ( okay ) {
-					popup.close();
+				popup
+					.loading( false )
+					.close();
+
+				msg.message = resp.message;
+				msg.parent = '#widgets-right';
+				msg.insert_after = '#cs-title-options';
+				msg.id = 'editor';
+
+				if ( ! okay ) {
+					msg.type = 'err';
 				}
+
+				wpmUi.message( msg );
 			};
 
 			// Submit the data and close the popup.
 			var save_data = function save_data() {
-				var form = popup.$().find( '.frm-location' );
-
 				popup.loading( true );
 
 				ajax.reset()
@@ -754,11 +1024,13 @@ var csSidebars, msgTimer;
 			popup = wpmUi.popup()
 				.modal( true )
 				.size( null, 500 )
-				.title( csSidebars.lang.data( 'title-location' ) )
+				.title( csSidebarsData.title_location )
 				.content( csSidebars.location_form )
 				.show();
 
 			popup.loading( true );
+			form = popup.$().find( '.frm-location' );
+			form.find( '.sb-id' ).val( id );
 
 			// Initialize ajax object.
 			ajax = wpmUi.ajax( null, 'cs-ajax' );
@@ -778,90 +1050,68 @@ var csSidebars, msgTimer;
 			return false;
 		},
 
-		/**
-		 * =====================================================================
-		 * Initialization function, creates a CsSidebar object for each sidebar.
-		 *
-		 * @since  1.0.0
-		 */
-		initSidebars: function(){
-			csSidebars.right.find('.widgets-sortables').each(function() {
-				var id = $(this).attr('id');
-
-				if ( csSidebars.isCustomSidebar( this ) ) {
-					csSidebars.add( id, 'custom' );
-				} else {
-					csSidebars.add( id, 'theme' );
-				}
-			});
-			return csSidebars;
-		},
+		/*======================================*\
+		==========================================
+		==                                      ==
+		==           REPLACEABLE FLAG           ==
+		==                                      ==
+		==========================================
+		\*======================================*/
 
 		/**
 		 * =====================================================================
-		 * Hook up all the functions in the sidebar toolbar.
-		 * Toolbar is in the bottom of each sidebar.
+		 * Change the replaceable flag
 		 *
-		 * @since  1.0.0
+		 * @since 1.0.0
 		 */
-		initToolbars: function() {
-			var tool_action = function( ev ) {
-				var me = jQuery( ev.srcElement ).closest( '.cs-tool' ),
-					id = csSidebars.getIdFromEditbar( me ),
-					sb = csSidebars.find( id );
+		setReplaceable: function( sb, state, do_ajax ) {
+			var ajax,
+				the_bar = jQuery( sb.sb ).closest( '.widgets-holder-wrap' ),
+				chk = the_bar.find( '.cs-toolbar .chk-replaceable' ),
+				marker = the_bar.find( '.replace-marker' );
 
-				// DELETE sidebar
-				if ( me.hasClass( 'delete-sidebar' ) ) {
-					csSidebars.showRemove( sb );
+			if ( undefined == state ) { state = chk.prop( 'checked' ); }
+			if ( undefined == do_ajax ) { do_ajax = true; }
 
-					return false;
-				} else
+			if ( chk.data( 'active' ) == state ) {
+				return false;
+			}
+			chk.data( 'active', state );
+			chk.prop( 'checked', state );
 
-				// EDIT dialog
-				if ( me.hasClass( 'edit-sidebar' ) ) {
-					var data = {
-						id: sb.getID(),
-						title: csSidebars.lang.data('title-edit') + ' ' + sb.name,
-						button: csSidebars.lang.data('btn-edit')
-					};
-					csSidebars.showEditor( data );
-
-					return false;
-				} else
-
-				// LOCATION popup
-				if ( me.hasClass( 'where-sidebar' ) ) {
-					csSidebars.showLocations( sb );
-					return false;
-				} else
-
-				// TOGGLE REPLACEABLE flag
-				if ( me.hasClass( 'btn-replaceable' ) ) {
-					var chk = me.find( 'input[type=checkbox]' ),
-						the_bar = jQuery( sb.sb ).closest( '.widgets-holder-wrap' ),
-						marker = the_bar.find( '.replace-marker' );
-
-					if ( chk.prop('checked') ) {
-						if ( ! marker.length ) {
-							jQuery( '<div></div>' )
-								.appendTo( the_bar )
-								.addClass( 'replace-marker' )
-								.attr( 'data-label', chk.attr( 'data-label' ) );
-						}
-						the_bar.addClass( 'replaceable' );
-					} else {
-						marker.remove();
-						the_bar.removeClass( 'replaceable' );
-					}
-					// TODO: Make ajax call to save flag
-					return true;
+			if ( state ) {
+				if ( ! marker.length ) {
+					jQuery( '<div></div>' )
+						.appendTo( the_bar )
+						.addClass( 'replace-marker' )
+						.attr( 'data-label', chk.attr( 'data-label' ) );
 				}
-			};
+				the_bar.addClass( 'replaceable' );
+			} else {
+				marker.remove();
+				the_bar.removeClass( 'replaceable' );
+			}
 
-			csSidebars.right.on('click', '.cs-tool', tool_action);
-
-			return csSidebars;
+			if ( do_ajax ) {
+				ajax = wpmUi.ajax( null, 'cs-ajax' );
+				ajax.reset()
+					.data({
+						'do': 'replaceable',
+						'state': state,
+						'sb': sb.getID()
+					})
+					.load_json();
+			}
 		},
+
+
+		/*=============================*\
+		=================================
+		==                             ==
+		==           HELPERS           ==
+		==                             ==
+		=================================
+		\*=============================*/
 
 		/**
 		 * =====================================================================

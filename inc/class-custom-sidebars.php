@@ -14,9 +14,36 @@ require_once( 'class-custom-sidebars-export.php' );
  * The CustomSidebars class encapsulates all our plugin logic.
  */
 class CustomSidebars {
+	/**
+	 * Prefix used for the sidebar-ID of custom sidebars. This is also used to
+	 * distinguish theme sidebars from custom sidebars.
+	 * @var string
+	 */
 	static protected $sidebar_prefix = 'cs-';
 
+	/**
+	 * Capability required to use *any* of the plugin features. If user does not
+	 * have this capability then he will not see any change on admin dashboard.
+	 * @var string
+	 */
 	static protected $cap_required = 'switch_themes';
+
+	/**
+	 * ID of the WP-Pointer used to introduce the plugin upon activation
+	 *
+	 * ========== Pointer ==========
+	 *  Internal ID:  wpmudcs1 [WPMUDev CustomSidebars 1]
+	 *  Point at:     #menu-appearance (Appearance menu item)
+	 *  Title:        Custom Sidebars Pro
+	 *  Description:  Create and edit custom sidebars in your widget screen!
+	 * -------------------------------------------------------------------------
+	 *
+	 * @see http://premium.wpmudev.org/blog/using-wordpress-pointers-in-your-own-plugins/
+	 * @var string
+	 */
+	static protected $pointer_id = 'wpmudcs1';
+
+
 
 	/**
 	 * Returns the singleton instance of the custom sidebars class.
@@ -41,9 +68,9 @@ class CustomSidebars {
 		/**
 		 * Hook up the plugin with WordPress.
 		 */
-		add_action( 'save_post', array( $this, 'store_replacements' ) );
 		add_action( 'init', array( $this, 'load_text_domain' ) );
-		add_action( 'admin_enqueue_scripts', array( $this, 'add_styles' ) );
+		add_action( 'admin_enqueue_scripts', array( $this, 'add_widget_scripts' ) );
+		add_action( 'admin_enqueue_scripts', array( $this, 'add_pointer' ) );
 
 		// AJAX actions
 		add_action( 'wp_ajax_cs-ajax', array( $this, 'ajax_handler' ) );
@@ -64,16 +91,83 @@ class CustomSidebars {
 	 * Load javascript and CSS files used by the plugin.
 	 *
 	 * @since 1.0.0
+	 * @param string $hook Name of current admin-page.
 	 */
-	public function add_styles( $hook ) {
+	public function add_widget_scripts( $hook ) {
 		if ( 'widgets.php' == $hook ) {
-			wp_enqueue_script( 'tiny-scrollbar', CSB_JS_URL . 'tiny-scrollbar.js', array( 'jquery' ) );
-			wp_enqueue_script( 'cs_script', CSB_JS_URL . 'cs.dev.js', array( 'tiny-scrollbar') );
-			wp_enqueue_script( 'wpmu-ui', CSB_JS_URL . 'wpmu-ui.js', array( 'jquery') );
+			wp_enqueue_script( 'tiny-scrollbar', CSB_JS_URL . 'tiny-scrollbar.min.js', array( 'jquery' ) );
+			wp_enqueue_script( 'cs_script', CSB_JS_URL . 'cs.min.js', array( 'tiny-scrollbar') );
+			wp_enqueue_script( 'wpmu-ui', CSB_JS_URL . 'wpmu-ui.min.js', array( 'jquery') );
 
-			wp_enqueue_style( 'cs_style', CSB_CSS_URL . 'cs_style.css' );
+			wp_enqueue_style( 'cs_style', CSB_CSS_URL . 'cs.css' );
 			wp_enqueue_style( 'wpmu-ui', CSB_CSS_URL . 'wpmu-ui.css' );
 		}
+	}
+
+	/**
+	 * Display the Introduction-pointer if user did not see it yet.
+	 *
+	 * @since 1.6.0
+	 * @param string $hook Name of current admin-page.
+	 */
+	public function add_pointer( $hook ) {
+		// Permission check.
+		if ( ! current_user_can( self::$cap_required ) ) {
+			return;
+		}
+
+		// Find out which pointer IDs this user has already seen.
+		$seen = (string) get_user_meta( get_current_user_id(), 'dismissed_wp_pointers', true );
+		$seen_list = explode( ',', $seen );
+
+		// Handle our first pointer announcing the plugin's new settings screen.
+		if ( ! in_array( self::$pointer_id, $seen_list ) ) {
+			add_action(
+				'admin_print_footer_scripts',
+				array( $this, 'footer_pointer_scripts' )
+			);
+
+			// Load the JS/CSS for WP Pointers
+			wp_enqueue_script( 'wp-pointer' );
+			wp_enqueue_style( 'wp-pointer' );
+		}
+	}
+
+	/**
+	 * Output HTML/scripts to show introduction pointer in the admin footer.
+	 *
+	 * @since  1.6.0
+	 */
+	public function footer_pointer_scripts() {
+		?>
+		<script>
+			jQuery(document).ready(function() {
+				if ( typeof( jQuery().pointer ) != 'undefined' ) {
+					jQuery( '#menu-appearance' ).pointer({
+						content: '<h3><?php _e( 'Custom Sidebars Pro', CSB_LANG ); ?></h3>' +
+							'<p><?php printf(
+								__(
+									'Now you can create and edit custom ' .
+									'sidebars in your ' .
+									'<a href="%1$s">Widgets screen</a>!', CSB_LANG
+								),
+								admin_url( 'widgets.php' )
+							); ?></p>',
+						position: {
+							edge: 'left',
+							align: 'center'
+						},
+						close: function() {
+							jQuery.post( ajaxurl, {
+								pointer: '<?php echo esc_js( self::$pointer_id ) ?>',
+								action: 'dismiss-wp-pointer'
+							});
+						}
+					}).pointer('open');
+				}
+			});
+		</script>
+		<?php
 	}
 
 
@@ -250,6 +344,11 @@ class CustomSidebars {
 	 * @since 1.6.0
 	 */
 	static public function set_options( $value ) {
+		// Permission check.
+		if ( ! current_user_can( self::$cap_required ) ) {
+			return;
+		}
+
 		update_option( 'cs_modifiable', $value );
 	}
 
@@ -264,6 +363,14 @@ class CustomSidebars {
 		if ( ! is_array( $sidebars ) ) {
 			$sidebars = array();
 		}
+
+		// Remove invalid items.
+		foreach ( $sidebars as $key => $data ) {
+			if ( ! is_array( $data ) ) {
+				unset( $sidebars[ $key ] );
+			}
+		}
+
 		return $sidebars;
 	}
 
@@ -274,6 +381,11 @@ class CustomSidebars {
 	 * @since 1.6.0
 	 */
 	static public function set_custom_sidebars( $value ) {
+		// Permission check.
+		if ( ! current_user_can( self::$cap_required ) ) {
+			return;
+		}
+
 		update_option( 'cs_sidebars', $value );
 	}
 
@@ -366,8 +478,10 @@ class CustomSidebars {
 	 * Returns a list of all sidebars available.
 	 * Depending on the parameter this will be either all sidebars or only
 	 * sidebars defined by the current theme.
+	 *
+	 * @param string $type [all|cust|theme] What kind of sidebars to return.
 	 */
-	static public function get_sidebars( $include_custom_sidebars = FALSE ) {
+	static public function get_sidebars( $type = 'theme' ) {
 		global $wp_registered_sidebars;
 		$allsidebars = $wp_registered_sidebars;
 		$result = array();
@@ -380,17 +494,22 @@ class CustomSidebars {
 		}
 
 		ksort( $allsidebars );
-		if ( $include_custom_sidebars ) {
+		if ( $type == 'all' ) {
 			$result = $allsidebars;
-		} else {
-			$themesidebars = array();
+		} else if ( $type == 'cust' ) {
 			foreach ( $allsidebars as $key => $sb ) {
-				// Remove sidebars that start with the custom-sidebar prefix.
-				if ( substr( $key, 0, 3 ) != self::$sidebar_prefix ) {
-					$themesidebars[$key] = $sb;
+				// Only keep custom sidebars in the results.
+				if ( substr( $key, 0, 3 ) == self::$sidebar_prefix ) {
+					$result[$key] = $sb;
 				}
 			}
-			$result = $themesidebars;
+		} else if ( $type == 'theme' ) {
+			foreach ( $allsidebars as $key => $sb ) {
+				// Remove custom sidebars from results.
+				if ( substr( $key, 0, 3 ) != self::$sidebar_prefix ) {
+					$result[$key] = $sb;
+				}
+			}
 		}
 
 		return $result;
@@ -399,12 +518,15 @@ class CustomSidebars {
 	/**
 	 * Returns the sidebar with the specified ID.
 	 * Sidebar can be both a custom sidebar or theme sidebar.
+	 *
+	 * @param string $id Sidebar-ID.
+	 * @param string $type [all|cust|theme] What kind of sidebars to check.
 	 */
-	static public function get_sidebar( $id  ) {
+	static public function get_sidebar( $id, $type = 'all' ) {
 		if ( empty( $id ) ) { return false; }
 
 		// Get all sidebars
-		$sidebars = self::get_sidebars( true );
+		$sidebars = self::get_sidebars( $type );
 
 		if ( isset( $sidebars[ $id ] ) ) {
 			return $sidebars[ $id ];
@@ -575,7 +697,7 @@ class CustomSidebars {
 	 *
 	 * @since  1.0.0
 	 */
-	static public function json_response( $obj ) {
+	static protected function json_response( $obj ) {
 		header( 'Content-Type: application/json' );
 		echo json_encode( $obj );
 		die();
@@ -586,10 +708,24 @@ class CustomSidebars {
 	 *
 	 * @since  1.6.0
 	 */
-	static public function plain_response( $data ) {
+	static protected function plain_response( $data ) {
 		header( 'Content-Type: text/plain' );
 		echo $data;
 		die();
+	}
+
+	/**
+	 * Sets the response object to ERR state with the specified message/reason.
+	 *
+	 * @since  1.6.0
+	 * @param  object $req Initial response object.
+	 * @param  string $message Error message or reason; already translated.
+	 * @return object Updated response object.
+	 */
+	static protected function req_err( $req, $message ) {
+		$req->status = 'ERR';
+		$req->message = $message;
+		return $req;
 	}
 
 	/**
@@ -600,6 +736,11 @@ class CustomSidebars {
 	 * @since  1.0.0
 	 */
 	public function ajax_handler() {
+		// Permission check.
+		if ( ! current_user_can( self::$cap_required ) ) {
+			return;
+		}
+
 		$action = @$_POST['do'];
 
 		/**

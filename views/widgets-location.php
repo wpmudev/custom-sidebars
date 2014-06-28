@@ -6,7 +6,7 @@
  * This file is included in widgets.php.
  */
 
-$sidebars = CustomSidebars::get_sidebars( false );
+$sidebars = CustomSidebars::get_sidebars( 'theme' );
 
 /**
  * Output the input fields to configure replacements for a single sidebar.
@@ -20,6 +20,7 @@ $sidebars = CustomSidebars::get_sidebars( false );
 function _show_replaceable( $sidebar, $prefix, $cat_name, $class = '' ) {
 	$base_id = 'cs-' . $prefix;
 	$inp_id = $base_id . '-' . $sidebar['id'];
+	$inp_name = 'cs[' . $prefix . '][' . $sidebar['id'] . ']';
 	$sb_id = $sidebar['id'];
 	$class = (empty( $class ) ? '' : ' ' . $class);
 
@@ -42,7 +43,7 @@ function _show_replaceable( $sidebar, $prefix, $cat_name, $class = '' ) {
 		<div class="details">
 			<select
 				class="cs-datalist <?php echo esc_attr( $base_id ); ?>"
-				name="<?php echo esc_attr( $inp_id ); ?>"
+				name="<?php echo esc_attr( $inp_name ); ?>[]"
 				multiple="multiple"
 			>
 			</select>
@@ -55,6 +56,8 @@ function _show_replaceable( $sidebar, $prefix, $cat_name, $class = '' ) {
 ?>
 
 <form class="frm-location wpmui-form">
+	<input type="hidden" name="do" value="set-location" />
+	<input type="hidden" name="sb" class="sb-id" value="" />
 
 	<div class="cs-title">
 		<h3 class="no-pad-top">

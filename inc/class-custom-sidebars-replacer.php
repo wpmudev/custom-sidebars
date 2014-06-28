@@ -9,6 +9,8 @@ add_action( 'cs_init', array( 'CustomSidebarsReplacer', 'instance' ) );
  */
 class CustomSidebarsReplacer extends CustomSidebars {
 
+	private $original_post_id = 0;
+
 	/**
 	 * Returns the singleton object.
 	 *
@@ -30,12 +32,22 @@ class CustomSidebarsReplacer extends CustomSidebars {
 	 * @since  1.6
 	 */
 	private function __construct() {
-		add_action( 'widgets_init', array( $this, 'register_custom_sidebars') );
+		add_action(
+			'widgets_init',
+			array( $this, 'register_custom_sidebars')
+		);
 
 		if ( ! is_admin() ) {
 			// Frontend hooks.
-			add_action( 'wp_head', array( $this, 'replace_sidebars' ) );
-			add_action( 'wp', array( $this, 'store_original_post_id' ) );
+			add_action(
+				'wp_head',
+				array( $this, 'replace_sidebars' )
+			);
+
+			add_action(
+				'wp',
+				array( $this, 'store_original_post_id' )
+			);
 		}
 	}
 
@@ -45,30 +57,39 @@ class CustomSidebarsReplacer extends CustomSidebars {
 	public function register_custom_sidebars() {
 		$sb = self::get_custom_sidebars();
 
-		if ( ! empty( $sb ) ) {
-			foreach ( $sb as $sidebar ) {
-				/**
-				 * i18n support for custom sidebars.
-				 */
-				$sidebar['name'] = __( $sidebar['name'], CSB_LANG );
-				$sidebar['description'] = __( $sidebar['description'], CSB_LANG );
-				$sidebar['before_widget'] = __( $sidebar['before_widget'], CSB_LANG );
-				$sidebar['after_widget'] = __( $sidebar['after_widget'], CSB_LANG );
-				$sidebar['before_title'] = __( $sidebar['before_title'], CSB_LANG );
-				$sidebar['after_title'] = __( $sidebar['after_title'], CSB_LANG );
+		foreach ( $sb as $sidebar ) {
+			/**
+			 * i18n support for custom sidebars.
+			 */
+			$sidebar['name'] = __( $sidebar['name'], CSB_LANG );
+			$sidebar['description'] = __( $sidebar['description'], CSB_LANG );
+			$sidebar['before_widget'] = __( $sidebar['before_widget'], CSB_LANG );
+			$sidebar['after_widget'] = __( $sidebar['after_widget'], CSB_LANG );
+			$sidebar['before_title'] = __( $sidebar['before_title'], CSB_LANG );
+			$sidebar['after_title'] = __( $sidebar['after_title'], CSB_LANG );
 
-				/**
-				 * Filter sidebar options for custom sidebars.
-				 *
-				 * @since  1.6
-				 *
-				 * @param  array $sidebar Options used by WordPress to display
-				 *           the sidebar.
-				 */
-				$sidebar = apply_filters( 'cs_sidebar_params', $sidebar );
+			/**
+			 * Filter sidebar options for custom sidebars.
+			 *
+			 * @since  1.6
+			 *
+			 * @param  array $sidebar Options used by WordPress to display
+			 *           the sidebar.
+			 */
+			$sidebar = apply_filters( 'cs_sidebar_params', $sidebar );
 
-				register_sidebar( $sidebar );
-			}
+			register_sidebar( $sidebar );
+		}
+	}
+
+	/**
+	 * Stores the original post id before any plugin (buddypress) can modify this data, to show the proper sidebar.
+	 */
+	public function store_original_post_id() {
+		global $post;
+
+		if ( isset( $post->ID ) ) {
+			$this->original_post_id = $post->ID;
 		}
 	}
 
@@ -82,8 +103,7 @@ class CustomSidebarsReplacer extends CustomSidebars {
 	 * custom defined sidebars.
 	 */
 	public function replace_sidebars() {
-		global $post,
-			$_wp_sidebars_widgets,
+		global $_wp_sidebars_widgets,
 			$wp_registered_sidebars,
 			$wp_registered_widgets;
 
@@ -93,8 +113,7 @@ class CustomSidebarsReplacer extends CustomSidebars {
 		 */
 		$original_widgets = $_wp_sidebars_widgets;
 
-		$updated = FALSE;
-		$defaults = self::get_options( 'defaults' );
+		$defaults = self::get_options();
 
 		/**
 		 * Fires before determining sidebar replacements.
@@ -102,115 +121,140 @@ class CustomSidebarsReplacer extends CustomSidebars {
 		 * @param  array $defaults Array of the default sidebars for the page.
 		 */
 		do_action( 'cs_predetermine_replacements', $defaults );
+
 		// Legacy handler with camelCase
 		do_action( 'cs_predetermineReplacements', $defaults );
 
 		$replacements = $this->determine_replacements( $defaults );
 
-		foreach ( $replacements as $sb_name => $replacement_info ) {
-			if ( $replacement_info ) {
-				list( $replacement, $replacement_type, $extra_index ) = $replacement_info;
+		foreach ( $replacements as $sb_id => $replace_info ) {
+			if ( ! is_array( $replace_info ) || count( $replace_info ) < 3 ) {
+				continue;
+			}
 
-				if ( $this->check_and_fix_sidebar( $sb_name, $replacement, $replacement_type, $extra_index ) ) {
-					if ( sizeof( $original_widgets[$replacement] ) == 0 ) {
-						// No widgets on custom bar, show nothing.
-						$wp_registered_widgets['csemptywidget'] = $this->get_empty_widget();
-						$_wp_sidebars_widgets[$sb_name] = array( 'csemptywidget' );
-					} else {
-						$_wp_sidebars_widgets[$sb_name] = $original_widgets[$replacement];
-						//replace before/after widget/title?
-						$sidebar_for_replacing = $wp_registered_sidebars[$replacement];
-						if ( $this->replace_before_after_widget( $sidebar_for_replacing ) ) {
-							$sidebar_for_replacing = $this->clean_before_after_widget( $sidebar_for_replacing );
-							$wp_registered_sidebars[$sb_name] = $sidebar_for_replacing;
-						}
+			list( $replacement, $replacement_type, $extra_index ) = $replace_info;
+			$check = $this->is_valid_replacement( $sb_id, $replacement, $replacement_type, $extra_index );
+
+			if ( $check ) {
+				if ( sizeof( $original_widgets[$replacement] ) == 0 ) {
+					// No widgets on custom sidebar, show nothing.
+					$wp_registered_widgets['csemptywidget'] = $this->get_empty_widget();
+					$_wp_sidebars_widgets[$sb_id] = array( 'csemptywidget' );
+				} else {
+					$_wp_sidebars_widgets[$sb_id] = $original_widgets[$replacement];
+
+					/**
+					 * When custom sidebars use some wrapper code (before_title,
+					 * after_title, ...) then we need to strip-slashes for this
+					 * wrapper code to work properly
+					 */
+					$sidebar_for_replacing = $wp_registered_sidebars[$replacement];
+					if ( $this->has_wrapper_code( $sidebar_for_replacing ) ) {
+						$sidebar_for_replacing = $this->clean_wrapper_code( $sidebar_for_replacing );
+						$wp_registered_sidebars[$sb_id] = $sidebar_for_replacing;
 					}
-					$wp_registered_sidebars[$sb_name]['class'] = $replacement;
-				}  // endif: check_and_fix_sidebar
+				}
+				$wp_registered_sidebars[$sb_id]['class'] = $replacement;
+			}  // endif: is_valid_replacement
 
-			} // endif: replacement_info
 		} // endforeach
 	}
 
 	/**
-	 * Find out if some sidebars should be replaced.
+	 * THIS IS THE ACTUAL LOGIC OF THE PLUGIN
 	 *
+	 * Here we find out if some sidebars should be replaced, and if it is
+	 * replaced we determine which custom sidebar to use.
+	 *
+	 * @param   array $options Plugin options with the replacement rules.
 	 * @return  array List of the replaced sidebars.
 	 */
-	public function determine_replacements( $defaults ) {
-		$replaceable_sidebars = self::get_options( 'modifiable' );
-		$replacements_todo = sizeof( $replaceable_sidebars );
-		$replacements = array();
+	public function determine_replacements( $options ) {
+		global $post,
+			$sidebar_category;
 
-		foreach ( $replaceable_sidebars as $sb ) {
-			$replacements[ $sb ] = FALSE;
+		$sidebars = self::get_options( 'modifiable' );
+		$replacements_todo = sizeof( $sidebars );
+		$replacements = array();
+		$branch = 0; // Debugging information
+
+		foreach ( $sidebars as $sb ) {
+			$replacements[ $sb ] = false;
 		}
 
-
-		//posts
+		// 1 |== Single posts/pages --------------------------------------------
 		if ( is_single() ) {
-			//Post sidebar
-			global $post;
-			$post_type = get_post_type( $post );
+			$branch = 1;
 
+			$post_type = get_post_type();
 			if ( ! self::supported_post_type( $post_type ) ) {
-				return $defaults;
+				return $options;
 			}
 
-			$replacements = self::get_post_meta( $this->originalPostId );
-			foreach ( $replaceable_sidebars as $sidebar ) {
-				if ( is_array( $replacements ) && ! empty( $replacements[$sidebar] ) ) {
-					$replacements[$sidebar] = array( $replacements[$sidebar], 'particular', -1 );
+			// 1.1 Check if replacements are defined in the post metadata.
+			$reps = self::get_post_meta( $this->original_post_id );
+			foreach ( $sidebars as $sb_id ) {
+				if ( is_array( $reps ) && ! empty( $reps[$sb_id] ) ) {
+					$replacements[$sb_id] = array(
+						$reps[$sb_id],
+						'particular',
+						-1,
+					);
 					$replacements_todo -= 1;
 				}
 			}
 
-			//Parent sidebar
+			// 1.2 Try to use the parents metadata.
 			if ( $post->post_parent != 0 && $replacements_todo > 0 ) {
-				$replacements = self::get_post_meta( $post->post_parent );
-				foreach ( $replaceable_sidebars as $sidebar ) {
-					if ( ! $replacements[$sidebar]
-						&& is_array( $replacements )
-						&& ! empty( $replacements[$sidebar] )
+				$reps = self::get_post_meta( $post->post_parent );
+				foreach ( $sidebars as $sb_id ) {
+					if ( $replacements[$sb_id] ) { continue; }
+					if (
+						is_array( $reps )
+						&& ! empty( $reps[$sb_id] )
 					) {
-						$replacements[$sidebar] = array( $replacements[$sidebar], 'particular', -1 );
+						$replacements[$sb_id] = array(
+							$reps[$sb_id],
+							'particular',
+							-1,
+						);
 						$replacements_todo -= 1;
 					}
 				}
 			}
 
-			//Category sidebar
-			global $sidebar_category;
+			// 1.3 If no metadata set then use the category settings.
 			if ( $replacements_todo > 0 ) {
 				$categories = self::get_sorted_categories();
-				$i = 0;
-				while ( $replacements_todo > 0 && $i < sizeof( $categories ) ) {
-					foreach ( $replaceable_sidebars as $sidebar ) {
-						if ( ! $replacements[$sidebar]
-							&& ! empty( $defaults['category_posts'][$categories[$i]->cat_ID][$sidebar] )
-						) {
-							$replacements[$sidebar] = array(
-								$defaults['category_posts'][$categories[$i]->cat_ID][$sidebar],
-								'category_posts',
+				$ind = sizeof( $categories ) -1;
+				while ( $replacements_todo > 0 && $ind >= 0 ) {
+					$cat_id = $categories[$ind]->cat_ID;
+					foreach ( $sidebars as $sb_id ) {
+						if ( $replacements[$sb_id] ) { continue; }
+						if ( ! empty( $options['category_single'][$cat_id][$sb_id] ) ) {
+							$replacements[$sb_id] = array(
+								$options['category_single'][$cat_id][$sb_id],
+								'category_single',
 								$sidebar_category,
 							);
 							$replacements_todo -= 1;
 						}
 					}
-					$i += 1;
+					$ind -= 1;
 				}
 			}
 
-			//Post-type sidebar
+			// 1.4 Look for post-type level replacements.
 			if ( $replacements_todo > 0 ) {
-				foreach ( $replaceable_sidebars as $sidebar ) {
-					if ( ! $replacements[$sidebar]
-						&& isset( $defaults['post_type_posts'][$post_type] )
-						&& isset( $defaults['post_type_posts'][$post_type][$sidebar] )
+				foreach ( $sidebars as $sb_id ) {
+					if ( $replacements[$sb_id] ) { continue; }
+					if (
+						isset( $options['post_type_single'][$post_type] )
+						&& ! empty( $options['post_type_single'][$post_type][$sb_id] )
 					) {
-						$replacements[$sidebar] = array(
-							$defaults['post_type_posts'][$post_type][$sidebar],
-							'defaults',
+						$replacements[$sb_id] = array(
+							$options['post_type_single'][$post_type][$sb_id],
+							'post_type_single',
 							$post_type,
 						);
 						$replacements_todo -= 1;
@@ -218,20 +262,21 @@ class CustomSidebarsReplacer extends CustomSidebars {
 				}
 			}
 		} else
-		//Category archive
-		if ( is_category() ) {
-			global $sidebar_category;
 
+		// 2 |== Category archive ----------------------------------------------
+		if ( is_category() ) {
+			$branch = 2;
+
+			// 2.1 Start at current category and travel up all parents
 			$category_object = get_queried_object();
 			$current_category = $category_object->term_id;
 			while ( $current_category != 0 && $replacements_todo > 0 ) {
-				foreach ( $replaceable_sidebars as $sidebar ) {
-					if ( ! $replacements[$sidebar]
-						&& ! empty( $defaults['category_pages'][$current_category][$sidebar] )
-					) {
-						$replacements[$sidebar] = array(
-							$defaults['category_pages'][$current_category][$sidebar],
-							'category_pages',
+				foreach ( $sidebars as $sb_id ) {
+					if ( $replacements[$sb_id] ) { continue; }
+					if ( ! empty( $options['category_archive'][$current_category][$sb_id] ) ) {
+						$replacements[$sb_id] = array(
+							$options['category_archive'][$current_category][$sb_id],
+							'category_archive',
 							$current_category,
 						);
 						$replacements_todo -= 1;
@@ -243,77 +288,98 @@ class CustomSidebarsReplacer extends CustomSidebars {
 				}
 			}
 		} else
-		//Search comes before because searches with no results are recognized as post types archives
+
+		// 3 |== Search --------------------------------------------------------
+		// Must be before the post-type archive section; otherwise a search with
+		// no results is recognized as post-type archive...
 		if ( is_search() ) {
-			foreach ( $replaceable_sidebars as $sidebar ) {
-				if ( ! empty( $defaults['search'][$sidebar] ) ) {
-					$replacements[$sidebar] = array( $defaults['search'][$sidebar], 'search', -1 );
+			$branch = 3;
+
+			foreach ( $sidebars as $sb_id ) {
+				if ( ! empty( $options['search'][$sb_id] ) ) {
+					$replacements[$sb_id] = array(
+						$options['search'][$sb_id],
+						'search',
+						-1,
+					);
 				}
 			}
 		} else
-		//post type archive
+
+		// 4 |== Post-Tpe Archive ----------------------------------------------
 		if ( ! is_category() && ! is_singular() && get_post_type() != 'post' ) {
+			$branch = 4;
+
 			$post_type = get_post_type();
 			if ( ! self::supported_post_type( $post_type ) ) {
-				return $defaults;
+				return $options;
 			}
 
-			foreach ( $replaceable_sidebars as $sidebar ) {
-				if ( isset( $defaults['post_type_pages'][$post_type] )
-					&& isset( $defaults['post_type_pages'][$post_type][$sidebar] )
+			foreach ( $sidebars as $sb_id ) {
+				if (
+					isset( $options['post_type_archive'][$post_type] )
+					&& ! empty( $options['post_type_archive'][$post_type][$sb_id] )
 				) {
-					$replacements[$sidebar] = array(
-						$defaults['post_type_pages'][$post_type][$sidebar],
-						'post_type_pages',
+					$replacements[$sb_id] = array(
+						$options['post_type_archive'][$post_type][$sb_id],
+						'post_type_archive',
 						$post_type,
 					);
 					$replacements_todo -= 1;
 				}
 			}
 		} else
-		//Page sidebar
-		if ( is_page() ) {
-			global $post;
 
-			$post_type = get_post_type( $post );
+		// 5 |== Page ----------------------------------------------------------
+		if ( is_page() ) {
+			$branch = 5;
+
+			$post_type = get_post_type();
 			if ( ! self::supported_post_type( $post_type ) ) {
-				return $defaults;
+				return $options;
 			}
 
-			$replacements = self::get_post_meta( $this->originalPostId );
-			foreach ( $replaceable_sidebars as $sidebar ) {
-				if ( is_array( $replacements )
-					&& ! empty( $replacements[$sidebar] )
-				) {
-					$replacements[$sidebar] = array( $replacements[$sidebar], 'particular', -1 );
+			// 5.1 Check if replacements are defined in the post metadata.
+			$reps = self::get_post_meta( $this->original_post_id );
+			foreach ( $sidebars as $sb_id ) {
+				if ( is_array( $reps ) && ! empty( $reps[$sb_id] ) ) {
+					$replacements[$sb_id] = array(
+						$reps[$sb_id],
+						'particular',
+						-1,
+					);
 					$replacements_todo -= 1;
 				}
 			}
 
-			//Parent sidebar
+			// 5.2 Try to use the parents metadata.
 			if ( $post->post_parent != 0 && $replacements_todo > 0 ) {
-				$replacements = self::get_post_meta( $post->post_parent );
-				foreach ( $replaceable_sidebars as $sidebar ) {
-					if ( ! $replacements[$sidebar]
-						&& is_array( $replacements )
-						&& ! empty( $replacements[$sidebar] )
+				$reps = self::get_post_meta( $post->post_parent );
+				foreach ( $sidebars as $sb_id ) {
+					if ( $replacements[$sb_id] ) { continue; }
+					if ( is_array( $reps )
+						&& ! empty( $reps[$sb_id] )
 					) {
-						$replacements[$sidebar] = array( $replacements[$sidebar], 'particular', -1 );
+						$replacements[$sb_id] = array(
+							$reps[$sb_id],
+							'particular',
+							-1,
+						);
 						$replacements_todo -= 1;
 					}
 				}
 			}
 
-			//Page Post-type sidebar
+			// 5.3 Look for post-type level replacements.
 			if ( $replacements_todo > 0 ) {
-				foreach ( $replaceable_sidebars as $sidebar ) {
-					if ( ! $replacements[$sidebar]
-						&& isset( $defaults['post_type_posts'][$post_type] )
-						&& isset( $defaults['post_type_posts'][$post_type][$sidebar] )
+				foreach ( $sidebars as $sb_id ) {
+					if ( $replacements[$sb_id] ) { continue; }
+					if ( isset( $options['post_type_single'][$post_type] )
+						&& ! empty( $options['post_type_single'][$post_type][$sb_id] )
 					) {
-						$replacements[$sidebar] = array(
-							$defaults['post_type_posts'][$post_type][$sidebar],
-							'defaults',
+						$replacements[$sb_id] = array(
+							$options['post_type_single'][$post_type][$sb_id],
+							'post_type_single',
 							$post_type,
 						);
 						$replacements_todo -= 1;
@@ -321,31 +387,63 @@ class CustomSidebarsReplacer extends CustomSidebars {
 				}
 			}
 		} else
+
+		// 6 |== Front Page ----------------------------------------------------
 		if ( is_home() ) {
-			foreach ( $replaceable_sidebars as $sidebar ) {
-				if ( ! empty( $defaults['blog'][$sidebar] ) ) {
-					$replacements[$sidebar] = array( $defaults['blog'][$sidebar], 'blog', -1 );
+			$branch = 6;
+
+			foreach ( $sidebars as $sb_id ) {
+				if ( ! empty( $options['blog'][$sb_id] ) ) {
+					$replacements[$sb_id] = array(
+						$options['blog'][$sb_id],
+						'blog',
+						-1,
+					);
 				}
 			}
 		} else
+
+		// 7 |== Tag archive ---------------------------------------------------
 		if ( is_tag() ) {
-			foreach ( $replaceable_sidebars as $sidebar ) {
-				if ( ! empty( $defaults['tags'][$sidebar] ) ) {
-					$replacements[$sidebar] = array( $defaults['tags'][$sidebar], 'tags', -1 );
+			$branch = 7;
+
+			foreach ( $sidebars as $sb_id ) {
+				if ( ! empty( $options['tags'][$sb_id] ) ) {
+					$replacements[$sb_id] = array(
+						$options['tags'][$sb_id],
+						'tags',
+						-1,
+					);
 				}
 			}
 		} else
+
+		// 8 |== Author archive ------------------------------------------------
 		if ( is_author() ) {
-			foreach ( $replaceable_sidebars as $sidebar ) {
-				if ( ! empty( $defaults['authors'][$sidebar] ) ) {
-					$replacements[$sidebar] = array( $defaults['authors'][$sidebar], 'authors', -1 );
+			$branch = 8;
+
+			foreach ( $sidebars as $sb_id ) {
+				if ( ! empty( $options['authors'][$sb_id] ) ) {
+					$replacements[$sb_id] = array(
+						$options['authors'][$sb_id],
+						'authors',
+						-1,
+					);
 				}
 			}
 		} else
+
+		// 9 |== Date archive --------------------------------------------------
 		if ( is_date() ) {
-			foreach ( $replaceable_sidebars as $sidebar ) {
-				if ( ! empty( $defaults['date'][$sidebar] ) ) {
-					$replacements[$sidebar] = array( $defaults['date'][$sidebar], 'date', -1);
+			$branch = 9;
+
+			foreach ( $sidebars as $sb_id ) {
+				if ( ! empty( $options['date'][$sb_id] ) ) {
+					$replacements[$sb_id] = array(
+						$options['date'][$sb_id],
+						'date',
+						-1,
+					);
 				}
 			}
 		}
@@ -362,41 +460,59 @@ class CustomSidebarsReplacer extends CustomSidebars {
 		return $replacements;
 	}
 
-	/**
-	 * Stores the original post id before any plugin (buddypress) can modify this data, to show the proper sidebar.
-	 * @return null
-	 */
-	public function store_original_post_id() {
-		global $post;
-		if ( isset( $post->ID ) ) {
-			$this->originalPostId = $post->ID;
-		}
-	}
 
-	public function check_and_fix_sidebar( $sidebar, $replacement, $method, $extra_index ) {
+
+	/**
+	 * Makes sure that the replacement sidebar exists.
+	 * If the custom sidebar does not exist then the WordPress/Post options are
+	 * updated to remove the invalid option.
+	 *
+	 * @since  1.0.0
+	 * @param  string $sb_id The original sidebar (the one that is replaced).
+	 * @param  string $replacement ID of the custom sidebar that should be used.
+	 * @param  string $method Info where the replacement setting is saved.
+	 * @param  int|string $extra_index Depends on $method - can be either one:
+	 *                empty/post-type/category-ID
+	 * @return bool
+	 */
+	public function is_valid_replacement( $sb_id, $replacement, $method, $extra_index ) {
 		global $wp_registered_sidebars;
 		$options = self::get_options();
 
-		if ( isset( $wp_registered_sidebars[$replacement] ) ) {
+		if ( isset( $wp_registered_sidebars[ $replacement ] ) ) {
+			// Everything okay, we can use the replacement
 			return true;
 		}
 
+		/*
+		 * The replacement sidebar was not registered. Something's wrong, so we
+		 * update the options and not try to replace this sidebar again.
+		 */
 		if ( $method == 'particular' ) {
-			global $post;
-			$sidebars = self::get_post_meta( $post->ID );
-			if ( $sidebars && isset( $sidebars[$sidebar] ) ) {
-				unset( $sidebars[$sidebar] );
-				self::set_post_meta( $post->ID, $sidebars );
+			// Invalid replacement was found in post-meta data.
+			$sidebars = self::get_post_meta( $this->original_post_id );
+			if ( $sidebars && isset( $sidebars[$sb_id] ) ) {
+				unset( $sidebars[$sb_id] );
+				self::set_post_meta( $this->original_post_id, $sidebars );
 			}
 		} else {
+			// Invalid replacement is defined in wordpress options table.
 			if ( isset( $options[$method] ) ) {
-				if ( $extra_index != -1 && isset( $options[$method][$extra_index] ) && isset( $options[$method][$extra_index][$sidebar] ) ) {
-					unset( $options[$method][$extra_index][$sidebar] );
+				if (
+					$extra_index != -1 &&
+					isset( $options[$method][$extra_index] ) &&
+					isset( $options[$method][$extra_index][$sb_id] )
+				) {
+					unset( $options[$method][$extra_index][$sb_id] );
 					self::set_options( $options );
 				}
 
-				if ( $extra_index == 1 && isset( $options[$method] ) && isset( $options[$method][$sidebar] ) ) {
-					unset( $options[$method][$sidebar] );
+				if (
+					$extra_index == 1 &&
+					isset( $options[$method] ) &&
+					isset( $options[$method][$sb_id] )
+				) {
+					unset( $options[$method][$sb_id] );
 					self::set_options( $options );
 				}
 			}
@@ -405,21 +521,45 @@ class CustomSidebarsReplacer extends CustomSidebars {
 		return false;
 	}
 
-	public function replace_before_after_widget( $sidebar ) {
-		return (
-			trim( $sidebar['before_widget'] ) != ''
-			OR trim( $sidebar['after_widget'] ) != ''
-			OR trim( $sidebar['before_title'] ) != ''
-			OR trim( $sidebar['after_title'] ) != ''
+	/**
+	 * Returns an empty dummy-widget. This dummy widget is used when a custom
+	 * sidebar has no widgets.
+	 *
+	 * @since  1.0.0
+	 */
+	public function get_empty_widget() {
+		$widget = new CustomSidebarsEmptyPlugin();
+		return array(
+			'name'        => 'CS Empty Widget',
+			'id'          => 'csemptywidget',
+			'callback'    => array( $widget, 'display_callback' ),
+			'params'      => array( array( 'number' => 2 ) ),
+			'classname'   => 'CustomSidebarsEmptyPlugin',
+			'description' => 'CS dummy widget',
 		);
 	}
 
 	/**
-	 * Clean the slashes of before and after.
+	 * Checks if the specified sidebar uses custom wrapper code.
+	 *
+	 * @since  1.2
+	 * @return bool
+	 */
+	public function has_wrapper_code( $sidebar ) {
+		return (
+			strlen( trim( $sidebar['before_widget'] ) )
+			OR strlen( trim( $sidebar['after_widget'] ) )
+			OR strlen( trim( $sidebar['before_title'] ) )
+			OR strlen( trim( $sidebar['after_title'] ) )
+		);
+	}
 
+	/**
+	 * Clean the slashes of the custom sidebar wrapper code.
+	 *
 	 * @since  1.2
 	 */
-	public function clean_before_after_widget( $sidebar ) {
+	public function clean_wrapper_code( $sidebar ) {
 		$sidebar['before_widget'] = stripslashes( $sidebar['before_widget'] );
 		$sidebar['after_widget'] = stripslashes( $sidebar['after_widget'] );
 		$sidebar['before_title'] = stripslashes( $sidebar['before_title'] );

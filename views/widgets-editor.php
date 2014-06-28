@@ -21,15 +21,7 @@
 			<input type="text" name="description" id="csb-description" placeholder="<?php _e( 'Sidebar description here...', CSB_LANG ); ?>" />
 		</div>
 	</div>
-	<hr />
-	<div class="wpmui-grid-8">
-		<div class="col-8">
-			<label for="csb-more">
-				<input type="checkbox" id="csb-more" />
-				<?php _e( 'Add custom wrapper code', CSB_LANG ); ?>
-			</label>
-		</div>
-	</div>
+	<hr class="csb-more-content" />
 	<div class="wpmui-grid-8 csb-more-content">
 		<div class="col-8 hint">
 			<strong><?php _e( 'Caution:', CSB_LANG ); ?></strong>
@@ -63,6 +55,11 @@
 		</div>
 	</div>
 	<div class="buttons">
+		<label for="csb-more" class="wpmui-left">
+			<input type="checkbox" id="csb-more" />
+			<?php _e( 'Edit custom wrapper code', CSB_LANG ); ?>
+		</label>
+
 		<button type="button" class="button-link btn-cancel"><?php _e( 'Cancel', CSB_LANG ); ?></button>
 		<button type="button" class="button-primary btn-save"><?php _e( 'Create Sidebar', CSB_LANG ); ?></button>
 	</div>

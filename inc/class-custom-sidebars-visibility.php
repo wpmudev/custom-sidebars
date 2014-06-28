@@ -338,7 +338,7 @@ class CustomSidebarsVisibility {
 	public function admin_scripts() {
 		wp_enqueue_script(
 			'csb-visibility',
-			CSB_JS_URL . 'visibility.js',
+			CSB_JS_URL . 'visibility.min.js',
 			array( 'jquery' ),
 			'1.6',
 			true
@@ -363,7 +363,7 @@ class CustomSidebarsVisibility {
 
 		wp_enqueue_style(
 			'chosen',
-			CSB_CSS_URL . 'chosen.min.css',
+			CSB_CSS_URL . 'chosen.css',
 			array(),
 			'1.6'
 		);
