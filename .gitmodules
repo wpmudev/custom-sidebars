@@ -1,0 +1,3 @@
+[submodule "inc/external"]
+	path = inc/external
+	url = https://strackerphil@bitbucket.org/incsub/wpmudev-dashboard-notification.git
