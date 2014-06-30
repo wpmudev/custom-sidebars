@@ -365,6 +365,25 @@ var csSidebars, msgTimer;
 			return csSidebars;
 		},
 
+		/**
+		 * Displays a error notification that something has gone wrong.
+		 *
+		 * @since  1.6.0
+		 * @param  mixed details Ajax response string/object.
+		 */
+		showAjaxError: function( details ) {
+			var msg = {};
+
+			msg.message = csSidebarsData.ajax_error;
+			msg.details = details;
+			msg.parent = '#widgets-right';
+			msg.insert_after = '#cs-title-options';
+			msg.id = 'editor';
+			msg.type = 'err';
+
+			wpmUi.message( msg );
+		},
+
 
 		/*============================*\
 		================================
@@ -416,7 +435,15 @@ var csSidebars, msgTimer;
 				popup.loading( false );
 
 				// Ignore error responses from Ajax.
-				if ( ! okay || ! data ) { return false; }
+				if ( ! data ) {
+					return false;
+				}
+
+				if ( ! okay ) {
+					popup.close();
+					csSidebars.showAjaxError( data );
+					return false;
+				}
 
 				if ( undefined !== data.sidebar ) {
 					data = data.sidebar;
@@ -458,6 +485,7 @@ var csSidebars, msgTimer;
 					.close();
 
 				msg.message = resp.message;
+				msg.details = resp;
 				msg.parent = '#widgets-right';
 				msg.insert_after = '#cs-title-options';
 				msg.id = 'editor';
@@ -628,6 +656,7 @@ var csSidebars, msgTimer;
 						.content( resp.html );
 				} else {
 					msg.message = resp.message;
+					msg.details = resp;
 					msg.parent = popup.$().find( '.wpmui-wnd-content' );
 					msg.insert_after = false;
 					msg.id = 'export';
@@ -679,6 +708,7 @@ var csSidebars, msgTimer;
 					.close();
 
 				msg.message = resp.message;
+				msg.details = resp;
 				msg.parent = '#widgets-right';
 				msg.insert_after = '#cs-title-options';
 				msg.id = 'import';
@@ -763,6 +793,7 @@ var csSidebars, msgTimer;
 					.close();
 
 				msg.message = resp.message;
+				msg.details = resp;
 				msg.parent = '#widgets-right';
 				msg.insert_after = '#cs-title-options';
 				msg.id = 'editor';
@@ -837,12 +868,18 @@ var csSidebars, msgTimer;
 
 			// Display the location data after it was loaded by ajax.
 			var handle_done_load = function handle_done_load( resp, okay, xhr ) {
+				var msg = {}; // Only used in error case.
+
 				popup.loading( false );
 
-				if ( ! okay ) { return false; }
+				if ( ! okay ) {
+					popup.close();
+					csSidebars.showAjaxError( resp );
+					return;
+				}
 
 				// Display the sidebar name.
-				popup.$().find( '.sidebar-name' ).text( resp.sidebar.name );
+				popup.$().find( '.sb-name' ).text( resp.sidebar.name );
 				var sb_id = resp.sidebar.id;
 
 				// Only show settings for replaceable sidebars
@@ -866,12 +903,18 @@ var csSidebars, msgTimer;
 							.filter('.' + sidebar),
 						option = row
 							.find( 'option[value="' + key + '"]' ),
-						group = row.find( 'optgroup.used' );
+						group = row.find( 'optgroup.used' ),
+						check = row.find( '.detail-toggle' );
 
 					if ( replacement == sb_id ) {
 						option.prop( 'selected', true );
-						row.find( '.detail-toggle' ).prop( 'checked', true );
-						row.addClass( 'open' );
+						if ( true != check.prop( 'checked' ) ) {
+							check.prop( 'checked', true );
+							row.addClass( 'open' );
+
+							// Upgrade the select list with chosen.
+							wpmUi.upgrade_multiselect( row );
+						}
 					} else {
 						if ( ! group.length ) {
 							group = jQuery( '<optgroup class="used">' )
@@ -973,8 +1016,6 @@ var csSidebars, msgTimer;
 					}
 				}
 
-				wpmUi.upgrade_multiselect( popup.$() );
-
 			}; // end: handle_done_load()
 
 			// User clicks on "replace <sidebar> for <category>" checkbox.
@@ -983,7 +1024,10 @@ var csSidebars, msgTimer;
 					row = inp.closest( '.cs-replaceable' );
 
 				if ( inp.prop( 'checked' ) ) {
-					row.addClass( 'open' )
+					row.addClass( 'open' );
+
+					// Upgrade the select list with chosen.
+					wpmUi.upgrade_multiselect( row );
 				} else {
 					row.removeClass( 'open' );
 					row.find( 'select' ).val( [] ).trigger( 'chosen:updated' );
@@ -999,6 +1043,7 @@ var csSidebars, msgTimer;
 					.close();
 
 				msg.message = resp.message;
+				msg.details = resp;
 				msg.parent = '#widgets-right';
 				msg.insert_after = '#cs-title-options';
 				msg.id = 'editor';
@@ -1113,49 +1158,6 @@ var csSidebars, msgTimer;
 		=================================
 		\*=============================*/
 
-		/**
-		 * =====================================================================
-		 * Show a message to the user.
-		 *
-		 * TODO: Move this to the wpmUi object
-		 *
-		 * @since  1.0.0
-		 */
-		showMessage: function(message, error){
-			var html, btn_close, msgclass,
-				msgdiv = jQuery( '#cs-message' );
-
-			var hide_message = function hide_message() {
-				var msgdiv = jQuery('#cs-message');
-
-				msgdiv.fadeOut(400)
-				setTimeout( function() {
-					msgdiv.remove();
-				}, 400);
-			};
-
-			if (error) {
-				msgclass = 'cs-error';
-			} else {
-				msgclass = 'cs-update';
-			}
-
-			if (msgdiv.length != 0) {
-				clearTimeout(msgTimer);
-				msgdiv.removeClass('cs-error cs-update').addClass(msgclass);
-				msgdiv.text(message);
-			}
-			else {
-				msgdiv = jQuery( '<div id="cs-message" class="cs-message"></div>' );
-				btn_close = jQuery('<a href="#" class="close">&times;</a>');
-
-				msgdiv.html(message).addClass(msgclass).hide();
-				btn_close.appendTo(msgdiv).click( hide_message );
-				msgdiv.insertAfter('#cs-title-options').fadeIn();
-				btn_close.focus();
-			}
-			msgTimer = setTimeout( hide_message, 7000);
-		},
 
 		/**
 		 * =====================================================================

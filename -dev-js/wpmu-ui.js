@@ -121,17 +121,24 @@
 	 *                                 // insert a new message and the next
 	 *                                 // call will update the existing element.
 	 *                'class': 'msg1'  // Additional CSS class.
+	 *                'details': obj   // Details for error-type message.
 	 *             }
 	 */
 	wpmUi.message = function message( args ) {
-		var parent, msg_box, btn_close, need_insert;
+		var parent, msg_box, btn_close, need_insert, debug;
 
 		// Hides the message again, e.g. when user clicks the close icon.
 		var hide_message = function hide_message( ev ) {
 			ev.preventDefault();
 			msg_box.remove();
 			return false;
-		}
+		};
+
+		// Toggle the error-details
+		var toggle_debug = function toggle_debug( ev ) {
+			var me = jQuery( this ).closest( '.wpmui-msg' );
+			me.find( '.debug' ).toggle();
+		};
 
 		if ( 'undefined' == typeof args ) { return false; }
 
@@ -151,6 +158,10 @@
 		args.insert_after = undefined == args.insert_after ? 'h2' : args.insert_after;
 		args.id = undefined == args.id ? '' : args.id.toString().toLowerCase();
 		args.class = undefined == args.class ? '' : args.class.toString().toLowerCase();
+		args.details = undefined == args.details ? false : args.details;
+
+		if ( args.type == 'error' || args.type == 'red' ) { args.type = 'err'; }
+		if ( args.type == 'success' || args.type == 'green' ) { args.type = 'ok'; }
 
 		parent = jQuery( args.parent ).first();
 		if ( ! parent.length ) { return false; }
@@ -164,6 +175,15 @@
 			need_insert = true;
 		}
 		msg_box.find( 'p' ).html( args.message );
+
+		if ( args.type == 'err' && args.details && window.JSON ) {
+			jQuery( '<div class="debug" style="display:none"></div>' )
+				.appendTo( msg_box )
+				.text( JSON.stringify( args.details ) );
+			jQuery( '<i class="dashicons dashicons-editor-help"></i> ' )
+				.prependTo( msg_box.find( 'p:first' ) )
+				.click( toggle_debug );
+		}
 
 		msg_box.removeClass().addClass( 'updated wpmui-msg ' + args.class );
 		if ( 'err' == args.type ) {
@@ -1285,12 +1305,19 @@
 			ajax_args = {
 				url: ajaxurl,
 				type: 'POST',
-				dataType: type,
+				dataType: 'html',
 				data: data,
 				xhr: _create_xhr,
 				success: function( resp, status, xhr ) {
 					okay = true;
 					response = resp;
+					if ( 'json' == type ) {
+						try {
+							response = jQuery.parseJSON( resp );
+						} catch(ignore) {
+							response = { 'status': 'ERR', 'data': resp };
+						}
+					}
 				},
 				error: function( xhr, status, error ) {
 					okay = false;

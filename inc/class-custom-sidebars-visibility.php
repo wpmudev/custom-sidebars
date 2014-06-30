@@ -128,6 +128,7 @@ class CustomSidebarsVisibility {
 		$tax_list = get_taxonomies( array( 'public' => true ), 'objects' );
 		$type_list = CustomSidebars::get_post_types( 'objects' );
 		$role_list = array_reverse( get_editable_roles() );
+		$membership_levels = $this->get_membership_levels();
 		$pagetype_list = array(
 			'frontpage' => 'Frontpage',
 			'single' => 'Single page',
@@ -165,7 +166,7 @@ class CustomSidebarsVisibility {
 		<?php if ( ! isset( $_POST[ 'csb-visibility-button' ] ) ) : ?>
 			<a href="#" class="button csb-visibility-button"><span class="dashicons dashicons-visibility"></span> <?php _e( 'Visibility', CSB_LANG ); ?></a>
 		<?php else : ?>
-			<script>jQuery(function() { jQuery('.csb-visibility-<?php echo esc_js( $widget->id ); ?>').closest('.widget').trigger('csb:ui').trigger('csb:update'); }); </script>
+			<script>jQuery(function() { jQuery('.csb-visibility-<?php echo esc_js( $widget->id ); ?>').closest('.widget').trigger('csb:update'); }); </script>
 		<?php endif; ?>
 
 		<div class="csb-visibility-inner" <?php if ( ! $is_visible ) : ?>style="display:none"<?php endif; ?>>
@@ -180,7 +181,9 @@ class CustomSidebarsVisibility {
 				<li class="csb-group">Filters</li>
 				<li class="add-filter" data-for=".csb-date" style="display:none">Date</li>
 				<li class="add-filter" data-for=".csb-roles" <?php if ( ! empty( $cond['roles'] ) ) : ?>style="display:none"<?php endif; ?>>Roles</li>
-				<li class="add-filter" data-for=".csb-membership" style="display:none">Membership</li>
+				<?php if ( false != $membership_levels ) : ?>
+					<li class="add-filter" data-for=".csb-membership">Membership</li>
+				<?php endif; ?>
 				<li class="add-filter" data-for=".csb-prosite" style="display:none">ProSite</li>
 				<li class="add-filter" data-for=".csb-pagetypes" <?php if ( ! empty( $cond['pagetypes'] ) ) : ?>style="display:none"<?php endif; ?>>Special pages</li>
 				<li class="add-filter" data-for=".csb-posttypes" <?php if ( ! empty( $cond['posttypes'] ) ) : ?>style="display:none"<?php endif; ?>>For posttype</li>
@@ -217,17 +220,29 @@ class CustomSidebarsVisibility {
 			<?php foreach ( $role_list as $role => $details ) : ?>
 				<?php $name = translate_user_role( $details['name'] ); ?>
 				<?php $is_selected = in_array( $role, $cond['roles'] ); ?>
-				<option <?php selected( $is_selected, true ); ?> value="<?php echo esc_attr( $role ); ?>"><?php echo esc_html( $name ); ?></option>
+				<option <?php selected( $is_selected, true ); ?> value="<?php echo esc_attr( $role ); ?>">
+					<?php echo esc_html( $name ); ?>
+				</option>
 			<?php endforeach; ?>
 			</select>
 		</div>
 
 		<?php /* MEMBERSHIP */ ?>
+		<?php if ( is_array( $membership_levels ) ) : ?>
 		<div class="csb-option-row csb-membership" <?php if ( empty( $cond['membership'] ) ) : ?>style="display:none"<?php endif; ?>>
 			<label for="<?php echo esc_attr( $widget->id ); ?>-membership"><span class="csb-and" style="display:none"><?php _e( 'AND', CSB_LANG ); ?></span> <?php _e( 'User has Membership Level', CSB_LANG ); ?></label>
 			<i class="dashicons dashicons-trash clear-filter show-on-hover action"></i>
-			<input type="text" id="<?php echo esc_attr( $widget->id ); ?>-membership" name="<?php echo esc_attr( $block_name ); ?>[membership]" value="<?php echo esc_attr( @$cond['membership'] ); ?>" />
+			<select id="<?php echo esc_attr( $widget->id ); ?>-membership" name="<?php echo esc_attr( $block_name ); ?>[membership][]" multiple="multiple">
+			<?php foreach ( $membership_levels as $level ) : ?>
+				<?php $is_selected = in_array( $level['id'], $cond['membership'] ); ?>
+				<option <?php selected( $is_selected ); ?> value="<?php echo esc_attr( $level['id'] ); ?>">
+					<?php echo esc_html( $level['level_title'] ); ?>
+					<?php if ( ! $level['level_active'] ) { _e( '(inactive)', CSB_LANG ); } ?>
+				</option>
+			<?php endforeach; ?>
+			</select>
 		</div>
+		<?php endif; ?>
 
 		<?php /* PRO-SITE */ ?>
 		<div class="csb-option-row csb-prosite" <?php if ( empty( $cond['prosite'] ) ) : ?>style="display:none"<?php endif; ?>>
@@ -243,7 +258,9 @@ class CustomSidebarsVisibility {
 			<select id="<?php echo esc_attr( $widget->id ); ?>-pagetypes" name="<?php echo esc_attr( $block_name ); ?>[pagetypes][]" multiple="multiple">
 			<?php foreach ( $pagetype_list as $type => $name ) : ?>
 				<?php $is_selected = in_array( $type, $cond['pagetypes'] ); ?>
-				<option <?php selected( $is_selected ); ?> value="<?php echo esc_attr( $type ); ?>"><?php echo esc_html( $name ); ?></option>
+				<option <?php selected( $is_selected ); ?> value="<?php echo esc_attr( $type ); ?>">
+					<?php echo esc_html( $name ); ?>
+				</option>
 			<?php endforeach; ?>
 			</select>
 		</div>
@@ -255,7 +272,9 @@ class CustomSidebarsVisibility {
 			<select class="posttype" id="<?php echo esc_attr( $widget->id ); ?>-posttypes" name="<?php echo esc_attr( $block_name ); ?>[posttypes][]" multiple="multiple">
 			<?php foreach ( $type_list as $type_item ) : ?>
 				<?php $is_selected = in_array( $type_item->name, $cond['posttypes'] ); ?>
-				<option <?php selected( $is_selected ); ?> value="<?php echo esc_attr( $type_item->name ); ?>"><?php echo esc_html( $type_item->labels->name ); ?></option>
+				<option <?php selected( $is_selected ); ?> value="<?php echo esc_attr( $type_item->name ); ?>">
+					<?php echo esc_html( $type_item->labels->name ); ?>
+				</option>
 			<?php endforeach; ?>
 			</select>
 
@@ -282,7 +301,10 @@ class CustomSidebarsVisibility {
 					<div class="detail" <?php if ( empty( $cond[ $row_id ] ) ) : ?>style="display:none"<?php endif; ?>>
 						<select name="<?php echo esc_attr( $block_name ); ?>[<?php echo esc_attr( $row_id ); ?>][]" multiple="multiple">
 						<?php foreach ( $posts as $post ) : ?>
-							<option <?php selected( in_array( $post->ID, $cond[ $row_id ] ) ); ?> value="<?php echo esc_attr( $post->ID ); ?>"><?php echo esc_html( $post->post_title ); ?></option>
+							<?php $is_selected = in_array( $post->ID, $cond[ $row_id ] ); ?>
+							<option <?php selected( $is_selected ); ?> value="<?php echo esc_attr( $post->ID ); ?>">
+								<?php echo esc_html( $post->post_title ); ?>
+							</option>
 						<?php endforeach; ?>
 						</select>
 					</div>
@@ -301,7 +323,10 @@ class CustomSidebarsVisibility {
 				<i class="dashicons dashicons-trash clear-filter show-on-hover action"></i>
 				<select id="<?php echo esc_attr( $widget->id ); ?>-<?php echo esc_attr( $row_id ); ?>" name="<?php echo esc_attr( $block_name ); ?>[<?php echo esc_attr( $row_id ); ?>][]" multiple="multiple">
 					<?php foreach ( $tags as $tag ) : ?>
-						<option <?php selected( in_array( $tag->term_id, $cond[ $row_id ] ) ); ?>value="<?php echo esc_attr( $tag->term_id ); ?>"><?php echo esc_html( $tag->name ); ?></option>
+						<?php $is_selected = in_array( $tag->term_id, $cond[ $row_id ] ); ?>
+						<option <?php selected( $is_selected ); ?>value="<?php echo esc_attr( $tag->term_id ); ?>">
+							<?php echo esc_html( $tag->name ); ?>
+						</option>
 					<?php endforeach; ?>
 				</select>
 			</div>
@@ -312,6 +337,42 @@ class CustomSidebarsVisibility {
 		</div>
 		</div>
 		<?php
+	}
+
+	/**
+	 * Integration with the WPMU Dev Membership plugin:
+	 * If the plugin is installed and active this function returns a list of
+	 * all membership levels.
+	 *
+	 * If the plugin is not active the return value is boolean false.
+	 *
+	 * @since  1.6.0
+	 * @return bool|array
+	 */
+	public function get_membership_levels() {
+		$Result = null;
+
+		if (
+			null === $Result &&
+			function_exists( 'M_get_membership_active' ) &&
+			'no' != M_get_membership_active() &&
+			defined( 'MEMBERSHIP_TABLE_LEVELS' )
+		) {
+			global $wpdb;
+			$Result = $wpdb->get_results(
+				sprintf(
+					'SELECT
+						id, level_title, level_active
+					FROM %s
+					ORDER BY id',
+					MEMBERSHIP_TABLE_LEVELS
+				), ARRAY_A
+			);
+		} else {
+			$Result = false;
+		}
+
+		return $Result;
 	}
 
 	/**

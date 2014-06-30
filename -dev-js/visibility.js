@@ -21,8 +21,7 @@ jQuery(function init_visibility() {
 		$spinner.insertBefore( $target ).css({ 'float': 'left' });
 		$btn.insertBefore( $target ).click( toggle_section );
 		$widget.on( 'click', '.toggle-action b', toggle_action );
-		$widget.on( 'csb:ui', init_ui ).trigger( 'csb:ui' );
-		$widget.on( 'csb:update', update_hints ).trigger( 'csb:update' );
+		$widget.on( 'csb:update', update_display );
 		$widget.on( 'click', '.clear-filter', remove_filter );
 		$widget.on( 'click', '.choose-filters', show_filter_menu );
 		$widget.on( 'click', '.add-filter', add_filter );
@@ -30,14 +29,6 @@ jQuery(function init_visibility() {
 		$widget.on( 'change', 'select.posttype', update_posttypes );
 
 		$widget.data( '_csb_visibility', true );
-	};
-
-	/**
-	 * Initialize the UI components (i.e. chosen select-list, etc)
-	 */
-	var init_ui = function init_ui( ev ) {
-		var $widget = jQuery( this );
-		wpmUi.upgrade_multiselect( $widget );
 	};
 
 	/**
@@ -84,7 +75,7 @@ jQuery(function init_visibility() {
 	/**
 	 * When a filter block is added or removed we need to show/hide some hints.
 	 */
-	var update_hints = function update_hints() {
+	var update_display = function update_display() {
 		var $widget = jQuery( this ).closest( '.widget' ),
 			$always = $widget.find( '.csb-always' ),
 			$rows = $widget.find( '.csb-option-row:visible:not(.csb-action,.csb-always)' );
@@ -96,6 +87,7 @@ jQuery(function init_visibility() {
 			$rows.find( '.csb-and' ).show();
 			$rows.first().find( '.csb-and' ).hide();
 		}
+		wpmUi.upgrade_multiselect( $widget );
 	}
 
 	/**

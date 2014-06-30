@@ -41,6 +41,7 @@
 		'title_export': "<?php _e( 'Import / Export Sidebars', CSB_LANG ); ?>",
 		'custom_sidebars': "<?php _e( 'Custom Sidebars', CSB_LANG ); ?>",
 		'theme_sidebars': "<?php _e( 'Theme Sidebars', CSB_LANG ); ?>",
+		'ajax_error': "<?php _e( 'Couldn\'t load data from WordPress...', CSB_LANG ); ?>",
 		'replaceable': <?php echo json_encode( CustomSidebars::get_options( 'modifiable' ) ); ?>
 	};
 	</script>

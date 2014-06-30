@@ -196,7 +196,7 @@ class CustomSidebarsEditor extends CustomSidebars {
 			$sidebars[] = $sidebar;
 			$req->message = sprintf(
 				__( 'Created new sidebar <strong>%1$s</strong>', CSB_LANG ),
-				$sidebar['name']
+				esc_html( $sidebar['name'] )
 			);
 		} else {
 			$found = false;
@@ -204,7 +204,7 @@ class CustomSidebarsEditor extends CustomSidebars {
 				if ( $item['id'] == $sb_id ) {
 					$req->message = sprintf(
 						__( 'Updated sidebar <strong>%1$s</strong>', CSB_LANG ),
-						$sidebar['name']
+						esc_html( $sidebar['name'] )
 					);
 					$sidebars[ $ind ] = $sidebar;
 					$found = true;
@@ -253,7 +253,7 @@ class CustomSidebarsEditor extends CustomSidebars {
 				$found = true;
 				$req->message = sprintf(
 					__( 'Deleted sidebar <strong>%1$s</strong>', CSB_LANG ),
-					$req->sidebar['name']
+					esc_html( $req->sidebar['name'] )
 				);
 				unset( $sidebars[ $ind ] );
 				break;
@@ -453,7 +453,7 @@ class CustomSidebarsEditor extends CustomSidebars {
 
 		$req->message = sprintf(
 			__( 'Updated sidebar <strong>%1$s</strong> settings.', CSB_LANG ),
-			$req->sidebar['name']
+			esc_html( $req->sidebar['name'] )
 		);
 		self::set_options( $options );
 		return $req;

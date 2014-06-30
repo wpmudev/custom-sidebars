@@ -61,7 +61,7 @@ function _show_replaceable( $sidebar, $prefix, $cat_name, $class = '' ) {
 
 	<div class="cs-title">
 		<h3 class="no-pad-top">
-			<span class="sidebar-name">...</span>
+			<span class="sb-name">...</span>
 		</h3>
 	</div>
 	<p>

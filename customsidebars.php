@@ -2,7 +2,7 @@
 /*
 Plugin Name: Custom Sidebars Pro
 Plugin URI: http://premium.wpmudev.org/project/custom-sidebars/
-Description: Allows you to create widgetized areas and custom sidebars, and select sidebars for specific posts and pages.
+Description: Allows you to create widgetized areas and custom sidebars. Replace whole sidebars or single widgets for specific posts and pages.
 Version: 1.6-BETA
 Author: WPMU DEV
 Author URI: http://premium.wpmudev.org/
