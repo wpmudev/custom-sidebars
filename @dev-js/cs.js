@@ -122,6 +122,11 @@ var csSidebars, msgTimer;
 		\*====================================*/
 
 		init: function(){
+			if ( 'undefined' == typeof( csSidebarsData ) ) {
+				// Inside theme customizer we load the JS but have no widget-data.
+				return;
+			}
+
 			csSidebars
 				.initControls()
 				.initScrollbar()

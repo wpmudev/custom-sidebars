@@ -79,8 +79,8 @@ class CustomSidebarsVisibility {
 				'roles' => array(),
 				'pagetypes' => array(),
 				'posttypes' => array(),
-				'membership' => '',
-				'prosite' => '',
+				'membership' => array(),
+				'prosite' => array(),
 			);
 			foreach ( $type_list as $type_item ) {
 				$Condition_keys[ 'pt-' . $type_item->name ] = array();
@@ -248,7 +248,14 @@ class CustomSidebarsVisibility {
 		<div class="csb-option-row csb-prosite" <?php if ( empty( $cond['prosite'] ) ) : ?>style="display:none"<?php endif; ?>>
 			<label for="<?php echo esc_attr( $widget->id ); ?>-prosite"><span class="csb-and" style="display:none"><?php _e( 'AND', CSB_LANG ); ?></span> <?php _e( 'Pro Sites Level', CSB_LANG ); ?></label>
 			<i class="dashicons dashicons-trash clear-filter show-on-hover action"></i>
-			<input type="text" id="<?php echo esc_attr( $widget->id ); ?>-prosite" name="<?php echo esc_attr( $block_name ); ?>[prosite]" value="<?php echo esc_attr( @$cond['prosite'] ); ?>" />
+			<select id="<?php echo esc_attr( $widget->id ); ?>-prosite" name="<?php echo esc_attr( $block_name ); ?>[prosite][]" multiple="multiple">
+			<?php foreach ( array() as $level ) : ?>
+				<?php $is_selected = in_array( $level['id'], $cond['prosite'] ); ?>
+				<option <?php selected( $is_selected ); ?> value="<?php echo esc_attr( $level['id'] ); ?>">
+					<?php echo esc_html( 'title' ); ?>
+				</option>
+			<?php endforeach; ?>
+			</select>
 		</div>
 
 		<?php /* PAGE TYPES */ ?>
@@ -533,7 +540,24 @@ class CustomSidebarsVisibility {
 
 		// Filter for MEMBERSHIP Level.
 		if ( $condition_true && ! empty( $cond['membership'] ) ) {
-			// not implemented yet...
+			if ( ! is_user_logged_in() ) {
+				$condition_true = false;
+			} else {
+				if ( class_exists( 'Membership_Factory' ) ) {
+					$factory = new Membership_Factory();
+					$user = $factory->get_member( get_current_user_id() );
+					$has_level = false;
+					foreach ( $cond['membership'] as $level ) {
+						if ( $user->on_level( $level ) ) {
+							$has_level = true;
+							break;
+						}
+					}
+					if ( ! $has_level ) {
+						$condition_true = false;
+					}
+				}
+			}
 		}
 
 		// Filter for PRO-SITE Level.
