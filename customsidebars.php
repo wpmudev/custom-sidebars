@@ -7,7 +7,7 @@ Version: 1.6-BETA
 Author: WPMU DEV
 Author URI: http://premium.wpmudev.org/
 Textdomain: custom-sidebars
-WDP ID: 132456
+WDP ID: 9105
 */
 
 /*
@@ -68,3 +68,19 @@ if ( ! class_exists( 'CustomSidebarsEmptyPlugin' ) ) {
 		}
 	} //end class
 } //end if class exists
+
+// Integrate WPMU Dev Dashboard
+if ( is_admin() ) {
+	if ( file_exists( 'inc/lib/external/wpmudev-dash-notification.php' ) ) {
+		global $wpmudev_notices;
+		is_array( $wpmudev_notices ) || $wpmudev_notices = array();
+		$wpmudev_notices[] = array(
+			'id' => 9105,
+			'name' => 'Custom Sidebars Pro',
+			'screens' => array(
+				'widgets',
+			),
+		);
+		require_once 'inc/lib/external/wpmudev-dash-notification.php';
+	}
+}
