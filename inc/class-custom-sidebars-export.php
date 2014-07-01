@@ -39,10 +39,27 @@ class CustomSidebarsExport extends CustomSidebars {
 	private function __construct() {
 		if ( is_admin() ) {
 			add_action(
+				'cs_widget_header',
+				array( $this, 'widget_header' )
+			);
+
+			add_action(
 				'cs_ajax_request',
 				array( $this, 'handle_ajax' )
 			);
 		}
+	}
+
+	/**
+	 * Called by action 'cs_widget_header'. Output the export/import button in
+	 * the widget header.
+	 *
+	 * @since  1.6.0
+	 */
+	public function widget_header() {
+		?>
+		<a href="#" class="cs-action btn-export"><?php _e( 'Import / Export Sidebars', CSB_LANG ); ?></a>
+		<?php
 	}
 
 	/**

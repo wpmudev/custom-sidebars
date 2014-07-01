@@ -1,12 +1,12 @@
 <?php
 
 // Load additional Pro-modules.
-require_once( 'class-custom-sidebars-widgets.php' );
-require_once( 'class-custom-sidebars-editor.php' );
-require_once( 'class-custom-sidebars-replacer.php' );
-require_once( 'class-custom-sidebars-cloning.php' );
-require_once( 'class-custom-sidebars-visibility.php' );
-require_once( 'class-custom-sidebars-export.php' );
+require_once CSB_INC_DIR . 'class-custom-sidebars-widgets.php';
+require_once CSB_INC_DIR . 'class-custom-sidebars-editor.php';
+require_once CSB_INC_DIR . 'class-custom-sidebars-replacer.php';
+require_once CSB_INC_DIR . 'class-custom-sidebars-cloning.php';
+require_once CSB_INC_DIR . 'class-custom-sidebars-visibility.php';
+require_once CSB_INC_DIR . 'class-custom-sidebars-export.php';
 
 
 /**
@@ -69,11 +69,14 @@ class CustomSidebars {
 		 * Hook up the plugin with WordPress.
 		 */
 		add_action( 'init', array( $this, 'load_text_domain' ) );
-		add_action( 'admin_enqueue_scripts', array( $this, 'add_widget_scripts' ) );
 		add_action( 'admin_enqueue_scripts', array( $this, 'add_pointer' ) );
 
 		// AJAX actions
 		add_action( 'wp_ajax_cs-ajax', array( $this, 'ajax_handler' ) );
+
+		TheLib::add_ui( 'scrollbar', 'widgets.php' );
+		TheLib::add_js( CSB_JS_URL . 'cs.min.js', 'widgets.php' );
+		TheLib::add_css( CSB_CSS_URL . 'cs.css', 'widgets.php' );
 
 		// Extensions use this hook to initialize themselfs.
 		do_action( 'cs_init' );
@@ -85,23 +88,6 @@ class CustomSidebars {
 	public function load_text_domain() {
 		load_plugin_textdomain( CSB_LANG, false, dirname( plugin_basename( __FILE__ ) ) . '/lang/' );
 		self::get_options();
-	}
-
-	/**
-	 * Load javascript and CSS files used by the plugin.
-	 *
-	 * @since 1.0.0
-	 * @param string $hook Name of current admin-page.
-	 */
-	public function add_widget_scripts( $hook ) {
-		if ( 'widgets.php' == $hook ) {
-			wp_enqueue_script( 'tiny-scrollbar', CSB_JS_URL . 'tiny-scrollbar.min.js', array( 'jquery' ) );
-			wp_enqueue_script( 'cs_script', CSB_JS_URL . 'cs.min.js', array( 'tiny-scrollbar') );
-			wp_enqueue_script( 'wpmu-ui', CSB_JS_URL . 'wpmu-ui.min.js', array( 'jquery') );
-
-			wp_enqueue_style( 'cs_style', CSB_CSS_URL . 'cs.css' );
-			wp_enqueue_style( 'wpmu-ui', CSB_CSS_URL . 'wpmu-ui.css' );
-		}
 	}
 
 	/**
@@ -283,6 +269,7 @@ class CustomSidebars {
 	 */
 	static public function get_options( $key = null ) {
 		static $Options = null;
+		$need_update = false;
 
 		if ( null === $Options ) {
 			$Options = get_option( 'cs_modifiable', array() );
@@ -291,7 +278,12 @@ class CustomSidebars {
 			}
 
 			// List of modifiable sidebars.
-			$Options['modifiable'] = self::get_array( @$Options['modifiable'] );
+			if ( ! is_array( @$Options['modifiable'] ) ) {
+				// By default we make ALL theme sidebars replaceable:
+				$all = self::get_sidebars( 'theme' );
+				$Options['modifiable'] = array_keys( $all );
+				$need_update = true;
+			}
 
 			/**
 			 * In version 1.6.0 four config values have been renamed and are
@@ -317,10 +309,22 @@ class CustomSidebars {
 			);
 
 			// Remove old item names from the array.
-			unset( $Options['defaults'] );
-			unset( $Options['post_type_pages'] );
-			unset( $Options['category_posts'] );
-			unset( $Options['category_pages'] );
+			if ( isset( $Options['defaults'] ) ) {
+				unset( $Options['defaults'] );
+				$need_update = true;
+			}
+			if ( isset( $Options['post_type_pages'] ) ) {
+				unset( $Options['post_type_pages'] );
+				$need_update = true;
+			}
+			if ( isset( $Options['category_posts'] ) ) {
+				unset( $Options['category_posts'] );
+				$need_update = true;
+			}
+			if ( isset( $Options['category_pages'] ) ) {
+				unset( $Options['category_pages'] );
+				$need_update = true;
+			}
 
 			// Special archive pages
 			$Options['blog'] = self::get_array( @$Options['blog'] );
@@ -328,6 +332,10 @@ class CustomSidebars {
 			$Options['authors'] = self::get_array( @$Options['authors'] );
 			$Options['search'] = self::get_array( @$Options['search'] );
 			$Options['date'] = self::get_array( @$Options['date'] );
+
+			if ( $need_update ) {
+				self::set_options( $Options );
+			}
 		}
 
 		if ( ! empty( $key ) ) {
@@ -698,6 +706,9 @@ class CustomSidebars {
 	 * @since  1.0.0
 	 */
 	static protected function json_response( $obj ) {
+		// Flush any output that was made prior to this function call
+		while ( 0 < ob_get_level() ) { ob_end_clean(); }
+
 		header( 'Content-Type: application/json' );
 		echo json_encode( $obj );
 		die();
@@ -709,6 +720,9 @@ class CustomSidebars {
 	 * @since  1.6.0
 	 */
 	static protected function plain_response( $data ) {
+		// Flush any output that was made prior to this function call
+		while ( 0 < ob_get_level() ) { ob_end_clean(); }
+
 		header( 'Content-Type: text/plain' );
 		echo $data;
 		die();
@@ -733,6 +747,16 @@ class CustomSidebars {
 	 * It analyzes the post-data and calls the required functions to execute
 	 * the requested action.
 	 *
+	 * --------------------------------
+	 *
+	 * IMPORTANT! ANY SERVER RESPONSE MUST BE MADE VIA ONE OF THESE FUNCTIONS!
+	 * Using direct `echo` or include an html file will not work.
+	 *
+	 *    self::json_response( $obj )
+	 *    self::plain_response( $text )
+	 *
+	 * --------------------------------
+	 *
 	 * @since  1.0.0
 	 */
 	public function ajax_handler() {
@@ -740,6 +764,14 @@ class CustomSidebars {
 		if ( ! current_user_can( self::$cap_required ) ) {
 			return;
 		}
+
+		// Try to disable debug output for ajax handlers of this plugin.
+		if ( defined( 'WP_DEBUG' ) && WP_DEBUG ) {
+			defined( 'WP_DEBUG_DISPLAY' ) || define( 'WP_DEBUG_DISPLAY', false );
+			defined( 'WP_DEBUG_LOG' ) || define( 'WP_DEBUG_LOG', true );
+		}
+		// Catch any unexpected output via output buffering.
+		ob_start();
 
 		$action = @$_POST['do'];
 

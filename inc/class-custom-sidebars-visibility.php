@@ -46,11 +46,9 @@ class CustomSidebarsVisibility {
 				10, 3
 			);
 
-			// Load the javascript support file for this module.
-			add_action(
-				'admin_enqueue_scripts',
-				array( $this, 'admin_scripts' )
-			);
+			TheLib::add_ui( array( 'chosen' ), 'widgets.php' );
+			TheLib::add_js( CSB_JS_URL . 'cs-visibility.min.js', 'widgets.php' );
+			TheLib::add_css( CSB_CSS_URL . 'cs-visibility.css', 'widgets.php' );
 		} else {
 			// Filters the list of widget-areas and their widgets
 			add_action(
@@ -396,45 +394,6 @@ class CustomSidebarsVisibility {
 		$instance['csb_visibility'] = $data;
 
 		return $instance;
-	}
-
-	/**
-	 * Load the javascript support file for the visibility module.
-	 *
-	 * @since  1.6
-	 */
-	public function admin_scripts() {
-		wp_enqueue_script(
-			'csb-visibility',
-			CSB_JS_URL . 'visibility.min.js',
-			array( 'jquery' ),
-			'1.6',
-			true
-		);
-
-		wp_enqueue_script(
-			'chosen',
-			CSB_JS_URL . 'chosen.jquery.min.js',
-			array( 'jquery' ),
-			'1.6',
-			true
-		);
-
-		// -- CSS --
-
-		wp_enqueue_style(
-			'csb-visibility',
-			CSB_CSS_URL . 'visibility.css',
-			array(),
-			'1.6'
-		);
-
-		wp_enqueue_style(
-			'chosen',
-			CSB_CSS_URL . 'chosen.css',
-			array(),
-			'1.6'
-		);
 	}
 
 	// == Front-end functions

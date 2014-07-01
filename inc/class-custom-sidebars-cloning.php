@@ -65,10 +65,10 @@ class CustomSidebarsCloning {
 			);
 
 			// Load the javascript support file for this module.
-			add_action(
-				'admin_enqueue_scripts',
-				array( $this, 'admin_scripts' )
-			);
+			TheLib::add_ui( 'core', 'widgets.php' );
+			TheLib::add_ui( 'chosen', 'widgets.php' );
+			TheLib::add_js( CSB_JS_URL . 'cs-cloning.min.js', 'widgets.php' );
+			TheLib::add_css( CSB_CSS_URL . 'cs-cloning.css', 'widgets.php' );
 		}
 	}
 
@@ -322,38 +322,6 @@ class CustomSidebarsCloning {
 		$this->group_data = $settings;
 
 		return $instance;
-	}
-
-	/**
-	 * Load the javascript support file for the visibility module.
-	 *
-	 * @since  1.6
-	 */
-	public function admin_scripts() {
-		wp_enqueue_script(
-			'csb-clone',
-			CSB_JS_URL . 'cloning.min.js',
-			array( 'jquery' ),
-			'1.6',
-			true
-		);
-
-		wp_enqueue_script(
-			'chosen',
-			CSB_JS_URL . 'chosen.jquery.min.js',
-			array( 'jquery' ),
-			'1.6',
-			true
-		);
-
-		// -- CSS --
-
-		wp_enqueue_style(
-			'csb-clone',
-			CSB_CSS_URL . 'cloning.css',
-			array(),
-			'1.6'
-		);
 	}
 
 };

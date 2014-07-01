@@ -330,32 +330,32 @@ class CustomSidebarsEditor extends CustomSidebars {
 		// Collect required data for all posttypes.
 		$posttypes = array();
 		foreach ( $raw_posttype as $item ) {
-			$sel_single = $defaults['post_type_single'][$item->name];
+			$sel_single = @$defaults['post_type_single'][$item->name];
 
 			$posttypes[ $item->name ] = array(
 				'name' => $item->labels->name,
-				'single' => $sel_single,
+				'single' => self::get_array( $sel_single ),
 			);
 		}
 
 		// Extract the data from categories list that we need.
 		$categories = array();
 		foreach ( $raw_cat as $item ) {
-			$sel_single = $defaults['category_single'][$item->term_id];
-			$sel_archive = $defaults['category_archive'][$item->term_id];
+			$sel_single = @$defaults['category_single'][$item->term_id];
+			$sel_archive = @$defaults['category_archive'][$item->term_id];
 
 			$categories[ $item->term_id ] = array(
 				'name' => $item->name,
 				'count' => $item->count,
-				'single' => $sel_single,
-				'archive' => $sel_archive,
+				'single' => self::get_array( $sel_single ),
+				'archive' => self::get_array( $sel_archive ),
 			);
 		}
 
 		// Build a list of archive types.
 		$archives = array(); // Start with a copy of the posttype list.
 		foreach ( $raw_posttype as $item ) {
-			$sel_archive = $defaults['post_type_archive'][$item->name];
+			$sel_archive = @$defaults['post_type_archive'][$item->name];
 
 			$label = sprintf(
 				__( '%1$s Archives', CSB_LANG ),
@@ -364,16 +364,16 @@ class CustomSidebarsEditor extends CustomSidebars {
 
 			$archives[ $item->name ] = array(
 				'name' => $label,
-				'archive' => $sel_archive,
+				'archive' => self::get_array( $sel_archive ),
 			);
 		}
 
 		foreach ( $archive_type as $key => $name ) {
-			$sel_archive = $defaults[substr( $key, 1 ) ];
+			$sel_archive = @$defaults[ substr( $key, 1 ) ];
 
 			$archives[ $key ] = array(
 				'name' => $name,
-				'archive' => $sel_archive,
+				'archive' => self::get_array( $sel_archive ),
 			);
 		}
 
@@ -398,7 +398,7 @@ class CustomSidebarsEditor extends CustomSidebars {
 		$sidebars = $options['modifiable'];
 		$raw_posttype = self::get_post_types( 'objects' );
 		$raw_cat = self::get_all_categories();
-		$data = $_POST['cs'];
+		$data = @$_POST['cs'];
 		$special_arc = array(
 			'blog',
 			'tags',
@@ -413,15 +413,29 @@ class CustomSidebarsEditor extends CustomSidebars {
 			// Post-type settings.
 			foreach ( $raw_posttype as $item ) {
 				$pt = $item->name;
-				if ( in_array( $pt, $data['pt'][$sb_id] ) ) {
+				if (
+					is_array( @$data['pt'][$sb_id] ) &&
+					in_array( $pt, $data['pt'][$sb_id] )
+				) {
 					$options['post_type_single'][$pt][$sb_id] = $req->id;
-				} else if ( $options['post_type_single'][$pt][$sb_id] == $req->id ) {
+				} else
+				if (
+					isset( $options['post_type_single'][$pt][$sb_id] ) &&
+					$options['post_type_single'][$pt][$sb_id] == $req->id
+				) {
 					$options['post_type_single'][$pt][$sb_id] = '';
 				}
 
-				if ( in_array( $pt, $data['arc'][$sb_id] ) ) {
+				if (
+					is_array( @$data['arc'][$sb_id] ) &&
+					in_array( $pt, $data['arc'][$sb_id] )
+				) {
 					$options['post_type_archive'][$pt][$sb_id] = $req->id;
-				} else if ( $options['post_type_archive'][$pt][$sb_id] == $req->id ) {
+				} else
+				if (
+					isset( $options['post_type_archive'][$pt][$sb_id] ) &&
+					$options['post_type_archive'][$pt][$sb_id] == $req->id
+				) {
 					$options['post_type_archive'][$pt][$sb_id] = '';
 				}
 			}
@@ -429,23 +443,44 @@ class CustomSidebarsEditor extends CustomSidebars {
 			// Category settings.
 			foreach ( $raw_cat as $item ) {
 				$cat = $item->term_id;
-				if ( in_array( $cat, $data['cat'][$sb_id] ) ) {
+				if (
+					is_array( @$data['cat'][$sb_id] ) &&
+					in_array( $cat, $data['cat'][$sb_id] )
+				) {
 					$options['category_single'][$cat][$sb_id] = $req->id;
-				} else if ( $options['category_single'][$cat][$sb_id] == $req->id ) {
+				} else
+				if (
+					isset( $options['category_single'][$cat][$sb_id] ) &&
+					$options['category_single'][$cat][$sb_id] == $req->id
+				) {
 					$options['category_single'][$cat][$sb_id] = '';
 				}
 
-				if ( in_array( $cat, $data['arc-cat'][$sb_id] ) ) {
+				if (
+					is_array( @$data['cat-arc'][$sb_id] ) &&
+					in_array( $cat, $data['arc-cat'][$sb_id] )
+				) {
 					$options['category_archive'][$cat][$sb_id] = $req->id;
-				} else if ( $options['category_archive'][$cat][$sb_id] == $req->id ) {
+				} else
+				if (
+					isset( $options['category_archive'][$cat][$sb_id] ) &&
+					$options['category_archive'][$cat][$sb_id] == $req->id
+				) {
 					$options['category_archive'][$cat][$sb_id] = '';
 				}
 			}
 
 			foreach ( $special_arc as $key ) {
-				if ( in_array( '_' . $key, $data['arc'][$sb_id] ) ) {
+				if (
+					is_array( @$data['arc'][$sb_id] ) &&
+					in_array( '_' . $key, $data['arc'][$sb_id] )
+				) {
 					$options[$key][$sb_id] = $req->id;
-				} else if ( $options[$key][$sb_id] == $req->id ) {
+				} else
+				if (
+					isset( $options[$key][$sb_id] ) &&
+					$options[$key][$sb_id] == $req->id
+				) {
 					$options[$key][$sb_id] = '';
 				}
 			}
@@ -559,7 +594,7 @@ class CustomSidebarsEditor extends CustomSidebars {
 				if ( isset( $_POST[ 'cs_replacement_' . $sb_id ] ) ) {
 					$replacement = $_POST[ 'cs_replacement_' . $sb_id ];
 					if ( ! empty( $replacement ) && $replacement != '' ) {
-						$data[$sb_id] = $replacement;
+						$data[ $sb_id ] = $replacement;
 					}
 				}
 			}

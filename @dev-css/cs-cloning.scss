@@ -50,20 +50,22 @@
 	cursor: default;
 }
 
-h4.csb-group {
-	padding-left: 45px;
-	position: relative;
-}
+h4 {
+	&.csb-group {
+		padding-left: 45px;
+		position: relative;
+	}
 
-h4 .btn-clone-group {
-	position: absolute;
-	top: 50%;
-	margin-top: -10px;
-	left: 15px;
-	cursor: pointer;
-	opacity: .6;
-}
+	.btn-clone-group {
+		position: absolute;
+		top: 50%;
+		margin-top: -10px;
+		left: 15px;
+		cursor: pointer;
+		opacity: .6;
 
-h4 .btn-clone-group:hover {
-	opacity: 1;
+		&:hover {
+			opacity: 1;
+		}
+	}
 }

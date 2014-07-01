@@ -41,16 +41,22 @@ if ( ! class_exists( 'CustomSidebars' ) ) {
 	$plugin_dir = dirname( __FILE__ );
 	$plugin_url = plugin_dir_url( __FILE__ );
 	define( 'CSB_VIEWS_DIR', $plugin_dir . '/views/' );
+	define( 'CSB_INC_DIR', $plugin_dir . '/inc/' );
 	define( 'CSB_JS_URL', $plugin_url . 'js/' );
 	define( 'CSB_CSS_URL', $plugin_url . 'css/' );
 	define( 'CSB_VERSION', '1.6' );
 
 	// Load the actual core.
 	require_once 'inc/class-custom-sidebars.php';
-
-	// Initialize the plugin
-	$plugin_sidebars = CustomSidebars::instance();
 }
+
+// Include function library
+if ( file_exists( CSB_INC_DIR . 'external/wpmu-lib/core.php' ) ) {
+	require_once CSB_INC_DIR . 'external/wpmu-lib/core.php';
+}
+
+// Initialize the plugin
+$plugin_sidebars = CustomSidebars::instance();
 
 if ( ! class_exists( 'CustomSidebarsEmptyPlugin' ) ) {
 	class CustomSidebarsEmptyPlugin extends WP_Widget {
@@ -69,9 +75,9 @@ if ( ! class_exists( 'CustomSidebarsEmptyPlugin' ) ) {
 	} //end class
 } //end if class exists
 
-// Integrate WPMU Dev Dashboard
+// Pro: Integrate WPMU Dev Dashboard
 if ( is_admin() ) {
-	if ( file_exists( 'inc/lib/external/wpmudev-dash-notification.php' ) ) {
+	if ( file_exists( 'inc/external/wpmudev-dashboard/wpmudev-dash-notification.php' ) ) {
 		global $wpmudev_notices;
 		is_array( $wpmudev_notices ) || $wpmudev_notices = array();
 		$wpmudev_notices[] = array(
@@ -81,6 +87,6 @@ if ( is_admin() ) {
 				'widgets',
 			),
 		);
-		require_once 'inc/lib/external/wpmudev-dash-notification.php';
+		require_once 'inc/external/wpmudev-dashboard/wpmudev-dash-notification.php';
 	}
 }
