@@ -270,39 +270,41 @@ body.appearance_page_customsidebars #poststuff h2 {
 
 .replaceable {
 	position: relative;
-}
 
-.replaceable .replace-marker {
-	position: absolute;
-	left: 0;
-	top: 0;
-	bottom: 0;
-	width: 5px;
-	margin: 0 5px 0 0;
-	border-left: 2px solid #05c944;
-	z-index: 10;
-}
+	.replace-marker {
+		position: absolute;
+		left: 0;
+		top: 0;
+		bottom: 0;
+		width: 5px;
+		margin: 0 5px 0 0;
+		border-left: 2px solid #05c944;
+		z-index: 10;
 
-.replaceable .replace-marker:hover:before {
-	content: attr(data-label);
-	background: #333;
-	color: #EEE;
-	font-size: 13px;
-	white-space: nowrap;
-	padding: 5px;
-	position: absolute;
-	top: 7px;
-	right: 13px;
-	line-height: 20px;
-}
+		/*
+		&:hover:before {
+			content: attr(data-label);
+			background: #333;
+			color: #EEE;
+			font-size: 13px;
+			white-space: nowrap;
+			padding: 5px;
+			position: absolute;
+			top: 7px;
+			right: 13px;
+			line-height: 20px;
+		}
 
-.replaceable .replace-marker:hover:after {
-	content: '';
-	position: absolute;
-	top: 16px;
-	right: 3px;
-	border: 6px solid transparent;
-	border-left-color: #333;
+		&:hover:after {
+			content: '';
+			position: absolute;
+			top: 16px;
+			right: 3px;
+			border: 6px solid transparent;
+			border-left-color: #333;
+		}
+		*/
+	}
 }
 
 
@@ -367,12 +369,12 @@ body.appearance_page_customsidebars #poststuff h2 {
 	padding: 0;
 	background: #FCFCFC;
 	border-top: 1px solid #E5E5E5;
-}
 
-.cs-toolbar:after {
-	display: table;
-	content: '';
-	clear: both;
+	&:after {
+		display: table;
+		content: '';
+		clear: both;
+	}
 }
 
 .closed .cs-toolbar {
@@ -385,6 +387,8 @@ body.appearance_page_customsidebars #poststuff h2 {
 	padding: 0 10px;
 	white-space: nowrap;
 	background: #FFF;
+	position: relative;
+	overflow: hidden;
 }
 
 .cs-toolbar .dashicons {
@@ -420,6 +424,69 @@ body.appearance_page_customsidebars #poststuff h2 {
 .cs-toolbar .delete-sidebar:focus,
 .cs-toolbar .delete-sidebar:active {
 	color: #F00;
+}
+
+.cs-toolbar .only-replaceable {
+	display: none;
+}
+
+.cs-toolbar .cs-tool.btn-replaceable {
+	color: #555;
+
+	&:hover {
+		color: #333 !important;
+	}
+
+	.chk-replaceable {
+		position: absolute;
+		left: -20px;
+		top: -20px;
+	}
+
+	.icon {
+		display: inline-block;
+		width: 20px;
+		height: 20px;
+		font-size: 20px;
+		line-height: 20px;
+		font-family: "dashicons";
+		font-weight: normal;
+		font-style: normal;
+		text-align: center;
+		float: left;
+		padding: 10px 5px 10px 0;
+		-webkit-font-smoothing: antialiased;
+		-moz-osx-font-smoothing: grayscale;
+
+		&:before {
+			content: "\f160"; /* dashicons-lock */
+			color: #BBB;
+		}
+	}
+}
+
+.replaceable {
+	.cs-toolbar .cs-tool.btn-replaceable {
+		background: lighten(#05c944, 56%);
+		color: #333;
+
+		.icon:before {
+			content: "\f147"; /* dashicons-yes */
+			color: #080;
+		}
+	}
+
+	.cs-toolbar .only-replaceable {
+		display: inline;
+	}
+}
+
+.replace-tip-box {
+	float: left;
+}
+
+.replace-tip {
+	width: 200px;
 }
 
 

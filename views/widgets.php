@@ -42,6 +42,7 @@
 		'custom_sidebars': "<?php _e( 'Custom Sidebars', CSB_LANG ); ?>",
 		'theme_sidebars': "<?php _e( 'Theme Sidebars', CSB_LANG ); ?>",
 		'ajax_error': "<?php _e( 'Couldn\'t load data from WordPress...', CSB_LANG ); ?>",
+		'replace_tip': "<?php _e( 'Activate this option to replace the sidebar with one of your custom sidebars.', CSB_LANG ); ?>",
 		'replaceable': <?php echo json_encode( CustomSidebars::get_options( 'modifiable' ) ); ?>
 	};
 	</script>
@@ -53,18 +54,33 @@
 	============================================================================
 	*/ ?>
 	<div class="cs-custom-sidebar cs-toolbar">
-		<a class="cs-tool delete-sidebar" href="#" title="<?php _e( 'Delete', CSB_LANG ); ?>">
+		<a
+			class="cs-tool delete-sidebar"
+			data-action="delete"
+			href="#"
+			title="<?php _e( 'Delete this sidebar.', CSB_LANG ); ?>"
+			>
 			<i class="dashicons dashicons-trash"></i>
 		</a>
-		<span class="cs-separator"> | </span>
-		<a class="cs-tool edit-sidebar" href="#">
+		<span class="cs-separator">|</span>
+		<a
+			class="cs-tool"
+			data-action="edit"
+			href="#"
+			title="<?php _e( 'Edit this sidebar.', CSB_LANG ); ?>"
+			>
 			<?php _e( 'Edit', CSB_LANG ); ?>
 		</a>
-		<span class="cs-separator"> | </span>
-		<a class="cs-tool where-sidebar" href="#" title="<?php _e( 'Where do you want the sidebar?', CSB_LANG ); ?>">
+		<span class="cs-separator">|</span>
+		<a
+			class="cs-tool"
+			data-action="location"
+			href="#"
+			title="<?php _e( 'Where do you want the sidebar?', CSB_LANG ); ?>"
+			>
 			<?php _e( 'Sidebar Location', CSB_LANG ); ?>
 		</a>
-		<span class="cs-separator"> | </span>
+		<span class="cs-separator">|</span>
 	</div>
 
 
@@ -74,11 +90,37 @@
 	============================================================================
 	*/ ?>
 	<div class="cs-theme-sidebar cs-toolbar">
-		<label for="cs-replaceable" class="cs-tool btn-replaceable">
-			<input type="checkbox" id="" class="has-label chk-replaceable" data-label="<?php echo esc_attr( __( 'This sidebar can be replaced', CSB_LANG ) ); ?>" />
-			<?php _e( 'Make Replaceable', CSB_LANG ); ?>
+		<label
+			for="cs-replaceable"
+			class="cs-tool btn-replaceable"
+			data-action="replaceable"
+			>
+			<span class="icon"></span>
+			<input
+				type="checkbox"
+				id=""
+				class="has-label chk-replaceable"
+				/>
+			<span
+				class="is-label"
+				data-on="<?php _e( 'Can be replaced', CSB_LANG ); ?>"
+				data-off="<?php _e( 'Static sidebar', CSB_LANG ); ?>"
+				>
+				<?php _e( 'Static sidebar', CSB_LANG ); ?>
+			</span>
 		</label>
-		<span class="cs-separator"> | </span>
+		<span class="cs-separator">|</span>
+		<span class="only-replaceable">
+			<a
+				class="cs-tool"
+				data-action="location"
+				href="#"
+				title="<?php _e( 'Where do you want the sidebar?', CSB_LANG ); ?>"
+				>
+				<?php _e( 'Sidebar Location', CSB_LANG ); ?>
+			</a>
+			<span class="cs-separator">|</span>
+		</span>
 	</div>
 
 

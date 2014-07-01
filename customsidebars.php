@@ -77,7 +77,7 @@ if ( ! class_exists( 'CustomSidebarsEmptyPlugin' ) ) {
 
 // Pro: Integrate WPMU Dev Dashboard
 if ( is_admin() ) {
-	if ( file_exists( 'inc/external/wpmudev-dashboard/wpmudev-dash-notification.php' ) ) {
+	if ( file_exists( CSB_INC_DIR . 'external/wpmudev-dashboard/wpmudev-dash-notification.php' ) ) {
 		global $wpmudev_notices;
 		is_array( $wpmudev_notices ) || $wpmudev_notices = array();
 		$wpmudev_notices[] = array(
@@ -87,6 +87,6 @@ if ( is_admin() ) {
 				'widgets',
 			),
 		);
-		require_once 'inc/external/wpmudev-dashboard/wpmudev-dash-notification.php';
+		require_once CSB_INC_DIR . 'external/wpmudev-dashboard/wpmudev-dash-notification.php';
 	}
 }

@@ -112,6 +112,14 @@ var csSidebars, msgTimer;
 		 */
 		extras: null,
 
+		/**
+		 * Stores the callback functions associated with the toolbar actions.
+		 * @see  csSidebars.handleAction
+		 * @see  csSidebars.registerAction
+		 * @type Object
+		 */
+		action_handlers: {},
+
 
 		/*====================================*\
 		========================================
@@ -262,6 +270,51 @@ var csSidebars, msgTimer;
 
 		/**
 		 * =====================================================================
+		 * Initialization function, creates a CsSidebar object for each sidebar.
+		 *
+		 * @since  1.0.0
+		 */
+		initSidebars: function(){
+			csSidebars.right.find('.widgets-sortables').each(function() {
+				var sb, state, i, btn_replace, args,
+					me = jQuery( this ),
+					id = me.attr('id');
+
+				if ( me.data( 'cs-init' ) === true ) { return; }
+				me.data( 'cs-init', true );
+
+				if ( csSidebars.isCustomSidebar( this ) ) {
+					sb = csSidebars.add( id, 'custom' );
+				} else {
+					sb = csSidebars.add( id, 'theme' );
+
+					// Set correct "replaceable" flag for the toolbar.
+					state = false;
+					for ( i = 0; i < csSidebarsData.replaceable.length; i += 1 ) {
+						if ( csSidebarsData.replaceable[i] == id ) {
+							state = true;
+							break;
+						}
+					}
+					csSidebars.setReplaceable( sb, state, false );
+
+					// Add a replaceable-tooltip.
+					btn_replace = sb.sb
+						.closest( '.widgets-holder-wrap' )
+						.find( '.cs-toolbar .btn-replaceable' );
+					args = {
+						'content': csSidebarsData.replace_tip,
+						'class': 'replace-tip',
+						'pos': 'top'
+					};
+					wpmUi.tooltip( btn_replace, args );
+				}
+			});
+			return csSidebars;
+		},
+
+		/**
+		 * =====================================================================
 		 * Initialize the top toolbar, above the sidebar list.
 		 *
 		 * @since  1.0.0
@@ -290,38 +343,6 @@ var csSidebars, msgTimer;
 
 		/**
 		 * =====================================================================
-		 * Initialization function, creates a CsSidebar object for each sidebar.
-		 *
-		 * @since  1.0.0
-		 */
-		initSidebars: function(){
-			csSidebars.right.find('.widgets-sortables').each(function() {
-				var sb, state, i,
-					me = jQuery( this ),
-					id = me.attr('id');
-
-				if ( me.data( 'cs-init' ) === true ) { return; }
-				me.data( 'cs-init', true );
-
-				if ( csSidebars.isCustomSidebar( this ) ) {
-					sb = csSidebars.add( id, 'custom' );
-				} else {
-					sb = csSidebars.add( id, 'theme' );
-					state = false;
-					for ( i = 0; i < csSidebarsData.replaceable.length; i += 1 ) {
-						if ( csSidebarsData.replaceable[i] == id ) {
-							state = true;
-							break;
-						}
-					}
-					csSidebars.setReplaceable( sb, state, false );
-				}
-			});
-			return csSidebars;
-		},
-
-		/**
-		 * =====================================================================
 		 * Hook up all the functions in the sidebar toolbar.
 		 * Toolbar is in the bottom of each sidebar.
 		 *
@@ -330,44 +351,44 @@ var csSidebars, msgTimer;
 		initToolbars: function() {
 			var tool_action = function( ev ) {
 				var me = jQuery( ev.target ).closest( '.cs-tool' ),
+					action = me.data( 'action' ),
 					id = csSidebars.getIdFromEditbar( me ),
 					sb = csSidebars.find( id );
 
-				// DELETE sidebar
-				if ( me.hasClass( 'delete-sidebar' ) ) {
-					csSidebars.showRemove( sb );
-
-					return false;
-				} else
-
-				// EDIT dialog
-				if ( me.hasClass( 'edit-sidebar' ) ) {
-					var data = {
-						id: sb.getID(),
-						title: csSidebarsData.title_edit + ' ' + sb.name,
-						button: csSidebarsData.btn_edit
-					};
-					csSidebars.showEditor( data );
-
-					return false;
-				} else
-
-				// LOCATION popup
-				if ( me.hasClass( 'where-sidebar' ) ) {
-					csSidebars.showLocations( sb );
-					return false;
-				} else
-
-				// TOGGLE REPLACEABLE flag
-				if ( me.hasClass( 'btn-replaceable' ) ) {
-					csSidebars.setReplaceable( sb )
-					return true;
-				}
+				// Return value False means: Execute the default click handler.
+				return ! csSidebars.handleAction( action, sb );
 			};
+
+			csSidebars.registerAction( 'edit', csSidebars.showEditor );
+			csSidebars.registerAction( 'location', csSidebars.showLocations );
+			csSidebars.registerAction( 'delete', csSidebars.showRemove );
+			csSidebars.registerAction( 'replaceable', csSidebars.setReplaceable );
 
 			csSidebars.right.on('click', '.cs-tool', tool_action);
 
 			return csSidebars;
+		},
+
+		/**
+		 * Triggers the callback function for the specified toolbar action.
+		 *
+		 * @since  1.6.0
+		 */
+		handleAction: function( action, sb ) {
+			if ( 'function' == typeof csSidebars.action_handlers[ action ] ) {
+				return !! csSidebars.action_handlers[ action ]( sb );
+			}
+			return false;
+		},
+
+		/**
+		 * Registers a new callback function that is triggered when the
+		 * associated toolbar icon is clicked.
+		 *
+		 * @since  1.6.0
+		 */
+		registerAction: function( action, callback ) {
+			csSidebars.action_handlers[ action ] = callback;
 		},
 
 		/**
@@ -409,10 +430,20 @@ var csSidebars, msgTimer;
 		 *           - description .. Value of field "description".
 		 *           - title .. Text for the window title.
 		 *           - button .. Caption of the save button.
+		 *
+		 *           or a CsSidebar object.
 		 */
 		showEditor: function( data ) {
 			var popup = null,
 				ajax = null;
+
+			if ( data instanceof CsSidebar ) {
+				data = {
+					id: data.getID(),
+					title: csSidebarsData.title_edit + ' ' + data.name,
+					button: csSidebarsData.btn_edit
+				};
+			}
 
 			// Hide the "extra" fields
 			var hide_extras = function hide_extras() {
@@ -556,7 +587,7 @@ var csSidebars, msgTimer;
 			popup.$().on( 'click', '.btn-save', save_data );
 			popup.$().on( 'click', '.btn-cancel', popup.close );
 
-			return csSidebars;
+			return true;
 		},
 
 		/**
@@ -755,7 +786,7 @@ var csSidebars, msgTimer;
 			popup.$().on( 'click', '.btn-cancel', show_overview );
 			popup.$().on( 'click', '.btn-import', do_import );
 
-			return false;
+			return true;
 		},
 
 
@@ -847,7 +878,7 @@ var csSidebars, msgTimer;
 			popup.$().on( 'click', '.btn-cancel', close_popup );
 			popup.$().on( 'click', '.btn-delete', delete_sidebar );
 
-			return false;
+			return true;
 		},
 
 
@@ -1097,7 +1128,7 @@ var csSidebars, msgTimer;
 			popup.$().on( 'click', '.btn-save', save_data );
 			popup.$().on( 'click', '.btn-cancel', popup.close );
 
-			return false;
+			return true;
 		},
 
 		/*======================================*\
@@ -1118,7 +1149,8 @@ var csSidebars, msgTimer;
 			var ajax,
 				the_bar = jQuery( sb.sb ).closest( '.widgets-holder-wrap' ),
 				chk = the_bar.find( '.cs-toolbar .chk-replaceable' ),
-				marker = the_bar.find( '.replace-marker' );
+				marker = the_bar.find( '.replace-marker' ),
+				lbl = the_bar.find( '.cs-toolbar .btn-replaceable .is-label' );
 
 			if ( undefined == state ) { state = chk.prop( 'checked' ); }
 			if ( undefined == do_ajax ) { do_ajax = true; }
@@ -1133,13 +1165,14 @@ var csSidebars, msgTimer;
 				if ( ! marker.length ) {
 					jQuery( '<div></div>' )
 						.appendTo( the_bar )
-						.addClass( 'replace-marker' )
-						.attr( 'data-label', chk.attr( 'data-label' ) );
+						.addClass( 'replace-marker' );
 				}
 				the_bar.addClass( 'replaceable' );
+				lbl.text( lbl.data( 'on' ) );
 			} else {
 				marker.remove();
 				the_bar.removeClass( 'replaceable' );
+				lbl.text( lbl.data( 'off' ) );
 			}
 
 			if ( do_ajax ) {
@@ -1152,6 +1185,13 @@ var csSidebars, msgTimer;
 					})
 					.load_json();
 			}
+
+			/**
+			 * This function is called by csSidebars.handleAction. Return value
+			 * False means that the default click event should be executed after
+			 * this function was called.
+			 */
+			return false;
 		},
 
 

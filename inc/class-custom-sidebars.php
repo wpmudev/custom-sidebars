@@ -69,7 +69,19 @@ class CustomSidebars {
 		 * Hook up the plugin with WordPress.
 		 */
 		add_action( 'init', array( $this, 'load_text_domain' ) );
-		add_action( 'admin_enqueue_scripts', array( $this, 'add_pointer' ) );
+		TheLib::pointer(
+			self::$pointer_id,
+			'#menu-appearance',
+			__( 'Custom Sidebars Pro', CSB_LANG ),
+			sprintf(
+				__(
+					'Now you can create and edit custom sidebars in your ' .
+					'<a href="%1$s">Widgets screen</a>!', CSB_LANG
+				),
+				admin_url( 'widgets.php' )
+			),
+			self::$cap_required
+		);
 
 		// AJAX actions
 		add_action( 'wp_ajax_cs-ajax', array( $this, 'ajax_handler' ) );
@@ -89,74 +101,6 @@ class CustomSidebars {
 		load_plugin_textdomain( CSB_LANG, false, dirname( plugin_basename( __FILE__ ) ) . '/lang/' );
 		self::get_options();
 	}
-
-	/**
-	 * Display the Introduction-pointer if user did not see it yet.
-	 *
-	 * @since 1.6.0
-	 * @param string $hook Name of current admin-page.
-	 */
-	public function add_pointer( $hook ) {
-		// Permission check.
-		if ( ! current_user_can( self::$cap_required ) ) {
-			return;
-		}
-
-		// Find out which pointer IDs this user has already seen.
-		$seen = (string) get_user_meta( get_current_user_id(), 'dismissed_wp_pointers', true );
-		$seen_list = explode( ',', $seen );
-
-		// Handle our first pointer announcing the plugin's new settings screen.
-		if ( ! in_array( self::$pointer_id, $seen_list ) ) {
-			add_action(
-				'admin_print_footer_scripts',
-				array( $this, 'footer_pointer_scripts' )
-			);
-
-			// Load the JS/CSS for WP Pointers
-			wp_enqueue_script( 'wp-pointer' );
-			wp_enqueue_style( 'wp-pointer' );
-		}
-	}
-
-	/**
-	 * Output HTML/scripts to show introduction pointer in the admin footer.
-	 *
-	 * @since  1.6.0
-	 */
-	public function footer_pointer_scripts() {
-		?>
-		<script>
-			jQuery(document).ready(function() {
-				if ( typeof( jQuery().pointer ) != 'undefined' ) {
-					jQuery( '#menu-appearance' ).pointer({
-						content: '<h3><?php _e( 'Custom Sidebars Pro', CSB_LANG ); ?></h3>' +
-							'<p><?php printf(
-								__(
-									'Now you can create and edit custom ' .
-									'sidebars in your ' .
-									'<a href="%1$s">Widgets screen</a>!', CSB_LANG
-								),
-								admin_url( 'widgets.php' )
-							); ?></p>',
-						position: {
-							edge: 'left',
-							align: 'center'
-						},
-						close: function() {
-							jQuery.post( ajaxurl, {
-								pointer: '<?php echo esc_js( self::$pointer_id ) ?>',
-								action: 'dismiss-wp-pointer'
-							});
-						}
-					}).pointer('open');
-				}
-			});
-		</script>
-		<?php
-	}
-
-
 
 
 
