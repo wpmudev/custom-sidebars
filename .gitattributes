@@ -4,3 +4,4 @@ config.rb export-ignore
 .gitattributes export-ignore
 .gitignore export-ignore
 .gitmodules export-ignore
+.git export-ignore
