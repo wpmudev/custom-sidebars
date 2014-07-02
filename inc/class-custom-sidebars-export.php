@@ -294,7 +294,7 @@ class CustomSidebarsExport extends CustomSidebars {
 		} else {
 			return self::req_err(
 				$req,
-				__( 'No file uploaded', CSB_LANG )
+				__( 'No file was uploaded', CSB_LANG )
 			);
 		}
 

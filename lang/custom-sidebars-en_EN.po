@@ -2,8 +2,8 @@ msgid ""
 msgstr ""
 "Project-Id-Version: customsidebars\n"
 "Report-Msgid-Bugs-To: \n"
-"POT-Creation-Date: 2014-07-02 14:58+0100\n"
-"PO-Revision-Date: 2014-07-02 14:58+0100\n"
+"POT-Creation-Date: 2014-07-02 19:49+0100\n"
+"PO-Revision-Date: 2014-07-02 19:49+0100\n"
 "Last-Translator: Philipp Stracker <philipp@stracker.net>\n"
 "Language-Team: \n"
 "Language: en\n"
@@ -106,6 +106,7 @@ msgid "Import / Export Sidebars"
 msgstr "Import / Export Sidebars"
 
 #: inc/class-custom-sidebars-export.php:255
+#: inc/class-custom-sidebars-export.php:297
 msgid "No file was uploaded"
 msgstr "No file was uploaded"
 
@@ -120,10 +121,6 @@ msgstr "Something went wrong"
 #: inc/class-custom-sidebars-export.php:291
 msgid "Unexpected import format"
 msgstr "Unexpected import format"
-
-#: inc/class-custom-sidebars-export.php:297
-msgid "No file uploaded"
-msgstr "No file uploaded"
 
 #: inc/class-custom-sidebars-export.php:361
 msgid ""
@@ -392,8 +389,9 @@ msgstr ""
 "want to show for this post!"
 
 #: views/metabox.php:40
+#, fuzzy
 msgid ""
-"All sidebars have been locked, you cannot replace them.Go to <a href="
+"All sidebars have been locked, you cannot replace them. Go to <a href="
 "\"widgets.php\">the widgets page</a> to unlock a sidebar"
 msgstr ""
 "All sidebars have been locked, you cannot replace them.Go to <a href="
@@ -532,8 +530,8 @@ msgid "Click to toggle"
 msgstr "Click to toggle"
 
 #: views/widgets-location.php:89
-msgid "For Category or Post Type"
-msgstr "For Category or Post Type"
+msgid "For single entries"
+msgstr "For single entries"
 
 # @ custom-sidebars
 #: views/widgets-location.php:92
@@ -646,3 +644,9 @@ msgstr "Can be replaced"
 #: views/widgets.php:107 views/widgets.php:109
 msgid "Static sidebar"
 msgstr "Static sidebar"
+
+#~ msgid "No file uploaded"
+#~ msgstr "No file uploaded"
+
+#~ msgid "For Category or Post Type"
+#~ msgstr "For Category or Post Type"

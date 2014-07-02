@@ -37,7 +37,7 @@ $sidebars = CustomSidebars::get_options( 'modifiable' );
 	?>
 	<p id="message" class="updated">
 		<?php _e(
-			'All sidebars have been locked, you cannot replace them.' .
+			'All sidebars have been locked, you cannot replace them. ' .
 			'Go to <a href="widgets.php">the widgets page</a> to unlock a ' .
 			'sidebar', CSB_LANG
 		); ?>
