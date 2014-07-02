@@ -10,9 +10,9 @@ jQuery(function init_visibility() {
 	 */
 	var init_widget = function init_widget( ev, el ) {
 		var $widget = jQuery( el ).closest( '.widget' ),
-			$btn = jQuery( '.csb-visibility-button', $widget ),
-			$target = jQuery( '.widget-control-actions .widget-control-save', $widget ),
-			$spinner = jQuery( '.widget-control-actions .spinner', $widget );
+			$btn = $widget.find( '.csb-visibility-button' ),
+			$target = $widget.find( '.widget-control-actions .widget-control-save' ),
+			$spinner = $widget.find( '.widget-control-actions .spinner' );
 
 		if ( $widget.data( '_csb_visibility' ) == true ) {
 			return;

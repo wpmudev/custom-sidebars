@@ -6,11 +6,12 @@
  */
 ?>
 
-<div class="wpmui-form">
+<div class="wpmui-form module-export">
 	<h2 class="no-pad-top"><?php _e( 'Export', CSB_LANG ); ?></h2>
 	<form class="frm-export">
 		<input type="hidden" name="do" value="export" />
 		<p>
+			<i class="dashicons dashicons-info light"></i>
 			<?php _e(
 				'This will generate a complete export file containing all ' .
 				'your sidebars and the current sidebar configuration.', CSB_LANG

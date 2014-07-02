@@ -1,5 +1,5 @@
 Plugin Name: Custom Sidebars Pro
-Author: Javier Marquez (Incsub)
+Author: Javier Marquez (Incsub), Philipp Stracker (Incsub)
 
 Change Log:
 ----------------------------------------------------------------------
@@ -12,9 +12,6 @@ Change Log:
 - Pro: Define widget visibility options.
 - Pro: Widget cloning.
 - Many small bugfixes.
-
-----------------------------------------------------------------------
-----------------------------------------------------------------------
 
 1.5
 ----------------------------------------------------------------------

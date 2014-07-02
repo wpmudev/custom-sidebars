@@ -1,6 +1,7 @@
 /@dev-css export-ignore
 /@dev-js export-ignore
 config.rb export-ignore
+prepros.json export-ignore
 .gitattributes export-ignore
 .gitignore export-ignore
 .gitmodules export-ignore

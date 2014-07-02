@@ -1,3 +1,9 @@
+/**
+ * =============================================================================
+ * == PLUGIN STYLES
+ * =============================================================================
+ */
+
 
 #defaultsidebarspage p.submit {
 	padding: 0 0 10px;
@@ -165,14 +171,6 @@ div#widgets-right .widgets-sortables .sidebar-name>h3 {
 	cursor: pointer;
 }
 
-#submitwhere{
-	position:absolute;
-	bottom:0;
-	right: 35px;
-	display: none;
-	padding:0;
-}
-
 #customsidebarspage #col-right{
 	width: 62%;
 }
@@ -193,41 +191,12 @@ div#widgets-right .widgets-sortables .sidebar-name>h3 {
 	position:static;
 }
 
-.cs-options .ajax-feedback,
-#new-sidebar-holder .ajax-feedback {
-	height:16px;
-	vertical-align: middle;
-	margin: 0 5px;
-}
-
-#new-sidebar-holder h3 .ajax-feedback {
-	vertical-align: bottom;
-}
-
-.sidebar-name h3 .ajax-feedback {
-	height: 16px;
-	vertical-align: bottom;
-	margin: 0 5px;
-}
-
 body.appearance_page_customsidebars .wrap h2 {
 	float: none;
 }
 
 body.appearance_page_customsidebars #poststuff h2 {
 	margin-top: 0;
-}
-
-.widgets-php #TB_ajaxContent #poststuff {
-	min-width: 0;
-}
-
-.widgets-php #TB_ajaxContent h2 {
-	float: none;
-}
-
-.widgets-php #TB_ajaxContent select {
-	clear: left;
 }
 
 /**
@@ -419,7 +388,7 @@ body.appearance_page_customsidebars #poststuff h2 {
 	float: left;
 }
 
-.cs-toolbar
+.cs-toolbar {
 	.delete-sidebar {
 		color: #A00;
 	}

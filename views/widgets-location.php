@@ -35,7 +35,7 @@ function _show_replaceable( $sidebar, $prefix, $cat_name, $class = '' ) {
 				class="detail-toggle"
 				/>
 			<?php printf(
-				__( 'Set as <strong>%1$s</strong> for %2$s', CSB_LANG ),
+				__( 'As <strong>%1$s</strong> for %2$s', CSB_LANG ),
 				$sidebar['name'],
 				$cat_name
 			); ?>
@@ -97,7 +97,7 @@ function _show_replaceable( $sidebar, $prefix, $cat_name, $class = '' ) {
 			 * ========== SINGLE -- Categories ========== *
 			 */
 			foreach ( $sidebars as $sb_id => $details ) {
-				$cat_name = __( 'these categories', CSB_LANG );
+				$cat_name = __( 'categories', CSB_LANG );
 				_show_replaceable( $details, 'cat', $cat_name );
 			}
 			?>
@@ -109,7 +109,7 @@ function _show_replaceable( $sidebar, $prefix, $cat_name, $class = '' ) {
 			 * ========== SINGLE -- Post-Type ========== *
 			 */
 			foreach ( $sidebars as $sb_id => $details ) {
-				$cat_name = __( 'these Post Types', CSB_LANG );
+				$cat_name = __( 'Post Types', CSB_LANG );
 				_show_replaceable( $details, 'pt', $cat_name );
 			}
 			?>
@@ -143,7 +143,7 @@ function _show_replaceable( $sidebar, $prefix, $cat_name, $class = '' ) {
 					 * ========== ARCHIVE -- Special ========== *
 					 */
 					foreach ( $sidebars as $sb_id => $details ) {
-						$cat_name = __( 'these Archive Types', CSB_LANG );
+						$cat_name = __( 'Archive Types', CSB_LANG );
 						_show_replaceable( $details, 'arc', $cat_name );
 					}
 					?>
@@ -154,7 +154,7 @@ function _show_replaceable( $sidebar, $prefix, $cat_name, $class = '' ) {
 					 * ========== ARCHIVE -- Category ========== *
 					 */
 					foreach ( $sidebars as $sb_id => $details ) {
-						$cat_name = __( 'these Category Archives', CSB_LANG );
+						$cat_name = __( 'Category Archives', CSB_LANG );
 						_show_replaceable( $details, 'arc-cat', $cat_name );
 					}
 					?>

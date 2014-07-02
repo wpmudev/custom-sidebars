@@ -46,7 +46,6 @@ class CustomSidebarsVisibility {
 				10, 3
 			);
 
-			TheLib::add_ui( 'chosen', 'widgets.php' );
 			TheLib::add_ui( CSB_JS_URL . 'cs-visibility.min.js', 'widgets.php' );
 			TheLib::add_ui( CSB_CSS_URL . 'cs-visibility.css', 'widgets.php' );
 		} else {

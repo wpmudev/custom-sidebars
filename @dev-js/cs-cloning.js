@@ -13,7 +13,7 @@ jQuery(function init_cloning() {
 		var $widget = jQuery( el ).closest( '.widget' ),
 			$btn = $widget.find( '.csb-clone-button' ),
 			$target = $widget.find( '.widget-control-actions .widget-control-save' ),
-			$spinner = $widget.find( '.widget-control-actions .spinner' );
+			$spinner = $widget.find( '.widget-control-actions .spinner' ),
 			$btn_save = $widget.find( '.widget-control-save' );
 
 		if ( $widget.data( '_csb_cloning' ) == true ) {

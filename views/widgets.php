@@ -115,7 +115,7 @@
 				class="cs-tool"
 				data-action="location"
 				href="#"
-				title="<?php _e( 'Where do you want the sidebar?', CSB_LANG ); ?>"
+				title="<?php _e( 'Where do you want to show the sidebar?', CSB_LANG ); ?>"
 				>
 				<?php _e( 'Sidebar Location', CSB_LANG ); ?>
 			</a>
@@ -140,7 +140,7 @@
 	============================================================================
 	*/ ?>
 	<div class="cs-editor">
-		<?php include CSB_VIEWS_DIR . 'widgets-editor.php'; ?>
+	<?php include CSB_VIEWS_DIR . 'widgets-editor.php'; ?>
 	</div>
 
 
@@ -159,7 +159,7 @@
 	============================================================================
 	*/ ?>
 	<div class="cs-location">
-		<?php include CSB_VIEWS_DIR . 'widgets-location.php'; ?>
+	<?php include CSB_VIEWS_DIR . 'widgets-location.php'; ?>
 	</div>
 
  </div>

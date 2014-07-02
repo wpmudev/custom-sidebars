@@ -28,6 +28,12 @@ class CustomSidebars {
 	 */
 	static protected $cap_required = 'switch_themes';
 
+	/**
+	 * URL to the documentation/info page of the pro plugin
+	 * @var  string
+	 */
+	static public $pro_url = 'http://premium.wpmudev.org';
+
 
 	/**
 	 * Returns the singleton instance of the custom sidebars class.
@@ -76,7 +82,9 @@ class CustomSidebars {
 		TheLib::load_textdomain( CSB_LANG, CSB_LANG_DIR );
 
 		// Load javascripts/css files
+		TheLib::add_ui( 'core', 'widgets.php' );
 		TheLib::add_ui( 'scrollbar', 'widgets.php' );
+		TheLib::add_ui( 'chosen', 'widgets.php' );
 		TheLib::add_ui( CSB_JS_URL . 'cs.min.js', 'widgets.php' );
 		TheLib::add_ui( CSB_CSS_URL . 'cs.css', 'widgets.php' );
 
@@ -711,5 +719,24 @@ class CustomSidebars {
 		 * @param  string $action The specified ajax action.
 		 */
 		do_action( 'cs_ajax_request', $action );
+	}
+
+	/**
+	 * Add extra translations from the free plugin version so poedit will
+	 * recognize the translations and we do not need to keep separate
+	 * translation files for pro/free version.
+	 *
+	 * @since  2.0
+	 */
+	private function other_translations() {
+		return;
+
+		// These functions will never be called, but poedit recognizes the text.
+		__(
+			'Import / Export functionality is available<br />' .
+			'in the <b>PRO</b> version of this plugin.<br />' .
+			'<a href="%1$s" target="_blank">Learn more</a>', CSB_LANG
+		);
+		__( 'Pro Version Features', CSB_LANG );
 	}
 };
