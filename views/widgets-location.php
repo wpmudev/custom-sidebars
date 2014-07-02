@@ -11,7 +11,7 @@ $sidebars = CustomSidebars::get_sidebars( 'theme' );
 /**
  * Output the input fields to configure replacements for a single sidebar.
  *
- * @since  1.6.0
+ * @since  2.0
  * @param  array $sidebar Details provided by CustomSidebars::get_sidebar().
  * @param  string $prefix Category specific prefix used for input field ID/Name.
  * @param  string $cat_name Used in label: "Replace sidebar for <cat_name>".

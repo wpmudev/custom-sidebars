@@ -10,7 +10,7 @@ class CustomSidebarsEditor extends CustomSidebars {
 	/**
 	 * Returns the singleton object.
 	 *
-	 * @since  1.6
+	 * @since  2.0
 	 */
 	public static function instance() {
 		static $Inst = null;
@@ -25,7 +25,7 @@ class CustomSidebarsEditor extends CustomSidebars {
 	/**
 	 * Constructor is private -> singleton.
 	 *
-	 * @since  1.6
+	 * @since  2.0
 	 */
 	private function __construct() {
 		if ( is_admin() ) {
@@ -142,7 +142,7 @@ class CustomSidebarsEditor extends CustomSidebars {
 	 * object. When $req->id is empty a new sidebar will be created. Otherwise
 	 * the existing sidebar is updated.
 	 *
-	 * @since  1.6.0
+	 * @since  2.0
 	 * @param  object $req Initial response object.
 	 * @param  array $data Sidebar data to save (typically this is $_POST).
 	 * @return object Updated response object.
@@ -232,7 +232,7 @@ class CustomSidebarsEditor extends CustomSidebars {
 	/**
 	 * Delete the specified sidebar and update the response object.
 	 *
-	 * @since  1.6.0
+	 * @since  2.0
 	 * @param  object $req Initial response object.
 	 * @return object Updated response object.
 	 */
@@ -277,7 +277,7 @@ class CustomSidebarsEditor extends CustomSidebars {
 	/**
 	 * Save the repaceable flag of a theme sidebar.
 	 *
-	 * @since  1.6.0
+	 * @since  2.0
 	 * @param  object $req Initial response object.
 	 * @return object Updated response object.
 	 */
@@ -310,7 +310,7 @@ class CustomSidebarsEditor extends CustomSidebars {
 	 * Location data defines where a custom sidebar is displayed, i.e. on which
 	 * pages it is used and which theme-sidebars are replaced.
 	 *
-	 * @since  1.6.0
+	 * @since  2.0
 	 * @param  object $req Initial response object.
 	 * @return object Updated response object.
 	 */
@@ -389,7 +389,7 @@ class CustomSidebarsEditor extends CustomSidebars {
 	 * Location data defines where a custom sidebar is displayed, i.e. on which
 	 * pages it is used and which theme-sidebars are replaced.
 	 *
-	 * @since 1.6.0
+	 * @since  2.0
 	 * @param  object $req Initial response object.
 	 * @return object Updated response object.
 	 */
@@ -508,7 +508,7 @@ class CustomSidebarsEditor extends CustomSidebars {
 		 * Option that can be set in wp-config.php to remove the custom sidebar
 		 * meta box for certain post types.
 		 *
-		 * @since  1.6
+		 * @since  2.0
 		 *
 		 * @option bool TRUE will hide all meta boxes.
 		 */

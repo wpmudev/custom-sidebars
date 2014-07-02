@@ -381,29 +381,32 @@ body.appearance_page_customsidebars #poststuff h2 {
 	display: none;
 }
 
-.cs-toolbar .cs-tool {
-	text-decoration: none;
-	line-height: 40px;
-	padding: 0 10px;
-	white-space: nowrap;
-	background: #FFF;
-	position: relative;
-	overflow: hidden;
-}
+.cs-toolbar {
+	.cs-tool {
+		text-decoration: none;
+		line-height: 40px;
+		height: 40px;
+		padding: 0 10px;
+		white-space: nowrap;
+		background: #FFF;
+		position: relative;
+		overflow: hidden;
+	}
 
-.cs-toolbar .dashicons {
-	line-height: 40px;
-}
+	.dashicons {
+		line-height: 40px;
+	}
 
-.cs-toolbar .cs-separator {
-	border-left: 1px solid #E5E5E5;
-	width: 1px;
-	padding: 0;
-	margin: 0;
-	height: 40px;
-	overflow: hidden;
-	display: inline-block;
-	color: #DDD;
+	.cs-separator {
+		border-left: 1px solid #E5E5E5;
+		width: 1px;
+		padding: 0;
+		margin: 0;
+		height: 40px;
+		overflow: hidden;
+		display: inline-block;
+		color: #DDD;
+	}
 }
 
 .cs-custom-sidebar .cs-tool,
@@ -416,22 +419,22 @@ body.appearance_page_customsidebars #poststuff h2 {
 	float: left;
 }
 
-.cs-toolbar .delete-sidebar {
-	color: #A00;
-}
+.cs-toolbar
+	.delete-sidebar {
+		color: #A00;
+	}
 
-.cs-toolbar .delete-sidebar:hover,
-.cs-toolbar .delete-sidebar:focus,
-.cs-toolbar .delete-sidebar:active {
-	color: #F00;
-}
-
-.cs-toolbar .only-replaceable {
-	display: none;
+	.delete-sidebar:hover,
+	.delete-sidebar:focus,
+	.delete-sidebar:active {
+		color: #F00;
+	}
 }
 
 .cs-toolbar .cs-tool.btn-replaceable {
 	color: #555;
+	width: 150px;
+	text-align: center;
 
 	&:hover {
 		color: #333 !important;
@@ -474,10 +477,6 @@ body.appearance_page_customsidebars #poststuff h2 {
 			content: "\f147"; /* dashicons-yes */
 			color: #080;
 		}
-	}
-
-	.cs-toolbar .only-replaceable {
-		display: inline;
 	}
 }
 

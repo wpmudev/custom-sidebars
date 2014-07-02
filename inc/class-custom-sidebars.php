@@ -17,38 +17,22 @@ class CustomSidebars {
 	/**
 	 * Prefix used for the sidebar-ID of custom sidebars. This is also used to
 	 * distinguish theme sidebars from custom sidebars.
-	 * @var string
+	 * @var  string
 	 */
 	static protected $sidebar_prefix = 'cs-';
 
 	/**
 	 * Capability required to use *any* of the plugin features. If user does not
 	 * have this capability then he will not see any change on admin dashboard.
-	 * @var string
+	 * @var  string
 	 */
 	static protected $cap_required = 'switch_themes';
-
-	/**
-	 * ID of the WP-Pointer used to introduce the plugin upon activation
-	 *
-	 * ========== Pointer ==========
-	 *  Internal ID:  wpmudcs1 [WPMUDev CustomSidebars 1]
-	 *  Point at:     #menu-appearance (Appearance menu item)
-	 *  Title:        Custom Sidebars Pro
-	 *  Description:  Create and edit custom sidebars in your widget screen!
-	 * -------------------------------------------------------------------------
-	 *
-	 * @see http://premium.wpmudev.org/blog/using-wordpress-pointers-in-your-own-plugins/
-	 * @var string
-	 */
-	static protected $pointer_id = 'wpmudcs1';
-
 
 
 	/**
 	 * Returns the singleton instance of the custom sidebars class.
 	 *
-	 * @since 1.6
+	 * @since  2.0
 	 */
 	static public function instance() {
 		static $Inst = null;
@@ -66,40 +50,41 @@ class CustomSidebars {
 	 */
 	private function __construct() {
 		/**
-		 * Hook up the plugin with WordPress.
+		 * ID of the WP-Pointer used to introduce the plugin upon activation
+		 *
+		 * ========== Pointer ==========
+		 *  Internal ID:  wpmudcs1 [WPMUDev CustomSidebars 1]
+		 *  Point at:     #menu-appearance (Appearance menu item)
+		 *  Title:        Custom Sidebars Pro
+		 *  Description:  Create and edit custom sidebars in your widget screen!
+		 * -------------------------------------------------------------------------
 		 */
-		add_action( 'init', array( $this, 'load_text_domain' ) );
 		TheLib::pointer(
-			self::$pointer_id,
-			'#menu-appearance',
-			__( 'Custom Sidebars Pro', CSB_LANG ),
+			'wpmudcs1',                               // Internal Pointer-ID
+			'#menu-appearance',                       // Point at
+			__( 'Custom Sidebars Pro', CSB_LANG ),    // Title
 			sprintf(
 				__(
 					'Now you can create and edit custom sidebars in your ' .
 					'<a href="%1$s">Widgets screen</a>!', CSB_LANG
 				),
 				admin_url( 'widgets.php' )
-			),
-			self::$cap_required
+			)                                         // Body
 		);
+
+		// Load the text domain for the plugin
+		TheLib::load_textdomain( CSB_LANG, CSB_LANG_DIR );
+
+		// Load javascripts/css files
+		TheLib::add_ui( 'scrollbar', 'widgets.php' );
+		TheLib::add_ui( CSB_JS_URL . 'cs.min.js', 'widgets.php' );
+		TheLib::add_ui( CSB_CSS_URL . 'cs.css', 'widgets.php' );
 
 		// AJAX actions
 		add_action( 'wp_ajax_cs-ajax', array( $this, 'ajax_handler' ) );
 
-		TheLib::add_ui( 'scrollbar', 'widgets.php' );
-		TheLib::add_js( CSB_JS_URL . 'cs.min.js', 'widgets.php' );
-		TheLib::add_css( CSB_CSS_URL . 'cs.css', 'widgets.php' );
-
 		// Extensions use this hook to initialize themselfs.
 		do_action( 'cs_init' );
-	}
-
-	/**
-	 * Load the .po language files.
-	 */
-	public function load_text_domain() {
-		load_plugin_textdomain( CSB_LANG, false, dirname( plugin_basename( __FILE__ ) ) . '/lang/' );
-		self::get_options();
 	}
 
 
@@ -190,7 +175,7 @@ class CustomSidebars {
 	 * If the specified variable is an array it will be returned. Otherwise
 	 * an empty array is returned.
 	 *
-	 * @since  1.6.0
+	 * @since  2.0
 	 * @param  mixed $val1 Value that maybe is an array.
 	 * @param  mixed $val2 Optional, Second value that maybe is an array.
 	 * @return array
@@ -230,7 +215,7 @@ class CustomSidebars {
 			}
 
 			/**
-			 * In version 1.6.0 four config values have been renamed and are
+			 * In version 2.0 four config values have been renamed and are
 			 * migrated in the following block:
 			 */
 
@@ -293,7 +278,7 @@ class CustomSidebars {
 	 * Saves the sidebar options to DB.
 	 *
 	 * Option-Key: 'cs_modifiable' (1)
-	 * @since 1.6.0
+	 * @since  2.0
 	 */
 	static public function set_options( $value ) {
 		// Permission check.
@@ -330,7 +315,7 @@ class CustomSidebars {
 	 * Saves the custom sidebars to DB.
 	 *
 	 * Option-Key: 'cs_sidebars' (3)
-	 * @since 1.6.0
+	 * @since  2.0
 	 */
 	static public function set_custom_sidebars( $value ) {
 		// Permission check.
@@ -346,7 +331,7 @@ class CustomSidebars {
 	 * widgets (this is stored inside a WordPress core option).
 	 *
 	 * Option-Key: 'sidebars_widgets' (4)
-	 * @since  1.6.0
+	 * @since  2.0
 	 */
 	static public function get_sidebar_widgets() {
 		return get_option( 'sidebars_widgets', array() );
@@ -400,7 +385,7 @@ class CustomSidebars {
 	 * Returns the custom sidebar metadata of a single post.
 	 *
 	 * Meta-Key: '_cs_replacements' (2)
-	 * @since  1.6
+	 * @since  2.0
 	 */
 	static public function get_post_meta( $post_id ) {
 		$data = get_post_meta( $post_id, '_cs_replacements', TRUE );
@@ -414,7 +399,7 @@ class CustomSidebars {
 	 * Saves custom sidebar metadata to a single post.
 	 *
 	 * Meta-Key: '_cs_replacements' (2)
-	 * @since 1.6
+	 * @since  2.0
 	 * @param int $post_id
 	 * @param array $data When array is empty the meta data will be deleted.
 	 */
@@ -503,7 +488,7 @@ class CustomSidebars {
 	/**
 	 * Returns true, when the specified post type supports custom sidebars.
 	 *
-	 * @since  1.6.0
+	 * @since  2.0
 	 * @param  object|string $posttype The posttype to validate. Either the
 	 *                posttype name or the full posttype object.
 	 * @return bool
@@ -531,7 +516,7 @@ class CustomSidebars {
 			 * Filters the support-flag. The flag defines if the posttype supports
 			 * custom sidebars or not.
 			 *
-			 * @since 1.6
+			 * @since  2.0
 			 *
 			 * @param  bool $response Flag if the posttype is supported.
 			 * @param  string $posttype Name of the posttype that is checked.
@@ -574,7 +559,7 @@ class CustomSidebars {
 	/**
 	 * Returns an array of all categories.
 	 *
-	 * @since  1.6.0
+	 * @since  2.0
 	 * @return array List of categories, including empty ones.
 	 */
 	static public function get_all_categories() {
@@ -661,7 +646,7 @@ class CustomSidebars {
 	/**
 	 * Output HTML data and die()
 	 *
-	 * @since  1.6.0
+	 * @since  2.0
 	 */
 	static protected function plain_response( $data ) {
 		// Flush any output that was made prior to this function call
@@ -675,7 +660,7 @@ class CustomSidebars {
 	/**
 	 * Sets the response object to ERR state with the specified message/reason.
 	 *
-	 * @since  1.6.0
+	 * @since  2.0
 	 * @param  object $req Initial response object.
 	 * @param  string $message Error message or reason; already translated.
 	 * @return object Updated response object.
@@ -722,7 +707,7 @@ class CustomSidebars {
 		/**
 		 * Notify all extensions about the ajax call.
 		 *
-		 * @since  1.6.0
+		 * @since  2.0
 		 * @param  string $action The specified ajax action.
 		 */
 		do_action( 'cs_ajax_request', $action );

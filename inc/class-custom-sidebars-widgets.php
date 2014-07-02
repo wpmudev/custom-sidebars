@@ -10,7 +10,7 @@ class CustomSidebarsWidgets extends CustomSidebars {
 	/**
 	 * Returns the singleton object.
 	 *
-	 * @since  1.6
+	 * @since  2.0
 	 */
 	public static function instance() {
 		static $Inst = null;
@@ -25,7 +25,7 @@ class CustomSidebarsWidgets extends CustomSidebars {
 	/**
 	 * Constructor is private -> singleton.
 	 *
-	 * @since  1.6
+	 * @since  2.0
 	 */
 	private function __construct() {
 		if ( is_admin() ) {

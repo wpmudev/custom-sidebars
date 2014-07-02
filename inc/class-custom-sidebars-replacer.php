@@ -5,7 +5,7 @@ add_action( 'cs_init', array( 'CustomSidebarsReplacer', 'instance' ) );
 /**
  * This class actually replaces sidebars on the frontend.
  *
- * @since  1.6
+ * @since  2.0
  */
 class CustomSidebarsReplacer extends CustomSidebars {
 
@@ -14,7 +14,7 @@ class CustomSidebarsReplacer extends CustomSidebars {
 	/**
 	 * Returns the singleton object.
 	 *
-	 * @since  1.6
+	 * @since  2.0
 	 */
 	public static function instance() {
 		static $Inst = null;
@@ -29,7 +29,7 @@ class CustomSidebarsReplacer extends CustomSidebars {
 	/**
 	 * Constructor is private -> singleton.
 	 *
-	 * @since  1.6
+	 * @since  2.0
 	 */
 	private function __construct() {
 		add_action(
@@ -71,7 +71,7 @@ class CustomSidebarsReplacer extends CustomSidebars {
 			/**
 			 * Filter sidebar options for custom sidebars.
 			 *
-			 * @since  1.6
+			 * @since  2.0
 			 *
 			 * @param  array $sidebar Options used by WordPress to display
 			 *           the sidebar.
@@ -451,7 +451,7 @@ class CustomSidebarsReplacer extends CustomSidebars {
 		/**
 		 * Filter the replaced sidebars before they are processed by the plugin.
 		 *
-		 * @since  1.6
+		 * @since  2.0
 		 *
 		 * @param  array $replacements List of the final/replaced sidebars.
 		 */

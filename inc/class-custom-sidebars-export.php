@@ -5,7 +5,7 @@ add_action( 'cs_init', array( 'CustomSidebarsExport', 'instance' ) );
 /**
  * Provides functionality to export and import sidebar settings.
  *
- * @since 1.6
+ * @since  2.0
  */
 class CustomSidebarsExport extends CustomSidebars {
 
@@ -19,7 +19,7 @@ class CustomSidebarsExport extends CustomSidebars {
 	/**
 	 * Returns the singleton object.
 	 *
-	 * @since  1.6
+	 * @since  2.0
 	 */
 	public static function instance() {
 		static $Inst = null;
@@ -34,7 +34,7 @@ class CustomSidebarsExport extends CustomSidebars {
 	/**
 	 * Constructor is private -> singleton.
 	 *
-	 * @since  1.6
+	 * @since  2.0
 	 */
 	private function __construct() {
 		if ( is_admin() ) {
@@ -54,7 +54,7 @@ class CustomSidebarsExport extends CustomSidebars {
 	 * Called by action 'cs_widget_header'. Output the export/import button in
 	 * the widget header.
 	 *
-	 * @since  1.6.0
+	 * @since  2.0
 	 */
 	public function widget_header() {
 		?>
@@ -66,7 +66,7 @@ class CustomSidebarsExport extends CustomSidebars {
 	 * When the custom sidebars section is visible we see if export-action
 	 * needs to be processed.
 	 *
-	 * @since  1.6.0
+	 * @since  2.0
 	 */
 	public function handle_ajax( $ajax_action ) {
 		$req = (object) array(
@@ -142,7 +142,7 @@ class CustomSidebarsExport extends CustomSidebars {
 	/**
 	 * Collects the plugin details for export.
 	 *
-	 * @since  1.6.0
+	 * @since  2.0
 	 */
 	private function get_export_data() {
 		global $wp_registered_widgets, $wp_version;
@@ -211,7 +211,7 @@ class CustomSidebarsExport extends CustomSidebars {
 	/**
 	 * Generates the export file and sends it as a download to the browser.
 	 *
-	 * @since  1.6.0
+	 * @since  2.0
 	 */
 	private function download_export_file() {
 		$data = $this->get_export_data();
@@ -238,7 +238,7 @@ class CustomSidebarsExport extends CustomSidebars {
 	 * inside self::$import_data. The data is de-serialized.
 	 * In error case the response object will be set to error status.
 	 *
-	 * @since  1.6.0
+	 * @since  2.0
 	 * @param  object $req Initial response object for JSON response.
 	 * @return object Updated response object.
 	 */
@@ -306,7 +306,7 @@ class CustomSidebarsExport extends CustomSidebars {
 	 * The data was prepared by the import-preview screen.
 	 * Populates the response object.
 	 *
-	 * @since  1.6.0
+	 * @since  2.0
 	 * @param  object $req Initial response object for JSON response.
 	 * @return object Updated response object.
 	 */
@@ -372,7 +372,7 @@ class CustomSidebarsExport extends CustomSidebars {
 	 * not relevant for the current blog. I.e. posttypes that are not registered
 	 * or categories that do not match the current blog.
 	 *
-	 * @since  1.6.0
+	 * @since  2.0
 	 */
 	private function prepare_data() {
 		global $wp_registered_widgets;
@@ -470,7 +470,7 @@ class CustomSidebarsExport extends CustomSidebars {
 	/**
 	 * Helper function that is used by prepare_data.
 	 *
-	 * @since  1.6.0
+	 * @since  2.0
 	 */
 	private function _remove_sidebar_from_list( $list, $valid_list ) {
 		foreach ( $list as $id => $value ) {
@@ -486,7 +486,7 @@ class CustomSidebarsExport extends CustomSidebars {
 	/**
 	 * Returns the contents of the uploaded import file for preview or import.
 	 *
-	 * @since  1.6.0
+	 * @since  2.0
 	 */
 	static public function get_import_data() {
 		return self::$import_data;
@@ -506,7 +506,7 @@ class CustomSidebarsExport extends CustomSidebars {
 	 * Save the configuration to database.
 	 * Populates the response object.
 	 *
-	 * @since  1.6.0
+	 * @since  2.0
 	 * @param  object $req Initial response object for JSON response.
 	 * @return object Updated response object.
 	 */
@@ -628,7 +628,7 @@ class CustomSidebarsExport extends CustomSidebars {
 	 * Helper function used by the "do_import()" handler.
 	 * Updates the widget-data in DB.
 	 *
-	 * @since  1.6.0
+	 * @since  2.0
 	 */
 	private function _refresh_widget_settings( $id_base ) {
 		global $wp_registered_widget_updates;
@@ -654,7 +654,7 @@ class CustomSidebarsExport extends CustomSidebars {
 	 * Helper function used by the "do_import()" handler.
 	 * Updates the widget-data in DB.
 	 *
-	 * @since  1.6.0
+	 * @since  2.0
 	 */
 	private function _add_new_widget( $id_base, $instance ) {
 		global $wp_registered_widget_updates;
@@ -690,8 +690,8 @@ class CustomSidebarsExport extends CustomSidebars {
 				 * Returning false will effectively short-circuit the widget's ability
 				 * to update settings.
 				 *
-				 * @since 2.8.0
-				 * @see  wp-includes/widgets.php : function "update_callback()"
+				 * @see    wp-includes/widgets.php : function "update_callback()"
+				 * @since  WordPress 2.8.0
 				 *
 				 * @param array     $instance     The current widget instance's settings.
 				 * @param array     $new_instance Array of new widget settings.

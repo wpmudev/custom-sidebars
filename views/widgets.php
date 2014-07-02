@@ -76,7 +76,7 @@
 			class="cs-tool"
 			data-action="location"
 			href="#"
-			title="<?php _e( 'Where do you want the sidebar?', CSB_LANG ); ?>"
+			title="<?php _e( 'Where do you want to show the sidebar?', CSB_LANG ); ?>"
 			>
 			<?php _e( 'Sidebar Location', CSB_LANG ); ?>
 		</a>
@@ -110,7 +110,7 @@
 			</span>
 		</label>
 		<span class="cs-separator">|</span>
-		<span class="only-replaceable">
+		<span class="">
 			<a
 				class="cs-tool"
 				data-action="location"

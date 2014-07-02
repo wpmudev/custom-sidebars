@@ -4,13 +4,14 @@ Author: Javier Marquez (Incsub)
 Change Log:
 ----------------------------------------------------------------------
 
-1.6
+2.0
 ----------------------------------------------------------------------
+- Complete UI redesign.
 - Update to Pro version.
-- Pro: Export/Import features.
-- Pro: Widget visibility options.
-- Pro: Custom sidebars are fully translate-able (name, description, etc).
-- Pro: Directly assign sidebars to multiple posts and pages.
+- Pro: Import/export sidebars and widgets.
+- Pro: Define widget visibility options.
+- Pro: Widget cloning.
+- Many small bugfixes.
 
 ----------------------------------------------------------------------
 ----------------------------------------------------------------------

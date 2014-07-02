@@ -6,14 +6,14 @@ add_action( 'cs_init', array( 'CustomSidebarsVisibility', 'instance' ) );
  * Adds visibility options to all widgets: Hide or show widgets only when
  * specific conditions are met.
  *
- * @since 1.6
+ * @since  2.0
  */
 class CustomSidebarsVisibility {
 
 	/**
 	 * Returns the singleton object.
 	 *
-	 * @since  1.6
+	 * @since  2.0
 	 */
 	public static function instance() {
 		static $Inst = null;
@@ -28,7 +28,7 @@ class CustomSidebarsVisibility {
 	/**
 	 * Constructor is private -> singleton.
 	 *
-	 * @since  1.6
+	 * @since  2.0
 	 */
 	private function __construct() {
 		if ( is_admin() ) {
@@ -46,9 +46,9 @@ class CustomSidebarsVisibility {
 				10, 3
 			);
 
-			TheLib::add_ui( array( 'chosen' ), 'widgets.php' );
-			TheLib::add_js( CSB_JS_URL . 'cs-visibility.min.js', 'widgets.php' );
-			TheLib::add_css( CSB_CSS_URL . 'cs-visibility.css', 'widgets.php' );
+			TheLib::add_ui( 'chosen', 'widgets.php' );
+			TheLib::add_ui( CSB_JS_URL . 'cs-visibility.min.js', 'widgets.php' );
+			TheLib::add_ui( CSB_CSS_URL . 'cs-visibility.css', 'widgets.php' );
 		} else {
 			// Filters the list of widget-areas and their widgets
 			add_action(
@@ -61,7 +61,7 @@ class CustomSidebarsVisibility {
 	/**
 	 * Extracts and sanitizes the CSB visibility data from the widget instance.
 	 *
-	 * @since  1.6
+	 * @since  2.0
 	 * @param  array $instance The widget instance data.
 	 * @return array Sanitized CSB visibility data.
 	 */
@@ -119,7 +119,7 @@ class CustomSidebarsVisibility {
 	/**
 	 * Action handler for 'in_widget_form'
 	 *
-	 * @since  1.6
+	 * @since  2.0
 	 */
 	public function admin_widget_button( $widget, $return, $instance ) {
 		$is_visible = ('1' == @$_POST['csb_visible'] ? 1 : 0);
@@ -351,7 +351,7 @@ class CustomSidebarsVisibility {
 	 *
 	 * If the plugin is not active the return value is boolean false.
 	 *
-	 * @since  1.6.0
+	 * @since  2.0
 	 * @return bool|array
 	 */
 	public function get_membership_levels() {
@@ -383,7 +383,7 @@ class CustomSidebarsVisibility {
 	/**
 	 * When user saves the widget we check for the
 	 *
-	 * @since  1.6
+	 * @since  2.0
 	 * @param  array $new_instance New settings for this instance as input by the user.
 	 * @param  array $old_instance Old settings for this instance.
 	 * @return array Modified settings.
@@ -401,7 +401,7 @@ class CustomSidebarsVisibility {
 	/**
 	 * Filter the list of widgets for a sidebar so that active sidebars work as expected.
 	 *
-	 * @since  1.6
+	 * @since  2.0
 	 * @param  array $widget_areas An array of widget areas and their widgets.
 	 * @return array The modified $widget_area array.
 	 */

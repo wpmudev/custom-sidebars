@@ -11,14 +11,14 @@ function CsSidebar(id, type) {
 	 * Replace % to fix bug http://wordpress.org/support/topic/in-wp-35-sidebars-are-not-collapsable-anymore?replies=16#post-3990447
 	 * We'll use this.id to select and the original id for html
 	 *
-	 * @since 1.2
+	 * @since  1.2
 	 */
 	this.id = id.split('%').join('\\%');
 
 	/**
 	 * Either 'custom' or 'theme'
 	 *
-	 * @since 1.6
+	 * @since  2.0
 	 */
 	this.type = type;
 
@@ -46,7 +46,7 @@ function CsSidebar(id, type) {
 /**
  * Returns the sidebar ID.
  *
- * @since  1.6.0
+ * @since  2.0
  */
 CsSidebar.prototype.getID = function() {
 	return this.id.split('\\').join('');
@@ -78,44 +78,44 @@ var csSidebars, msgTimer;
 
 		/**
 		 * Form for the edit-sidebar popup.
-		 * @type: jQuery object
+		 * @type jQuery object
 		 */
 		edit_form: null,
 
 		/**
 		 * Form for the delete-sidebar popup.
-		 * @type: jQuery object
+		 * @type jQuery object
 		 */
 		delete_form: null,
 
 		/**
 		 * Form for the export/import popup.
-		 * @type: jQuery object
+		 * @type jQuery object
 		 */
 		export_form: null,
 
 		/**
 		 * Form for the location popup.
-		 * @type: jQuery object
+		 * @type jQuery object
 		 */
 		location_form: null,
 
 		/**
 		 * Shortcut to '#widgets-right'
-		 * @type: jQuery object
+		 * @type jQuery object
 		 */
 		right: null,
 
 		/**
 		 * Shortcut to '#cs-widgets-extra'
-		 * @type: jQuery object
+		 * @type jQuery object
 		 */
 		extras: null,
 
 		/**
 		 * Stores the callback functions associated with the toolbar actions.
-		 * @see  csSidebars.handleAction
-		 * @see  csSidebars.registerAction
+		 * @see  csSidebars.handleAction()
+		 * @see  csSidebars.registerAction()
 		 * @type Object
 		 */
 		action_handlers: {},
@@ -148,7 +148,7 @@ var csSidebars, msgTimer;
 		 * =====================================================================
 		 * Initialize DOM and find jQuery objects
 		 *
-		 * @since 1.0.0
+		 * @since  1.0.0
 		 */
 		initControls: function(){
 			csSidebars.right = jQuery( '#widgets-right' );
@@ -237,7 +237,7 @@ var csSidebars, msgTimer;
 		 * Arrange sidebars in left/right columns.
 		 * Left column: Custom sidebars. Right column: Theme sidebars.
 		 *
-		 * @since  1.6
+		 * @since  2.0
 		 */
 		initColumns: function() {
 			var col1 = csSidebars.right.find( '.sidebars-column-1' ),
@@ -372,7 +372,7 @@ var csSidebars, msgTimer;
 		/**
 		 * Triggers the callback function for the specified toolbar action.
 		 *
-		 * @since  1.6.0
+		 * @since  2.0
 		 */
 		handleAction: function( action, sb ) {
 			if ( 'function' == typeof csSidebars.action_handlers[ action ] ) {
@@ -385,7 +385,7 @@ var csSidebars, msgTimer;
 		 * Registers a new callback function that is triggered when the
 		 * associated toolbar icon is clicked.
 		 *
-		 * @since  1.6.0
+		 * @since  2.0
 		 */
 		registerAction: function( action, callback ) {
 			csSidebars.action_handlers[ action ] = callback;
@@ -394,7 +394,7 @@ var csSidebars, msgTimer;
 		/**
 		 * Displays a error notification that something has gone wrong.
 		 *
-		 * @since  1.6.0
+		 * @since  2.0
 		 * @param  mixed details Ajax response string/object.
 		 */
 		showAjaxError: function( details ) {
@@ -423,7 +423,7 @@ var csSidebars, msgTimer;
 		 * =====================================================================
 		 * Show the editor for a custom sidebar as a popup window.
 		 *
-		 * @since  1.6.0
+		 * @since  2.0
 		 * @param  Object data Data describing the popup window.
 		 *           - id .. ID of the sidebar (text).
 		 *           - name .. Value of field "name".
@@ -663,7 +663,7 @@ var csSidebars, msgTimer;
 		/**
 		 * Shows a popup window with the export/import form.
 		 *
-		 * @since  1.6.0
+		 * @since  2.0
 		 */
 		showExport: function() {
 			var popup = null,
@@ -894,7 +894,7 @@ var csSidebars, msgTimer;
 		 * =====================================================================
 		 * Show popup to assign sidebar to default categories.
 		 *
-		 * @since  1.6.0
+		 * @since  2.0
 		 */
 		showLocations: function( sb ){
 			var popup = null,
@@ -1143,7 +1143,7 @@ var csSidebars, msgTimer;
 		 * =====================================================================
 		 * Change the replaceable flag
 		 *
-		 * @since 1.0.0
+		 * @since  1.0.0
 		 */
 		setReplaceable: function( sb, state, do_ajax ) {
 			var ajax,
@@ -1229,7 +1229,7 @@ var csSidebars, msgTimer;
 		 * =====================================================================
 		 * Removes a new CsSidebar object.
 		 *
-		 * @since  1.6.0
+		 * @since  2.0
 		 */
 		remove: function(id){
 			delete csSidebars.sidebars[id];
@@ -1240,7 +1240,7 @@ var csSidebars, msgTimer;
 		 * Returns true when the specified ID is recognized as a sidebar
 		 * that was created by the custom sidebars plugin.
 		 *
-		 * @since  1.6.0
+		 * @since  2.0
 		 */
 		isCustomSidebar: function( el ) {
 			var id = jQuery( el ).attr('id'),
@@ -1253,7 +1253,7 @@ var csSidebars, msgTimer;
 		 * =====================================================================
 		 * Append the specified sidebar ID to the label and input element.
 		 *
-		 * @since  1.6.0
+		 * @since  2.0
 		 */
 		addIdToLabel: function( $obj, id ){
 			if ( true != $obj.data( 'label-done' ) ) {
@@ -1268,7 +1268,7 @@ var csSidebars, msgTimer;
 		 * =====================================================================
 		 * Returns the sidebar ID based on the sidebar DOM object.
 		 *
-		 * @since  1.6.0
+		 * @since  2.0
 		 * @param  jQuery $obj Any DOM object inside the Sidebar HTML structure.
 		 * @return string The sidebar ID
 		 */

@@ -6,7 +6,7 @@ add_action( 'cs_init', array( 'CustomSidebarsCloning', 'instance' ) );
  * Adds visibility options to all widgets:
  * Clone a widget to quickly replicate its settings.
  *
- * @since 1.6
+ * @since  2.0
  */
 class CustomSidebarsCloning {
 
@@ -15,7 +15,7 @@ class CustomSidebarsCloning {
 	 * @see update_linked_widgets() // populate the property
 	 * @see update_widget_group() // use the property
 	 *
-	 * @since  1.6
+	 * @since  2.0
 	 * @var    bool|array
 	 */
 	private $group_data = false;
@@ -24,7 +24,7 @@ class CustomSidebarsCloning {
 	/**
 	 * Returns the singleton object.
 	 *
-	 * @since  1.6
+	 * @since  2.0
 	 */
 	public static function instance() {
 		static $Inst = null;
@@ -39,7 +39,7 @@ class CustomSidebarsCloning {
 	/**
 	 * Constructor is private -> singleton.
 	 *
-	 * @since  1.6
+	 * @since  2.0
 	 */
 	private function __construct() {
 		if ( is_admin() ) {
@@ -67,8 +67,8 @@ class CustomSidebarsCloning {
 			// Load the javascript support file for this module.
 			TheLib::add_ui( 'core', 'widgets.php' );
 			TheLib::add_ui( 'chosen', 'widgets.php' );
-			TheLib::add_js( CSB_JS_URL . 'cs-cloning.min.js', 'widgets.php' );
-			TheLib::add_css( CSB_CSS_URL . 'cs-cloning.css', 'widgets.php' );
+			TheLib::add_ui( CSB_JS_URL . 'cs-cloning.min.js', 'widgets.php' );
+			TheLib::add_ui( CSB_CSS_URL . 'cs-cloning.css', 'widgets.php' );
 		}
 	}
 
@@ -76,7 +76,7 @@ class CustomSidebarsCloning {
 	 * Extracts and sanitizes the CSB cloning data from the widget instance.
 	 * Cloning data contains the parent widget.
 	 *
-	 * @since  1.6
+	 * @since  2.0
 	 * @param  array $instance The widget instance data.
 	 * @return array Sanitized CSB cloning data.
 	 */
@@ -114,7 +114,7 @@ class CustomSidebarsCloning {
 	/**
 	 * Returns a new/unique group-ID.
 	 *
-	 * @since  1.6.0
+	 * @since  2.0
 	 */
 	protected function new_group_id() {
 		global $wp_registered_widgets;
@@ -156,7 +156,7 @@ class CustomSidebarsCloning {
 	/**
 	 * Finds the settings for the specified group inside the settings array.
 	 *
-	 * @since  1.6.0
+	 * @since  2.0
 	 */
 	protected function settings_for_group( $settings, $group ) {
 		if ( is_numeric( $group ) && $group > 0 ) {
@@ -176,7 +176,7 @@ class CustomSidebarsCloning {
 	/**
 	 * Action handler for 'in_widget_form'
 	 *
-	 * @since  1.6
+	 * @since  2.0
 	 */
 	public function admin_widget_button( $widget, $return, $instance ) {
 		$data = $this->get_widget_data( $instance );
@@ -221,7 +221,7 @@ class CustomSidebarsCloning {
 	 * the widget but provides a way to update the settings in chronolically
 	 * correct order, this is why we hijack it for saving settings...
 	 *
-	 * @since  1.6
+	 * @since  2.0
 	 */
 	public function update_widget_group( $widget, $return, $instance ) {
 		if ( ! empty( $this->group_data ) ) {
@@ -232,7 +232,7 @@ class CustomSidebarsCloning {
 	/**
 	 * Apply cloning logic when user saves the widget.
 	 *
-	 * @since  1.6
+	 * @since  2.0
 	 * @param  array $new_instance New settings for this instance as input by the user.
 	 * @param  array $old_instance Old settings for this instance.
 	 * @param  WP_Widget $widget   The current widget instance.
