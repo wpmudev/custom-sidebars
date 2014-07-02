@@ -3,23 +3,32 @@
   "cfgVersion": 1,
   "name": "Custom Sidebars Pro",
   "files": {
-    "6bd38c79": {
-      "id": "6bd38c79",
+    "fbbf2354": {
+      "id": "fbbf2354",
       "pid": "51daac34",
-      "name": "cs-cloning.scss",
-      "input": "@dev-css/cs-cloning.scss",
-      "customOutput": false,
-      "type": "Scss",
+      "name": "cs-visibility.js",
+      "input": "@dev-js/cs-visibility.js",
+      "customOutput": "js/cs-visibility.min.js",
+      "type": "Js",
       "config": {
         "autoCompile": true,
-        "lineNumbers": false,
-        "unixNewlines": false,
-        "sourcemaps": false,
-        "debug": false,
-        "compass": true,
-        "fullCompass": true,
-        "outputStyle": "expanded",
-        "autoprefixer": false
+        "uglify": true,
+        "mangle": true,
+        "sourcemaps": false
+      }
+    },
+    "f14f2bc5": {
+      "id": "f14f2bc5",
+      "pid": "51daac34",
+      "name": "cs-cloning.js",
+      "input": "@dev-js/cs-cloning.js",
+      "customOutput": "js/cs-cloning.min.js",
+      "type": "Js",
+      "config": {
+        "autoCompile": true,
+        "uglify": true,
+        "mangle": true,
+        "sourcemaps": false
       }
     },
     "7a71721b": {
@@ -38,35 +47,26 @@
         "compass": true,
         "fullCompass": true,
         "outputStyle": "expanded",
-        "autoprefixer": false
+        "autoprefixer": true
       }
     },
-    "fbbf2354": {
-      "id": "fbbf2354",
+    "6bd38c79": {
+      "id": "6bd38c79",
       "pid": "51daac34",
-      "name": "cs-visibility.js",
-      "input": "@dev-js/cs-visibility.js",
-      "customOutput": "js/cs-visibility.min.js",
-      "type": "Js",
+      "name": "cs-cloning.scss",
+      "input": "@dev-css/cs-cloning.scss",
+      "customOutput": false,
+      "type": "Scss",
       "config": {
         "autoCompile": true,
-        "uglify": true,
-        "mangle": true,
-        "sourcemaps": false
-      }
-    },
-    "4c3458e5": {
-      "id": "4c3458e5",
-      "pid": "51daac34",
-      "name": "cs.js",
-      "input": "@dev-js/cs.js",
-      "customOutput": "js/cs.min.js",
-      "type": "Js",
-      "config": {
-        "autoCompile": true,
-        "uglify": true,
-        "mangle": true,
-        "sourcemaps": false
+        "lineNumbers": false,
+        "unixNewlines": false,
+        "sourcemaps": false,
+        "debug": false,
+        "compass": true,
+        "fullCompass": true,
+        "outputStyle": "expanded",
+        "autoprefixer": true
       }
     },
     "caa71251": {
@@ -85,15 +85,15 @@
         "compass": true,
         "fullCompass": true,
         "outputStyle": "expanded",
-        "autoprefixer": false
+        "autoprefixer": true
       }
     },
-    "f14f2bc5": {
-      "id": "f14f2bc5",
+    "4c3458e5": {
+      "id": "4c3458e5",
       "pid": "51daac34",
-      "name": "cs-cloning.js",
-      "input": "@dev-js/cs-cloning.js",
-      "customOutput": false,
+      "name": "cs.js",
+      "input": "@dev-js/cs.js",
+      "customOutput": "js/cs.min.js",
       "type": "Js",
       "config": {
         "autoCompile": true,
