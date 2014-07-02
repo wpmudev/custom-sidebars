@@ -242,8 +242,7 @@ var csSidebars, msgTimer;
 		initColumns: function() {
 			var col1 = csSidebars.right.find( '.sidebars-column-1' ),
 				col2 = csSidebars.right.find( '.sidebars-column-2' ),
-				title1 = jQuery( '<div class="cs-title"><h3></h3></div>' ),
-				title2 = jQuery( '<div class="cs-title"><h3></h3></div>' ),
+				title = jQuery( '<div class="cs-title"><h3></h3></div>' ),
 				sidebars = csSidebars.right.find( '.widgets-holder-wrap' );
 
 			if ( ! col2.length ) {
@@ -251,10 +250,20 @@ var csSidebars, msgTimer;
 				col2.appendTo( csSidebars.right );
 			}
 
-			title1.find('h3').text( csSidebarsData.custom_sidebars );
-			title2.find('h3').text( csSidebarsData.theme_sidebars );
-			col1.prepend( title1 );
-			col2.prepend( title2 );
+			title
+				.clone()
+				.prependTo( col1 )
+				.find('h3')
+				.text( csSidebarsData.custom_sidebars );
+
+			title
+				.clone()
+				.prependTo( col2 )
+				.find('h3')
+				.text( csSidebarsData.theme_sidebars );
+
+			col1 = jQuery( '<div class="inner"></div>' ).appendTo( col1 );
+			col2 = jQuery( '<div class="inner"></div>' ).appendTo( col2 );
 
 			sidebars.each(function check_sidebar() {
 				var me = jQuery( this ),
@@ -619,7 +628,7 @@ var csSidebars, msgTimer;
 				inner = jQuery( '<div class="widgets-sortables ui-sortable"></div>' ),
 				name = jQuery( '<div class="sidebar-name"><div class="sidebar-name-arrow"><br></div><h3></h3></div>' ),
 				desc = jQuery( '<div class="sidebar-description"></div>' ),
-				col = csSidebars.right.find( '.sidebars-column-1' );
+				col = csSidebars.right.find( '.sidebars-column-1 > .inner:first' );
 
 			// Set sidebar specific values.
 			inner.attr( 'id', data.id );
@@ -632,7 +641,7 @@ var csSidebars, msgTimer;
 			inner.appendTo( box );
 
 			// Display the new sidebar on screen.
-			box.appendTo( col );
+			box.prependTo( col );
 
 			// Remove hooks added by wpWidgets.init()
 			jQuery( '#widgets-right .sidebar-name' ).unbind( 'click' );

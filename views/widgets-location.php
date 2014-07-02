@@ -86,7 +86,7 @@ function _show_replaceable( $sidebar, $prefix, $cat_name, $class = '' ) {
 	<div class="wpmui-box">
 		<h3>
 			<a href="#" class="toggle" title="<?php _e( 'Click to toggle' ); /* This is a Wordpress default language */ ?>"><br></a>
-			<span><?php _e( 'For Category or Post Type', CSB_LANG ); ?></span>
+			<span><?php _e( 'For single entries', CSB_LANG ); ?></span>
 		</h3>
 		<div class="inside">
 			<p><?php _e( 'These replacements will be applied to every single post that matches a certain post type or category.', CSB_LANG ); ?>
