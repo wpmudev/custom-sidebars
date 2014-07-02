@@ -32,7 +32,7 @@
 	*/ ?>
 	<script>
 	csSidebarsData = {
-		'title_edit': "<?php _e( 'Edit', CSB_LANG ); ?>",
+		'title_edit': "<?php _e( 'Edit [Sidebar]', CSB_LANG ); ?>",
 		'title_new': "<?php _e( 'New Custom Sidebar', CSB_LANG ); ?>",
 		'btn_edit': "<?php _e( 'Save Changes', CSB_LANG ); ?>",
 		'btn_new': "<?php _e( 'Create Sidebar', CSB_LANG ); ?>",

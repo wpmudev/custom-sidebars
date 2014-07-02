@@ -2,8 +2,8 @@ msgid ""
 msgstr ""
 "Project-Id-Version: customsidebars\n"
 "Report-Msgid-Bugs-To: \n"
-"POT-Creation-Date: 2014-07-02 19:49+0100\n"
-"PO-Revision-Date: 2014-07-02 19:49+0100\n"
+"POT-Creation-Date: 2014-07-02 20:40+0100\n"
+"PO-Revision-Date: 2014-07-02 20:40+0100\n"
 "Last-Translator: Philipp Stracker <philipp@stracker.net>\n"
 "Language-Team: \n"
 "Language: it_IT\n"
@@ -30,8 +30,9 @@ msgstr ""
 
 #: inc/class-custom-sidebars-editor.php:182
 #: inc/class-custom-sidebars-editor.php:246
+#, fuzzy
 msgid "The sidebar does not exist"
-msgstr ""
+msgstr "Crea una sidebar"
 
 #: inc/class-custom-sidebars-editor.php:198
 #, php-format
@@ -45,8 +46,9 @@ msgstr ""
 
 #: inc/class-custom-sidebars-editor.php:217
 #: inc/class-custom-sidebars-editor.php:266
+#, fuzzy
 msgid "The sidebar was not found"
-msgstr ""
+msgstr "Crea una sidebar"
 
 #: inc/class-custom-sidebars-editor.php:255
 #, php-format
@@ -84,13 +86,15 @@ msgid "Updated sidebar <strong>%1$s</strong> settings."
 msgstr ""
 
 #: inc/class-custom-sidebars-editor.php:526 views/widgets.php:17
+#, fuzzy
 msgid "Sidebars"
-msgstr ""
+msgstr "Sidebar personalizzate"
 
 #: inc/class-custom-sidebars-export.php:61 views/widgets.php:23
 #: views/widgets.php:41
+#, fuzzy
 msgid "Import / Export Sidebars"
-msgstr ""
+msgstr "Sidebar personalizzate"
 
 #: inc/class-custom-sidebars-export.php:255
 #: inc/class-custom-sidebars-export.php:297
@@ -194,8 +198,9 @@ msgid "Only these %s:"
 msgstr ""
 
 #: inc/class-custom-sidebars.php:71
+#, fuzzy
 msgid "Custom Sidebars Pro"
-msgstr ""
+msgstr "Sidebar personalizzate"
 
 #: inc/class-custom-sidebars.php:74
 #, php-format
@@ -272,24 +277,28 @@ msgid "Widgets"
 msgstr ""
 
 #: views/import.php:150
+#, fuzzy
 msgid "Existing sidebar will be replaced!"
-msgstr ""
+msgstr "Crea una sidebar"
 
 #: views/import.php:152
+#, fuzzy
 msgid "New sidebar will be created"
-msgstr ""
+msgstr "Crea una nuova sidebar"
 
 #: views/import.php:206
+#, fuzzy
 msgid "(Theme sidebar)"
-msgstr ""
+msgstr "Crea una sidebar"
 
 #: views/import.php:232
 msgid "Configuration"
 msgstr ""
 
 #: views/import.php:236
+#, fuzzy
 msgid "Replaceable sidebars"
-msgstr ""
+msgstr "Sidebar sostituibili"
 
 #: views/import.php:239
 msgid "Replaceable Sidebars"
@@ -300,16 +309,18 @@ msgid "By post type"
 msgstr "Per tipo di articolo"
 
 #: views/import.php:262
+#, fuzzy
 msgid "Post-type archives"
-msgstr ""
+msgstr "Per tipo di articolo"
 
 #: views/import.php:275
 msgid "By category"
 msgstr "Per categoria"
 
 #: views/import.php:288
+#, fuzzy
 msgid "Category archives"
-msgstr ""
+msgstr "Per categoria"
 
 #: views/import.php:301
 msgid "Special pages"
@@ -368,16 +379,19 @@ msgid "Yes, delete it"
 msgstr ""
 
 #: views/widgets-editor.php:16
+#, fuzzy
 msgid "Sidebar name here..."
-msgstr ""
+msgstr "Nome"
 
 #: views/widgets-editor.php:17
+#, fuzzy
 msgid "The name must be unique."
-msgstr ""
+msgstr "Nome"
 
 #: views/widgets-editor.php:21
+#, fuzzy
 msgid "Sidebar description here..."
-msgstr ""
+msgstr "Descrizione"
 
 #: views/widgets-editor.php:27
 msgid "Caution:"
@@ -440,8 +454,9 @@ msgid "Preview"
 msgstr ""
 
 #: views/widgets-location.php:30
+#, fuzzy
 msgid "Replaced by another sidebar:"
-msgstr ""
+msgstr "Crea una sidebar"
 
 #: views/widgets-location.php:38
 #, php-format
@@ -477,8 +492,9 @@ msgid "categories"
 msgstr ""
 
 #: views/widgets-location.php:112
+#, fuzzy
 msgid "Post Types"
-msgstr ""
+msgstr "Per tipo di articolo"
 
 #: views/widgets-location.php:130
 msgid "For Archives"
@@ -493,8 +509,9 @@ msgid "Archive Types"
 msgstr ""
 
 #: views/widgets-location.php:137 views/widgets-location.php:157
+#, fuzzy
 msgid "Category Archives"
-msgstr ""
+msgstr "Per categoria"
 
 #: views/widgets-location.php:168 views/widgets.php:37
 msgid "Save Changes"
@@ -504,25 +521,29 @@ msgstr "Registra le modifiche"
 msgid "Create a new sidebar"
 msgstr "Crea una nuova sidebar"
 
-#: views/widgets.php:35 views/widgets.php:72
-msgid "Edit"
+#: views/widgets.php:35
+#, fuzzy
+msgid "Edit [Sidebar]"
 msgstr "Modifica"
 
 #: views/widgets.php:36
+#, fuzzy
 msgid "New Custom Sidebar"
-msgstr ""
+msgstr "Crea una nuova sidebar"
 
 #: views/widgets.php:39
+#, fuzzy
 msgid "Delete Sidebar"
-msgstr ""
+msgstr "Crea una sidebar"
 
 #: views/widgets.php:40
 msgid "Define where you want this sidebar to appear."
 msgstr ""
 
 #: views/widgets.php:43
+#, fuzzy
 msgid "Theme Sidebars"
-msgstr ""
+msgstr "Sidebar personalizzate"
 
 #: views/widgets.php:44
 msgid "Couldn't load data from WordPress..."
@@ -534,28 +555,36 @@ msgid ""
 msgstr ""
 
 #: views/widgets.php:61
+#, fuzzy
 msgid "Delete this sidebar."
-msgstr ""
+msgstr "Crea una sidebar"
 
 #: views/widgets.php:70
+#, fuzzy
 msgid "Edit this sidebar."
-msgstr ""
+msgstr "Modifica"
+
+#: views/widgets.php:72
+msgid "Edit"
+msgstr "Modifica"
 
 #: views/widgets.php:79 views/widgets.php:118
 msgid "Where do you want to show the sidebar?"
 msgstr ""
 
 #: views/widgets.php:81 views/widgets.php:120
+#, fuzzy
 msgid "Sidebar Location"
-msgstr ""
+msgstr "Crea una sidebar"
 
 #: views/widgets.php:106
 msgid "Can be replaced"
 msgstr ""
 
 #: views/widgets.php:107 views/widgets.php:109
+#, fuzzy
 msgid "Static sidebar"
-msgstr ""
+msgstr "Crea una sidebar"
 
 #~ msgid ""
 #~ "There was not any sidebar called \"%s\" and it could not been deleted."

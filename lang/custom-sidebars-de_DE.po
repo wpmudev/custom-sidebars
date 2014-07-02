@@ -1,16 +1,16 @@
 msgid ""
 msgstr ""
-"Project-Id-Version: customsidebars\n"
+"Project-Id-Version: custom-sidebars\n"
 "Report-Msgid-Bugs-To: \n"
-"POT-Creation-Date: 2014-07-02 19:49+0100\n"
-"PO-Revision-Date: 2014-07-02 19:52+0100\n"
+"POT-Creation-Date: 2014-07-02 20:38+0100\n"
+"PO-Revision-Date: 2014-07-02 20:39+0100\n"
 "Last-Translator: Philipp Stracker <philipp@stracker.net>\n"
-"Language-Team: Markus Vocke <info@web-funk.de>\n"
+"Language-Team: \n"
 "Language: de_DE\n"
 "MIME-Version: 1.0\n"
 "Content-Type: text/plain; charset=UTF-8\n"
 "Content-Transfer-Encoding: 8bit\n"
-"X-Poedit-KeywordsList: __;gettext;gettext_noop;_e\n"
+"X-Poedit-KeywordsList: __;gettext;gettext_noop;_e;_x;_ex\n"
 "X-Poedit-Basepath: ..\n"
 "X-Generator: Poedit 1.6.5\n"
 "X-Poedit-SourceCharset: UTF-8\n"
@@ -352,6 +352,8 @@ msgid ""
 "Here you can replace the default sidebars. Simply select what sidebar you "
 "want to show for this post!"
 msgstr ""
+"Hier kannst die Sidebars für diesen Beitrag festlegen. Wähle einfach aus, "
+"welche Sidebar verwendet werden soll!"
 
 #: views/metabox.php:40
 msgid ""
@@ -392,7 +394,7 @@ msgstr "Hier die Beschreibung..."
 
 #: views/widgets-editor.php:27
 msgid "Caution:"
-msgstr "Vorsicht:"
+msgstr "Wichtig:"
 
 #: views/widgets-editor.php:29
 msgid ""
@@ -403,6 +405,12 @@ msgid ""
 "are not sure what you are doing, it can break the design of your site. Leave "
 "these fields blank to use the theme sidebars design."
 msgstr ""
+"Vor/Nach Überschrift/Widget Einstellungen definieren den HTML Code der für "
+"die Anzeige der Sidebars verwendet wird. Mehr Infos auf <a href=\"http://"
+"justintadlock.com/archives/2010/11/08/sidebars-in-wordpress\" target=\"_blank"
+"\">Justin Tadlock Blog</a>. Um Fehler auf deiner Seite zu vermeiden solltest "
+"du diese Felder nur verwenden, wenn du weißt was du tust. Lasse die Felder "
+"leer um den WordPress Standardcode zu verwenden."
 
 #: views/widgets-editor.php:39
 msgid "Before Title"
@@ -422,7 +430,7 @@ msgstr "Nach dem Widget"
 
 #: views/widgets-editor.php:60
 msgid "Edit custom wrapper code"
-msgstr ""
+msgstr "Umgebenden HTML Code bearbeiten"
 
 #: views/widgets-editor.php:64 views/widgets.php:38
 msgid "Create Sidebar"
@@ -475,7 +483,7 @@ msgstr ""
 # Not relevant! This is a WordPress core-translation; poedit added this by mistake...
 #: views/widgets-location.php:88 views/widgets-location.php:129
 msgid "Click to toggle"
-msgstr ""
+msgstr "Umschalten"
 
 #: views/widgets-location.php:89
 msgid "For single entries"
@@ -521,9 +529,9 @@ msgstr "Änderungen speichern"
 msgid "Create a new sidebar"
 msgstr "Neue Sidebar erstellen"
 
-#: views/widgets.php:35 views/widgets.php:72
-msgid "Edit"
-msgstr "Bearbeiten"
+#: views/widgets.php:35
+msgid "Edit [Sidebar]"
+msgstr "[Sidebar] bearbeiten"
 
 #: views/widgets.php:36
 msgid "New Custom Sidebar"
@@ -559,6 +567,10 @@ msgstr "Diese Sidebar löschen."
 #: views/widgets.php:70
 msgid "Edit this sidebar."
 msgstr "Diese Sidebar bearbeiten."
+
+#: views/widgets.php:72
+msgid "Edit"
+msgstr "Bearbeiten"
 
 #: views/widgets.php:79 views/widgets.php:118
 msgid "Where do you want to show the sidebar?"

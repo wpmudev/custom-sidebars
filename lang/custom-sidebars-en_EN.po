@@ -2,8 +2,8 @@ msgid ""
 msgstr ""
 "Project-Id-Version: customsidebars\n"
 "Report-Msgid-Bugs-To: \n"
-"POT-Creation-Date: 2014-07-02 19:49+0100\n"
-"PO-Revision-Date: 2014-07-02 19:49+0100\n"
+"POT-Creation-Date: 2014-07-02 20:39+0100\n"
+"PO-Revision-Date: 2014-07-02 20:39+0100\n"
 "Last-Translator: Philipp Stracker <philipp@stracker.net>\n"
 "Language-Team: \n"
 "Language: en\n"
@@ -389,12 +389,11 @@ msgstr ""
 "want to show for this post!"
 
 #: views/metabox.php:40
-#, fuzzy
 msgid ""
 "All sidebars have been locked, you cannot replace them. Go to <a href="
 "\"widgets.php\">the widgets page</a> to unlock a sidebar"
 msgstr ""
-"All sidebars have been locked, you cannot replace them.Go to <a href="
+"All sidebars have been locked, you cannot replace them. Go to <a href="
 "\"widgets.php\">the widgets page</a> to unlock a sidebar"
 
 # @ custom-sidebars
@@ -582,9 +581,9 @@ msgid "Create a new sidebar"
 msgstr "Create a new sidebar"
 
 # @ custom-sidebars
-#: views/widgets.php:35 views/widgets.php:72
-msgid "Edit"
-msgstr "Edit"
+#: views/widgets.php:35
+msgid "Edit [Sidebar]"
+msgstr "Edit [Sidebar]"
 
 # @ custom-sidebars
 #: views/widgets.php:36
@@ -626,6 +625,11 @@ msgstr "Delete this sidebar."
 #: views/widgets.php:70
 msgid "Edit this sidebar."
 msgstr "Edit this sidebar."
+
+# @ custom-sidebars
+#: views/widgets.php:72
+msgid "Edit"
+msgstr "Edit"
 
 # @ custom-sidebars
 #: views/widgets.php:79 views/widgets.php:118

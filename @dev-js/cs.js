@@ -449,7 +449,7 @@ var csSidebars, msgTimer;
 			if ( data instanceof CsSidebar ) {
 				data = {
 					id: data.getID(),
-					title: csSidebarsData.title_edit + ' ' + data.name,
+					title: csSidebarsData.title_edit.replace( '[Sidebar]', data.name ),
 					button: csSidebarsData.btn_edit
 				};
 			}
