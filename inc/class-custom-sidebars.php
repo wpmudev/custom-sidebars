@@ -32,7 +32,7 @@ class CustomSidebars {
 	 * URL to the documentation/info page of the pro plugin
 	 * @var  string
 	 */
-	static public $pro_url = 'http://premium.wpmudev.org';
+	static public $pro_url = 'http://premium.wpmudev.org/project/custom-sidebars-pro/';
 
 
 	/**
