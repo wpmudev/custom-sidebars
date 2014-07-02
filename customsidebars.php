@@ -1,13 +1,12 @@
 <?php
 /*
-Plugin Name: Custom Sidebars Pro
-Plugin URI: http://premium.wpmudev.org/project/custom-sidebars/
+Plugin Name: Custom Sidebars Free
+Plugin URI:  http://premium.wpmudev.org/project/custom-sidebars/
 Description: Allows you to create widgetized areas and custom sidebars. Replace whole sidebars or single widgets for specific posts and pages.
-Version: 2.0-BETA
-Author: WPMU DEV
-Author URI: http://premium.wpmudev.org/
-Textdomain: custom-sidebars
-WDP ID: 9105
+Version:     2.0
+Author:      WPMU DEV
+Author URI:  http://premium.wpmudev.org/
+Textdomain:  custom-sidebars
 */
 
 /*
@@ -76,19 +75,3 @@ if ( ! class_exists( 'CustomSidebarsEmptyPlugin' ) ) {
 		}
 	} //end class
 } //end if class exists
-
-// Pro: Integrate WPMU Dev Dashboard
-if ( is_admin() ) {
-	if ( file_exists( CSB_INC_DIR . 'external/wpmudev-dashboard/wpmudev-dash-notification.php' ) ) {
-		global $wpmudev_notices;
-		is_array( $wpmudev_notices ) || $wpmudev_notices = array();
-		$wpmudev_notices[] = array(
-			'id' => 9105,
-			'name' => 'Custom Sidebars Pro',
-			'screens' => array(
-				'widgets',
-			),
-		);
-		require_once CSB_INC_DIR . 'external/wpmudev-dashboard/wpmudev-dash-notification.php';
-	}
-}

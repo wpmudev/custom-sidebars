@@ -1,0 +1,101 @@
+{
+  "id": "848760cc",
+  "cfgVersion": 1,
+  "name": "Custom Sidebars Free",
+  "files": {
+    "4c3458e5": {
+      "id": "4c3458e5",
+      "pid": "848760cc",
+      "name": "cs.js",
+      "input": "@dev-js/cs.js",
+      "customOutput": "js/cs.min.js",
+      "type": "Js",
+      "config": {
+        "autoCompile": true,
+        "uglify": true,
+        "mangle": true,
+        "sourcemaps": true
+      }
+    },
+    "caa71251": {
+      "id": "caa71251",
+      "pid": "848760cc",
+      "name": "cs.scss",
+      "input": "@dev-css/cs.scss",
+      "customOutput": false,
+      "type": "Scss",
+      "config": {
+        "autoCompile": true,
+        "lineNumbers": false,
+        "unixNewlines": false,
+        "sourcemaps": false,
+        "debug": false,
+        "compass": true,
+        "fullCompass": true,
+        "outputStyle": "expanded",
+        "autoprefixer": false
+      }
+    },
+    "2da67591": {
+      "id": "2da67591",
+      "pid": "848760cc",
+      "name": "cs-free.js",
+      "input": "@dev-js/cs-free.js",
+      "customOutput": "js/cs-free.min.js",
+      "type": "Js",
+      "config": {
+        "autoCompile": true,
+        "uglify": true,
+        "mangle": true,
+        "sourcemaps": true
+      }
+    }
+  },
+  "imports": {},
+  "images": {
+    "43e9ab3f": {
+      "id": "43e9ab3f",
+      "pid": "848760cc",
+      "path": "img/stripes.png",
+      "size": 2932,
+      "name": "stripes.png",
+      "type": "Png",
+      "initialSize": 2932,
+      "status": "NOT_OPTIMIZED"
+    }
+  },
+  "config": {
+    "watch": true,
+    "liveRefresh": true,
+    "liveRefreshDelay": 0,
+    "filterPatterns": "inc/external/",
+    "useCustomServer": false,
+    "customServerUrl": "",
+    "cssPath": "css/",
+    "jsPath": "js/",
+    "htmlPath": "html/",
+    "minJsPath": "min/",
+    "htmlExtension": ".html",
+    "cssPathType": "RELATIVE_FILESDIR",
+    "htmlPathType": "REPLACE_TYPE",
+    "jsPathType": "RELATIVE_FILESDIR",
+    "minJsPathType": "SIDE_BY_FILE",
+    "htmlTypes": "jade, haml, slim, markdown, md",
+    "cssTypes": "less, sass, stylus, scss, styl",
+    "jsTypes": "coffee, coffeescript, coffeescripts, ls, livescript, livescripts",
+    "cssPreprocessorPath": "@dev-css/",
+    "htmlPreprocessorPath": "",
+    "jsPreprocessorPath": "@dev-js",
+    "minJsPreprocessorPath": "",
+    "autoprefixerBrowsers": "",
+    "ftpHost": "",
+    "ftpPort": "21",
+    "ftpRemotePath": "",
+    "ftpIgnorePreprocessorFiles": true,
+    "ftpType": "FTP",
+    "ftpExcludePatterns": "",
+    "ftpSecure": false,
+    "ftpPassword": "",
+    "ftpUsername": ""
+  }
+}

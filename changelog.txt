@@ -1,5 +1,5 @@
-Plugin Name: Custom Sidebars Pro
-Author: Javier Marquez (Incsub)
+Plugin Name: Custom Sidebars Free
+Author: Javier Marquez (Incsub), Philipp Stracker (Incsub)
 
 Change Log:
 ----------------------------------------------------------------------
@@ -7,14 +7,7 @@ Change Log:
 2.0
 ----------------------------------------------------------------------
 - Complete UI redesign.
-- Update to Pro version.
-- Pro: Import/export sidebars and widgets.
-- Pro: Define widget visibility options.
-- Pro: Widget cloning.
 - Many small bugfixes.
-
-----------------------------------------------------------------------
-----------------------------------------------------------------------
 
 1.5
 ----------------------------------------------------------------------

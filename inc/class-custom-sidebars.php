@@ -4,9 +4,6 @@
 require_once CSB_INC_DIR . 'class-custom-sidebars-widgets.php';
 require_once CSB_INC_DIR . 'class-custom-sidebars-editor.php';
 require_once CSB_INC_DIR . 'class-custom-sidebars-replacer.php';
-require_once CSB_INC_DIR . 'class-custom-sidebars-cloning.php';
-require_once CSB_INC_DIR . 'class-custom-sidebars-visibility.php';
-require_once CSB_INC_DIR . 'class-custom-sidebars-export.php';
 
 
 /**
@@ -27,6 +24,12 @@ class CustomSidebars {
 	 * @var  string
 	 */
 	static protected $cap_required = 'switch_themes';
+
+	/**
+	 * URL to the documentation/info page of the pro plugin
+	 * @var  string
+	 */
+	static public $pro_url = 'http://premium.wpmudev.org';
 
 
 	/**
@@ -76,7 +79,9 @@ class CustomSidebars {
 		TheLib::load_textdomain( CSB_LANG, CSB_LANG_DIR );
 
 		// Load javascripts/css files
+		TheLib::add_ui( 'core', 'widgets.php' );
 		TheLib::add_ui( 'scrollbar', 'widgets.php' );
+		TheLib::add_ui( 'chosen', 'widgets.php' );
 		TheLib::add_ui( CSB_JS_URL . 'cs.min.js', 'widgets.php' );
 		TheLib::add_ui( CSB_CSS_URL . 'cs.css', 'widgets.php' );
 
@@ -85,6 +90,29 @@ class CustomSidebars {
 
 		// Extensions use this hook to initialize themselfs.
 		do_action( 'cs_init' );
+
+		// Free version only
+		add_action(
+			'in_widget_form',
+			function( $widget ) {
+				?>
+				<input type="hidden" name="csb-buttons" value="0" />
+				<?php if ( ! isset( $_POST[ 'csb-buttons' ] ) ) : ?>
+					<div class="csb-pro-layer csb-pro-<?php echo esc_attr( $widget->id ); ?>">
+						<a href="#" class="button csb-clone-button"><?php _e( 'Clone', CSB_LANG ); ?></a>
+						<a href="#" class="button csb-visibility-button"><span class="dashicons dashicons-visibility"></span> <?php _e( 'Visibility', CSB_LANG ); ?></a>
+						<a href="<?php echo esc_url( CustomSidebars::$pro_url ); ?>" target="_blank" class="pro-info">
+						<?php printf(
+							__( 'Pro Version Features', CSB_LANG ),
+							CustomSidebars::$pro_url
+						); ?>
+						</a>
+					</div>
+				<?php
+				endif;
+			},
+			10, 1
+		);
 	}
 
 

@@ -1,4 +1,36 @@
 /**
+ * Javascript support for the free version of the plugin.
+ */
+jQuery(function init_free() {
+	var $doc = jQuery( document ),
+		$all = jQuery( '#widgets-right' );
+
+	/**
+	 * Moves the "Clone" button next to the save button.
+	 */
+	var init_widget = function init_widget( ev, el ) {
+		var $widget = jQuery( el ).closest( '.widget' ),
+			$btns = $widget.find( '.csb-pro-layer' ),
+			$target = $widget.find( '.widget-control-actions .widget-control-save' ),
+			$spinner = $widget.find( '.widget-control-actions .spinner' );
+
+		if ( $widget.data( '_csb_free' ) == true ) {
+			return;
+		}
+
+		$spinner.insertBefore( $target ).css({ 'float': 'left' });
+		$btns.insertBefore( $target );
+
+		$widget.data( '_csb_free', true );
+	};
+
+	$all.find( '.widget' ).each( init_widget );
+	$doc.on( 'widget-added', init_widget );
+});
+
+/*-----  End of free version scripts  ------*/
+
+/**
  * CsSidebar class
  *
  * This adds new functionality to each sidebar.
@@ -666,106 +698,7 @@ var csSidebars, msgTimer;
 		 * @since  2.0
 		 */
 		showExport: function() {
-			var popup = null,
-				ajax = null;
-
-			// Download export file.
-			var do_export = function do_export( ev ) {
-				var ajax = wpmUi.ajax(),
-					form = jQuery( this ).closest( 'form' );
-
-				ajax.data( form )
-					.load_http( 'cs-ajax' );
-
-				ev.preventDefault();
-				return false;
-			};
-
-			// Ajax handler after import file was uploaded.
-			var handle_done_upload = function handle_done_upload( resp, okay, xhr ) {
-				var msg = {};
-				popup.loading( false );
-
-				if ( okay ) {
-					popup
-						.size( 900, 600 )
-						.content( resp.html );
-				} else {
-					msg.message = resp.message;
-					msg.details = resp;
-					msg.parent = popup.$().find( '.wpmui-wnd-content' );
-					msg.insert_after = false;
-					msg.id = 'export';
-					msg.class = 'wpmui-wnd-err';
-					msg.type = 'err';
-					wpmUi.message( msg );
-				}
-			};
-
-			// Upload the import file.
-			var do_upload = function do_upload( ev ) {
-				var ajax = wpmUi.ajax(),
-					form = jQuery( this ).closest( 'form' );
-
-				popup.loading( true );
-				ajax.data( form )
-					.ondone( handle_done_upload )
-					.load_json( 'cs-ajax' );
-
-				ev.preventDefault();
-				return false;
-			};
-
-			// Import preview: Toggle widgets
-			var toggle_widgets = function toggle_widgets() {
-				var me = jQuery( this ),
-					checked = me.prop( 'checked' ),
-					items = popup.$().find( '.column-widgets, .import-widgets' );
-
-				if ( checked ) {
-					items.show();
-				} else {
-					items.hide();
-				}
-			};
-
-			// Import preview: Cancel.
-			var show_overview = function show_overview() {
-				popup
-					.size( 740, 480 )
-					.content( csSidebars.export_form );
-			};
-
-			// Ajax handler after import was done.
-			var handle_done_import = function handle_done_import( resp, okay, xhr ) {
-				var msg = {};
-				popup
-					.loading( false )
-					.close();
-
-				msg.message = resp.message;
-				msg.details = resp;
-				msg.parent = '#widgets-right';
-				msg.insert_after = '#cs-title-options';
-				msg.id = 'import';
-
-				if ( ! okay ) {
-					msg.type = 'err';
-				}
-				wpmUi.message( msg );
-			};
-
-			// Import preview: Import the data.
-			var do_import = function do_import() {
-				var form = popup.$().find( '.frm-import' );
-
-				popup.loading( true );
-
-				ajax.reset()
-					.data( form )
-					.ondone( handle_done_import )
-					.load_json();
-			};
+			var popup = null;
 
 			// Show the popup.
 			popup = wpmUi.popup()
@@ -774,17 +707,6 @@ var csSidebars, msgTimer;
 				.title( csSidebarsData.title_export )
 				.content( csSidebars.export_form )
 				.show();
-
-			ajax = wpmUi.ajax( null, 'cs-ajax' );
-
-			// Events for the Import / Export view.
-			popup.$().on( 'submit', '.frm-export', do_export );
-			popup.$().on( 'submit', '.frm-preview-import', do_upload );
-
-			// Events for the Import preview.
-			popup.$().on( 'change', '#import-widgets', toggle_widgets );
-			popup.$().on( 'click', '.btn-cancel', show_overview );
-			popup.$().on( 'click', '.btn-import', do_import );
 
 			return true;
 		},
