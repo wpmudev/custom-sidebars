@@ -1,16 +1,12 @@
 #!/usr/bin/bash
-# v 2014-07-03 20:47
+# v 2014-07-03 21:04
 clear
 
 if [ -f local.config.sh ]; then
 	. local.config.sh
 else
-	if [ -f config.sh ]; then
-		. config.sh
-	else
-		echo "There must be a config.sh or local.config.sh file in the current directory."
-		exit 1;
-	fi
+	echo "There must be a local.config.sh file in the current directory."
+	exit 1;
 fi
 
 CUR_DIR="$( pwd )"

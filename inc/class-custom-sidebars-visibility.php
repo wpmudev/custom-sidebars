@@ -592,8 +592,8 @@ class CustomSidebarsVisibility {
 			// TAXONOMY condition.
 			$tax_query = @$wp_query->tax_query->queries;
 			if ( is_array( $tax_query ) ) {
-				$tax_type = $tax_query[0]['taxonomy'];
-				$tax_terms = $tax_query[0]['terms'];
+				$tax_type = @$tax_query[0]['taxonomy'];
+				$tax_terms = @$tax_query[0]['terms'];
 			} else {
 				$tax_type = false;
 				$tax_terms = false;
