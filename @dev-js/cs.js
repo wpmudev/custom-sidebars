@@ -590,6 +590,7 @@ var csSidebars, msgTimer;
 			}
 
 			popup.show();
+			popup.$().find( '#csb-name' ).focus();
 
 			// Add event hooks to the editor.
 			popup.$().on( 'click', '#csb-more', toggle_extras );
