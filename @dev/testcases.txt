@@ -82,6 +82,8 @@ Keep debugging console open to monitor network infos and JS errors.
   - There should be link inside the text that takes the user to widgets section.
 
 1.11 Pro features
+  - The widgets section has an obvious WPMU Dashboard notification.
+
   In widget section open the export/import popup
   Enter some text in the export note and click the Export button.
   - A file should be downloaded.
@@ -125,6 +127,8 @@ Create a new, empty WordPress installation
 Tests 1.1 - 1.10 are same as in Pro plugin
 
 1.11 Pro features
+  - The widgets section does _NOT_ contain a WPMU Dashboard notification
+
   In widget section open the export/import popup
   - The form should be covered by semi-transparent layer, buttons cannot be clicked.
   - There should be a note stating that this is a pro feature.
@@ -149,6 +153,7 @@ Use the WordPress installation from test 2.
 Then replace the free plugin with the pro plugin.
 
 3.1 Widget section
+  - After update the widgets section shows a WPMU Dashboard notification.
   - Check the widget section if all your data is still displayed.
   - Confirm that data is identical to the data you entered with free version.
 

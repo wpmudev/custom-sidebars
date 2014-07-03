@@ -423,7 +423,7 @@ class CustomSidebarsEditor extends CustomSidebars {
 					isset( $options['post_type_single'][$pt][$sb_id] ) &&
 					$options['post_type_single'][$pt][$sb_id] == $req->id
 				) {
-					$options['post_type_single'][$pt][$sb_id] = '';
+					unset( $options['post_type_single'][$pt][$sb_id] );
 				}
 
 				if (
@@ -436,7 +436,7 @@ class CustomSidebarsEditor extends CustomSidebars {
 					isset( $options['post_type_archive'][$pt][$sb_id] ) &&
 					$options['post_type_archive'][$pt][$sb_id] == $req->id
 				) {
-					$options['post_type_archive'][$pt][$sb_id] = '';
+					unset( $options['post_type_archive'][$pt][$sb_id] );
 				}
 			}
 
@@ -453,7 +453,7 @@ class CustomSidebarsEditor extends CustomSidebars {
 					isset( $options['category_single'][$cat][$sb_id] ) &&
 					$options['category_single'][$cat][$sb_id] == $req->id
 				) {
-					$options['category_single'][$cat][$sb_id] = '';
+					unset( $options['category_single'][$cat][$sb_id] );
 				}
 
 				if (
@@ -466,7 +466,7 @@ class CustomSidebarsEditor extends CustomSidebars {
 					isset( $options['category_archive'][$cat][$sb_id] ) &&
 					$options['category_archive'][$cat][$sb_id] == $req->id
 				) {
-					$options['category_archive'][$cat][$sb_id] = '';
+					unset( $options['category_archive'][$cat][$sb_id] );
 				}
 			}
 
@@ -481,7 +481,7 @@ class CustomSidebarsEditor extends CustomSidebars {
 					isset( $options[$key][$sb_id] ) &&
 					$options[$key][$sb_id] == $req->id
 				) {
-					$options[$key][$sb_id] = '';
+					unset( $options[$key][$sb_id] );
 				}
 			}
 		}

@@ -1,4 +1,5 @@
 #!/usr/bin/bash
+# v 2014-07-03 20:47
 clear
 
 if [ -f local.config.sh ]; then

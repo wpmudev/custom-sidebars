@@ -1,4 +1,5 @@
 #!/usr/bin/bash
+# v 2014-07-03 20:47
 clear
 
 if [ -f local.config.sh ]; then
@@ -95,7 +96,7 @@ install_db() {
 		--dbname=$DB_NAME \
 		--dbuser="$DB_USER" \
 		--dbpass="$DB_PASS" \
-		--dbprefix=test \
+		--dbprefix=test_ \
 		--skip-check \
 		--extra-php << END
 define( 'WP_DEBUG_LOG', true );
