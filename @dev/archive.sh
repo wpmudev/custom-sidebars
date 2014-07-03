@@ -7,8 +7,9 @@
 #                                                                             #
 # # # # # # # # # # # # # # # # # # # # # # # # # # # # # # # # # # # # # # # #
 
-FOLDER=custom-sidebars       # This will never change!
 VER=2.0                      # Update this to match the current release version.
+FOLDER=custom-sidebars       # This will never change!
+
 DEST=${1-~/Desktop}          # Optionally define where the archive is saved.
 ARCHIVE=$FOLDER-pro-$VER.zip # This will never change!
 

@@ -35,6 +35,8 @@ http://arqex.com/
 
 if ( ! class_exists( 'CustomSidebars' ) ) {
 
+	define( 'CSB_VERSION', '2.0' );                    // Plugin version number.
+
 	// used for more readable i18n functions: __( 'text', CSB_LANG );
 	define( 'CSB_LANG', 'custom-sidebars' );
 
@@ -46,7 +48,6 @@ if ( ! class_exists( 'CustomSidebars' ) ) {
 	define( 'CSB_INC_DIR', $plugin_dir . '/inc/' );
 	define( 'CSB_JS_URL', $plugin_url . 'js/' );
 	define( 'CSB_CSS_URL', $plugin_url . 'css/' );
-	define( 'CSB_VERSION', '2.0' );                    // Plugin version number.
 
 	// Load the actual core.
 	require_once 'inc/class-custom-sidebars.php';
