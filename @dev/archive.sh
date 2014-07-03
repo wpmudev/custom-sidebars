@@ -3,25 +3,28 @@
 
 # # # # # # # # # # # # # # # # # # # # # # # # # # # # # # # # # # # # # # # #
 #                                                                             #
-#                             CUSTOM SIDEBARS PRO                             #
+#                            CREATE EXPORT ARCHIVE                            #
 #                                                                             #
 # # # # # # # # # # # # # # # # # # # # # # # # # # # # # # # # # # # # # # # #
 
-VER=2.0                      # Update this to match the current release version.
-FOLDER=custom-sidebars       # This will never change!
-
-DEST=${1-~/Desktop}          # Optionally define where the archive is saved.
-ARCHIVE=$FOLDER-pro-$VER.zip # This will never change!
-
-if [ $# -gt 1 ]; then
-	ARCHIVE=$2
+if [ -f local.config.sh ]; then
+	. local.config.sh
+else
+	if [ -f config.sh ]; then
+		. config.sh
+	else
+		echo "There must be a config.sh or local.config.sh file in the current directory."
+		exit 1;
+	fi
 fi
 
-
-# ----- This will create the archive / DON'T CHANGE THIS -----------------------
+# Allow the output filename to be overwritten
+if [ $# -gt 0 ]; then
+	EXPORT_ARCHIVE=$1
+fi
 
 cd ..
-python /usr/local/bin/git-archive-all --force-submodules --prefix $FOLDER/ "$DEST"/$ARCHIVE
+python /usr/local/bin/git-archive-all --force-submodules --prefix $FOLDER/ "$EXPORT_ARCHIVE"
 
 # ------------------------------------------------------------------------------
 # Depends on:

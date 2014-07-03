@@ -1,41 +1,17 @@
 #!/usr/bin/bash
 clear
 
-if [ $# -lt 3 ]; then
-	echo "usage: $0 <wp-url> <wp-dir> <db-name> <db-user> <db-pass> [db-host] [wp-version]"
-	echo ""
-	echo "<wp-url>"
-	echo "        This is the URL where your new testing installation will be"
-	echo "        setup. You can login at this URL with user/pass 'test'/'test'"
-	echo ""
-	echo "<wp-dir>"
-	echo "        This directory will be deleted and a new Wordpress installation"
-	echo "        is created at this location."
-	echo ""
-	echo "<db-name>"
-	echo "        This database will be deleted and created from scratch."
-	echo ""
-	echo "<db-user> <db-pass>"
-	echo "        User must exist and have permission to DELETE and "
-	echo "        CREATE databases."
-	echo ""
-	echo "<db-host>"
-	echo "        Default: localhost"
-	echo ""
-	echo "<wp-version>"
-	echo "        Default: latest; can also be a version number like 3.1"
-	exit 1
+if [ -f local.config.sh ]; then
+	. local.config.sh
+else
+	if [ -f config.sh ]; then
+		. config.sh
+	else
+		echo "There must be a config.sh or local.config.sh file in the current directory."
+		exit 1;
+	fi
 fi
 
-WP_URL=$1
-WP_USER=test
-WP_PASS=test
-WP_DIR=$2
-DB_NAME=$3
-DB_USER=$4
-DB_PASS=$5
-DB_HOST=${6-localhost}
-WP_VERSION=${7-latest}
 CUR_DIR="$( pwd )"
 
 # Display a sumary of all parameters for the user.
@@ -45,11 +21,14 @@ show_infos() {
 	echo "WordPress URL:     $WP_URL"
 	echo "WordPress User:    $WP_USER"
 	echo "WordPress Pass:    $WP_PASS"
+	echo "WordPress Email:   $WP_EMAIL"
 	echo "WordPress version: $WP_VERSION"
 	echo "DB Host:           $DB_HOST"
 	echo "DB Name:           $DB_NAME"
 	echo "DB User:           $DB_USER"
 	echo "DB Pass:           $DB_PASS"
+	echo "------------------------------------------"
+	echo "Task: Setup a fresh WordPress installation and install this plugin"
 	echo "------------------------------------------"
 }
 
@@ -132,13 +111,13 @@ END
 		--title="Testing installation" \
 		--admin_user=$WP_USER \
 		--admin_password=$WP_PASS \
-		--admin_email=test@example.com
+		--admin_email=$WP_EMAIL
 }
 
 install_plugin() {
 	if [ -f "$CUR_DIR"/archive.sh ]; then
 		cd "$CUR_DIR"
-		"$CUR_DIR"/archive.sh "$CUR_DIR" plugin.zip
+		"$CUR_DIR"/archive.sh "$CUR_DIR"/plugin.zip
 		echo "- Created a clean export of the current plugin"
 	fi
 	if [ -f "$CUR_DIR"/plugin.zip ]; then

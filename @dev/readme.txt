@@ -1,7 +1,7 @@
 
 
 ======================  NOTES ON DEVELOPMENT AND TESTING  ======================
-                            - Custom Sidebars Pro -
+                              - Custom Sidebars -
 
 --------------------------------------------------------------------------------
 Philipp Stracker                                     Scripts are written for OSX
@@ -12,10 +12,13 @@ Philipp Stracker                                     Scripts are written for OSX
 
   - changelog.txt .. Plugin version
   - customsidebars.php .. Plugin version (2x)
-  - @dev/archive.sh .. Plugin name and version
+  - @dev/config.txt .. Options for clean-installation.sh and install-plugin.sh
+                       Create a local copy and name it @dev/local.config.txt !!
 
   Not plugin specific (no changes required):
+  - @dev/archive.sh
   - @dev/clean-installation.sh
+  - @dev/install-plugin.sh
 
 
 --------------------------------------------------------------------------------
@@ -50,6 +53,9 @@ Philipp Stracker                                     Scripts are written for OSX
      > cd <plugin-dir>/@dev
      > sh ./archive.sh
      This will generate a clean zip archive with all plugin files on your desktop.
+
+
+  Deploy the exported zip archive to wordpress SVN!
 
 
 --------------------------------------------------------------------------------
