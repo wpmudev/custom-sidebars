@@ -150,7 +150,7 @@ class CustomSidebarsEditor extends CustomSidebars {
 	private function save_item( $req, $data )  {
 		$sidebars = self::get_custom_sidebars();
 		$sb_id = $req->id;
-		$sb_name = stripslashes( trim( @$data['name'] ) );
+		$sb_name = substr( stripslashes( trim( @$data['name'] ) ), 0, 40 );
 
 		if ( empty( $sb_name ) ) {
 			return self::req_err(
@@ -186,7 +186,7 @@ class CustomSidebarsEditor extends CustomSidebars {
 
 		// Populate the sidebar object.
 		$sidebar['name'] = $sb_name;
-		$sidebar['description'] = stripslashes( trim( @$_POST['description'] ) );
+		$sidebar['description'] = substr( stripslashes( trim( @$_POST['description'] ) ), 0, 200 );
 		$sidebar['before_widget'] = stripslashes( trim( @$_POST['before_widget'] ) );
 		$sidebar['after_widget'] = stripslashes( trim( @$_POST['after_widget'] ) );
 		$sidebar['before_title'] = stripslashes( trim( @$_POST['before_title'] ) );

@@ -50,11 +50,96 @@ Keep debugging console open to monitor network infos and JS errors.
   - All checkboxes are still checked.
   - Each multiselect list displays the correct value.
 
+1.8 Error handling
+  Try so create a new sidebar with empty name.
+  - User friendly error should be displayed.
+  Try to edit an existing sidebar and set name to empty value.
+  - User friendly error should be displayed.
+  Set sidebar name to super long text
+  - Max 40 characters should be allowed/saved.
+  Set sidebar description to super long text
+  - Max 200 characters should be allowed/saved.
+
+1.9 Theme sidebars
+  - Every Theme sidebar has a toolbar in the bottom
+  - Tools: Replaceable flag / Location popup
+  Click the replacable flag
+  - It will toggle from "Can be replaced" to "static"
+  - Static color is gray / no marker on the left side
+  - Replaceable color is green / with marker-line on left side
+  Change the status of a sidebar and refresh the page
+  - The Replaceable flag must be same (it was saved via ajax)
+
+1.10 Post meta box
+  Open the location popup of any sidebar. Click on the "Post" link.
+  Edit a post.
+  - The sidebars meta box should display all theme sidebars.
+  Select any replacements for all sidebars and save.
+  - The selected values should still be displayed after saving.
+  Go back to widgets section. Make all theme sidebars static.
+  Edit a post again.
+  - The sidebars metabox should display a message, that no sidebar can be replaced.
+  - There should be link inside the text that takes the user to widgets section.
+
+1.11 Pro features
+  In widget section open the export/import popup
+  Enter some text in the export note and click the Export button.
+  - A file should be downloaded.
+  - The popup should be closed.
+
+  Import the exported file again. Check all checkboxes in the import preview.
+  - Import should be successful
+  - A message with 3 lines should be displayed: Imported sidebars/widgets/settings
+
+  Add a new widget to any sidebar.
+  - There should be 2 buttons next to the save button: "Clone" and "Visibility"
+
+  In the widget click the save button
+  - Loading animation is left of the buttons.
+  - After saving the buttons are still visible.
+
+  Click the Clone button.
+  - Creates a new widget in same sidebar with identical settings as current widget.
+  - The current and new widgets have a new link-icon left of the the title.
+  Change anything in the current widget and save.
+  - The cloned widget should also update and display the same change
+  Click the icon in the title and save.
+  - When clicking the icon the icon will show a broken link.
+  - After saving the icon will disappear from both widgets.
+  - Any changes made to a widget should not change the other widget anymore.
+
+  Click visibility button.
+  - On every click a new section will be displayed/hidden again.
+  Open visibility section and click the plus icon. Choose post-type.
+  - A new section is displayed showing a multi-select list with all post types.
+  Select all post types and save
+  - After saving the visibility section is still displayed
+  - The selected post types are still visible/selected.
+
+
 --------------------------------------------------------------------------------
 
 2. Test FREE version
 Create a new, empty WordPress installation
-Same as 1, but using the free plugin version
+
+Tests 1.1 - 1.10 are same as in Pro plugin
+
+1.11 Pro features
+  In widget section open the export/import popup
+  - The form should be covered by semi-transparent layer, buttons cannot be clicked.
+  - There should be a note stating that this is a pro feature.
+  - There should a link opening a new tab and displaying this page:
+    http://premium.wpmudev.org/project/custom-sidebars-pro/
+
+  Add a new widget to any sidebar.
+  - There should be 2 semi-transparent buttons "Clone" and "Visibility"
+  - Buttons have same position as in pro plugin
+  - On mouse contact a link should be displayed opening a new tab to this URL:
+    http://premium.wpmudev.org/project/custom-sidebars-pro/
+
+  In the widget click the save button
+  - Loading animation is left of the buttons.
+  - After saving the buttons are still visible.
 
 --------------------------------------------------------------------------------
 

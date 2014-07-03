@@ -13,12 +13,12 @@
 	<div class="wpmui-grid-8 no-pad-top">
 		<div class="col-3">
 			<label for="csb-name"><?php _e( 'Name', CSB_LANG ); ?></label>
-			<input type="text" name="name" id="csb-name" placeholder="<?php _e( 'Sidebar name here...', CSB_LANG ); ?>" />
+			<input type="text" name="name" id="csb-name" maxlength="40" placeholder="<?php _e( 'Sidebar name here...', CSB_LANG ); ?>" />
 			<div class="hint"><?php _e( 'The name must be unique.', CSB_LANG ); ?></div>
 		</div>
 		<div class="col-5">
 			<label for="csb-description"><?php _e( 'Description', CSB_LANG ); ?></label>
-			<input type="text" name="description" id="csb-description" placeholder="<?php _e( 'Sidebar description here...', CSB_LANG ); ?>" />
+			<input type="text" name="description" id="csb-description" maxlength="200" placeholder="<?php _e( 'Sidebar description here...', CSB_LANG ); ?>" />
 		</div>
 	</div>
 	<hr class="csb-more-content" />

@@ -530,7 +530,7 @@ var csSidebars, msgTimer;
 					.close();
 
 				msg.message = resp.message;
-				msg.details = resp;
+				// msg.details = resp;
 				msg.parent = '#widgets-right';
 				msg.insert_after = '#cs-title-options';
 				msg.id = 'editor';
@@ -695,6 +695,8 @@ var csSidebars, msgTimer;
 				ajax.data( form )
 					.load_http( 'cs-ajax' );
 
+				popup.close();
+
 				ev.preventDefault();
 				return false;
 			};
@@ -710,7 +712,7 @@ var csSidebars, msgTimer;
 						.content( resp.html );
 				} else {
 					msg.message = resp.message;
-					msg.details = resp;
+					// msg.details = resp;
 					msg.parent = popup.$().find( '.wpmui-wnd-content' );
 					msg.insert_after = false;
 					msg.id = 'export';
@@ -762,7 +764,7 @@ var csSidebars, msgTimer;
 					.close();
 
 				msg.message = resp.message;
-				msg.details = resp;
+				// msg.details = resp;
 				msg.parent = '#widgets-right';
 				msg.insert_after = '#cs-title-options';
 				msg.id = 'import';
@@ -847,7 +849,7 @@ var csSidebars, msgTimer;
 					.close();
 
 				msg.message = resp.message;
-				msg.details = resp;
+				// msg.details = resp;
 				msg.parent = '#widgets-right';
 				msg.insert_after = '#cs-title-options';
 				msg.id = 'editor';
@@ -1097,7 +1099,7 @@ var csSidebars, msgTimer;
 					.close();
 
 				msg.message = resp.message;
-				msg.details = resp;
+				// msg.details = resp;
 				msg.parent = '#widgets-right';
 				msg.insert_after = '#cs-title-options';
 				msg.id = 'editor';
