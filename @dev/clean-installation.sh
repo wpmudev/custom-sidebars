@@ -40,16 +40,16 @@ CUR_DIR="$( pwd )"
 
 # Display a sumary of all parameters for the user.
 show_infos() {
+	echo "Current Dir:       $CUR_DIR"
+	echo "WordPress Dir:     $WP_DIR"
 	echo "WordPress URL:     $WP_URL"
 	echo "WordPress User:    $WP_USER"
 	echo "WordPress Pass:    $WP_PASS"
-	echo "WordPress Dir:     $WP_DIR"
 	echo "WordPress version: $WP_VERSION"
 	echo "DB Host:           $DB_HOST"
 	echo "DB Name:           $DB_NAME"
 	echo "DB User:           $DB_USER"
 	echo "DB Pass:           $DB_PASS"
-	echo "Current Dir:       $CUR_DIR"
 	echo "------------------------------------------"
 }
 
@@ -103,32 +103,57 @@ install_db() {
 	fi
 
 	mysqladmin drop $DB_NAME --force --silent --user="$DB_USER" --password="$DB_PASS"$EXTRA
-	echo "- Old database droped"
-
 	mysqladmin create $DB_NAME --force --silent --user="$DB_USER" --password="$DB_PASS"$EXTRA
-	echo "- New database created"
+	echo "- Created fresh database"
 
 	if [ -f "$WP_DIR"/wp-config.php ]; then
 		rm "$WP_DIR"/wp-config.php
 	fi
 
 	cd "$WP_DIR"
-	wp core config --dbhost=$DB_HOST --dbname=$DB_NAME --dbuser="$DB_USER" --dbpass="$DB_PASS" --skip-check
-	wp core install --url=$WP_URL --title="Testing installation" --admin_user=$WP_USER --admin_password=$WP_PASS --admin_email=test@example.com
+	wp core config \
+		--dbhost=$DB_HOST \
+		--dbname=$DB_NAME \
+		--dbuser="$DB_USER" \
+		--dbpass="$DB_PASS" \
+		--dbprefix=test \
+		--skip-check \
+		--extra-php << END
+define( 'WP_DEBUG_LOG', true );
+if ( defined( 'DOING_AJAX' ) && DOING_AJAX ) {
+	define( 'WP_DEBUG', false );
+} else {
+	define( 'WP_DEBUG', true );
+}
+END
+
+	wp core install \
+		--url=$WP_URL \
+		--title="Testing installation" \
+		--admin_user=$WP_USER \
+		--admin_password=$WP_PASS \
+		--admin_email=test@example.com
 }
 
 install_plugin() {
 	if [ -f "$CUR_DIR"/archive.sh ]; then
 		cd "$CUR_DIR"
 		"$CUR_DIR"/archive.sh "$CUR_DIR" plugin.zip
+		echo "- Created a clean export of the current plugin"
+	fi
+	if [ -f "$CUR_DIR"/plugin.zip ]; then
+		unzip -o -q plugin.zip -d "$WP_DIR"/wp-content/plugins/
+		echo "- Plugin extracted to new WordPress installation"
+		rm "$CUR_DIR"/plugin.zip
 	fi
 }
 
 show_infos
-#create_dir
-#install_wp
-#install_db
+create_dir
+install_wp
+install_db
 install_plugin
 
+echo ""
 echo "There you go: $WP_URL is a fresh and clean WordPress installation!"
 echo ""

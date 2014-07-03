@@ -613,7 +613,9 @@ var csSidebars, msgTimer;
 			// Update description.
 			sb.sb
 				.find( '.sidebar-description' )
-				.html( '<p class="description">' + data.description + '</p>' );
+				.html( '<p class="description"></p>' )
+				.find( '.description' )
+				.text( data.description );
 
 			return csSidebars;
 		},
@@ -632,8 +634,15 @@ var csSidebars, msgTimer;
 
 			// Set sidebar specific values.
 			inner.attr( 'id', data.id );
-			name.find( 'h3' ).text( data.name );
-			desc.html( '<p class="description">' + data.description + '</p>' );
+
+			name
+				.find( 'h3' )
+				.text( data.name );
+
+			desc
+				.html( '<p class="description"></p>' )
+				.find( '.description' )
+				.text( data.description );
 
 			// Assemble the new sidebar box in correct order.
 			name.appendTo( inner );

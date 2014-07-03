@@ -1,12 +1,6 @@
 == Testcases
 
-TEST PREP
-
-cd /Volumes/Macintosh HD2/Sites/wordpress-stage
-sudo chmod -R a+rw ./*
-sudo chown -R philipp ./*
-
-
+Use script `clean-installation.sh` to create a fresh WordPress installation.
 
 --------------------------------------------------------------------------------
 
