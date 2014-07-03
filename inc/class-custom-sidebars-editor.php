@@ -457,7 +457,7 @@ class CustomSidebarsEditor extends CustomSidebars {
 				}
 
 				if (
-					is_array( @$data['cat-arc'][$sb_id] ) &&
+					is_array( @$data['arc-cat'][$sb_id] ) &&
 					in_array( $cat, $data['arc-cat'][$sb_id] )
 				) {
 					$options['category_archive'][$cat][$sb_id] = $req->id;
