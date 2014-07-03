@@ -21,7 +21,7 @@ if [ $# -gt 0 ]; then
 fi
 
 cd ..
-python /usr/local/bin/git-archive-all --force-submodules --prefix $FOLDER/ "$EXPORT_ARCHIVE"
+python /usr/local/bin/git-archive-all --force-submodules --prefix $EXPORT_FOLDER/ "$EXPORT_ARCHIVE"
 
 # ------------------------------------------------------------------------------
 # Depends on:
