@@ -46,7 +46,7 @@ jQuery(function init_visibility() {
 		$add_item.show();
 		$row.fadeOut( 400, function clear_values() {
 			// After row is hidden clear the input values.
-			$input.val('').trigger('chosen:updated');
+			$input.val('').trigger('change.select2');
 			$widget.trigger('csb:update');
 		} );
 		return false;
@@ -176,7 +176,7 @@ jQuery(function init_visibility() {
 		} else {
 			$lbl.text( $inp.data( 'lbl-all' ) );
 			$detail.hide();
-			$detail_inp.val('').trigger('chosen:updated');
+			$detail_inp.val('').trigger('change.select2');
 		}
 	};
 

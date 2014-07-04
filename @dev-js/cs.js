@@ -306,17 +306,6 @@ var csSidebars, msgTimer;
 						}
 					}
 					csSidebars.setReplaceable( sb, state, false );
-
-					// Add a replaceable-tooltip.
-					btn_replace = sb.sb
-						.closest( '.widgets-holder-wrap' )
-						.find( '.cs-toolbar .btn-replaceable' );
-					args = {
-						'content': csSidebarsData.replace_tip,
-						'class': 'replace-tip',
-						'pos': 'top'
-					};
-					wpmUi.tooltip( btn_replace, args );
 				}
 			});
 			return csSidebars;
@@ -457,13 +446,13 @@ var csSidebars, msgTimer;
 			// Hide the "extra" fields
 			var hide_extras = function hide_extras() {
 				popup.$().removeClass( 'csb-has-more' );
-				popup.size( null, 205 );
+				popup.size( null, 215 );
 			};
 
 			// Show the "extra" fields
 			var show_extras = function show_extras() {
 				popup.$().addClass( 'csb-has-more' );
-				popup.size( null, 540 );
+				popup.size( null, 545 );
 			};
 
 			// Toggle the "extra" fields based on the checkbox state.
@@ -1087,7 +1076,7 @@ var csSidebars, msgTimer;
 					wpmUi.upgrade_multiselect( row );
 				} else {
 					row.removeClass( 'open' );
-					row.find( 'select' ).val( [] ).trigger( 'chosen:updated' );
+					row.find( 'select' ).val( [] ).trigger( 'change.select2' );
 				}
 			};
 
@@ -1125,7 +1114,7 @@ var csSidebars, msgTimer;
 			// Show the popup.
 			popup = wpmUi.popup()
 				.modal( true )
-				.size( null, 500 )
+				.size( null, 560 )
 				.title( csSidebarsData.title_location )
 				.content( csSidebars.location_form )
 				.show();
@@ -1168,10 +1157,11 @@ var csSidebars, msgTimer;
 		 */
 		setReplaceable: function( sb, state, do_ajax ) {
 			var ajax,
+				// args = { 'class': 'replace-tip', 'pos': 'top' };
 				the_bar = jQuery( sb.sb ).closest( '.widgets-holder-wrap' ),
 				chk = the_bar.find( '.cs-toolbar .chk-replaceable' ),
 				marker = the_bar.find( '.replace-marker' ),
-				lbl = the_bar.find( '.cs-toolbar .btn-replaceable .is-label' );
+				btn_replaceable = the_bar.find( '.cs-toolbar .btn-replaceable' );
 
 			if ( undefined == state ) { state = chk.prop( 'checked' ); }
 			if ( undefined == do_ajax ) { do_ajax = true; }
@@ -1186,15 +1176,20 @@ var csSidebars, msgTimer;
 				if ( ! marker.length ) {
 					jQuery( '<div></div>' )
 						.appendTo( the_bar )
+						.attr( 'data-label', csSidebarsData.lbl_replaceable )
 						.addClass( 'replace-marker' );
 				}
 				the_bar.addClass( 'replaceable' );
-				lbl.text( lbl.data( 'on' ) );
+
+				// args.content = btn_replaceable.data( 'on' );
 			} else {
 				marker.remove();
 				the_bar.removeClass( 'replaceable' );
-				lbl.text( lbl.data( 'off' ) );
+
+				// args.content = btn_replaceable.data( 'off' );
 			}
+			// Tooltip replaced on request from victor.
+			// wpmUi.tooltip( btn_replaceable, args );
 
 			if ( do_ajax ) {
 				ajax = wpmUi.ajax( null, 'cs-ajax' );

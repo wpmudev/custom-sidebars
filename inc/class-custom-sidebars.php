@@ -84,7 +84,7 @@ class CustomSidebars {
 		// Load javascripts/css files
 		TheLib::add_ui( 'core', 'widgets.php' );
 		TheLib::add_ui( 'scrollbar', 'widgets.php' );
-		TheLib::add_ui( 'chosen', 'widgets.php' );
+		TheLib::add_ui( 'select', 'widgets.php' );
 		TheLib::add_ui( CSB_JS_URL . 'cs.min.js', 'widgets.php' );
 		TheLib::add_ui( CSB_CSS_URL . 'cs.css', 'widgets.php' );
 
