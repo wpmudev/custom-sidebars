@@ -42,6 +42,7 @@
 		'custom_sidebars': "<?php _e( 'Custom Sidebars', CSB_LANG ); ?>",
 		'theme_sidebars': "<?php _e( 'Theme Sidebars', CSB_LANG ); ?>",
 		'ajax_error': "<?php _e( 'Couldn\'t load data from WordPress...', CSB_LANG ); ?>",
+		'lbl_replaceable': "<?php _e( 'This sidebar can be replaced on certain pages', CSB_LANG ); ?>",
 		'replace_tip': "<?php _e( 'Activate this option to replace the sidebar with one of your custom sidebars.', CSB_LANG ); ?>",
 		'replaceable': <?php echo json_encode( CustomSidebars::get_options( 'modifiable' ) ); ?>
 	};
@@ -94,6 +95,8 @@
 			for="cs-replaceable"
 			class="cs-tool btn-replaceable"
 			data-action="replaceable"
+			data-on="<?php _e( 'This sidebar can be replaced on certain pages', CSB_LANG ); ?>"
+			data-off="<?php _e( 'This sidebar will always be same on all pages', CSB_LANG ); ?>"
 			>
 			<span class="icon"></span>
 			<input
@@ -101,12 +104,8 @@
 				id=""
 				class="has-label chk-replaceable"
 				/>
-			<span
-				class="is-label"
-				data-on="<?php _e( 'Can be replaced', CSB_LANG ); ?>"
-				data-off="<?php _e( 'Static sidebar', CSB_LANG ); ?>"
-				>
-				<?php _e( 'Static sidebar', CSB_LANG ); ?>
+			<span class="is-label">
+				<?php _e( 'Allow this sidebar to be replaced', CSB_LANG ); ?>
 			</span>
 		</label>
 		<span class="cs-separator">|</span>

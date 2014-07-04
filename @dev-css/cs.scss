@@ -250,7 +250,6 @@ body.appearance_page_customsidebars #poststuff h2 {
 		border-left: 2px solid #05c944;
 		z-index: 10;
 
-		/*
 		&:hover:before {
 			content: attr(data-label);
 			background: #333;
@@ -272,7 +271,6 @@ body.appearance_page_customsidebars #poststuff h2 {
 			border: 6px solid transparent;
 			border-left-color: #333;
 		}
-		*/
 	}
 }
 
@@ -402,8 +400,7 @@ body.appearance_page_customsidebars #poststuff h2 {
 
 .cs-toolbar .cs-tool.btn-replaceable {
 	color: #555;
-	width: 150px;
-	text-align: center;
+	padding-left: 32px;
 
 	&:hover {
 		color: #333 !important;
@@ -411,9 +408,12 @@ body.appearance_page_customsidebars #poststuff h2 {
 
 	.chk-replaceable {
 		position: absolute;
-		left: -20px;
-		top: -20px;
+		top: 50%;
+		left: 10px;
+		height: 16px;
+		margin-top: -8px;
 	}
+	/*
 
 	.icon {
 		display: inline-block;
@@ -431,21 +431,23 @@ body.appearance_page_customsidebars #poststuff h2 {
 		-moz-osx-font-smoothing: grayscale;
 
 		&:before {
-			content: "\f160"; /* dashicons-lock */
+			content: "\f160"; /* dashicons-lock * /
 			color: #BBB;
 		}
 	}
+	*/
 }
 
 .replaceable {
 	.cs-toolbar .cs-tool.btn-replaceable {
 		background: lighten(#05c944, 56%);
 		color: #333;
-
+		/*
 		.icon:before {
-			content: "\f147"; /* dashicons-yes */
+			content: "\f147"; /* dashicons-yes * /
 			color: #080;
 		}
+		*/
 	}
 }
 
