@@ -57,7 +57,7 @@
 	<div class="buttons">
 		<label for="csb-more" class="wpmui-left">
 			<input type="checkbox" id="csb-more" />
-			<?php _e( 'Edit custom wrapper code', CSB_LANG ); ?>
+			<?php _e( 'Advanced - Edit custom wrapper code', CSB_LANG ); ?>
 		</label>
 
 		<button type="button" class="button-link btn-cancel"><?php _e( 'Cancel', CSB_LANG ); ?></button>

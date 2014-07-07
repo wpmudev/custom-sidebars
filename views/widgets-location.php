@@ -35,7 +35,7 @@ function _show_replaceable( $sidebar, $prefix, $cat_name, $class = '' ) {
 				class="detail-toggle"
 				/>
 			<?php printf(
-				__( 'As <strong>%1$s</strong> for %2$s', CSB_LANG ),
+				__( 'As <strong>%1$s</strong> for selected %2$s', CSB_LANG ),
 				$sidebar['name'],
 				$cat_name
 			); ?>
@@ -45,6 +45,12 @@ function _show_replaceable( $sidebar, $prefix, $cat_name, $class = '' ) {
 				class="cs-datalist <?php echo esc_attr( $base_id ); ?>"
 				name="<?php echo esc_attr( $inp_name ); ?>[]"
 				multiple="multiple"
+				placeholder="<?php echo esc_attr(
+					sprintf(
+						__( 'Click here to pick available %1$s', CSB_LANG ),
+						$cat_name
+					)
+				); ?>"
 			>
 			</select>
 		</div>
@@ -86,7 +92,7 @@ function _show_replaceable( $sidebar, $prefix, $cat_name, $class = '' ) {
 	<div class="wpmui-box">
 		<h3>
 			<a href="#" class="toggle" title="<?php _e( 'Click to toggle' ); /* This is a Wordpress default language */ ?>"><br></a>
-			<span><?php _e( 'For single entries', CSB_LANG ); ?></span>
+			<span><?php _e( 'For all Single Entries matching selected criteria', CSB_LANG ); ?></span>
 		</h3>
 		<div class="inside">
 			<p><?php _e( 'These replacements will be applied to every single post that matches a certain post type or category.', CSB_LANG ); ?>

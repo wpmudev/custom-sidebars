@@ -1067,16 +1067,22 @@ var csSidebars, msgTimer;
 			// User clicks on "replace <sidebar> for <category>" checkbox.
 			var toggle_details = function toggle_details( ev ) {
 				var inp = jQuery( this ),
-					row = inp.closest( '.cs-replaceable' );
+					row = inp.closest( '.cs-replaceable' ),
+					sel = row.find( 'select' );
 
 				if ( inp.prop( 'checked' ) ) {
 					row.addClass( 'open' );
 
 					// Upgrade the select list with chosen.
 					wpmUi.upgrade_multiselect( row );
+
+					// Tell the select list to render the contents again.
+					sel.trigger( 'change.select2' );
 				} else {
 					row.removeClass( 'open' );
-					row.find( 'select' ).val( [] ).trigger( 'change.select2' );
+
+					// Remove all selected options.
+					sel.val( [] );
 				}
 			};
 
