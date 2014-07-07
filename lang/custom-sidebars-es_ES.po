@@ -2,8 +2,8 @@ msgid ""
 msgstr ""
 "Project-Id-Version: Custom sidebars v1.0\n"
 "Report-Msgid-Bugs-To: \n"
-"POT-Creation-Date: 2014-07-02 20:39+0100\n"
-"PO-Revision-Date: 2014-07-02 20:39+0100\n"
+"POT-Creation-Date: 2014-07-07 15:11+0100\n"
+"PO-Revision-Date: 2014-07-07 15:11+0100\n"
 "Last-Translator: Philipp Stracker <philipp@stracker.net>\n"
 "Language-Team: \n"
 "Language: es_ES\n"
@@ -29,81 +29,81 @@ msgstr ""
 msgid "You do not have permission for this"
 msgstr ""
 
-#: inc/class-custom-sidebars-editor.php:158
+#: inc/class-custom-sidebars-editor.php:159
 msgid "Sidebar-name cannot be empty"
 msgstr ""
 
 # @ custom-sidebars
-#: inc/class-custom-sidebars-editor.php:182
-#: inc/class-custom-sidebars-editor.php:246
+#: inc/class-custom-sidebars-editor.php:183
+#: inc/class-custom-sidebars-editor.php:251
 #, fuzzy
 msgid "The sidebar does not exist"
 msgstr "Crear una barra"
 
-#: inc/class-custom-sidebars-editor.php:198
+#: inc/class-custom-sidebars-editor.php:203
 #, php-format
 msgid "Created new sidebar <strong>%1$s</strong>"
 msgstr ""
 
-#: inc/class-custom-sidebars-editor.php:206
+#: inc/class-custom-sidebars-editor.php:211
 #, php-format
 msgid "Updated sidebar <strong>%1$s</strong>"
 msgstr ""
 
 # @ custom-sidebars
-#: inc/class-custom-sidebars-editor.php:217
-#: inc/class-custom-sidebars-editor.php:266
+#: inc/class-custom-sidebars-editor.php:222
+#: inc/class-custom-sidebars-editor.php:271
 #, fuzzy
 msgid "The sidebar was not found"
 msgstr "Crear una barra"
 
-#: inc/class-custom-sidebars-editor.php:255
+#: inc/class-custom-sidebars-editor.php:260
 #, php-format
 msgid "Deleted sidebar <strong>%1$s</strong>"
 msgstr ""
 
-#: inc/class-custom-sidebars-editor.php:323
+#: inc/class-custom-sidebars-editor.php:328
 #, fuzzy
 msgid "Front Page"
 msgstr "Página principal del Blog"
 
 # @ custom-sidebars
-#: inc/class-custom-sidebars-editor.php:324
+#: inc/class-custom-sidebars-editor.php:329
 #, fuzzy
 msgid "Search Results"
 msgstr "Página de resultados de búsqueda"
 
 # @ custom-sidebars
-#: inc/class-custom-sidebars-editor.php:325
+#: inc/class-custom-sidebars-editor.php:330
 #, fuzzy
 msgid "Author Archives"
 msgstr "Archivos de autores"
 
 # @ custom-sidebars
-#: inc/class-custom-sidebars-editor.php:326
+#: inc/class-custom-sidebars-editor.php:331
 #, fuzzy
 msgid "Tag Archives"
 msgstr "Archivos de etiquetas"
 
 # @ custom-sidebars
-#: inc/class-custom-sidebars-editor.php:327
+#: inc/class-custom-sidebars-editor.php:332
 #, fuzzy
 msgid "Date Archives"
 msgstr "Archivos por fecha"
 
 # @ custom-sidebars
-#: inc/class-custom-sidebars-editor.php:361
+#: inc/class-custom-sidebars-editor.php:366
 #, fuzzy, php-format
 msgid "%1$s Archives"
 msgstr "Archivos de categorías"
 
-#: inc/class-custom-sidebars-editor.php:490
+#: inc/class-custom-sidebars-editor.php:495
 #, php-format
 msgid "Updated sidebar <strong>%1$s</strong> settings."
 msgstr ""
 
 # @ custom-sidebars
-#: inc/class-custom-sidebars-editor.php:526 views/widgets.php:17
+#: inc/class-custom-sidebars-editor.php:531 views/widgets.php:17
 msgid "Sidebars"
 msgstr "Barras Laterales"
 
@@ -408,7 +408,7 @@ msgstr ""
 
 # @ custom-sidebars
 #: views/widgets-delete.php:16 views/widgets-editor.php:63
-#: views/widgets-location.php:167
+#: views/widgets-location.php:173
 msgid "Cancel"
 msgstr "Cancelar"
 
@@ -468,7 +468,7 @@ msgid "After Widget"
 msgstr "After Widget"
 
 #: views/widgets-editor.php:60
-msgid "Edit custom wrapper code"
+msgid "Advanced - Edit custom wrapper code"
 msgstr ""
 
 # @ custom-sidebars
@@ -506,10 +506,15 @@ msgstr "Crear una barra"
 
 #: views/widgets-location.php:38
 #, php-format
-msgid "As <strong>%1$s</strong> for %2$s"
+msgid "As <strong>%1$s</strong> for selected %2$s"
 msgstr ""
 
-#: views/widgets-location.php:71
+#: views/widgets-location.php:50
+#, php-format
+msgid "Click here to pick available %1$s"
+msgstr ""
+
+#: views/widgets-location.php:77
 #, php-format
 msgid ""
 "To attach this sidebar to a unique Post or Page please visit that <a href="
@@ -518,16 +523,16 @@ msgid ""
 msgstr ""
 
 # @ custom-sidebars
-#: views/widgets-location.php:88 views/widgets-location.php:129
+#: views/widgets-location.php:94 views/widgets-location.php:135
 msgid "Click to toggle"
 msgstr ""
 
-#: views/widgets-location.php:89
-msgid "For single entries"
+#: views/widgets-location.php:95
+msgid "For all Single Entries matching selected criteria"
 msgstr ""
 
 # @ custom-sidebars
-#: views/widgets-location.php:92
+#: views/widgets-location.php:98
 msgid ""
 "These replacements will be applied to every single post that matches a "
 "certain post type or category."
@@ -536,39 +541,39 @@ msgstr ""
 "pertenezcan a el tipo de entrada o categoría particular."
 
 # @ custom-sidebars
-#: views/widgets-location.php:100
+#: views/widgets-location.php:106
 msgid "categories"
 msgstr ""
 
 # @ custom-sidebars
-#: views/widgets-location.php:112
+#: views/widgets-location.php:118
 #, fuzzy
 msgid "Post Types"
 msgstr "Por tipo de entrada"
 
 # @ custom-sidebars
-#: views/widgets-location.php:130
+#: views/widgets-location.php:136
 #, fuzzy
 msgid "For Archives"
 msgstr "Archivos de categorías"
 
 # @ custom-sidebars
-#: views/widgets-location.php:133
+#: views/widgets-location.php:139
 msgid "These replacements will be applied to Archive Type posts and pages."
 msgstr ""
 
-#: views/widgets-location.php:136 views/widgets-location.php:146
+#: views/widgets-location.php:142 views/widgets-location.php:152
 msgid "Archive Types"
 msgstr ""
 
 # @ custom-sidebars
-#: views/widgets-location.php:137 views/widgets-location.php:157
+#: views/widgets-location.php:143 views/widgets-location.php:163
 #, fuzzy
 msgid "Category Archives"
 msgstr "Archivos de categorías"
 
 # @ custom-sidebars
-#: views/widgets-location.php:168 views/widgets.php:37
+#: views/widgets-location.php:174 views/widgets.php:37
 msgid "Save Changes"
 msgstr "Guardar Cambios"
 
@@ -610,44 +615,52 @@ msgstr "Barras Laterales"
 msgid "Couldn't load data from WordPress..."
 msgstr ""
 
-#: views/widgets.php:45
+#: views/widgets.php:45 views/widgets.php:98
+msgid "This sidebar can be replaced on certain pages"
+msgstr ""
+
+#: views/widgets.php:46
 msgid ""
 "Activate this option to replace the sidebar with one of your custom sidebars."
 msgstr ""
 
 # @ custom-sidebars
-#: views/widgets.php:61
+#: views/widgets.php:62
 #, fuzzy
 msgid "Delete this sidebar."
 msgstr "Crear una barra"
 
 # @ custom-sidebars
-#: views/widgets.php:70
+#: views/widgets.php:71
 #, fuzzy
 msgid "Edit this sidebar."
 msgstr "Editar"
 
 # @ custom-sidebars
-#: views/widgets.php:72
+#: views/widgets.php:73
 msgid "Edit"
 msgstr "Editar"
 
 # @ custom-sidebars
-#: views/widgets.php:79 views/widgets.php:118
+#: views/widgets.php:80 views/widgets.php:117
 msgid "Where do you want to show the sidebar?"
 msgstr ""
 
-#: views/widgets.php:81 views/widgets.php:120
+#: views/widgets.php:82 views/widgets.php:119
 #, fuzzy
 msgid "Sidebar Location"
 msgstr "Crear una barra"
 
-#: views/widgets.php:106
-msgid "Can be replaced"
+#: views/widgets.php:99
+msgid "This sidebar will always be same on all pages"
 msgstr ""
 
-# @ custom-sidebars
-#: views/widgets.php:107 views/widgets.php:109
+#: views/widgets.php:108
 #, fuzzy
-msgid "Static sidebar"
+msgid "Allow this sidebar to be replaced"
 msgstr "Crear una barra"
+
+# @ custom-sidebars
+#, fuzzy
+#~ msgid "Static sidebar"
+#~ msgstr "Crear una barra"
