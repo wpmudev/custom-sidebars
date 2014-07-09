@@ -4,9 +4,13 @@ Author: Javier Marquez (Incsub), Philipp Stracker (Incsub)
 Change Log:
 ----------------------------------------------------------------------
 
+2.0.3
+----------------------------------------------------------------------
+- Fixed: Javascript errors on Windows servers are fixed.
+
 2.0.2
 ----------------------------------------------------------------------
-- Fixed: Dashboard notification is now removed when clicking "dismis"
+- Fixed: Dashboard notification is now removed when clicking "dismiss"
 
 2.0.1
 ----------------------------------------------------------------------
