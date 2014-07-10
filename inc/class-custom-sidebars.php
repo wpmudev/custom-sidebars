@@ -270,6 +270,8 @@ class CustomSidebars {
 			$Options['search'] = self::get_array( @$Options['search'] );
 			$Options['date'] = self::get_array( @$Options['date'] );
 
+			$Options = self::validate_options( $Options );
+
 			if ( $need_update ) {
 				self::set_options( $Options );
 			}
@@ -287,6 +289,7 @@ class CustomSidebars {
 	 *
 	 * Option-Key: 'cs_modifiable' (1)
 	 * @since  2.0
+	 * @param  array $value The options array.
 	 */
 	static public function set_options( $value ) {
 		// Permission check.
@@ -295,6 +298,27 @@ class CustomSidebars {
 		}
 
 		update_option( 'cs_modifiable', $value );
+	}
+
+	/**
+	 * Removes invalid settings from the options array.
+	 *
+	 * @since  1.0.4
+	 * @param  array $data This array will be validated and returned.
+	 * @return array
+	 */
+	static public function validate_options( $data = null ) {
+		if ( ! is_array( $data ) ) {
+			return array();
+		}
+		$valid = array_keys( self::get_sidebars( 'theme' ) );
+		$current = self::get_array( @$data['modifiable'] );
+
+		// Get all the sidebars that are modifiable AND exist.
+		$modifiable = array_intersect( $valid, $current );
+		$data['modifiable'] = $modifiable;
+
+		return $data;
 	}
 
 	/**

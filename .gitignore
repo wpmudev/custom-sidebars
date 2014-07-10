@@ -3,3 +3,4 @@
 .smbdelete*
 local.*
 prepros.json
+*.tmp
