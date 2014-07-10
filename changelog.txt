@@ -4,6 +4,10 @@ Author: Javier Marquez (Incsub), Philipp Stracker (Incsub)
 Change Log:
 ----------------------------------------------------------------------
 
+2.0.4
+----------------------------------------------------------------------
+- Fixed: Widgets that are registered via old API no longer break the page.
+
 2.0.3
 ----------------------------------------------------------------------
 - Fixed: Javascript errors on Windows servers are fixed.
