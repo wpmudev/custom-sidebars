@@ -189,16 +189,41 @@ class CustomSidebarsExport extends CustomSidebars {
 				$data['widgets'][ $sidebar ] = array();
 				foreach ( $widgets as $widget_id ) {
 					if ( isset( $wp_registered_widgets[$widget_id] ) ) {
-						$item = array();
-						$widget = reset( $wp_registered_widgets[$widget_id]['callback'] );
-						$settings = $widget->get_settings();
-						$data['widgets'][ $sidebar ][ $widget_id ] = array(
-							'name' => @$widget->name,
-							'classname' => get_class( $widget ),
-							'id_base' => @$widget->id_base,
-							'description' => @$widget->description,
-							'settings' => $settings[ @$widget->number ],
-						);
+						$item = @$wp_registered_widgets[$widget_id];
+						$cb = $item['callback'];
+						$widget = is_array( $cb ) ? reset( $cb ) : false;
+
+						if ( $widget ) {
+							$settings = $widget->get_settings();
+							$data['widgets'][ $sidebar ][ $widget_id ] = array(
+								'name' => @$widget->name,
+								'classname' => get_class( $widget ),
+								'id_base' => @$widget->id_base,
+								'description' => @$widget->description,
+								'settings' => $settings[ @$widget->number ],
+								'version' => 3,
+							);
+						} else {
+							/**
+							 * Widgets that are registered with the old widget API
+							 * have a different structure:
+							 *
+							 * - Not an object but a callback function.
+							 * - No standard options-form.
+							 *   -> No widget settings to export.
+							 *   -> No clone/visibility options to export.
+							 * - Only one instance
+							 *   -> "id_base" is same as $widget_id
+							 */
+							$data['widgets'][ $sidebar ][ $widget_id ] = array(
+								'name' => @$item['name'],
+								'classname' => @$item['classname'],
+								'id_base' => @$item['id'],
+								'description' => @$item['description'],
+								'settings' => @$item['params'],
+								'version' => 2,
+							);
+						}
 					}
 				}
 			} else {
@@ -448,11 +473,17 @@ class CustomSidebarsExport extends CustomSidebars {
 		// =====
 		// Remove missing widgets from import data.
 		foreach ( $wp_registered_widgets as $widget ) {
-			$classname = get_class( $widget['callback'][0] );
+			if ( is_array( $widget['callback'] ) ) {
+				$classname = get_class( $widget['callback'][0] );
+			} else {
+				$classname = $widget['classname'];
+			}
 			$valid_widgets[ $classname ] = true;
 		}
 		foreach ( self::$import_data['widgets'] as $sb_id => $sidebar ) {
+			if ( ! is_array( $sidebar ) ) { continue; }
 			foreach ( $sidebar as $id => $widget_instance ) {
+				$version = $widget_instance['version'];
 				$instance_class = $widget_instance['classname'];
 				$exists = (true === @$valid_widgets[ $instance_class ]);
 				if ( ! $exists ) {
@@ -511,7 +542,6 @@ class CustomSidebarsExport extends CustomSidebars {
 	 * @return object Updated response object.
 	 */
 	private function do_import( $req ) {
-		global $wp_registered_widgets;
 		$data = $this->selected_data;
 		$msg = array();
 
@@ -640,11 +670,13 @@ class CustomSidebarsExport extends CustomSidebars {
 					continue;
 				}
 
-				$control['callback']->updated = false;
-
 				ob_start();
+				if ( is_object( $control['callback'] ) ) {
+					$control['callback']->updated = false;
+				}
 				call_user_func_array( $control['callback'], $control['params'] );
 				ob_end_clean();
+
 				break;
 			}
 		}
@@ -667,7 +699,12 @@ class CustomSidebarsExport extends CustomSidebars {
 					continue;
 				}
 
-				$obj = $control['callback'][0];
+				if ( is_array( $control['callback'] ) ) {
+					$obj = $control['callback'][0];
+				} else {
+					// We cannot import data from old widgets API.
+					break;
+				}
 				$obj->updated = false;
 
 				$all_instances = $obj->get_settings();
