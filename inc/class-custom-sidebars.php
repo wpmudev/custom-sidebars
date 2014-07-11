@@ -79,7 +79,7 @@ class CustomSidebars {
 		);
 
 		// Load the text domain for the plugin
-		TheLib::load_textdomain( CSB_LANG, CSB_LANG_DIR );
+		TheLib::translate_plugin( CSB_LANG, CSB_LANG_DIR );
 
 		// Load javascripts/css files
 		TheLib::add_ui( 'core', 'widgets.php' );
