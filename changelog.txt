@@ -4,6 +4,10 @@ Author: Javier Marquez (Incsub), Philipp Stracker (Incsub)
 Change Log:
 ----------------------------------------------------------------------
 
+2.0.7
+----------------------------------------------------------------------
+- Fix: Fixed issue with some people losing some sidebar settings after update.
+
 2.0.6.1
 ----------------------------------------------------------------------
 - Minor fix: Use WordPress core functions to get URL to javascript files.

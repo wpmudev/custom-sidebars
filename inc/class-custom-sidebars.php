@@ -314,6 +314,7 @@ class CustomSidebars {
 	 * @return array
 	 */
 	static public function validate_options( $data = null ) {
+		$data = (is_object( $data ) ? (array) $data : $data );
 		if ( ! is_array( $data ) ) {
 			return array();
 		}
