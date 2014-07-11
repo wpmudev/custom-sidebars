@@ -60,3 +60,10 @@ DB_PASS=stage-pass
 
 # Database server
 DB_HOST=localhost
+
+
+# ----- Used to update the wordpress.org SVN repository -----
+
+# The path of the SVN repository
+SVN_DIR=/dir/to/svn
+

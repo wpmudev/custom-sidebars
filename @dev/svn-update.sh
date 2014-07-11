@@ -1,5 +1,5 @@
 #!/usr/bin/bash
-# v 2014-07-03 21:04
+# v 2014-07-09 17:44
 clear
 
 if [ -f local.config.sh ]; then
@@ -33,15 +33,9 @@ show_infos() {
 	echo "------------------------------------------"
 }
 
-install_plugin() {
-	if [ ! -d "$WP_DIR" ]; then
-		echo "WordPress installation not found"
-		echo "use `clean-install.sh` first"
-		exit 1;
-	fi
-	if [ ! -d "$WP_DIR"/wp-content/plugins ]; then
-		echo "WordPress installation not found"
-		echo "use `clean-install.sh` first"
+copy_files() {
+	if [ ! -d "$SVN_DIR" ]; then
+		echo "SVN path not found: $SVN_DIR"
 		exit 1;
 	fi
 
@@ -51,15 +45,29 @@ install_plugin() {
 		echo "- Created a clean export of the current plugin"
 	fi
 	if [ -f "$CUR_DIR"/plugin.zip ]; then
-		unzip -o -q plugin.zip -d "$WP_DIR"/wp-content/plugins/
-		echo "- Plugin extracted to new WordPress installation"
+		rm -rf "$CUR_DIR/plugin"
+		unzip -o -q plugin.zip -d "./plugin"
 		rm "$CUR_DIR"/plugin.zip
+
+		printf "-"
+		printf " Copy files"
+		FILES=$(find "./plugin" -type f)
+		for f in $FILES
+		do
+			if [[ $f != *.svn* ]]; then
+				t=${f/.\/plugin\/$EXPORT_FOLDER/$SVN_DIR}
+				cp "$f" "$t"
+				printf "."
+			fi
+		done
+		echo ""
+		rm -rf "$CUR_DIR/plugin"
 	fi
 }
 
 show_infos
-install_plugin
+copy_files
 
 echo ""
-echo "There you go: Plugin installed to WordPress installation at $WP_URL!"
+echo "There you go: Plugin updated at $SVN_DIR!"
 echo ""

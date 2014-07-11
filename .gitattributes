@@ -1,9 +1,9 @@
 @dev/*				export-ignore
 @dev-css/*			export-ignore
 @dev-js/*			export-ignore
-tests/*				export-ignore
-tests/*/*			export-ignore
-tests/*/*/*			export-ignore
+@tests/*			export-ignore
+@tests/*/*			export-ignore
+@tests/*/*/*		export-ignore
 config.rb			export-ignore
 prepros.json		export-ignore
 .js.map				export-ignore
