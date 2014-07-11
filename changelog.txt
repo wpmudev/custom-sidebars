@@ -4,6 +4,11 @@ Author: Javier Marquez (Incsub), Philipp Stracker (Incsub)
 Change Log:
 ----------------------------------------------------------------------
 
+2.0.6.1
+----------------------------------------------------------------------
+- Minor fix: Use WordPress core functions to get URL to javascript files.
+- Minor fix: Refactor function name to avoid misunderstandings.
+
 2.0.6
 ----------------------------------------------------------------------
 - Fixed: Widgets that are registered via old API no longer break the page (again).
