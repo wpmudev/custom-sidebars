@@ -125,7 +125,7 @@ class CustomSidebarsCloning {
 			// Loop though all widgets to fetch used IDs.
 			foreach ( $wp_registered_widgets as $id => $data ) {
 				$widget = reset( $data['callback'] );
-				if ( $widget ) {
+				if ( is_object( $widget ) && method_exists( $widget, 'get_settings' ) ) {
 					$settings = $widget->get_settings();
 				}
 

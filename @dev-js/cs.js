@@ -679,11 +679,11 @@ var csSidebars, msgTimer;
 
 			// Download export file.
 			var do_export = function do_export( ev ) {
-				var ajax = wpmUi.ajax(),
-					form = jQuery( this ).closest( 'form' );
+				var form = jQuery( this ).closest( 'form' );
 
-				ajax.data( form )
-					.load_http( 'cs-ajax' );
+				ajax.reset()
+					.data( form )
+					.load_http();
 
 				popup.close();
 
@@ -746,25 +746,6 @@ var csSidebars, msgTimer;
 					.content( csSidebars.export_form );
 			};
 
-			// Ajax handler after import was done.
-			var handle_done_import = function handle_done_import( resp, okay, xhr ) {
-				var msg = {};
-				popup
-					.loading( false )
-					.close();
-
-				msg.message = resp.message;
-				// msg.details = resp;
-				msg.parent = '#widgets-right';
-				msg.insert_after = '#cs-title-options';
-				msg.id = 'import';
-
-				if ( ! okay ) {
-					msg.type = 'err';
-				}
-				wpmUi.message( msg );
-			};
-
 			// Import preview: Import the data.
 			var do_import = function do_import() {
 				var form = popup.$().find( '.frm-import' );
@@ -773,8 +754,7 @@ var csSidebars, msgTimer;
 
 				ajax.reset()
 					.data( form )
-					.ondone( handle_done_import )
-					.load_json();
+					.load_http( '_self' );
 			};
 
 			// Show the popup.

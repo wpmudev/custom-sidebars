@@ -93,6 +93,12 @@ class CustomSidebars {
 
 		// Extensions use this hook to initialize themselfs.
 		do_action( 'cs_init' );
+
+		// Display a message after import.
+		if ( isset( $_GET['cs-msg'] ) ) {
+			$msg = base64_decode( $_GET['cs-msg'] );
+			TheLib::message( $msg );
+		}
 	}
 
 

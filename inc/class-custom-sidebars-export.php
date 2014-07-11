@@ -193,7 +193,7 @@ class CustomSidebarsExport extends CustomSidebars {
 						$cb = $item['callback'];
 						$widget = is_array( $cb ) ? reset( $cb ) : false;
 
-						if ( $widget ) {
+						if ( is_object( $widget ) && method_exists( $widget, 'get_settings' ) ) {
 							$settings = $widget->get_settings();
 							$data['widgets'][ $sidebar ][ $widget_id ] = array(
 								'name' => @$widget->name,
@@ -650,8 +650,12 @@ class CustomSidebarsExport extends CustomSidebars {
 			);
 		}
 
-		$req->message = $msg;
-		return $req;
+		$req->message = base64_encode( implode( '<br />', $msg ) );
+
+		// We return a HTTP header to refresh the widgets page.
+		header( 'HTTP/1.1 302 Found' );
+		header( 'Location: ' . admin_url( 'widgets.php?cs-msg=' . $req->message ) );
+		die();
 	}
 
 	/**

@@ -4,6 +4,12 @@ Author: Javier Marquez (Incsub), Philipp Stracker (Incsub)
 Change Log:
 ----------------------------------------------------------------------
 
+2.0.6
+----------------------------------------------------------------------
+- Fixed: Widgets that are registered via old API no longer break the page (again).
+- Fixed: After importing data the widgets page is reloaded to show new sidebars.
+- Fixed: Warnings by buddypress about using bp_current_user too early.
+
 2.0.5
 ----------------------------------------------------------------------
 - Fixed: Meta box in post editor did show missing sidebars (e.g. after switching the theme)
