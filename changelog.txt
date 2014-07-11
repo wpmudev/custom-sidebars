@@ -8,7 +8,7 @@ Change Log:
 ----------------------------------------------------------------------
 - Fixed: Widgets that are registered via old API no longer break the page (again).
 - Fixed: After importing data the widgets page is reloaded to show new sidebars.
-- Fixed: Warnings by buddypress about using bp_current_user too early.
+- Fixed: Warnings by BuddyPress about using bp_current_user too early.
 
 2.0.5
 ----------------------------------------------------------------------
