@@ -678,7 +678,7 @@ class CustomSidebars {
 		while ( 0 < ob_get_level() ) { ob_end_clean(); }
 
 		header( 'Content-Type: application/json' );
-		echo json_encode( $obj );
+		echo json_encode( $obj, JSON_FORCE_OBJECT );
 		die();
 	}
 

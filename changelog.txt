@@ -4,6 +4,10 @@ Author: Javier Marquez (Incsub), Philipp Stracker (Incsub)
 Change Log:
 ----------------------------------------------------------------------
 
+2.0.8
+----------------------------------------------------------------------
+- Fix: Fixed issue with settings not being saved correctly.
+
 2.0.7
 ----------------------------------------------------------------------
 - Fix: Fixed issue with some people losing some sidebar settings after update.

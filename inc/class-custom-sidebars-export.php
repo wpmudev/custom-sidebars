@@ -243,7 +243,7 @@ class CustomSidebarsExport extends CustomSidebars {
 		$filename = 'sidebars.' . date( 'Y-m-d.H-i-s' ) . '.json';
 		header( 'Content-type: application/json' );
 		header( 'Content-Disposition: attachment; filename="' . $filename . '"' );
-		echo json_encode( $data );
+		echo json_encode( $data, JSON_FORCE_OBJECT );
 
 		die();
 	}
