@@ -285,7 +285,8 @@ var csSidebars, msgTimer;
 		 */
 		initSidebars: function(){
 			csSidebars.right.find('.widgets-sortables').each(function() {
-				var sb, state, i, btn_replace, args,
+				var sb,
+					state = false,
 					me = jQuery( this ),
 					id = me.attr('id');
 
@@ -298,7 +299,6 @@ var csSidebars, msgTimer;
 					sb = csSidebars.add( id, 'theme' );
 
 					// Set correct "replaceable" flag for the toolbar.
-					state = false;
 					for ( key in csSidebarsData.replaceable ) {
 						if ( ! csSidebarsData.replaceable.hasOwnProperty( key ) ) {
 							continue;
@@ -1152,11 +1152,41 @@ var csSidebars, msgTimer;
 		 */
 		setReplaceable: function( sb, state, do_ajax ) {
 			var ajax,
-				// args = { 'class': 'replace-tip', 'pos': 'top' };
+				theme_sb = csSidebars.right.find( '.sidebars-column-2 .widgets-holder-wrap' ),
 				the_bar = jQuery( sb.sb ).closest( '.widgets-holder-wrap' ),
 				chk = the_bar.find( '.cs-toolbar .chk-replaceable' ),
 				marker = the_bar.find( '.replace-marker' ),
 				btn_replaceable = the_bar.find( '.cs-toolbar .btn-replaceable' );
+
+			// After changing a sidebars "replaceable" flag.
+			var handle_done_replaceable = function handle_done_replaceable( resp, okay, xhr ) {
+				// Adjust the "replaceable" flag to match the data returned by the ajax request.
+				if ( resp instanceof Object && typeof resp.replaceable == 'object' ) {
+					csSidebarsData.replaceable = wpmUi.obj( resp.replaceable );
+
+					theme_sb.find( '.widgets-sortables' ).each(function() {
+						var _state = false,
+							_me = jQuery( this ),
+							_id = _me.attr( 'id' ),
+							_sb = csSidebars.find( _id );
+
+						for ( key in csSidebarsData.replaceable ) {
+							if ( ! csSidebarsData.replaceable.hasOwnProperty( key ) ) {
+								continue;
+							}
+							if ( csSidebarsData.replaceable[key] == _id ) {
+								_state = true;
+								break;
+							}
+						}
+						csSidebars.setReplaceable( _sb, _state, false );
+					});
+				}
+
+				// Enable the checkboxes again after the ajax request is handled.
+				theme_sb.find( '.cs-toolbar .chk-replaceable' ).prop( 'disabled', false );
+				theme_sb.find( '.cs-toolbar .btn-replaceable' ).removeClass( 'wpmui-loading' );
+			};
 
 			if ( undefined == state ) { state = chk.prop( 'checked' ); }
 			if ( undefined == do_ajax ) { do_ajax = true; }
@@ -1175,18 +1205,16 @@ var csSidebars, msgTimer;
 						.addClass( 'replace-marker' );
 				}
 				the_bar.addClass( 'replaceable' );
-
-				// args.content = btn_replaceable.data( 'on' );
 			} else {
 				marker.remove();
 				the_bar.removeClass( 'replaceable' );
-
-				// args.content = btn_replaceable.data( 'off' );
 			}
-			// Tooltip replaced on request from victor.
-			// wpmUi.tooltip( btn_replaceable, args );
 
 			if ( do_ajax ) {
+				// Disable the checkbox until ajax request is done.
+				theme_sb.find( '.cs-toolbar .chk-replaceable' ).prop( 'disabled', true );
+				theme_sb.find( '.cs-toolbar .btn-replaceable' ).addClass( 'wpmui-loading' );
+
 				ajax = wpmUi.ajax( null, 'cs-ajax' );
 				ajax.reset()
 					.data({
@@ -1194,6 +1222,7 @@ var csSidebars, msgTimer;
 						'state': state,
 						'sb': sb.getID()
 					})
+					.ondone( handle_done_replaceable )
 					.load_json();
 			}
 
