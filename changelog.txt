@@ -4,9 +4,12 @@ Author: Javier Marquez (Incsub), Philipp Stracker (Incsub)
 Change Log:
 ----------------------------------------------------------------------
 
-2.0.8.1
+2.0.9
 ----------------------------------------------------------------------
+- Fix: Fixed issue with WP sidebar chooser right after creating a new sidebar.
+- Fix: Fixed various issues when flagging a sidebar s replaceable.
 - Minor fix: Make code compatible with PHP 5.2.4
+- Minor fix: Slight improvement of ajax stability
 
 2.0.8
 ----------------------------------------------------------------------
