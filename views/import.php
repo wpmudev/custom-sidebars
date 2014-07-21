@@ -319,7 +319,7 @@ function list_sidebar_replacement( $label, $list ) {
 		</label>
 	</p>
 
-	<input type="hidden" name="import_data" value="<?php echo esc_attr( base64_encode( json_encode( $import ) ) ); ?>" />
+	<input type="hidden" name="import_data" value="<?php echo esc_attr( base64_encode( json_encode( (object) $import ) ) ); ?>" />
 	<p class="buttons">
 		<button type="button" class="btn-cancel button-link">Cancel</button>
 		<button class="button-primary btn-import"><i class="dashicons dashicons-migrate"></i> Import selected items</button>

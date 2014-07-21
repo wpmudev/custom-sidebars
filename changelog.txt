@@ -4,6 +4,10 @@ Author: Javier Marquez (Incsub), Philipp Stracker (Incsub)
 Change Log:
 ----------------------------------------------------------------------
 
+2.0.8.1
+----------------------------------------------------------------------
+- Minor fix: Make code compatible with PHP 5.2.4
+
 2.0.8
 ----------------------------------------------------------------------
 - Fix: Fixed issue with settings not being saved correctly.
