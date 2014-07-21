@@ -90,7 +90,7 @@ class CustomSidebars {
 		TheLib::translate_plugin( CSB_LANG, CSB_LANG_DIR );
 
 		// Find out if the page is loaded in accessibility mode.
-		self::$accessibility_mode = ( 'on' == $_GET['widgets-access'] );
+		self::$accessibility_mode = ( 'on' == @$_GET['widgets-access'] );
 
 		// We don't support accessibility mode. Display a note to the user.
 		if ( true === self::$accessibility_mode ) {
