@@ -8,6 +8,7 @@ Change Log:
 ----------------------------------------------------------------------
 - Fix: Fixed issue with WP sidebar chooser right after creating a new sidebar.
 - Fix: Fixed various issues when flagging a sidebar s replaceable.
+- Fix: Plugin will not load in accessibility mode but display a notice instead.
 - Minor fix: Make code compatible with PHP 5.2.4
 - Minor fix: Slight improvement of ajax stability
 
