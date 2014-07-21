@@ -299,12 +299,13 @@ var csSidebars, msgTimer;
 
 					// Set correct "replaceable" flag for the toolbar.
 					state = false;
-					for ( i = 0; i < csSidebarsData.replaceable.length; i += 1 ) {
-						if ( csSidebarsData.replaceable[i] == id ) {
-							state = true;
-							break;
-						}
-					}
+                    for (key in csSidebarsData.replaceable) {
+                        if ( csSidebarsData.replaceable[key] == id ) {
+                            state = true;
+                            break;
+                        }
+                    }
+
 					csSidebars.setReplaceable( sb, state, false );
 				}
 			});
@@ -706,7 +707,8 @@ var csSidebars, msgTimer;
 					msg.parent = popup.$().find( '.wpmui-wnd-content' );
 					msg.insert_after = false;
 					msg.id = 'export';
-					msg.class = 'wpmui-wnd-err';
+                    //Change msg.class to msg['class']. Reserved words not allowed as unquoted properties in older version of javascript
+                    msg['class'] = 'wpmui-wnd-err';
 					msg.type = 'err';
 					wpmUi.message( msg );
 				}
@@ -911,9 +913,9 @@ var csSidebars, msgTimer;
 				// Only show settings for replaceable sidebars
 				var sidebars = popup.$().find( '.cs-replaceable' );
 				sidebars.hide();
-				for ( var ind = resp.replaceable.length - 1; ind >= 0; ind -= 1 ) {
-					sidebars.filter( '.' + resp.replaceable[ind] ).show();
-				}
+                for (key in resp.replaceable) {
+                    sidebars.filter( '.' + resp.replaceable[key] ).show();
+                }
 
 				// Add a new option to the replacement list.
 				var _add_option = function _add_option( item, lists ) {
