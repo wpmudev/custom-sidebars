@@ -653,6 +653,8 @@ var csSidebars, msgTimer;
 			jQuery('.widgets-chooser')
 				.off( 'click.widgets-chooser' )
 				.off( 'keyup.widgets-chooser' );
+			jQuery( '#available-widgets .widget .widget-title' ).off( 'click.widgets-chooser' );
+			jQuery( '.widgets-chooser-sidebars' ).empty();
 
 			// Re-Init the page using wpWidgets.init()
 			wpWidgets.init();
