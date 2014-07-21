@@ -34,9 +34,6 @@ http://arqex.com/
 */
 
 if ( ! class_exists( 'CustomSidebars' ) ) {
-
-	define( 'CSB_VERSION', '2.0.7' );                  // Plugin version number.
-
 	// used for more readable i18n functions: __( 'text', CSB_LANG );
 	define( 'CSB_LANG', 'custom-sidebars' );
 
