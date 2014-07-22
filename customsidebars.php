@@ -56,7 +56,7 @@ if ( file_exists( CSB_INC_DIR . 'external/wpmu-lib/core.php' ) ) {
 }
 
 // Initialize the plugin
-$plugin_sidebars = CustomSidebars::instance();
+add_action( 'set_current_user', array( 'CustomSidebars', 'instance' ) );
 
 if ( ! class_exists( 'CustomSidebarsEmptyPlugin' ) ) {
 	class CustomSidebarsEmptyPlugin extends WP_Widget {
