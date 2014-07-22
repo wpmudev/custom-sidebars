@@ -11,6 +11,7 @@ Change Log:
 - Fix: Plugin will not load in accessibility mode but display a notice instead.
 - Minor fix: Make code compatible with PHP 5.2.4
 - Minor fix: Slight improvement of ajax stability
+- Minor fix: Plugin now requires capability "edit_theme_options"
 
 2.0.8
 ----------------------------------------------------------------------

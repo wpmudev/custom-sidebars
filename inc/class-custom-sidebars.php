@@ -26,7 +26,7 @@ class CustomSidebars {
 	 * have this capability then he will not see any change on admin dashboard.
 	 * @var  string
 	 */
-	static protected $cap_required = 'switch_themes';
+	static protected $cap_required = 'edit_theme_options';
 
 	/**
 	 * URL to the documentation/info page of the pro plugin
