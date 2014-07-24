@@ -50,7 +50,7 @@ class CustomSidebarsVisibility {
 			TheLib::add_ui( CSB_CSS_URL . 'cs-visibility.css', 'widgets.php' );
 		} else {
 			// Filters the list of widget-areas and their widgets
-			add_action(
+			add_filter(
 				'sidebars_widgets',
 				array( $this, 'sidebars_widgets' )
 			);
@@ -406,7 +406,13 @@ class CustomSidebarsVisibility {
 	 */
 	public function sidebars_widgets( $widget_areas ) {
 		static $Settings = array();
+		$expl = CustomSidebarsExplain::do_explain();
 
+		if ( ! did_action( 'wp' ) ) {
+			return $widget_areas;
+		}
+
+		$expl && do_action( 'cs_explain', '<h4>Filter widgets</h4>', true );
 		foreach ( $widget_areas as $widget_area => $widgets ) {
 			if ( empty( $widgets ) ) {
 				continue;
@@ -415,6 +421,8 @@ class CustomSidebarsVisibility {
 			if ( 'wp_inactive_widgets' == $widget_area ) {
 				continue;
 			}
+
+			$expl && do_action( 'cs_explain', '<h5>Sidebar "' . $widget_area . '"</h5>', true );
 
 			foreach ( $widgets as $position => $widget_id ) {
 				// Find the conditions for this widget.
@@ -429,6 +437,8 @@ class CustomSidebarsVisibility {
 				if ( ! isset( $Settings[ $id_base ] ) ) {
 					$Settings[ $id_base ] = get_option( 'widget_' . $id_base );
 				}
+
+				$expl && do_action( 'cs_explain', 'Widget "' . $widget_id . '"', true );
 
 				// New multi widget (WP_Widget)
 				if ( ! is_null( $widget_number ) ) {
@@ -455,6 +465,8 @@ class CustomSidebarsVisibility {
 		$show_widget = true;
 		$condition_true = true;
 		$action = 'show';
+		$explain = ''; // This is used to explain why a widget is not displayed.
+		$expl = CustomSidebarsExplain::do_explain();
 
 		if ( empty( $instance['csb_visibility'] ) || empty( $instance['csb_visibility']['conditions'] ) ) {
 			return $show_widget;
@@ -464,6 +476,7 @@ class CustomSidebarsVisibility {
 		$action = 'hide' != $instance['csb_visibility']['action'] ? 'show' : 'hide';
 
 		if ( $instance['csb_visibility']['always'] ) {
+			do_action( 'cs_explain', '<span style="color:#090">Always</span> <b>' . $action . '</b>' );
 			return ( 'hide' == $action ? false : true );
 		}
 
@@ -479,26 +492,33 @@ class CustomSidebarsVisibility {
 
 		// Filter for USER ROLES.
 		if ( $condition_true && ! empty( $cond['roles'] ) && is_array( $cond['roles'] ) ) {
+			$expl && $explain .= '<br />ROLE [';
 			if ( ! is_user_logged_in() ) {
+				$expl && $explain .= 'user not logged in';
 				$condition_true = false;
 			} else {
 				global $current_user;
 				$has_role = false;
 				foreach ( $current_user->roles as $user_role ) {
 					if ( in_array( $user_role, $cond['roles'] ) ) {
+						$expl && $explain .= 'ok:' . $user_role;
 						$has_role = true;
 						break;
 					}
 				}
 				if ( ! $has_role ) {
+					$expl && $explain .= 'invalid role';
 					$condition_true = false;
 				}
 			}
+			$expl && $explain .= '] ';
 		}
 
 		// Filter for MEMBERSHIP Level.
 		if ( $condition_true && ! empty( $cond['membership'] ) ) {
+			$expl && $explain .= '<br />MEMBERSHIP [';
 			if ( ! is_user_logged_in() ) {
+				$expl && $explain .= 'user not logged in';
 				$condition_true = false;
 			} else {
 				if ( class_exists( 'Membership_Factory' ) ) {
@@ -507,24 +527,30 @@ class CustomSidebarsVisibility {
 					$has_level = false;
 					foreach ( $cond['membership'] as $level ) {
 						if ( $user->on_level( $level ) ) {
+							$expl && $explain .= 'ok';
 							$has_level = true;
 							break;
 						}
 					}
 					if ( ! $has_level ) {
+						$expl && $explain .= 'invalid user level';
 						$condition_true = false;
 					}
 				}
 			}
+			$expl && $explain .= '] ';
 		}
 
 		// Filter for PRO-SITE Level.
 		if ( $condition_true && ! empty( $cond['prosite'] ) ) {
+			$expl && $explain .= '<br />PROSITE [';
 			// not implemented yet...
+			$expl && $explain .= '] ';
 		}
 
 		// Filter for SPECIAL PAGES.
 		if ( $condition_true && ! empty( $cond['pagetypes'] ) && is_array( $cond['pagetypes'] ) ) {
+			$expl && $explain .= '<br />PAGETYPE [';
 			$is_type = false;
 			foreach ( $cond['pagetypes'] as $type ) {
 				if ( $is_type ) {
@@ -567,25 +593,35 @@ class CustomSidebarsVisibility {
 						}
 						break;
 				}
+				$expl && $explain .= $type . ':' . ($is_type ? 'ok' : 'invalid');
 			}
 			if ( ! $is_type ) {
 				$condition_true = false;
 			}
+			$expl && $explain .= '] ';
 		}
 
 		// Filter for POST-TYPE.
 		if ( $condition_true && ! empty( $cond['posttypes'] ) ) {
 			$posttype = get_post_type();
+			$expl && $explain .= '<br />POSTTYPE-' . strtoupper( $posttype ) . ' [';
+
 			if ( ! in_array( $posttype, $cond['posttypes'] ) ) {
+				$expl && $explain .= 'invalid posttype';
 				$condition_true = false;
 			} else {
 				// Filter for SPECIFIC POSTS.
 				if ( ! empty( $cond[ 'pt-' . $posttype ] ) ) {
 					if ( ! in_array( get_the_ID(), $cond[ 'pt-' . $posttype ] ) ) {
+						$expl && $explain .= 'invalid post_id';
 						$condition_true = false;
 					}
 				}
 			}
+			if ( $condition_true ) {
+				$expl && $explain .= 'ok';
+			}
+			$expl && $explain .= '] ';
 		}
 
 		if ( $condition_true ) {
@@ -606,6 +642,7 @@ class CustomSidebarsVisibility {
 
 				$tax_key = 'tax-' . $tax_item->name;
 				if ( isset( $cond[ $tax_key ] ) && ! empty( $cond[ $tax_key ] ) ) {
+					$expl && $explain .= '<br />TAX-' . strtoupper( $tax_item->name ) . ' [';
 					$has_term = false;
 
 					if ( $tax_type && $tax_type == $tax_item->name ) {
@@ -613,6 +650,7 @@ class CustomSidebarsVisibility {
 						foreach ( $tax_terms as $slug ) {
 							$term_data = get_term_by( 'slug', $slug, $tax_type );
 							if ( in_array( $term_data->term_id, $cond[ $tax_key ] ) ) {
+								$expl && $explain .= 'ok:' . $term_data->term_id;
 								$has_term = true;
 							}
 						}
@@ -620,14 +658,17 @@ class CustomSidebarsVisibility {
 						// Check if current post has the specific taxonomy.
 						foreach ( $cond[ $tax_key ] as $term ) {
 							if ( has_term( $term, $tax_item->name ) ) {
+								$expl && $explain .= 'ok:' . $term;
 								$has_term = true;
 								break;
 							}
 						}
 					}
 					if ( ! $has_term ) {
+						$expl && $explain .= 'no match';
 						$condition_true = false;
 					}
+					$expl && $explain .= '] ';
 				}
 			}
 		}
@@ -635,6 +676,13 @@ class CustomSidebarsVisibility {
 		if ( ( 'show' == $action && ! $condition_true ) || ( 'hide' == $action && $condition_true ) ) {
 			$show_widget = false;
 		}
+
+		$expl && do_action(
+			'cs_explain',
+			($condition_true ? '<span style="color:#090">Do</span>' : '<span style="color:#900">Dont</span>') .
+			' <b>' . $action . '</b> - ' .
+			$explain
+		);
 
 		return $show_widget;
 	}

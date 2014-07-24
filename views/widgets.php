@@ -20,7 +20,12 @@
 				<i class="dashicons dashicons-plus-alt"></i>
 				<?php _e( 'Create a new sidebar', CSB_LANG ); ?>
 			</button>
-			<a href="#" class="cs-action btn-export"><?php _e( 'Import / Export Sidebars', CSB_LANG ); ?></a>
+			<?php
+			/**
+			 * Show additional functions in the widget header.
+			 */
+			do_action( 'cs_widget_header' );
+			?>
 		</div>
 	</div>
 
@@ -44,6 +49,7 @@
 		'ajax_error': "<?php _e( 'Couldn\'t load data from WordPress...', CSB_LANG ); ?>",
 		'lbl_replaceable': "<?php _e( 'This sidebar can be replaced on certain pages', CSB_LANG ); ?>",
 		'replace_tip': "<?php _e( 'Activate this option to replace the sidebar with one of your custom sidebars.', CSB_LANG ); ?>",
+		'explain_tip': "<?php _e( 'Shows additional information on your webpage that explains why a sidebar or widget is displayed. Only you will see this information', CSB_LANG ); ?>",
 		'replaceable': <?php echo json_encode( (object) CustomSidebars::get_options( 'modifiable' ) ); ?>
 	};
 	</script>

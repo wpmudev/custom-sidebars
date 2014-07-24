@@ -7,6 +7,7 @@ require_once CSB_INC_DIR . 'class-custom-sidebars-replacer.php';
 require_once CSB_INC_DIR . 'class-custom-sidebars-cloning.php';
 require_once CSB_INC_DIR . 'class-custom-sidebars-visibility.php';
 require_once CSB_INC_DIR . 'class-custom-sidebars-export.php';
+require_once CSB_INC_DIR . 'class-custom-sidebars-explain.php';
 
 
 /**
