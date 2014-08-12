@@ -10,7 +10,7 @@
 
 # ----- Used to create plugin zip-archive -----
 
-# Current plugin version
+# Current plugin version.
 VER=1.0
 
 # Name of the plugin folder.
@@ -19,26 +19,30 @@ VER=1.0
 # the export folder is always "custom-sidebars"
 EXPORT_FOLDER=plugin-name
 
-# Defines the default path and name of the exported zip archive.
-EXPORT_ARCHIVE=~/Desktop/$EXPORT_FOLDER-pro-$VER.zip
-
 
 # ----- Used to create a test installation -----
+
+# The WordPress installation archive will be downloaded to this directory.
+WP_INSTALL_DIR=/tmp/wordpress
+
+# When setting up a new installation the WPMU DEV Dashboard is installed. This
+# API Key is used to directly activate the plugin, so you don't have to login.
+WPMUDEV_APIKEY=some-md5-value
 
 # The domain where the test installation will be available at
 # You have to manually setup your DNS/webserver for this first.
 WP_URL=http://local.stage
 
-# WordPress admin user
+# WordPress admin user.
 WP_USER=test
 
-# WordPress admin password
+# WordPress admin password.
 WP_PASS=test
 
-# WordPress admin email
+# WordPress admin email.
 WP_EMAIL=test@local.stage
 
-# The test installation will be copied to this directory
+# The test installation will be copied to this directory.
 # Important: This directory will be deleted and created again. All data that
 # is inside the directory will be lost!
 WP_DIR=/dir/to/wordpress-test
@@ -52,18 +56,32 @@ WP_VERSION=latest
 # inside the database will be lost!
 DB_NAME=local-stage
 
-# Database user
+# Database user.
 DB_USER=stage-user
 
-# Database password
+# Database password.
 DB_PASS=stage-pass
 
-# Database server
+# Database server.
 DB_HOST=localhost
 
 
 # ----- Used to update the wordpress.org SVN repository -----
 
-# The path of the SVN repository
+# The path of the SVN repository.
 SVN_DIR=/dir/to/svn
 
+
+# ----- No need to change these settings -----
+
+# Defines the default path and name of the exported zip archive.
+EXPORT_ARCHIVE=~/Desktop/$EXPORT_FOLDER-pro-$VER.zip
+
+# Generate the filename to the local WordPress installation archive.
+WP_INSTALL_FILE="$WP_INSTALL_DIR"/wordpress-$WP_VERSION.tar.gz
+
+# Generate the filename to the local WPMU DEV Dashboard archive.
+WP_DASHBOARD_FILE="$WP_INSTALL_DIR"/wpmudev-dashboard.zip
+
+# This is the full path to the current @dev folder.
+CUR_DIR="$( pwd )"
