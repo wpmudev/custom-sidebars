@@ -6,7 +6,8 @@ Change Log:
 
 2.0.9.1
 ----------------------------------------------------------------------
-- Added debugging output that explains why a sidebar/widget is displayed.
+- Fix: Sidebars now support unicode-text in name/description.
+- Minor: New debugging output that explains why a sidebar/widget is displayed.
 
 2.0.9
 ----------------------------------------------------------------------
