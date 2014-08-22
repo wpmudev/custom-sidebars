@@ -125,7 +125,7 @@ class CustomSidebars {
 			do_action( 'cs_init' );
 
 			// Display a message after import.
-			if ( isset( $_GET['cs-msg'] ) ) {
+			if ( ! empty( $_GET['cs-msg'] ) ) {
 				$msg = base64_decode( $_GET['cs-msg'] );
 				WDev()->message( $msg );
 			}
