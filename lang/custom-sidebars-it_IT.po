@@ -2,8 +2,8 @@ msgid ""
 msgstr ""
 "Project-Id-Version: customsidebars\n"
 "Report-Msgid-Bugs-To: \n"
-"POT-Creation-Date: 2014-07-07 15:10+0100\n"
-"PO-Revision-Date: 2014-07-07 15:10+0100\n"
+"POT-Creation-Date: 2014-08-22 14:01+0100\n"
+"PO-Revision-Date: 2014-08-22 14:01+0100\n"
 "Last-Translator: Philipp Stracker <philipp@stracker.net>\n"
 "Language-Team: \n"
 "Language: it_IT\n"
@@ -12,10 +12,20 @@ msgstr ""
 "Content-Transfer-Encoding: 8bit\n"
 "X-Poedit-KeywordsList: __;gettext;gettext_noop;_e\n"
 "X-Poedit-Basepath: ..\n"
-"X-Generator: Poedit 1.6.5\n"
+"X-Generator: Poedit 1.6.8\n"
 "X-Poedit-SearchPath-0: .\n"
 
-#: inc/class-custom-sidebars-cloning.php:195
+#: customsidebars.php:69
+#, php-format
+msgid ""
+"<strong>Custom Sidebars Pro</strong><br />It seems that you have more than "
+"one version of the plugin installed. To avoid problems please check your <a "
+"href=\"%1$s\">plugins</a> and deactivate other versions of this plugin!<br /"
+">You might see this notice, because the free and pro versions of this plugin "
+"are installed at the same time."
+msgstr ""
+
+#: inc/class-custom-sidebars-cloning.php:197
 msgid "Clone"
 msgstr ""
 
@@ -55,80 +65,79 @@ msgstr "Crea una sidebar"
 msgid "Deleted sidebar <strong>%1$s</strong>"
 msgstr ""
 
-#: inc/class-custom-sidebars-editor.php:328
+#: inc/class-custom-sidebars-editor.php:329
 msgid "Front Page"
 msgstr ""
 
-#: inc/class-custom-sidebars-editor.php:329
+#: inc/class-custom-sidebars-editor.php:330
 msgid "Search Results"
 msgstr ""
 
-#: inc/class-custom-sidebars-editor.php:330
+#: inc/class-custom-sidebars-editor.php:331
 msgid "Author Archives"
 msgstr ""
 
-#: inc/class-custom-sidebars-editor.php:331
+#: inc/class-custom-sidebars-editor.php:332
 msgid "Tag Archives"
 msgstr ""
 
-#: inc/class-custom-sidebars-editor.php:332
+#: inc/class-custom-sidebars-editor.php:333
 msgid "Date Archives"
 msgstr ""
 
-#: inc/class-custom-sidebars-editor.php:366
+#: inc/class-custom-sidebars-editor.php:367
 #, php-format
 msgid "%1$s Archives"
 msgstr ""
 
-#: inc/class-custom-sidebars-editor.php:495
+#: inc/class-custom-sidebars-editor.php:496
 #, php-format
 msgid "Updated sidebar <strong>%1$s</strong> settings."
 msgstr ""
 
-#: inc/class-custom-sidebars-editor.php:531 views/widgets.php:17
+#: inc/class-custom-sidebars-editor.php:532 views/widgets.php:17
 #, fuzzy
 msgid "Sidebars"
 msgstr "Sidebar personalizzate"
 
-#: inc/class-custom-sidebars-export.php:61 views/widgets.php:23
-#: views/widgets.php:41
+#: inc/class-custom-sidebars-export.php:61 views/widgets.php:46
 #, fuzzy
 msgid "Import / Export Sidebars"
 msgstr "Sidebar personalizzate"
 
-#: inc/class-custom-sidebars-export.php:255
-#: inc/class-custom-sidebars-export.php:297
+#: inc/class-custom-sidebars-export.php:280
+#: inc/class-custom-sidebars-export.php:322
 msgid "No file was uploaded"
 msgstr ""
 
-#: inc/class-custom-sidebars-export.php:262
+#: inc/class-custom-sidebars-export.php:287
 msgid "Import file is too big"
 msgstr ""
 
-#: inc/class-custom-sidebars-export.php:268
+#: inc/class-custom-sidebars-export.php:293
 msgid "Something went wrong"
 msgstr ""
 
-#: inc/class-custom-sidebars-export.php:291
+#: inc/class-custom-sidebars-export.php:316
 msgid "Unexpected import format"
 msgstr ""
 
-#: inc/class-custom-sidebars-export.php:361
+#: inc/class-custom-sidebars-export.php:386
 msgid ""
 "Something unexpected happened and we could not finish the import. Please try "
 "again."
 msgstr ""
 
-#: inc/class-custom-sidebars-export.php:557
+#: inc/class-custom-sidebars-export.php:587
 #, php-format
 msgid "Imported %d custom sidebar(s)!"
 msgstr ""
 
-#: inc/class-custom-sidebars-export.php:567
+#: inc/class-custom-sidebars-export.php:597
 msgid "Plugin options were imported!"
 msgstr ""
 
-#: inc/class-custom-sidebars-export.php:618
+#: inc/class-custom-sidebars-export.php:648
 #, php-format
 msgid "Imported %d widget(s)!"
 msgstr ""
@@ -197,26 +206,34 @@ msgstr ""
 msgid "Only these %s:"
 msgstr ""
 
-#: inc/class-custom-sidebars.php:71
+#: inc/class-custom-sidebars.php:80
 #, fuzzy
 msgid "Custom Sidebars Pro"
 msgstr "Sidebar personalizzate"
 
-#: inc/class-custom-sidebars.php:74
+#: inc/class-custom-sidebars.php:83
 #, php-format
 msgid ""
 "Now you can create and edit custom sidebars in your <a href=\"%1$s\">Widgets "
 "screen</a>!"
 msgstr ""
 
-#: inc/class-custom-sidebars.php:736
+#: inc/class-custom-sidebars.php:102
+#, php-format
+msgid ""
+"<strong>Accessibility mode is not supported by the\n"
+"\t\t\t\t\t\t%1$s plugin.</strong><br /><a href=\"%2$s\">Click here</a>\n"
+"\t\t\t\t\t\tto disable accessibility mode and use the %1$s plugin!"
+msgstr ""
+
+#: inc/class-custom-sidebars.php:798
 #, php-format
 msgid ""
 "Import / Export functionality is available<br />in the <b>PRO</b> version of "
 "this plugin.<br /><a href=\"%1$s\" target=\"_blank\">Learn more</a>"
 msgstr ""
 
-#: inc/class-custom-sidebars.php:740
+#: inc/class-custom-sidebars.php:802
 msgid "Pro Version Features"
 msgstr ""
 
@@ -248,7 +265,7 @@ msgstr ""
 msgid "Theme"
 msgstr ""
 
-#: views/import.php:125 views/widgets.php:42
+#: views/import.php:125 views/widgets.php:47
 msgid "Custom Sidebars"
 msgstr "Sidebar personalizzate"
 
@@ -427,7 +444,7 @@ msgstr "Dopo il Widget"
 msgid "Advanced - Edit custom wrapper code"
 msgstr ""
 
-#: views/widgets-editor.php:64 views/widgets.php:38
+#: views/widgets-editor.php:64 views/widgets.php:43
 msgid "Create Sidebar"
 msgstr "Crea una sidebar"
 
@@ -518,7 +535,7 @@ msgstr ""
 msgid "Category Archives"
 msgstr "Per categoria"
 
-#: views/widgets-location.php:174 views/widgets.php:37
+#: views/widgets-location.php:174 views/widgets.php:42
 msgid "Save Changes"
 msgstr "Registra le modifiche"
 
@@ -526,71 +543,77 @@ msgstr "Registra le modifiche"
 msgid "Create a new sidebar"
 msgstr "Crea una nuova sidebar"
 
-#: views/widgets.php:35
+#: views/widgets.php:40
 #, fuzzy
 msgid "Edit [Sidebar]"
 msgstr "Modifica"
 
-#: views/widgets.php:36
+#: views/widgets.php:41
 #, fuzzy
 msgid "New Custom Sidebar"
 msgstr "Crea una nuova sidebar"
 
-#: views/widgets.php:39
+#: views/widgets.php:44
 #, fuzzy
 msgid "Delete Sidebar"
 msgstr "Crea una sidebar"
 
-#: views/widgets.php:40
+#: views/widgets.php:45
 msgid "Define where you want this sidebar to appear."
 msgstr ""
 
-#: views/widgets.php:43
+#: views/widgets.php:48
 #, fuzzy
 msgid "Theme Sidebars"
 msgstr "Sidebar personalizzate"
 
-#: views/widgets.php:44
+#: views/widgets.php:49
 msgid "Couldn't load data from WordPress..."
 msgstr ""
 
-#: views/widgets.php:45 views/widgets.php:98
+#: views/widgets.php:50 views/widgets.php:104
 msgid "This sidebar can be replaced on certain pages"
 msgstr ""
 
-#: views/widgets.php:46
+#: views/widgets.php:51
 msgid ""
 "Activate this option to replace the sidebar with one of your custom sidebars."
 msgstr ""
 
-#: views/widgets.php:62
+#: views/widgets.php:52
+msgid ""
+"Shows additional information on your webpage that explains why a sidebar or "
+"widget is displayed. Only you will see this information"
+msgstr ""
+
+#: views/widgets.php:68
 #, fuzzy
 msgid "Delete this sidebar."
 msgstr "Crea una sidebar"
 
-#: views/widgets.php:71
+#: views/widgets.php:77
 #, fuzzy
 msgid "Edit this sidebar."
 msgstr "Modifica"
 
-#: views/widgets.php:73
+#: views/widgets.php:79
 msgid "Edit"
 msgstr "Modifica"
 
-#: views/widgets.php:80 views/widgets.php:117
+#: views/widgets.php:86 views/widgets.php:123
 msgid "Where do you want to show the sidebar?"
 msgstr ""
 
-#: views/widgets.php:82 views/widgets.php:119
+#: views/widgets.php:88 views/widgets.php:125
 #, fuzzy
 msgid "Sidebar Location"
 msgstr "Crea una sidebar"
 
-#: views/widgets.php:99
+#: views/widgets.php:105
 msgid "This sidebar will always be same on all pages"
 msgstr ""
 
-#: views/widgets.php:108
+#: views/widgets.php:114
 #, fuzzy
 msgid "Allow this sidebar to be replaced"
 msgstr "Crea una sidebar"
