@@ -1,7 +1,6 @@
 
 
 ======================  NOTES ON DEVELOPMENT AND TESTING  ======================
-                              - Custom Sidebars -
 
 --------------------------------------------------------------------------------
 Philipp Stracker                                     Scripts are written for OSX
@@ -10,17 +9,16 @@ Philipp Stracker                                     Scripts are written for OSX
 --------------------------------------------------------------------------------
 == PLUGIN SETTINGS
 
-  - changelog.txt .. Plugin version
-  - customsidebars.php .. Plugin version (2x)
-  - @dev/config.txt .. Options for clean-installation.sh and install-plugin.sh
-                       Create a local copy and name it @dev/local.config.txt !!
+  - @dev/local.config.sh .. All scripts use the settings defined here. This file
+                          is not commited to git repository, every Dev can set
+                          the options for his own environment here.
 
 Available scripts; run them from the @dev folder!
-  - sh do/archive.sh
-  - sh do/get-wordpress.sh
-  - sh do/clean-installation.sh [multisite]
-  - sh do/install-plugin.sh
-  - sh do/svn-update.sh
+  $ sh do/archive.sh
+  $ sh do/get-wordpress.sh
+  $ sh do/clean-installation.sh [multisite]
+  $ sh do/install-plugin.sh
+  $ sh do/svn-update.sh
 
 
 --------------------------------------------------------------------------------
@@ -31,6 +29,8 @@ Available scripts; run them from the @dev folder!
 
   @dev-css .. These are SASS files that should be compiled into /css
   @dev-js .. These are js files that are minified into /js
+
+  @tests .. any PHP Unit tests are collected in this folder.
 
 -- Prepros
 
@@ -49,15 +49,16 @@ Available scripts; run them from the @dev folder!
   - Tools needed for archiving
     - git-archive-all  (https://github.com/Kentzo/git-archive-all)
 
-  1. Edit file @dev/archive.sh and make sure the version-number is correct
+  1. Edit file @dev/local.config.sh and make sure the version-number is correct
 
   2. Use terminal to create the zip archive:
-     > cd <plugin-dir>/@dev
-     > sh ./archive.sh
-     This will generate a clean zip archive with all plugin files on your desktop.
 
+     $ cd <plugin-dir>/@dev
+     $ sh do/archive.sh
+     ## This will generate a clean archive with all plugin files on your desktop.
 
-  Deploy the exported zip archive to wordpress SVN!
+     $ sh do/svn-update.sh
+     ## This will copy all plugin files to the SVN folder (defined in local.config)
 
 
 --------------------------------------------------------------------------------
@@ -69,37 +70,17 @@ Available scripts; run them from the @dev folder!
 
   - Important test-cases are documented in @dev/testcases.txt
 
+  - PHP Unit tests are in @tests
+
   - To setup a fresh WordPress installation with only this plugin installed use
-    the script @dev/clean-installation.sh
+    one of these commands in the directory <plugin-dir>/@dev:
 
-    Example usage (in terminal)
+    $ sh do/clean-installation.sh
+    ## Create a new Single-Blog stage installation
 
-    sh ./clean-installation.sh \
-    http://local.stage /Volumes/Macintosh\ HD2/Sites/wordpress-stage \
-    local-stage stage-user stage-pass localhost latest
+    $ sh do/clean-installation.sh multisite
+    ## Create a new Multisite stage installation
 
-    Generates this output:
+    $ sh do/install-plugin.sh multisite
+    ## Copy the current plugin to the stage installation
 
-    Current Dir:       /Volumes/Macintosh HD2/Sites/wordpress/wp-content/plugins/custom-sidebars/@dev
-    WordPress Dir:     /Volumes/Macintosh HD2/Sites/wordpress-stage
-    WordPress URL:     http://local.stage
-    WordPress User:    test
-    WordPress Pass:    test
-    WordPress version: latest
-    DB Host:           localhost
-    DB Name:           local-stage
-    DB User:           stage-user
-    DB Pass:           stage-pass
-    ------------------------------------------
-    - Removed old WordPress directory
-    - Created new WordPress directory
-    - Download and install WordPress files (version 'latest') ...
-    - Installation finished
-    Database "local-stage" dropped
-    - Created fresh database
-    Success: Generated wp-config.php file.
-    Success: WordPress installed successfully.
-    - Created a clean export of the current plugin
-    - Plugin extracted to new WordPress installation
-
-    There you go: http://local.stage is a fresh and clean WordPress installation!
