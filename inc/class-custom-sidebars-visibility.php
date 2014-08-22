@@ -46,8 +46,8 @@ class CustomSidebarsVisibility {
 				10, 3
 			);
 
-			TheLib::add_ui( CSB_JS_URL . 'cs-visibility.min.js', 'widgets.php' );
-			TheLib::add_ui( CSB_CSS_URL . 'cs-visibility.css', 'widgets.php' );
+			WDev()->add_ui( CSB_JS_URL . 'cs-visibility.min.js', 'widgets.php' );
+			WDev()->add_ui( CSB_CSS_URL . 'cs-visibility.css', 'widgets.php' );
 		} else {
 			// Filters the list of widget-areas and their widgets
 			add_filter(

@@ -63,7 +63,7 @@ if ( file_exists( CSB_INC_DIR . 'external/wpmu-lib/core.php' ) ) {
 
 // Only Pro version: Notify user when a possibly collission is detected.
 if ( $something_fishy && is_admin() ) {
-	TheLib::message(
+	WDev()->message(
 		sprintf(
 			__(
 				'<strong>Custom Sidebars Pro</strong><br />' .
