@@ -361,12 +361,17 @@ class CustomSidebarsEditor extends CustomSidebars {
 		// Build a list of archive types.
 		$archives = array(); // Start with a copy of the posttype list.
 		foreach ( $raw_posttype as $item ) {
-			$sel_archive = @$defaults['post_type_archive'][$item->name];
-
+			if ( $item->name == 'post' ) {
+				$label = __( 'Post Index', CSB_LANG );
+			} else {
+				if ( ! $item->has_archive ) { continue; }
 			$label = sprintf(
 				__( '%1$s Archives', CSB_LANG ),
 				$item->labels->singular_name
 			);
+			}
+
+			$sel_archive = @$defaults['post_type_archive'][$item->name];
 
 			$archives[ $item->name ] = array(
 				'name' => $label,

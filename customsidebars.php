@@ -3,7 +3,7 @@
 Plugin Name: Custom Sidebars Pro
 Plugin URI:  http://premium.wpmudev.org/project/custom-sidebars/
 Description: Allows you to create widgetized areas and custom sidebars. Replace whole sidebars or single widgets for specific posts and pages.
-Version:     2.0.9.1
+Version:     2.0.9.2
 Author:      WPMU DEV
 Author URI:  http://premium.wpmudev.org/
 Textdomain:  custom-sidebars
@@ -33,52 +33,27 @@ This plugin was originally developed by Javier Marquez.
 http://arqex.com/
 */
 
-$something_fishy = false;
-if ( ! class_exists( 'CustomSidebars' ) ) {
-	// used for more readable i18n functions: __( 'text', CSB_LANG );
-	define( 'CSB_LANG', 'custom-sidebars' );
+// used for more readable i18n functions: __( 'text', CSB_LANG );
+define( 'CSB_LANG', 'custom-sidebars' );
 
-	$plugin_dir = dirname( __FILE__ );
-	$plugin_dir_rel = dirname( plugin_basename( __FILE__ ) );
-	$plugin_url = plugin_dir_url( __FILE__ );
-	define( 'CSB_LANG_DIR', $plugin_dir_rel . '/lang/' );
-	define( 'CSB_VIEWS_DIR', $plugin_dir . '/views/' );
-	define( 'CSB_INC_DIR', $plugin_dir . '/inc/' );
-	define( 'CSB_JS_URL', $plugin_url . 'js/' );
-	define( 'CSB_CSS_URL', $plugin_url . 'css/' );
+$plugin_dir = dirname( __FILE__ );
+$plugin_dir_rel = dirname( plugin_basename( __FILE__ ) );
+$plugin_url = plugin_dir_url( __FILE__ );
+define( 'CSB_LANG_DIR', $plugin_dir_rel . '/lang/' );
+define( 'CSB_VIEWS_DIR', $plugin_dir . '/views/' );
+define( 'CSB_INC_DIR', $plugin_dir . '/inc/' );
+define( 'CSB_JS_URL', $plugin_url . 'js/' );
+define( 'CSB_CSS_URL', $plugin_url . 'css/' );
 
-	// Load the actual core.
-	require_once 'inc/class-custom-sidebars.php';
+// Load the actual core.
+require_once 'inc/class-custom-sidebars.php';
 
-	// Initialize the plugin as soon as we have identified the current user.
-	add_action( 'set_current_user', array( 'CustomSidebars', 'instance' ) );
-} else {
-	$something_fishy = true;
-}
+// Initialize the plugin as soon as we have identified the current user.
+add_action( 'set_current_user', array( 'CustomSidebars', 'instance' ) );
 
 // Include function library
 if ( file_exists( CSB_INC_DIR . 'external/wpmu-lib/core.php' ) ) {
 	require_once CSB_INC_DIR . 'external/wpmu-lib/core.php';
-}
-
-// Only Pro version: Notify user when a possibly collission is detected.
-if ( $something_fishy && is_admin() ) {
-	WDev()->message(
-		sprintf(
-			__(
-				'<strong>Custom Sidebars Pro</strong><br />' .
-				'It seems that you have more than one version of the plugin ' .
-				'installed. To avoid problems please check your ' .
-				'<a href="%1$s">plugins</a> and deactivate other versions of ' .
-				'this plugin!<br />' .
-				'You might see this notice, because the free and pro '.
-				'versions of this plugin are installed at the same time.',
-				CSB_LANG
-			),
-			admin_url( 'plugins.php' )
-		),
-		'err'
-	);
 }
 
 if ( ! class_exists( 'CustomSidebarsEmptyPlugin' ) ) {

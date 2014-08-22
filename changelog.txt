@@ -4,6 +4,10 @@ Author: Javier Marquez (Incsub), Philipp Stracker (Incsub)
 Change Log:
 ----------------------------------------------------------------------
 
+2.0.9.2
+----------------------------------------------------------------------
+- Fix: Sidebar Locations "Front Page" and "Post Index" now work correctly.
+
 2.0.9.1
 ----------------------------------------------------------------------
 - Fix: Sidebars now support unicode-text in name/description.
