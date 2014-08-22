@@ -53,6 +53,7 @@ div.widget-liquid-right {
 	top: 0;
 	height: auto;
 	padding: 32px 0 0;
+	z-index: 10000; /* https://app.asana.com/0/11388810124414/15265827322055 */
 }
 
 .widgets-php #wpcontent,
