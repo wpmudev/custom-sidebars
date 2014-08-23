@@ -111,6 +111,8 @@ class CustomSidebarsReplacer extends CustomSidebars {
 
 		$expl && do_action( 'cs_explain', '<h4>Replace sidebars</h4>', true );
 
+		do_action( 'cs_before_replace_sidebars' );
+
 		/**
 		 * Original sidebar configuration by WordPress:
 		 * Lists sidebars and all widgets inside each sidebar.
@@ -194,7 +196,7 @@ class CustomSidebarsReplacer extends CustomSidebars {
 		// 1 |== Single posts/pages --------------------------------------------
 		if ( is_single() ) {
 			$post_type = get_post_type();
-			$expl && do_action( 'cs_explain', 'Type 1: single ' . $post_type );
+			$expl && do_action( 'cs_explain', 'Type 1: Single ' . ucfirst( $post_type ) );
 
 			if ( ! self::supported_post_type( $post_type ) ) {
 				$expl && do_action( 'cs_explain', 'Invalid post type, use default sidebars.' );
@@ -275,7 +277,7 @@ class CustomSidebarsReplacer extends CustomSidebars {
 
 		// 2 |== Category archive ----------------------------------------------
 		if ( is_category() ) {
-			$expl && do_action( 'cs_explain', 'Type 2: category archive' );
+			$expl && do_action( 'cs_explain', 'Type 2: Category Archive' );
 
 			// 2.1 Start at current category and travel up all parents
 			$category_object = get_queried_object();
@@ -303,7 +305,7 @@ class CustomSidebarsReplacer extends CustomSidebars {
 		// Must be before the post-type archive section; otherwise a search with
 		// no results is recognized as post-type archive...
 		if ( is_search() ) {
-			$expl && do_action( 'cs_explain', 'Type 3: is_search' );
+			$expl && do_action( 'cs_explain', 'Type 3: Search Results' );
 
 			foreach ( $sidebars as $sb_id ) {
 				if ( ! empty( $options['search'][$sb_id] ) ) {
@@ -320,7 +322,7 @@ class CustomSidebarsReplacer extends CustomSidebars {
 		// `get_post_type() != 'post'` .. post-archive = post-index (see 7)
 		if ( ! is_category() && ! is_singular() && get_post_type() != 'post' ) {
 			$post_type = get_post_type();
-			$expl && do_action( 'cs_explain', 'Type 4: ' . $post_type . ' archive' );
+			$expl && do_action( 'cs_explain', 'Type 4: ' . ucfirst( $post_type ) . ' Archive' );
 
 			if ( ! self::supported_post_type( $post_type ) ) {
 				$expl && do_action( 'cs_explain', 'Invalid post type, use default sidebars.' );
@@ -346,7 +348,7 @@ class CustomSidebarsReplacer extends CustomSidebars {
 		// `! is_front_page()` .. in case the site uses static front page.
 		if ( is_page() && ! is_front_page() ) {
 			$post_type = get_post_type();
-			$expl && do_action( 'cs_explain', 'Type 5: ' . $post_type );
+			$expl && do_action( 'cs_explain', 'Type 5: ' . ucfirst( $post_type ) );
 
 			if ( ! self::supported_post_type( $post_type ) ) {
 				$expl && do_action( 'cs_explain', 'Invalid post type, use default sidebars.' );
@@ -410,15 +412,51 @@ class CustomSidebarsReplacer extends CustomSidebars {
 			 * - a static front-page.
 			 */
 
-			$expl && do_action( 'cs_explain', 'Type 6: front-page' );
+			$expl && do_action( 'cs_explain', 'Type 6: Front Page' );
+
+			if ( ! is_home() ) {
+				// A static front-page. Maybe we need the post-meta data...
+				$reps_post = self::get_post_meta( $this->original_post_id );
+				$reps_parent = self::get_post_meta( $post->post_parent );
+			}
 
 			foreach ( $sidebars as $sb_id ) {
+
+				// First check if there is a 'Front Page' replacement.
 				if ( ! empty( $options['blog'][$sb_id] ) ) {
 					$replacements[$sb_id] = array(
 						$options['blog'][$sb_id],
 						'blog',
 						-1,
 					);
+				} else if ( ! is_home() ) {
+					// There is no 'Front Page' reaplcement and this is a static
+					// front page, so check if the page has a replacement.
+
+					// 6.1 Check if replacements are defined in the post metadata.
+					if ( is_array( $reps_post ) && ! empty( $reps_post[$sb_id] ) ) {
+						$replacements[$sb_id] = array(
+							$reps_post[$sb_id],
+							'particular',
+							-1,
+						);
+						$replacements_todo -= 1;
+					}
+
+					// 6.2 Try to use the parents metadata.
+					if ( $post->post_parent != 0 && $replacements_todo > 0 ) {
+						if ( $replacements[$sb_id] ) { continue; }
+						if ( is_array( $reps_parent )
+							&& ! empty( $reps_parent[$sb_id] )
+						) {
+							$replacements[$sb_id] = array(
+								$reps_parent[$sb_id],
+								'particular',
+								-1,
+							);
+							$replacements_todo -= 1;
+						}
+					}
 				}
 			}
 		} else
@@ -434,7 +472,7 @@ class CustomSidebarsReplacer extends CustomSidebars {
 			 * "is_front_page" above is used and this node is never executed.
 			 */
 
-			$expl && do_action( 'cs_explain', 'Type 7: post-index' );
+			$expl && do_action( 'cs_explain', 'Type 7: Post Index' );
 
 			foreach ( $sidebars as $sb_id ) {
 				if ( ! empty( $options['post_type_archive']['post'][$sb_id] ) ) {
@@ -449,7 +487,7 @@ class CustomSidebarsReplacer extends CustomSidebars {
 
 		// 8 |== Tag archive ---------------------------------------------------
 		if ( is_tag() ) {
-			$expl && do_action( 'cs_explain', 'Type 8: tag archive' );
+			$expl && do_action( 'cs_explain', 'Type 8: Tag Archive' );
 
 			foreach ( $sidebars as $sb_id ) {
 				if ( ! empty( $options['tags'][$sb_id] ) ) {
@@ -464,7 +502,7 @@ class CustomSidebarsReplacer extends CustomSidebars {
 
 		// 9 |== Author archive ------------------------------------------------
 		if ( is_author() ) {
-			$expl && do_action( 'cs_explain', 'Type 9: author archive' );
+			$expl && do_action( 'cs_explain', 'Type 9: Author Archive' );
 
 			foreach ( $sidebars as $sb_id ) {
 				if ( ! empty( $options['authors'][$sb_id] ) ) {

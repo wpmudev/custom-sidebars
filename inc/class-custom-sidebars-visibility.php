@@ -406,55 +406,63 @@ class CustomSidebarsVisibility {
 	 */
 	public function sidebars_widgets( $widget_areas ) {
 		static $Settings = array();
+		static $Result = array();
+
 		$expl = CustomSidebarsExplain::do_explain();
 
-		if ( ! did_action( 'wp' ) ) {
+		if ( ! did_action( 'cs_before_replace_sidebars' ) ) {
 			return $widget_areas;
 		}
 
-		$expl && do_action( 'cs_explain', '<h4>Filter widgets</h4>', true );
-		foreach ( $widget_areas as $widget_area => $widgets ) {
-			if ( empty( $widgets ) ) {
-				continue;
-			}
+		$key = serialize( $widget_areas );
 
-			if ( 'wp_inactive_widgets' == $widget_area ) {
-				continue;
-			}
-
-			$expl && do_action( 'cs_explain', '<h5>Sidebar "' . $widget_area . '"</h5>', true );
-
-			foreach ( $widgets as $position => $widget_id ) {
-				// Find the conditions for this widget.
-				if ( preg_match( '/^(.+?)-(\d+)$/', $widget_id, $matches ) ) {
-					$id_base = $matches[1];
-					$widget_number = intval( $matches[2] );
-				} else {
-					$id_base = $widget_id;
-					$widget_number = null;
+		if ( ! isset( $Result[$key] ) ) {
+			$expl && do_action( 'cs_explain', '<h4>Filter widgets</h4>', true );
+			foreach ( $widget_areas as $widget_area => $widgets ) {
+				if ( empty( $widgets ) ) {
+					continue;
 				}
 
-				if ( ! isset( $Settings[ $id_base ] ) ) {
-					$Settings[ $id_base ] = get_option( 'widget_' . $id_base );
+				if ( 'wp_inactive_widgets' == $widget_area ) {
+					continue;
 				}
 
-				$expl && do_action( 'cs_explain', 'Widget "' . $widget_id . '"', true );
+				$expl && do_action( 'cs_explain', '<h5>Sidebar "' . $widget_area . '"</h5>', true );
 
-				// New multi widget (WP_Widget)
-				if ( ! is_null( $widget_number ) ) {
-					if ( isset( $Settings[ $id_base ][ $widget_number ] ) && false === $this->maybe_display_widget( $Settings[ $id_base ][ $widget_number ] ) ) {
+				foreach ( $widgets as $position => $widget_id ) {
+					// Find the conditions for this widget.
+					if ( preg_match( '/^(.+?)-(\d+)$/', $widget_id, $matches ) ) {
+						$id_base = $matches[1];
+						$widget_number = intval( $matches[2] );
+					} else {
+						$id_base = $widget_id;
+						$widget_number = null;
+					}
+
+					if ( ! isset( $Settings[ $id_base ] ) ) {
+						$Settings[ $id_base ] = get_option( 'widget_' . $id_base );
+					}
+
+					$expl && do_action( 'cs_explain', 'Widget "' . $widget_id . '"', true );
+
+					// New multi widget (WP_Widget)
+					if ( ! is_null( $widget_number ) ) {
+						if ( isset( $Settings[ $id_base ][ $widget_number ] ) && false === $this->maybe_display_widget( $Settings[ $id_base ][ $widget_number ] ) ) {
+							unset( $widget_areas[ $widget_area ][ $position ] );
+						}
+					}
+
+					// Old single widget
+					else if ( ! empty( $Settings[ $id_base ] ) && false === $this->maybe_display_widget( $Settings[ $id_base ] ) ) {
 						unset( $widget_areas[ $widget_area ][ $position ] );
 					}
 				}
-
-				// Old single widget
-				else if ( ! empty( $Settings[ $id_base ] ) && false === $this->maybe_display_widget( $Settings[ $id_base ] ) ) {
-					unset( $widget_areas[ $widget_area ][ $position ] );
-				}
 			}
+
+			$Result[$key] = $widget_areas;
 		}
 
-		return $widget_areas;
+		return $Result[$key];
 	}
 
 	public function maybe_display_widget( $instance ) {
@@ -476,7 +484,7 @@ class CustomSidebarsVisibility {
 		$action = 'hide' != $instance['csb_visibility']['action'] ? 'show' : 'hide';
 
 		if ( $instance['csb_visibility']['always'] ) {
-			do_action( 'cs_explain', '<span style="color:#090">Always</span> <b>' . $action . '</b>' );
+			$expl && do_action( 'cs_explain', '<span style="color:#090">Always</span> <b>' . $action . '</b>' );
 			return ( 'hide' == $action ? false : true );
 		}
 
