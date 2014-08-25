@@ -4,6 +4,10 @@ Author: Javier Marquez (Incsub), Philipp Stracker (Incsub)
 Change Log:
 ----------------------------------------------------------------------
 
+2.0.9.5
+----------------------------------------------------------------------
+- Fix: PHP error "WDev" undefined that appeared in 2.0.9.4
+
 2.0.9.4
 ----------------------------------------------------------------------
 - Fix: For some users the plugin was not loading anymore after updating to 2.0.9.1.
