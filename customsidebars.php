@@ -49,7 +49,7 @@ define( 'CSB_CSS_URL', $plugin_url . 'css/' );
 require_once 'inc/class-custom-sidebars.php';
 
 // Initialize the plugin as soon as we have identified the current user.
-add_action( 'set_current_user', array( 'CustomSidebars', 'instance' ) );
+CustomSidebars::instance();
 
 // Include function library
 if ( file_exists( CSB_INC_DIR . 'external/wpmu-lib/core.php' ) ) {
