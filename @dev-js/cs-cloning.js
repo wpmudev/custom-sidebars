@@ -4,7 +4,8 @@
 
 jQuery(function init_cloning() {
 	var $doc = jQuery( document ),
-		$all = jQuery( '#widgets-right' );
+		$all = jQuery( '#widgets-right' ),
+		is_cloning = false;
 
 	/**
 	 * Moves the "Clone" button next to the save button.
@@ -25,6 +26,46 @@ jQuery(function init_cloning() {
 		$btn_save.click( prepare_update_group );
 
 		$widget.data( '_csb_cloning', true );
+	};
+
+	/**
+	 * Updates the group-counter when a widget is added.
+	 */
+	var update_group_counter = function update_group_counter( ev, el ) {
+		// We do NOT want to change the group-id when we clone a widget...
+		if ( is_cloning ) { return false; }
+
+		var $widget = jQuery( el ).closest( '.widget' ),
+			$widget_group = $widget.find( 'input.csb-clone-group' ),
+			group_id = parseInt( $widget_group.val() ),
+			check = null;
+
+		do {
+			check = $all.find( 'input.csb-clone-group[value="' + group_id + '"]' );
+			if ( ! check.length || ( 1 == check.length && check[0] == $widget_group[0] ) ) {
+				break;
+			} else {
+				group_id += 1;
+			}
+		}
+		while ( true );
+
+		$widget_group.val( group_id );
+		update_template_groups();
+	};
+
+	/**
+	 * Updates all group_id values for the widget-templates to the next free id.
+	 */
+	var update_template_groups = function update_template_groups() {
+		var $groups = jQuery( '#widgets-left input.csb-clone-group' ),
+			next_id = parseInt( $groups.first().val() );
+
+		while ( $all.find( 'input.csb-clone-group[value="' + next_id + '"]' ).length ) {
+			next_id += 1;
+		}
+
+		$groups.val( next_id );
 	};
 
 	/**
@@ -125,6 +166,7 @@ jQuery(function init_cloning() {
 			$content = jQuery( '#wpbody-content' );
 
 		ev.preventDefault();
+		is_cloning = true;
 
 		// 1. If the current widget is new then first save the current widget
 		var state = $widget.find( 'input.csb-clone-state' ).val();
@@ -170,7 +212,9 @@ jQuery(function init_cloning() {
 
 		// 7. Remove the custom elements and information again.
 		wpWidgets.clearWidgetSelection();
-		$group.val(0);
+		update_template_groups();
+
+		is_cloning = false;
 
 		return false;
 	};
@@ -261,8 +305,9 @@ jQuery(function init_cloning() {
 
 	$all.find( '.widget' ).each( init_widget );
 	$doc.on( 'widget-added', init_widget );
-	//$doc.on( 'widget-updated', init_group_icons );
+	$doc.on( 'widget-added', update_group_counter );
 	$doc.ajaxSuccess( ajax_observer );
 
 	init_group_icons();
+	update_template_groups();
 });

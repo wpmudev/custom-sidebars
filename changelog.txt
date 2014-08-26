@@ -4,6 +4,10 @@ Author: Javier Marquez (Incsub), Philipp Stracker (Incsub)
 Change Log:
 ----------------------------------------------------------------------
 
+2.0.9.6
+----------------------------------------------------------------------
+- Fix: When adding new widgets they are not linked anymore (not "clones")
+
 2.0.9.5
 ----------------------------------------------------------------------
 - Fix: PHP error "WDev" undefined that appeared in 2.0.9.4

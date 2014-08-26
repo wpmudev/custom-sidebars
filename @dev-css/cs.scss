@@ -200,6 +200,10 @@ body.appearance_page_customsidebars #poststuff h2 {
 	margin-top: 0;
 }
 
+.widget.ui-draggable-dragging {
+	z-index: 10001 !important;
+}
+
 /**
  * =============================================================================
  * == POPUP WINDOW: Add/Edit sidebar
