@@ -54,6 +54,12 @@
 	height: auto;
 	padding: 32px 0 0;
 	z-index: 9999; /* https://app.asana.com/0/11388810124414/15265827322055 */
+
+	/* https://app.asana.com/0/11388810124414/15066782299785 */
+	-webkit-user-select: none;
+	-moz-user-select: none;
+	-ms-user-select: none;
+	user-select: none;
 }
 
 .widgets-php #wpcontent,
