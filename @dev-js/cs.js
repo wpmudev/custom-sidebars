@@ -190,32 +190,29 @@ var csSidebars, msgTimer;
 		initScrollbar: function(){
 			var right_side = jQuery( '.widget-liquid-right' )
 				wnd = jQuery( window ),
-				viewport = null,
-				scrollbar = null;
+				viewport = null;
 
 			csSidebars.right
 				.addClass('overview')
 				.wrap('<div class="viewport" />');
-
-			viewport = jQuery( '.viewport' )
-				.height( wnd.height() - 60 );
 
 			right_side
 				.height( wnd.height() )
 				.prepend('<div class="scrollbar"><div class="track"><div class="thumb"><div class="end"></div></div></div></div>')
 				.tinyscrollbar();
 
-			scrollbar = right_side.data( 'plugin_tinyscrollbar' );
+			viewport = jQuery( '.viewport' )
+				.height( wnd.height() - 32 );
 
 			// Re-calculate the scrollbar size.
 			var update_scrollbars = function update_scrollbars() {
-				scrollbar.update( 'relative' );
+				right_side.data( 'plugin_tinyscrollbar' ).update( 'relative' );
 			};
 
 			wnd.resize(function() {
 				right_side.height( wnd.height() );
-				viewport.height( wnd.height() - 60 );
-				scrollbar.update( 'relative' );
+				viewport.height( wnd.height() - 32 );
+				update_scrollbars();
 			});
 
 			right_side.click(function(){
@@ -224,9 +221,9 @@ var csSidebars, msgTimer;
 
 			right_side.hover(
 				function() {
-					$('.scrollbar').fadeIn();
+					right_side.find( '.scrollbar' ).fadeIn();
 				}, function() {
-					$('.scrollbar').fadeOut();
+					right_side.find( '.scrollbar' ).fadeOut();
 				}
 			);
 			return csSidebars;

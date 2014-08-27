@@ -46,7 +46,7 @@ define( 'CSB_JS_URL', $plugin_url . 'js/' );
 define( 'CSB_CSS_URL', $plugin_url . 'css/' );
 
 // Load the actual core.
-require_once 'inc/class-custom-sidebars.php';
+require_once CSB_INC_DIR . 'class-custom-sidebars.php';
 
 // Include function library
 if ( file_exists( CSB_INC_DIR . 'external/wpmu-lib/core.php' ) ) {

@@ -42,18 +42,18 @@
 	width: 49%;
 }
 
-.widgets-php div.widget-liquid-left {
+.widgets-php .widget-liquid-left {
 	width: 100%;
 }
 
-div.widget-liquid-right {
+.widget-liquid-right {
 	position: fixed;
 	background: #E4E4E4;
 	right: 0;
 	top: 0;
 	height: auto;
 	padding: 32px 0 0;
-	z-index: 10000; /* https://app.asana.com/0/11388810124414/15265827322055 */
+	z-index: 9999; /* https://app.asana.com/0/11388810124414/15265827322055 */
 }
 
 .widgets-php #wpcontent,
