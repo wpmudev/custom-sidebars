@@ -9,6 +9,7 @@ Change Log:
 - Fix: When adding new widgets they are not linked anymore (not "clones")
 - Fix: In some browsers the "Add sidebar" popup was partially hidden.
 - Fix: Sometimes the dropdown list of a multiselect list stayed open.
+- Some other small improvements.
 
 2.0.9.5
 ----------------------------------------------------------------------

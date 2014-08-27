@@ -226,6 +226,10 @@ var csSidebars, msgTimer;
 					right_side.find( '.scrollbar' ).fadeOut();
 				}
 			);
+
+			// Update the scrollbars after short delay
+			setTimeout( update_scrollbars, 1000 );
+
 			return csSidebars;
 		},
 
