@@ -94,9 +94,6 @@ class CustomSidebars {
 			)                                         // Body
 		);
 
-		// Load the text domain for the plugin
-		WDev()->translate_plugin( CSB_LANG, CSB_LANG_DIR );
-
 		// Find out if the page is loaded in accessibility mode.
 		$flag = isset( $_GET['widgets-access'] ) ? $_GET['widgets-access'] : get_user_setting( 'widgets_access' );
 		self::$accessibility_mode = ( 'on' == $flag );

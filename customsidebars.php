@@ -39,6 +39,7 @@ define( 'CSB_LANG', 'custom-sidebars' );
 $plugin_dir = dirname( __FILE__ );
 $plugin_dir_rel = dirname( plugin_basename( __FILE__ ) );
 $plugin_url = plugin_dir_url( __FILE__ );
+
 define( 'CSB_LANG_DIR', $plugin_dir_rel . '/lang/' );
 define( 'CSB_VIEWS_DIR', $plugin_dir . '/views/' );
 define( 'CSB_INC_DIR', $plugin_dir . '/inc/' );
@@ -52,6 +53,9 @@ require_once CSB_INC_DIR . 'class-custom-sidebars.php';
 if ( file_exists( CSB_INC_DIR . 'external/wpmu-lib/core.php' ) ) {
 	require_once CSB_INC_DIR . 'external/wpmu-lib/core.php';
 }
+
+// Load the text domain for the plugin
+WDev()->translate_plugin( CSB_LANG, CSB_LANG_DIR );
 
 // Initialize the plugin as soon as we have identified the current user.
 CustomSidebars::instance();
