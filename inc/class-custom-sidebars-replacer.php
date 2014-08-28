@@ -37,6 +37,12 @@ class CustomSidebarsReplacer extends CustomSidebars {
 			array( $this, 'register_custom_sidebars')
 		);
 
+		// PRO: Support translation via WPML plugin.
+		add_action(
+			'register_sidebar',
+			array( $this, 'translate_sidebar' )
+		);
+
 		if ( ! is_admin() ) {
 			// Frontend hooks.
 			add_action(
@@ -58,16 +64,6 @@ class CustomSidebarsReplacer extends CustomSidebars {
 		$sb = self::get_custom_sidebars();
 
 		foreach ( $sb as $sidebar ) {
-			/**
-			 * i18n support for custom sidebars.
-			 */
-			$sidebar['name'] = __( $sidebar['name'], CSB_LANG );
-			$sidebar['description'] = __( $sidebar['description'], CSB_LANG );
-			$sidebar['before_widget'] = __( $sidebar['before_widget'], CSB_LANG );
-			$sidebar['after_widget'] = __( $sidebar['after_widget'], CSB_LANG );
-			$sidebar['before_title'] = __( $sidebar['before_title'], CSB_LANG );
-			$sidebar['after_title'] = __( $sidebar['after_title'], CSB_LANG );
-
 			/**
 			 * Filter sidebar options for custom sidebars.
 			 *
@@ -647,6 +643,25 @@ class CustomSidebarsReplacer extends CustomSidebars {
 		$sidebar['before_title'] = stripslashes( $sidebar['before_title'] );
 		$sidebar['after_title'] = stripslashes( $sidebar['after_title'] );
 		return $sidebar;
+	}
+
+	/**
+	 * Translates a sidebar using WPML right after it was registered.
+	 *
+	 * @since  2.0.9.7
+	 * @param  array $sidebar The sidebar that was registered
+	 */
+	public function translate_sidebar( $sidebar ) {
+		if ( ! function_exists( 'icl_t' ) ) { return false; }
+
+		global $wp_registered_sidebars;
+		$context = 'Sidebar';
+
+		// Translate the name and description.
+		$sidebar['name'] = icl_t( $context, $sidebar['id'] . '-name', $sidebar['name'] );
+		$sidebar['description'] = icl_t( $context, $sidebar['id'] . '-description', $sidebar['description'] );
+
+		$wp_registered_sidebars[$sidebar['id']] = $sidebar;
 	}
 
 };

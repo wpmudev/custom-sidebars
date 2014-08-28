@@ -190,8 +190,13 @@ class CustomSidebarsEditor extends CustomSidebars {
 		}
 
 		// Populate the sidebar object.
-		$sidebar['name'] = $sb_name;
-		$sidebar['description'] = $sb_desc;
+		if ( $action == 'insert' || self::wpml_is_default_lang() ) {
+			$sidebar['name'] = $sb_name;
+			$sidebar['description'] = $sb_desc;
+		} else {
+			$sidebar['name_lang'] = $sb_name;
+			$sidebar['description_lang'] = $sb_desc;
+		}
 		$sidebar['before_widget'] = stripslashes( trim( @$_POST['before_widget'] ) );
 		$sidebar['after_widget'] = stripslashes( trim( @$_POST['after_widget'] ) );
 		$sidebar['before_title'] = stripslashes( trim( @$_POST['before_title'] ) );
@@ -228,8 +233,11 @@ class CustomSidebarsEditor extends CustomSidebars {
 		self::set_custom_sidebars( $sidebars );
 		self::refresh_sidebar_widgets();
 
+		// PRO: Allow user to translate sidebar name/description via WPML.
+		self::wpml_update( $sidebars );
+
 		$req->action = $action;
-		$req->data = $sidebar;
+		$req->data = self::wpml_translate( $sidebar );
 
 		return $req;
 	}
@@ -612,6 +620,135 @@ class CustomSidebarsEditor extends CustomSidebars {
 		}
 
 		self::set_post_meta( $post_id, $data );
+	}
+
+	/**
+	 * Updates the WPML string register with the current sidebar string so the
+	 * user can translate the sidebar details using the WPML string translation.
+	 *
+	 * @since  2.0.9.7
+	 * @param  array $custom_sidebars List of the custom sidebars.
+	 */
+	static protected function wpml_update( $custom_sidebars ) {
+		if ( ! function_exists( 'icl_register_string' ) ) { return false; }
+
+		$theme_sidebars = self::get_sidebars();
+
+		// This is used to identify the sidebar-translations by WPML.
+		$context = 'Sidebar';
+
+		// First do the theme sidebars, so they will be displayed in the
+		// *bottom* of the translations list.
+		foreach ( $theme_sidebars as $fields ) {
+			self::wpml_update_field( $context, $fields['id'] . '-name', @$fields['name'], false );
+			self::wpml_update_field( $context, $fields['id'] . '-description', @$fields['description'], false );
+		}
+
+		foreach ( $custom_sidebars as $fields ) {
+			$name = isset( $fields['name_lang'] ) ? $fields['name_lang'] : $fields['name'];
+			$description = isset( $fields['description_lang'] ) ? $fields['description_lang'] : $fields['description'];
+			self::wpml_update_field( $context, $fields['id'] . '-name', $name, true );
+			self::wpml_update_field( $context, $fields['id'] . '-description', $description, true );
+		}
+	}
+
+	/**
+	 * Updates the WPML string register for a single field.
+	 *
+	 * @since  2.0.9.7
+	 * @param  string $context
+	 * @param  string $field
+	 * @param  string $value
+	 * @param  bool $update_string If false then the translation will only be
+	 *                registered but not updated.
+	 */
+	static protected function wpml_update_field( $context, $field, $value, $update_string = true ) {
+		global $sitepress, $sitepress_settings;
+
+		if ( empty( $sitepress ) || empty( $sitepress_settings ) ) { return false; }
+		if ( ! function_exists( 'icl_t' ) ) { return false; }
+
+		if ( ! icl_st_is_registered_string( $context, $field ) ) {
+			// Register the field if it does not exist.
+			icl_register_string( $context, $field, $value, false );
+
+			$active_languages = $sitepress->get_active_languages();
+
+			foreach ( $active_languages as $lang => $data ) {
+				icl_update_string_translation( $field, $lang, $value, ICL_STRING_TRANSLATION_COMPLETE );
+			}
+
+			$default_language = ! empty( $sitepress_settings['st']['strings_language'] )
+				? $sitepress_settings['st']['strings_language']
+				: $sitepress->get_default_language();
+			icl_update_string_translation( $field, $default_language, $value, ICL_STRING_TRANSLATION_COMPLETE );
+
+		} else if ( $update_string ) {
+
+			// Add translation.
+			if ( defined( 'DOING_AJAX' ) ) {
+				$current_language = $sitepress->get_language_cookie();
+			} else {
+				$current_language = $sitepress->get_current_language();
+			}
+
+			icl_update_string_translation( $field, $current_language, $value, ICL_STRING_TRANSLATION_COMPLETE );
+		}
+	}
+
+	/**
+	 * Returns boolean true, when site is currently using the default language.
+	 *
+	 * @since  2.0.9.7
+	 * @return bool
+	 */
+	static protected function wpml_is_default_lang() {
+		global $sitepress, $sitepress_settings;
+		if ( empty( $sitepress ) || empty( $sitepress_settings ) ) { return true; }
+		if ( ! function_exists( 'icl_t' ) ) { return true; }
+
+		if ( defined( 'DOING_AJAX' ) ) {
+			$current_language = $sitepress->get_language_cookie();
+		} else {
+			$current_language = $sitepress->get_current_language();
+		}
+
+		$default_language = ! empty( $sitepress_settings['st']['strings_language'] )
+			? $sitepress_settings['st']['strings_language']
+			: $sitepress->get_default_language();
+
+		return $default_language == $current_language;
+	}
+
+	/**
+	 * Translates the text inside the specified sidebar object.
+	 *
+	 * @since  2.0.9.7
+	 * @param  array $sidebar Sidebar object.
+	 * @return array Translated sidebar object.
+	 */
+	static protected function wpml_translate( $sidebar ) {
+		if ( ! function_exists( 'icl_t' ) ) { return $sidebar; }
+
+		global $wp_registered_sidebars;
+		$context = 'Sidebar';
+
+		// Translate the name and description.
+		// Note: When changing a translation the icl_t() function will not
+		// return the updated value due to caching.
+
+		if ( isset( $sidebar['name_lang'] ) ) {
+			$sidebar['name'] = $sidebar['name_lang'];
+		} else {
+			$sidebar['name'] = icl_t( $context, $sidebar['id'] . '-name', $sidebar['name'] );
+		}
+		if ( isset( $sidebar['description_lang'] ) ) {
+			$sidebar['description'] = $sidebar['description_lang'];
+		} else {
+			$sidebar['description'] = icl_t( $context, $sidebar['id'] . '-description', $sidebar['description'] );
+		}
+
+		return $sidebar;
 	}
 
 };
