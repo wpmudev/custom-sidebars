@@ -1,9 +1,9 @@
 msgid ""
 msgstr ""
-"Project-Id-Version: custom-sidebars\n"
+"Project-Id-Version: Custom Sidebars\n"
 "Report-Msgid-Bugs-To: \n"
-"POT-Creation-Date: 2014-08-22 14:03+0100\n"
-"PO-Revision-Date: 2014-08-22 14:03+0100\n"
+"POT-Creation-Date: 2014-08-28 21:44+0100\n"
+"PO-Revision-Date: 2014-08-28 21:53+0100\n"
 "Last-Translator: Philipp Stracker <philipp@stracker.net>\n"
 "Language-Team: \n"
 "Language: de_DE\n"
@@ -14,17 +14,8 @@ msgstr ""
 "X-Poedit-Basepath: ..\n"
 "X-Generator: Poedit 1.6.8\n"
 "X-Poedit-SourceCharset: UTF-8\n"
+"Plural-Forms: nplurals=2; plural=(n != 1);\n"
 "X-Poedit-SearchPath-0: .\n"
-
-#: customsidebars.php:69
-#, php-format
-msgid ""
-"<strong>Custom Sidebars Pro</strong><br />It seems that you have more than "
-"one version of the plugin installed. To avoid problems please check your <a "
-"href=\"%1$s\">plugins</a> and deactivate other versions of this plugin!<br /"
-">You might see this notice, because the free and pro versions of this plugin "
-"are installed at the same time."
-msgstr ""
 
 #: inc/class-custom-sidebars-cloning.php:197
 msgid "Clone"
@@ -40,61 +31,65 @@ msgid "Sidebar-name cannot be empty"
 msgstr "Der Name darf nicht leer sein."
 
 #: inc/class-custom-sidebars-editor.php:183
-#: inc/class-custom-sidebars-editor.php:251
+#: inc/class-custom-sidebars-editor.php:259
 msgid "The sidebar does not exist"
 msgstr "Die Sidebar existiert nicht"
 
-#: inc/class-custom-sidebars-editor.php:203
+#: inc/class-custom-sidebars-editor.php:208
 #, php-format
 msgid "Created new sidebar <strong>%1$s</strong>"
 msgstr "Neue Sidebar <strong>%1$s</strong> erstellt"
 
-#: inc/class-custom-sidebars-editor.php:211
+#: inc/class-custom-sidebars-editor.php:216
 #, php-format
 msgid "Updated sidebar <strong>%1$s</strong>"
 msgstr "Sidebar <strong>%1$s</strong> aktualisiert"
 
-#: inc/class-custom-sidebars-editor.php:222
-#: inc/class-custom-sidebars-editor.php:271
+#: inc/class-custom-sidebars-editor.php:227
+#: inc/class-custom-sidebars-editor.php:279
 msgid "The sidebar was not found"
 msgstr "Die Sidebar wurde nicht gefunden"
 
-#: inc/class-custom-sidebars-editor.php:260
+#: inc/class-custom-sidebars-editor.php:268
 #, php-format
 msgid "Deleted sidebar <strong>%1$s</strong>"
 msgstr "Sidebar <strong>%1$s</strong> gelöscht"
 
-#: inc/class-custom-sidebars-editor.php:329
+#: inc/class-custom-sidebars-editor.php:337
 msgid "Front Page"
 msgstr "Startseite"
 
-#: inc/class-custom-sidebars-editor.php:330
+#: inc/class-custom-sidebars-editor.php:338
 msgid "Search Results"
 msgstr "Suchergebnisse"
 
-#: inc/class-custom-sidebars-editor.php:331
+#: inc/class-custom-sidebars-editor.php:339
 msgid "Author Archives"
 msgstr "Autoren-Archive"
 
-#: inc/class-custom-sidebars-editor.php:332
+#: inc/class-custom-sidebars-editor.php:340
 msgid "Tag Archives"
 msgstr "Tag-Archive"
 
-#: inc/class-custom-sidebars-editor.php:333
+#: inc/class-custom-sidebars-editor.php:341
 msgid "Date Archives"
 msgstr "Datums-Archive"
 
-#: inc/class-custom-sidebars-editor.php:367
+#: inc/class-custom-sidebars-editor.php:373
+msgid "Post Index"
+msgstr "Post Index"
+
+#: inc/class-custom-sidebars-editor.php:377
 #, php-format
 msgid "%1$s Archives"
 msgstr "%1$s Archive"
 
-#: inc/class-custom-sidebars-editor.php:496
+#: inc/class-custom-sidebars-editor.php:509
 #, php-format
 msgid "Updated sidebar <strong>%1$s</strong> settings."
 msgstr "Einstellungen der Sidebar <strong>%1$s</strong> aktualisiert"
 
-#: inc/class-custom-sidebars-editor.php:532 views/widgets.php:17
+#: inc/class-custom-sidebars-editor.php:545 views/widgets.php:17
 msgid "Sidebars"
 msgstr "Sidebars"
 
@@ -205,11 +200,11 @@ msgstr "Nur für einzelne %s"
 msgid "Only these %s:"
 msgstr "Nur diese %s:"
 
-#: inc/class-custom-sidebars.php:80
+#: inc/class-custom-sidebars.php:87
 msgid "Custom Sidebars Pro"
 msgstr "Custom Sidebars Pro"
 
-#: inc/class-custom-sidebars.php:83
+#: inc/class-custom-sidebars.php:90
 #, php-format
 msgid ""
 "Now you can create and edit custom sidebars in your <a href=\"%1$s\">Widgets "
@@ -218,7 +213,7 @@ msgstr ""
 "Du kannst jetzt individuelle Sidebars auf der <a href=\"%1$s\">Widget Seite</"
 "a> anlegen!"
 
-#: inc/class-custom-sidebars.php:102
+#: inc/class-custom-sidebars.php:106
 #, php-format
 msgid ""
 "<strong>Accessibility mode is not supported by the\n"
@@ -226,7 +221,7 @@ msgid ""
 "\t\t\t\t\t\tto disable accessibility mode and use the %1$s plugin!"
 msgstr ""
 
-#: inc/class-custom-sidebars.php:798
+#: inc/class-custom-sidebars.php:802
 #, php-format
 msgid ""
 "Import / Export functionality is available<br />in the <b>PRO</b> version of "
@@ -235,7 +230,7 @@ msgstr ""
 "Import / Export Funktionen sind in<br />der <b>PRO</b> Version verfügbar."
 "<br /><a href=\"%1$s\" target=\"_blank\">Weitere Details</a>"
 
-#: inc/class-custom-sidebars.php:802
+#: inc/class-custom-sidebars.php:806
 msgid "Pro Version Features"
 msgstr "Pro Version Funktionen"
 

@@ -1,33 +1,23 @@
 msgid ""
 msgstr ""
-"Project-Id-Version: Custom Sidebars Pro v2.0\n"
+"Project-Id-Version: Custom Sidebars\n"
 "Report-Msgid-Bugs-To: \n"
-"POT-Creation-Date: 2014-08-22 14:03+0100\n"
-"PO-Revision-Date: 2014-08-22 14:03+0100\n"
+"POT-Creation-Date: 2014-08-28 21:45+0100\n"
+"PO-Revision-Date: 2014-08-28 21:54+0100\n"
 "Last-Translator: Philipp Stracker <philipp@stracker.net>\n"
 "Language-Team: \n"
 "Language: es_ES\n"
 "MIME-Version: 1.0\n"
 "Content-Type: text/plain; charset=UTF-8\n"
 "Content-Transfer-Encoding: 8bit\n"
-"Plural-Forms: nplurals=2; plural=n != 1;\n"
+"Plural-Forms: nplurals=2; plural=(n != 1);\n"
 "X-Generator: Poedit 1.6.8\n"
-"X-Poedit-SourceCharset: utf-8\n"
+"X-Poedit-SourceCharset: UTF-8\n"
 "X-Poedit-KeywordsList: __;_e;__ngettext:1,2;_n:1,2;__ngettext_noop:1,2;"
 "_n_noop:1,2;_c,_nc:4c,1,2;_x:1,2c;_ex:1,2c;_nx:4c,1,2;_nx_noop:4c,1,2\n"
-"X-Poedit-Basepath: ../\n"
+"X-Poedit-Basepath: ..\n"
 "X-Textdomain-Support: yes\n"
 "X-Poedit-SearchPath-0: .\n"
-
-#: customsidebars.php:69
-#, php-format
-msgid ""
-"<strong>Custom Sidebars Pro</strong><br />It seems that you have more than "
-"one version of the plugin installed. To avoid problems please check your <a "
-"href=\"%1$s\">plugins</a> and deactivate other versions of this plugin!<br /"
-">You might see this notice, because the free and pro versions of this plugin "
-"are installed at the same time."
-msgstr ""
 
 # @ custom-sidebars
 #: inc/class-custom-sidebars-cloning.php:197
@@ -48,80 +38,86 @@ msgstr "El nombre de la barra lateral no puede ser vacío"
 
 # @ custom-sidebars
 #: inc/class-custom-sidebars-editor.php:183
-#: inc/class-custom-sidebars-editor.php:251
+#: inc/class-custom-sidebars-editor.php:259
 #, fuzzy
 msgid "The sidebar does not exist"
 msgstr "Crear una barra"
 
 # @ custom-sidebars
-#: inc/class-custom-sidebars-editor.php:203
+#: inc/class-custom-sidebars-editor.php:208
 #, php-format
 msgid "Created new sidebar <strong>%1$s</strong>"
 msgstr "Creada la barra <strong>%1$s</strong>"
 
 # @ custom-sidebars
-#: inc/class-custom-sidebars-editor.php:211
+#: inc/class-custom-sidebars-editor.php:216
 #, php-format
 msgid "Updated sidebar <strong>%1$s</strong>"
 msgstr "Barra <strong>%1$s</strong> actualizada"
 
 # @ custom-sidebars
-#: inc/class-custom-sidebars-editor.php:222
-#: inc/class-custom-sidebars-editor.php:271
+#: inc/class-custom-sidebars-editor.php:227
+#: inc/class-custom-sidebars-editor.php:279
 #, fuzzy
 msgid "The sidebar was not found"
 msgstr "Crear una barra"
 
 # @ custom-sidebars
-#: inc/class-custom-sidebars-editor.php:260
+#: inc/class-custom-sidebars-editor.php:268
 #, php-format
 msgid "Deleted sidebar <strong>%1$s</strong>"
 msgstr "Barra <strong>%1$s</strong> borrada"
 
 # @ custom-sidebars
-#: inc/class-custom-sidebars-editor.php:329
+#: inc/class-custom-sidebars-editor.php:337
 #, fuzzy
 msgid "Front Page"
 msgstr "Página principal del Blog"
 
 # @ custom-sidebars
-#: inc/class-custom-sidebars-editor.php:330
+#: inc/class-custom-sidebars-editor.php:338
 #, fuzzy
 msgid "Search Results"
 msgstr "Página de resultados de búsqueda"
 
 # @ custom-sidebars
-#: inc/class-custom-sidebars-editor.php:331
+#: inc/class-custom-sidebars-editor.php:339
 #, fuzzy
 msgid "Author Archives"
 msgstr "Archivos de autores"
 
 # @ custom-sidebars
-#: inc/class-custom-sidebars-editor.php:332
+#: inc/class-custom-sidebars-editor.php:340
 #, fuzzy
 msgid "Tag Archives"
 msgstr "Archivos de etiquetas"
 
 # @ custom-sidebars
-#: inc/class-custom-sidebars-editor.php:333
+#: inc/class-custom-sidebars-editor.php:341
 #, fuzzy
 msgid "Date Archives"
 msgstr "Archivos por fecha"
 
 # @ custom-sidebars
-#: inc/class-custom-sidebars-editor.php:367
+#: inc/class-custom-sidebars-editor.php:373
+#, fuzzy
+msgid "Post Index"
+msgstr "Por tipo de entrada"
+
+# @ custom-sidebars
+#: inc/class-custom-sidebars-editor.php:377
 #, fuzzy, php-format
 msgid "%1$s Archives"
 msgstr "Archivos %1$s"
 
 # @ custom-sidebars
-#: inc/class-custom-sidebars-editor.php:496
+#: inc/class-custom-sidebars-editor.php:509
 #, php-format
 msgid "Updated sidebar <strong>%1$s</strong> settings."
 msgstr "Actualizadas las opciones para la barra <strong>%1$s</strong>."
 
 # @ custom-sidebars
-#: inc/class-custom-sidebars-editor.php:532 views/widgets.php:17
+#: inc/class-custom-sidebars-editor.php:545 views/widgets.php:17
 msgid "Sidebars"
 msgstr "Barras Laterales"
 
@@ -258,13 +254,13 @@ msgid "Only these %s:"
 msgstr "Solo estos %s"
 
 # @ custom-sidebars
-#: inc/class-custom-sidebars.php:80
+#: inc/class-custom-sidebars.php:87
 #, fuzzy
 msgid "Custom Sidebars Pro"
 msgstr "Barras Laterales"
 
 # @ custom-sidebars
-#: inc/class-custom-sidebars.php:83
+#: inc/class-custom-sidebars.php:90
 #, php-format
 msgid ""
 "Now you can create and edit custom sidebars in your <a href=\"%1$s\">Widgets "
@@ -273,7 +269,7 @@ msgstr ""
 "Ahora puedes crear y editar barras laterales en tu <a href=\"%1$s\">pantalla "
 "de Widgets</a>!"
 
-#: inc/class-custom-sidebars.php:102
+#: inc/class-custom-sidebars.php:106
 #, php-format
 msgid ""
 "<strong>Accessibility mode is not supported by the\n"
@@ -282,7 +278,7 @@ msgid ""
 msgstr ""
 
 # @ custom-sidebars
-#: inc/class-custom-sidebars.php:798
+#: inc/class-custom-sidebars.php:802
 #, php-format
 msgid ""
 "Import / Export functionality is available<br />in the <b>PRO</b> version of "
@@ -292,7 +288,7 @@ msgstr ""
 "b> del plugin.<br /><a href=\"%1$s\" target=\"_blank\">Leer más</a>"
 
 # @ custom-sidebars
-#: inc/class-custom-sidebars.php:802
+#: inc/class-custom-sidebars.php:806
 msgid "Pro Version Features"
 msgstr "Características PRO"
 
@@ -503,13 +499,13 @@ msgstr "El nombre de la barra lateral no puede ser vacío"
 #: views/widgets-editor.php:17
 #, fuzzy
 msgid "The name must be unique."
-msgstr "Nombre"
+msgstr "name"
 
 # @ custom-sidebars
 #: views/widgets-editor.php:21
 #, fuzzy
 msgid "Sidebar description here..."
-msgstr "Descripción"
+msgstr "description"
 
 # @ custom-sidebars
 #: views/widgets-editor.php:27
