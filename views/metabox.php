@@ -2,6 +2,9 @@
 /**
  * Metabox inside posts/pages where user can define custom sidebars for an
  * individual post.
+ *
+ * Uses:
+ *   $selected
  */
 
 global $wp_registered_sidebars;
@@ -21,8 +24,12 @@ $sidebars = CustomSidebars::get_options( 'modifiable' );
 	<?php foreach ( $sidebars as $s ) { ?>
 		<?php $sb_name = $available[ $s ]['name']; ?>
 		<p>
-			<b><?php echo esc_html( $sb_name ); ?></b>:
-			<select name="cs_replacement_<?php echo esc_attr( $s ); ?>">
+			<label for="cs_replacement_<?php echo esc_attr( $s ); ?>">
+				<b><?php echo esc_html( $sb_name ); ?></b>:
+			</label>
+			<select name="cs_replacement_<?php echo esc_attr( $s ); ?>"
+				id="cs_replacement_<?php echo esc_attr( $s ); ?>"
+				class="cs-replacement-field <?php echo esc_attr( $s ); ?>">
 				<option value=""></option>
 				<?php foreach ( $available as $a ) : ?>
 				<option value="<?php echo esc_attr( $a['id'] ); ?>" <?php selected( $selected[ $s ], $a['id'] ); ?>>

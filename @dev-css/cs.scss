@@ -289,6 +289,9 @@ body.appearance_page_customsidebars #poststuff h2 {
 /**
  * =============================================================================
  * == Message box
+ *
+ * @todo: Check if this is used at all??
+ *
  * =============================================================================
  */
 
@@ -689,4 +692,82 @@ h2 .show-infos {
 .cs-replaceable.open > .details {
 	display: block;
 }
+
+/**
+ * =============================================================================
+ * == Post list
+ * =============================================================================
+ */
+
+#wpbody-content .wp-list-table {
+	.column-cs_replacement {
+		width: 300px;
+		overflow: hidden;
+	}
+
+	td.cs_replacement {
+		/* do not display sidebars that are not replaced */
+		.def,
+		.cust {
+			opacity: .8;
+			cursor: default;
+
+			&:after {
+				content: ' ';
+				display: block;
+				clear: both;
+			}
+
+			&:hover {
+				opacity: 1;
+				background: rgba(0,0,0,0.02);
+			}
+		}
+
+		.def {
+			display: none;
+		}
+
+		.cs-val,
+		.cs-key {
+			white-space: nowrap;
+			text-overflow: ellipsis;
+			overflow: hidden;
+			float: left;
+		}
+
+		.cs-key {
+			width: 100px;
+			padding-right: 10px;
+			color: #666;
+		}
+
+		.cs-val {
+			width: 190px;
+		}
+	}
+
+	.inline-edit-row {
+		fieldset.cs-quickedit {
+			border-top: 1px solid #EEE;
+			margin-top: 10px;
+			padding-top: 10px;
+
+			label span.title {
+				display: block;
+				float: left;
+				min-width: 5em;
+				white-space: nowrap;
+				padding-right: 10px;
+				width: auto;
+			}
+		}
+	}
+
+	.inline-edit-row-page .inline-edit-col-right {
+		float: right;
+	}
+}
+
+
 

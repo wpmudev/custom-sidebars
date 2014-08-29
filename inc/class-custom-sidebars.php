@@ -121,6 +121,7 @@ class CustomSidebars {
 			WDev()->add_ui( 'select', 'widgets.php' );
 			WDev()->add_ui( CSB_JS_URL . 'cs.min.js', 'widgets.php' );
 			WDev()->add_ui( CSB_CSS_URL . 'cs.css', 'widgets.php' );
+			WDev()->add_ui( CSB_CSS_URL . 'cs.css', 'edit.php' );
 
 			// AJAX actions
 			add_action( 'wp_ajax_cs-ajax', array( $this, 'ajax_handler' ) );

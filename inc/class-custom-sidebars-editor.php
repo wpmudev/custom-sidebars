@@ -46,6 +46,35 @@ class CustomSidebarsEditor extends CustomSidebars {
 				'cs_ajax_request',
 				array( $this, 'handle_ajax' )
 			);
+
+
+			// === Pro only: Custom column and Quick-Edit.
+
+			// Add a custom column to post list.
+			$posttypes = self::get_post_types( 'objects' );
+			foreach ( $posttypes as $pt ) {
+				add_filter(
+					'manage_' . $pt->name . '_posts_columns',
+					array( $this, 'post_columns' )
+				);
+
+				add_action(
+					'manage_' . $pt->name . '_posts_custom_column',
+					array( $this, 'post_column_content' ),
+					10, 2
+				);
+			}
+
+			add_action(
+				'quick_edit_custom_box',
+				array( $this, 'post_quick_edit' ),
+				10, 2
+			);
+
+			add_action(
+				'admin_footer',
+				array( $this, 'post_quick_edit_js' )
+			);
 		}
 	}
 
@@ -543,7 +572,7 @@ class CustomSidebarsEditor extends CustomSidebars {
 			add_meta_box(
 				'customsidebars-mb',
 				__( 'Sidebars', CSB_LANG ),
-				array( $this, 'print_metabox' ),
+				array( $this, 'print_metabox_editor' ),
 				$post_type,
 				'side'
 			);
@@ -553,10 +582,28 @@ class CustomSidebarsEditor extends CustomSidebars {
 	/**
 	 * Renders the Custom Sidebars meta box in the post-editor.
 	 */
-	public function print_metabox() {
-		global $post, $wp_registered_sidebars;
+	public function print_metabox_editor() {
+		global $post;
+		$this->print_sidebars_form( $post->ID, 'metabox' );
+	}
 
-		$replacements = self::get_replacements( $post->ID );
+	/**
+	 * Renders the sidebar-fields inside the quick-edit form.
+	 */
+	public function print_metabox_quick() {
+		$this->print_sidebars_form( 0, 'quick-edit' );
+	}
+
+	/**
+	 * Renders the Custom Sidebars form.
+	 *
+	 * @param  int $post_id The post-ID to display
+	 * @param  string $type Which form to display. 'metabox/quick-edit/col-sidebars'.
+	 */
+	protected function print_sidebars_form( $post_id, $type = 'metabox' ) {
+		global $wp_registered_sidebars;
+
+		$replacements = self::get_replacements( $post_id );
 
 		$available = $wp_registered_sidebars;
 		ksort( $available );
@@ -572,9 +619,20 @@ class CustomSidebarsEditor extends CustomSidebars {
 			}
 		}
 
-		include CSB_VIEWS_DIR . 'metabox.php';
-	}
+		switch ( $type ) {
+			case 'col-sidebars':
+				include CSB_VIEWS_DIR . 'col-sidebars.php';
+				break;
 
+			case 'quick-edit':
+				include CSB_VIEWS_DIR . 'quick-edit.php';
+				break;
+
+			default:
+				include CSB_VIEWS_DIR . 'metabox.php';
+				break;
+		}
+	}
 
 	public function store_replacements( $post_id ) {
 		global $action;
@@ -593,11 +651,11 @@ class CustomSidebarsEditor extends CustomSidebars {
 		}
 
 		/*
-		 * Make sure we are editing the post normaly, if we are bulk editing or
-		 * quick editing, no sidebar data is recieved and the sidebars would
-		 * be deleted.
+		 * 'editpost' .. Saved from full Post-Editor screen.
+		 * 'inline-save' .. Saved via the quick-edit form.
+		 * We do not (yet) offer a bulk-editing option for custom sidebars.
 		 */
-		if ( $action != 'editpost' ) {
+		if ( 'editpost' != $action && 'inline-save' != @$_POST['action'] ) {
 			return $post_id;
 		}
 
@@ -621,6 +679,12 @@ class CustomSidebarsEditor extends CustomSidebars {
 
 		self::set_post_meta( $post_id, $data );
 	}
+
+
+	//
+	// ========== PRO: WPML support.
+	//
+
 
 	/**
 	 * Updates the WPML string register with the current sidebar string so the
@@ -749,6 +813,131 @@ class CustomSidebarsEditor extends CustomSidebars {
 		}
 
 		return $sidebar;
+	}
+
+
+	//
+	// ========== PRO: Custom column an Quick-Edit fields for post list.
+	// http://shibashake.com/wordpress-theme/expand-the-wordpress-quick-edit-menu
+	//
+
+
+	/**
+	 * Adds a custom column to post-types that support custom sidebars.
+	 *
+	 * @since  2.0.9.7
+	 * @param  array $columns Column list.
+	 * @return array Modified column list.
+	 */
+	public function post_columns( $columns ) {
+		// This column is added.
+		$insert = array(
+			'cs_replacement' => __( 'Custom Sidebars', CSB_LANG ),
+		);
+
+		// Column is added after column 'title'.
+		$insert_after = 'title';
+
+		$pos = array_search( $insert_after, array_keys( $columns ) ) + 1;
+		$columns = array_merge(
+			array_slice( $columns, 0, $pos ),
+			$insert,
+			array_slice( $columns, $pos )
+		);
+
+		return $columns;
+	}
+
+	/**
+	 * Display values in the custom column.
+	 *
+	 * @since  2.0.9.7
+	 * @param  string $column_name Column-Key defined in post_columns above.
+	 * @param  int $post_id Post-ID
+	 */
+	public function post_column_content( $column_name, $post_id ) {
+		switch ( $column_name ) {
+			case 'cs_replacement':
+				$this->print_sidebars_form( $post_id, 'col-sidebars' );
+				break;
+		}
+	}
+
+	/**
+	 * Adds a custom field to the quick-edit box to select custom columns.
+	 *
+	 * @since  2.0.9.7
+	 * @param  string $column_name Column-Key defined in post_columns above.
+	 * @param  string $post_type Post-type that is currently edited.
+	 */
+	public function post_quick_edit( $column_name, $post_type ) {
+		if ( ! self::supported_post_type( $post_type ) ) { return false; }
+
+		switch ( $column_name ) {
+			case 'cs_replacement':
+				$this->print_metabox_quick();
+				break;
+		}
+	}
+
+	/**
+	 * Javascript to set the values of the quick-edit form.
+	 *
+	 * Note: There is only 1 quick-edit form on the page. The form is displayed
+	 * when the user clicks the quick edit action; all fields are then populated
+	 * with values of the corresponding post.
+	 *
+	 * @since  2.0.9.7
+	 */
+	public function post_quick_edit_js() {
+		global $current_screen;
+
+		if ( ( $current_screen->base != 'edit' ) ) { return false; }
+		if ( ! self::supported_post_type( $current_screen->post_type ) ) { return false; }
+
+		?>
+		<script type="text/javascript">
+		<!--
+		jQuery(function() {
+			// we create a copy of the WP inline edit post function
+			var wp_inline_edit = inlineEditPost.edit;
+
+			// and then we overwrite the function with our own code
+			inlineEditPost.edit = function( id ) {
+
+				// "call" the original WP edit function
+				// we don't want to leave WordPress hanging
+				wp_inline_edit.apply( this, arguments );
+
+				// now we take care of our business.
+
+				// get the post ID
+				var post_id = 0;
+				if ( typeof( id ) == 'object' ) {
+					post_id = parseInt( this.getId( id ) );
+				}
+
+				if ( post_id > 0 ) {
+
+					// define the edit row
+					var edit_row = jQuery( '#edit-' + post_id );
+					var post_row = jQuery( '#post-' + post_id );
+
+					// Our custom column
+					var sidebar_col = post_row.find( '.cs_replacement' );
+
+					sidebar_col.find( '[data-sidebar]' ).each(function() {
+						var key = jQuery( this ).attr( 'data-sidebar' ),
+							val = jQuery( this ).attr( 'data-replaced' );
+
+						edit_row.find( '.cs-replacement-field.' + key ).val ( val );
+					});
+				}
+			};
+		});
+		//-->
+		</script>
+		<?php
 	}
 
 };
