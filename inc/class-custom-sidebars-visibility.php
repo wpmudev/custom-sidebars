@@ -8,7 +8,7 @@ add_action( 'cs_init', array( 'CustomSidebarsVisibility', 'instance' ) );
  *
  * @since  2.0
  */
-class CustomSidebarsVisibility {
+class CustomSidebarsVisibility extends CustomSidebars {
 
 	/**
 	 * Returns the singleton object.
@@ -48,6 +48,12 @@ class CustomSidebarsVisibility {
 
 			WDev()->add_ui( CSB_JS_URL . 'cs-visibility.min.js', 'widgets.php' );
 			WDev()->add_ui( CSB_CSS_URL . 'cs-visibility.css', 'widgets.php' );
+
+			// Custom Sidebars Ajax request.
+			add_action(
+				'cs_ajax_request_get',
+				array( $this, 'ajax_handler' )
+			);
 		} else {
 			// Filters the list of widget-areas and their widgets
 			add_filter(
@@ -72,7 +78,7 @@ class CustomSidebarsVisibility {
 			$tax_list = get_taxonomies( array( 'public' => true ), 'objects' );
 			$type_list = CustomSidebars::get_post_types( 'objects' );
 			$Condition_keys = array(
-				'date' => '',
+				'date' => array(),
 				'roles' => array(),
 				'pagetypes' => array(),
 				'posttypes' => array(),
@@ -121,38 +127,49 @@ class CustomSidebarsVisibility {
 	 * @since  2.0
 	 */
 	public function admin_widget_button( $widget, $return, $instance ) {
-		$is_visible = ('1' == @$_POST['csb_visible'] ? 1 : 0);
-		$tax_list = get_taxonomies( array( 'public' => true ), 'objects' );
-		$type_list = CustomSidebars::get_post_types( 'objects' );
-		$role_list = array_reverse( get_editable_roles() );
-		$membership_levels = $this->get_membership_levels();
-		$pagetype_list = array(
-			'frontpage' => 'Frontpage',
-			'single' => 'Single page',
-			'posts' => 'Posts page',
-			'archive' => 'Archives',
-			'search' => 'Search results',
-			'e404' => 'Not found (404)',
-			'preview' => 'Preview',
-			'day' => 'Archive: Day',
-			'month' => 'Archive: Month',
-			'year' => 'Archive: Year',
-		);
+		static $Loaded = false;
+		static $tax_list = array();
+		static $type_list = array();
+		static $role_list = array();
+		static $membership_levels = array();
+		static $pagetype_list = array();
 
-		// Remove taxonomies without values.
-		foreach ( $tax_list as $index => $tax_item ) {
-			$tags = get_terms( $tax_item->name, array( 'hide_empty' => false ) );
-			if ( empty( $tags ) ) {
-				unset( $tax_list[ $index ] );
+		if ( false === $Loaded ) {
+			$tax_list = get_taxonomies( array( 'public' => true ), 'objects' );
+			$type_list = CustomSidebars::get_post_types( 'objects' );
+			$role_list = array_reverse( get_editable_roles() );
+			$membership_levels = $this->get_membership_levels();
+			$pagetype_list = array(
+				'frontpage' => 'Frontpage',
+				'single' => 'Single page',
+				'posts' => 'Posts page',
+				'archive' => 'Archives',
+				'search' => 'Search results',
+				'e404' => 'Not found (404)',
+				'preview' => 'Preview',
+				'day' => 'Archive: Day',
+				'month' => 'Archive: Month',
+				'year' => 'Archive: Year',
+			);
+
+			// Remove taxonomies without values.
+			foreach ( $tax_list as $index => $tax_item ) {
+				$tags = get_terms( $tax_item->name, array( 'hide_empty' => false ) );
+				if ( empty( $tags ) ) {
+					unset( $tax_list[ $index ] );
+				}
 			}
 		}
 
+		$is_visible = ('1' == @$_POST['csb_visible'] ? 1 : 0);
 		$data = $this->get_widget_data( $instance );
 		$action_show = ($data['action'] == 'show');
 		$cond = $data['conditions'];
 
 		?>
-		<div class="csb-visibility csb-visibility-<?php echo esc_attr( $widget->id ); ?>">
+		<div class="csb-visibility csb-visibility-<?php echo esc_attr( $widget->id ); ?>"
+			data-widget="<?php echo esc_attr( $widget->option_name ); ?>"
+			data-number="<?php echo esc_attr( absint( @$widget->number ) ); ?>">
 		<?php
 		/*
 		 * This input is only used to determine if the "visibility" button
@@ -176,19 +193,44 @@ class CustomSidebarsVisibility {
 			<i class="dashicons dashicons-plus choose-filters show-on-hover action"></i>
 			<ul class="dropdown" style="display:none">
 				<li class="csb-group">Filters</li>
-				<li class="add-filter" data-for=".csb-date" style="display:none">Date</li>
-				<li class="add-filter" data-for=".csb-roles" <?php if ( ! empty( $cond['roles'] ) ) : ?>style="display:none"<?php endif; ?>>Roles</li>
+				<li class="add-filter"
+					data-for=".csb-date"
+					style="display:none">
+					Date
+				</li>
+				<li class="add-filter"
+					data-for=".csb-roles"
+					<?php if ( ! empty( $cond['roles'] ) ) : ?>style="display:none"<?php endif; ?>>
+					Roles
+				</li>
 				<?php if ( false != $membership_levels ) : ?>
-					<li class="add-filter" data-for=".csb-membership">Membership</li>
+					<li class="add-filter"
+						data-for=".csb-membership">
+						Membership
+					</li>
 				<?php endif; ?>
-				<li class="add-filter" data-for=".csb-prosite" style="display:none">ProSite</li>
-				<li class="add-filter" data-for=".csb-pagetypes" <?php if ( ! empty( $cond['pagetypes'] ) ) : ?>style="display:none"<?php endif; ?>>Special pages</li>
-				<li class="add-filter" data-for=".csb-posttypes" <?php if ( ! empty( $cond['posttypes'] ) ) : ?>style="display:none"<?php endif; ?>>For posttype</li>
+				<li class="add-filter"
+					data-for=".csb-prosite"
+					style="display:none">
+					ProSite
+				</li>
+				<li class="add-filter"
+					data-for=".csb-pagetypes"
+					<?php if ( ! empty( $cond['pagetypes'] ) ) : ?>style="display:none"<?php endif; ?>>
+					Special pages
+				</li>
+				<li class="add-filter"
+					data-for=".csb-posttypes"
+					<?php if ( ! empty( $cond['posttypes'] ) ) : ?>style="display:none"<?php endif; ?>>
+					For posttype
+				</li>
 				<li class="csb-group">Taxonomy</li>
 				<?php foreach ( $tax_list as $tax_item ) :
 					$row_id = 'tax-' . $tax_item->name;
 					?>
-					<li class="add-filter" data-for=".csb-<?php echo esc_attr( $row_id ); ?>" <?php if ( ! empty( $cond[ $row_id ] ) ) : ?>style="display:none"<?php endif; ?>>
+					<li class="add-filter"
+						data-for=".csb-<?php echo esc_attr( $row_id ); ?>"
+						<?php if ( ! empty( $cond[ $row_id ] ) ) : ?>style="display:none"<?php endif; ?>>
 						<?php echo esc_html( $tax_item->labels->name ); ?>
 					</li>
 					<?php
@@ -204,14 +246,25 @@ class CustomSidebarsVisibility {
 
 		<?php /* DATE */ ?>
 		<div class="csb-option-row csb-date" <?php if ( empty( $cond['date'] ) ) : ?>style="display:none"<?php endif; ?>>
-			<label for="<?php echo esc_attr( $widget->id ); ?>-date"><span class="csb-and" style="display:none"><?php _e( 'AND', CSB_LANG ); ?></span> <?php _e( 'On these dates', CSB_LANG ); ?></label>
+			<label for="<?php echo esc_attr( $widget->id ); ?>-date">
+				<span class="csb-and" style="display:none"><?php _e( 'AND', CSB_LANG ); ?></span>
+				<?php _e( 'On these dates', CSB_LANG ); ?>
+			</label>
 			<i class="dashicons dashicons-trash clear-filter show-on-hover action"></i>
-			<input type="text" id="<?php echo esc_attr( $widget->id ); ?>-date" name="<?php echo esc_attr( $block_name ); ?>[date]" value="<?php echo esc_attr( @$cond['date'] ); ?>" />
+		<?php /* ?>
+			<input type="text"
+				id="<?php echo esc_attr( $widget->id ); ?>-date"
+				name="<?php echo esc_attr( $block_name ); ?>[date][]"
+				value="<?php echo esc_attr( @$cond['date'] ); ?>" />
+		<?php */ ?>
 		</div>
 
 		<?php /* ROLES */ ?>
 		<div class="csb-option-row csb-roles" <?php if ( empty( $cond['roles'] ) ) : ?>style="display:none"<?php endif; ?>>
-			<label for="<?php echo esc_attr( $widget->id ); ?>-roles"><span class="csb-and" style="display:none"><?php _e( 'AND', CSB_LANG ); ?></span> <?php _e( 'User has role', CSB_LANG ); ?></label>
+			<label for="<?php echo esc_attr( $widget->id ); ?>-roles">
+				<span class="csb-and" style="display:none"><?php _e( 'AND', CSB_LANG ); ?></span>
+				<?php _e( 'User has role', CSB_LANG ); ?>
+			</label>
 			<i class="dashicons dashicons-trash clear-filter show-on-hover action"></i>
 			<select id="<?php echo esc_attr( $widget->id ); ?>-roles" name="<?php echo esc_attr( $block_name ); ?>[roles][]" multiple="multiple">
 			<?php foreach ( $role_list as $role => $details ) : ?>
@@ -227,7 +280,10 @@ class CustomSidebarsVisibility {
 		<?php /* MEMBERSHIP */ ?>
 		<?php if ( is_array( $membership_levels ) ) : ?>
 		<div class="csb-option-row csb-membership" <?php if ( empty( $cond['membership'] ) ) : ?>style="display:none"<?php endif; ?>>
-			<label for="<?php echo esc_attr( $widget->id ); ?>-membership"><span class="csb-and" style="display:none"><?php _e( 'AND', CSB_LANG ); ?></span> <?php _e( 'User has Membership Level', CSB_LANG ); ?></label>
+			<label for="<?php echo esc_attr( $widget->id ); ?>-membership">
+				<span class="csb-and" style="display:none"><?php _e( 'AND', CSB_LANG ); ?></span>
+				<?php _e( 'User has Membership Level', CSB_LANG ); ?>
+			</label>
 			<i class="dashicons dashicons-trash clear-filter show-on-hover action"></i>
 			<select id="<?php echo esc_attr( $widget->id ); ?>-membership" name="<?php echo esc_attr( $block_name ); ?>[membership][]" multiple="multiple">
 			<?php foreach ( $membership_levels as $level ) : ?>
@@ -243,7 +299,10 @@ class CustomSidebarsVisibility {
 
 		<?php /* PRO-SITE */ ?>
 		<div class="csb-option-row csb-prosite" <?php if ( empty( $cond['prosite'] ) ) : ?>style="display:none"<?php endif; ?>>
-			<label for="<?php echo esc_attr( $widget->id ); ?>-prosite"><span class="csb-and" style="display:none"><?php _e( 'AND', CSB_LANG ); ?></span> <?php _e( 'Pro Sites Level', CSB_LANG ); ?></label>
+			<label for="<?php echo esc_attr( $widget->id ); ?>-prosite">
+				<span class="csb-and" style="display:none"><?php _e( 'AND', CSB_LANG ); ?></span>
+				<?php _e( 'Pro Sites Level', CSB_LANG ); ?>
+			</label>
 			<i class="dashicons dashicons-trash clear-filter show-on-hover action"></i>
 			<select id="<?php echo esc_attr( $widget->id ); ?>-prosite" name="<?php echo esc_attr( $block_name ); ?>[prosite][]" multiple="multiple">
 			<?php foreach ( array() as $level ) : ?>
@@ -257,7 +316,10 @@ class CustomSidebarsVisibility {
 
 		<?php /* PAGE TYPES */ ?>
 		<div class="csb-option-row csb-pagetypes" <?php if ( empty( $cond['pagetypes'] ) ) : ?>style="display:none"<?php endif; ?>>
-			<label for="<?php echo esc_attr( $widget->id ); ?>-pagetypes"><span class="csb-and" style="display:none"><?php _e( 'AND', CSB_LANG ); ?></span> <?php _e( 'On these special pages', CSB_LANG ); ?></label>
+			<label for="<?php echo esc_attr( $widget->id ); ?>-pagetypes">
+				<span class="csb-and" style="display:none"><?php _e( 'AND', CSB_LANG ); ?></span>
+				<?php _e( 'On these special pages', CSB_LANG ); ?>
+			</label>
 			<i class="dashicons dashicons-trash clear-filter show-on-hover action"></i>
 			<select id="<?php echo esc_attr( $widget->id ); ?>-pagetypes" name="<?php echo esc_attr( $block_name ); ?>[pagetypes][]" multiple="multiple">
 			<?php foreach ( $pagetype_list as $type => $name ) : ?>
@@ -270,10 +332,18 @@ class CustomSidebarsVisibility {
 		</div>
 
 		<?php /* POSTTYPES */ ?>
-		<div class="csb-option-row csb-posttypes" <?php if ( empty( $cond['posttypes'] ) ) : ?>style="display:none"<?php endif; ?>>
-			<label for="<?php echo esc_attr( $widget->id ); ?>-posttypes"><span class="csb-and" style="display:none"><?php _e( 'AND', CSB_LANG ); ?></span> <?php _e( 'On any page of these types', CSB_LANG ); ?></label>
+		<div class="csb-option-row csb-posttypes"
+			<?php if ( empty( $cond['posttypes'] ) ) : ?>style="display:none"<?php endif; ?>>
+
+			<label for="<?php echo esc_attr( $widget->id ); ?>-posttypes">
+				<span class="csb-and" style="display:none"><?php _e( 'AND', CSB_LANG ); ?></span>
+				<?php _e( 'On any page of these types', CSB_LANG ); ?>
+			</label>
 			<i class="dashicons dashicons-trash clear-filter show-on-hover action"></i>
-			<select class="posttype" id="<?php echo esc_attr( $widget->id ); ?>-posttypes" name="<?php echo esc_attr( $block_name ); ?>[posttypes][]" multiple="multiple">
+			<select class="posttype"
+				id="<?php echo esc_attr( $widget->id ); ?>-posttypes"
+				name="<?php echo esc_attr( $block_name ); ?>[posttypes][]"
+				multiple="multiple">
 			<?php foreach ( $type_list as $type_item ) : ?>
 				<?php $is_selected = in_array( $type_item->name, $cond['posttypes'] ); ?>
 				<option <?php selected( $is_selected ); ?> value="<?php echo esc_attr( $type_item->name ); ?>">
@@ -297,13 +367,22 @@ class CustomSidebarsVisibility {
 					)
 				);
 				?>
-				<div class="csb-detail-row csb-<?php echo esc_attr( $row_id ); ?>" <?php if ( ! $is_selected ) : ?>style="display:none"<?php endif; ?>>
+				<div class="csb-detail-row csb-<?php echo esc_attr( $row_id ); ?>"
+					<?php if ( ! $is_selected ) : ?>style="display:none"<?php endif; ?>>
+
 					<label for="<?php echo esc_attr( $widget->id ); ?>-<?php echo esc_attr( $row_id ); ?>">
-						<input type="checkbox" id="<?php echo esc_attr( $widget->id ); ?>-<?php echo esc_attr( $row_id ); ?>" <?php checked( ! empty( $cond[ $row_id ] ) ); ?> data-lbl-all="<?php echo esc_attr( $lbl_all ); ?>" data-lbl-single="<?php echo esc_attr( $lbl_single ); ?>" />
-						<span class="lbl"><?php echo esc_html( empty( $cond[ $row_id ] ) ? $lbl_all : $lbl_single ); ?></span>
+						<input type="checkbox"
+							id="<?php echo esc_attr( $widget->id ); ?>-<?php echo esc_attr( $row_id ); ?>"
+							<?php checked( ! empty( $cond[ $row_id ] ) ); ?>
+							data-lbl-all="<?php echo esc_attr( $lbl_all ); ?>"
+							data-lbl-single="<?php echo esc_attr( $lbl_single ); ?>" />
+						<span class="lbl">
+							<?php echo esc_html( empty( $cond[ $row_id ] ) ? $lbl_all : $lbl_single ); ?>
+						</span>
 					</label>
 					<div class="detail" <?php if ( empty( $cond[ $row_id ] ) ) : ?>style="display:none"<?php endif; ?>>
-						<select name="<?php echo esc_attr( $block_name ); ?>[<?php echo esc_attr( $row_id ); ?>][]" multiple="multiple">
+						<select name="<?php echo esc_attr( $block_name ); ?>[<?php echo esc_attr( $row_id ); ?>][]"
+							multiple="multiple">
 						<?php foreach ( $posts as $post ) : ?>
 							<?php $is_selected = in_array( $post->ID, $cond[ $row_id ] ); ?>
 							<option <?php selected( $is_selected ); ?> value="<?php echo esc_attr( $post->ID ); ?>">
@@ -320,19 +399,38 @@ class CustomSidebarsVisibility {
 		<?php
 		foreach ( $tax_list as $tax_item ) {
 			$row_id = 'tax-' . $tax_item->name;
-			$tags = get_terms( $tax_item->name, array( 'hide_empty' => false ) );
+			$ajax_url = admin_url( 'admin-ajax.php?action=cs-ajax&do=visibility&tag=' . $tax_item->name );
+			$sel = array();
+
+			if ( ! empty( $cond[ $row_id ] ) ) {
+				$tags = get_terms(
+					$tax_item->name,
+					array(
+						'include' => implode( ',', $cond[ $row_id ] ),
+						'hide_empty' => false,
+					)
+				);
+
+				foreach ( $tags as $tag ) {
+					$sel[] = $tag->term_id . '::' . str_replace( '::', ':', $tag->name );
+				}
+			}
+
 			?>
-			<div class="csb-option-row csb-<?php echo esc_attr( $row_id ); ?>" <?php if ( empty( $cond[ $row_id ] ) ) : ?>style="display:none"<?php endif; ?>>
-				<label for="<?php echo esc_attr( $widget->id ); ?>-<?php echo esc_attr( $row_id ); ?>"><span class="csb-and" style="display:none"><?php _e( 'AND', CSB_LANG ); ?></span> <?php echo esc_html( $tax_item->labels->name ); ?></label>
+			<div class="csb-option-row csb-<?php echo esc_attr( $row_id ); ?>"
+				<?php if ( empty( $cond[ $row_id ] ) ) : ?>style="display:none"<?php endif; ?>>
+
+				<label for="<?php echo esc_attr( $widget->id ); ?>-<?php echo esc_attr( $row_id ); ?>">
+					<span class="csb-and" style="display:none"><?php _e( 'AND', CSB_LANG ); ?></span>
+					<?php echo esc_html( $tax_item->labels->name ); ?>
+					</label>
 				<i class="dashicons dashicons-trash clear-filter show-on-hover action"></i>
-				<select id="<?php echo esc_attr( $widget->id ); ?>-<?php echo esc_attr( $row_id ); ?>" name="<?php echo esc_attr( $block_name ); ?>[<?php echo esc_attr( $row_id ); ?>][]" multiple="multiple">
-					<?php foreach ( $tags as $tag ) : ?>
-						<?php $is_selected = in_array( $tag->term_id, $cond[ $row_id ] ); ?>
-						<option <?php selected( $is_selected ); ?>value="<?php echo esc_attr( $tag->term_id ); ?>">
-							<?php echo esc_html( $tag->name ); ?>
-						</option>
-					<?php endforeach; ?>
-				</select>
+
+				<input type="hidden"
+					id="<?php echo esc_attr( $widget->id ); ?>-<?php echo esc_attr( $row_id ); ?>"
+					name="<?php echo esc_attr( $block_name ); ?>[<?php echo esc_attr( $row_id ); ?>]"
+					value="<?php echo esc_attr( implode( ',', $sel ) ); ?>"
+					data-select-ajax="<?php echo esc_url( $ajax_url ); ?>" />
 			</div>
 			<?php
 		}
@@ -390,6 +488,12 @@ class CustomSidebarsVisibility {
 	public function admin_widget_update( $instance, $new_instance, $old_instance ) {
 		$data = $this->get_widget_data( $_POST );
 
+		foreach ( $data['conditions'] as $key => $list ) {
+			if ( ! is_array( $list ) ) {
+				$list = explode( ',', $list );
+				$data['conditions'][$key] = $list;
+			}
+		}
 		$instance['csb_visibility'] = $data;
 
 		return $instance;
@@ -693,5 +797,59 @@ class CustomSidebarsVisibility {
 		);
 
 		return $show_widget;
+	}
+
+	//
+	// ========== AJAX Handler
+	//
+
+	/**
+	 * Ajax handler. If the action is processed the request is closed via die()
+	 *
+	 * @since  2.0.9.7
+	 * @param  string $action
+	 */
+	public function ajax_handler( $action ) {
+		// The ajax request was not meant for us...
+		if ( 'visibility' != $action ) {
+			return false;
+		}
+
+		$data = array();
+		if ( isset( $_GET['tag'] ) ) {
+			$data = $this->ajax_data_terms( @$_GET['tag'], @$_REQUEST['q'] );
+		}
+
+		self::json_response( array( 'items' => $data ) );
+	}
+
+	/**
+	 * Returns an array with tags that contain the specified search term.
+	 *
+	 * @since  2.0.9.7
+	 * @param  string $term_name Taxonomy type.
+	 * @param  string $search Search term.
+	 * @return array
+	 */
+	protected function ajax_data_terms( $term_name, $search ) {
+		$data = array();
+		$tags = get_terms(
+			$term_name,
+			array(
+				'hide_empty' => false,
+				'search' => $search,
+			)
+		);
+
+		foreach ( $tags as $tag ) {
+			$key = $tag->term_id;
+			$name = $tag->name;
+			$data[] = array(
+				'key' => $key,
+				'val' => esc_html( $name ),
+			);
+		}
+
+		return $data;
 	}
 };

@@ -778,6 +778,7 @@ class CustomSidebars {
 		ob_start();
 
 		$action = @$_POST['do'];
+		$get_action = @$_GET['do'];
 
 		/**
 		 * Notify all extensions about the ajax call.
@@ -786,6 +787,14 @@ class CustomSidebars {
 		 * @param  string $action The specified ajax action.
 		 */
 		do_action( 'cs_ajax_request', $action );
+
+		/**
+		 * Notify all extensions about the GET ajax call.
+		 *
+		 * @since  2.0.9.7
+		 * @param  string $action The specified ajax action.
+		 */
+		do_action( 'cs_ajax_request_get', $get_action );
 	}
 
 	/**
