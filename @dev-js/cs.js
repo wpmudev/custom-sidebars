@@ -1107,6 +1107,33 @@ var csSidebars, msgTimer;
 					}
 				}
 
+				// ----- Authors ----------------------------------------------
+				// Refresh list for authors.
+				var lst_aut = popup.$().find( '.cs-datalist.cs-arc-aut' );
+				var data = resp.authors;
+				lst_aut.empty();
+				// Add the options
+				for ( var key in data ) {
+					var opt = jQuery( '<option></option>' ),
+						name = data[ key ].name;
+					opt.attr( 'value', key ).text( name );
+					lst_aut.append( opt );
+				}
+
+				// Select options
+				for ( var key in data ) {
+					if ( data[ key ].archive ) {
+						for ( var theme_sb in data[ key ].archive ) {
+							_select_option(
+								data[ key ].archive[ theme_sb ],
+								theme_sb,
+								key,
+								lst_aut
+							);
+						}
+					}
+				}
+
 			}; // end: handle_done_load()
 
 			// User clicks on "replace <sidebar> for <category>" checkbox.

@@ -365,9 +365,17 @@ class CustomSidebarsEditor extends CustomSidebars {
 		$archive_type = array(
 			'_blog' => __( 'Front Page', CSB_LANG ),
 			'_search' => __( 'Search Results', CSB_LANG ),
-			'_authors' => __( 'Author Archives', CSB_LANG ),
+			'_authors' => __( 'Any Author Archive', CSB_LANG ),
 			'_tags' => __( 'Tag Archives', CSB_LANG ),
 			'_date' => __( 'Date Archives', CSB_LANG ),
+		);
+
+		$raw_authors = get_users(
+			array(
+				'order_by' => 'display_name',
+				'fields' => array( 'ID', 'display_name' ),
+				'who' => 'authors',
+			)
 		);
 
 		// Collect required data for all posttypes.
@@ -402,10 +410,10 @@ class CustomSidebarsEditor extends CustomSidebars {
 				$label = __( 'Post Index', CSB_LANG );
 			} else {
 				if ( ! $item->has_archive ) { continue; }
-			$label = sprintf(
-				__( '%1$s Archives', CSB_LANG ),
-				$item->labels->singular_name
-			);
+				$label = sprintf(
+					__( '%1$s Archives', CSB_LANG ),
+					$item->labels->singular_name
+				);
 			}
 
 			$sel_archive = @$defaults['post_type_archive'][$item->name];
@@ -425,10 +433,22 @@ class CustomSidebarsEditor extends CustomSidebars {
 			);
 		}
 
+		// Build a list of authors.
+		$authors = array();
+		foreach ( $raw_authors as $user ) {
+			$sel_archive = @$defaults['author_archive'][ @$user->ID ];
+
+			$authors[ @$user->ID ] = array(
+				'name' => @$user->display_name,
+				'archive' => self::get_array( $sel_archive ),
+			);
+		}
+
 		$req->replaceable = $defaults['modifiable'];
 		$req->posttypes = $posttypes;
 		$req->categories = $categories;
 		$req->archives = $archives;
+		$req->authors = $authors;
 		return $req;
 	}
 
@@ -453,6 +473,13 @@ class CustomSidebarsEditor extends CustomSidebars {
 			'authors',
 			'search',
 			'date',
+		);
+		$raw_authors = get_users(
+			array(
+				'order_by' => 'display_name',
+				'fields' => array( 'ID', 'display_name' ),
+				'who' => 'authors',
+			)
 		);
 
 		// == Update the options
@@ -530,6 +557,24 @@ class CustomSidebarsEditor extends CustomSidebars {
 					$options[$key][$sb_id] == $req->id
 				) {
 					unset( $options[$key][$sb_id] );
+				}
+			}
+
+			// Author settings.
+			foreach ( $raw_authors as $user ) {
+				$key = $user->ID;
+
+				if (
+					is_array( @$data['arc-aut'][$sb_id] ) &&
+					in_array( $key, $data['arc-aut'][$sb_id] )
+				) {
+					$options['author_archive'][$key][$sb_id] = $req->id;
+				} else
+				if (
+					isset( $options['author_archive'][$key][$sb_id] ) &&
+					$options['author_archive'][$key][$sb_id] == $req->id
+				) {
+					unset( $options['author_archive'][$key][$sb_id] );
 				}
 			}
 		}

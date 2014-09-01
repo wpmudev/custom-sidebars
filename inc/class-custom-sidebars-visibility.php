@@ -140,7 +140,8 @@ class CustomSidebarsVisibility extends CustomSidebars {
 			$role_list = array_reverse( get_editable_roles() );
 			$membership_levels = $this->get_membership_levels();
 			$pagetype_list = array(
-				'frontpage' => 'Frontpage',
+				'frontpage' => 'Front Page',
+				'home' => 'Post Index',
 				'single' => 'Single page',
 				'posts' => 'Posts page',
 				'archive' => 'Archives',
@@ -714,6 +715,9 @@ class CustomSidebarsVisibility extends CustomSidebars {
 						else {
 							$is_type = $is_type ||  ( is_front_page() && ! is_paged() );
 						}
+						break;
+					case 'home':
+						$is_type = $is_type || is_home();
 						break;
 				}
 				$expl && $explain .= $type . ':' . ($is_type ? 'ok' : 'invalid');

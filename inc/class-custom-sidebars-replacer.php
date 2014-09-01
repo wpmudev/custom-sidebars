@@ -498,15 +498,33 @@ class CustomSidebarsReplacer extends CustomSidebars {
 
 		// 9 |== Author archive ------------------------------------------------
 		if ( is_author() ) {
-			$expl && do_action( 'cs_explain', 'Type 9: Author Archive' );
+			$author_object = get_queried_object();
+			$current_author = $author_object->ID;
+			$expl && do_action( 'cs_explain', 'Type 9: Author Archive (' . $current_author . ')' );
 
+			// 9.1 First check for specific authors.
 			foreach ( $sidebars as $sb_id ) {
-				if ( ! empty( $options['authors'][$sb_id] ) ) {
+				if ( ! empty( $options['author_archive'][$current_author][$sb_id] ) ) {
 					$replacements[$sb_id] = array(
-						$options['authors'][$sb_id],
-						'authors',
-						-1,
+						$options['author_archive'][$current_author][$sb_id],
+						'author_archive',
+						$current_author,
 					);
+					$replacements_todo -= 1;
+				}
+			}
+
+			// 9.2 Then check if there is an "Any authors" sidebar
+			if ( $replacements_todo > 0 ) {
+				foreach ( $sidebars as $sb_id ) {
+					if ( $replacements[$sb_id] ) { continue; }
+					if ( ! empty( $options['authors'][$sb_id] ) ) {
+						$replacements[$sb_id] = array(
+							$options['authors'][$sb_id],
+							'authors',
+							-1,
+						);
+					}
 				}
 			}
 		} else

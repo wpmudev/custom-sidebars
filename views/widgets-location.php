@@ -141,6 +141,7 @@ function _show_replaceable( $sidebar, $prefix, $cat_name, $class = '' ) {
 			<h3 class="wpmui-tabs">
 				<a href="#tab-arch" class="tab active"><?php _e( 'Archive Types', CSB_LANG ); ?></a>
 				<a href="#tab-catg" class="tab"><?php _e( 'Category Archives', CSB_LANG ); ?></a>
+				<a href="#tab-aut" class="tab"><?php _e( 'Authors', CSB_LANG ); ?></a>
 			</h3>
 			<div class="wpmui-tab-contents">
 				<div id="tab-arch" class="tab active">
@@ -162,6 +163,17 @@ function _show_replaceable( $sidebar, $prefix, $cat_name, $class = '' ) {
 					foreach ( $sidebars as $sb_id => $details ) {
 						$cat_name = __( 'Category Archives', CSB_LANG );
 						_show_replaceable( $details, 'arc-cat', $cat_name );
+					}
+					?>
+				</div>
+				<div id="tab-aut" class="tab">
+					<?php
+					/**
+					 * ========== ARCHIVE -- Author ========== *
+					 */
+					foreach ( $sidebars as $sb_id => $details ) {
+						$cat_name = __( 'Author Archives', CSB_LANG );
+						_show_replaceable( $details, 'arc-aut', $cat_name );
 					}
 					?>
 				</div>
