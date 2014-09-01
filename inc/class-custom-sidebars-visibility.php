@@ -244,20 +244,23 @@ class CustomSidebarsVisibility extends CustomSidebars {
 			<label><?php _e( 'Always', CSB_LANG ); ?></label>
 		</div>
 
-		<?php /* DATE */ ?>
-		<div class="csb-option-row csb-date" <?php if ( empty( $cond['date'] ) ) : ?>style="display:none"<?php endif; ?>>
+		<?php /* DATE */ /* ?>
+		<div class="csb-option-row csb-date" style="display:none">
 			<label for="<?php echo esc_attr( $widget->id ); ?>-date">
 				<span class="csb-and" style="display:none"><?php _e( 'AND', CSB_LANG ); ?></span>
 				<?php _e( 'On these dates', CSB_LANG ); ?>
 			</label>
 			<i class="dashicons dashicons-trash clear-filter show-on-hover action"></i>
-		<?php /* ?>
 			<input type="text"
 				id="<?php echo esc_attr( $widget->id ); ?>-date"
-				name="<?php echo esc_attr( $block_name ); ?>[date][]"
-				value="<?php echo esc_attr( @$cond['date'] ); ?>" />
-		<?php */ ?>
+				name="<?php echo esc_attr( $block_name ); ?>[date][from]"
+				value="<?php echo esc_attr( @$cond['date']['from'] ); ?>" />
+			<input type="text"
+				id="<?php echo esc_attr( $widget->id ); ?>-date-to"
+				name="<?php echo esc_attr( $block_name ); ?>[date][to]"
+				value="<?php echo esc_attr( @$cond['date']['to'] ); ?>" />
 		</div>
+		<?php */ ?>
 
 		<?php /* ROLES */ ?>
 		<div class="csb-option-row csb-roles" <?php if ( empty( $cond['roles'] ) ) : ?>style="display:none"<?php endif; ?>>
@@ -297,8 +300,8 @@ class CustomSidebarsVisibility extends CustomSidebars {
 		</div>
 		<?php endif; ?>
 
-		<?php /* PRO-SITE */ ?>
-		<div class="csb-option-row csb-prosite" <?php if ( empty( $cond['prosite'] ) ) : ?>style="display:none"<?php endif; ?>>
+		<?php /* PRO-SITE */ /* ?>
+		<div class="csb-option-row csb-prosite" style="display:none">
 			<label for="<?php echo esc_attr( $widget->id ); ?>-prosite">
 				<span class="csb-and" style="display:none"><?php _e( 'AND', CSB_LANG ); ?></span>
 				<?php _e( 'Pro Sites Level', CSB_LANG ); ?>
@@ -313,6 +316,7 @@ class CustomSidebarsVisibility extends CustomSidebars {
 			<?php endforeach; ?>
 			</select>
 		</div>
+		<?php */ ?>
 
 		<?php /* PAGE TYPES */ ?>
 		<div class="csb-option-row csb-pagetypes" <?php if ( empty( $cond['pagetypes'] ) ) : ?>style="display:none"<?php endif; ?>>
@@ -358,14 +362,24 @@ class CustomSidebarsVisibility extends CustomSidebars {
 				$lbl_all = sprintf( __( 'Only for specific %s', CSB_LANG ), $type_item->labels->name );
 				$lbl_single = sprintf( __( 'Only these %s:', CSB_LANG ), $type_item->labels->name );
 				$is_selected = in_array( $type_item->name, $cond['posttypes'] );
-				$posts = get_posts(
-					array(
-						'post_type' => $type_item->name,
-						'order_by' => 'title',
-						'order' => 'ASC',
-						'numberposts' => '0',
-					)
-				);
+				$ajax_url = admin_url( 'admin-ajax.php?action=cs-ajax&do=visibility&posttype=' . $type_item->name );
+				$sel = array();
+
+				if ( ! empty( $cond[ $row_id ] ) ) {
+					$posts = get_posts(
+						array(
+							'post_type' => $type_item->name,
+							'order_by' => 'title',
+							'order' => 'ASC',
+							'numberposts' => '0',
+							'include' => implode( ',', $cond[ $row_id ] ),
+						)
+					);
+
+					foreach ( $posts as $post ) {
+						$sel[] = $post->ID . '::' . str_replace( '::', ':', $post->post_title );
+					}
+				}
 				?>
 				<div class="csb-detail-row csb-<?php echo esc_attr( $row_id ); ?>"
 					<?php if ( ! $is_selected ) : ?>style="display:none"<?php endif; ?>>
@@ -381,15 +395,11 @@ class CustomSidebarsVisibility extends CustomSidebars {
 						</span>
 					</label>
 					<div class="detail" <?php if ( empty( $cond[ $row_id ] ) ) : ?>style="display:none"<?php endif; ?>>
-						<select name="<?php echo esc_attr( $block_name ); ?>[<?php echo esc_attr( $row_id ); ?>][]"
-							multiple="multiple">
-						<?php foreach ( $posts as $post ) : ?>
-							<?php $is_selected = in_array( $post->ID, $cond[ $row_id ] ); ?>
-							<option <?php selected( $is_selected ); ?> value="<?php echo esc_attr( $post->ID ); ?>">
-								<?php echo esc_html( $post->post_title ); ?>
-							</option>
-						<?php endforeach; ?>
-						</select>
+
+						<input type="hidden"
+							name="<?php echo esc_attr( $block_name ); ?>[<?php echo esc_attr( $row_id ); ?>]"
+							value="<?php echo esc_attr( implode( ',', $sel ) ); ?>"
+							data-select-ajax="<?php echo esc_url( $ajax_url ); ?>" />
 					</div>
 				</div>
 			<?php endforeach; ?>
@@ -490,6 +500,7 @@ class CustomSidebarsVisibility extends CustomSidebars {
 
 		foreach ( $data['conditions'] as $key => $list ) {
 			if ( ! is_array( $list ) ) {
+				WDev()->message( 'Expl ' . $key . ' it was: ' . $list );
 				$list = explode( ',', $list );
 				$data['conditions'][$key] = $list;
 			}
@@ -818,6 +829,8 @@ class CustomSidebarsVisibility extends CustomSidebars {
 		$data = array();
 		if ( isset( $_GET['tag'] ) ) {
 			$data = $this->ajax_data_terms( @$_GET['tag'], @$_REQUEST['q'] );
+		} else if ( isset( $_GET['posttype'] ) ) {
+			$data = $this->ajax_data_posts( @$_GET['posttype'], @$_REQUEST['q'] );
 		}
 
 		self::json_response( array( 'items' => $data ) );
@@ -844,6 +857,38 @@ class CustomSidebarsVisibility extends CustomSidebars {
 		foreach ( $tags as $tag ) {
 			$key = $tag->term_id;
 			$name = $tag->name;
+			$data[] = array(
+				'key' => $key,
+				'val' => esc_html( $name ),
+			);
+		}
+
+		return $data;
+	}
+
+	/**
+	 * Returns an array with post-titles that contain the specified search term.
+	 *
+	 * @since  2.0.9.7
+	 * @param  string $posttype Post-type to search.
+	 * @param  string $search Search term.
+	 * @return array
+	 */
+	protected function ajax_data_posts( $posttype, $search ) {
+		$data = array();
+		$posts = get_posts(
+			array(
+				'post_type' => $posttype,
+				'order_by' => 'title',
+				'order' => 'ASC',
+				'numberposts' => '0',
+				's' => $search,
+			)
+		);
+
+		foreach ( $posts as $post ) {
+			$key = $post->ID;
+			$name = $post->post_title;
 			$data[] = array(
 				'key' => $key,
 				'val' => esc_html( $name ),

@@ -9,6 +9,7 @@ Change Log:
 - New: WPML support to translate name/description of custom- and theme-sidebars!
 - New: A column in the post-list shows the assigned custom sidebars.
 - New: Assign Custom Sidebars to a post via the Quick-Edit form.
+- Improved loading performance of the Widgets screen.
 
 2.0.9.6
 ----------------------------------------------------------------------
