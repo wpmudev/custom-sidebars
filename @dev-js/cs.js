@@ -251,16 +251,32 @@ var csSidebars, msgTimer;
 				col2.appendTo( csSidebars.right );
 			}
 
+			function toggle_sort() {
+				var me = jQuery( this ),
+					col = me.closest( '.sidebars-column-1, .sidebars-column-2' ),
+					dir = col.data( 'sort-dir' );
+
+				dir = ('asc' == dir ? 'desc' : 'asc');
+				csSidebars.sort_sidebars( col, dir );
+			}
+
+			title
+				.find( 'h3' )
+				.append( '<span class="cs-title-val"></span><i class="cs-icon dashicons dashicons-sort"></i>' )
+				.css({'cursor': 'pointer'});
+
 			title
 				.clone()
 				.prependTo( col1 )
-				.find('h3')
+				.click( toggle_sort )
+				.find('.cs-title-val')
 				.text( csSidebarsData.custom_sidebars );
 
 			title
 				.clone()
 				.prependTo( col2 )
-				.find('h3')
+				.click( toggle_sort )
+				.find( '.cs-title-val' )
 				.text( csSidebarsData.theme_sidebars );
 
 			col1 = jQuery( '<div class="inner"></div>' ).appendTo( col1 );
@@ -411,6 +427,41 @@ var csSidebars, msgTimer;
 			msg.type = 'err';
 
 			wpmUi.message( msg );
+		},
+
+		/**
+		 * Sorts the sidebars in the specified column
+		 *
+		 * @since  2.0.9.7
+		 * @param  jQuery col Sidebar container/column.
+		 * @param  string dir "asc|desc"
+		 */
+		sort_sidebars: function( col, dir ) {
+			var sidebars = col.find( '.widgets-holder-wrap' ),
+				icon = col.find( '.cs-title .cs-icon' );
+
+			sidebars.sortElements(function( a, b ) {
+				var val_a = jQuery(a).find('.sidebar-name h3').text(),
+					val_b = jQuery(b).find('.sidebar-name h3').text();
+
+				if ( dir == 'asc' ) {
+					return val_a > val_b ? 1 : -1;
+				} else {
+					return val_a < val_b ? 1 : -1;
+				}
+			});
+
+			// Change the indicator.
+			col.data( 'sort-dir', dir );
+			if ( 'asc' == dir ) {
+				icon
+					.removeClass( 'dashicons-arrow-down dashicons-sort' )
+					.addClass( 'dashicons-arrow-up' );
+			} else {
+				icon
+					.removeClass( 'dashicons-arrow-up dashicons-sort' )
+					.addClass( 'dashicons-arrow-down' );
+			}
 		},
 
 
@@ -1363,6 +1414,74 @@ var csSidebars, msgTimer;
 		});
 	});
 })(jQuery);
+
+/**
+ * jQuery.fn.sortElements
+ * --------------
+ * @param Function comparator:
+ *   Exactly the same behaviour as [1,2,3].sort(comparator)
+ *
+ * @param Function getSortable
+ *   A function that should return the element that is
+ *   to be sorted. The comparator will run on the
+ *   current collection, but you may want the actual
+ *   resulting sort to occur on a parent or another
+ *   associated element.
+ *
+ *   E.g. $('td').sortElements(comparator, function(){
+ *      return this.parentNode;
+ *   })
+ *
+ *   The <td>'s parent (<tr>) will be sorted instead
+ *   of the <td> itself.
+ *
+ * @see http://james.padolsey.com/javascript/sorting-elements-with-jquery/
+ */
+jQuery.fn.sortElements = (function(){
+
+    var sort = [].sort;
+
+    return function(comparator, getSortable) {
+
+        getSortable = getSortable || function(){return this;};
+
+        var placements = this.map(function(){
+
+            var sortElement = getSortable.call(this),
+                parentNode = sortElement.parentNode,
+
+                // Since the element itself will change position, we have
+                // to have some way of storing its original position in
+                // the DOM. The easiest way is to have a 'flag' node:
+                nextSibling = parentNode.insertBefore(
+                    document.createTextNode(''),
+                    sortElement.nextSibling
+                );
+
+            return function() {
+
+                if (parentNode === this) {
+                    throw new Error(
+                        "You can't sort elements if any one is a descendant of another."
+                    );
+                }
+
+                // Insert before flag:
+                parentNode.insertBefore(this, nextSibling);
+                // Remove flag:
+                parentNode.removeChild(nextSibling);
+
+            };
+
+        });
+
+        return sort.call(this, comparator).each(function(i){
+            placements[i].call(getSortable.call(this));
+        });
+
+    };
+
+})();
 
 
 
