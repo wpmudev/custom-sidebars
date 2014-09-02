@@ -325,7 +325,6 @@ var csSidebars, msgTimer;
 		initTopTools: function() {
 			var btn_create = jQuery( '.btn-create-sidebar' ),
 				btn_export = jQuery( '.btn-export' ),
-				btn_explain = jQuery( '.btn-explain' ),
 				data = {};
 
 			// Button: Add new sidebar.
@@ -341,11 +340,6 @@ var csSidebars, msgTimer;
 
 			// Button: Export sidebars.
 			btn_export.click( csSidebars.showExport );
-
-			// Button: Explain details.
-			csSidebars.refreshExplain();
-			btn_explain.click( csSidebars.toggleExplain );
-			wpmUi.tooltip( btn_explain, {'content': csSidebarsData.explain_tip, 'pos': 'bottom'} );
 
 			return csSidebars;
 		},
@@ -670,53 +664,6 @@ var csSidebars, msgTimer;
 			csSidebars.initSidebars();
 
 			return csSidebars;
-		},
-
-		/**
-		 * Refreshes the label of the "Explain" button (either "show" or "hide")
-		 *
-		 * @since  2.0.9.1
-		 */
-		refreshExplain: function() {
-			var exp_status, exp_label,
-				btn_explain = jQuery( '.btn-explain' );
-
-			exp_status = btn_explain.attr( 'data-status' );
-			exp_label = btn_explain.data( 'label-' + exp_status );
-			btn_explain.html( exp_label );
-		},
-
-		/**
-		 * Changes the explain-mode (either activate or deactivate)
-		 *
-		 * @since  2.0.9.1
-		 */
-		toggleExplain: function( ev ) {
-			var exp_status,
-				ajax = wpmUi.ajax( null, 'cs-ajax' ),
-				btn_explain = jQuery( '.btn-explain' );
-
-			var handle_done_toggle = function handle_done_toggle( resp, okay ) {
-				btn_explain.removeClass( 'wpmui-loading' );
-
-				if ( resp && undefined !== resp.state ) {
-					btn_explain.attr( 'data-status', resp.state );
-					csSidebars.refreshExplain();
-				}
-			};
-
-			btn_explain.addClass( 'wpmui-loading' );
-			exp_status = btn_explain.attr( 'data-status' );
-			exp_status = ( 'on' == exp_status ? 'off' : 'on' );
-
-			ajax.data({
-					'do': 'explain',
-					'state': exp_status
-				})
-				.ondone( handle_done_toggle )
-				.load_json();
-
-			return false;
 		},
 
 

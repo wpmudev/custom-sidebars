@@ -365,6 +365,7 @@ class CustomSidebarsEditor extends CustomSidebars {
 		$archive_type = array(
 			'_blog' => __( 'Front Page', CSB_LANG ),
 			'_search' => __( 'Search Results', CSB_LANG ),
+			'_404' => __( 'Not found (404)', CSB_LANG ),
 			'_authors' => __( 'Any Author Archive', CSB_LANG ),
 			'_tags' => __( 'Tag Archives', CSB_LANG ),
 			'_date' => __( 'Date Archives', CSB_LANG ),
@@ -469,6 +470,7 @@ class CustomSidebarsEditor extends CustomSidebars {
 		$data = @$_POST['cs'];
 		$special_arc = array(
 			'blog',
+			'404',
 			'tags',
 			'authors',
 			'search',

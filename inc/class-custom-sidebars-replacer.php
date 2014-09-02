@@ -135,7 +135,11 @@ class CustomSidebarsReplacer extends CustomSidebars {
 				continue;
 			}
 
-			list( $replacement, $replacement_type, $extra_index ) = $replace_info;
+			// Fix rare message "illegal offset type in isset or empty"
+			$replacement = (string) @$replace_info[0];
+			$replacement_type = (string) @$replace_info[1];
+			$extra_index = (string) @$replace_info[2];
+
 			$check = $this->is_valid_replacement( $sb_id, $replacement, $replacement_type, $extra_index );
 
 			if ( $check ) {
@@ -529,7 +533,7 @@ class CustomSidebarsReplacer extends CustomSidebars {
 			}
 		} else
 
-		// 10 |== Date archive --------------------------------------------------
+		// 10 |== Date archive -------------------------------------------------
 		if ( is_date() ) {
 			$expl && do_action( 'cs_explain', 'Type 10: Date Archive' );
 
@@ -538,6 +542,21 @@ class CustomSidebarsReplacer extends CustomSidebars {
 					$replacements[$sb_id] = array(
 						$options['date'][$sb_id],
 						'date',
+						-1,
+					);
+				}
+			}
+		} else
+
+		// 11 |== 404 not found ------------------------------------------------
+		if ( is_404() ) {
+			$expl && do_action( 'cs_explain', 'Type 11: 404 not found' );
+
+			foreach ( $sidebars as $sb_id ) {
+				if ( ! empty( $options['404'][$sb_id] ) ) {
+					$replacements[$sb_id] = array(
+						$options['404'][$sb_id],
+						'404',
 						-1,
 					);
 				}

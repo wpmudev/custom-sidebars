@@ -10,6 +10,7 @@ Change Log:
 - New: A column in the post-list shows the assigned custom sidebars.
 - New: Assign Custom Sidebars to a post via the Quick-Edit form.
 - New: Assign a Sidebar to a specific Author via the Sidebar Location dialog.
+- New: Assign a Sidebar to 404 pages via the Sidebar Location dialog.
 - Improved loading performance of the Widgets screen.
 
 2.0.9.6

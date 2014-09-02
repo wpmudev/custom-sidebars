@@ -143,7 +143,7 @@ class CustomSidebarsVisibility extends CustomSidebars {
 				'frontpage' => 'Front Page',
 				'home' => 'Post Index',
 				'single' => 'Single page',
-				'posts' => 'Posts page',
+				//'posts' => 'Posts page',  "Posts page" is same as "Post Index"...
 				'archive' => 'Archives',
 				'search' => 'Search results',
 				'e404' => 'Not found (404)',
@@ -694,9 +694,6 @@ class CustomSidebarsVisibility extends CustomSidebars {
 					case 'archive':
 						$is_type = $is_type || is_archive();
 						break;
-					case 'posts':
-						$is_type = $is_type || $wp_query->is_posts_page;
-						break;
 					case 'preview':
 						$is_type = $is_type || is_preview();
 						break;
@@ -716,6 +713,7 @@ class CustomSidebarsVisibility extends CustomSidebars {
 							$is_type = $is_type ||  ( is_front_page() && ! is_paged() );
 						}
 						break;
+					case 'posts':
 					case 'home':
 						$is_type = $is_type || is_home();
 						break;
