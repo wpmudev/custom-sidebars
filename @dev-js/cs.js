@@ -218,6 +218,7 @@ var csSidebars, msgTimer;
 			right_side.click(function(){
 				setTimeout( update_scrollbars, 400 );
 			});
+			wnd.on( 'cs-resize', update_scrollbars );
 
 			right_side.hover(
 				function() {
@@ -341,6 +342,8 @@ var csSidebars, msgTimer;
 		initTopTools: function() {
 			var btn_create = jQuery( '.btn-create-sidebar' ),
 				btn_export = jQuery( '.btn-export' ),
+				topbar = jQuery( '.cs-options' ),
+				txt_filter = jQuery( '<input type="search" class="cs-filter" />' ),
 				data = {};
 
 			// Button: Add new sidebar.
@@ -356,6 +359,13 @@ var csSidebars, msgTimer;
 
 			// Button: Export sidebars.
 			btn_export.click( csSidebars.showExport );
+
+			// Add Sidebar filter.
+			txt_filter
+				.appendTo( topbar )
+				.attr( 'placeholder', csSidebarsData.filter )
+				.keyup( csSidebars.filter_sidebars )
+				.on( 'search', csSidebars.filter_sidebars );
 
 			return csSidebars;
 		},
@@ -462,6 +472,28 @@ var csSidebars, msgTimer;
 					.removeClass( 'dashicons-arrow-up dashicons-sort' )
 					.addClass( 'dashicons-arrow-down' );
 			}
+		},
+
+		/**
+		 * Filters the sidebars by title
+		 *
+		 * @since  2.0.9.7
+		 */
+		filter_sidebars: function( ev ) {
+			var query = jQuery( 'input.cs-filter' ).val().toLowerCase(),
+				all = csSidebars.right.find( '.widgets-holder-wrap' );
+
+			all.each(function(){
+				var sb = jQuery( this ),
+					title = sb.find( '.sidebar-name h3' ).text();
+
+				if ( title.toLowerCase().indexOf( query ) != -1 ) {
+					sb.show();
+				} else {
+					sb.hide();
+				}
+			});
+			jQuery( window ).trigger( 'cs-resize' );
 		},
 
 

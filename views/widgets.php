@@ -49,6 +49,7 @@
 		'ajax_error': "<?php _e( 'Couldn\'t load data from WordPress...', CSB_LANG ); ?>",
 		'lbl_replaceable': "<?php _e( 'This sidebar can be replaced on certain pages', CSB_LANG ); ?>",
 		'replace_tip': "<?php _e( 'Activate this option to replace the sidebar with one of your custom sidebars.', CSB_LANG ); ?>",
+		'filter': "<?php _e( 'Filter...', CSB_LANG ); ?>",
 		'replaceable': <?php echo json_encode( (object) CustomSidebars::get_options( 'modifiable' ) ); ?>
 	};
 	</script>

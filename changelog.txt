@@ -11,7 +11,7 @@ Change Log:
 - New: Assign Custom Sidebars to a post via the Quick-Edit form.
 - New: Assign a Sidebar to a specific Author via the Sidebar Location dialog.
 - New: Assign a Sidebar to 404 pages via the Sidebar Location dialog.
-- New: Sidebars can be sorted by title.
+- New: Sidebars can be sorted and filtered by title.
 - Improved loading performance of the Widgets screen.
 
 2.0.9.6

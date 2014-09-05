@@ -134,9 +134,15 @@
 	background: #ccc;
 }
 
-#cs-options .cs-action {
-	line-height: 26px;
-	margin-right: 20px;
+#cs-options {
+	.cs-action {
+		line-height: 26px;
+		margin-right: 20px;
+	}
+
+	.cs-filter {
+		float: right;
+	}
 }
 
 .sidebar-form {
