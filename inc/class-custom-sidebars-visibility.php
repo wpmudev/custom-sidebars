@@ -501,7 +501,6 @@ class CustomSidebarsVisibility extends CustomSidebars {
 
 		foreach ( $data['conditions'] as $key => $list ) {
 			if ( ! is_array( $list ) ) {
-				WDev()->message( 'Expl ' . $key . ' it was: ' . $list );
 				$list = explode( ',', $list );
 				$data['conditions'][$key] = $list;
 			}
