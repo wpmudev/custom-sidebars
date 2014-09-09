@@ -33,6 +33,11 @@ class CustomSidebarsWidgets extends CustomSidebars {
 				'widgets_admin_page',
 				array( $this, 'widget_sidebar_content' )
 			);
+
+			add_action(
+				'admin_head-widgets.php',
+				array( $this, 'init_admin_head' )
+			);
 		}
 	}
 
@@ -41,6 +46,28 @@ class CustomSidebarsWidgets extends CustomSidebars {
 	 */
 	public function widget_sidebar_content() {
 		include CSB_VIEWS_DIR . 'widgets.php';
+	}
+
+	/**
+	 * Initialize the admin-head for the widgets page.
+	 *
+	 * @since  2.0.9.7
+	 */
+	public function init_admin_head( $classes ) {
+		add_filter(
+			'admin_body_class',
+			array( $this, 'admin_body_class' )
+		);
+	}
+
+	/**
+	 * Add a class to the body tag.
+	 *
+	 * @since  2.0.9.7
+	 */
+	public function admin_body_class( $classes ) {
+		$classes .= ' no-auto-init ';
+		return $classes;
 	}
 
 };
