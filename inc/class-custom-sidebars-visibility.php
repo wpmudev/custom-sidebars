@@ -640,25 +640,41 @@ class CustomSidebarsVisibility extends CustomSidebars {
 		// Filter for MEMBERSHIP Level.
 		if ( $condition_true && ! empty( $cond['membership'] ) ) {
 			$expl && $explain .= '<br />MEMBERSHIP [';
-			if ( ! is_user_logged_in() ) {
-				$expl && $explain .= 'user not logged in';
-				$condition_true = false;
-			} else {
-				if ( class_exists( 'Membership_Factory' ) ) {
+			if ( class_exists( 'Membership_Factory' ) ) {
+				$has_level = false;
+				$wpuser = get_userdata( get_current_user_id() );
+
+				$is_admin = $wpuser && (
+					$wpuser->has_cap( 'membershipadmin' ) ||
+					$wpuser->has_cap( 'manage_options' ) ||
+					is_super_admin()
+					);
+
+				if ( $is_admin ) {
+					$expl && $explain .= 'is admin';
+					$has_level = true;
+				} else {
 					$factory = new Membership_Factory();
 					$user = $factory->get_member( get_current_user_id() );
-					$has_level = false;
-					foreach ( $cond['membership'] as $level ) {
-						if ( $user->on_level( $level ) ) {
-							$expl && $explain .= 'ok';
-							$has_level = true;
-							break;
+					$levels = $user->get_level_ids();
+
+					if ( ! is_array( $levels ) ) { $levels = array( $levels ); }
+
+					foreach ( $cond['membership'] as $need_level_id ) {
+						if ( empty( $need_level_id ) ) { continue; }
+						foreach ( $levels as $the_level ) {
+							if ( $the_level->level_id == $need_level_id ) {
+								$expl && $explain .= 'ok';
+								$has_level = true;
+								break;
+							}
 						}
+						if ( $has_level ) { break; }
 					}
-					if ( ! $has_level ) {
-						$expl && $explain .= 'invalid user level';
-						$condition_true = false;
-					}
+				}
+				if ( ! $has_level ) {
+					$expl && $explain .= 'invalid user level';
+					$condition_true = false;
 				}
 			}
 			$expl && $explain .= '] ';

@@ -4,6 +4,10 @@ Author: Javier Marquez (Incsub), Philipp Stracker (Incsub)
 Change Log:
 ----------------------------------------------------------------------
 
+2.0.9.8
+----------------------------------------------------------------------
+- Fix: Membership levels are recognized correctly by Visibility module.
+
 2.0.9.7
 ----------------------------------------------------------------------
 - New: WPML support to translate name/description of custom- and theme-sidebars!
