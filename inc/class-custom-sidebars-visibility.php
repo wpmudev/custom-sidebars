@@ -52,7 +52,7 @@ class CustomSidebarsVisibility extends CustomSidebars {
 			// Custom Sidebars Ajax request.
 			add_action(
 				'cs_ajax_request_get',
-				array( $this, 'ajax_handler' )
+				array( $this, 'handle_ajax' )
 			);
 		} else {
 			// Filters the list of widget-areas and their widgets
@@ -837,7 +837,7 @@ class CustomSidebarsVisibility extends CustomSidebars {
 	 * @since  2.0.9.7
 	 * @param  string $action
 	 */
-	public function ajax_handler( $action ) {
+	public function handle_ajax( $action ) {
 		// The ajax request was not meant for us...
 		if ( 'visibility' != $action ) {
 			return false;
