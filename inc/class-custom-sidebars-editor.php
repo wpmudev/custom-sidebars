@@ -975,9 +975,14 @@ class CustomSidebarsEditor extends CustomSidebars {
 
 					sidebar_col.find( '[data-sidebar]' ).each(function() {
 						var key = jQuery( this ).attr( 'data-sidebar' ),
-							val = jQuery( this ).attr( 'data-replaced' );
+							val = jQuery( this ).attr( 'data-replaced' ),
+							hide = 'yes' === jQuery( this ).attr( 'data-cshide' );
 
-						edit_row.find( '.cs-replacement-field.' + key ).val ( val );
+						if ( hide ) {
+							edit_row.find( '.cs-replacement-field.' + key ).val( val ).parent().hide();
+						} else {
+							edit_row.find( '.cs-replacement-field.' + key ).val( val ).parent().show();
+						}
 					});
 				}
 			};

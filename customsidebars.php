@@ -45,6 +45,7 @@ define( 'CSB_VIEWS_DIR', $plugin_dir . '/views/' );
 define( 'CSB_INC_DIR', $plugin_dir . '/inc/' );
 define( 'CSB_JS_URL', $plugin_url . 'js/' );
 define( 'CSB_CSS_URL', $plugin_url . 'css/' );
+define( 'CSB_IMG_URL', $plugin_url . 'img/' );
 
 // Load the actual core.
 require_once CSB_INC_DIR . 'class-custom-sidebars.php';

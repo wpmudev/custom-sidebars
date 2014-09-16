@@ -42,6 +42,17 @@ Available scripts; run them from the @dev folder!
   - config.rb
   - prepros.json
 
+-- Grunt
+
+  Grunt replaces Prepros
+
+  Install npm from: http://nodejs.org/  (Big "Install" button)
+  $ sudo npm update -g npm
+  $ sudo npm install -g grunt-cli
+  $ sudo npm install -g grunt-init
+
+  $ git clone https://github.com/gruntjs/grunt-init-jquery.git ~/.grunt-init/jquery
+
 
 --------------------------------------------------------------------------------
 == GET PLUGIN ZIP ARCHIVE
