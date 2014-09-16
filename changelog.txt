@@ -7,6 +7,7 @@ Change Log:
 2.0.9.8
 ----------------------------------------------------------------------
 - Fix: Membership levels are recognized correctly by Visibility module.
+- Better: Improve layout of Custom Sidebars column in posts-list on small screens.
 
 2.0.9.7
 ----------------------------------------------------------------------

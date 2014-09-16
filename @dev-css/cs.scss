@@ -712,8 +712,15 @@ h2 .show-infos {
 
 #wpbody-content .wp-list-table {
 	.column-cs_replacement {
-		width: 300px;
-		overflow: hidden;
+		width: 30%;
+	}
+
+	&.fixed {
+		@media screen and (max-width: 782px) {
+			.column-cs_replacement {
+				display: none;
+			}
+		}
 	}
 
 	td.cs_replacement {
@@ -722,6 +729,8 @@ h2 .show-infos {
 		.cust {
 			opacity: .8;
 			cursor: default;
+			position: relative;
+			padding-left: 110px;
 
 			&:after {
 				content: ' ';
@@ -744,17 +753,17 @@ h2 .show-infos {
 			white-space: nowrap;
 			text-overflow: ellipsis;
 			overflow: hidden;
-			float: left;
 		}
 
 		.cs-key {
-			width: 100px;
-			padding-right: 10px;
+			max-width: 100px;
 			color: #666;
+			position: absolute;
+			left: 0;
 		}
 
 		.cs-val {
-			width: 190px;
+			display: block;
 		}
 	}
 
