@@ -241,9 +241,20 @@ class CustomSidebarsExport extends CustomSidebars {
 	private function download_export_file() {
 		$data = $this->get_export_data();
 		$filename = 'sidebars.' . date( 'Y-m-d.H-i-s' ) . '.json';
+		$content = json_encode( (object) $data );
+
+		// Send the download headers.
+		header( 'Pragma: public' );
+		header( 'Expires: 0' );
+		header( 'Cache-Control: must-revalidate, post-check=0, pre-check=0' );
+		header( 'Cache-Control: private', false ); // required for certain browsers
 		header( 'Content-type: application/json' );
 		header( 'Content-Disposition: attachment; filename="' . $filename . '"' );
-		echo json_encode( (object) $data );
+		header( 'Content-Transfer-Encoding: binary' );
+		header( 'Content-Length: ' . strlen( $content ) );
+
+		// Finally send the export-file content.
+		echo '' . $content;
 
 		die();
 	}
