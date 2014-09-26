@@ -1,6 +1,11 @@
-/**
- * Javascript support for the visibility module.
- */
+/*! Custom Sidebars Pro - v2.0.98
+ * http://premium.wpmudev.org/project/the-pop-over-plugin/
+ * Copyright (c) 2014; * Licensed GPLv2+ */
+/*global jQuery:false */
+/*global window:false */
+/*global document:false */
+/*global wp:false */
+/*global wpmUi:false */
 
 jQuery(function init_visibility() {
 	var $doc = jQuery( document );
@@ -14,7 +19,7 @@ jQuery(function init_visibility() {
 			$target = $widget.find( '.widget-control-actions .widget-control-save' ),
 			$spinner = $widget.find( '.widget-control-actions .spinner' );
 
-		if ( $widget.data( '_csb_visibility' ) == true ) {
+		if ( $widget.data( '_csb_visibility' ) ) {
 			return;
 		}
 
@@ -70,7 +75,7 @@ jQuery(function init_visibility() {
 		hide_filter_menu();
 		$widget.trigger('csb:update');
 		return false;
-	}
+	};
 
 	/**
 	 * When a filter block is added or removed we need to show/hide some hints.
@@ -80,7 +85,7 @@ jQuery(function init_visibility() {
 			$always = $widget.find( '.csb-always' ),
 			$rows = $widget.find( '.csb-option-row:visible:not(.csb-action,.csb-always)' );
 
-		if ( $rows.length == 0 ) {
+		if ( $rows.length === 0 ) {
 			$always.show();
 		} else {
 			$always.hide();
@@ -88,7 +93,7 @@ jQuery(function init_visibility() {
 			$rows.first().find( '.csb-and' ).hide();
 		}
 		wpmUi.upgrade_multiselect( $widget );
-	}
+	};
 
 	/**
 	 * Let user add a new filter.
@@ -109,7 +114,7 @@ jQuery(function init_visibility() {
 	 */
 	var hide_filter_menu = function hide_filter_menu( ev ) {
 		jQuery( '.csb-action .dropdown:visible' ).hide();
-	}
+	};
 
 	/**
 	 * Shows or hides the visibility-options for the current widget.
@@ -121,12 +126,12 @@ jQuery(function init_visibility() {
 			$flag = $section.find( '.csb-visible-flag' );
 
 		ev.preventDefault();
-		if ( $flag.val() == '0' ) {
-			$flag.val(1);
+		if ( $flag.val() === '0' ) {
+			$flag.val('1');
 			$section.show();
 			$widget.trigger('csb:update');
 		} else {
-			$flag.val(0);
+			$flag.val('0');
 			$section.hide();
 		}
 
@@ -146,7 +151,7 @@ jQuery(function init_visibility() {
 			$lbl_hide = $widget.find( '.lbl-hide-if' );
 
 		ev.preventDefault();
-		if ( 'show' != state ) {
+		if ( 'show' !== state ) {
 			$lbl_show.show();
 			$lbl_hide.hide();
 			$action.val( 'show' );
@@ -200,7 +205,7 @@ jQuery(function init_visibility() {
 
 		$types.each(function check_detail_row() {
 			var $detail = jQuery( this ),
-				$check = $detail.find( 'input[type=checkbox]' );;
+				$check = $detail.find( 'input[type=checkbox]' );
 
 			if ( $detail.hasClass( 'csb-hide' ) ) {
 				$detail.hide();
@@ -210,7 +215,7 @@ jQuery(function init_visibility() {
 				$detail.show();
 			}
 		});
-	}
+	};
 
 	jQuery( '#widgets-right .widget' ).each( init_widget );
 	$doc.on( 'widget-added', init_widget );

@@ -1,6 +1,11 @@
 /**
  * Javascript support for the cloning module.
  */
+/*global jQuery:false */
+/*global window:false */
+/*global document:false */
+/*global wp:false */
+/*global wpmUi:false */
 
 jQuery(function init_cloning() {
 	var $doc = jQuery( document ),
@@ -17,7 +22,7 @@ jQuery(function init_cloning() {
 			$spinner = $widget.find( '.widget-control-actions .spinner' ),
 			$btn_save = $widget.find( '.widget-control-save' );
 
-		if ( $widget.data( '_csb_cloning' ) == true ) {
+		if ( $widget.data( '_csb_cloning' ) ) {
 			return;
 		}
 
@@ -42,7 +47,7 @@ jQuery(function init_cloning() {
 
 		do {
 			check = $all.find( 'input.csb-clone-group[value="' + group_id + '"]' );
-			if ( ! check.length || ( 1 == check.length && check[0] == $widget_group[0] ) ) {
+			if ( ! check.length || ( 1 === check.length && check[0] === $widget_group[0] ) ) {
 				break;
 			} else {
 				group_id += 1;
@@ -117,7 +122,7 @@ jQuery(function init_cloning() {
 			$members.removeAttr( 'data-csb-icon' );
 
 			// If action is "add" then we add the icons again.
-			if ( action == 'add' ) {
+			if ( action === 'add' ) {
 				$titles.addClass( 'csb-group group-active' )
 					.prepend( '<i class="dashicons dashicons-admin-links btn-clone-group"></i> ' );
 				$titles.find( '.btn-clone-group' )
@@ -152,7 +157,7 @@ jQuery(function init_cloning() {
 			mark_group.call( this, [ev] );
 		}
 		return false;
-	}
+	};
 
 	/**
 	 * Clones the widget:
@@ -171,11 +176,11 @@ jQuery(function init_cloning() {
 		// 1. If the current widget is new then first save the current widget
 		var state = $widget.find( 'input.csb-clone-state' ).val();
 		if ( 'new' === state ) {
-			wpWidgets.save( $widget, 0, 0, 0 );
+			window.wpWidgets.save( $widget, 0, 0, 0 );
 		}
 
 		// 2. Close any open chooser
-		wpWidgets.clearWidgetSelection();
+		window.wpWidgets.clearWidgetSelection();
 		$chooser.slideUp( 200, function() {
 			$chooser.hide();
 			$content.append( this );
@@ -201,17 +206,17 @@ jQuery(function init_cloning() {
 		$chooser.find ( '.widgets-chooser-selected' ).removeClass( 'widgets-chooser-selected' );
 		$chooser.find( 'li' ).each( function() {
 			var $li = jQuery( this );
-			if ( sb_id == $li.data('sidebarId') ) {
+			if ( sb_id === $li.data('sidebarId') ) {
 				$li.addClass( 'widgets-chooser-selected' ).focus();
 			}
 		});
 
 		// 6. Add the new widget to the sidebar.
 		//    This will directly trigger the ajax command to save the widget.
-		wpWidgets.addWidget( $chooser );
+		window.wpWidgets.addWidget( $chooser );
 
 		// 7. Remove the custom elements and information again.
-		wpWidgets.clearWidgetSelection();
+		window.wpWidgets.clearWidgetSelection();
 		update_template_groups();
 
 		is_cloning = false;
@@ -225,9 +230,9 @@ jQuery(function init_cloning() {
 	var populate_widget = function populate_widget( $widget ) {
 		var $state = $widget.find( 'input.csb-clone-state' );
 
-		if ( $state.val() == 'empty' ) {
+		if ( $state.val() === 'empty' ) {
 			$widget.addClass( 'wpmui-loading' );
-			wpWidgets.save( $widget, 0, 1, 0 );
+			window.wpWidgets.save( $widget, 0, 1, 0 );
 		}
 	};
 
@@ -245,7 +250,7 @@ jQuery(function init_cloning() {
 
 			$item.addClass('wpmui-loading').attr( 'data-reload', true );
 		});
-	}
+	};
 
 	/**
 	 * Update all widgets belonging to the same group.
@@ -259,7 +264,7 @@ jQuery(function init_cloning() {
 
 			$state.val( 'empty' );
 			$item.removeAttr( 'data-reload' );
-			wpWidgets.save( $item, 0, 0, 0 );
+			window.wpWidgets.save( $item, 0, 0, 0 );
 		});
 	};
 
@@ -268,11 +273,11 @@ jQuery(function init_cloning() {
 	 * out when a new widget is saved for the first time.
 	 */
 	var ajax_observer = function ajax_observer( ev, xhr, opt, resp ) {
-		var data = ( 'string' == typeof opt.data ? opt.data : '' ),
-			find_action = data.match( /^.*&action=([^&]+).*$/ );
-			find_widget = data.match( /^.*&widget-id=([^&]+).*$/ );
-			action = (find_action && find_action.length == 2 ? find_action[1] : ''),
-			widget = (find_widget && find_widget.length == 2 ? find_widget[1] : '');
+		var data = ( 'string' === typeof opt.data ? opt.data : '' ),
+			find_action = data.match( /^.*&action=([^&]+).*$/ ),
+			find_widget = data.match( /^.*&widget-id=([^&]+).*$/ ),
+			action = (find_action && find_action.length === 2 ? find_action[1] : ''),
+			widget = (find_widget && find_widget.length === 2 ? find_widget[1] : '');
 
 		if ( ! widget.length ) {
 			return;
@@ -289,7 +294,7 @@ jQuery(function init_cloning() {
 					populate_widget( $widget );
 				} else if ( resp.match( /^deleted:/ ) ) {
 					// Widget was deleted and is removed with animation.
-					setTimeout( init_group_icons, 400 );
+					window.setTimeout( init_group_icons, 400 );
 				} else {
 					// Existing widget was updated.
 					init_group_icons();
