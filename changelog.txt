@@ -4,6 +4,11 @@ Author: Javier Marquez (Incsub), Philipp Stracker (Incsub)
 Change Log:
 ----------------------------------------------------------------------
 
+2.0.9.9
+----------------------------------------------------------------------
+- Fixed: Plugin will install to the correct folder.
+- Fixed: Minified CSS files included now.
+
 2.0.9.8
 ----------------------------------------------------------------------
 - Fix: Membership levels are recognized correctly by Visibility module.
