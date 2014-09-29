@@ -15,7 +15,8 @@ module.exports = function( grunt ) {
 			'css/cs-cloning.css':      'css/sass/cs-cloning.scss',
 			'css/cs-visibility.css':   'css/sass/cs-visibility.scss',
 			'css/cs.css':              'css/sass/cs.scss'
-		}
+		},
+		plugin_dir: 'custom-sidebars/'
 	};
 
 	// Project configuration
@@ -126,7 +127,7 @@ module.exports = function( grunt ) {
 				expand: true,
 
 				cwd: 'css/',
-				src: ['popup-admin.css'],
+				src: ['*.css', '!*.min.css'],
 
 				dest: 'css/',
 				ext: '.min.css'
@@ -197,7 +198,7 @@ module.exports = function( grunt ) {
 				expand: true,
 				cwd: 'release/<%= pkg.version %>/',
 				src: [ '**/*' ],
-				dest: 'popover/'
+				dest: paths.plugin_dir
 			}
 		}
 
