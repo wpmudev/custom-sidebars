@@ -175,6 +175,7 @@ module.exports = function( grunt ) {
 					'!node_modules/**',
 					'!release/**',
 					'!.sass-cache/**',
+					'!**/package.json',
 					'!**/css/sass/**',
 					'!**/js/src/**',
 					'!**/js/vendor/**',
