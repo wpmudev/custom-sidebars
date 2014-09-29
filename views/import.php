@@ -16,6 +16,8 @@ foreach ( $current_sidebars as $c_sidebar ) {
 	$current_keys[] = $c_sidebar['id'];
 }
 
+$csb_info = get_plugin_data( CSB_PLUGIN );
+
 /**
  * Helper function used only in this view.
  * It renders a list with sidebar-replacement details
@@ -93,7 +95,7 @@ function list_sidebar_replacement( $label, $list ) {
 					<tr>
 						<th><?php _e( 'Plugin version', CSB_LANG ); ?></th>
 						<td><?php echo esc_html( $import['meta']['csb_version'] ); ?></td>
-						<td><?php echo esc_html( CSB_VERSION ); ?></td>
+						<td><?php echo esc_html( @$csb_info['Version'] ); ?></td>
 					</tr>
 					<tr>
 						<th><?php _e( 'Theme', CSB_LANG ); ?></th>
@@ -151,7 +153,7 @@ function list_sidebar_replacement( $label, $list ) {
 		} else {
 			$note = __( 'New sidebar will be created', CSB_LANG );
 		}
-		$import_sidebar = $import['widgets'][ $sidebar['id'] ];
+		$import_sidebar = @$import['widgets'][ $sidebar['id'] ];
 		if ( ! is_array( $import_sidebar ) ) {
 			$import_sidebar = array();
 		}
@@ -189,7 +191,7 @@ function list_sidebar_replacement( $label, $list ) {
 		<?php if ( isset( $import['widgets'][ $sidebar['id'] ] ) ) : ?>
 			<?php
 			$alternate = ('' == $alternate ? 'alternate' : '');
-			$import_sidebar = $import['widgets'][ $sidebar['id'] ];
+			$import_sidebar = @$import['widgets'][ $sidebar['id'] ];
 			if ( ! is_array( $import_sidebar ) ) {
 				$import_sidebar = array();
 			}
@@ -249,7 +251,7 @@ function list_sidebar_replacement( $label, $list ) {
 	<div class="section"><?php _e( 'By post type', CSB_LANG ); ?></div>
 	<table cellspacing="1" cellpadding="4" class="csb-export-head">
 	<?php
-	$list = $import['options']['post_type_single'];
+	$list = @$import['options']['post_type_single'];
 	foreach ( $list as $key => $values ) {
 		$type = get_post_type_object( $key );
 		if ( ! count( $values ) ) { continue; }
@@ -262,7 +264,7 @@ function list_sidebar_replacement( $label, $list ) {
 	<div class="section"><?php _e( 'Post-type archives', CSB_LANG ); ?></div>
 	<table cellspacing="1" cellpadding="4" class="csb-export-head">
 	<?php
-	$list = $import['options']['post_type_archive'];
+	$list = @$import['options']['post_type_archive'];
 	foreach ( $list as $key => $values ) {
 		$type = get_post_type_object( $key );
 		if ( ! count( $values ) ) { continue; }
@@ -275,7 +277,7 @@ function list_sidebar_replacement( $label, $list ) {
 	<div class="section"><?php _e( 'By category', CSB_LANG ); ?></div>
 	<table cellspacing="1" cellpadding="4" class="csb-export-head">
 	<?php
-	$list = $import['options']['category_single'];
+	$list = @$import['options']['category_single'];
 	foreach ( $list as $key => $values ) {
 		$cat = get_category( $key );
 		if ( ! count( $values ) ) { continue; }
@@ -288,7 +290,7 @@ function list_sidebar_replacement( $label, $list ) {
 	<div class="section"><?php _e( 'Category archives', CSB_LANG ); ?></div>
 	<table cellspacing="1" cellpadding="4" class="csb-export-head">
 	<?php
-	$list = $import['options']['category_archive'];
+	$list = @$import['options']['category_archive'];
 	foreach ( $list as $key => $values ) {
 		$cat = get_category( $key );
 		if ( ! count( $values ) ) { continue; }

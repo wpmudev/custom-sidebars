@@ -149,12 +149,14 @@ class CustomSidebarsExport extends CustomSidebars {
 
 		$theme = wp_get_theme();
 
+		$csb_info = get_plugin_data( CSB_PLUGIN );
+
 		$data = array();
 		// Add some meta-details to the export file.
 		$data['meta'] = array(
 			'created' => time(),
 			'wp_version' => $wp_version,
-			'csb_version' => CSB_VERSION,
+			'csb_version' => @$csb_info['Version'],
 			'theme_name' => $theme->get( 'Name' ),
 			'theme_version' => $theme->get( 'Version' ),
 			'description' => htmlspecialchars( @$_POST['export-description'] ),
