@@ -4,6 +4,10 @@ Author: Javier Marquez (Incsub), Philipp Stracker (Incsub)
 Change Log:
 ----------------------------------------------------------------------
 
+2.1.0.0
+----------------------------------------------------------------------
+- Fixed: Sidebars could not be created on certain webserver setups.
+
 2.0.9.9
 ----------------------------------------------------------------------
 - Fixed: Plugin will install to the correct folder.
