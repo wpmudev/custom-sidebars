@@ -6,11 +6,6 @@ module.exports = function( grunt ) {
 			'js/cs-visibility.js': ['js/src/cs-visibility.js'],
 			'js/cs.js':            ['js/src/cs.js']
 		},
-		js_files_min: {
-			'js/cs-cloning.min.js':    ['js/cs-cloning.js'],
-			'js/cs-visibility.min.js': ['js/cs-visibility.js'],
-			'js/cs.min.js':            ['js/cs.js']
-		},
 		css_files_compile: {
 			'css/cs-cloning.css':      'css/sass/cs-cloning.scss',
 			'css/cs-visibility.css':   'css/sass/cs-visibility.scss',
@@ -65,7 +60,14 @@ module.exports = function( grunt ) {
 
 		uglify: {
 			all: {
-				files: paths.js_files_min,
+				files: [{
+					expand: true,
+					src: ['*.js', '!*.min.js'],
+					cwd: 'js/',
+					dest: 'js/',
+					ext: '.min.js',
+					extDot: 'last'
+				}],
 				options: {
 					banner: '/*! <%= pkg.title %> - v<%= pkg.version %>\n' +
 						' * <%= pkg.homepage %>\n' +
@@ -125,12 +127,11 @@ module.exports = function( grunt ) {
 			},
 			minify: {
 				expand: true,
-
-				cwd: 'css/',
 				src: ['*.css', '!*.min.css'],
-
+				cwd: 'css/',
 				dest: 'css/',
-				ext: '.min.css'
+				ext: '.min.css',
+				extDot: 'last'
 			}
 		},
 
