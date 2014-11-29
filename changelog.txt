@@ -4,6 +4,10 @@ Author: Javier Marquez (Incsub), Philipp Stracker (Incsub)
 Change Log:
 ----------------------------------------------------------------------
 
+2.1.0.1
+----------------------------------------------------------------------
+- Fix incompatibility with PopUp plugin
+
 2.1.0.0
 ----------------------------------------------------------------------
 - Fixed: Sidebars could not be created on certain webserver setups.
