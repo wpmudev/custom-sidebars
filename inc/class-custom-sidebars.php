@@ -132,7 +132,20 @@ class CustomSidebars {
 			// Display a message after import.
 			if ( ! empty( $_GET['cs-msg'] ) ) {
 				$msg = base64_decode( $_GET['cs-msg'] );
-				WDev()->message( $msg );
+
+				// Prevent XSS attacks...
+				$kses_args = array(
+					'br' => array(),
+					'b' => array(),
+					'strong' => array(),
+					'i' => array(),
+					'em' => array(),
+				);
+				$msg = wp_kses( $msg, $kses_args );
+
+				if ( ! empty( $msg ) ) {
+					WDev()->message( $msg );
+				}
 			}
 		}
 	}
