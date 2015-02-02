@@ -78,6 +78,7 @@ class CustomSidebarsVisibility extends CustomSidebars {
 			$tax_list = get_taxonomies( array( 'public' => true ), 'objects' );
 			$type_list = CustomSidebars::get_post_types( 'objects' );
 			$Condition_keys = array(
+				'guest' => array(),
 				'date' => array(),
 				'roles' => array(),
 				'pagetypes' => array(),
@@ -193,39 +194,39 @@ class CustomSidebarsVisibility extends CustomSidebars {
 			<input type="hidden" id="<?php echo esc_attr( $widget->id ); ?>-action" name="csb_visibility[action]" value="<?php echo esc_attr( $data['action'] ); ?>" />
 			<i class="dashicons dashicons-plus choose-filters show-on-hover action"></i>
 			<ul class="dropdown" style="display:none">
-				<li class="csb-group">Filters</li>
+				<li class="csb-group"><?php _e( 'Filters', CSB_LANG ); ?></li>
 				<li class="add-filter"
 					data-for=".csb-date"
 					style="display:none">
-					Date
+					<?php _e( 'Date', CSB_LANG ); ?>
+				</li>
+				<li class="add-filter"
+					data-for=".csb-guest"
+					<?php if ( ! empty( $cond['guest'] ) ) : ?>style="display:none"<?php endif; ?>>
+					<?php _e( 'Guests', CSB_LANG ); ?>
 				</li>
 				<li class="add-filter"
 					data-for=".csb-roles"
 					<?php if ( ! empty( $cond['roles'] ) ) : ?>style="display:none"<?php endif; ?>>
-					Roles
+					<?php _e( 'Roles', CSB_LANG ); ?>
 				</li>
 				<?php if ( false != $membership_levels ) : ?>
 					<li class="add-filter"
 						data-for=".csb-membership">
-						Membership
+						<?php _e( 'Membership', CSB_LANG ); ?>
 					</li>
 				<?php endif; ?>
 				<li class="add-filter"
-					data-for=".csb-prosite"
-					style="display:none">
-					ProSite
-				</li>
-				<li class="add-filter"
 					data-for=".csb-pagetypes"
 					<?php if ( ! empty( $cond['pagetypes'] ) ) : ?>style="display:none"<?php endif; ?>>
-					Special pages
+					<?php _e( 'Special pages', CSB_LANG ); ?>
 				</li>
 				<li class="add-filter"
 					data-for=".csb-posttypes"
 					<?php if ( ! empty( $cond['posttypes'] ) ) : ?>style="display:none"<?php endif; ?>>
-					For posttype
+					<?php _e( 'For posttype', CSB_LANG ); ?>
 				</li>
-				<li class="csb-group">Taxonomy</li>
+				<li class="csb-group"><?php _e( 'Taxonomy', CSB_LANG ); ?></li>
 				<?php foreach ( $tax_list as $tax_item ) :
 					$row_id = 'tax-' . $tax_item->name;
 					?>
@@ -262,6 +263,21 @@ class CustomSidebarsVisibility extends CustomSidebars {
 				value="<?php echo esc_attr( @$cond['date']['to'] ); ?>" />
 		</div>
 		<?php */ ?>
+
+		<?php /* GUEST */ ?>
+		<div class="csb-option-row csb-guest" <?php if ( empty( $cond['guest'] ) ) : ?>style="display:none"<?php endif; ?>>
+			<label for="<?php echo esc_attr( $widget->id ); ?>-guest1" style="padding-top:10px;margin-bottom:0">
+				<input id="<?php echo esc_attr( $widget->id ); ?>-guest1" type="radio" name="<?php echo esc_attr( $block_name ); ?>[guest][]" value="guest" <?php checked( in_array( 'guest', $cond['guest'] ) ); ?> />
+				<span class="csb-and" style="display:none"><?php _e( 'AND', CSB_LANG ); ?></span>
+				<?php _e( 'User is not logged-in (Guest)', CSB_LANG ); ?><br />
+			</label>
+			<label for="<?php echo esc_attr( $widget->id ); ?>-guest2" style="border:0;margin-bottom:0">
+				<input id="<?php echo esc_attr( $widget->id ); ?>-guest2" type="radio" name="<?php echo esc_attr( $block_name ); ?>[guest][]" value="member" <?php checked( in_array( 'member', $cond['guest'] ) ); ?>  />
+				<span class="csb-and" style="display:none"><?php _e( 'AND', CSB_LANG ); ?></span>
+				<?php _e( 'User is logged-in (Member)', CSB_LANG ); ?>
+			</label>
+			<i class="dashicons dashicons-trash clear-filter show-on-hover action"></i>
+		</div>
 
 		<?php /* ROLES */ ?>
 		<div class="csb-option-row csb-roles" <?php if ( empty( $cond['roles'] ) ) : ?>style="display:none"<?php endif; ?>>
@@ -300,24 +316,6 @@ class CustomSidebarsVisibility extends CustomSidebars {
 			</select>
 		</div>
 		<?php endif; ?>
-
-		<?php /* PRO-SITE */ /* ?>
-		<div class="csb-option-row csb-prosite" style="display:none">
-			<label for="<?php echo esc_attr( $widget->id ); ?>-prosite">
-				<span class="csb-and" style="display:none"><?php _e( 'AND', CSB_LANG ); ?></span>
-				<?php _e( 'Pro Sites Level', CSB_LANG ); ?>
-			</label>
-			<i class="dashicons dashicons-trash clear-filter show-on-hover action"></i>
-			<select id="<?php echo esc_attr( $widget->id ); ?>-prosite" name="<?php echo esc_attr( $block_name ); ?>[prosite][]" multiple="multiple">
-			<?php foreach ( array() as $level ) : ?>
-				<?php $is_selected = in_array( $level['id'], $cond['prosite'] ); ?>
-				<option <?php selected( $is_selected ); ?> value="<?php echo esc_attr( $level['id'] ); ?>">
-					<?php echo esc_html( 'title' ); ?>
-				</option>
-			<?php endforeach; ?>
-			</select>
-		</div>
-		<?php */ ?>
 
 		<?php /* PAGE TYPES */ ?>
 		<div class="csb-option-row csb-pagetypes" <?php if ( empty( $cond['pagetypes'] ) ) : ?>style="display:none"<?php endif; ?>>
@@ -611,6 +609,23 @@ class CustomSidebarsVisibility extends CustomSidebars {
 		// Filter for DATE-RANGE.
 		if ( $condition_true && ! empty( $cond['date'] ) ) {
 			// not implemented yet...
+		}
+
+		// Filter for GUEST STATUS.
+		if ( $condition_true && ! empty( $cond['guest'] ) && is_array( $cond['guest'] ) ) {
+			$expl && $explain .= '<br />GUEST [';
+			if ( is_user_logged_in() ) {
+				if ( 'member' != $cond['guest'][0] ) {
+					$expl && $explain .= 'user is logged in';
+					$condition_true = false;
+				}
+			} else {
+				if ( 'guest' != $cond['guest'][0] ) {
+					$expl && $explain .= 'user not logged in';
+					$condition_true = false;
+				}
+			}
+			$expl && $explain .= '] ';
 		}
 
 		// Filter for USER ROLES.
