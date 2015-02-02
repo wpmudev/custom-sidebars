@@ -4,6 +4,10 @@ Author: Javier Marquez (Incsub), Philipp Stracker (Incsub)
 Change Log:
 ----------------------------------------------------------------------
 
+2.1.0.3
+----------------------------------------------------------------------
+- Add new Widget-Visibility option: Guests only
+
 2.1.0.2
 ----------------------------------------------------------------------
 - Close possible security hole (XSS vulnerability)
