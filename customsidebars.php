@@ -57,7 +57,7 @@ if ( file_exists( CSB_INC_DIR . 'external/wpmu-lib/core.php' ) ) {
 }
 
 // Load the text domain for the plugin
-WDev()->translate_plugin( CSB_LANG, CSB_LANG_DIR );
+lib2()->translate_plugin( CSB_LANG, CSB_LANG_DIR );
 
 // Initialize the plugin
 CustomSidebars::instance();

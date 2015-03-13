@@ -46,8 +46,8 @@ class CustomSidebarsVisibility extends CustomSidebars {
 				10, 3
 			);
 
-			WDev()->add_ui( CSB_JS_URL . 'cs-visibility.min.js', 'widgets.php' );
-			WDev()->add_ui( CSB_CSS_URL . 'cs-visibility.css', 'widgets.php' );
+			lib2()->ui->add( CSB_JS_URL . 'cs-visibility.min.js', 'widgets.php' );
+			lib2()->ui->add( CSB_CSS_URL . 'cs-visibility.css', 'widgets.php' );
 
 			// Custom Sidebars Ajax request.
 			add_action(

@@ -53,7 +53,7 @@ class CustomSidebars {
 		static $Inst = null;
 
 		// We can initialize the plugin once we know the current user:
-		// The WDev()->pointer() notification is based on current user...
+		// The lib2()->html->pointer() notification is based on current user...
 		if ( ! did_action( 'set_current_user' ) ) {
 			add_action( 'set_current_user', array( __CLASS__, 'instance' ) );
 			return null;
@@ -81,7 +81,7 @@ class CustomSidebars {
 		 *  Description:  Create and edit custom sidebars in your widget screen!
 		 * -------------------------------------------------------------------------
 		 */
-		WDev()->pointer(
+		lib2()->html->pointer(
 			'wpmudcs1',                               // Internal Pointer-ID
 			'#menu-appearance',                       // Point at
 			__( 'Custom Sidebars Pro', CSB_LANG ),    // Title
@@ -100,7 +100,7 @@ class CustomSidebars {
 
 		// We don't support accessibility mode. Display a note to the user.
 		if ( true === self::$accessibility_mode ) {
-			WDev()->message(
+			lib2()->ui->admin_message(
 				sprintf(
 					__(
 						'<strong>Accessibility mode is not supported by the
@@ -116,12 +116,12 @@ class CustomSidebars {
 			);
 		} else {
 			// Load javascripts/css files
-			WDev()->add_ui( 'core', 'widgets.php' );
-			WDev()->add_ui( 'scrollbar', 'widgets.php' );
-			WDev()->add_ui( 'select', 'widgets.php' );
-			WDev()->add_ui( CSB_JS_URL . 'cs.min.js', 'widgets.php' );
-			WDev()->add_ui( CSB_CSS_URL . 'cs.css', 'widgets.php' );
-			WDev()->add_ui( CSB_CSS_URL . 'cs.css', 'edit.php' );
+			lib2()->ui->add( 'core', 'widgets.php' );
+			lib2()->ui->add( 'scrollbar', 'widgets.php' );
+			lib2()->ui->add( 'select', 'widgets.php' );
+			lib2()->ui->add( CSB_JS_URL . 'cs.min.js', 'widgets.php' );
+			lib2()->ui->add( CSB_CSS_URL . 'cs.css', 'widgets.php' );
+			lib2()->ui->add( CSB_CSS_URL . 'cs.css', 'edit.php' );
 
 			// AJAX actions
 			add_action( 'wp_ajax_cs-ajax', array( $this, 'ajax_handler' ) );
@@ -144,7 +144,7 @@ class CustomSidebars {
 				$msg = wp_kses( $msg, $kses_args );
 
 				if ( ! empty( $msg ) ) {
-					WDev()->message( $msg );
+					lib2()->ui->admin_message( $msg );
 				}
 			}
 		}
