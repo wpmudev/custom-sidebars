@@ -468,9 +468,6 @@ body.appearance_page_customsidebars #poststuff h2 {
   opacity: .75;
   line-height: 26px;
   margin-right: 5px;
-  -webkit-transition: opacity .2s;
-  -moz-transition: opacity .2s;
-  -o-transition: opacity .2s;
   transition: opacity .2s;
 }
 
