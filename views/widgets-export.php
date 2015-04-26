@@ -12,13 +12,15 @@
 		<input type="hidden" name="do" value="export" />
 		<p>
 			<i class="dashicons dashicons-info light"></i>
-			<?php _e(
+			<?php
+			_e(
 				'This will generate a complete export file containing all ' .
 				'your sidebars and the current sidebar configuration.', CSB_LANG
-			); ?>
+			);
+			?>
 		</p>
 		<p>
-			<label for="description"><?php _e( 'Optional description for the export file:' ); ?></label><br />
+			<label for="description"><?php _e( 'Optional description for the export file:', CSB_LANG ); ?></label><br />
 			<textarea id="description" name="export-description" placeholder="" cols="80" rows="3"></textarea>
 		</p>
 		<p>
