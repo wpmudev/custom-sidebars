@@ -124,7 +124,11 @@ class CustomSidebarsCloning {
 
 			// Loop though all widgets to fetch used IDs.
 			foreach ( $wp_registered_widgets as $id => $data ) {
+				if ( ! isset( $data['callback'] ) ) { continue; }
+				if ( ! is_array( $data['callback'] ) ) { continue; }
+
 				$widget = reset( $data['callback'] );
+				$settings = false;
 				if ( is_object( $widget ) && method_exists( $widget, 'get_settings' ) ) {
 					$settings = $widget->get_settings();
 				}
@@ -132,6 +136,7 @@ class CustomSidebarsCloning {
 				// Check the database settings of the widget to find group IDs.
 				if ( is_array( $settings ) ) {
 					foreach ( $settings as $instance ) {
+						if ( ! isset( $instance['csb_clone'] ) ) { continue; }
 						if ( ! empty( $instance['csb_clone']['group'] ) ) {
 							$group = $instance['csb_clone']['group'];
 							if ( ! in_array( $group, $Used_ids ) ) {
