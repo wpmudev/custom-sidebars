@@ -84,6 +84,7 @@ class CustomSidebarsVisibility extends CustomSidebars {
 				'pagetypes' => array(),
 				'posttypes' => array(),
 				'membership' => array(),
+				'membership2' => array(),
 				'prosite' => array(),
 			);
 			foreach ( $type_list as $type_item ) {
@@ -140,6 +141,7 @@ class CustomSidebarsVisibility extends CustomSidebars {
 			$type_list = CustomSidebars::get_post_types( 'objects' );
 			$role_list = array_reverse( get_editable_roles() );
 			$membership_levels = $this->get_membership_levels();
+			$membership2_items = $this->get_membership2_items();
 			$pagetype_list = array(
 				'frontpage' => 'Front Page',
 				'home' => 'Post Index',
@@ -214,6 +216,12 @@ class CustomSidebarsVisibility extends CustomSidebars {
 					<li class="add-filter"
 						data-for=".csb-membership">
 						<?php _e( 'Membership', CSB_LANG ); ?>
+					</li>
+				<?php endif; ?>
+				<?php if ( false != $membership2_items ) : ?>
+					<li class="add-filter"
+						data-for=".csb-membership2">
+						<?php _e( 'Membership2', CSB_LANG ); ?>
 					</li>
 				<?php endif; ?>
 				<li class="add-filter"
@@ -311,6 +319,26 @@ class CustomSidebarsVisibility extends CustomSidebars {
 				<option <?php selected( $is_selected ); ?> value="<?php echo esc_attr( $level['id'] ); ?>">
 					<?php echo esc_html( $level['level_title'] ); ?>
 					<?php if ( ! $level['level_active'] ) { _e( '(inactive)', CSB_LANG ); } ?>
+				</option>
+			<?php endforeach; ?>
+			</select>
+		</div>
+		<?php endif; ?>
+
+		<?php /* MEMBERSHIP2 (PROTECTED CONTENT) */ ?>
+		<?php if ( is_array( $membership2_items ) ) : ?>
+		<div class="csb-option-row csb-membership2" <?php if ( empty( $cond['membership2'] ) ) : ?>style="display:none"<?php endif; ?>>
+			<label for="<?php echo esc_attr( $widget->id ); ?>-membership2">
+				<span class="csb-and" style="display:none"><?php _e( 'AND', CSB_LANG ); ?></span>
+				<?php _e( 'User has Membership', CSB_LANG ); ?>
+			</label>
+			<i class="dashicons dashicons-trash clear-filter show-on-hover action"></i>
+			<select id="<?php echo esc_attr( $widget->id ); ?>-membership2" name="<?php echo esc_attr( $block_name ); ?>[membership2][]" multiple="multiple">
+			<?php foreach ( $membership2_items as $item ) : ?>
+				<?php $is_selected = in_array( $item->id, $cond['membership2'] ); ?>
+				<option <?php selected( $is_selected ); ?> value="<?php echo esc_attr( $item->id ); ?>">
+					<?php echo esc_html( $item->name ); ?>
+					<?php if ( ! $item->active ) { _e( '(inactive)', CSB_LANG ); } ?>
 				</option>
 			<?php endforeach; ?>
 			</select>
@@ -463,24 +491,45 @@ class CustomSidebarsVisibility extends CustomSidebars {
 	public function get_membership_levels() {
 		$Result = null;
 
-		if (
-			null === $Result &&
-			function_exists( 'M_get_membership_active' ) &&
-			'no' != M_get_membership_active() &&
-			defined( 'MEMBERSHIP_TABLE_LEVELS' )
-		) {
-			global $wpdb;
-			$Result = $wpdb->get_results(
-				sprintf(
-					'SELECT
-						id, level_title, level_active
-					FROM %s
-					ORDER BY id',
-					MEMBERSHIP_TABLE_LEVELS
-				), ARRAY_A
-			);
-		} else {
-			$Result = false;
+		if ( null === $Result ) {
+			if (
+				function_exists( 'M_get_membership_active' ) &&
+				'no' != M_get_membership_active() &&
+				defined( 'MEMBERSHIP_TABLE_LEVELS' )
+			) {
+				global $wpdb;
+				$Result = $wpdb->get_results(
+					sprintf(
+						'SELECT
+							id, level_title, level_active
+						FROM %s
+						ORDER BY id',
+						MEMBERSHIP_TABLE_LEVELS
+					), ARRAY_A
+				);
+			} else {
+				$Result = false;
+			}
+		}
+
+		return $Result;
+	}
+
+	/**
+	 * Integration with the WPMU Dev Membership2 plugin:
+	 * If the plugin is installed and active this function returns a list of
+	 * all membership levels.
+	 *
+	 * If the plugin is not active the return value is boolean false.
+	 *
+	 * @since  2.0
+	 * @return bool|array
+	 */
+	public function get_membership2_items() {
+		$Result = null;
+
+		if ( null === $Result && apply_filters( 'ms_active' ) ) {
+			$Result = MS_Plugin::$api->list_memberships( true );
 		}
 
 		return $Result;
@@ -695,6 +744,32 @@ class CustomSidebarsVisibility extends CustomSidebars {
 			$expl && $explain .= '] ';
 		}
 
+		// Filter for MEMBERSHIP2 Level.
+		if ( $condition_true && ! empty( $cond['membership2'] ) ) {
+			$expl && $explain .= '<br />MEMBERSHIP2 [';
+			if ( apply_filters( 'ms_active' ) ) {
+				$is_member = false;
+				$member = MS_Plugin::$api->get_current_member();
+
+				if ( $member->is_admin_user() ) {
+					$expl && $explain .= 'is admin';
+					$is_member = true;
+				} else {
+					foreach ( $cond['membership2'] as $membership_id ) {
+						if ( $member->has_membership( $membership_id ) ) {
+							$is_member = true;
+							break;
+						}
+					}
+				}
+				if ( ! $is_member ) {
+					$expl && $explain .= 'is no member';
+					$condition_true = false;
+				}
+			}
+			$expl && $explain .= '] ';
+		}
+
 		// Filter for PRO-SITE Level.
 		if ( $condition_true && ! empty( $cond['prosite'] ) ) {
 			$expl && $explain .= '<br />PROSITE [';
@@ -737,9 +812,9 @@ class CustomSidebarsVisibility extends CustomSidebars {
 						$is_type = $is_type || is_year();
 						break;
 					case 'frontpage':
-						if ( current_theme_supports( 'infinite-scroll' ) )
+						if ( current_theme_supports( 'infinite-scroll' ) ) {
 							$is_type = $is_type || is_front_page();
-						else {
+						} else {
 							$is_type = $is_type ||  ( is_front_page() && ! is_paged() );
 						}
 						break;
