@@ -10,6 +10,7 @@ add_action( 'cs_init', array( 'CustomSidebarsVisibility', 'instance' ) );
  */
 class CustomSidebarsVisibility extends CustomSidebars {
 
+    public static $filtered_tax_list = false;
 	/**
 	 * Returns the singleton object.
 	 *
@@ -157,12 +158,17 @@ class CustomSidebarsVisibility extends CustomSidebars {
 			);
 
 			// Remove taxonomies without values.
-			foreach ( $tax_list as $index => $tax_item ) {
-				$tags = get_terms( $tax_item->name, array( 'hide_empty' => false ) );
-				if ( empty( $tags ) ) {
-					unset( $tax_list[ $index ] );
-				}
-			}
+            if( !self::$filtered_tax_list ){
+                foreach ( $tax_list as $index => $tax_item ) {
+                    $tags = get_terms( $tax_item->name, array( 'hide_empty' => false ) );
+                    if ( empty( $tags ) ) {
+                        unset( $tax_list[ $index ] );
+                    }
+                }
+                self::$filtered_tax_list = $tax_list;
+            } else {
+                $tax_list = self::$filtered_tax_list;
+		    }
 		}
 
 		$is_visible = ('1' == @$_POST['csb_visible'] ? 1 : 0);
