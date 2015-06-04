@@ -1,4 +1,4 @@
-/*! Custom Sidebars Pro - v2.1.04
+/*! Custom Sidebars Pro - v2.1.05
  * http://premium.wpmudev.org/project/the-pop-over-plugin/
  * Copyright (c) 2015; * Licensed GPLv2+ */
 /*global window:false */
