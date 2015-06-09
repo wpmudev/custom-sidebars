@@ -659,7 +659,6 @@ window.csSidebars = null;
 			var save_data = function save_data() {
 				var form = popup.$().find( 'form' );
 
-
 				// Start loading-animation.
 				popup.loading( true );
 
