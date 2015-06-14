@@ -528,7 +528,7 @@ class CustomSidebarsVisibility extends CustomSidebars {
 	public function get_membership2_items() {
 		$Result = null;
 
-		if ( null === $Result && apply_filters( 'ms_active' ) ) {
+		if ( null === $Result && apply_filters( 'ms_active', false ) ) {
 			$Result = MS_Plugin::$api->list_memberships( true );
 		}
 
@@ -747,7 +747,7 @@ class CustomSidebarsVisibility extends CustomSidebars {
 		// Filter for MEMBERSHIP2 Level.
 		if ( $condition_true && ! empty( $cond['membership2'] ) ) {
 			$expl && $explain .= '<br />MEMBERSHIP2 [';
-			if ( apply_filters( 'ms_active' ) ) {
+			if ( apply_filters( 'ms_active', false ) ) {
 				$is_member = false;
 				$member = MS_Plugin::$api->get_current_member();
 
