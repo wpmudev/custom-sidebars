@@ -4,6 +4,10 @@ Author: Javier Marquez (Incsub), Philipp Stracker (Incsub)
 Change Log:
 ----------------------------------------------------------------------
 
+2.1.0.7
+----------------------------------------------------------------------
+- Fix bug that prevented Widget-Visibility options to work
+
 2.1.0.6
 ----------------------------------------------------------------------
 - Fix a bug introduced in last update that prevented creation of custom sidebars
