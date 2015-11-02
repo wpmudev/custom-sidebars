@@ -506,7 +506,7 @@ class CustomSidebarsReplacer extends CustomSidebars {
 			$current_author = $author_object->ID;
 			$expl && do_action( 'cs_explain', 'Type 9: Author Archive (' . $current_author . ')' );
 
-			// 9.1 First check for specific authors.
+			// 9.1 Pro Only: First check for specific authors.
 			foreach ( $sidebars as $sb_id ) {
 				if ( ! empty( $options['author_archive'][$current_author][$sb_id] ) ) {
 					$replacements[$sb_id] = array(

@@ -33,34 +33,40 @@ This plugin was originally developed by Javier Marquez.
 http://arqex.com/
 */
 
-// used for more readable i18n functions: __( 'text', CSB_LANG );
-define( 'CSB_LANG', 'custom-sidebars' );
+add_action(
+	'plugins_loaded',
+	'__inc_sidebars_init',
+	9
+);
 
-$plugin_dir = dirname( __FILE__ );
-$plugin_dir_rel = dirname( plugin_basename( __FILE__ ) );
-$plugin_url = plugin_dir_url( __FILE__ );
+function __inc_sidebars_init() {
+	// used for more readable i18n functions: __( 'text', CSB_LANG );
+	define( 'CSB_LANG', 'custom-sidebars' );
 
-define( 'CSB_PLUGIN', __FILE__ );
-define( 'CSB_LANG_DIR', $plugin_dir_rel . '/lang/' );
-define( 'CSB_VIEWS_DIR', $plugin_dir . '/views/' );
-define( 'CSB_INC_DIR', $plugin_dir . '/inc/' );
-define( 'CSB_JS_URL', $plugin_url . 'js/' );
-define( 'CSB_CSS_URL', $plugin_url . 'css/' );
-define( 'CSB_IMG_URL', $plugin_url . 'img/' );
+	$plugin_dir = dirname( __FILE__ );
+	$plugin_dir_rel = dirname( plugin_basename( __FILE__ ) );
+	$plugin_url = plugin_dir_url( __FILE__ );
 
-// Load the actual core.
-require_once CSB_INC_DIR . 'class-custom-sidebars.php';
+	define( 'CSB_PLUGIN', __FILE__ );
+	define( 'CSB_LANG_DIR', $plugin_dir_rel . '/lang/' );
+	define( 'CSB_VIEWS_DIR', $plugin_dir . '/views/' );
+	define( 'CSB_INC_DIR', $plugin_dir . '/inc/' );
+	define( 'CSB_JS_URL', $plugin_url . 'js/' );
+	define( 'CSB_CSS_URL', $plugin_url . 'css/' );
+	define( 'CSB_IMG_URL', $plugin_url . 'img/' );
 
-// Include function library
-if ( file_exists( CSB_INC_DIR . 'external/wpmu-lib/core.php' ) ) {
+	// Load the actual core.
+	require_once CSB_INC_DIR . 'class-custom-sidebars.php';
+
+	// Include function library
 	require_once CSB_INC_DIR . 'external/wpmu-lib/core.php';
+
+	// Load the text domain for the plugin
+	lib2()->translate_plugin( CSB_LANG, CSB_LANG_DIR );
+
+	// Initialize the plugin
+	CustomSidebars::instance();
 }
-
-// Load the text domain for the plugin
-lib2()->translate_plugin( CSB_LANG, CSB_LANG_DIR );
-
-// Initialize the plugin
-CustomSidebars::instance();
 
 if ( ! class_exists( 'CustomSidebarsEmptyPlugin' ) ) {
 	class CustomSidebarsEmptyPlugin extends WP_Widget {

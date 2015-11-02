@@ -445,7 +445,7 @@ class CustomSidebarsEditor extends CustomSidebars {
 			);
 		}
 
-		// Build a list of authors.
+		// Pro only: Build a list of authors.
 		$authors = array();
 		foreach ( $raw_authors as $user ) {
 			$sel_archive = @$defaults['author_archive'][ @$user->ID ];
