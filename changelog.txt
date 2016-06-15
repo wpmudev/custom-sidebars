@@ -7,10 +7,11 @@ Change Log:
 2.1.0.8
 ----------------------------------------------------------------------
 - Fix a deprecated notice
+- Fix bug that prevented Widget-Visibility options to work
 
 2.1.0.7
 ----------------------------------------------------------------------
-- Fix bug that prevented Widget-Visibility options to work
+- Fix PHP warning about "Missing argument 2 for apply_filters()"
 
 2.1.0.6
 ----------------------------------------------------------------------
