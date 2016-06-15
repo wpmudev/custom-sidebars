@@ -84,7 +84,7 @@ class CustomSidebars {
 		lib2()->html->pointer(
 			'wpmudcs1',                               // Internal Pointer-ID
 			'#menu-appearance',                       // Point at
-			__( 'Custom Sidebars Pro', 'custom-sidebars'),    // Title
+			__( 'Custom Sidebars Pro', 'custom-sidebars' ),    // Title
 			sprintf(
 				__(
 					'Now you can create and edit custom sidebars in your ' .
@@ -246,7 +246,7 @@ class CustomSidebars {
 	static public function get_array( $val1, $val2 = array() ) {
 		if ( is_array( $val1 ) ) {
 			return $val1;
-		} else if ( is_array( $val2 ) ) {
+		} elseif ( is_array( $val2 ) ) {
 			return $val2;
 		} else {
 			return array();
@@ -439,13 +439,12 @@ class CustomSidebars {
 		$cs_sidebars = self::get_custom_sidebars();
 		$delete_widgetized_sidebars = array();
 
-
 		foreach ( $widgetized_sidebars as $id => $bar ) {
 			if ( substr( $id, 0, 3 ) == self::$sidebar_prefix ) {
-				$found = FALSE;
+				$found = false;
 				foreach ( $cs_sidebars as $csbar ) {
 					if ( $csbar['id'] == $id ) {
-						$found = TRUE;
+						$found = true;
 					}
 				}
 				if ( ! $found ) {
@@ -458,12 +457,12 @@ class CustomSidebars {
 		foreach ( $cs_sidebars as $cs ) {
 			$sb_id = $cs['id'];
 			if ( ! in_array( $sb_id, $all_ids ) ) {
-				$widgetized_sidebars[$sb_id] = array();
+				$widgetized_sidebars[ $sb_id ] = array();
 			}
 		}
 
 		foreach ( $delete_widgetized_sidebars as $id ) {
-			unset( $widgetized_sidebars[$id] );
+			unset( $widgetized_sidebars[ $id ] );
 		}
 
 		update_option( 'sidebars_widgets', $widgetized_sidebars );
@@ -476,7 +475,7 @@ class CustomSidebars {
 	 * @since  2.0
 	 */
 	static public function get_post_meta( $post_id ) {
-		$data = get_post_meta( $post_id, '_cs_replacements', TRUE );
+		$data = get_post_meta( $post_id, '_cs_replacements', true );
 		if ( ! is_array( $data ) ) {
 			$data = array();
 		}
@@ -514,25 +513,25 @@ class CustomSidebars {
 		// Remove inactive sidebars.
 		foreach ( $allsidebars as $sb_id => $sidebar ) {
 			if ( false !== strpos( $sidebar['class'], 'inactive-sidebar' ) ) {
-				unset( $allsidebars[$sb_id] );
+				unset( $allsidebars[ $sb_id ] );
 			}
 		}
 
 		ksort( $allsidebars );
-		if ( $type == 'all' ) {
+		if ( 'all' == $type ) {
 			$result = $allsidebars;
-		} else if ( $type == 'cust' ) {
+		} elseif ( 'cust' == $type ) {
 			foreach ( $allsidebars as $key => $sb ) {
 				// Only keep custom sidebars in the results.
 				if ( substr( $key, 0, 3 ) == self::$sidebar_prefix ) {
-					$result[$key] = $sb;
+					$result[ $key ] = $sb;
 				}
 			}
-		} else if ( $type == 'theme' ) {
+		} elseif ( 'theme' == $type ) {
 			foreach ( $allsidebars as $key => $sb ) {
 				// Remove custom sidebars from results.
 				if ( substr( $key, 0, 3 ) != self::$sidebar_prefix ) {
-					$result[$key] = $sb;
+					$result[ $key ] = $sb;
 				}
 			}
 		}
@@ -626,7 +625,7 @@ class CustomSidebars {
 	static public function get_post_types( $type = 'names' ) {
 		$Valid = array();
 
-		if ( $type != 'objects' ) {
+		if ( 'objects' != $type ) {
 			$type = 'names';
 		}
 
@@ -697,7 +696,7 @@ class CustomSidebars {
 	 * Helper function used to sort categories.
 	 */
 	static public function get_category_level( $catid ) {
-		if ( $catid == 0 ) {
+		if ( ! $catid ) {
 			return 0;
 		}
 
@@ -829,6 +828,6 @@ class CustomSidebars {
 			'in the <b>PRO</b> version of this plugin.<br />' .
 			'<a href="%1$s" target="_blank">Learn more</a>', 'custom-sidebars'
 		);
-		__( 'Pro Version Features', 'custom-sidebars');
+		__( 'Pro Version Features', 'custom-sidebars' );
 	}
 };

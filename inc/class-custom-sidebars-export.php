@@ -58,7 +58,7 @@ class CustomSidebarsExport extends CustomSidebars {
 	 */
 	public function widget_header() {
 		?>
-		<a href="#" class="cs-action btn-export"><?php _e( 'Import / Export Sidebars', 'custom-sidebars'); ?></a>
+		<a href="#" class="cs-action btn-export"><?php _e( 'Import / Export Sidebars', 'custom-sidebars' ); ?></a>
 		<?php
 	}
 
@@ -94,7 +94,7 @@ class CustomSidebarsExport extends CustomSidebars {
 		if ( ! current_user_can( self::$cap_required ) ) {
 			$req = self::req_err(
 				$req,
-				__( 'You do not have permission for this', 'custom-sidebars')
+				__( 'You do not have permission for this', 'custom-sidebars' )
 			);
 		} else {
 			switch ( $ajax_action ) {
@@ -190,8 +190,8 @@ class CustomSidebarsExport extends CustomSidebars {
 			if ( is_array( $widgets ) ) {
 				$data['widgets'][ $sidebar ] = array();
 				foreach ( $widgets as $widget_id ) {
-					if ( isset( $wp_registered_widgets[$widget_id] ) ) {
-						$item = @$wp_registered_widgets[$widget_id];
+					if ( isset( $wp_registered_widgets[ $widget_id ] ) ) {
+						$item = @$wp_registered_widgets[ $widget_id ];
 						$cb = $item['callback'];
 						$widget = is_array( $cb ) ? reset( $cb ) : false;
 
@@ -290,20 +290,20 @@ class CustomSidebarsExport extends CustomSidebars {
 				case UPLOAD_ERR_NO_FILE:
 					return self::req_err(
 						$req,
-						__( 'No file was uploaded', 'custom-sidebars')
+						__( 'No file was uploaded', 'custom-sidebars' )
 					);
 
 				case UPLOAD_ERR_INI_SIZE:
 				case UPLOAD_ERR_FORM_SIZE:
 					return self::req_err(
 						$req,
-						__( 'Import file is too big', 'custom-sidebars')
+						__( 'Import file is too big', 'custom-sidebars' )
 					);
 
 				default:
 					return self::req_err(
 						$req,
-						__( 'Something went wrong', 'custom-sidebars')
+						__( 'Something went wrong', 'custom-sidebars' )
 					);
 			}
 
@@ -326,13 +326,13 @@ class CustomSidebarsExport extends CustomSidebars {
 			} else {
 				return self::req_err(
 					$req,
-					__( 'Unexpected import format', 'custom-sidebars')
+					__( 'Unexpected import format', 'custom-sidebars' )
 				);
 			}
 		} else {
 			return self::req_err(
 				$req,
-				__( 'No file was uploaded', 'custom-sidebars')
+				__( 'No file was uploaded', 'custom-sidebars' )
 			);
 		}
 
@@ -597,19 +597,17 @@ class CustomSidebarsExport extends CustomSidebars {
 		if ( $sidebar_count > 0 ) {
 			self::set_custom_sidebars( $sidebars );
 			$msg[] = sprintf(
-				__( 'Imported %d custom sidebar(s)!', 'custom-sidebars'),
+				__( 'Imported %d custom sidebar(s)!', 'custom-sidebars' ),
 				$sidebar_count
 			);
 		}
-
 
 		// =====================================================================
 		// Import plugin settings
 		if ( ! empty( $data['options'] ) ) {
 			self::set_options( $data['options'] );
-			$msg[] = __( 'Plugin options were imported!', 'custom-sidebars');
+			$msg[] = __( 'Plugin options were imported!', 'custom-sidebars' );
 		}
-
 
 		// =====================================================================
 		// Import widgets
@@ -658,7 +656,7 @@ class CustomSidebarsExport extends CustomSidebars {
 		if ( $widget_count > 0 ) {
 			wp_set_sidebars_widgets( $def_sidebars );
 			$msg[] = sprintf(
-				__( 'Imported %d widget(s)!', 'custom-sidebars'),
+				__( 'Imported %d widget(s)!', 'custom-sidebars' ),
 				$widget_count
 			);
 		}
@@ -765,5 +763,4 @@ class CustomSidebarsExport extends CustomSidebars {
 
 		return $widget_name;
 	}
-
 };

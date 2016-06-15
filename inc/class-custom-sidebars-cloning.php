@@ -185,7 +185,7 @@ class CustomSidebarsCloning {
 	 */
 	public function admin_widget_button( $widget, $return, $instance ) {
 		$data = $this->get_widget_data( $instance );
-		$is_linked = ($data['group'] != 0);
+		$is_linked = (0 != $data['group']);
 
 		?>
 		<div class="csb-clone csb-clone-<?php echo esc_attr( $widget->id ); ?>">
@@ -198,8 +198,8 @@ class CustomSidebarsCloning {
 		<input type="hidden" name="csb-clone-button" value="0" />
 		<input type="hidden" name="csb_clone[group]" class="csb-clone-group" value="<?php echo esc_attr( $data['group'] ); ?>" />
 		<input type="hidden" name="csb_clone[state]" class="csb-clone-state" value="<?php echo esc_attr( $data['state'] ); ?>" />
-		<?php if ( ! isset( $_POST[ 'csb-clone-button' ] ) ) : ?>
-			<a href="#" class="button csb-clone-button"><?php _e( 'Clone', 'custom-sidebars'); ?></a>
+		<?php if ( ! isset( $_POST['csb-clone-button'] ) ) : ?>
+			<a href="#" class="button csb-clone-button"><?php _e( 'Clone', 'custom-sidebars' ); ?></a>
 		<?php else : ?>
 			<script>jQuery(function() { jQuery('.csb-clone-<?php echo esc_js( $widget->id ); ?>').closest('.widget').trigger('csb:update'); }); </script>
 		<?php endif; ?>
@@ -278,7 +278,7 @@ class CustomSidebarsCloning {
 		}
 
 		$group = $instance['csb_clone']['group'];
-		if ( empty ( $group ) ) {
+		if ( empty( $group ) ) {
 			// Widget does not have a group (anymore).
 			return $instance;
 		}
@@ -309,7 +309,7 @@ class CustomSidebarsCloning {
 			}
 
 			$group = $the_inst['csb_clone']['group'];
-			if ( empty ( $group ) ) {
+			if ( empty( $group ) ) {
 				// Widget does not have a group (anymore).
 				continue;
 			}
@@ -323,10 +323,9 @@ class CustomSidebarsCloning {
 			$settings[ $key ] = $group_data;
 		}
 
-		$settings[$id] = $group_data;
+		$settings[ $id ] = $group_data;
 		$this->group_data = $settings;
 
 		return $instance;
 	}
-
 };

@@ -11,14 +11,14 @@
 $available = $wp_registered_sidebars;
 $sidebars = CustomSidebars::get_options( 'modifiable' );
 
-$is_front = $post_id == get_option( 'page_on_front' );
-$is_blog = $post_id == get_option( 'page_for_posts' );
+$is_front = get_option( 'page_on_front' ) == $post_id;
+$is_blog = get_option( 'page_for_posts' ) == $post_id;
 
 if ( $is_front || $is_blog ) {
 	if ( $is_front ) {
-		_e( '(Not available for Home-Page)', 'custom-sidebars');
+		_e( '(Not available for Home-Page)', 'custom-sidebars' );
 	} else {
-		_e( '(Not available for Blog-Page)', 'custom-sidebars');
+		_e( '(Not available for Blog-Page)', 'custom-sidebars' );
 	}
 	foreach ( $sidebars as $s ) : ?>
 		<span data-sidebar="<?php echo esc_attr( $s ); ?>" data-replaced="<?php echo esc_attr( @$selected[ $s ] ); ?>" data-cshide="yes">
@@ -30,7 +30,7 @@ if ( $is_front || $is_blog ) {
 		$class = $replaced ? 'cust' : 'def';
 
 		?>
-		<div class="<?php echo esc_attr( $class, 'custom-sidebars'); ?>"
+		<div class="<?php echo esc_attr( $class, 'custom-sidebars' ); ?>"
 			data-sidebar="<?php echo esc_attr( $s ); ?>"
 			data-replaced="<?php echo esc_attr( @$selected[ $s ] ); ?>">
 			<small class="cs-key">

@@ -109,8 +109,8 @@ class CustomSidebarsExplain extends CustomSidebars {
 		<a href="#"
 			class="cs-action btn-explain"
 			data-status="<?php echo esc_attr( $state ); ?>"
-			data-label-off="<?php _e( 'Show explanations', 'custom-sidebars'); ?>"
-			data-label-on="<?php _e( 'Hide explanations', 'custom-sidebars'); ?>">
+			data-label-off="<?php _e( 'Show explanations', 'custom-sidebars' ); ?>"
+			data-label-on="<?php _e( 'Hide explanations', 'custom-sidebars' ); ?>">
 		</a>
 		<?php
 		*/
@@ -171,7 +171,7 @@ class CustomSidebarsExplain extends CustomSidebars {
 	 * @param string $state [on|off]
 	 */
 	public static function set_explain( $state ) {
-		if ( $state != 'on' ) {
+		if ( 'on' != $state ) {
 			$state = 'off';
 		}
 		$_SESSION['cs-explain'] = $state;
@@ -240,12 +240,12 @@ class CustomSidebarsExplain extends CustomSidebars {
 		$col = self::get_color();
 		$w_col = self::get_color();
 
-		$wp_registered_sidebars[$index]['before_widget'] =
+		$wp_registered_sidebars[ $index ]['before_widget'] =
 			'<div style="border:2px solid ' . $w_col . ';margin:2px;width:auto;clear:both">' .
 			'<div style="font-size:12px;padding:1px 4px 1px 6px;float:right;background-color:' . $w_col . ';color:#FFF">%1$s</div>' .
-			@$wp_registered_sidebars[$index]['before_widget'];
-		$wp_registered_sidebars[$index]['after_widget'] =
-			@$wp_registered_sidebars[$index]['after_widget'] .
+			@$wp_registered_sidebars[ $index ]['before_widget'];
+		$wp_registered_sidebars[ $index ]['after_widget'] =
+			@$wp_registered_sidebars[ $index ]['after_widget'] .
 			'<div style="clear:both"> </div>' .
 			'</div>';
 		?>
@@ -265,5 +265,4 @@ class CustomSidebarsExplain extends CustomSidebars {
 		</div>
 		<?php
 	}
-
 };
