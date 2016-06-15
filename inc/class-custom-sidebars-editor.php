@@ -232,7 +232,7 @@ class CustomSidebarsEditor extends CustomSidebars {
 		}
 
 		// Populate the sidebar object.
-		if ( 'insert' == $action || self::wpml_is_default_lang() ) {
+		if ( ! CSB_IS_PRO /* start:pro */|| 'insert' == $action || self::wpml_is_default_lang() /* end:pro */ ) {
 			$sidebar['name'] = $sb_name;
 			$sidebar['description'] = $sb_desc;
 		} else {
@@ -275,11 +275,14 @@ class CustomSidebarsEditor extends CustomSidebars {
 		self::set_custom_sidebars( $sidebars );
 		self::refresh_sidebar_widgets();
 
+		$req->data = $sidebar;
+		$req->action = $action;
+
+		/* start:pro */
 		// PRO: Allow user to translate sidebar name/description via WPML.
 		self::wpml_update( $sidebars );
-
-		$req->action = $action;
 		$req->data = self::wpml_translate( $sidebar );
+		/* end:pro */
 
 		return $req;
 	}
@@ -384,6 +387,8 @@ class CustomSidebarsEditor extends CustomSidebars {
 			'_date' => __( 'Date Archives', 'custom-sidebars' ),
 		);
 
+		$raw_authors = array();
+		/* start:pro */
 		$raw_authors = get_users(
 			array(
 				'order_by' => 'display_name',
@@ -391,6 +396,7 @@ class CustomSidebarsEditor extends CustomSidebars {
 				'who' => 'authors',
 			)
 		);
+		/* end:pro */
 
 		// Collect required data for all posttypes.
 		$posttypes = array();
@@ -447,6 +453,7 @@ class CustomSidebarsEditor extends CustomSidebars {
 			);
 		}
 
+		/* start:pro */
 		// Pro only: Build a list of authors.
 		$authors = array();
 		foreach ( $raw_authors as $user ) {
@@ -457,12 +464,13 @@ class CustomSidebarsEditor extends CustomSidebars {
 				'archive' => self::get_array( $sel_archive ),
 			);
 		}
+		$req->authors = $authors;
+		/* end:pro */
 
 		$req->replaceable = $defaults['modifiable'];
 		$req->posttypes = $posttypes;
 		$req->categories = $categories;
 		$req->archives = $archives;
-		$req->authors = $authors;
 		return $req;
 	}
 
@@ -489,6 +497,9 @@ class CustomSidebarsEditor extends CustomSidebars {
 			'search',
 			'date',
 		);
+
+		$raw_authors = array();
+		/* start:pro */
 		$raw_authors = get_users(
 			array(
 				'order_by' => 'display_name',
@@ -496,6 +507,7 @@ class CustomSidebarsEditor extends CustomSidebars {
 				'who' => 'authors',
 			)
 		);
+		/* end:pro */
 
 		// == Update the options
 
@@ -570,6 +582,7 @@ class CustomSidebarsEditor extends CustomSidebars {
 				}
 			}
 
+			/* start:pro */
 			// Author settings.
 			foreach ( $raw_authors as $user ) {
 				$key = $user->ID;
@@ -586,6 +599,7 @@ class CustomSidebarsEditor extends CustomSidebars {
 					unset( $options['author_archive'][ $key ][ $sb_id ] );
 				}
 			}
+			/* end:pro */
 		}
 
 		$req->message = sprintf(
@@ -734,7 +748,7 @@ class CustomSidebarsEditor extends CustomSidebars {
 		self::set_post_meta( $post_id, $data );
 	}
 
-
+	/* start:pro */
 	//
 	// ========== PRO: WPML support.
 	//
@@ -998,4 +1012,5 @@ class CustomSidebarsEditor extends CustomSidebars {
 		</script>
 		<?php
 	}
+	/* end:pro */
 };

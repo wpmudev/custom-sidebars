@@ -4,9 +4,11 @@
 require_once CSB_INC_DIR . 'class-custom-sidebars-widgets.php';
 require_once CSB_INC_DIR . 'class-custom-sidebars-editor.php';
 require_once CSB_INC_DIR . 'class-custom-sidebars-replacer.php';
+/* start:pro */
 require_once CSB_INC_DIR . 'class-custom-sidebars-cloning.php';
 require_once CSB_INC_DIR . 'class-custom-sidebars-visibility.php';
 require_once CSB_INC_DIR . 'class-custom-sidebars-export.php';
+/* end:pro */
 require_once CSB_INC_DIR . 'class-custom-sidebars-explain.php';
 
 
@@ -71,20 +73,23 @@ class CustomSidebars {
 	 * We directly initialize sidebar options when class is created.
 	 */
 	private function __construct() {
+		/* start:free */$plugin_title = 'Custom Sidebars';/* end:free */
+		/* start:pro */$plugin_title = 'Custom Sidebars Pro';/* end:pro */
+
 		/**
 		 * ID of the WP-Pointer used to introduce the plugin upon activation
 		 *
 		 * ========== Pointer ==========
 		 *  Internal ID:  wpmudcs1 [WPMUDev CustomSidebars 1]
 		 *  Point at:     #menu-appearance (Appearance menu item)
-		 *  Title:        Custom Sidebars Pro
+		 *  Title:        Custom Sidebars
 		 *  Description:  Create and edit custom sidebars in your widget screen!
 		 * -------------------------------------------------------------------------
 		 */
 		lib2()->html->pointer(
 			'wpmudcs1',                               // Internal Pointer-ID
 			'#menu-appearance',                       // Point at
-			__( 'Custom Sidebars Pro', 'custom-sidebars' ),    // Title
+			$plugin_title,
 			sprintf(
 				__(
 					'Now you can create and edit custom sidebars in your ' .
@@ -108,7 +113,7 @@ class CustomSidebars {
 						to disable accessibility mode and use the %1$s plugin!',
 						'custom-sidebars'
 					),
-					'Custom Sidebars Pro',
+					$plugin_title,
 					admin_url( 'widgets.php?widgets-access=off' )
 				),
 				'err',
@@ -117,7 +122,6 @@ class CustomSidebars {
 		} else {
 			// Load javascripts/css files
 			lib2()->ui->add( 'core', 'widgets.php' );
-			lib2()->ui->add( 'scrollbar', 'widgets.php' );
 			lib2()->ui->add( 'select', 'widgets.php' );
 			lib2()->ui->add( CSB_JS_URL . 'cs.min.js', 'widgets.php' );
 			lib2()->ui->add( CSB_CSS_URL . 'cs.css', 'widgets.php' );
@@ -147,6 +151,12 @@ class CustomSidebars {
 					lib2()->ui->admin_message( $msg );
 				}
 			}
+
+			add_action(
+				'in_widget_form',
+				array( $this, 'in_widget_form' ),
+				10, 1
+			);
 		}
 	}
 
@@ -710,6 +720,34 @@ class CustomSidebars {
 	// =========================================================================
 
 
+	/**
+	 * Callback for in_widget_form action
+	 *
+	 * Free version only.
+	 *
+	 * @since 2.0.1
+	 */
+	public function in_widget_form( $widget ) {
+		/* start:free */
+		if ( CSB_IS_PRO ) { return; }
+		?>
+		<input type="hidden" name="csb-buttons" value="0" />
+		<?php if ( ! isset( $_POST['csb-buttons'] ) ) : ?>
+			<div class="csb-pro-layer csb-pro-<?php echo esc_attr( $widget->id ); ?>">
+				<a href="#" class="button csb-clone-button"><?php _e( 'Clone', 'custom-sidebars' ); ?></a>
+				<a href="#" class="button csb-visibility-button"><span class="dashicons dashicons-visibility"></span> <?php _e( 'Visibility', 'custom-sidebars' ); ?></a>
+				<a href="<?php echo esc_url( CustomSidebars::$pro_url ); ?>" target="_blank" class="pro-info">
+				<?php printf(
+					__( 'Pro Version Features', 'custom-sidebars' ),
+					CustomSidebars::$pro_url
+				); ?>
+				</a>
+			</div>
+		<?php
+		endif;
+		/* end:free */
+	}
+
 
 	// =========================================================================
 	// == AJAX FUNCTIONS
@@ -810,24 +848,5 @@ class CustomSidebars {
 		 * @param  string $action The specified ajax action.
 		 */
 		do_action( 'cs_ajax_request_get', $get_action );
-	}
-
-	/**
-	 * Add extra translations from the free plugin version so poedit will
-	 * recognize the translations and we do not need to keep separate
-	 * translation files for pro/free version.
-	 *
-	 * @since  2.0
-	 */
-	private function other_translations() {
-		return;
-
-		// These functions will never be called, but poedit recognizes the text.
-		__(
-			'Import / Export functionality is available<br />' .
-			'in the <b>PRO</b> version of this plugin.<br />' .
-			'<a href="%1$s" target="_blank">Learn more</a>', 'custom-sidebars'
-		);
-		__( 'Pro Version Features', 'custom-sidebars' );
 	}
 };

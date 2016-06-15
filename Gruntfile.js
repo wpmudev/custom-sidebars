@@ -49,6 +49,9 @@ module.exports = function( grunt ) {
 				'./js/cs-visibility.js',
 				'./css/cs-cloning.css',
 				'./css/cs-visibility.css',
+				'./inc/class-custom-sidebars-cloning.php',
+				'./inc/class-custom-sidebars-export.php',
+				'./inc/class-custom-sidebars-visibility.php',
 			],
 			include_files: [
 				'**',
