@@ -16,9 +16,9 @@ $is_blog = $post_id == get_option( 'page_for_posts' );
 
 if ( $is_front || $is_blog ) {
 	if ( $is_front ) {
-		_e( '(Not available for Home-Page)', CSB_LANG );
+		_e( '(Not available for Home-Page)', 'custom-sidebars');
 	} else {
-		_e( '(Not available for Blog-Page)', CSB_LANG );
+		_e( '(Not available for Blog-Page)', 'custom-sidebars');
 	}
 	foreach ( $sidebars as $s ) : ?>
 		<span data-sidebar="<?php echo esc_attr( $s ); ?>" data-replaced="<?php echo esc_attr( @$selected[ $s ] ); ?>" data-cshide="yes">
@@ -30,7 +30,7 @@ if ( $is_front || $is_blog ) {
 		$class = $replaced ? 'cust' : 'def';
 
 		?>
-		<div class="<?php echo esc_attr( $class, CSB_LANG ); ?>"
+		<div class="<?php echo esc_attr( $class, 'custom-sidebars'); ?>"
 			data-sidebar="<?php echo esc_attr( $s ); ?>"
 			data-replaced="<?php echo esc_attr( @$selected[ $s ] ); ?>">
 			<small class="cs-key">

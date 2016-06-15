@@ -28,7 +28,7 @@ class MS_Test_General extends WP_UnitTestCase {
 	 * @test
 	 */
 	function plugin_is_loaded() {
-		$this->assertTrue( defined( 'CSB_LANG' ) );
+		$this->assertTrue( defined( 'CSB_PLUGIN' ) );
 	}
 
 	/**

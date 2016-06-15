@@ -115,7 +115,7 @@ class CustomSidebarsEditor extends CustomSidebars {
 		if ( ! current_user_can( self::$cap_required ) ) {
 			$req = self::req_err(
 				$req,
-				__( 'You do not have permission for this', CSB_LANG )
+				__( 'You do not have permission for this', 'custom-sidebars')
 			);
 		} else {
 			switch ( $action ) {
@@ -190,7 +190,7 @@ class CustomSidebarsEditor extends CustomSidebars {
 		if ( empty( $sb_name ) ) {
 			return self::req_err(
 				$req,
-				__( 'Sidebar-name cannot be empty', CSB_LANG )
+				__( 'Sidebar-name cannot be empty', 'custom-sidebars')
 			);
 		}
 
@@ -214,7 +214,7 @@ class CustomSidebarsEditor extends CustomSidebars {
 			if ( ! $sidebar ) {
 				return self::req_err(
 					$req,
-					__( 'The sidebar does not exist', CSB_LANG )
+					__( 'The sidebar does not exist', 'custom-sidebars')
 				);
 			}
 		}
@@ -245,7 +245,7 @@ class CustomSidebarsEditor extends CustomSidebars {
 		if ( $action == 'insert' ) {
 			$sidebars[] = $sidebar;
 			$req->message = sprintf(
-				__( 'Created new sidebar <strong>%1$s</strong>', CSB_LANG ),
+				__( 'Created new sidebar <strong>%1$s</strong>', 'custom-sidebars'),
 				esc_html( $sidebar['name'] )
 			);
 		} else {
@@ -253,7 +253,7 @@ class CustomSidebarsEditor extends CustomSidebars {
 			foreach ( $sidebars as $ind => $item ) {
 				if ( $item['id'] == $sb_id ) {
 					$req->message = sprintf(
-						__( 'Updated sidebar <strong>%1$s</strong>', CSB_LANG ),
+						__( 'Updated sidebar <strong>%1$s</strong>', 'custom-sidebars'),
 						esc_html( $sidebar['name'] )
 					);
 					$sidebars[ $ind ] = $sidebar;
@@ -264,7 +264,7 @@ class CustomSidebarsEditor extends CustomSidebars {
 			if ( ! $found ) {
 				return self::req_err(
 					$req,
-					__( 'The sidebar was not found', CSB_LANG )
+					__( 'The sidebar was not found', 'custom-sidebars')
 				);
 			}
 		}
@@ -296,7 +296,7 @@ class CustomSidebarsEditor extends CustomSidebars {
 		if ( ! $sidebar ) {
 			return self::req_err(
 				$req,
-				__( 'The sidebar does not exist', CSB_LANG )
+				__( 'The sidebar does not exist', 'custom-sidebars')
 			);
 		}
 
@@ -305,7 +305,7 @@ class CustomSidebarsEditor extends CustomSidebars {
 			if ( $item['id'] == $req->id ) {
 				$found = true;
 				$req->message = sprintf(
-					__( 'Deleted sidebar <strong>%1$s</strong>', CSB_LANG ),
+					__( 'Deleted sidebar <strong>%1$s</strong>', 'custom-sidebars'),
 					esc_html( $req->sidebar['name'] )
 				);
 				unset( $sidebars[ $ind ] );
@@ -316,7 +316,7 @@ class CustomSidebarsEditor extends CustomSidebars {
 		if ( ! $found ) {
 			return self::req_err(
 				$req,
-				__( 'The sidebar was not found', CSB_LANG )
+				__( 'The sidebar was not found', 'custom-sidebars')
 			);
 		}
 
@@ -374,12 +374,12 @@ class CustomSidebarsEditor extends CustomSidebars {
 		$raw_cat = self::get_all_categories();
 
 		$archive_type = array(
-			'_blog' => __( 'Front Page', CSB_LANG ),
-			'_search' => __( 'Search Results', CSB_LANG ),
-			'_404' => __( 'Not found (404)', CSB_LANG ),
-			'_authors' => __( 'Any Author Archive', CSB_LANG ),
-			'_tags' => __( 'Tag Archives', CSB_LANG ),
-			'_date' => __( 'Date Archives', CSB_LANG ),
+			'_blog' => __( 'Front Page', 'custom-sidebars'),
+			'_search' => __( 'Search Results', 'custom-sidebars'),
+			'_404' => __( 'Not found (404)', 'custom-sidebars'),
+			'_authors' => __( 'Any Author Archive', 'custom-sidebars'),
+			'_tags' => __( 'Tag Archives', 'custom-sidebars'),
+			'_date' => __( 'Date Archives', 'custom-sidebars'),
 		);
 
 		$raw_authors = get_users(
@@ -419,11 +419,11 @@ class CustomSidebarsEditor extends CustomSidebars {
 		$archives = array(); // Start with a copy of the posttype list.
 		foreach ( $raw_posttype as $item ) {
 			if ( $item->name == 'post' ) {
-				$label = __( 'Post Index', CSB_LANG );
+				$label = __( 'Post Index', 'custom-sidebars');
 			} else {
 				if ( ! $item->has_archive ) { continue; }
 				$label = sprintf(
-					__( '%1$s Archives', CSB_LANG ),
+					__( '%1$s Archives', 'custom-sidebars'),
 					$item->labels->singular_name
 				);
 			}
@@ -593,7 +593,7 @@ class CustomSidebarsEditor extends CustomSidebars {
 		}
 
 		$req->message = sprintf(
-			__( 'Updated sidebar <strong>%1$s</strong> settings.', CSB_LANG ),
+			__( 'Updated sidebar <strong>%1$s</strong> settings.', 'custom-sidebars'),
 			esc_html( $req->sidebar['name'] )
 		);
 		self::set_options( $options );
@@ -629,7 +629,7 @@ class CustomSidebarsEditor extends CustomSidebars {
 		if ( $pt_obj->publicly_queryable || $pt_obj->public ) {
 			add_meta_box(
 				'customsidebars-mb',
-				__( 'Sidebars', CSB_LANG ),
+				__( 'Sidebars', 'custom-sidebars'),
 				array( $this, 'print_metabox_editor' ),
 				$post_type,
 				'side'
@@ -890,7 +890,7 @@ class CustomSidebarsEditor extends CustomSidebars {
 	public function post_columns( $columns ) {
 		// This column is added.
 		$insert = array(
-			'cs_replacement' => __( 'Custom Sidebars', CSB_LANG ),
+			'cs_replacement' => __( 'Custom Sidebars', 'custom-sidebars'),
 		);
 
 		// Column is added after column 'title'.

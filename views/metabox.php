@@ -12,8 +12,8 @@
 $available = $wp_registered_sidebars;
 $sidebars = CustomSidebars::get_options( 'modifiable' );
 
-$is_front = $post_id == get_option( 'page_on_front' );
-$is_blog = $post_id == get_option( 'page_for_posts' );
+$is_front = get_option( 'page_on_front' ) == $post_id;
+$is_blog = get_option( 'page_for_posts' ) == $post_id;
 ?>
 
 <?php if ( $is_front || $is_blog ) : ?>
@@ -26,7 +26,7 @@ $is_blog = $post_id == get_option( 'page_for_posts' );
 				'<li>Click on "Sidebar Location"</li>' .
 				'<li>Open the "Archive-Types" tab</li>' .
 				'<li>Choose "Front-Page" or "Post-Index"</li></ul>',
-				CSB_LANG
+				'custom-sidebars'
 			),
 			admin_url( 'widgets.php' )
 		); ?>
@@ -45,12 +45,12 @@ $is_blog = $post_id == get_option( 'page_for_posts' );
 	<p>
 		<?php _e(
 			'Here you can replace the default sidebars. Simply select what ' .
-			'sidebar you want to show for this post!', CSB_LANG
+			'sidebar you want to show for this post!', 'custom-sidebars'
 		); ?>
 	</p>
 
-	<?php if ( ! empty( $sidebars ) ) { ?>
-		<?php foreach ( $sidebars as $s ) { ?>
+	<?php if ( ! empty( $sidebars ) ) : ?>
+		<?php foreach ( $sidebars as $s ) : ?>
 			<?php $sb_name = $available[ $s ]['name']; ?>
 			<p>
 				<label for="cs_replacement_<?php echo esc_attr( $s ); ?>">
@@ -67,18 +67,14 @@ $is_blog = $post_id == get_option( 'page_for_posts' );
 					<?php endforeach; ?>
 				</select>
 			</p>
-		<?php
-		}
-	} else {
-		?>
+		<?php endforeach; ?>
+	<?php else : ?>
 		<p id="message" class="updated">
 			<?php _e(
 				'All sidebars have been locked, you cannot replace them. ' .
 				'Go to <a href="widgets.php">the widgets page</a> to unlock a ' .
-				'sidebar', CSB_LANG
+				'sidebar', 'custom-sidebars'
 			); ?>
 		</p>
-		<?php
-	}
-
+	<?php endif;
 endif;

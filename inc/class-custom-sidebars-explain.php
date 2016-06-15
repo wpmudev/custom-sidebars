@@ -109,8 +109,8 @@ class CustomSidebarsExplain extends CustomSidebars {
 		<a href="#"
 			class="cs-action btn-explain"
 			data-status="<?php echo esc_attr( $state ); ?>"
-			data-label-off="<?php _e( 'Show explanations', CSB_LANG ); ?>"
-			data-label-on="<?php _e( 'Hide explanations', CSB_LANG ); ?>">
+			data-label-off="<?php _e( 'Show explanations', 'custom-sidebars'); ?>"
+			data-label-on="<?php _e( 'Hide explanations', 'custom-sidebars'); ?>">
 		</a>
 		<?php
 		*/

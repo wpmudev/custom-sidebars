@@ -84,11 +84,11 @@ class CustomSidebars {
 		lib2()->html->pointer(
 			'wpmudcs1',                               // Internal Pointer-ID
 			'#menu-appearance',                       // Point at
-			__( 'Custom Sidebars Pro', CSB_LANG ),    // Title
+			__( 'Custom Sidebars Pro', 'custom-sidebars'),    // Title
 			sprintf(
 				__(
 					'Now you can create and edit custom sidebars in your ' .
-					'<a href="%1$s">Widgets screen</a>!', CSB_LANG
+					'<a href="%1$s">Widgets screen</a>!', 'custom-sidebars'
 				),
 				admin_url( 'widgets.php' )
 			)                                         // Body
@@ -106,7 +106,7 @@ class CustomSidebars {
 						'<strong>Accessibility mode is not supported by the
 						%1$s plugin.</strong><br /><a href="%2$s">Click here</a>
 						to disable accessibility mode and use the %1$s plugin!',
-						CSB_LANG
+						'custom-sidebars'
 					),
 					'Custom Sidebars Pro',
 					admin_url( 'widgets.php?widgets-access=off' )
@@ -827,8 +827,8 @@ class CustomSidebars {
 		__(
 			'Import / Export functionality is available<br />' .
 			'in the <b>PRO</b> version of this plugin.<br />' .
-			'<a href="%1$s" target="_blank">Learn more</a>', CSB_LANG
+			'<a href="%1$s" target="_blank">Learn more</a>', 'custom-sidebars'
 		);
-		__( 'Pro Version Features', CSB_LANG );
+		__( 'Pro Version Features', 'custom-sidebars');
 	}
 };

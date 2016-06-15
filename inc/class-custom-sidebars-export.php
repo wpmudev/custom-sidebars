@@ -58,7 +58,7 @@ class CustomSidebarsExport extends CustomSidebars {
 	 */
 	public function widget_header() {
 		?>
-		<a href="#" class="cs-action btn-export"><?php _e( 'Import / Export Sidebars', CSB_LANG ); ?></a>
+		<a href="#" class="cs-action btn-export"><?php _e( 'Import / Export Sidebars', 'custom-sidebars'); ?></a>
 		<?php
 	}
 
@@ -94,7 +94,7 @@ class CustomSidebarsExport extends CustomSidebars {
 		if ( ! current_user_can( self::$cap_required ) ) {
 			$req = self::req_err(
 				$req,
-				__( 'You do not have permission for this', CSB_LANG )
+				__( 'You do not have permission for this', 'custom-sidebars')
 			);
 		} else {
 			switch ( $ajax_action ) {
@@ -290,20 +290,20 @@ class CustomSidebarsExport extends CustomSidebars {
 				case UPLOAD_ERR_NO_FILE:
 					return self::req_err(
 						$req,
-						__( 'No file was uploaded', CSB_LANG )
+						__( 'No file was uploaded', 'custom-sidebars')
 					);
 
 				case UPLOAD_ERR_INI_SIZE:
 				case UPLOAD_ERR_FORM_SIZE:
 					return self::req_err(
 						$req,
-						__( 'Import file is too big', CSB_LANG )
+						__( 'Import file is too big', 'custom-sidebars')
 					);
 
 				default:
 					return self::req_err(
 						$req,
-						__( 'Something went wrong', CSB_LANG )
+						__( 'Something went wrong', 'custom-sidebars')
 					);
 			}
 
@@ -326,13 +326,13 @@ class CustomSidebarsExport extends CustomSidebars {
 			} else {
 				return self::req_err(
 					$req,
-					__( 'Unexpected import format', CSB_LANG )
+					__( 'Unexpected import format', 'custom-sidebars')
 				);
 			}
 		} else {
 			return self::req_err(
 				$req,
-				__( 'No file was uploaded', CSB_LANG )
+				__( 'No file was uploaded', 'custom-sidebars')
 			);
 		}
 
@@ -397,7 +397,7 @@ class CustomSidebarsExport extends CustomSidebars {
 				$req,
 				__(
 					'Something unexpected happened and we could not finish ' .
-					'the import. Please try again.', CSB_LANG
+					'the import. Please try again.', 'custom-sidebars'
 				)
 			);
 		}
@@ -597,7 +597,7 @@ class CustomSidebarsExport extends CustomSidebars {
 		if ( $sidebar_count > 0 ) {
 			self::set_custom_sidebars( $sidebars );
 			$msg[] = sprintf(
-				__( 'Imported %d custom sidebar(s)!', CSB_LANG ),
+				__( 'Imported %d custom sidebar(s)!', 'custom-sidebars'),
 				$sidebar_count
 			);
 		}
@@ -607,7 +607,7 @@ class CustomSidebarsExport extends CustomSidebars {
 		// Import plugin settings
 		if ( ! empty( $data['options'] ) ) {
 			self::set_options( $data['options'] );
-			$msg[] = __( 'Plugin options were imported!', CSB_LANG );
+			$msg[] = __( 'Plugin options were imported!', 'custom-sidebars');
 		}
 
 
@@ -658,7 +658,7 @@ class CustomSidebarsExport extends CustomSidebars {
 		if ( $widget_count > 0 ) {
 			wp_set_sidebars_widgets( $def_sidebars );
 			$msg[] = sprintf(
-				__( 'Imported %d widget(s)!', CSB_LANG ),
+				__( 'Imported %d widget(s)!', 'custom-sidebars'),
 				$widget_count
 			);
 		}
