@@ -2,6 +2,10 @@
  * CSS rules for the cloning module.
  */
 
+.inactive-sidebar .csb-clone {
+	display: none;
+}
+
 .widget-control-actions .csb-clone-button {
 	margin: 0 5px 0 0;
 }
