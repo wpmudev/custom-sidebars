@@ -1,6 +1,10 @@
 /**
  * CSS rules for the visibility module.
  */
+.inactive-sidebar .csb-visibility {
+  display: none;
+}
+
 .widget-control-actions .csb-visibility-button {
   margin: 0 5px 0 0;
 }

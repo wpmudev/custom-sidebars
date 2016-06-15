@@ -1,6 +1,6 @@
-/*! Custom Sidebars Pro - v2.1.06
+/*! Custom Sidebars - v2.1.08
  * http://premium.wpmudev.org/project/the-pop-over-plugin/
- * Copyright (c) 2015; * Licensed GPLv2+ */
+ * Copyright (c) 2016; * Licensed GPLv2+ */
 /*global window:false */
 /*global console:false */
 /*global document:false */
@@ -167,7 +167,6 @@ window.csSidebars = null;
 
 			csSidebars
 				.initControls()
-				.initScrollbar()
 				.initTopTools()
 				.initSidebars()
 				.initToolbars()
@@ -207,59 +206,6 @@ window.csSidebars = null;
 			jQuery('#cs-title-options')
 				.detach()
 				.prependTo( csSidebars.right );
-
-			return csSidebars;
-		},
-
-		/**
-		 * =====================================================================
-		 * Initialize the custom scrollbars on the right side.
-		 *
-		 * @since  1.0.0
-		 */
-		initScrollbar: function(){
-			var right_side = jQuery( '.widget-liquid-right' ),
-				wnd = jQuery( window ),
-				viewport = null;
-
-			csSidebars.right
-				.addClass('overview')
-				.wrap('<div class="viewport" />');
-
-			right_side
-				.height( wnd.height() )
-				.prepend('<div class="scrollbar"><div class="track"><div class="thumb"><div class="end"></div></div></div></div>')
-				.tinyscrollbar();
-
-			viewport = jQuery( '.viewport' )
-				.height( wnd.height() - 32 );
-
-			// Re-calculate the scrollbar size.
-			var update_scrollbars = function update_scrollbars() {
-				right_side.data( 'plugin_tinyscrollbar' ).update( 'relative' );
-			};
-
-			wnd.resize(function() {
-				right_side.height( wnd.height() );
-				viewport.height( wnd.height() - 32 );
-				update_scrollbars();
-			});
-
-			right_side.click(function(){
-				window.setTimeout( update_scrollbars, 400 );
-			});
-			wnd.on( 'cs-resize', update_scrollbars );
-
-			right_side.hover(
-				function() {
-					right_side.find( '.scrollbar' ).fadeIn();
-				}, function() {
-					right_side.find( '.scrollbar' ).fadeOut();
-				}
-			);
-
-			// Update the scrollbars after short delay
-			window.setTimeout( update_scrollbars, 1000 );
 
 			return csSidebars;
 		},

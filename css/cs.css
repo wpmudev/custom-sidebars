@@ -1,5 +1,113 @@
 /**
  * =============================================================================
+ * == FREE VERSION ONLY
+ * =============================================================================
+ */
+.module-export .pro-layer {
+  position: absolute;
+  left: 0;
+  top: 0;
+  right: 0;
+  bottom: 0;
+  z-index: 99999;
+  background: rgba(255, 255, 255, 0.8);
+  text-align: center;
+  font-size: 26px;
+  font-weight: 100;
+  padding-top: 120px;
+  line-height: 1.5;
+}
+.module-export .pro-layer a {
+  margin-top: 20px;
+  display: inline-block;
+  background: #2EA2CC;
+  color: #FAFAFA;
+  text-decoration: none;
+  padding: 10px 20px;
+  font-size: 18px;
+  font-weight: bold;
+}
+
+.module-export .pro-layer a:hover, .module-export .pro-layer a:focus, .module-export .pro-layer a:active {
+  background: #1E8CBE;
+  color: #FFF;
+}
+
+.frm-location .pro-layer {
+  padding: 10px;
+  text-align: center;
+  font-size: 26px;
+  font-weight: 100;
+  line-height: 1.5;
+}
+.frm-location .pro-layer a {
+  margin-top: 20px;
+  display: inline-block;
+  background: #2EA2CC;
+  color: #FAFAFA;
+  text-decoration: none;
+  padding: 10px 20px;
+  font-size: 18px;
+  font-weight: bold;
+}
+.frm-location .pro-layer a:hover, .frm-location .pro-layer a:focus, .frm-location .pro-layer a:active {
+  background: #1E8CBE;
+  color: #FFF;
+}
+
+.csb-pro-layer {
+  float: left;
+  position: relative;
+  opacity: .5;
+  margin-right: 10px;
+}
+.csb-pro-layer .pro-info {
+  position: absolute;
+  left: 0;
+  top: 0;
+  right: 0;
+  bottom: 0;
+  opacity: 0;
+  background: rgba(96, 96, 96, 0.75);
+  z-index: 99999;
+  text-align: center;
+  text-decoration: none;
+  line-height: 28px;
+  font-size: 16px;
+  font-weight: 100;
+  color: #FFF;
+  text-decoration: underline;
+  padding: 0;
+  margin: 0;
+  overflow: hidden;
+}
+.csb-pro-layer:hover {
+  opacity: 1;
+}
+.csb-pro-layer:hover .pro-info,
+.csb-pro-layer:hover .pro-info:hover,
+.csb-pro-layer:hover .pro-info:active,
+.csb-pro-layer:hover .pro-info:focus {
+  line-height: 48px;
+  left: -10px;
+  top: -10px;
+  right: -5px;
+  bottom: -10px;
+  opacity: 1;
+}
+.csb-pro-layer .button {
+  margin: 0 5px 0 0;
+  float: left;
+}
+.csb-pro-layer .button .dashicons {
+  line-height: 26px;
+  height: 26px;
+  float: left;
+  margin-right: 6px;
+}
+
+/**
+ * =============================================================================
  * == PLUGIN STYLES
  * =============================================================================
  */
@@ -44,26 +152,40 @@
   width: 100%;
 }
 
-.widget-liquid-right {
-  position: fixed;
+.widgets-php .widget-liquid-right {
+  position: absolute;
+  z-index: 0;
+  padding: 0 0 75px 0;
+  margin: -10px -214% 0 0;
+  width: 210%;
   background: #E4E4E4;
   right: 0;
   top: 0;
-  height: auto;
-  padding: 32px 0 0;
-  z-index: 9999;
-  /* https://app.asana.com/0/11388810124414/15265827322055 */
+  height: 100%;
   /* https://app.asana.com/0/11388810124414/15066782299785 */
   -webkit-user-select: none;
   -moz-user-select: none;
   -ms-user-select: none;
   user-select: none;
 }
+.widgets-php .widget-liquid-right #widgets-right {
+  margin: 20px;
+}
 
-.widgets-php #wpcontent,
-.widgets-php #wpfooter {
-  margin-right: 59%;
+.widgets-php #wpcontent {
   position: relative;
+}
+.widgets-php #wpcontent .wrap {
+  margin-right: 68%;
+  position: relative;
+}
+.widgets-php #wpcontent #screen-meta-links {
+  position: relative;
+  z-index: 10;
+}
+.widgets-php #wpcontent #screen-meta {
+  position: relative;
+  z-index: 10;
 }
 
 .widgets-php #widgets-left {
@@ -80,42 +202,6 @@
   margin-bottom: 10px;
 }
 
-.widget-liquid-right .scrollbar {
-  position: relative;
-  float: right;
-  width: 10px;
-  z-index: 10;
-}
-
-.widget-liquid-right .track {
-  height: 100%;
-  width: 10px;
-  position: relative;
-  padding: 0 1px;
-}
-
-.widget-liquid-right .thumb {
-  height: 20px;
-  width: 10px;
-  cursor: pointer;
-  overflow: hidden;
-  position: absolute;
-  top: 0;
-  background-color: #666;
-  margin-top: 10px;
-}
-
-.widget-liquid-right .thumb .end {
-  overflow: hidden;
-  height: 5px;
-  width: 13px;
-}
-
-.widget-liquid-right .viewport {
-  position: relative;
-  margin-right: 20px;
-}
-
 .widget-liquid-right .overview {
   list-style: none;
   position: absolute;
@@ -125,11 +211,6 @@
   right: 0;
   padding-left: 20px;
   border-left: 1px solid #DDD;
-}
-
-.disable .thumb {
-  cursor: default;
-  background: #ccc;
 }
 
 #cs-options .cs-action {
@@ -236,7 +317,7 @@ body.appearance_page_customsidebars #poststuff h2 {
 #cs-title-options {
   zoom: 1;
   background: #E8E8E8;
-  margin: 0 -20px 0 -20px;
+  margin: -20px -20px 0 -20px;
   padding: 10px 20px 20px;
   border-bottom: 1px solid #DDD;
 }
@@ -507,15 +588,6 @@ body.appearance_page_customsidebars #poststuff h2 {
 .rtl #cs-title-options h2 {
   float: right;
   margin-right: 5px;
-}
-
-.rtl .widget-liquid-right .viewport {
-  margin-right: 5px;
-  margin-left: 14px;
-}
-
-.rtl .widget-liquid-right .scrollbar {
-  float: left;
 }
 
 .rtl .cs-options {
