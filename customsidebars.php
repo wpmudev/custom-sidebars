@@ -2,19 +2,22 @@
 /* start:pro *//**
  * Plugin Name: Custom Sidebars Pro
  * Plugin URI:  http://premium.wpmudev.org/project/custom-sidebars/
- *//* end:pro */
-/* start:free *//**
- * Plugin Name: Custom Sidebars
- * Plugin URI:  https://wordpress.org/plugins/custom-sidebars/
- *//* end:free */
-/*
  * Description: Allows you to create widgetized areas and custom sidebars. Replace whole sidebars or single widgets for specific posts and pages.
  * Version:     2.1.0.8
  * Author:      WPMU DEV
  * Author URI:  http://premium.wpmudev.org/
  * Textdomain:  custom-sidebars
  * WDP ID:      910520
- */
+ *//* end:pro *//* start:free *//**
+ * Plugin Name: Custom Sidebars
+ * Plugin URI:  https://wordpress.org/plugins/custom-sidebars/
+ * Description: Allows you to create widgetized areas and custom sidebars. Replace whole sidebars or single widgets for specific posts and pages.
+ * Version:     2.1.0.8
+ * Author:      WPMU DEV
+ * Author URI:  http://premium.wpmudev.org/
+ * Textdomain:  custom-sidebars
+ * WDP ID:      910520
+ *//* end:free */
 
 /*
 Copyright Incsub (http://incsub.com)

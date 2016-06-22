@@ -6,8 +6,9 @@ Change Log:
 
 2.1.0.8
 ----------------------------------------------------------------------
-- Fix a deprecated notice
-- Fix bug that prevented Widget-Visibility options to work
+- Minor improvements in the admin UI: Better scrolling, fix JS errors and PHP notices.
+- Fix a bug that prevented Widget-Visibility options to work.
+- Update third party libraries.
 
 2.1.0.7
 ----------------------------------------------------------------------
