@@ -123,8 +123,7 @@ class CustomSidebars {
 			// Load javascripts/css files
 			lib3()->ui->add( 'core', 'widgets.php' );
 			lib3()->ui->add( 'select', 'widgets.php' );
-			###lib3()->ui->add( CSB_JS_URL . 'cs.min.js', 'widgets.php' );
-			lib3()->ui->add( CSB_JS_URL . 'src/cs.js', 'widgets.php' );
+			lib3()->ui->add( CSB_JS_URL . 'cs.min.js', 'widgets.php' );
 			lib3()->ui->add( CSB_CSS_URL . 'cs.css', 'widgets.php' );
 			lib3()->ui->add( CSB_CSS_URL . 'cs.css', 'edit.php' );
 
