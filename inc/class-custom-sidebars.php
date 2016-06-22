@@ -55,7 +55,7 @@ class CustomSidebars {
 		static $Inst = null;
 
 		// We can initialize the plugin once we know the current user:
-		// The lib2()->html->pointer() notification is based on current user...
+		// The lib3()->html->pointer() notification is based on current user...
 		if ( ! did_action( 'set_current_user' ) ) {
 			add_action( 'set_current_user', array( __CLASS__, 'instance' ) );
 			return null;
@@ -86,7 +86,7 @@ class CustomSidebars {
 		 *  Description:  Create and edit custom sidebars in your widget screen!
 		 * -------------------------------------------------------------------------
 		 */
-		lib2()->html->pointer(
+		lib3()->html->pointer(
 			'wpmudcs1',                               // Internal Pointer-ID
 			'#menu-appearance',                       // Point at
 			$plugin_title,
@@ -105,7 +105,7 @@ class CustomSidebars {
 
 		// We don't support accessibility mode. Display a note to the user.
 		if ( true === self::$accessibility_mode ) {
-			lib2()->ui->admin_message(
+			lib3()->ui->admin_message(
 				sprintf(
 					__(
 						'<strong>Accessibility mode is not supported by the
@@ -121,11 +121,12 @@ class CustomSidebars {
 			);
 		} else {
 			// Load javascripts/css files
-			lib2()->ui->add( 'core', 'widgets.php' );
-			lib2()->ui->add( 'select', 'widgets.php' );
-			lib2()->ui->add( CSB_JS_URL . 'cs.min.js', 'widgets.php' );
-			lib2()->ui->add( CSB_CSS_URL . 'cs.css', 'widgets.php' );
-			lib2()->ui->add( CSB_CSS_URL . 'cs.css', 'edit.php' );
+			lib3()->ui->add( 'core', 'widgets.php' );
+			lib3()->ui->add( 'select', 'widgets.php' );
+			###lib3()->ui->add( CSB_JS_URL . 'cs.min.js', 'widgets.php' );
+			lib3()->ui->add( CSB_JS_URL . 'src/cs.js', 'widgets.php' );
+			lib3()->ui->add( CSB_CSS_URL . 'cs.css', 'widgets.php' );
+			lib3()->ui->add( CSB_CSS_URL . 'cs.css', 'edit.php' );
 
 			// AJAX actions
 			add_action( 'wp_ajax_cs-ajax', array( $this, 'ajax_handler' ) );
@@ -148,7 +149,7 @@ class CustomSidebars {
 				$msg = wp_kses( $msg, $kses_args );
 
 				if ( ! empty( $msg ) ) {
-					lib2()->ui->admin_message( $msg );
+					lib3()->ui->admin_message( $msg );
 				}
 			}
 

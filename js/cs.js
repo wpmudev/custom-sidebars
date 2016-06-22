@@ -354,7 +354,7 @@ window.csSidebars = null;
 		 * @since  1.0.0
 		 */
 		initToolbars: function() {
-			var tool_action = function( ev ) {
+			function tool_action( ev ) {
 				var me = jQuery( ev.target ).closest( '.cs-tool' ),
 					action = me.data( 'action' ),
 					id = csSidebars.getIdFromEditbar( me ),
@@ -362,7 +362,7 @@ window.csSidebars = null;
 
 				// Return value False means: Execute the default click handler.
 				return ! csSidebars.handleAction( action, sb );
-			};
+			}
 
 			csSidebars.registerAction( 'edit', csSidebars.showEditor );
 			csSidebars.registerAction( 'location', csSidebars.showLocations );
@@ -508,28 +508,28 @@ window.csSidebars = null;
 			}
 
 			// Hide the "extra" fields
-			var hide_extras = function hide_extras() {
+			function hide_extras() {
 				popup.$().removeClass( 'csb-has-more' );
-				popup.size( null, 215 );
-			};
+				popup.size( 782, 215 );
+			}
 
 			// Show the "extra" fields
-			var show_extras = function show_extras() {
+			function show_extras() {
 				popup.$().addClass( 'csb-has-more' );
-				popup.size( null, 545 );
-			};
+				popup.size( 782, 545 );
+			}
 
 			// Toggle the "extra" fields based on the checkbox state.
-			var toggle_extras = function toggle_extras() {
+			function toggle_extras() {
 				if ( jQuery( this ).prop( 'checked' ) ) {
 					show_extras();
 				} else {
 					hide_extras();
 				}
-			};
+			}
 
 			// Populates the input fields in the editor with given data.
-			var set_values = function set_values( data, okay, xhr ) {
+			function set_values( data, okay, xhr ) {
 				popup.loading( false );
 
 				// Ignore error responses from Ajax.
@@ -538,49 +538,48 @@ window.csSidebars = null;
 				}
 
 				if ( ! okay ) {
-					popup.close();
+					popup.destroy();
 					csSidebars.showAjaxError( data );
 					return false;
 				}
 
-				if ( undefined !== data.sidebar ) {
+				if ( data.sidebar ) {
 					data = data.sidebar;
 				}
 
 				// Populate known fields.
-				if ( undefined !== data.id ) {
+				if ( data.id ) {
 					popup.$().find( '#csb-id' ).val( data.id );
 				}
-				if ( undefined !== data.name ) {
+				if ( data.name ) {
 					popup.$().find( '#csb-name' ).val( data.name );
 				}
-				if ( undefined !== data.description ) {
+				if ( data.description ) {
 					popup.$().find( '#csb-description' ).val( data.description );
 				}
-				if ( undefined !== data.before_title ) {
+				if ( data.before_title ) {
 					popup.$().find( '#csb-before-title' ).val( data.before_title );
 				}
-				if ( undefined !== data.after_title ) {
+				if ( data.after_title ) {
 					popup.$().find( '#csb-after-title' ).val( data.after_title );
 				}
-				if ( undefined !== data.before_widget ) {
+				if ( data.before_widget ) {
 					popup.$().find( '#csb-before-widget' ).val( data.before_widget );
 				}
-				if ( undefined !== data.after_widget ) {
+				if ( data.after_widget ) {
 					popup.$().find( '#csb-after-widget' ).val( data.after_widget );
 				}
-				if ( undefined !== data.button ) {
+				if ( data.button ) {
 					popup.$().find( '.btn-save' ).text( data.button );
 				}
-			};
+			}
 
 			// Close popup after ajax request
-			var handle_done_save = function handle_done_save( resp, okay, xhr ) {
+			function handle_done_save( resp, okay, xhr ) {
 				var msg = {}, sb;
 
-				popup
-					.loading( false )
-					.close();
+				popup.loading( false );
+				popup.destroy();
 
 				msg.message = resp.message;
 				// msg.details = resp;
@@ -601,10 +600,10 @@ window.csSidebars = null;
 					msg.type = 'err';
 				}
 				wpmUi.message( msg );
-			};
+			}
 
 			// Submit the data via ajax.
-			var save_data = function save_data() {
+			function save_data() {
 				var form = popup.$().find( 'form' );
 
 				// Start loading-animation.
@@ -616,9 +615,9 @@ window.csSidebars = null;
 					.load_json();
 
 				return false;
-			};
+			}
 
-			// Show the popup.
+			// Show the EDITOR popup.
 			popup = wpmUi.popup()
 				.modal( true )
 				.title( data.title )
@@ -647,7 +646,7 @@ window.csSidebars = null;
 			// Add event hooks to the editor.
 			popup.$().on( 'click', '#csb-more', toggle_extras );
 			popup.$().on( 'click', '.btn-save', save_data );
-			popup.$().on( 'click', '.btn-cancel', popup.close );
+			popup.$().on( 'click', '.btn-cancel', popup.destroy );
 
 			return true;
 		},
@@ -743,21 +742,21 @@ window.csSidebars = null;
 				ajax = null;
 
 			// Download export file.
-			var do_export = function do_export( ev ) {
+			function do_export( ev ) {
 				var form = jQuery( this ).closest( 'form' );
 
 				ajax.reset()
 					.data( form )
 					.load_http();
 
-				popup.close();
+				popup.destroy();
 
 				ev.preventDefault();
 				return false;
-			};
+			}
 
 			// Ajax handler after import file was uploaded.
-			var handle_done_upload = function handle_done_upload( resp, okay, xhr ) {
+			function handle_done_upload( resp, okay, xhr ) {
 				var msg = {};
 				popup.loading( false );
 
@@ -776,10 +775,10 @@ window.csSidebars = null;
 					msg.type = 'err';
 					wpmUi.message( msg );
 				}
-			};
+			}
 
 			// Upload the import file.
-			var do_upload = function do_upload( ev ) {
+			function do_upload( ev ) {
 				var form = jQuery( this ).closest( 'form' );
 
 				popup.loading( true );
@@ -790,10 +789,10 @@ window.csSidebars = null;
 
 				ev.preventDefault();
 				return false;
-			};
+			}
 
 			// Import preview: Toggle widgets
-			var toggle_widgets = function toggle_widgets() {
+			function toggle_widgets() {
 				var me = jQuery( this ),
 					checked = me.prop( 'checked' ),
 					items = popup.$().find( '.column-widgets, .import-widgets' );
@@ -803,17 +802,16 @@ window.csSidebars = null;
 				} else {
 					items.hide();
 				}
-			};
+			}
 
 			// Import preview: Cancel.
-			var show_overview = function show_overview() {
-				popup
-					.size( 740, 480 )
-					.content( csSidebars.export_form );
-			};
+			function show_overview() {
+				popup.size( 782, 480 );
+				popup.content( csSidebars.export_form );
+			}
 
 			// Import preview: Import the data.
-			var do_import = function do_import() {
+			function do_import() {
 				var form = popup.$().find( '.frm-import' );
 
 				popup.loading( true );
@@ -821,12 +819,12 @@ window.csSidebars = null;
 				ajax.reset()
 					.data( form )
 					.load_http( '_self' );
-			};
+			}
 
-			// Show the popup.
+			// Show the EXPORT popup.
 			popup = wpmUi.popup()
 				.modal( true )
-				.size( 740, 480 )
+				.size( 782, 480 )
 				.title( csSidebarsData.title_export )
 				.content( csSidebars.export_form )
 				.show();
@@ -865,24 +863,22 @@ window.csSidebars = null;
 				name = sb.name;
 
 			// Insert the sidebar name into the delete message.
-			var insert_name = function insert_name( el ) {
+			function insert_name( el ) {
 				el.find('.name').text( name );
-			};
+			}
 
 			// Closes the delete confirmation.
-			var close_popup = function close_popup() {
-				popup
-					.loading( false )
-					.close();
-			};
+			function close_popup() {
+				popup.loading( false );
+				popup.destroy();
+			}
 
 			// Handle response of the delete ajax-call.
-			var handle_done = function handle_done( resp, okay, xhr ) {
+			function handle_done( resp, okay, xhr ) {
 				var msg = {};
 
-				popup
-					.loading( false )
-					.close();
+				popup.loading( false );
+				popup.destroy();
 
 				msg.message = resp.message;
 				// msg.details = resp;
@@ -904,10 +900,10 @@ window.csSidebars = null;
 				}
 
 				wpmUi.message( msg );
-			};
+			}
 
 			// Deletes the sidebar and closes the confirmation popup.
-			var delete_sidebar = function delete_sidebar() {
+			function delete_sidebar() {
 				popup.loading( true );
 
 				ajax.reset()
@@ -917,12 +913,12 @@ window.csSidebars = null;
 					})
 					.ondone( handle_done )
 					.load_json();
-			};
+			}
 
-			// Show the popup.
+			// Show the REMOVE popup.
 			popup = wpmUi.popup()
 				.modal( true )
-				.size( null, 160 )
+				.size( 560, 160 )
 				.title( csSidebarsData.title_delete )
 				.content( csSidebars.delete_form )
 				.onshow( insert_name )
@@ -959,13 +955,13 @@ window.csSidebars = null;
 				id = sb.getID();
 
 			// Display the location data after it was loaded by ajax.
-			var handle_done_load = function handle_done_load( resp, okay, xhr ) {
+			function handle_done_load( resp, okay, xhr ) {
 				var theme_sb, opt, name, msg = {}; // Only used in error case.
 
 				popup.loading( false );
 
 				if ( ! okay ) {
-					popup.close();
+					popup.destroy();
 					csSidebars.showAjaxError( resp );
 					return;
 				}
@@ -986,14 +982,14 @@ window.csSidebars = null;
 				}
 
 				// Add a new option to the replacement list.
-				var _add_option = function _add_option( item, lists, key ) {
+				function _add_option( item, lists, key ) {
 					var opt = jQuery( '<option></option>' );
 					opt.attr( 'value', key ).text( item.name );
 					lists.append( opt );
-				};
+				}
 
 				// Check if the current sidebar is a replacement in the list.
-				var _select_option = function _select_option( replacement, sidebar, key, lists ) {
+				function _select_option( replacement, sidebar, key, lists ) {
 					var row = lists
 							.closest( '.cs-replaceable' )
 							.filter('.' + sidebar),
@@ -1019,7 +1015,7 @@ window.csSidebars = null;
 						}
 						option.detach().appendTo( group );
 					}
-				};
+				}
 
 				// ----- Category ----------------------------------------------
 				// Refresh list for single categories and category archives.
@@ -1142,10 +1138,10 @@ window.csSidebars = null;
 					}
 				}
 
-			}; // end: handle_done_load()
+			} // end: handle_done_load()
 
 			// User clicks on "replace <sidebar> for <category>" checkbox.
-			var toggle_details = function toggle_details( ev ) {
+			function toggle_details( ev ) {
 				var inp = jQuery( this ),
 					row = inp.closest( '.cs-replaceable' ),
 					sel = row.find( 'select' );
@@ -1164,15 +1160,14 @@ window.csSidebars = null;
 					// Remove all selected options.
 					sel.val( [] );
 				}
-			};
+			}
 
 			// After saving data via ajax is done.
-			var handle_done_save = function handle_done_save( resp, okay, xhr ) {
+			function handle_done_save( resp, okay, xhr ) {
 				var msg = {};
 
-				popup
-					.loading( false )
-					.close();
+				popup.loading( false );
+				popup.destroy();
 
 				msg.message = resp.message;
 				// msg.details = resp;
@@ -1185,22 +1180,22 @@ window.csSidebars = null;
 				}
 
 				wpmUi.message( msg );
-			};
+			}
 
 			// Submit the data and close the popup.
-			var save_data = function save_data() {
+			function save_data() {
 				popup.loading( true );
 
 				ajax.reset()
 					.data( form )
 					.ondone( handle_done_save )
 					.load_json();
-			};
+			}
 
-			// Show the popup.
+			// Show the LOCATION popup.
 			popup = wpmUi.popup()
 				.modal( true )
-				.size( null, 560 )
+				.size( 782, 560 )
 				.title( csSidebarsData.title_location )
 				.content( csSidebars.location_form )
 				.show();
@@ -1222,7 +1217,7 @@ window.csSidebars = null;
 			// Attach events.
 			popup.$().on( 'click', '.detail-toggle', toggle_details );
 			popup.$().on( 'click', '.btn-save', save_data );
-			popup.$().on( 'click', '.btn-cancel', popup.close );
+			popup.$().on( 'click', '.btn-cancel', popup.destroy );
 
 			return true;
 		},
@@ -1250,7 +1245,7 @@ window.csSidebars = null;
 				btn_replaceable = the_bar.find( '.cs-toolbar .btn-replaceable' );
 
 			// After changing a sidebars "replaceable" flag.
-			var handle_done_replaceable = function handle_done_replaceable( resp, okay, xhr ) {
+			function handle_done_replaceable( resp, okay, xhr ) {
 				// Adjust the "replaceable" flag to match the data returned by the ajax request.
 				if ( resp instanceof Object && typeof resp.replaceable === 'object' ) {
 					csSidebarsData.replaceable = wpmUi.obj( resp.replaceable );
@@ -1277,7 +1272,7 @@ window.csSidebars = null;
 				// Enable the checkboxes again after the ajax request is handled.
 				theme_sb.find( '.cs-toolbar .chk-replaceable' ).prop( 'disabled', false );
 				theme_sb.find( '.cs-toolbar .btn-replaceable' ).removeClass( 'wpmui-loading' );
-			};
+			}
 
 			if ( undefined === state ) { state = chk.prop( 'checked' ); }
 			if ( undefined === do_ajax ) { do_ajax = true; }

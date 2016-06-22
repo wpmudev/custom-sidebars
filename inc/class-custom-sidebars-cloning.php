@@ -65,8 +65,8 @@ class CustomSidebarsCloning {
 			);
 
 			// Load the javascript support file for this module.
-			lib2()->ui->add( CSB_JS_URL . 'cs-cloning.min.js', 'widgets.php' );
-			lib2()->ui->add( CSB_CSS_URL . 'cs-cloning.css', 'widgets.php' );
+			lib3()->ui->add( CSB_JS_URL . 'cs-cloning.min.js', 'widgets.php' );
+			lib3()->ui->add( CSB_CSS_URL . 'cs-cloning.css', 'widgets.php' );
 		}
 	}
 

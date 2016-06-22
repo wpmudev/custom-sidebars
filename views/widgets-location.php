@@ -20,7 +20,7 @@ $sidebars = CustomSidebars::get_sidebars( 'theme' );
 function _show_replaceable( $sidebar, $prefix, $cat_name, $class = '' ) {
 	$base_id = 'cs-' . $prefix;
 	$inp_id = $base_id . '-' . $sidebar['id'];
-	$inp_name = 'cs[' . $prefix . '][' . $sidebar['id'] . ']';
+	$inp_name = '___cs___' . $prefix . '___' . $sidebar['id'];
 	$sb_id = $sidebar['id'];
 	$class = (empty( $class ) ? '' : ' ' . $class);
 
@@ -56,7 +56,6 @@ function _show_replaceable( $sidebar, $prefix, $cat_name, $class = '' ) {
 		</div>
 	</div>
 	<?php
-
 }
 
 ?>
@@ -72,15 +71,17 @@ function _show_replaceable( $sidebar, $prefix, $cat_name, $class = '' ) {
 	</div>
 	<p>
 		<i class="dashicons dashicons-info light"></i>
-		<?php printf(
+		<?php
+		printf(
 			__(
-			'To attach this sidebar to a unique Post or Page please visit ' .
-			'that <a href="%1$s">Post</a> or <a href="%2$s">Page</a> & set it ' .
-			'up via the sidebars metabox.', 'custom-sidebars'
+				'To attach this sidebar to a unique Post or Page please visit ' .
+				'that <a href="%1$s">Post</a> or <a href="%2$s">Page</a> & set it ' .
+				'up via the sidebars metabox.', 'custom-sidebars'
 			),
 			admin_url( 'edit.php' ),
 			admin_url( 'edit.php?post_type=page' )
-		); ?>
+		);
+		?>
 	</p>
 
 	<?php

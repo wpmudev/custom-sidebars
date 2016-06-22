@@ -90,8 +90,11 @@ class CustomSidebarsEditor extends CustomSidebars {
 		$is_json = true;
 		$handle_it = false;
 		$view_file = '';
+		$sb_id = '';
 
-		$sb_id = @$_POST['sb'];
+		if ( isset( $_POST['sb'] ) ) {
+			$sb_id = $_POST['sb'];
+		}
 
 		switch ( $action ) {
 			case 'get':
@@ -488,7 +491,19 @@ class CustomSidebarsEditor extends CustomSidebars {
 		$sidebars = $options['modifiable'];
 		$raw_posttype = self::get_post_types( 'objects' );
 		$raw_cat = self::get_all_categories();
-		$data = @$_POST['cs'];
+		$data = array();
+
+		foreach ( $_POST as $key => $value ) {
+			if ( strlen( $key ) > 8 && '___cs___' == substr( $key, 0, 8 ) ) {
+				list( $prefix, $id ) = explode( '___', substr( $key, 8 ) );
+
+				if ( ! isset( $data[ $prefix ] ) ) {
+					$data[ $prefix ] = array();
+				}
+				$data[ $prefix ][ $id ] = $value;
+			}
+		}
+
 		$special_arc = array(
 			'blog',
 			'404',
