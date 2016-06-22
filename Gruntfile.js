@@ -70,6 +70,7 @@ module.exports = function( grunt ) {
 				'!**/js/vendor/**',
 				'!**/img/src/**',
 				'!**/node_modules/**',
+				'!**/**.log',
 				'!**/tests/**',
 				'!**/release/*.zip',
 				'!release/*.zip',
