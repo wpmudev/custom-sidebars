@@ -220,6 +220,7 @@ module.exports = function( grunt ) {
 
 
 		// TEST - Run the PHPUnit tests.
+		/* -- Not used right now...
 		phpunit: {
 			classes: {
 				dir: ''
@@ -237,6 +238,7 @@ module.exports = function( grunt ) {
 				noGlobalsBackup: false
 			}
 		},
+		*/
 
 
 		// CSS - Compile a .scss file into a normal .css file.
@@ -531,7 +533,7 @@ module.exports = function( grunt ) {
 	// Default task.
 
 	grunt.registerTask( 'default', ['clean:temp', 'jshint', 'concat', 'uglify', 'sass', 'autoprefixer', 'cssmin'] );
-	grunt.registerTask( 'test', ['phpunit', 'jshint'] );
+	//grunt.registerTask( 'test', ['phpunit', 'jshint'] );
 
 	grunt.task.run( 'clear' );
 	grunt.util.linefeed = '\n';
