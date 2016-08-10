@@ -292,6 +292,32 @@ class CustomSidebars {
 			 * migrated in the following block:
 			 */
 
+			/**
+			 * set defaults
+			 */
+			$keys = array(
+				'authors',
+				'blog',
+				'category_archive',
+				'category_pages',
+				'category_posts',
+				'category_single',
+				'date',
+				'defaults',
+				'post_type_archive',
+				'post_type_pages',
+				'post_type_single',
+				'search',
+				'tags'
+			);
+
+			foreach ( $keys as $k ) {
+				if ( isset( $Options[ $k ] ) ) {
+					continue;
+				}
+				$Options[ $k ] = null;
+			}
+
 			// Single/Archive pages - new names
 			$Options['post_type_single'] = self::get_array(
 				@$Options['post_type_single'], // new name
@@ -682,7 +708,7 @@ class CustomSidebars {
 
 		if ( ! isset( $Sorted[ $post_id ] ) ) {
 			$Sorted[ $post_id ] = get_the_category( $post_id );
-			@usort( $Sorted[ $post_id ], array( self, 'cmp_cat_level' ) );
+			usort( $Sorted[ $post_id ], array( __CLASS__, 'cmp_cat_level' ) );
 		}
 		return $Sorted[ $post_id ];
 	}

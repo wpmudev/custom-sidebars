@@ -161,7 +161,10 @@ class CustomSidebarsExplain extends CustomSidebars {
 	 * @return boolean
 	 */
 	public static function do_explain() {
-		return 'on' == @$_SESSION['cs-explain'];
+		return
+			isset( $_SESSION['cs-explain'] )
+			&& is_string( $_SESSION['cs-explain'] )
+			&& 'on' == $_SESSION['cs-explain'];
 	}
 
 	/**
