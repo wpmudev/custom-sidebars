@@ -295,7 +295,18 @@ class CustomSidebars {
 			/**
 			 * set defaults
 			 */
-			$keys = array( 'defaults', 'post_type_pages', 'category_pages', 'category_posts' );
+			$keys = array(
+				'blog',
+				'category_archive',
+				'category_pages',
+				'category_posts',
+				'category_single',
+				'defaults',
+				'post_type_archive',
+				'post_type_pages',
+				'post_type_single',
+				'tags'
+			);
 
 			foreach ( $keys as $key ) {
 				if ( isset( $Options[ $key ] ) ) {
