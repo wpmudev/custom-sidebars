@@ -292,45 +292,22 @@ class CustomSidebars {
 			 * migrated in the following block:
 			 */
 
-			/**
-			 * set defaults
-			 */
-			$keys = array(
-				'blog',
-				'category_archive',
-				'category_pages',
-				'category_posts',
-				'category_single',
-				'defaults',
-				'post_type_archive',
-				'post_type_pages',
-				'post_type_single',
-				'tags'
-			);
-
-			foreach ( $keys as $key ) {
-				if ( isset( $Options[ $key ] ) ) {
-					continue;
-				}
-				$Options[ $key ] = null;
-			}
-
 			// Single/Archive pages - new names
 			$Options['post_type_single'] = self::get_array(
-				$Options['post_type_single'], // new name
-				$Options['defaults']          // old name
+				@$Options['post_type_single'], // new name
+				@$Options['defaults']          // old name
 			);
 			$Options['post_type_archive'] = self::get_array(
-				$Options['post_type_archive'], // new name
-				$Options['post_type_pages']    // old name
+				@$Options['post_type_archive'], // new name
+				@$Options['post_type_pages']    // old name
 			);
 			$Options['category_single'] = self::get_array(
-				$Options['category_single'], // new name
-				$Options['category_posts']   // old name
+				@$Options['category_single'], // new name
+				@$Options['category_posts']   // old name
 			);
 			$Options['category_archive'] = self::get_array(
-				$Options['category_archive'], // new name
-				$Options['category_pages']    // old name
+				@$Options['category_archive'], // new name
+				@$Options['category_pages']    // old name
 			);
 
 			// Remove old item names from the array.

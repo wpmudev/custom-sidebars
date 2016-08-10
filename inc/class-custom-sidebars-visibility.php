@@ -100,11 +100,11 @@ class CustomSidebarsVisibility extends CustomSidebars {
 		}
 
 		$valid_action = array( 'show', 'hide' );
-		if ( ! isset( $data['action'] ) || ! in_array( $data['action'], $valid_action ) ) {
+		if ( ! in_array( @$data['action'], $valid_action ) ) {
 			$data['action'] = reset( $valid_action );
 		}
 
-		$conditions = isset( $data['conditions'] )? $data['conditions'] : array();
+		$conditions = @$data['conditions'];
 		if ( ! is_array( $conditions ) ) {
 			$conditions = array();
 		}
@@ -165,7 +165,7 @@ class CustomSidebarsVisibility extends CustomSidebars {
 			}
 		}
 
-		$is_visible = ( isset( $_POST['csb_visible'] ) && '1' == $_POST['csb_visible'] ? 1 : 0);
+		$is_visible = ('1' == @$_POST['csb_visible'] ? 1 : 0);
 		$data = $this->get_widget_data( $instance );
 		$action_show = ('show' == $data['action']);
 		$cond = $data['conditions'];
