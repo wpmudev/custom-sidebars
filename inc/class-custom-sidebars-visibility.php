@@ -855,12 +855,10 @@ class CustomSidebarsVisibility extends CustomSidebars {
 		if ( $condition_true ) {
 			// TAXONOMY condition.
 			$tax_query = @$wp_query->tax_query->queries;
-			if ( is_array( $tax_query ) ) {
-				$tax_type = @$tax_query[0]['taxonomy'];
-				$tax_terms = @$tax_query[0]['terms'];
-			} else {
-				$tax_type = false;
-				$tax_terms = false;
+			$tax_type = $tax_terms = false;
+			if ( ! empty( $tax_query ) && is_array( $tax_query ) ) {
+				$tax_type = $tax_query[0]['taxonomy'];
+				$tax_terms = $tax_query[0]['terms'];
 			}
 
 			foreach ( $Tax_list as $tax_item ) {
