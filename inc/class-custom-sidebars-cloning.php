@@ -91,7 +91,7 @@ class CustomSidebarsCloning {
 
 		// group: ID of the group
 
-		if ( is_numeric( @$data['group'] ) && $data['group'] > 0 ) {
+		if ( isset( $data['group'] ) && is_numeric( $data['group'] ) && $data['group'] > 0 ) {
 			$group = preg_replace( '/^.*-(\d+)$/', '$1', $data['group'] );
 			$state = @$data['state'];
 		} else {
