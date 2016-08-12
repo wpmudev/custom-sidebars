@@ -111,7 +111,7 @@ inc_sidebars_init();
 
 if ( ! class_exists( 'CustomSidebarsEmptyPlugin' ) ) {
 	class CustomSidebarsEmptyPlugin extends WP_Widget {
-		public function CustomSidebarsEmptyPlugin() {
+		public function __construct() {
 			parent::__construct( false, $name = 'CustomSidebarsEmptyPlugin' );
 		}
 		public function form( $instance ) {
