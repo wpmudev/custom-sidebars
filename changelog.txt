@@ -1,8 +1,12 @@
 Plugin Name: Custom Sidebars Pro
-Author: Javier Marquez (Incsub), Philipp Stracker (Incsub)
+Author: Javier Marquez (Incsub), Philipp Stracker (Incsub), Marcin Pietrzak (Incsub)
 
 Change Log:
 ----------------------------------------------------------------------
+
+2.1.0.9
+----------------------------------------------------------------------
+- Fixed issue with broken link icon for cloned widgets.
 
 2.1.0.8
 ----------------------------------------------------------------------

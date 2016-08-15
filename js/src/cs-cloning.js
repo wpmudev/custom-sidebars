@@ -106,7 +106,7 @@ jQuery(function init_cloning() {
 		$groups.each(function() {
 			var group_id = jQuery( this ).val(),
 				$members = $all.find( 'input.csb-clone-group[value="' + group_id + '"]' ).closest( '.widget' ),
-				$titles = $members.find( '.widget-title h4' ),
+				$titles = $members.find( '.widget-title h4, .widget-title h3' ),
 				action = 'add';
 
 			if ( isNaN( group_id ) || group_id < 1 ) {
