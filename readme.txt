@@ -1,5 +1,5 @@
 === Plugin Name ===
-Contributors: WPMUDEV, marquex, WPMUDEV-Support2, WPMUDEV-Support1, WPMUDEV-Support6, WPMUDEV-Support4
+Contributors: WPMUDEV, marquex, WPMUDEV-Support2, WPMUDEV-Support1, WPMUDEV-Support6, WPMUDEV-Support4, iworks
 Tags: custom sidebars, widgets, sidebars, custom, sidebar, widget, personalize
 Requires at least: 3.3
 Tested up to: 4.5.3
@@ -118,6 +118,9 @@ Custom Sidebars has the same license as WordPress, so you can use it wherever yo
 If you are running a earlier version of Wordpress download Custom Sidebars 0.8.2.
 
 == Changelog ==
+
+= 2.1.0.9 =
+* Fixed issue with broken link icon for cloned widgets.
 
 = 2.1.0.8 =
 * Small improvements in the admin UI: Better scrolling, fix JS errors and PHP notices.
