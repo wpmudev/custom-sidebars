@@ -2,7 +2,7 @@
 Contributors: WPMUDEV, marquex, WPMUDEV-Support2, WPMUDEV-Support1, WPMUDEV-Support6, WPMUDEV-Support4, iworks
 Tags: custom sidebars, widgets, sidebars, custom, sidebar, widget, personalize
 Requires at least: 3.3
-Tested up to: 4.5.3
+Tested up to: 4.6
 Stable tag: trunk
 
 Display custom widget configurations for every page or post on your site.
