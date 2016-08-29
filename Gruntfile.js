@@ -500,7 +500,9 @@ module.exports = function( grunt ) {
 		}
 
 		// First run unit tests.
+		/* -- Not used right now...
 		grunt.task.run( 'phpunit' );
+		*/
 
 		// Run the default tasks (js/css/php validation).
 		grunt.task.run( 'default' );
