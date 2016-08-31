@@ -534,8 +534,11 @@ class CustomSidebarsVisibility extends CustomSidebars {
 	public function get_membership2_items() {
 		$Result = null;
 
-		if ( null === $Result && apply_filters( 'ms_active', false ) ) {
-			$Result = MS_Plugin::$api->list_memberships( true );
+		if ( null === $Result ) {
+			$is_active_membership = apply_filters( 'ms_active', false );
+			if ( $is_active_membership ) {
+				$Result = MS_Plugin::$api->list_memberships( true );
+			}
 		}
 
 		return $Result;
