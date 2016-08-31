@@ -4,6 +4,9 @@ Author: Javier Marquez (Incsub), Philipp Stracker (Incsub), Marcin Pietrzak (Inc
 Change Log:
 ----------------------------------------------------------------------
 
+2.1.1.0
+- Improved performance on admin widgets screen.
+
 2.1.0.9
 ----------------------------------------------------------------------
 - Fixed issue with broken link icon for cloned widgets.
