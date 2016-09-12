@@ -5,7 +5,7 @@ Change Log:
 ----------------------------------------------------------------------
 
 2.1.1.0
-- Improved performance on admin widgets screen.
+- Fixed undefined index in Sidebars Editor.
 
 2.1.0.9
 ----------------------------------------------------------------------
