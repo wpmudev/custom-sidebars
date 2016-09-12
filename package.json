@@ -2,7 +2,7 @@
   "name": "custom-sidebars",
   "title": "Custom Sidebars",
   "description": "Allows you to create widgetized areas and custom sidebars. Replace whole sidebars or single widgets for specific posts and pages.",
-  "version": "2.1.09",
+  "version": "2.1.10",
   "homepage": "http://premium.wpmudev.org/project/the-pop-over-plugin/",
   "author": [
     { "name": "Javier Marquez" },
