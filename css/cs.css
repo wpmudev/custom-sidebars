@@ -153,15 +153,10 @@
 }
 
 .widgets-php .widget-liquid-right {
-  position: absolute;
-  z-index: 0;
   padding: 0 0 75px 0;
   margin: -10px -214% 0 0;
   width: 210%;
-  background: #E4E4E4;
-  right: 0;
-  top: 0;
-  height: 100%;
+  background: #e4e4e4;
   /* https://app.asana.com/0/11388810124414/15066782299785 */
   -webkit-user-select: none;
   -moz-user-select: none;
