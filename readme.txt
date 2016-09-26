@@ -1,4 +1,4 @@
-=== Plugin Name ===
+=== Custom Sidebars ===
 Contributors: WPMUDEV, marquex, WPMUDEV-Support2, WPMUDEV-Support1, WPMUDEV-Support6, WPMUDEV-Support4, iworks
 Tags: custom sidebars, widgets, sidebars, custom, sidebar, widget, personalize
 Requires at least: 3.3
