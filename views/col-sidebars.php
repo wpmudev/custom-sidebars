@@ -8,7 +8,6 @@
  *   $post_id
  */
 
-$available = $wp_registered_sidebars;
 $sidebars = CustomSidebars::get_options( 'modifiable' );
 
 $is_front = get_option( 'page_on_front' ) == $post_id;
@@ -24,6 +23,8 @@ if ( $is_front || $is_blog ) {
 		<span data-sidebar="<?php echo esc_attr( $s ); ?>" data-replaced="<?php echo esc_attr( @$selected[ $s ] ); ?>" data-cshide="yes">
 	<?php endforeach;
 } else {
+	global $wp_registered_sidebars;
+	$available = CustomSidebars::sort_sidebars_by_name( $wp_registered_sidebars );
 	foreach ( $sidebars as $s ) {
 		$sb_name = $available[ $s ]['name'];
 		$replaced = ! empty( $available[ $selected[ $s ] ] );

@@ -4,6 +4,9 @@ Author: Javier Marquez (Incsub), Philipp Stracker (Incsub), Marcin Pietrzak (Inc
 Change Log:
 ----------------------------------------------------------------------
 
+2.1.1.2 ( 2016-10-10 )
+- Sidebars are now sorted by name.
+
 2.1.1.1 ( 2016-09-26 )
 ----------------------------------------------------------------------
 - Fixed a problem with unclickable items on widgets admin screen.

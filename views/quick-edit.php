@@ -7,14 +7,15 @@
  */
 
 global $wp_registered_sidebars;
+$available = CustomSidebars::sort_sidebars_by_name( $wp_registered_sidebars );
 
-$available = $wp_registered_sidebars;
 $sidebars = CustomSidebars::get_options( 'modifiable' );
 
 ?>
 <fieldset class="inline-edit-col-left cs-quickedit">
 <div class="inline-edit-col">
 <?php
+
 
 foreach ( $sidebars as $s ) {
 	$sb_name = $available[ $s ]['name'];
