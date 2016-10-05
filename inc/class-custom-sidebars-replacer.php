@@ -64,7 +64,7 @@ class CustomSidebarsReplacer extends CustomSidebars {
 	 */
 	public function register_custom_sidebars() {
 		$sb = self::get_custom_sidebars();
-
+		$sb = CustomSidebars::sort_sidebars_by_name( $sb );
 		foreach ( $sb as $sidebar ) {
 			/**
 			 * Filter sidebar options for custom sidebars.
@@ -75,7 +75,6 @@ class CustomSidebarsReplacer extends CustomSidebars {
 			 *           the sidebar.
 			 */
 			$sidebar = apply_filters( 'cs_sidebar_params', $sidebar );
-
 			register_sidebar( $sidebar );
 		}
 	}

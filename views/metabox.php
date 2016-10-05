@@ -9,14 +9,12 @@
  *   $post_id
  */
 
-$available = $wp_registered_sidebars;
 $sidebars = CustomSidebars::get_options( 'modifiable' );
 
 $is_front = get_option( 'page_on_front' ) == $post_id;
 $is_blog = get_option( 'page_for_posts' ) == $post_id;
-?>
 
-<?php if ( $is_front || $is_blog ) : ?>
+if ( $is_front || $is_blog ) : ?>
 	<p>
 		<?php printf(
 			__(
@@ -48,9 +46,11 @@ $is_blog = get_option( 'page_for_posts' ) == $post_id;
 			'sidebar you want to show for this post!', 'custom-sidebars'
 		); ?>
 	</p>
-
-	<?php if ( ! empty( $sidebars ) ) : ?>
-		<?php foreach ( $sidebars as $s ) : ?>
+<?php
+		if ( ! empty( $sidebars ) ) :
+			global $wp_registered_sidebars;
+			$available = CustomSidebars::sort_sidebars_by_name( $wp_registered_sidebars );
+			foreach ( $sidebars as $s ) : ?>
 			<?php $sb_name = $available[ $s ]['name']; ?>
 			<p>
 				<label for="cs_replacement_<?php echo esc_attr( $s ); ?>">

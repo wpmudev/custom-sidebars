@@ -199,8 +199,6 @@ class CustomSidebarsExplain extends CustomSidebars {
 	 * @since  2.0.9.1
 	 */
 	public function show_infos() {
-		#global $wp_registered_sidebars;
-		#var_dump( $wp_registered_sidebars );
 		?>
 		<div class="cs-infos" style="width:600px;margin:10px auto;padding:10px;color:#666;background:#FFF;">
 			<style>
