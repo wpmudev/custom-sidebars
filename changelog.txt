@@ -4,6 +4,9 @@ Author: Javier Marquez (Incsub), Philipp Stracker (Incsub), Marcin Pietrzak (Inc
 Change Log:
 ----------------------------------------------------------------------
 
+2.1.1.3 ( 2016-10-13 )
+- Added check if there the function "mb_strtolower".
+
 2.1.1.2 ( 2016-10-10 )
 - Sidebars are now sorted by name.
 

@@ -889,8 +889,13 @@ class CustomSidebars {
 		if ( ! isset( $a['name'] ) || ! isset( $b['name'] ) ) {
 			return 0;
 		}
-		$a_name = mb_strtolower($a['name']);
-		$b_name = mb_strtolower($b['name']);
+		if ( function_exists( 'mb_strtolower' ) ) {
+			$a_name = mb_strtolower($a['name']);
+			$b_name = mb_strtolower($b['name']);
+		} else {
+			$a_name = strtolower($a['name']);
+			$b_name = strtolower($b['name']);
+		}
 		if ( $a_name == $b_name ) {
 			return 0;
 		}
