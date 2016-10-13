@@ -3,7 +3,7 @@ Contributors: WPMUDEV, marquex, WPMUDEV-Support2, WPMUDEV-Support1, WPMUDEV-Supp
 Tags: custom sidebars, widgets, sidebars, custom, sidebar, widget, personalize
 Requires at least: 3.3
 Tested up to: 4.6.1
-Stable tag: 2.1.1.1
+Stable tag: 2.1.1.2
 
 Display custom widget configurations for every page or post on your site.
 
@@ -119,8 +119,13 @@ If you are running a earlier version of Wordpress download Custom Sidebars 0.8.2
 
 == Changelog ==
 
+= 2.1.1.3 =
+* Added check if there the function "mb_strtolower".
+
+= 2.1.1.2 =
+* Sidebars are now sorted by name.
+
 = 2.1.1.1 =
-----------------------------------------------------------------------
 * Fixed a problem with unclickable items on widgets admin screen.
 
 = 2.1.1.0 =
