@@ -51,7 +51,7 @@ function CsSidebar(id, type) {
 
 	this.sb = jQuery('#' + this.id);
 	this.widgets = '';
-	this.name = trim(this.sb.find('.sidebar-name h3').text());
+	this.name = trim(this.sb.find('.sidebar-name h2').text());
 	this.description = trim(this.sb.find('.sidebar-description').text());
 
 	// Add one of two editbars to each sidebar.
@@ -218,7 +218,7 @@ window.csSidebars = null;
 		initColumns: function() {
 			var col1 = csSidebars.right.find( '.sidebars-column-1' ),
 				col2 = csSidebars.right.find( '.sidebars-column-2' ),
-				title = jQuery( '<div class="cs-title"><h3></h3></div>' ),
+				title = jQuery( '<div class="cs-title"><h2></h2></div>' ),
 				sidebars = csSidebars.right.find( '.widgets-holder-wrap' );
 
 			if ( ! col2.length ) {
@@ -236,7 +236,7 @@ window.csSidebars = null;
 			}
 
 			title
-				.find( 'h3' )
+				.find( 'h2' )
 				.append( '<span class="cs-title-val"></span><i class="cs-icon dashicons dashicons-sort"></i>' )
 				.css({'cursor': 'pointer'});
 
@@ -425,8 +425,8 @@ window.csSidebars = null;
 				icon = col.find( '.cs-title .cs-icon' );
 
 			sidebars.sortElements(function( a, b ) {
-				var val_a = jQuery(a).find('.sidebar-name h3').text(),
-					val_b = jQuery(b).find('.sidebar-name h3').text();
+				var val_a = jQuery(a).find('.sidebar-name h2').text(),
+					val_b = jQuery(b).find('.sidebar-name h2').text();
 
 				if ( dir === 'asc' ) {
 					return val_a > val_b ? 1 : -1;
@@ -459,7 +459,7 @@ window.csSidebars = null;
 
 			all.each(function(){
 				var sb = jQuery( this ),
-					title = sb.find( '.sidebar-name h3' ).text();
+					title = sb.find( '.sidebar-name h2' ).text();
 
 				if ( title.toLowerCase().indexOf( query ) !== -1 ) {
 					sb.show();
@@ -657,7 +657,7 @@ window.csSidebars = null;
 		updateSidebar: function( sb, data ) {
 			// Update the title.
 			sb.sb
-				.find( '.sidebar-name h3' )
+				.find( '.sidebar-name h2' )
 				.text( data.name );
 
 			// Update description.
@@ -678,7 +678,7 @@ window.csSidebars = null;
 		insertSidebar: function( data ) {
 			var box = jQuery( '<div class="widgets-holder-wrap"></div>' ),
 				inner = jQuery( '<div class="widgets-sortables ui-sortable"></div>' ),
-				name = jQuery( '<div class="sidebar-name"><div class="sidebar-name-arrow"><br></div><h3></h3></div>' ),
+				name = jQuery( '<div class="sidebar-name"><div class="sidebar-name-arrow"><br></div><h2></h2></div>' ),
 				desc = jQuery( '<div class="sidebar-description"></div>' ),
 				col = csSidebars.right.find( '.sidebars-column-1 > .inner:first' );
 
@@ -686,7 +686,7 @@ window.csSidebars = null;
 			inner.attr( 'id', data.id );
 
 			name
-				.find( 'h3' )
+				.find( 'h2' )
 				.text( data.name );
 
 			desc
