@@ -3,7 +3,7 @@
   "title": "Custom Sidebars",
   "description": "Allows you to create widgetized areas and custom sidebars. Replace whole sidebars or single widgets for specific posts and pages.",
   "version": "2.1.13",
-  "homepage": "http://premium.wpmudev.org/project/custom-sidebars-pro/",
+  "homepage": "https://premium.wpmudev.org/project/custom-sidebars-pro/",
   "author": [
     { "name": "Javier Marquez" },
     { "name": "Philipp Stracker" },

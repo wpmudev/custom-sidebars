@@ -41,7 +41,7 @@ Install Custom Sidebars and see for yourself why it's the most popular widget ex
 
 <h4>Need more control?</h4>
 <br>
-If you want more targeted controls checkout <a href="http://premium.wpmudev.org/project/custom-sidebars-pro/">Custom Sidebars Pro:</a>
+If you want more targeted controls checkout <a href="https://premium.wpmudev.org/project/custom-sidebars-pro/">Custom Sidebars Pro:</a>
 <ul>
 	<li>Set individual widget visibility – for guests, by user role, by post type, for special pages or categories</li>
 	<li>Author specific sidebars – display a custom sidebar for each of your authors</li>
@@ -50,7 +50,7 @@ If you want more targeted controls checkout <a href="http://premium.wpmudev.org/
 	<li><a href="https://premium.wpmudev.org/support/">24/7 support</a> for all things WordPress</li>
 	<li><a href="http://premium.wpmudev.org/join/">100+ premium plugins, themes, support, updates and services</a> – Including Hummingbird pagespeed booster, Uptime monitoring and security hardening</li>
 </ul>
-Get Custom Sidebars or <a href="http://premium.wpmudev.org/project/custom-sidebars-pro/">Custom Sidebars Pro</a> for targeted marketing, better widgets for each level of your membership site, or just to clean up bloated content on each page. Download and try it for free!
+Get Custom Sidebars or <a href="https://premium.wpmudev.org/project/custom-sidebars-pro/">Custom Sidebars Pro</a> for targeted marketing, better widgets for each level of your membership site, or just to clean up bloated content on each page. Download and try it for free!
 
 == Screenshots ==
 
@@ -75,7 +75,7 @@ There are two ways of installing the plugin:
 
 Once you have the plugin activated you will find all new features inside your "Widgets" screen! There you will be able to create and manage your own sidebars.
 
-Find more functionality and usage information on the [Custom Sidebars Pro page](http://premium.wpmudev.org/project/custom-sidebars-pro/).
+Find more functionality and usage information on the [Custom Sidebars Pro page](https://premium.wpmudev.org/project/custom-sidebars-pro/).
 
 [youtube https://www.youtube.com/watch?v=q05O9OFEYHM]
 
@@ -83,7 +83,7 @@ Find more functionality and usage information on the [Custom Sidebars Pro page](
 
 = How do I begin working with this plugin? =
 
-Please refer to <a href="http://premium.wpmudev.org/project/custom-sidebars-pro/#usage">the usage section of Custom Sidebars Pro</a>
+Please refer to <a href="https://premium.wpmudev.org/project/custom-sidebars-pro/#usage">the usage section of Custom Sidebars Pro</a>
 
 = Why can't I see a widget menu? =
 
@@ -107,7 +107,7 @@ Any user that can switch themes, can create sidebars. Switch_themes is the capab
 
 = Does it have custom taxonomies support? =
 
-This plugin supports showing your posts on all different categories or tags, it's awesome, for more visibility controls try <a href="http://premium.wpmudev.org/project/custom-sidebars-pro/">Custom Sidebars Pro</a>
+This plugin supports showing your posts on all different categories or tags, it's awesome, for more visibility controls try <a href="https://premium.wpmudev.org/project/custom-sidebars-pro/">Custom Sidebars Pro</a>
 
 = Can I use the plugin in commercial projects? =
 

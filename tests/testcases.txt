@@ -133,13 +133,13 @@ Tests 1.1 - 1.10 are same as in Pro plugin
   - The form should be covered by semi-transparent layer, buttons cannot be clicked.
   - There should be a note stating that this is a pro feature.
   - There should a link opening a new tab and displaying this page:
-    http://premium.wpmudev.org/project/custom-sidebars-pro/
+    https://premium.wpmudev.org/project/custom-sidebars-pro/
 
   Add a new widget to any sidebar.
   - There should be 2 semi-transparent buttons "Clone" and "Visibility"
   - Buttons have same position as in pro plugin
   - On mouse contact a link should be displayed opening a new tab to this URL:
-    http://premium.wpmudev.org/project/custom-sidebars-pro/
+    https://premium.wpmudev.org/project/custom-sidebars-pro/
 
   In the widget click the save button
   - Loading animation is left of the buttons.

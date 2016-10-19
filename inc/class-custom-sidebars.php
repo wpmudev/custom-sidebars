@@ -35,7 +35,7 @@ class CustomSidebars {
 	 * URL to the documentation/info page of the pro plugin
 	 * @var  string
 	 */
-	static public $pro_url = 'http://premium.wpmudev.org/project/custom-sidebars-pro/';
+	static public $pro_url = 'https://premium.wpmudev.org/project/custom-sidebars-pro/';
 
 	/**
 	 * Flag that specifies if the page is loaded in accessibility mode.
