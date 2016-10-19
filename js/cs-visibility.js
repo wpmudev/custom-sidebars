@@ -1,5 +1,5 @@
 /*! Custom Sidebars - v2.1.08
- * http://premium.wpmudev.org/project/the-pop-over-plugin/
+ * http://premium.wpmudev.org/project/custom-sidebars-pro/
  * Copyright (c) 2016; * Licensed GPLv2+ */
 /*global jQuery:false */
 /*global window:false */
