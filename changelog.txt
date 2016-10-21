@@ -4,6 +4,9 @@ Author: Javier Marquez (Incsub), Philipp Stracker (Incsub), Marcin Pietrzak (Inc
 Change Log:
 ----------------------------------------------------------------------
 
+2.1.1.5 ( 2016-11-07 )
+- Added new filter "cs_replace_post_type" to filter post type inside function "determine_replacement()".
+
 2.1.1.4 ( 2016-10-24 )
 - Fixed problem with sorting and filtering.
 
