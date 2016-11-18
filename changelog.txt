@@ -4,6 +4,10 @@ Author: Javier Marquez (Incsub), Philipp Stracker (Incsub), Marcin Pietrzak (Inc
 Change Log:
 ----------------------------------------------------------------------
 
+2.1.1.6 ( 2016-11-21 )
+- Fixed a bug when we try to use to get property of non-object in "maybe_display_widget()".
+- If front page is a page, then we have now the same rules like we have on on page.
+
 2.1.1.5 ( 2016-11-07 )
 - Added new filter "cs_replace_post_type" to filter post type inside function "determine_replacement()".
 
