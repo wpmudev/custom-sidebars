@@ -4,6 +4,9 @@ Author: Javier Marquez (Incsub), Philipp Stracker (Incsub), Marcin Pietrzak (Inc
 Change Log:
 ----------------------------------------------------------------------
 
+2.1.1.7 ( 2016-11-23 )
+- Rolback last change with front page.
+
 2.1.1.6 ( 2016-11-21 )
 - Fixed a bug when we try to use to get property of non-object in "maybe_display_widget()".
 - If the front page is a page, then we have now the same rules like we have on a page.
