@@ -44,13 +44,9 @@ function list_sidebar_replacement( $label, $list ) {
 		<?php
 	}
 }
-
-
 ?>
-
 <div>
 <div class="wpmui-form">
-
 <?php if ( ! empty( $import ) ) : ?>
 	<?php
 	/* *****************************************************************
@@ -59,8 +55,7 @@ function list_sidebar_replacement( $label, $list ) {
 	 * the export.
 	 */
 	?>
-
-	<h2 class="no-pad-top"><?php _e( 'Import', 'custom-sidebars' ); ?>
+	<h2 class="no-pad-top"><?php _e( 'Import', 'custom-sidebars' ); ?></h2>
 	<div class="show-infos">
 		<i class="dashicons dashicons-info"></i>
 		<div class="export-infos" style="display:none">
@@ -105,8 +100,7 @@ function list_sidebar_replacement( $label, $list ) {
 				</tbody>
 			</table>
 		</div>
-
-	</div></h2>
+    </div>
 
 	<?php if ( ! empty( $import['meta']['description'] ) ) : ?>
 		<pre><?php echo esc_html( stripslashes( $import['meta']['description'] ) ); ?></pre>
@@ -145,189 +139,192 @@ function list_sidebar_replacement( $label, $list ) {
 			</tr>
 		</thead>
 		<tbody>
-	<?php foreach ( $import['sidebars'] as $sidebar ) : ?>
-		<?php
+<?php
+foreach ( $import['sidebars'] as $sidebar ) {
+	$alternate = ('' == $alternate ? 'alternate' : '');
+	$note = __( 'New sidebar will be created', 'custom-sidebars' );
+	if ( in_array( $sidebar['id'], $current_keys ) ) {
+		$note = __( 'Existing sidebar will be replaced!', 'custom-sidebars' );
+	}
+	$import_sidebar = @$import['widgets'][ $sidebar['id'] ];
+	if ( ! is_array( $import_sidebar ) ) {
+		$import_sidebar = array();
+	}
+	$id = sprintf( 'import_sb_id_%s', $sidebar['id'] );
+?>
+        <tr class="<?php echo esc_attr( $alternate ); ?>">
+            <th scope="row" class="check-column">
+                <input type="checkbox" name="import_sb_<?php echo esc_attr( $sidebar['id'] ); ?>" id="<?php echo esc_attr( $id ); ?>"/>
+            </th>
+            <td class="name column-name"><label for="<?php echo esc_attr( $id ); ?>"><?php echo esc_html( $sidebar['name'] ); ?></label></td>
+            <td class="description column-description"><?php echo esc_html( $sidebar['description'] ); ?></td>
+            <td class="note column-note"><?php echo esc_html( $note ); ?></td>
+            <td class="widgets column-widgets" style="display:none">
+<?php
+if ( count( $import_sidebar ) ) {
+	echo '<ul>';
+	foreach ( $import_sidebar as $key => $data ) {
+		printf( '<li>%s</li>', esc_html( $data['name'] ) );
+	}
+	echo '</ul>';
+} else {
+	echo '-';
+}
+?>
+            </td>
+        </tr>
+<?php
+}
+
+
+/* *****************************************************************
+ *
+ * List all default theme sidebars that exist in the import file
+ */
+
+foreach ( $theme_sidebars as $sidebar ) {
+	if ( isset( $import['widgets'][ $sidebar['id'] ] ) ) {
 		$alternate = ('' == $alternate ? 'alternate' : '');
-		if ( in_array( $sidebar['id'], $current_keys ) ) {
-			$note = __( 'Existing sidebar will be replaced!', 'custom-sidebars' );
-		} else {
-			$note = __( 'New sidebar will be created', 'custom-sidebars' );
-		}
 		$import_sidebar = @$import['widgets'][ $sidebar['id'] ];
 		if ( ! is_array( $import_sidebar ) ) {
 			$import_sidebar = array();
 		}
-		?>
-		<tr class="<?php echo esc_attr( $alternate ); ?>">
-			<th scope="row" class="check-column">
-				<input type="checkbox" name="import_sb_<?php echo esc_attr( $sidebar['id'] ); ?>" />
-			</th>
-			<td class="name column-name"><?php echo esc_html( $sidebar['name'] ); ?></td>
-			<td class="description column-description"><?php echo esc_html( $sidebar['description'] ); ?></td>
-			<td class="note column-note"><?php echo esc_html( $note ); ?></td>
-			<td class="widgets column-widgets" style="display:none">
-		<?php if ( count( $import_sidebar ) ) : ?>
-			<?php foreach ( $import_sidebar as $key => $data ) : ?>
-				<?php echo esc_html( $data['name'] ); ?><br />
-			<?php endforeach; ?>
-		<?php else : ?>
-			-
-		<?php endif; ?>
-			</td>
-		</tr>
-	<?php endforeach; ?>
-
-
-
-	<?php
-	/* *****************************************************************
-	 *
-	 * List all default theme sidebars that exist in the import file
-	 */
-	?>
-
-	<?php foreach ( $theme_sidebars as $sidebar ) : ?>
-
-		<?php if ( isset( $import['widgets'][ $sidebar['id'] ] ) ) : ?>
-			<?php
-			$alternate = ('' == $alternate ? 'alternate' : '');
-			$import_sidebar = @$import['widgets'][ $sidebar['id'] ];
-			if ( ! is_array( $import_sidebar ) ) {
-				$import_sidebar = array();
-			}
-			if ( ! count( $import_sidebar ) ) {
-				continue;
-			}
-			?>
-			<tr class="import-widgets <?php echo esc_attr( $alternate ); ?>" style="display: none">
-				<th scope="row" class="check-column">
-					<input type="checkbox" name="import_sb_<?php echo esc_attr( $sidebar['id'] ); ?>" />
-				</th>
-				<td class="name column-name"><?php echo esc_html( $sidebar['name'] ); ?></td>
-				<td class="description column-description"><?php echo esc_html( $sidebar['description'] ); ?></td>
-				<td><em><?php _e( '(Theme sidebar)', 'custom-sidebars' ); ?></em></td>
-				<td class="widgets column-widgets">
-			<?php if ( count( $import_sidebar ) ) : ?>
-				<?php foreach ( $import_sidebar as $key => $data ) : ?>
-					<?php echo esc_html( $data['name'] ); ?><br />
-				<?php endforeach; ?>
-			<?php else : ?>
-				-
-			<?php endif; ?>
-				</td>
-			</tr>
-		<?php endif; ?>
-
-	<?php endforeach; ?>
-		</tbody>
-	</table>
-
-
-
-	<?php
-	/* *****************************************************************
-	 *
-	 * Show the custom sidebar configuration
-	 */
-	?>
-	<p>&nbsp;</p>
-	<h3 class="title"><?php _e( 'Configuration', 'custom-sidebars' ); ?>
-	<div class="show-infos">
-		<i class="dashicons dashicons-info"></i>
-		<div class="export-infos" style="display:none">
-	<div class="section"><?php _e( 'Replaceable sidebars', 'custom-sidebars' ); ?></div>
-	<table cellspacing="1" cellpadding="4" class="csb-export-head">
-		<tr>
-			<th scope="row"><?php _e( 'Replaceable Sidebars', 'custom-sidebars' ); ?></th>
-			<td>
-			<?php foreach ( $import['options']['modifiable'] as $sb_id ) : ?>
-				<?php echo esc_html( $theme_sidebars[ $sb_id ]['name'] ); ?><br />
-			<?php endforeach; ?>
-			</td>
-		</tr>
-	</table>
-
-	<?php /* single-posttype */ ?>
-	<div class="section"><?php _e( 'By post type', 'custom-sidebars' ); ?></div>
-	<table cellspacing="1" cellpadding="4" class="csb-export-head">
-	<?php
-	$list = @$import['options']['post_type_single'];
-	foreach ( $list as $key => $values ) {
-		$type = get_post_type_object( $key );
-		if ( ! count( $values ) ) { continue; }
-		list_sidebar_replacement( $type->labels->name, $values );
+		if ( ! count( $import_sidebar ) ) {
+			continue;
+		}
+		$id = sprintf( 'import_sb_id_%s', $sidebar['id'] );
+?>
+            <tr class="import-widgets <?php echo esc_attr( $alternate ); ?>" style="display: none">
+            <th scope="row" class="check-column">
+                <input type="checkbox" name="import_sb_<?php echo esc_attr( $sidebar['id'] ); ?>" id="<?php echo esc_attr( $id ); ?>"/>
+            </th>
+            <td class="name column-name"><label for="<?php echo esc_attr( $id ); ?>"><?php echo esc_html( $sidebar['name'] ); ?></label></td>
+                <td class="description column-description"><?php echo esc_html( $sidebar['description'] ); ?></td>
+                <td><em><?php _e( '(Theme sidebar)', 'custom-sidebars' ); ?></em></td>
+                <td class="widgets column-widgets">
+<?php
+if ( count( $import_sidebar ) ) {
+	echo '<ul>';
+	foreach ( $import_sidebar as $key => $data ) {
+		printf( '<li>%s</li>', esc_html( $data['name'] ) );
 	}
-	?>
-	</table>
-
-	<?php /* archive-posttype */ ?>
-	<div class="section"><?php _e( 'Post-type archives', 'custom-sidebars' ); ?></div>
-	<table cellspacing="1" cellpadding="4" class="csb-export-head">
-	<?php
-	$list = @$import['options']['post_type_archive'];
-	foreach ( $list as $key => $values ) {
-		$type = get_post_type_object( $key );
-		if ( ! count( $values ) ) { continue; }
-		list_sidebar_replacement( $type->labels->name, $values );
+	echo '</ul>';
+} else {
+	echo '-';
+}
+?>
+                </td>
+            </tr>
+<?php
 	}
-	?>
-	</table>
+}
+?>
+        </tbody>
+    </table>
+<?php
+/* *****************************************************************
+ *
+ * Show the custom sidebar configuration
+ */
+?>
+    <p>&nbsp;</p>
+    <h3 class="title"><?php _e( 'Configuration', 'custom-sidebars' ); ?>
+    <div class="show-infos">
+        <i class="dashicons dashicons-info"></i>
+        <div class="export-infos" style="display:none">
+    <div class="section"><?php _e( 'Replaceable sidebars', 'custom-sidebars' ); ?></div>
+    <table cellspacing="1" cellpadding="4" class="csb-export-head">
+        <tr>
+            <th scope="row"><?php _e( 'Replaceable Sidebars', 'custom-sidebars' ); ?></th>
+            <td>
+            <?php foreach ( $import['options']['modifiable'] as $sb_id ) : ?>
+                <?php echo esc_html( $theme_sidebars[ $sb_id ]['name'] ); ?><br />
+            <?php endforeach; ?>
+            </td>
+        </tr>
+    </table>
 
-	<?php /* single-category */ ?>
-	<div class="section"><?php _e( 'By category', 'custom-sidebars' ); ?></div>
-	<table cellspacing="1" cellpadding="4" class="csb-export-head">
-	<?php
-	$list = @$import['options']['category_single'];
-	foreach ( $list as $key => $values ) {
-		$cat = get_category( $key );
-		if ( ! count( $values ) ) { continue; }
-		list_sidebar_replacement( $cat->name, $values );
-	}
-	?>
-	</table>
+    <?php /* single-posttype */ ?>
+    <div class="section"><?php _e( 'By post type', 'custom-sidebars' ); ?></div>
+    <table cellspacing="1" cellpadding="4" class="csb-export-head">
+<?php
+$list = @$import['options']['post_type_single'];
+foreach ( $list as $key => $values ) {
+	$type = get_post_type_object( $key );
+	if ( ! count( $values ) ) { continue; }
+	list_sidebar_replacement( $type->labels->name, $values );
+}
+?>
+    </table>
 
-	<?php /* archive-category */ ?>
-	<div class="section"><?php _e( 'Category archives', 'custom-sidebars' ); ?></div>
-	<table cellspacing="1" cellpadding="4" class="csb-export-head">
-	<?php
-	$list = @$import['options']['category_archive'];
-	foreach ( $list as $key => $values ) {
-		$cat = get_category( $key );
-		if ( ! count( $values ) ) { continue; }
-		list_sidebar_replacement( $cat->name, $values );
-	}
-	?>
-	</table>
+    <?php /* archive-posttype */ ?>
+    <div class="section"><?php _e( 'Post-type archives', 'custom-sidebars' ); ?></div>
+    <table cellspacing="1" cellpadding="4" class="csb-export-head">
+<?php
+$list = @$import['options']['post_type_archive'];
+foreach ( $list as $key => $values ) {
+	$type = get_post_type_object( $key );
+	if ( ! count( $values ) ) { continue; }
+	list_sidebar_replacement( $type->labels->name, $values );
+}
+?>
+    </table>
 
-	<?php /* special pages */ ?>
-	<div class="section"><?php _e( 'Special pages', 'custom-sidebars' ); ?></div>
-	<table cellspacing="1" cellpadding="4" class="csb-export-head">
-		<?php
-		list_sidebar_replacement( __( 'Main blog page', 'custom-sidebars' ), $import['options']['blog'] );
-		list_sidebar_replacement( __( 'Date archives', 'custom-sidebars' ), $import['options']['date'] );
-		list_sidebar_replacement( __( 'Author archives', 'custom-sidebars' ), $import['options']['authors'] );
-		list_sidebar_replacement( __( 'Tag archives', 'custom-sidebars' ), $import['options']['tags'] );
-		list_sidebar_replacement( __( 'Search results page', 'custom-sidebars' ), $import['options']['search'] );
-		?>
-	</table>
-	</div>
-	</div>
-	</h3>
+    <?php /* single-category */ ?>
+    <div class="section"><?php _e( 'By category', 'custom-sidebars' ); ?></div>
+    <table cellspacing="1" cellpadding="4" class="csb-export-head">
+<?php
+$list = @$import['options']['category_single'];
+foreach ( $list as $key => $values ) {
+	$cat = get_category( $key );
+	if ( ! count( $values ) ) { continue; }
+	list_sidebar_replacement( $cat->name, $values );
+}
+?>
+    </table>
 
-	<p>
-		<label for="import-config">
-			<input type="checkbox" id="import-config" name="import_plugin_config" />
-			<?php _e( 'Replace the current plugin configuration with the imported configuration.', 'custom-sidebars' ); ?>
-		</label>
-	</p>
+    <?php /* archive-category */ ?>
+    <div class="section"><?php _e( 'Category archives', 'custom-sidebars' ); ?></div>
+    <table cellspacing="1" cellpadding="4" class="csb-export-head">
+<?php
+$list = @$import['options']['category_archive'];
+foreach ( $list as $key => $values ) {
+	$cat = get_category( $key );
+	if ( ! count( $values ) ) { continue; }
+	list_sidebar_replacement( $cat->name, $values );
+}
+?>
+    </table>
 
-	<input type="hidden" name="import_data" value="<?php echo esc_attr( base64_encode( json_encode( (object) $import ) ) ); ?>" />
-	<p class="buttons">
-		<button type="button" class="btn-cancel button-link">Cancel</button>
-		<button class="button-primary btn-import"><i class="dashicons dashicons-migrate"></i> Import selected items</button>
-	</p>
-	</form>
+    <?php /* special pages */ ?>
+    <div class="section"><?php _e( 'Special pages', 'custom-sidebars' ); ?></div>
+    <table cellspacing="1" cellpadding="4" class="csb-export-head">
+<?php
+list_sidebar_replacement( __( 'Main blog page', 'custom-sidebars' ), $import['options']['blog'] );
+list_sidebar_replacement( __( 'Date archives', 'custom-sidebars' ), $import['options']['date'] );
+list_sidebar_replacement( __( 'Author archives', 'custom-sidebars' ), $import['options']['authors'] );
+list_sidebar_replacement( __( 'Tag archives', 'custom-sidebars' ), $import['options']['tags'] );
+list_sidebar_replacement( __( 'Search results page', 'custom-sidebars' ), $import['options']['search'] );
+?>
+    </table>
+    </div>
+    </div>
+    </h3>
 
-	<?php endif; ?>
+    <p>
+        <label for="import-config">
+            <input type="checkbox" id="import-config" name="import_plugin_config" />
+            <?php _e( 'Replace the current plugin configuration with the imported configuration.', 'custom-sidebars' ); ?>
+        </label>
+    </p>
+
+    <input type="hidden" name="import_data" value="<?php echo esc_attr( base64_encode( json_encode( (object) $import ) ) ); ?>" />
+    <p class="buttons">
+        <button type="button" class="btn-cancel button-link">Cancel</button>
+        <button class="button-primary btn-import"><i class="dashicons dashicons-migrate"></i> Import selected items</button>
+    </p>
+    </form>
+
+    <?php endif; ?>
 </div>
 </div>

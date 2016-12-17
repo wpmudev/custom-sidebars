@@ -191,20 +191,27 @@ class CustomSidebarsExport extends CustomSidebars {
 				$data['widgets'][ $sidebar ] = array();
 				foreach ( $widgets as $widget_id ) {
 					if ( isset( $wp_registered_widgets[ $widget_id ] ) ) {
-						$item = @$wp_registered_widgets[ $widget_id ];
+						$item = $wp_registered_widgets[ $widget_id ];
 						$cb = $item['callback'];
 						$widget = is_array( $cb ) ? reset( $cb ) : false;
-
+						$id = $widget_id;
+						if ( ! isset( $data['widgets'][ $sidebar ][ $id ] ) ) {
+							if ( preg_match( '/(\d+)$/', $widget_id, $matches ) ) {
+								$id = $matches[1];
+							}
+						}
 						if ( is_object( $widget ) && method_exists( $widget, 'get_settings' ) ) {
 							$settings = $widget->get_settings();
-							$data['widgets'][ $sidebar ][ $widget_id ] = array(
-								'name' => @$widget->name,
-								'classname' => get_class( $widget ),
-								'id_base' => @$widget->id_base,
-								'description' => @$widget->description,
-								'settings' => $settings[ @$widget->number ],
-								'version' => 3,
-							);
+							if ( isset( $data['widgets'][ $sidebar ][ $id ] ) ) {
+								$data['widgets'][ $sidebar ][ $id ] = array(
+									'name' => @$widget->name,
+									'classname' => get_class( $widget ),
+									'id_base' => @$widget->id_base,
+									'description' => @$widget->description,
+									'settings' => $settings[ @$widget->number ],
+									'version' => 3,
+								);
+							}
 						} else {
 							/**
 							 * Widgets that are registered with the old widget API
@@ -243,8 +250,8 @@ class CustomSidebarsExport extends CustomSidebars {
 	private function download_export_file() {
 		$data = $this->get_export_data();
 		$filename = 'sidebars.' . date( 'Y-m-d.H-i-s' ) . '.json';
-		$content = json_encode( (object) $data );
-
+		$option = defined( 'JSON_PRETTY_PRINT' )? JSON_PRETTY_PRINT : null;
+		$content = json_encode( (object) $data, $option );
 		// Send the download headers.
 		header( 'Pragma: public' );
 		header( 'Expires: 0' );
@@ -254,13 +261,10 @@ class CustomSidebarsExport extends CustomSidebars {
 		header( 'Content-Disposition: attachment; filename="' . $filename . '"' );
 		header( 'Content-Transfer-Encoding: binary' );
 		header( 'Content-Length: ' . strlen( $content ) );
-
 		// Finally send the export-file content.
 		echo '' . $content;
-
 		die();
 	}
-
 
 	/*=============================*\
 	=================================
