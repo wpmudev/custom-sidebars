@@ -280,7 +280,7 @@ class CustomSidebars {
 			}
 
 			// List of modifiable sidebars.
-			if ( ! is_array( @$Options['modifiable'] ) ) {
+			if ( ! isset( $Options['modifiable'] ) || ! is_array( $Options['modifiable'] ) ) {
 				// By default we make ALL theme sidebars replaceable:
 				$all = self::get_sidebars( 'theme' );
 				$Options['modifiable'] = array_keys( $all );
@@ -320,20 +320,20 @@ class CustomSidebars {
 
 			// Single/Archive pages - new names
 			$Options['post_type_single'] = self::get_array(
-				@$Options['post_type_single'], // new name
-				@$Options['defaults']          // old name
+				$Options['post_type_single'], // new name
+				$Options['defaults']          // old name
 			);
 			$Options['post_type_archive'] = self::get_array(
-				@$Options['post_type_archive'], // new name
-				@$Options['post_type_pages']    // old name
+				$Options['post_type_archive'], // new name
+				$Options['post_type_pages']    // old name
 			);
 			$Options['category_single'] = self::get_array(
-				@$Options['category_single'], // new name
-				@$Options['category_posts']   // old name
+				$Options['category_single'], // new name
+				$Options['category_posts']   // old name
 			);
 			$Options['category_archive'] = self::get_array(
-				@$Options['category_archive'], // new name
-				@$Options['category_pages']    // old name
+				$Options['category_archive'], // new name
+				$Options['category_pages']    // old name
 			);
 
 			// Remove old item names from the array.
@@ -353,23 +353,21 @@ class CustomSidebars {
 				unset( $Options['category_pages'] );
 				$need_update = true;
 			}
-
 			// Special archive pages
-			$Options['blog'] = self::get_array( @$Options['blog'] );
-			$Options['tags'] = self::get_array( @$Options['tags'] );
-			$Options['authors'] = self::get_array( @$Options['authors'] );
-			$Options['search'] = self::get_array( @$Options['search'] );
-			$Options['date'] = self::get_array( @$Options['date'] );
-
+			$keys = array( 'blog', 'tags', 'authors', 'search', 'date' );
+			foreach( $keys as $temporary_key ) {
+				$Options[$temporary_key] = null;
+				if ( isset( $Options[$temporary_key]) ) {
+					$Options[$temporary_key] = self::get_array( $Options[$temporary_key] );
+				}
+			}
 			$Options = self::validate_options( $Options );
-
 			if ( $need_update ) {
 				self::set_options( $Options );
 			}
 		}
-
-		if ( ! empty( $key ) ) {
-			return @$Options[ $key ];
+        if ( ! empty( $key ) ) {
+			return isset( $Options[ $key ] )? $Options[ $key ] : null;
 		} else {
 			return $Options;
 		}
@@ -404,12 +402,13 @@ class CustomSidebars {
 			return array();
 		}
 		$valid = array_keys( self::get_sidebars( 'theme' ) );
-		$current = self::get_array( @$data['modifiable'] );
-
+		$current = array();
+		if ( isset( $data['modifiable'] ) ) {
+			$current = self::get_array( $data['modifiable'] );
+		}
 		// Get all the sidebars that are modifiable AND exist.
 		$modifiable = array_intersect( $valid, $current );
 		$data['modifiable'] = $modifiable;
-
 		return $data;
 	}
 
@@ -856,8 +855,8 @@ class CustomSidebars {
 		// Catch any unexpected output via output buffering.
 		ob_start();
 
-		$action = @$_POST['do'];
-		$get_action = @$_GET['do'];
+		$action = isset( $_POST['do'] )? $_POST['do']:null;
+		$get_action = isset( $_GET['do'] )? $_GET['do']:null;
 
 		/**
 		 * Notify all extensions about the ajax call.
