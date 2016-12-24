@@ -563,40 +563,37 @@ body.appearance_page_customsidebars #poststuff h2 {
   right: auto;
   left: 0;
 }
-
+.rtl.widgets-php #wpcontent .wrap {
+  margin-right: 2px;
+  margin-left: 68%;
+}
+.rtl.widgets-php .widget-liquid-right {
+  margin: -10px 0 0 -214%;
+}
 .rtl.widgets-php #widgets-left {
   margin-left: 0 !important;
 }
-
-.rtl.widgets-php #wpcontent,
-.rtl.widgets-php #wpfooter {
-  margin-left: 325px;
-  margin-right: 165px;
-}
-
 .rtl.widgets-php.folded #wpcontent,
 .rtl.widgets-php.folded #wpfooter {
   margin-left: 325px;
   margin-right: 52px;
 }
-
 .rtl #cs-title-options h2 {
-  float: right;
   margin-right: 5px;
 }
-
-.rtl .cs-options {
-  text-align: left;
+.rtl #cs-options .cs-filter {
+  float: left;
 }
-
+.rtl #cs-options .cs-action {
+  margin-right: 0;
+  margin-left: 20px;
+}
 .rtl .sidebar-form .submit {
   text-align: left;
 }
-
 .rtl #TB_ajaxWindowTitle {
   float: right;
 }
-
 .rtl #TB_closeAjaxWindow {
   float: left;
 }
