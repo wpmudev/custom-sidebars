@@ -158,8 +158,12 @@ class CustomSidebars {
 				10, 1
 			);
 		}
-	}
 
+		/**
+		* add links on plugin page.
+		*/
+		add_filter( 'plugin_action_links_' . plugin_basename( CSB_PLUGIN ), array( $this, 'add_action_links' ), 10, 4 );
+	}
 
 
 	// =========================================================================
@@ -308,7 +312,7 @@ class CustomSidebars {
 				'post_type_pages',
 				'post_type_single',
 				'search',
-				'tags'
+				'tags',
 			);
 
 			foreach ( $keys as $k ) {
@@ -890,11 +894,11 @@ class CustomSidebars {
 			return 0;
 		}
 		if ( function_exists( 'mb_strtolower' ) ) {
-			$a_name = mb_strtolower($a['name']);
-			$b_name = mb_strtolower($b['name']);
+			$a_name = mb_strtolower( $a['name'] );
+			$b_name = mb_strtolower( $b['name'] );
 		} else {
-			$a_name = strtolower($a['name']);
-			$b_name = strtolower($b['name']);
+			$a_name = strtolower( $a['name'] );
+			$b_name = strtolower( $b['name'] );
 		}
 		if ( $a_name == $b_name ) {
 			return 0;
@@ -914,15 +918,40 @@ class CustomSidebars {
 		if ( empty( $available ) ) {
 			return $available;
 		}
-		foreach( $available as $key => $data ) {
-			$available[$key]['cs-key'] = $key;
+		foreach ( $available as $key => $data ) {
+			$available[ $key ]['cs-key'] = $key;
 		}
 		usort( $available, array( __CLASS__, 'sort_sidebars_cmp_function' ) );
 		$sorted = array();
-		foreach( $available as $data ) {
-			$sorted[$data['cs-key']] = $data;
+		foreach ( $available as $data ) {
+			$sorted[ $data['cs-key'] ] = $data;
 		}
 		return $sorted;
 	}
 
+	/**
+	 * Add "support" and (configure) "widgets" on plugin list page
+	 *
+	 * @since 2.1.1.8
+	 *
+	 */
+	public function add_action_links( $actions, $plugin_file, $plugin_data, $context ) {
+		if ( current_user_can( 'edit_theme_options' ) ) {
+			$actions['widgets'] = sprintf(
+				'<a href="%s">%s</a>',
+				esc_url( admin_url( 'widgets.php' ) ),
+				__( 'Widgets', 'custom-sidebars' )
+			);
+		}
+		$url = 'https://wordpress.org/support/plugin/custom-sidebars';
+		/* start:pro */
+		$url = 'https://premium.wpmudev.org/forums/tags/custom-sidebars-pro';
+		/* end:pro */
+		$actions['support'] = sprintf(
+			'<a href="%s">%s</a>',
+			esc_url( $url ),
+			__( 'Support', 'custom-sidebars' )
+		);
+		return $actions;
+	}
 };
