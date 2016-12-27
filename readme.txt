@@ -2,8 +2,8 @@
 Contributors: WPMUDEV, marquex, WPMUDEV-Support2, WPMUDEV-Support1, WPMUDEV-Support6, WPMUDEV-Support4, iworks
 Tags: custom sidebars, widgets, sidebars, custom, sidebar, widget, personalize
 Requires at least: 3.3
-Tested up to: 4.6.1
-Stable tag: 2.1.1.6
+Tested up to: 4.7
+Stable tag: 2.1.1.8
 
 Display custom widget configurations for every page or post on your site.
 
@@ -118,6 +118,13 @@ Custom Sidebars has the same license as WordPress, so you can use it wherever yo
 If you are running a earlier version of WordPress download Custom Sidebars 0.8.2.
 
 == Changelog ==
+
+= 2.1.1.8 =
+* Added support and widgets links on plugins page.
+* Fixed export problem, when widget has the same name.
+* Fixed few "Undefined index" warnings.
+* Improved import preview screen.
+* Improved RTL languages on widgets screen.
 
 = 2.1.1.7 =
 * Rollback last change with front page.
