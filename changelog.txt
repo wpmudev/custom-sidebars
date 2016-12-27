@@ -7,6 +7,7 @@ Change Log:
 2.1.1.8 ( 2016-12-xx )
 - Fixed export problem, when widget has the same name.
 - Improved import preview screen.
+- Fixed few "Undefined index" warnings.
 
 2.1.1.7 ( 2016-11-23 )
 - Rollback last change with front page.
