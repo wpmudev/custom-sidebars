@@ -120,8 +120,8 @@ If you are running a earlier version of WordPress download Custom Sidebars 0.8.2
 == Changelog ==
 
 = 2.1.1.8 =
-* Added support and widgets links on plugins page.
-* Fixed export problem, when widget has the same name.
+* Added support and widgets links on the plugins page.
+* Fixed export problem, when two or more widget has the same name.
 * Fixed few "Undefined index" warnings.
 * Improved import preview screen.
 * Improved RTL languages on widgets screen.
