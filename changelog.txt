@@ -6,6 +6,7 @@ Change Log:
 
 2.1.1.9 ( 2017-01-02 )
 - Fixed export problem, when two or more widget has the same name.
+- Fixed problems with import widgets created before Custom Sidebars plugin was installed.
 
 2.1.1.8 ( 2016-12-27 )
 - Added support and widgets links on the plugins page.
@@ -46,7 +47,7 @@ Change Log:
 
 2.1.0.8
 ----------------------------------------------------------------------
-- Minor improvements in the admin UI: Better scrolling, fix JS errors and PHP notices.
+- Minor improvements in the admin UI: Better scrolling, fix JavaScript errors and PHP notices.
 - Fix a bug that prevented Widget-Visibility options to work.
 - Update third party libraries.
 
@@ -141,7 +142,7 @@ Change Log:
 - Fix: Fixed various issues when flagging a sidebar s replaceable.
 - Fix: Plugin will not load in accessibility mode but display a notice instead.
 - Minor fix: Make code compatible with PHP 5.2.4
-- Minor fix: Slight improvement of ajax stability
+- Minor fix: Slight improvement of AJAX stability
 - Minor fix: Plugin now requires capability "edit_theme_options"
 
 2.0.8
@@ -154,7 +155,7 @@ Change Log:
 
 2.0.6.1
 ----------------------------------------------------------------------
-- Minor fix: Use WordPress core functions to get URL to javascript files.
+- Minor fix: Use WordPress core functions to get URL to JavaScript files.
 - Minor fix: Refactor function name to avoid misunderstandings.
 
 2.0.6
@@ -174,7 +175,7 @@ Change Log:
 
 2.0.3
 ----------------------------------------------------------------------
-- Fixed: Javascript errors on Windows servers are fixed.
+- Fixed: JavaScript errors on Windows servers are fixed.
 
 2.0.2
 ----------------------------------------------------------------------
@@ -191,11 +192,11 @@ Change Log:
 - Pro: Import/export sidebars and widgets.
 - Pro: Define widget visibility options.
 - Pro: Widget cloning.
-- Many small bugfixes.
+- Many small bug fixes.
 
 1.5
 ----------------------------------------------------------------------
-- Added: Custom sidebars now works with buddypress pages.
+- Added: Custom sidebars now works with BuddyPress pages.
 
 1.4
 ----------------------------------------------------------------------
@@ -241,9 +242,9 @@ Change Log:
 
 0.8.2
 ----------------------------------------------------------------------
-- Fixed: Problems with spanish translation
+- Fixed: Problems with Spanish translation
 - Added: Dutch and German language files
-- Fixed: Some css issues with WP3.3
+- Fixed: Some CSS issues with WP3.3
 
 0.8.1
 ----------------------------------------------------------------------
@@ -270,12 +271,11 @@ Change Log:
 ----------------------------------------------------------------------
 - New interface, more user friendly
 - Added the possibility of customize the main blog page sidebars
-- Added the sidebars by category, so now you can personalize all the post that belongs to a category easily in a hierarchycal way
+- Added the sidebars by category, so now you can personalize all the post that belongs to a category easily in a hierarchical way
 - Added the possibility of customize the authors page sidebars
 - Added the possibility of customize the tags page sidebars
 - Added, now it is possible to edit the sidebars names, as well as the pre-widget, post-widget, pre-title, post-title for a sidebar.
 - Added the possibility of customize the sidebars of posts list by category or post-type.
-
 
 0.5
 ----------------------------------------------------------------------

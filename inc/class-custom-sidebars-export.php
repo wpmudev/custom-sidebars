@@ -183,8 +183,7 @@ class CustomSidebarsExport extends CustomSidebars {
 		 * "widget_search" contains options for all widget instances in any
 		 * sidebar. When we place 2 search widgets in different sidebars there
 		 * will be a list with two option-arrays.
-         */
-
+		 */
 		$data['widgets'] = array();
 		foreach ( self::get_sidebar_widgets() as $sidebar => $widgets ) {
 			if ( 'wp_inactive_widgets' === $sidebar ) {
@@ -207,6 +206,14 @@ class CustomSidebarsExport extends CustomSidebars {
 							continue;
 						}
 						if ( is_object( $widget ) && method_exists( $widget, 'get_settings' ) ) {
+							/**
+							 * set correct widget data
+							 */
+							$widget->id = $widget_id;
+							$widget->number = $id;
+							/**
+							 * get settings
+							 */
 							$settings = $widget->get_settings();
 							$data['widgets'][ $sidebar ][ $id ] = array(
 								'name' => @$widget->name,
@@ -267,7 +274,7 @@ class CustomSidebarsExport extends CustomSidebars {
 		$data = $this->get_export_data();
 		$filename = 'sidebars.' . date( 'Y-m-d.H-i-s' ) . '.json';
 		$option = defined( 'JSON_PRETTY_PRINT' )? JSON_PRETTY_PRINT : null;
-			$content = json_encode( (object) $data, $option );
+		$content = json_encode( (object) $data, $option );
 		// Send the download headers.
 		header( 'Pragma: public' );
 		header( 'Expires: 0' );
@@ -537,6 +544,12 @@ class CustomSidebarsExport extends CustomSidebars {
 	 * @since  2.0
 	 */
 	private function _remove_sidebar_from_list( $list, $valid_list ) {
+		/**
+		 * do not process if $list is not an array or is an empty array
+		 */
+		if ( ! is_array( $list ) || empty( $list ) ) {
+			return $list;
+		}
 		foreach ( $list as $id => $value ) {
 			if ( ! in_array( $value, $valid_list ) ) {
 				unset( $list[ $id ] );
@@ -751,7 +764,18 @@ class CustomSidebarsExport extends CustomSidebars {
 				}
 				$new_number += 1;
 				$widget_name = $id_base . '-' . $new_number;
-
+				/**
+				 * reset previous data
+				 */
+				$keys = array( 'title', 'text', 'filter', 'csb_visibility', 'csb_clone' );
+				foreach ( $keys as $key ) {
+					if ( isset( $_POST[ $key ] ) ) {
+						unset( $_POST[ $key ] );
+					}
+				}
+				/**
+				 * set current values
+				 */
 				foreach ( $instance as $key => $value ) {
 					$_POST[ $key ] = $value;
 				}
