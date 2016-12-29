@@ -45,7 +45,6 @@ class CustomSidebars {
 	 */
 	static protected $accessibility_mode = false;
 
-
 	/**
 	 * Returns the singleton instance of the custom sidebars class.
 	 *
@@ -357,20 +356,23 @@ class CustomSidebars {
 				unset( $Options['category_pages'] );
 				$need_update = true;
 			}
+
 			// Special archive pages
 			$keys = array( 'blog', 'tags', 'authors', 'search', 'date' );
-			foreach( $keys as $temporary_key ) {
-				$Options[$temporary_key] = null;
-				if ( isset( $Options[$temporary_key]) ) {
-					$Options[$temporary_key] = self::get_array( $Options[$temporary_key] );
+			foreach ( $keys as $temporary_key ) {
+				if ( isset( $Options[ $temporary_key ] ) ) {
+					$Options[ $temporary_key ] = self::get_array( $Options[ $temporary_key ] );
+				} else {
+					$Options[ $temporary_key ] = array();
 				}
 			}
+
 			$Options = self::validate_options( $Options );
 			if ( $need_update ) {
 				self::set_options( $Options );
 			}
 		}
-        if ( ! empty( $key ) ) {
+		if ( ! empty( $key ) ) {
 			return isset( $Options[ $key ] )? $Options[ $key ] : null;
 		} else {
 			return $Options;

@@ -4,6 +4,9 @@ Author: Javier Marquez (Incsub), Philipp Stracker (Incsub), Marcin Pietrzak (Inc
 Change Log:
 ----------------------------------------------------------------------
 
+2.1.1.9 ( 2016-12-29 )
+- Fixed problem with sidebars on Front Page.
+
 2.1.1.8 ( 2016-12-27 )
 - Added support and widgets links on the plugins page.
 - Fixed export problem, when two or more widget has the same name.
