@@ -119,6 +119,11 @@ If you are running a earlier version of WordPress download Custom Sidebars 0.8.2
 
 == Changelog ==
 
+= 2.1.1.9 =
+* Fixed export problem, when two or more widget has the same name.
+* Fixed problem with import widgets created before Custom Sidebars plugin was installed.
+* Fixed problem with sidebars on Front Page.
+
 = 2.1.1.8 =
 * Added support and widgets links on the plugins page.
 * Fixed export problem, when two or more widget has the same name.
@@ -155,7 +160,7 @@ If you are running a earlier version of WordPress download Custom Sidebars 0.8.2
 * Fixed issue with broken link icon for cloned widgets.
 
 = 2.1.0.8 =
-* Small improvements in the admin UI: Better scrolling, fix JS errors and PHP notices.
+* Small improvements in the admin UI: Better scrolling, fix JavaScript errors and PHP notices.
 * Update third party libraries.
 * Small improvements in code.
 
@@ -283,9 +288,9 @@ If you are running a earlier version of WordPress download Custom Sidebars 0.8.2
 *       Added: Italian translation
 
 = 0.8.2 =
-* 	Fixed: Problems with spanish translation
+* 	Fixed: Problems with Spanish translation
 *	Added: Dutch and German language files
-* 	Fixed: Some css issues with WP3.3
+* 	Fixed: Some CSS issues with WP3.3
 
 = 0.8.1 =
 *	Fixed: You can assign sidebars to your pages again.
