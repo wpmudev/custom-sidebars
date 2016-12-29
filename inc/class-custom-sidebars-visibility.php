@@ -441,6 +441,7 @@ class CustomSidebarsVisibility extends CustomSidebars {
 		<?php /* SPECIFIC TAXONOMY */ ?>
 		<?php
 		foreach ( $tax_list as $tax_item ) {
+
 			$row_id = 'tax-' . $tax_item->name;
 			$ajax_url = admin_url( 'admin-ajax.php?action=cs-ajax&do=visibility&tag=' . $tax_item->name );
 			$sel = array();
@@ -461,20 +462,29 @@ class CustomSidebarsVisibility extends CustomSidebars {
 
 			?>
 			<div class="csb-option-row csb-<?php echo esc_attr( $row_id ); ?>"
-				<?php if ( empty( $cond[ $row_id ] ) ) : ?>style="display:none"<?php endif; ?>>
+		<?php if ( empty( $cond[ $row_id ] ) ) : ?>style="display:none"<?php endif; ?>>
 
-				<label for="<?php echo esc_attr( $widget->id ); ?>-<?php echo esc_attr( $row_id ); ?>">
-					<span class="csb-and" style="display:none"><?php _e( 'AND', 'custom-sidebars' ); ?></span>
-					<?php echo esc_html( $tax_item->labels->name ); ?>
-					</label>
-				<i class="dashicons dashicons-trash clear-filter show-on-hover action"></i>
-
-				<input type="hidden"
-					id="<?php echo esc_attr( $widget->id ); ?>-<?php echo esc_attr( $row_id ); ?>"
-					name="<?php echo esc_attr( $block_name ); ?>[<?php echo esc_attr( $row_id ); ?>]"
-					value="<?php echo esc_attr( implode( ',', $sel ) ); ?>"
-					data-select-ajax="<?php echo esc_url( $ajax_url ); ?>" />
-			</div>
+		<label for="<?php echo esc_attr( $widget->id ); ?>-<?php echo esc_attr( $row_id ); ?>">
+			<span class="csb-and" style="display:none"><?php _e( 'AND', 'custom-sidebars' ); ?></span>
+			<?php echo esc_html( $tax_item->labels->name ); ?>
+			</label>
+		<i class="dashicons dashicons-trash clear-filter show-on-hover action"></i>
+        <select
+			id="<?php echo esc_attr( $widget->id ); ?>-<?php echo esc_attr( $row_id ); ?>"
+			name="<?php echo esc_attr( $block_name ); ?>[<?php echo esc_attr( $row_id ); ?>][]"
+            multiple="multiple"
+        >
+	<?php
+	$terms = get_terms( $tax_item->name );
+	foreach ( $terms as $item ) {
+?>
+					<?php $is_selected = in_array( $item->term_id, $sel ); ?>
+					<option <?php selected( $is_selected ); ?> value="<?php echo esc_attr( $item->term_id ); ?>">
+						<?php echo esc_html( $item->name ); ?>
+					</option>
+				<?php } ?>
+		</select>
+	</div>
 			<?php
 		}
 		?>
