@@ -26,22 +26,24 @@ function list_sidebar_replacement( $label, $list ) {
 	$import = CustomSidebarsExport::get_import_data();
 	$theme_sidebars = CustomSidebars::get_sidebars();
 
-	foreach ( $list as $from_id => $to_id ) {
-		$from = $theme_sidebars[ $from_id ];
-		$to = array();
-		if ( isset( $theme_sidebars[ $to_id ] ) ) {
-			$to = $theme_sidebars[ $to_id ];
-		} else {
-			$to = $import['sidebars'][ $to_id ];
+	if ( is_array( $list ) ) {
+		foreach ( $list as $from_id => $to_id ) {
+			$from = $theme_sidebars[ $from_id ];
+			$to = array();
+			if ( isset( $theme_sidebars[ $to_id ] ) ) {
+				$to = $theme_sidebars[ $to_id ];
+			} else {
+				$to = $import['sidebars'][ $to_id ];
+			}
+?>
+        <tr>
+            <th scope="row"><?php echo esc_html( $label ); ?></th>
+            <td><?php echo esc_html( $from['name'] ); ?></td>
+            <td><i class="dashicons dashicons-arrow-right-alt hint"></i></td>
+            <td><?php echo esc_html( $to['name'] ); ?></td>
+        </tr>
+<?php
 		}
-		?>
-		<tr>
-			<th scope="row"><?php echo esc_html( $label ); ?></th>
-			<td><?php echo esc_html( $from['name'] ); ?></td>
-			<td><i class="dashicons dashicons-arrow-right-alt hint"></i></td>
-			<td><?php echo esc_html( $to['name'] ); ?></td>
-		</tr>
-		<?php
 	}
 }
 ?>

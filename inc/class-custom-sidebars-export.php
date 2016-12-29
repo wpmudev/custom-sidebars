@@ -186,7 +186,9 @@ class CustomSidebarsExport extends CustomSidebars {
 		 */
 		$data['widgets'] = array();
 		foreach ( self::get_sidebar_widgets() as $sidebar => $widgets ) {
-			if ( 'wp_inactive_widgets' === $sidebar ) { continue; }
+			if ( 'wp_inactive_widgets' === $sidebar ) {
+				continue;
+			}
 			if ( is_array( $widgets ) ) {
 				$data['widgets'][ $sidebar ] = array();
 				foreach ( $widgets as $widget_id ) {
@@ -200,18 +202,27 @@ class CustomSidebarsExport extends CustomSidebars {
 								$id = $matches[1];
 							}
 						}
+						if ( isset( $data['widgets'][ $sidebar ][ $id ] ) ) {
+							continue;
+						}
 						if ( is_object( $widget ) && method_exists( $widget, 'get_settings' ) ) {
+							/**
+							 * set correct widget data
+							 */
+							$widget->id = $widget_id;
+							$widget->number = $id;
+							/**
+							 * get settings
+							 */
 							$settings = $widget->get_settings();
-							if ( isset( $data['widgets'][ $sidebar ][ $id ] ) ) {
-								$data['widgets'][ $sidebar ][ $id ] = array(
-									'name' => @$widget->name,
-									'classname' => get_class( $widget ),
-									'id_base' => @$widget->id_base,
-									'description' => @$widget->description,
-									'settings' => $settings[ @$widget->number ],
-									'version' => 3,
-								);
-							}
+							$data['widgets'][ $sidebar ][ $id ] = array(
+								'name' => @$widget->name,
+								'classname' => get_class( $widget ),
+								'id_base' => @$widget->id_base,
+								'description' => @$widget->description,
+								'settings' => $settings[ @$widget->number ],
+								'version' => 3,
+							);
 						} else {
 							/**
 							 * Widgets that are registered with the old widget API
@@ -232,6 +243,18 @@ class CustomSidebarsExport extends CustomSidebars {
 								'settings' => @$item['params'],
 								'version' => 2,
 							);
+						}
+						/**
+						 * remove empty settings
+						 */
+						if ( isset( $data['widgets'][ $sidebar ][ $id ]['settings']['csb_visibility']['conditions'] ) ) {
+							foreach ( $data['widgets'][ $sidebar ][ $id ]['settings']['csb_visibility']['conditions'] as $condition_id => $condition_value ) {
+								if ( empty( $condition_value ) ) {
+
+									unset( $data['widgets'][ $sidebar ][ $id ]['settings']['csb_visibility']['conditions'][ $condition_id ] );
+
+								}
+							}
 						}
 					}
 				}
@@ -521,6 +544,12 @@ class CustomSidebarsExport extends CustomSidebars {
 	 * @since  2.0
 	 */
 	private function _remove_sidebar_from_list( $list, $valid_list ) {
+		/**
+		 * do not process if $list is not an array or is an empty array
+		 */
+		if ( ! is_array( $list ) || empty( $list ) ) {
+			return $list;
+		}
 		foreach ( $list as $id => $value ) {
 			if ( ! in_array( $value, $valid_list ) ) {
 				unset( $list[ $id ] );
@@ -735,7 +764,18 @@ class CustomSidebarsExport extends CustomSidebars {
 				}
 				$new_number += 1;
 				$widget_name = $id_base . '-' . $new_number;
-
+				/**
+				 * reset previous data
+				 */
+				$keys = array( 'title', 'text', 'filter', 'csb_visibility', 'csb_clone' );
+				foreach ( $keys as $key ) {
+					if ( isset( $_POST[ $key ] ) ) {
+						unset( $_POST[ $key ] );
+					}
+				}
+				/**
+				 * set current values
+				 */
 				foreach ( $instance as $key => $value ) {
 					$_POST[ $key ] = $value;
 				}
