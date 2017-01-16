@@ -4,6 +4,9 @@ Author: Javier Marquez (Incsub), Philipp Stracker (Incsub), Marcin Pietrzak (Inc
 Change Log:
 ----------------------------------------------------------------------
 
+2.1.2.0 ( 2017-01-16 )
+- Fixed a problem with empty selectors.
+
 2.1.1.9 ( 2016-12-29 )
 - Fixed export problem, when two or more widget has the same name.
 - Fixed problem with import widgets created before Custom Sidebars plugin was installed.
