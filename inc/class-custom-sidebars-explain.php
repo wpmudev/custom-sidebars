@@ -51,11 +51,24 @@ class CustomSidebarsExplain extends CustomSidebars {
 	 * @since  2.0.9.1
 	 */
 	private function __construct() {
+		$debug = false;
+		if ( isset( $_GET['cs-explain'] ) ) {
+			$debug = true;
+			self::set_explain( $_GET['cs-explain'] );
+		}
+		if (
+			false === $debug
+			&& isset( $_SESSION )
+			&& isset( $_SESSION['cs-explain'] )
+			&& 'on' == $_SESSION['cs_explain']
+		) {
+			$debug = true;
+		}
+		if ( false === $debug ) {
+			return;
+		}
 		if ( ! session_id() ) {
 			session_start();
-		}
-		if ( isset( $_GET['cs-explain'] ) ) {
-			self::set_explain( $_GET['cs-explain'] );
 		}
 
 		if ( is_admin() ) {

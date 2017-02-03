@@ -4,8 +4,9 @@ Author: Javier Marquez (Incsub), Philipp Stracker (Incsub), Marcin Pietrzak (Inc
 Change Log:
 ----------------------------------------------------------------------
 
-2.1.2.0 ( 2017-01-16 )
+2.1.2.0 ( 2017-xx-xx )
 - Fixed a problem with empty selectors.
+- Remove unnecessary http header - it is only needed when we run cs-explains.
 
 2.1.1.9 ( 2016-12-29 )
 - Fixed export problem, when two or more widget has the same name.
