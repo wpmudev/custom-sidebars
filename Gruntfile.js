@@ -39,11 +39,18 @@ module.exports = function( grunt ) {
 		plugin_branches: {
 			exclude_pro: [
 				'./README.MD',
+				'./README.md',
 				'./readme.txt',
 				'./screenshot-*',
+				'./Gruntfile.js',
+				'./package.json',
 			],
 			exclude_free: [
+				'./changelog.txt',
 				'./README.MD',
+				'./README.md',
+				'./Gruntfile.js',
+				'./package.json',
 				'./inc/external/wpmudev-dashboard',
 				'./js/cs-cloning.js',
 				'./js/cs-cloning.min.js',
@@ -67,8 +74,6 @@ module.exports = function( grunt ) {
 				'!js/vendor/**',
 				'!img/src/**',
 				'!node_modules/**',
-				'!Gruntfile.js',
-				'!package.json',
 				'!build/**',
 				'!tests/**',
 				'!**/css/src/**',
