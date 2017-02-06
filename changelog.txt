@@ -6,7 +6,7 @@ Change Log:
 
 2.1.2.0 ( 2017-02-06 )
 - Fixed a problem with empty selectors.
-- Remove unnecessary http header - it is only needed when we run cs-explains.
+- Remove unnecessary HTTP header - it is only needed when we run cs-explains.
 - Update Dash notice.
 
 2.1.1.9 ( 2016-12-29 )
