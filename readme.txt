@@ -2,8 +2,8 @@
 Contributors: WPMUDEV, marquex, WPMUDEV-Support2, WPMUDEV-Support1, WPMUDEV-Support6, WPMUDEV-Support4, iworks
 Tags: custom sidebars, widgets, sidebars, custom, sidebar, widget, personalize
 Requires at least: 3.3
-Tested up to: 4.7
-Stable tag: 2.1.1.9
+Tested up to: 4.7.2
+Stable tag: 2.1.2.0
 
 Display custom widget configurations for every page or post on your site.
 
@@ -121,6 +121,8 @@ If you are running a earlier version of WordPress download Custom Sidebars 0.8.2
 
 = 2.1.2.0 =
 * Fixed a problem with empty selectors.
+* Remove unnecessary HTTP header - it is only needed when we run cs-explains.
+* Update Dash notice.
 
 = 2.1.1.9 =
 * Fixed export problem, when two or more widget has the same name.
