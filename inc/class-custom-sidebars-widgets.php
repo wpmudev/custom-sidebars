@@ -39,6 +39,16 @@ class CustomSidebarsWidgets extends CustomSidebars {
 				array( $this, 'init_admin_head' )
 			);
 		}
+		add_action( 'widgets_admin_page', array( $this, 'add_div_start' ) );
+		add_action( 'sidebar_admin_page', array( $this, 'add_div_end' ) );
+	}
+
+	public function add_div_start() {
+		echo '<div class="cs-wrap">';
+	}
+
+	public function add_div_end() {
+		echo '</div>';
 	}
 
 	/**
@@ -69,5 +79,4 @@ class CustomSidebarsWidgets extends CustomSidebars {
 		$classes .= ' no-auto-init ';
 		return $classes;
 	}
-
 };
