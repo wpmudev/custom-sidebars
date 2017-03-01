@@ -231,40 +231,71 @@
 		padding-right: 20px;
 	}
 
-    .custom-sidebars-wp-checkup {
-        @include border-radius( 4px );
-        align-items: center;
-        background: #fff url(../img/heart.png) no-repeat 0 50%;
-        border: 0;
-        display: flex;
-        min-height: 100px;
-        padding-left: 135px;
-        justify-content: space-between;
-        form {
-            white-space: nowrap;
-            input {
-                border: 0;
-                @include border-radius( 4px );
-            }
-            input[type=text] {
-                background-color: #f2f2f2;
-                padding: 15px 14px;
-            }
-            input[type=submit] {
-                background-color: #17a8e3;
-                color: #fff;
-                padding: 15px 35px;
-                text-transform: uppercase;
-                margin-left: 10px;
-            }
-        }
-        p {
-            font-size: 1.2em;
-            b {
-                color: #840006;
-            }
-        }
-    }
+	.custom-sidebars-wp-checkup {
+		@include border-radius( 4px );
+		align-items: center;
+		background: #fff url(../img/heart.png) no-repeat 0 50%;
+		border: 0;
+		display: flex;
+		min-height: 100px;
+		padding-left: 135px;
+		justify-content: space-between;
+		form {
+			white-space: nowrap;
+			input {
+				border: 0;
+				@include border-radius( 4px );
+			}
+			input[type=text] {
+				background-color: #f2f2f2;
+				padding: 15px 14px;
+			}
+			input[type=submit] {
+				background-color: #17a8e3;
+				color: #fff;
+				padding: 13px 35px;
+				text-transform: uppercase;
+				margin-left: 10px;
+			}
+		}
+		p {
+			font-size: 1.2em;
+			b {
+				color: #840006;
+			}
+		}
+	}
+	.sidebars-column-1 {
+		.inner {
+			.custom-sidebars-upfront {
+				@include border-radius( 4px );
+				background-color: #f9c200;
+				margin: 55px 0 16px 0;
+				.devman {
+					min-height: 145px;
+					margin-right: -16px;
+					background: url(../img/devman.png) no-repeat 100% 50%;
+					padding: 50px 120px 45px 20px;
+					p {
+						font-size: 1.4em;
+						color: #000;
+						margin-top: 0;
+						&:last-of-type {
+							margin-bottom: 0;
+						}
+					}
+					.button {
+						background-color: #00a7e6;
+						color: #fff;
+						font-weight: bold;
+						height: auto;
+						padding: 15px 16px;
+						text-transform: uppercase;
+					}
+				}
+			}
+		}
+	}
 }
 
 #cs-options {

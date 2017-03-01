@@ -226,7 +226,7 @@
 .widgets-php .custom-sidebars-wp-checkup form input[type=submit] {
   background-color: #17a8e3;
   color: #fff;
-  padding: 15px 35px;
+  padding: 13px 35px;
   text-transform: uppercase;
   margin-left: 10px;
 }
@@ -235,6 +235,33 @@
 }
 .widgets-php .custom-sidebars-wp-checkup p b {
   color: #840006;
+}
+.widgets-php .sidebars-column-1 .inner .custom-sidebars-upfront {
+  border-radius: 4px;
+  background-color: #f9c200;
+  margin: 55px 0 16px 0;
+}
+.widgets-php .sidebars-column-1 .inner .custom-sidebars-upfront .devman {
+  min-height: 145px;
+  margin-right: -16px;
+  background: url(../img/devman.png) no-repeat 100% 50%;
+  padding: 50px 120px 45px 20px;
+}
+.widgets-php .sidebars-column-1 .inner .custom-sidebars-upfront .devman p {
+  font-size: 1.4em;
+  color: #000;
+  margin-top: 0;
+}
+.widgets-php .sidebars-column-1 .inner .custom-sidebars-upfront .devman p:last-of-type {
+  margin-bottom: 0;
+}
+.widgets-php .sidebars-column-1 .inner .custom-sidebars-upfront .devman .button {
+  background-color: #00a7e6;
+  color: #fff;
+  font-weight: bold;
+  height: auto;
+  padding: 15px 16px;
+  text-transform: uppercase;
 }
 
 #cs-options .cs-action {
