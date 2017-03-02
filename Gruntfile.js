@@ -45,7 +45,8 @@ module.exports = function( grunt ) {
 				'./Gruntfile.js',
 				'./package.json',
 				'./inc/class-custom-sidebars-advertisement.php',
-				'./img/heart.png'
+				'./img/heart.png',
+				'./img/devman.png'
 			],
 			exclude_free: [
 				'./changelog.txt',
