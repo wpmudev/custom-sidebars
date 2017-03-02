@@ -123,9 +123,13 @@ class CustomSidebarsAdvertisement extends CustomSidebars {
 </script>
 <div class="notice is-dismissible custom-sidebars-wp-checkup">
 <p><?php _e( '<b>Warning:</b> Some of your plugins may be slowing down your site. Run a free security and performance scan with WP Checkup.', 'custom-sidebars' ); ?></p>
-<form method="post" action="https://premium.wpmudev.org/wp-checkup/">
+<form method="get" action="https://premium.wpmudev.org/wp-checkup/">
+<input type="hidden" name="external-url" value="1" />
 <input type="text" name="the-url" value="<?php echo esc_url( get_option( 'home' ) ); ?>" />
 <input type="submit" value="<?php esc_attr_e( 'Scan', 'custom-sidebars' ); ?>" />
+<input type="hidden" name="utm_source" value="custom_sidebar_ad" />
+<input type="hidden" name="utm_campaign" value="custom_sidebar_plugin" />
+<input type="hidden" name="utm_medium" value="Custom Sidebars Plugin" />
 </form>
 	<button type="button" class="notice-dismiss">
 		<span class="screen-reader-text">Dismiss this notice.</span>
