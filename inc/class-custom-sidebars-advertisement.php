@@ -37,11 +37,15 @@ class CustomSidebarsAdvertisement extends CustomSidebars {
 			return;
 		}
 		wp_enqueue_script( 'wp-util' );
-		add_action( 'widgets_admin_page', array( $this, 'widget_sidebar_content' ) );
 		add_action( 'admin_head-widgets.php', array( $this, 'init_admin_head' ) );
 		add_action( 'wp_ajax_custom_sidebars_advertisement_dismiss', array( $this, 'dismiss' ) );
 	}
 
+	/**
+	 * Save dismiss decision, no more show it.
+	 *
+	 * @since 2.2.0
+	 */
 	public function dismiss() {
 		/**
 		 * Check: is nonce send?
@@ -73,17 +77,19 @@ class CustomSidebarsAdvertisement extends CustomSidebars {
 	}
 
 	/**
-	 * Adds the additional HTML code to the widgets section.
+	 * Admin header
+	 *
+	 * @since 2.2.0
 	 */
-	public function widget_sidebar_content() {
-		l( __FUNCTION__, __CLASS__ );
-	}
-
-
 	public function init_admin_head() {
 		add_action( 'admin_notices', array( $this, 'admin_notices' ) );
 	}
 
+	/**
+	 * Admin notice!
+	 *
+	 * @since 2.2.0
+	 */
 	public function admin_notices() {
 		$user_id = get_current_user_id();
 		$url = add_query_arg(
