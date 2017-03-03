@@ -6,6 +6,7 @@ Change Log:
 ----------------------------------------------------------------------
 
 2.2.0.0 ( 2017-xx-xx )
+- Fixed a conflicting with other plugins.
 
 2.1.2.0 ( 2017-02-06 )
 - Fixed a problem with empty selectors.
