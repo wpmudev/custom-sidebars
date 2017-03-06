@@ -151,11 +151,6 @@ class CustomSidebars {
 				}
 			}
 
-			add_action(
-				'in_widget_form',
-				array( $this, 'in_widget_form' ),
-				10, 1
-			);
 		}
 
 		/**
@@ -745,48 +740,9 @@ class CustomSidebars {
 		return 1 + self::get_category_level( $cat->category_parent );
 	}
 
-
-	// =========================================================================
-	// == ACTION HOOKS
-	// =========================================================================
-
-
-	/**
-	 * Callback for in_widget_form action
-	 *
-	 * Free version only.
-	 *
-	 * @since 2.0.1
-	 */
-	public function in_widget_form( $widget ) {
-		/* start:free */
-		if ( CSB_IS_PRO ) { return; }
-		?>
-		<input type="hidden" name="csb-buttons" value="0" />
-		<?php if ( ! isset( $_POST['csb-buttons'] ) ) : ?>
-			<div class="csb-pro-layer csb-pro-<?php echo esc_attr( $widget->id ); ?>">
-				<a href="#" class="button csb-clone-button"><?php _e( 'Clone', 'custom-sidebars' ); ?></a>
-				<a href="#" class="button csb-visibility-button"><span class="dashicons dashicons-visibility"></span> <?php _e( 'Visibility', 'custom-sidebars' ); ?></a>
-				<a href="<?php echo esc_url( CustomSidebars::$pro_url ); ?>" target="_blank" class="pro-info">
-				<?php printf(
-					__( 'Pro Version Features', 'custom-sidebars' ),
-					CustomSidebars::$pro_url
-				); ?>
-				</a>
-			</div>
-		<?php
-		endif;
-		/* end:free */
-	}
-
-
 	// =========================================================================
 	// == AJAX FUNCTIONS
 	// =========================================================================
-
-
-
-
 
 	/**
 	 * Output JSON data and die()
