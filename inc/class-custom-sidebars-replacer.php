@@ -37,13 +37,11 @@ class CustomSidebarsReplacer extends CustomSidebars {
 			array( $this, 'register_custom_sidebars' )
 		);
 
-		/* start:pro */
-		// PRO: Support translation via WPML plugin.
+		// Support translation via WPML plugin.
 		add_action(
 			'register_sidebar',
 			array( $this, 'translate_sidebar' )
 		);
-		/* end:pro */
 
 		if ( ! is_admin() ) {
 			// Frontend hooks.
@@ -501,8 +499,7 @@ class CustomSidebarsReplacer extends CustomSidebars {
 			$current_author = $author_object->ID;
 			$expl && do_action( 'cs_explain', 'Type 9: Author Archive (' . $current_author . ')' );
 
-			/* start:pro */
-			// 9.1 Pro Only: First check for specific authors.
+			// 9.1 First check for specific authors.
 			foreach ( $sidebars as $sb_id ) {
 				if ( ! empty( $options['author_archive'][ $current_author ][ $sb_id ] ) ) {
 					$replacements[ $sb_id ] = array(
@@ -513,7 +510,6 @@ class CustomSidebarsReplacer extends CustomSidebars {
 					$replacements_todo -= 1;
 				}
 			}
-			/* end:pro */
 
 			// 9.2 Then check if there is an "Any authors" sidebar
 			if ( $replacements_todo > 0 ) {
@@ -677,7 +673,6 @@ class CustomSidebarsReplacer extends CustomSidebars {
 		return $sidebar;
 	}
 
-	/* start:pro */
 	/**
 	 * Translates a sidebar using WPML right after it was registered.
 	 *
@@ -696,5 +691,4 @@ class CustomSidebarsReplacer extends CustomSidebars {
 
 		$wp_registered_sidebars[ $sidebar['id'] ] = $sidebar;
 	}
-	/* end:pro */
 };

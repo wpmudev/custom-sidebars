@@ -151,7 +151,6 @@
 .widgets-php .widget-liquid-left {
   width: 100%;
 }
-
 .widgets-php .widget-liquid-right {
   padding: 0 0 75px 0;
   margin: -10px -214% 0 0;
@@ -166,12 +165,22 @@
 .widgets-php .widget-liquid-right #widgets-right {
   margin: 20px;
 }
-
+.widgets-php .widget-liquid-right .overview {
+  list-style: none;
+  position: absolute;
+  left: 0;
+  top: 0;
+  width: auto;
+  right: 0;
+  padding-left: 20px;
+  border-left: 1px solid #DDD;
+}
 .widgets-php #wpcontent {
   position: relative;
 }
-.widgets-php #wpcontent .wrap {
+.widgets-php #wpcontent .wrap .cs-wrap {
   margin-right: 68%;
+  padding-top: 1em;
   position: relative;
 }
 .widgets-php #wpcontent #screen-meta-links {
@@ -182,30 +191,77 @@
   position: relative;
   z-index: 10;
 }
-
 .widgets-php #widgets-left {
   margin-right: 0 !important;
 }
-
 .widgets-php #footer {
   background: #fff;
   margin-right: 0px;
   padding-right: 20px;
 }
-
-.widgets-php .wrap h2 {
-  margin-bottom: 10px;
+.widgets-php .custom-sidebars-wp-checkup {
+  border-radius: 4px;
+  -ms-flex-align: center;
+  align-items: center;
+  background: #fff url(../img/heart.png) no-repeat 0 50%;
+  border: 0;
+  display: -ms-flexbox;
+  display: flex;
+  min-height: 100px;
+  padding-left: 135px;
+  -ms-flex-pack: justify;
+  justify-content: space-between;
 }
-
-.widget-liquid-right .overview {
-  list-style: none;
-  position: absolute;
-  left: 0;
-  top: 0;
-  width: auto;
-  right: 0;
-  padding-left: 20px;
-  border-left: 1px solid #DDD;
+.widgets-php .custom-sidebars-wp-checkup form {
+  white-space: nowrap;
+}
+.widgets-php .custom-sidebars-wp-checkup form input {
+  border: 0;
+  border-radius: 4px;
+}
+.widgets-php .custom-sidebars-wp-checkup form input[type=text] {
+  background-color: #f2f2f2;
+  padding: 15px 14px;
+}
+.widgets-php .custom-sidebars-wp-checkup form input[type=submit] {
+  background-color: #17a8e3;
+  color: #fff;
+  padding: 13px 35px;
+  text-transform: uppercase;
+  margin-left: 10px;
+}
+.widgets-php .custom-sidebars-wp-checkup p {
+  font-size: 1.2em;
+}
+.widgets-php .custom-sidebars-wp-checkup p b {
+  color: #840006;
+}
+.widgets-php .sidebars-column-1 .inner .custom-sidebars-upfront {
+  border-radius: 4px;
+  background-color: #f9c200;
+  margin: 55px 0 16px 0;
+}
+.widgets-php .sidebars-column-1 .inner .custom-sidebars-upfront .devman {
+  min-height: 145px;
+  margin-right: -16px;
+  background: url(../img/devman.png) no-repeat 100% 50%;
+  padding: 50px 120px 45px 20px;
+}
+.widgets-php .sidebars-column-1 .inner .custom-sidebars-upfront .devman p {
+  font-size: 1.4em;
+  color: #000;
+  margin-top: 0;
+}
+.widgets-php .sidebars-column-1 .inner .custom-sidebars-upfront .devman p:last-of-type {
+  margin-bottom: 0;
+}
+.widgets-php .sidebars-column-1 .inner .custom-sidebars-upfront .devman .button {
+  background-color: #00a7e6;
+  color: #fff;
+  font-weight: bold;
+  height: auto;
+  padding: 15px 16px;
+  text-transform: uppercase;
 }
 
 #cs-options .cs-action {

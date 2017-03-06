@@ -4,13 +4,13 @@
 require_once CSB_INC_DIR . 'class-custom-sidebars-widgets.php';
 require_once CSB_INC_DIR . 'class-custom-sidebars-editor.php';
 require_once CSB_INC_DIR . 'class-custom-sidebars-replacer.php';
-/* start:pro */
 require_once CSB_INC_DIR . 'class-custom-sidebars-cloning.php';
 require_once CSB_INC_DIR . 'class-custom-sidebars-visibility.php';
 require_once CSB_INC_DIR . 'class-custom-sidebars-export.php';
-/* end:pro */
 require_once CSB_INC_DIR . 'class-custom-sidebars-explain.php';
-
+/* start:free */
+require_once CSB_INC_DIR . 'class-custom-sidebars-advertisement.php';
+/* end:free */
 
 /**
  * Main plugin file.
@@ -85,6 +85,7 @@ class CustomSidebars {
 		 *  Description:  Create and edit custom sidebars in your widget screen!
 		 * -------------------------------------------------------------------------
 		 */
+		lib3()->ui->add( 'core' );
 		lib3()->html->pointer(
 			'wpmudcs1',                               // Internal Pointer-ID
 			'#menu-appearance',                       // Point at
@@ -120,7 +121,6 @@ class CustomSidebars {
 			);
 		} else {
 			// Load javascripts/css files
-			lib3()->ui->add( 'core', 'widgets.php' );
 			lib3()->ui->add( 'select', 'widgets.php' );
 			lib3()->ui->add( CSB_JS_URL . 'cs.min.js', 'widgets.php' );
 			lib3()->ui->add( CSB_CSS_URL . 'cs.css', 'widgets.php' );

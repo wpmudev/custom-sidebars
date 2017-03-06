@@ -1,3 +1,10 @@
+@mixin border-radius($radius) {
+    -webkit-border-radius: $radius;
+    -moz-border-radius: $radius;
+    -ms-border-radius: $radius;
+    border-radius: $radius;
+}
+
 /**
  * =============================================================================
  * == FREE VERSION ONLY
@@ -160,69 +167,135 @@
 	width: 49%;
 }
 
-.widgets-php .widget-liquid-left {
-	width: 100%;
-}
-
-.widgets-php .widget-liquid-right {
-	padding: 0 0 75px 0;
-	margin: -10px -214% 0 0;
-	width: 210%;
-	background: #e4e4e4;
-
-	/* https://app.asana.com/0/11388810124414/15066782299785 */
-	-webkit-user-select: none;
-	-moz-user-select: none;
-	-ms-user-select: none;
-	user-select: none;
-
-	#widgets-right {
-		margin: 20px;
+.widgets-php {
+	.widget-liquid-left {
+		width: 100%;
 	}
-}
 
-.widgets-php #wpcontent {
-	position: relative;
+	.widget-liquid-right {
+		padding: 0 0 75px 0;
+		margin: -10px -214% 0 0;
+		width: 210%;
+		background: #e4e4e4;
 
-	.wrap {
-		margin-right: 68%;
+		/* https://app.asana.com/0/11388810124414/15066782299785 */
+		-webkit-user-select: none;
+		-moz-user-select: none;
+		-ms-user-select: none;
+		user-select: none;
+
+		#widgets-right {
+			margin: 20px;
+		}
+		.overview {
+			list-style: none;
+			position: absolute;
+			left: 0;
+			top: 0;
+			width: auto;
+			right: 0;
+			padding-left: 20px;
+			border-left: 1px solid #DDD;
+		}
+	}
+
+	#wpcontent {
 		position: relative;
+
+		.wrap {
+			.cs-wrap {
+				margin-right: 68%;
+				padding-top: 1em;
+				position: relative;
+			}
+		}
+
+		#screen-meta-links {
+			position: relative;
+			z-index: 10;
+		}
+
+		#screen-meta {
+			position: relative;
+			z-index: 10;
+		}
 	}
 
-	#screen-meta-links {
-		position: relative;
-		z-index: 10;
+	#widgets-left {
+		margin-right: 0 !important;
 	}
 
-	#screen-meta {
-		position: relative;
-		z-index: 10;
+	#footer{
+		background: #fff;
+		margin-right: 0px;
+		padding-right: 20px;
 	}
-}
 
-.widgets-php #widgets-left {
-	margin-right: 0 !important;
-}
-
-.widgets-php #footer{
-	background: #fff;
-	margin-right: 0px;
-	padding-right: 20px;
-}
-
-.widgets-php .wrap h2{
-	margin-bottom: 10px;
-}
-
-.widget-liquid-right .overview {
-	list-style: none;
-	position: absolute;
-	left: 0;
-	top: 0;
-	width: auto;
-	right: 0;
-	padding-left: 20px;
-	border-left: 1px solid #DDD;
+	.custom-sidebars-wp-checkup {
+		@include border-radius( 4px );
+		align-items: center;
+		background: #fff url(../img/heart.png) no-repeat 0 50%;
+		border: 0;
+		display: flex;
+		min-height: 100px;
+		padding-left: 135px;
+		justify-content: space-between;
+		form {
+			white-space: nowrap;
+			input {
+				border: 0;
+				@include border-radius( 4px );
+			}
+			input[type=text] {
+				background-color: #f2f2f2;
+				padding: 15px 14px;
+			}
+			input[type=submit] {
+				background-color: #17a8e3;
+				color: #fff;
+				padding: 13px 35px;
+				text-transform: uppercase;
+				margin-left: 10px;
+			}
+		}
+		p {
+			font-size: 1.2em;
+			b {
+				color: #840006;
+			}
+		}
+	}
+	.sidebars-column-1 {
+		.inner {
+			.custom-sidebars-upfront {
+				@include border-radius( 4px );
+				background-color: #f9c200;
+				margin: 55px 0 16px 0;
+				.devman {
+					min-height: 145px;
+					margin-right: -16px;
+					background: url(../img/devman.png) no-repeat 100% 50%;
+					padding: 50px 120px 45px 20px;
+					p {
+						font-size: 1.4em;
+						color: #000;
+						margin-top: 0;
+						&:last-of-type {
+							margin-bottom: 0;
+						}
+					}
+					.button {
+						background-color: #00a7e6;
+						color: #fff;
+						font-weight: bold;
+						height: auto;
+						padding: 15px 16px;
+						text-transform: uppercase;
+					}
+				}
+			}
+		}
+	}
 }
 
 #cs-options {

@@ -33,20 +33,21 @@ Every part of Custom Sidebars integrates seamlessly with the Widgets menu for si
   <li>Set custom widgets for individual posts and pages, categories, post types, and archives</li>
   <li>Seamless integration with the WordPress Widgets menu</li>
   <li>Works with well-coded themes and doesn't slow down your site</li>
+	<li>Set individual widget visibility – for guests, by user role, by post type, for special pages or categories</li>
+	<li>Author specific sidebars – display a custom sidebar for each of your authors</li>
+	<li>Clone and sync widget settings – quickly edit complex configurations</li>
+	<li>Import and export custom sidebars – backup and share sidebars</li>
 </ul>
 
 Install Custom Sidebars and see for yourself why it's the most popular widget extension plugin available for WordPress with over 200,000 downloads.
 <br>
 </blockquote>
 
-<h4>Need more control?</h4>
+<h4>Need more?</h4>
 <br>
-If you want more targeted controls checkout <a href="https://premium.wpmudev.org/project/custom-sidebars-pro/">Custom Sidebars Pro:</a>
+If you want more checkout <a href="https://premium.wpmudev.org/project/custom-sidebars-pro/">Custom Sidebars Pro:</a>
 <ul>
-	<li>Set individual widget visibility – for guests, by user role, by post type, for special pages or categories</li>
-	<li>Author specific sidebars – display a custom sidebar for each of your authors</li>
-	<li>Clone and sync widget settings – quickly edit complex configurations</li>
-	<li>Import and export custom sidebars – backup and share sidebars</li>
+	<li>Free of ads</li>
 	<li><a href="https://premium.wpmudev.org/support/">24/7 support</a> for all things WordPress</li>
 	<li><a href="http://premium.wpmudev.org/join/">100+ premium plugins, themes, support, updates and services</a> – Including Hummingbird pagespeed booster, Uptime monitoring and security hardening</li>
 </ul>
@@ -75,7 +76,7 @@ There are two ways of installing the plugin:
 
 Once you have the plugin activated you will find all new features inside your "Widgets" screen! There you will be able to create and manage your own sidebars.
 
-Find more functionality and usage information on the [Custom Sidebars Pro page](https://premium.wpmudev.org/project/custom-sidebars-pro/).
+Find more usage information on the [Custom Sidebars Pro page](https://premium.wpmudev.org/project/custom-sidebars-pro/).
 
 [youtube https://www.youtube.com/watch?v=q05O9OFEYHM]
 
@@ -104,10 +105,6 @@ You can create all the sidebars you want, but you need some sidebars of your the
 = It appears that only an Admin can choose to add a sidebar. How can Editors (or any other role) edit customs sidebars? =
 
 Any user that can switch themes, can create sidebars. Switch_themes is the capability needed to manage widgets, so if you can’t edit widgets you can’t create custom sidebars. There are some plugins to give capabilities to the roles, so you can make your author be able to create the sidebars. Try [User role editor](http://wordpress.org/extend/plugins/user-role-editor/)
-
-= Does it have custom taxonomies support? =
-
-This plugin supports showing your posts on all different categories or tags, it's awesome, for more visibility controls try <a href="https://premium.wpmudev.org/project/custom-sidebars-pro/">Custom Sidebars Pro</a>
 
 = Can I use the plugin in commercial projects? =
 
@@ -194,162 +191,162 @@ If you are running a earlier version of WordPress download Custom Sidebars 0.8.2
 * New: Assign a Sidebar to 404 pages via the Sidebar Location dialog.
 
 = 2.0.9.6 =
-*		Fix: In some browsers the "Add sidebar" popup was partially hidden.
-*		Fix: Sometimes the dropdown list of a multiselect list stayed open.
-*		Fix: Plugin now correctly loads the .po files to translate to other languages.
-*		Some other small improvements.
+* Fix: In some browsers the "Add sidebar" popup was partially hidden.
+* Fix: Sometimes the dropdown list of a multiselect list stayed open.
+* Fix: Plugin now correctly loads the .po files to translate to other languages.
+* Some other small improvements.
 
 = 2.0.9.4 =
-*		Fix: For some users the plugin was not loading anymore after updating to 2.0.9.1.
+* Fix: For some users the plugin was not loading anymore after updating to 2.0.9.1.
 
 = 2.0.9.3 =
-*		Fix: Z-index issue in Dashboard where wide widgets where covered by the main-menu.
-*		Fix: Added compatibility for static front-page sidebars with version 2.0.9
+* Fix: Z-index issue in Dashboard where wide widgets where covered by the main-menu.
+* Fix: Added compatibility for static front-page sidebars with version 2.0.9
 
 = 2.0.9.2 =
-*		Fix: Sidebar Locations "Front Page" and "Post Index" now work correctly.
+* Fix: Sidebar Locations "Front Page" and "Post Index" now work correctly.
 
 = 2.0.9.1 =
-*		Fix: Sidebars now support unicode-text in name/description.
-*		Minor: New debugging output that explains why a sidebar/widget is displayed.
+* Fix: Sidebars now support unicode-text in name/description.
+* Minor: New debugging output that explains why a sidebar/widget is displayed.
 
 
 = 2.0.9 =
-*		Fix: Fixed issue with WP sidebar chooser right after creating a new sidebar.
-*		Fix: Fixed various issues when flagging a sidebar s replaceable.
-*		Fix: Plugin will not load in accessibility mode but display a notice instead.
-*		Minor fix: Make code compatible with PHP 5.2.4
-*		Minor fix: Slight improvement of AJAX stability
-*		Minor fix: Plugin now requires capability "edit_theme_options"
+* Fix: Fixed issue with WP sidebar chooser right after creating a new sidebar.
+* Fix: Fixed various issues when flagging a sidebar s replaceable.
+* Fix: Plugin will not load in accessibility mode but display a notice instead.
+* Minor fix: Make code compatible with PHP 5.2.4
+* Minor fix: Slight improvement of AJAX stability
+* Minor fix: Plugin now requires capability "edit_theme_options"
 
 = 2.0.8 =
-*		Fix: Fixed issue with settings not being saved correctly.
+* Fix: Fixed issue with settings not being saved correctly.
 
 = 2.0.7 =
-*		Fix: Fixed issue with some people losing some sidebar settings after update.
+* Fix: Fixed issue with some people losing some sidebar settings after update.
 
 = 2.0.6.1 =
-*		Minor fix: Use WordPress core functions to get URL to JavaScript files.
-*		Minor fix: Refactor function name to avoid misunderstandings.
+* Minor fix: Use WordPress core functions to get URL to JavaScript files.
+* Minor fix: Refactor function name to avoid misunderstandings.
 
 = 2.0.5 =
-*		Fixed: Meta box in post editor did show missing sidebars (e.g. after switching the theme)
-*		Fixed: PHP warning about strict standards.
+* Fixed: Meta box in post editor did show missing sidebars (e.g. after switching the theme)
+* Fixed: PHP warning about strict standards.
 
 = 2.0.3 =
-*		Fixed: JavaScript errors on Windows servers are fixed.
+* Fixed: JavaScript errors on Windows servers are fixed.
 
 = 2.0.2 =
-*		Fixed: Dashboard notification is now removed when clicking "dismiss"
+* Fixed: Dashboard notification is now removed when clicking "dismiss"
 
 = 2.0.1 =
-*		PHP 5.2 compatibility layer.
+* PHP 5.2 compatibility layer.
 
 = 2.0 =
-*		Complete UI redesign!
-*		Many small bugfixes.
+* Complete UI redesign!
+* Many small bugfixes.
 
 = 1.6 =
-*		Added: WordPress filter "cs_sidebar_params" is called before a custom sidebar is registered.
-*		Added: Add setting "CUSTOM_SIDEBAR_DISABLE_METABOXES" in wp-config.php to remove custom-sidebar meta boxes.
+* Added: WordPress filter "cs_sidebar_params" is called before a custom sidebar is registered.
+* Added: Add setting "CUSTOM_SIDEBAR_DISABLE_METABOXES" in wp-config.php to remove custom-sidebar meta boxes.
 
 = 1.5 =
-*		Added: Custom sidebars now works with BuddyPress pages.
+* Added: Custom sidebars now works with BuddyPress pages.
 
 = 1.4 =
-*		Fixed: Individual post sidebar selection when default sidebars for single posts are defined
-*		Fixed: Category sidebars sorting
-*		Added: WP 3.8 new admin design (MP6) support
+* Fixed: Individual post sidebar selection when default sidebars for single posts are defined
+* Fixed: Category sidebars sorting
+* Added: WP 3.8 new admin design (MP6) support
 
 = 1.3.1 =
-*		Fixed: Absolute paths that leaded to the outdated browser error
-*		Fixed: Stripped slashes for the pre/post widget/title fields
+* Fixed: Absolute paths that leaded to the outdated browser error
+* Fixed: Stripped slashes for the pre/post widget/title fields
 
 = 1.3 =
-*		Fixed: A lot of warnings with the PHP debug mode on
-*		Improved: Styles to make them compatible with WP 3.6
-*		Fixed: Creation of sidebars from the custom sidebars option
-*		Fixed: Missing loading icons in the admin area
-*		Removed: Donate banner. Thanks to the ones that have be supporting Custom Sidebar so far.
+* Fixed: A lot of warnings with the PHP debug mode on
+* Improved: Styles to make them compatible with WP 3.6
+* Fixed: Creation of sidebars from the custom sidebars option
+* Fixed: Missing loading icons in the admin area
+* Removed: Donate banner. Thanks to the ones that have be supporting Custom Sidebar so far.
 
 = 1.2 =
-*       Fixed: Searches with no results shows default sidebar.
-*		Added: RTL support (thanks to Dvir http://foxy.co.il/blog/)
-*		Improved: Minor enhancements in the interface to adapt it to wp3.
-*		Added: French and Hebrew translations
-*		Fixed: Slashes are added to the attributes of before and after title/widget
+* Fixed: Searches with no results shows default sidebar.
+* Added: RTL support (thanks to Dvir http://foxy.co.il/blog/)
+* Improved: Minor enhancements in the interface to adapt it to wp3.
+* Added: French and Hebrew translations
+* Fixed: Slashes are added to the attributes of before and after title/widget
 
 = 1.1 =
-*       Fixed: Where lightbox not showing for everybody (Thanks to Robert Utnehmer)
-*       Added: Default sidebar for search results pages
-*       Added: Default sidebar for date archives
-*	Added: Default sidebar for Uncategorized posts
+* Fixed: Where lightbox not showing for everybody (Thanks to Robert Utnehmer)
+* Added: Default sidebar for search results pages
+* Added: Default sidebar for date archives
+* Added: Default sidebar for Uncategorized posts
 
 = 1.0 =
-*       Fixed: Special characters make sidebars undeletable
-*       Added: Child/parent pages support
-*       Improved interface to handle hundreds of sidebars easily
-*       Added: Ajax support for creating an editing sidebars from the widget page
-*       Added: Italian translation
+* Fixed: Special characters make sidebars undeletable
+* Added: Child/parent pages support
+* Improved interface to handle hundreds of sidebars easily
+* Added: Ajax support for creating an editing sidebars from the widget page
+* Added: Italian translation
 
 = 0.8.2 =
-* 	Fixed: Problems with Spanish translation
-*	Added: Dutch and German language files
-* 	Fixed: Some CSS issues with WP3.3
+* Fixed: Problems with Spanish translation
+* Added: Dutch and German language files
+* Fixed: Some CSS issues with WP3.3
 
 = 0.8.1 =
-*	Fixed: You can assign sidebars to your pages again.
+* Fixed: You can assign sidebars to your pages again.
 
 = 0.8 =
-*	Fixed: Category hierarchy is now handled properly by the custom sidebars plugin.
-*	Added: Sidebars can be set for every custom post type post individually.
-*	Improved the way it replace the sidebars.
-*	Improved some text and messages in the back-end.
+* Fixed: Category hierarchy is now handled properly by the custom sidebars plugin.
+* Added: Sidebars can be set for every custom post type post individually.
+* Improved the way it replace the sidebars.
+* Improved some text and messages in the back-end.
 
 = 0.7.1 =
-* 	Fixed: Now the plugin works with themes like Thesis that don't use the the_header hook. Changed the hook where execute the replacement code to wp_head.
-*	Fixed: When a second sidebar is replaced with the originally first sidebar, it is replaced by the first sidebar replacement instead.
+* Fixed: Now the plugin works with themes like Thesis that don't use the the_header hook. Changed the hook where execute the replacement code to wp_head.
+* Fixed: When a second sidebar is replaced with the originally first sidebar, it is replaced by the first sidebar replacement instead.
 
 = 0.7 =
-*	Fixed: Bulk and Quick editing posts and pages reset their custom sidebars.
-*	Changed capability needed to switch_themes, and improved capability management.
+* Fixed: Bulk and Quick editing posts and pages reset their custom sidebars.
+* Changed capability needed to switch_themes, and improved capability management.
 
 = 0.6 =
 
-*	New interface, more user friendly
-*	Added the possibility of customize the main blog page sidebars
-*	Added the sidebars by category, so now you can personalize all the post that belongs to a category easily in a hierarchical way
-*	Added the possibility of customize the authors page sidebars
-*	Added the possibility of customize the tags page sidebars
-*	Added, now it is possible to edit the sidebars names, as well as the pre-widget, post-widget, pre-title, post-title for a sidebar.
-*	Added the possibility of customize the sidebars of posts list by category or post-type.
+* New interface, more user friendly
+* Added the possibility of customize the main blog page sidebars
+* Added the sidebars by category, so now you can personalize all the post that belongs to a category easily in a hierarchical way
+* Added the possibility of customize the authors page sidebars
+* Added the possibility of customize the tags page sidebars
+* Added, now it is possible to edit the sidebars names, as well as the pre-widget, post-widget, pre-title, post-title for a sidebar.
+* Added the possibility of customize the sidebars of posts list by category or post-type.
 
 
 = 0.5 =
 
-*	Fixed a bug that didn't allow to create new bars when every previous bars were deleted.
-*	Fixed a bug introduced in v0.4 that did not allow to assign bars per post-types properly
-*	Added an option to remove all the Custom Sidebars data from the database easily.
+* Fixed a bug that didn't allow to create new bars when every previous bars were deleted.
+* Fixed a bug introduced in v0.4 that did not allow to assign bars per post-types properly
+* Added an option to remove all the Custom Sidebars data from the database easily.
 
 = 0.4 =
 
-*	Empty sidebars will now be shown as empty, instead of displaying the theme's default sidebar.
+* Empty sidebars will now be shown as empty, instead of displaying the theme's default sidebar.
 
 = 0.3 =
 
-*	PHP 4 Compatible (Thanks to Kay Larmer)
-*	Fixed a bug introduced in v0.2 that did not allow to save the replaceable bars options
+* PHP 4 Compatible (Thanks to Kay Larmer)
+* Fixed a bug introduced in v0.2 that did not allow to save the replaceable bars options
 
 = 0.2 =
 
-*	Improved security by adding wp_nonces to the forms.
-*	Added the pt-widget post type to the ignored post types.
-*	Improved i18n files.
-*	Fixed screenshots for documentation.
+* Improved security by adding wp_nonces to the forms.
+* Added the pt-widget post type to the ignored post types.
+* Improved i18n files.
+* Fixed screenshots for documentation.
 
 = 0.1 =
 
-*	Initial release
+* Initial release
 
 == Upgrade Notice ==
 
