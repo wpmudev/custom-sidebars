@@ -5,8 +5,9 @@ Buildtime: BUILDTIME
 Change Log:
 ----------------------------------------------------------------------
 
-2.2.0.0 ( 2017-xx-xx )
+3.0.0.0 ( 2017-03-06 )
 - Fixed a conflicting with other plugins.
+- Improved functionality, free and pro versions has now the same functionality. Only difference is that, the free version include ads.
 
 2.1.2.0 ( 2017-02-06 )
 - Fixed a problem with empty selectors.
