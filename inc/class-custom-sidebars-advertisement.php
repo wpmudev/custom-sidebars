@@ -36,9 +36,16 @@ class CustomSidebarsAdvertisement extends CustomSidebars {
 		if ( ! is_admin() ) {
 			return;
 		}
-		wp_enqueue_script( 'wp-util' );
+		add_action( 'admin_enqueue_scripts', array( $this, 'admin_enqueue_scripts' ) );
 		add_action( 'admin_head-widgets.php', array( $this, 'init_admin_head' ) );
 		add_action( 'wp_ajax_custom_sidebars_advertisement_dismiss', array( $this, 'dismiss' ) );
+	}
+
+	/**
+	 * Enqueue admin scripts
+	 */
+	public function admin_enqueue_scripts() {
+		wp_enqueue_script( 'wp-util' );
 	}
 
 	/**
