@@ -2,8 +2,8 @@
 Contributors: WPMUDEV, marquex, WPMUDEV-Support2, WPMUDEV-Support1, WPMUDEV-Support6, WPMUDEV-Support4, iworks
 Tags: custom sidebars, widgets, sidebars, custom, sidebar, widget, personalize
 Requires at least: 3.3
-Tested up to: 4.7.2
-Stable tag: 2.1.2.0
+Tested up to: 4.7.3
+Stable tag: 3.0.0.1
 
 Display custom widget configurations for every page or post on your site.
 
@@ -110,11 +110,15 @@ Any user that can switch themes, can create sidebars. Switch_themes is the capab
 
 Custom Sidebars has the same license as WordPress, so you can use it wherever you want for free. Yay!
 
-= I like the plugin, but what can I do if my website is based in a WP version older than 3.3 =
-
-If you are running a earlier version of WordPress download Custom Sidebars 0.8.2.
-
 == Changelog ==
+
+= 3.0.0.1 =
+* Fixed a problem with wp_enqueue_script wich was called too early.
+* Fixed a problem with advertising, which should stay close when you close it.
+
+= 3.0.0.0 =
+* Fixed a conflicting with other plugins.
+* Improved functionality, free and pro versions have now the same functionality. The only difference is that the free version includes ads.
 
 = 2.1.2.0 =
 * Fixed a problem with empty selectors.
