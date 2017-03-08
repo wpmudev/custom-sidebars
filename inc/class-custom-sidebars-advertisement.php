@@ -99,40 +99,20 @@ class CustomSidebarsAdvertisement extends CustomSidebars {
 	 */
 	public function admin_notices() {
 		$user_id = get_current_user_id();
-		$url = add_query_arg(
-			array(
-				'utm_source' => 'custom_sidebar_uf_ad',
-				'utm_campaign' => 'custom_sidebar_plugin_uf_ad',
-				'utm_medium' => 'Custom Sidebars Plugin',
-			),
-			'https://premium.wpmudev.org/projects/category/themes/'
-		);
+		$state = get_user_meta( $user_id, $this->dismiss_name, true );
+		if ( ! $state ) {
 ?>
 <script type="text/javascript">
     jQuery(document).on( 'click', '.custom-sidebars-wp-checkup .notice-dismiss', function() {
-    jQuery.ajax({
-        url: ajaxurl,
-        data: {
-            action: 'custom_sidebars_advertisement_dismiss',
-            _wpnonce: '<?php echo wp_create_nonce( $this->nonce_name . $user_id ) ?>',
-            user_id: <?php echo $user_id ?>
-        }
-    })
-})
-    .ready( function() {
-        setTimeout( function() {
-            var template = wp.template('custom-sidebars-upfront');
-            jQuery(".sidebars-column-1 .inner").append( template() );
-        }, 1000);
+        jQuery.ajax({
+            url: ajaxurl,
+            data: {
+            action: '<?php echo esc_attr( $this->dismiss_name ); ?>',
+                _wpnonce: '<?php echo wp_create_nonce( $this->nonce_name . $user_id ) ?>',
+                user_id: <?php echo $user_id ?>
+            }
+        })
     });
-</script>
-<script type="text/html" id="tmpl-custom-sidebars-upfront">
-<div class="custom-sidebars-upfront">
-    <div class="devman">
-        <p><?php esc_html_e( 'Don’t just replace sidebars. Add new sidebars and footers anywhere with Upfront.', 'custom-sidebars' ); ?></p>
-        <p><a class="button" href="<?php echo esc_url( $url ); ?>"><?php esc_html_e( 'get Upfront free', 'custom-sidebars' ); ?></a></p>
-    </div>
-</div>
 </script>
 <div class="notice is-dismissible custom-sidebars-wp-checkup">
 <p><?php _e( '<b>Warning:</b> Some of your plugins may be slowing down your site. Run a free security and performance scan with WP Checkup.', 'custom-sidebars' ); ?></p>
@@ -148,6 +128,33 @@ class CustomSidebarsAdvertisement extends CustomSidebars {
 		<span class="screen-reader-text">Dismiss this notice.</span>
 	</button>
 </div>
+<?php
+		}
+		$url = add_query_arg(
+			array(
+				'utm_source' => 'custom_sidebar_uf_ad',
+				'utm_campaign' => 'custom_sidebar_plugin_uf_ad',
+				'utm_medium' => 'Custom Sidebars Plugin',
+			),
+			'https://premium.wpmudev.org/projects/category/themes/'
+		);
+?>
+<script type="text/javascript">
+    jQuery(document).ready( function() {
+        setTimeout( function() {
+            var template = wp.template('custom-sidebars-upfront');
+            jQuery(".sidebars-column-1 .inner").append( template() );
+        }, 1000);
+    });
+</script>
+<script type="text/html" id="tmpl-custom-sidebars-upfront">
+<div class="custom-sidebars-upfront">
+    <div class="devman">
+        <p><?php esc_html_e( 'Don’t just replace sidebars. Add new sidebars and footers anywhere with Upfront.', 'custom-sidebars' ); ?></p>
+        <p><a class="button" href="<?php echo esc_url( $url ); ?>"><?php esc_html_e( 'get Upfront free', 'custom-sidebars' ); ?></a></p>
+    </div>
+</div>
+</script>
 <?php
 	}
 };
