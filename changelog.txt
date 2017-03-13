@@ -6,7 +6,7 @@ Change Log:
 ----------------------------------------------------------------------
 
 3.0.1.0 ( 2017-xx-xx )
-
+- Fixed UX problem with "plus" icon on visibility options.
 
 3.0.0.1 ( 2017-03-08 )
 - Fixed a problem with wp_enqueue_script wich was called too early.
