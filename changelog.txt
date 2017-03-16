@@ -5,7 +5,8 @@ Buildtime: BUILDTIME
 Change Log:
 ----------------------------------------------------------------------
 
-3.0.1.0 ( 2017-xx-xx )
+3.0.1.0 ( 2017-03-20 )
+- Fixed a problem with link to disable accessibility mode.
 - Fixed UX problem with "plus" icon on visibility options.
 - Show advertising for "WP Checkup" in whole admin area.
 

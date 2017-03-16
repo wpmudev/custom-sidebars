@@ -105,6 +105,7 @@ class CustomSidebars {
 
 		// We don't support accessibility mode. Display a note to the user.
 		if ( true === self::$accessibility_mode ) {
+			$nonce = wp_create_nonce( 'widgets-access' );
 			lib3()->ui->admin_message(
 				sprintf(
 					__(
@@ -114,7 +115,7 @@ class CustomSidebars {
 						'custom-sidebars'
 					),
 					$plugin_title,
-					admin_url( 'widgets.php?widgets-access=off' )
+					admin_url( 'widgets.php?widgets-access=off&_wpnonce='.urlencode( $nonce ) )
 				),
 				'err',
 				'widgets'
@@ -150,7 +151,6 @@ class CustomSidebars {
 					lib3()->ui->admin_message( $msg );
 				}
 			}
-
 		}
 
 		/**
