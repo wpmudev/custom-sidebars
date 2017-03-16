@@ -6,6 +6,7 @@ Change Log:
 ----------------------------------------------------------------------
 
 3.0.1.0 ( 2017-03-20 )
+- Added the "Create custom sidebar to get started." box.
 - Fixed a problem with link to disable accessibility mode.
 - Fixed UX problem with "plus" icon on visibility options.
 - Show advertising for "WP Checkup" in whole admin area.

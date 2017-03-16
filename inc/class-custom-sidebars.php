@@ -157,6 +157,8 @@ class CustomSidebars {
 		* add links on plugin page.
 		*/
 		add_filter( 'plugin_action_links_' . plugin_basename( CSB_PLUGIN ), array( $this, 'add_action_links' ), 10, 4 );
+
+		add_action( 'admin_footer', array( $this, 'print_templates' ) );
 	}
 
 
@@ -910,5 +912,21 @@ class CustomSidebars {
 			__( 'Support', 'custom-sidebars' )
 		);
 		return $actions;
+	}
+
+	/**
+	 * Print JavaScript template.
+	 *
+	 * @since 3.0.1
+	 */
+	public function print_templates() {
+?>
+<script type="text/html" id="tmpl-custom-sidebars-add-new">
+<div class="custom-sidebars-add-new">
+        <p><?php esc_html_e( 'Create a custom sidebar to get started.', 'custom-sidebars' ); ?></p>
+    </div>
+</div>
+</script>
+<?php
 	}
 };

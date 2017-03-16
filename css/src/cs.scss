@@ -227,6 +227,20 @@
 	}
 
 	.sidebars-column-1 {
+		.custom-sidebars-add-new {
+			background-color: #fff;
+			padding: 15px;
+			p {
+				@include border-radius( 4px );
+				border: 3px dashed #ddd;
+				color: #777;
+				cursor: pointer;
+				font-weight: bold;
+				margin: 0;
+				padding: 90px 10px;
+				text-align: center;
+			}
+		}
 		.inner {
 			.custom-sidebars-upfront {
 				@include border-radius( 4px );
