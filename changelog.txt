@@ -7,6 +7,7 @@ Change Log:
 
 3.0.1.0 ( 2017-xx-xx )
 - Fixed UX problem with "plus" icon on visibility options.
+- Show advertising for "WP Checkup" in whole admin area.
 
 3.0.0.1 ( 2017-03-08 )
 - Fixed a problem with wp_enqueue_script wich was called too early.
@@ -14,7 +15,7 @@ Change Log:
 
 3.0.0 ( 2017-03-06 )
 - Fixed a conflicting with other plugins.
-- Improved functionality, free and pro versions have now the same functionality. The only difference is that the free version includes ads.
+- Improved functionality, free and pro versions have now the same functionality. The only difference is that the free version includes advertising (only WordPress admin area).
 
 2.1.2.0 ( 2017-02-06 )
 - Fixed a problem with empty selectors.

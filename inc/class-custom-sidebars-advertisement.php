@@ -5,7 +5,7 @@ add_action( 'cs_init', array( 'CustomSidebarsAdvertisement', 'instance' ) );
 /**
  * Extends the widgets section to add the advertisements.
  *
- * @since 2.2.0
+ * @since 3.0.0
  */
 class CustomSidebarsAdvertisement extends CustomSidebars {
 
@@ -15,7 +15,7 @@ class CustomSidebarsAdvertisement extends CustomSidebars {
 	/**
 	 * Returns the singleton object.
 	 *
-	 * @since  2.2.0
+	 * @since 3.0.0
 	 */
 	public static function instance() {
 		static $instance = null;
@@ -30,14 +30,15 @@ class CustomSidebarsAdvertisement extends CustomSidebars {
 	/**
 	 * Constructor is private -> singleton.
 	 *
-	 * @since  2.2.0
+	 * @since 3.0.0
 	 */
 	private function __construct() {
 		if ( ! is_admin() ) {
 			return;
 		}
 		add_action( 'admin_enqueue_scripts', array( $this, 'admin_enqueue_scripts' ) );
-		add_action( 'admin_head-widgets.php', array( $this, 'init_admin_head' ) );
+		add_action( 'admin_head', array( $this, 'init_admin_head' ) );
+		add_action( 'admin_head-widgets.php', array( $this, 'init_admin_head_in_widgets' ) );
 		add_action( 'wp_ajax_custom_sidebars_advertisement_dismiss', array( $this, 'dismiss' ) );
 	}
 
@@ -51,7 +52,7 @@ class CustomSidebarsAdvertisement extends CustomSidebars {
 	/**
 	 * Save dismiss decision, no more show it.
 	 *
-	 * @since 2.2.0
+	 * @since 3.0.0
 	 */
 	public function dismiss() {
 		/**
@@ -86,21 +87,24 @@ class CustomSidebarsAdvertisement extends CustomSidebars {
 	/**
 	 * Admin header
 	 *
-	 * @since 2.2.0
+	 * @since 3.0.0
 	 */
 	public function init_admin_head() {
-		add_action( 'admin_notices', array( $this, 'admin_notices' ) );
+		add_action( 'admin_notices', array( $this, 'admin_notice_scan' ) );
 	}
 
 	/**
-	 * Admin notice!
+	 * Admin notice scan!
 	 *
-	 * @since 2.2.0
+	 * @since 3.0.1
 	 */
-	public function admin_notices() {
+	public function admin_notice_scan() {
 		$user_id = get_current_user_id();
 		$state = get_user_meta( $user_id, $this->dismiss_name, true );
-		if ( ! $state ) {
+		if ( $state ) {
+			return;
+		}
+		lib3()->ui->add( CSB_CSS_URL . 'cs-scan.css' );
 ?>
 <script type="text/javascript">
     jQuery(document).on( 'click', '.custom-sidebars-wp-checkup .notice-dismiss', function() {
@@ -129,7 +133,23 @@ class CustomSidebarsAdvertisement extends CustomSidebars {
 	</button>
 </div>
 <?php
-		}
+	}
+
+	/**
+	 * Admin header
+	 *
+	 * @since 3.0.1
+	 */
+	public function init_admin_head_in_widgets() {
+		add_action( 'admin_notices', array( $this, 'admin_notices' ) );
+	}
+
+	/**
+	 * Admin notice!
+	 *
+	 * @since 3.0.0
+	 */
+	public function admin_notices() {
 		$url = add_query_arg(
 			array(
 				'utm_source' => 'custom_sidebar_uf_ad',
