@@ -31,8 +31,9 @@ module.exports = function( grunt ) {
 		// SASS files to process. Resulting CSS files will be minified as well.
 		css_files_compile: {
 			'css/cs-cloning.css':    'css/src/cs-cloning.scss',
-			'css/cs-visibility.css': 'css/src/cs-visibility.scss',
-			'css/cs.css':            'css/src/cs.scss'
+			'css/cs.css':            'css/src/cs.scss',
+			'css/cs-scan.css':       'css/src/cs-scan.scss',
+			'css/cs-visibility.css': 'css/src/cs-visibility.scss'
 		},
 
 		// BUILD branches.
@@ -46,7 +47,9 @@ module.exports = function( grunt ) {
 				'./package.json',
 				'./inc/class-custom-sidebars-advertisement.php',
 				'./img/heart.png',
-				'./img/devman.png'
+				'./img/devman.png',
+				'./css/cs-scan.css',
+				'./css/cs-scan-min.css'
 			],
 			exclude_free: [
 				'./changelog.txt',
