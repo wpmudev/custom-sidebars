@@ -49,7 +49,7 @@ module.exports = function( grunt ) {
 				'./img/heart.png',
 				'./img/devman.png',
 				'./css/cs-scan.css',
-				'./css/cs-scan-min.css'
+				'./css/cs-scan.min.css'
 			],
 			exclude_free: [
 				'./changelog.txt',
