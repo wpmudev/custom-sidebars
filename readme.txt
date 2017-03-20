@@ -120,6 +120,12 @@ If you are running a earlier version of WordPress download Custom Sidebars 0.8.2
 
 == Changelog ==
 
+= 3.0.1.0 =
+* Added the "Create custom sidebar to get started." box.
+* Fixed a problem with link to disable accessibility mode.
+* Fixed UX problem with "plus" icon on visibility options.
+* Show advertising for "WP Checkup" in whole admin area.
+
 = 3.0.0.1 =
 * Fixed a problem with wp_enqueue_script wich was called too early.
 * Fixed a problem with advertising, which should stay close when you close it.
