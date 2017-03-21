@@ -3,7 +3,7 @@ Contributors: WPMUDEV, marquex, WPMUDEV-Support2, WPMUDEV-Support1, WPMUDEV-Supp
 Tags: sidebar, widget, footer, custom, flexible layout, dynamic widgets, manage sidebars, replace widgets, custom widget area
 Requires at least: 3.3
 Tested up to: 4.7.3
-Stable tag: 3.0.1
+Stable tag: 3.0.1.0
 
 Flexible sidebars for custom widget configurations on every page, post and custom post type on your site.
 
@@ -124,7 +124,7 @@ If you are running a earlier version of WordPress download Custom Sidebars 0.8.2
 * Fixed compatibility issue with uBlock Origin and AdBlock Plus.
 * Fixed getting started box not appearing.
 
-= 3.0.1 =
+= 3.0.1.0 =
 * Added the "Create custom sidebar to get started." box.
 * Fixed a problem with the link to disable accessibility mode.
 * Fixed UX problem with "plus" icon on visibility options.
