@@ -6,7 +6,7 @@ Change Log:
 ----------------------------------------------------------------------
 
 3.0.2.0 ( 2017-03-20 )
-- Fixed compatibility issue with AdBlock.
+- Fixed compatibility issue with uBlock Origin and AdBlock Plus.
 - Fixed getting started box not appearing.
 
 3.0.1.0 ( 2017-03-20 )
