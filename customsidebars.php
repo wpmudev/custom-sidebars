@@ -52,7 +52,12 @@ function inc_sidebars_init() {
 	$plugin_url = plugin_dir_url( __FILE__ );
 
 	define( 'CSB_PLUGIN', __FILE__ );
-	define( 'CSB_IS_PRO', /* start:pro */true,/* end:pro */false );
+	/* start:pro */
+	define( 'CSB_IS_PRO', true );
+	/* end:pro */
+	/* start:free */
+	define( 'CSB_IS_PRO', false );
+	/* end:free */
 	define( 'CSB_LANG_DIR', $plugin_dir_rel . '/lang/' );
 	define( 'CSB_VIEWS_DIR', $plugin_dir . '/views/' );
 	define( 'CSB_INC_DIR', $plugin_dir . '/inc/' );
