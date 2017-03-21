@@ -5,7 +5,7 @@ Buildtime: BUILDTIME
 Change Log:
 ----------------------------------------------------------------------
 
-3.0.2.0 ( 2017-03-20 )
+3.0.2.0 ( 2017-03-21 )
 - Fixed compatibility issue with uBlock Origin and AdBlock Plus.
 - Fixed getting started box not appearing.
 

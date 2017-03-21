@@ -36,17 +36,9 @@ class CustomSidebarsCheckupNotification extends CustomSidebars {
 		if ( ! is_admin() ) {
 			return;
 		}
-		add_action( 'admin_enqueue_scripts', array( $this, 'admin_enqueue_scripts' ) );
 		add_action( 'admin_head', array( $this, 'init_admin_head' ) );
 		add_action( 'admin_head-widgets.php', array( $this, 'init_admin_head_in_widgets' ) );
 		add_action( 'wp_ajax_custom_sidebars_checkup_notification_dismiss', array( $this, 'dismiss' ) );
-	}
-
-	/**
-	 * Enqueue admin scripts
-	 */
-	public function admin_enqueue_scripts() {
-		wp_enqueue_script( 'wp-util' );
 	}
 
 	/**
@@ -150,6 +142,7 @@ class CustomSidebarsCheckupNotification extends CustomSidebars {
 	 * @since 3.0.0
 	 */
 	public function admin_notices() {
+		wp_enqueue_script( 'wp-util' );
 		$url = add_query_arg(
 			array(
 				'utm_source' => 'custom_sidebar_uf_ad',
