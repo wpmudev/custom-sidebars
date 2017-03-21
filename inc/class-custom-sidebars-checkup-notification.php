@@ -1,16 +1,16 @@
 <?php
 
-add_action( 'cs_init', array( 'CustomSidebarsAdvertisement', 'instance' ) );
+add_action( 'cs_init', array( 'CustomSidebarsCheckupNotification', 'instance' ) );
 
 /**
  * Extends the widgets section to add the advertisements.
  *
  * @since 3.0.0
  */
-class CustomSidebarsAdvertisement extends CustomSidebars {
+class CustomSidebarsCheckupNotification extends CustomSidebars {
 
-	private $dismiss_name = 'custom_sidebars_advertisement_dismiss';
-	private $nonce_name = 'custom_sidebars_advertisement_nonce';
+	private $dismiss_name = 'custom_sidebars_checkup_notification_dismiss';
+	private $nonce_name = 'custom_sidebars_checkup_notification_nonce';
 
 	/**
 	 * Returns the singleton object.
@@ -21,7 +21,7 @@ class CustomSidebarsAdvertisement extends CustomSidebars {
 		static $instance = null;
 
 		if ( null === $instance ) {
-			$instance = new CustomSidebarsAdvertisement();
+			$instance = new CustomSidebarsCheckupNotification();
 		}
 
 		return $instance;
@@ -39,7 +39,7 @@ class CustomSidebarsAdvertisement extends CustomSidebars {
 		add_action( 'admin_enqueue_scripts', array( $this, 'admin_enqueue_scripts' ) );
 		add_action( 'admin_head', array( $this, 'init_admin_head' ) );
 		add_action( 'admin_head-widgets.php', array( $this, 'init_admin_head_in_widgets' ) );
-		add_action( 'wp_ajax_custom_sidebars_advertisement_dismiss', array( $this, 'dismiss' ) );
+		add_action( 'wp_ajax_custom_sidebars_checkup_notification_dismiss', array( $this, 'dismiss' ) );
 	}
 
 	/**
