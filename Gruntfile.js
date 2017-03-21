@@ -45,7 +45,7 @@ module.exports = function( grunt ) {
 				'./screenshot-*',
 				'./Gruntfile.js',
 				'./package.json',
-				'./inc/class-custom-sidebars-advertisement.php',
+				'./inc/class-custom-sidebars-checkup-notification.php',
 				'./img/heart.png',
 				'./img/devman.png',
 				'./css/cs-scan.css',
