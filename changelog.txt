@@ -5,7 +5,8 @@ Buildtime: BUILDTIME
 Change Log:
 ----------------------------------------------------------------------
 
-3.0.2.0 ( 2017-04-03 )
+3.0.1.1 ( 2017-03-20 )
+- Fixed compatibility issue with AdBlock.
 
 3.0.1.0 ( 2017-03-20 )
 - Added the "Create custom sidebar to get started." box.
