@@ -919,14 +919,17 @@ class CustomSidebars {
 	 *
 	 * @since 3.0.1
 	 */
-	public function print_templates() {
-?>
-<script type="text/html" id="tmpl-custom-sidebars-add-new">
-<div class="custom-sidebars-add-new">
-        <p><?php esc_html_e( 'Create a custom sidebar to get started.', 'custom-sidebars' ); ?></p>
-    </div>
-</div>
-</script>
-<?php
-	}
+	public function print_templates() { ?>
+	
+	<script type="text/html" id="tmpl-custom-sidebars-add-new">
+		
+		<div class="custom-sidebars-add-new">
+			
+			<p><?php esc_html_e( 'Create a custom sidebar to get started.', 'custom-sidebars' ); ?></p>
+			
+		</div>
+		
+	</script>
+	
+	<?php }
 };
