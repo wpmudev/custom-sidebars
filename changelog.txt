@@ -5,7 +5,10 @@ Buildtime: BUILDTIME
 Change Log:
 ----------------------------------------------------------------------
 
-3.0.2.0 ( 2017-03-21 )
+3.0.3 ( 2017-03-22 )
+- Removed WP Checkup banner.
+
+3.0.2 ( 2017-03-21 )
 - Fixed compatibility issue with uBlock Origin and AdBlock Plus.
 - Fixed getting started box not appearing.
 

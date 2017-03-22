@@ -120,6 +120,9 @@ If you are running a earlier version of WordPress download Custom Sidebars 0.8.2
 
 == Changelog ==
 
+= 3.0.3 =
+* Removed WP Checkup banner.
+
 = 3.0.2 =
 * Fixed compatibility issue with uBlock Origin and AdBlock Plus.
 * Fixed getting started box not appearing.

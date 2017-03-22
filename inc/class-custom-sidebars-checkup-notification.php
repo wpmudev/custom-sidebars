@@ -36,7 +36,7 @@ class CustomSidebarsCheckupNotification extends CustomSidebars {
 		if ( ! is_admin() ) {
 			return;
 		}
-		add_action( 'admin_head', array( $this, 'init_admin_head' ) );
+		//add_action( 'admin_head', array( $this, 'init_admin_head' ) );
 		add_action( 'admin_head-widgets.php', array( $this, 'init_admin_head_in_widgets' ) );
 		add_action( 'wp_ajax_custom_sidebars_checkup_notification_dismiss', array( $this, 'dismiss' ) );
 	}
