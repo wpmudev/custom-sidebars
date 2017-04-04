@@ -480,8 +480,7 @@ class CustomSidebarsVisibility extends CustomSidebars {
             multiple="multiple"
         >
 	<?php
-	$terms = get_terms( array(
-		'taxononmy'  => $tax_item->name,
+	$terms = get_terms( $tax_item->name, array(
 		'hide_empty' => false,
 	) );
 	foreach ( $terms as $item ) {
