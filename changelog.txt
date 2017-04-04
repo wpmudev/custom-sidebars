@@ -5,6 +5,10 @@ Buildtime: BUILDTIME
 Change Log:
 ----------------------------------------------------------------------
 
+3.0.4 ( 2017-04-xx )
+- Fixed fetching posts.
+- Fixed a problem on the Customizer page - removed clone option.
+
 3.0.3 ( 2017-03-22 )
 - Removed WP Checkup banner.
 
