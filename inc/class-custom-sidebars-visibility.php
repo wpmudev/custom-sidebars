@@ -446,7 +446,7 @@ class CustomSidebarsVisibility extends CustomSidebars {
 		<?php /* SPECIFIC TAXONOMY */ ?>
 		<?php
 		foreach ( $tax_list as $tax_item ) {
-
+//var_dump($tax_item->name);
 			$row_id = 'tax-' . $tax_item->name;
 			$ajax_url = admin_url( 'admin-ajax.php?action=cs-ajax&do=visibility&tag=' . $tax_item->name );
 			$sel = array();
@@ -480,7 +480,10 @@ class CustomSidebarsVisibility extends CustomSidebars {
             multiple="multiple"
         >
 	<?php
-	$terms = get_terms( $tax_item->name );
+	$terms = get_terms( array(
+		'taxononmy'  => $tax_item->name,
+		'hide_empty' => false,
+	) );
 	foreach ( $terms as $item ) {
 ?>
 					<?php $is_selected = in_array( $item->term_id, $sel ); ?>
