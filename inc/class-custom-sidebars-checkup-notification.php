@@ -188,8 +188,7 @@ class CustomSidebarsCheckupNotification extends CustomSidebars {
 		<p><?php esc_html_e( 'Free performance, security and SEO report', 'custom-sidebars' ); ?></p>
 		<form method="get" action="https://premium.wpmudev.org/wp-checkup/">
 			<input type="hidden" name="external-url" value="1" />
-			<input type="text" name="the-url" value="<?php echo esc_url( get_option( 'home' ) ); ?>" />
-			<input type="submit" value="<?php esc_attr_e( 'Go', 'custom-sidebars' ); ?>" />
+			<input type="text" name="the-url" value="<?php echo esc_url( get_option( 'home' ) ); ?>" /><input type="submit" value="<?php esc_attr_e( 'Go', 'custom-sidebars' ); ?>" />
 			<input type="hidden" name="utm_source" value="custom_sidebar_ad" />
 			<input type="hidden" name="utm_campaign" value="custom_sidebar_plugin" />
 			<input type="hidden" name="utm_medium" value="Custom Sidebars Plugin" />
