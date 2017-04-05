@@ -671,8 +671,10 @@ body.appearance_page_customsidebars #poststuff h2 {
 	&.widgets-php {
 		#wpcontent {
 			.wrap {
-				margin-right: 2px;
-				margin-left: 68%;
+				.cs-wrap {
+					margin-right: 2px;
+					margin-left: 68%;
+				}
 			}
 		}
 		.widget-liquid-right {
