@@ -143,6 +143,63 @@ class CustomSidebarsCheckupNotification extends CustomSidebars {
 	 */
 	public function admin_notices() {
 		wp_enqueue_script( 'wp-util' );
+		$this->show_box( 'checkup' );
+	}
+
+	/**
+	 * Show box.
+	 *
+	 * @since 3.0.4
+	 *
+	 * @param string $template_name Template name.
+	 */
+	private function show_box( $template_name ) {
+		$method = sprintf( 'show_box_%s', $template_name );
+		if ( ! method_exists( $this, $method ) ) {
+			return;
+		}
+?>
+<script type="text/javascript">
+	jQuery(document).ready( function() {
+		setTimeout( function() {
+			var template = wp.template('custom-sidebars-<?php echo $template_name; ?>');
+			jQuery(".sidebars-column-1 .inner").append( template() );
+		}, 1000);
+	});
+</script>
+<script type="text/html" id="tmpl-custom-sidebars-<?php echo $template_name; ?>">
+<?php
+		$this->$method();
+?>
+</script>
+<?php
+	}
+
+	/**
+	 * Show *Run site health check* box.
+	 *
+	 * @since 3.0.4
+	 */
+	private function show_box_checkup() {
+?>
+<div class="custom-sidebars-box custom-sidebars-checkup">
+	<div class="cs-inner">
+		<h4><?php esc_html_e( 'Run site health check', 'custom-sidebars' ); ?></h4>
+		<p><?php esc_html_e( 'Free performance, security and SEO report', 'custom-sidebars' ); ?></p>
+		<form method="get" action="https://premium.wpmudev.org/wp-checkup/">
+			<input type="hidden" name="external-url" value="1" />
+			<input type="text" name="the-url" value="<?php echo esc_url( get_option( 'home' ) ); ?>" />
+			<input type="submit" value="<?php esc_attr_e( 'Go', 'custom-sidebars' ); ?>" />
+			<input type="hidden" name="utm_source" value="custom_sidebar_ad" />
+			<input type="hidden" name="utm_campaign" value="custom_sidebar_plugin" />
+			<input type="hidden" name="utm_medium" value="Custom Sidebars Plugin" />
+		</form>
+	</div>
+</div>
+<?php
+	}
+
+	private function show_box_upfront() {
 		$url = add_query_arg(
 			array(
 				'utm_source' => 'custom_sidebar_uf_ad',
@@ -150,67 +207,13 @@ class CustomSidebarsCheckupNotification extends CustomSidebars {
 				'utm_medium' => 'Custom Sidebars Plugin',
 			),
 			'https://premium.wpmudev.org/projects/category/themes/'
-        );
-        $this->show_box('checkup');
-    }
-
-    /**
-     * Show box.
-     *
-     * @since 3.0.4
-     *
-     * @param string $template_name Template name.
-     */
-    private function show_box( $template_name ) {
-        $method = sprintf( 'show_box_%s', $template_name );
-        if ( ! method_exists( $this, $method ) ) {
-            return;
-        }
-?>
-<script type="text/javascript">
-    jQuery(document).ready( function() {
-        setTimeout( function() {
-            var template = wp.template('custom-sidebars-<?php echo $template_name; ?>');
-            jQuery(".sidebars-column-1 .inner").append( template() );
-        }, 1000);
-    });
-</script>
-<script type="text/html" id="tmpl-custom-sidebars-<?php echo $template_name; ?>">
-<?php
-        $this->$method();
-?>
-</script>
-<?php
-    }
-
-    /**
-     * Show *Run site health check* box.
-     *
-     * @since 3.0.4
-     */
-    private function show_box_checkup() {
-?>
-<div class="custom-sidebars-box custom-sidebars-checkup">
-    <div class="inner">
-        <p><?php esc_html_e( 'Don’t just replace sidebars. Add new sidebars and footers anywhere with checkup.', 'custom-sidebars' ); ?></p>
-        <p><a class="button" href="<?php echo esc_url( $url ); ?>"><?php esc_html_e( 'get checkup free', 'custom-sidebars' ); ?></a></p>
-
-*Run site health check*
-Free performance, security and SEO report
-[web address]
-Run Free Checkup
-    </div>
-</div>
-<?php
-    }
-
-    private function show_box_upfront() {
+		);
 ?>
 <div class="custom-sidebars-box custom-sidebars-upfront">
-    <div class="inner">
-        <p><?php esc_html_e( 'Don’t just replace sidebars. Add new sidebars and footers anywhere with Upfront.', 'custom-sidebars' ); ?></p>
-        <p><a class="button" href="<?php echo esc_url( $url ); ?>"><?php esc_html_e( 'get Upfront free', 'custom-sidebars' ); ?></a></p>
-    </div>
+	<div class="cs-inner">
+		<p><?php esc_html_e( 'Don’t just replace sidebars. Add new sidebars and footers anywhere with Upfront.', 'custom-sidebars' ); ?></p>
+		<p><a class="button" href="<?php echo esc_url( $url ); ?>"><?php esc_html_e( 'get Upfront free', 'custom-sidebars' ); ?></a></p>
+	</div>
 </div>
 <?php
 	}

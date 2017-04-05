@@ -244,11 +244,11 @@
 		.inner {
 			.custom-sidebars-box {
 				@include border-radius( 4px );
-            }
+				margin: 55px 0 16px 0;
+			}
 			.custom-sidebars-upfront {
 				background-color: #f9c200;
-				margin: 55px 0 16px 0;
-				.inner {
+				.cs-inner {
 					min-height: 145px;
 					margin-right: -16px;
 					background: url(../img/devman.png) no-repeat 100% 50%;
@@ -271,11 +271,29 @@
 					}
 				}
 			}
-            .custom-sidebars-checkup {
-                background-color: #fff;
-                .inner {
-                }
-            }
+			.custom-sidebars-checkup {
+				background-color: #fff;
+				.cs-inner {
+					min-height: 227px;
+					background: url(../img/hand-with-heart.png) no-repeat 100% 100%;
+					h4, p, form {
+						margin: 0;
+						padding: 0 30px 0 30px;
+					}
+					h4 {
+						color: #222;
+						padding-top: 50px;
+						font-size: 1.1em;
+					}
+					p {
+						color: #c1272c;
+						padding-top: 16px;
+					}
+					form {
+						padding-top: 24px;
+					}
+				}
+			}
 		}
 	}
 }

@@ -215,26 +215,26 @@
 }
 .widgets-php .sidebars-column-1 .inner .custom-sidebars-box {
   border-radius: 4px;
+  margin: 55px 0 16px 0;
 }
 .widgets-php .sidebars-column-1 .inner .custom-sidebars-upfront {
   background-color: #f9c200;
-  margin: 55px 0 16px 0;
 }
-.widgets-php .sidebars-column-1 .inner .custom-sidebars-upfront .inner {
+.widgets-php .sidebars-column-1 .inner .custom-sidebars-upfront .cs-inner {
   min-height: 145px;
   margin-right: -16px;
   background: url(../img/devman.png) no-repeat 100% 50%;
   padding: 50px 120px 45px 20px;
 }
-.widgets-php .sidebars-column-1 .inner .custom-sidebars-upfront .inner p {
+.widgets-php .sidebars-column-1 .inner .custom-sidebars-upfront .cs-inner p {
   font-size: 1.4em;
   color: #000;
   margin-top: 0;
 }
-.widgets-php .sidebars-column-1 .inner .custom-sidebars-upfront .inner p:last-of-type {
+.widgets-php .sidebars-column-1 .inner .custom-sidebars-upfront .cs-inner p:last-of-type {
   margin-bottom: 0;
 }
-.widgets-php .sidebars-column-1 .inner .custom-sidebars-upfront .inner .button {
+.widgets-php .sidebars-column-1 .inner .custom-sidebars-upfront .cs-inner .button {
   background-color: #00a7e6;
   color: #fff;
   font-weight: bold;
@@ -244,6 +244,26 @@
 }
 .widgets-php .sidebars-column-1 .inner .custom-sidebars-checkup {
   background-color: #fff;
+}
+.widgets-php .sidebars-column-1 .inner .custom-sidebars-checkup .cs-inner {
+  min-height: 227px;
+  background: url(../img/hand-with-heart.png) no-repeat 100% 100%;
+}
+.widgets-php .sidebars-column-1 .inner .custom-sidebars-checkup .cs-inner h4, .widgets-php .sidebars-column-1 .inner .custom-sidebars-checkup .cs-inner p, .widgets-php .sidebars-column-1 .inner .custom-sidebars-checkup .cs-inner form {
+  margin: 0;
+  padding: 0 30px 0 30px;
+}
+.widgets-php .sidebars-column-1 .inner .custom-sidebars-checkup .cs-inner h4 {
+  color: #222;
+  padding-top: 50px;
+  font-size: 1.1em;
+}
+.widgets-php .sidebars-column-1 .inner .custom-sidebars-checkup .cs-inner p {
+  color: #c1272c;
+  padding-top: 16px;
+}
+.widgets-php .sidebars-column-1 .inner .custom-sidebars-checkup .cs-inner form {
+  padding-top: 24px;
 }
 
 #cs-options .cs-action {
