@@ -1,4 +1,4 @@
-/*! Custom Sidebars - v3.0.2
+/*! Custom Sidebars - v3.0.4
  * https://premium.wpmudev.org/project/custom-sidebars-pro/
  * Copyright (c) 2017; * Licensed GPLv2+ */
 /*global window:false */
@@ -595,6 +595,7 @@ window.csSidebars = null;
 					} else if ( 'insert' === resp.action ) {
 						// Insert a brand new sidebar container.
 						csSidebars.insertSidebar( resp.data );
+						$('.cs-wrap .custom-sidebars-add-new').detach();
 					}
 				} else {
 					msg.type = 'err';
@@ -895,6 +896,12 @@ window.csSidebars = null;
 
 					// Remove object from internal collection.
 					csSidebars.remove( id );
+
+					// show "Create a custom sidebar to get started." if it is
+					// needed.
+					if ( "delete" === resp.action ) {
+						window.csSidebars.showGetStartedBox();
+					}
 				} else {
 					msg.type = 'err';
 				}
@@ -1403,6 +1410,23 @@ window.csSidebars = null;
 				sb = wrapper.find( '.widgets-sortables:first' ),
 				id = sb.attr( 'id' );
 			return id;
+		},
+
+		/**
+		 * =====================================================================
+		 * Show "Create a custom sidebar to get started." box.
+		 *
+		 * @since  3.0.4
+		 */
+		showGetStartedBox: function() {
+			if ( 0 === $(".sidebars-column-1 .inner .widgets-holder-wrap").length ) {
+				var template = wp.template('custom-sidebars-new');
+				$(".sidebars-column-1 .inner").before( template() );
+				$(".custom-sidebars-new").on( "click", function() {
+					$( "button.btn-create-sidebar" ).click();
+					$(this).detach();
+				});
+			}
 		}
 	};
 
@@ -1423,14 +1447,7 @@ window.csSidebars = null;
 	 */
 	jQuery(document).ready( function($) {
 		window.setTimeout( function() {
-			if ( 0 === $(".sidebars-column-1 .inner .widgets-holder-wrap").length ) {
-				var template = wp.template('custom-sidebars-new');
-				$(".sidebars-column-1 .inner").before( template() );
-				$(".custom-sidebars-new").on( "click", function() {
-					$( "button.btn-create-sidebar" ).click();
-					$(this).detach();
-				});
-			}
+            window.csSidebars.showGetStartedBox();
 		}, 1000);
 	});
 })(jQuery);
