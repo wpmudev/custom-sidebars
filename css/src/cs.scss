@@ -242,11 +242,13 @@
 			}
 		}
 		.inner {
-			.custom-sidebars-upfront {
+			.custom-sidebars-box {
 				@include border-radius( 4px );
+            }
+			.custom-sidebars-upfront {
 				background-color: #f9c200;
 				margin: 55px 0 16px 0;
-				.devman {
+				.inner {
 					min-height: 145px;
 					margin-right: -16px;
 					background: url(../img/devman.png) no-repeat 100% 50%;
@@ -269,6 +271,11 @@
 					}
 				}
 			}
+            .custom-sidebars-checkup {
+                background-color: #fff;
+                .inner {
+                }
+            }
 		}
 	}
 }

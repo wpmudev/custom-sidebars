@@ -150,24 +150,68 @@ class CustomSidebarsCheckupNotification extends CustomSidebars {
 				'utm_medium' => 'Custom Sidebars Plugin',
 			),
 			'https://premium.wpmudev.org/projects/category/themes/'
-		);
+        );
+        $this->show_box('checkup');
+    }
+
+    /**
+     * Show box.
+     *
+     * @since 3.0.4
+     *
+     * @param string $template_name Template name.
+     */
+    private function show_box( $template_name ) {
+        $method = sprintf( 'show_box_%s', $template_name );
+        if ( ! method_exists( $this, $method ) ) {
+            return;
+        }
 ?>
 <script type="text/javascript">
     jQuery(document).ready( function() {
         setTimeout( function() {
-            var template = wp.template('custom-sidebars-upfront');
+            var template = wp.template('custom-sidebars-<?php echo $template_name; ?>');
             jQuery(".sidebars-column-1 .inner").append( template() );
         }, 1000);
     });
 </script>
-<script type="text/html" id="tmpl-custom-sidebars-upfront">
-<div class="custom-sidebars-upfront">
-    <div class="devman">
+<script type="text/html" id="tmpl-custom-sidebars-<?php echo $template_name; ?>">
+<?php
+        $this->$method();
+?>
+</script>
+<?php
+    }
+
+    /**
+     * Show *Run site health check* box.
+     *
+     * @since 3.0.4
+     */
+    private function show_box_checkup() {
+?>
+<div class="custom-sidebars-box custom-sidebars-checkup">
+    <div class="inner">
+        <p><?php esc_html_e( 'Don’t just replace sidebars. Add new sidebars and footers anywhere with checkup.', 'custom-sidebars' ); ?></p>
+        <p><a class="button" href="<?php echo esc_url( $url ); ?>"><?php esc_html_e( 'get checkup free', 'custom-sidebars' ); ?></a></p>
+
+*Run site health check*
+Free performance, security and SEO report
+[web address]
+Run Free Checkup
+    </div>
+</div>
+<?php
+    }
+
+    private function show_box_upfront() {
+?>
+<div class="custom-sidebars-box custom-sidebars-upfront">
+    <div class="inner">
         <p><?php esc_html_e( 'Don’t just replace sidebars. Add new sidebars and footers anywhere with Upfront.', 'custom-sidebars' ); ?></p>
         <p><a class="button" href="<?php echo esc_url( $url ); ?>"><?php esc_html_e( 'get Upfront free', 'custom-sidebars' ); ?></a></p>
     </div>
 </div>
-</script>
 <?php
 	}
 };
