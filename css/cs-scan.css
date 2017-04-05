@@ -1,7 +1,7 @@
 .custom-sidebars-wp-checkup {
   border-radius: 4px;
   -ms-flex-align: center;
-      align-items: center;
+  align-items: center;
   background: #fff url(../img/heart.png) no-repeat 0 50%;
   border: 0;
   display: -ms-flexbox;
@@ -9,7 +9,7 @@
   min-height: 100px;
   padding-left: 135px;
   -ms-flex-pack: justify;
-      justify-content: space-between;
+  justify-content: space-between;
 }
 .custom-sidebars-wp-checkup form {
   white-space: nowrap;
