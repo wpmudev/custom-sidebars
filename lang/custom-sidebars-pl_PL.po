@@ -2,253 +2,270 @@
 # This file is distributed under the same license as the Plugins - Custom Sidebars - Development (trunk) package.
 msgid ""
 msgstr ""
+"Project-Id-Version: Plugins - Custom Sidebars - Development (trunk)\n"
+"Report-Msgid-Bugs-To: https://wordpress.org/support/plugin/customsidebars\n"
+"POT-Creation-Date: 2017-04-06 11:00:27+00:00\n"
 "PO-Revision-Date: 2016-12-29 10:30:08+0000\n"
+"Language: pl\n"
 "MIME-Version: 1.0\n"
 "Content-Type: text/plain; charset=UTF-8\n"
 "Content-Transfer-Encoding: 8bit\n"
-"Plural-Forms: nplurals=3; plural=(n==1 ? 0 : n%10>=2 && n%10<=4 && (n%100<10 || n%100>=20) ? 1 : 2);\n"
+"Plural-Forms: nplurals=3; plural=(n==1 ? 0 : n%10>=2 && n%10<=4 && (n%100<10 "
+"|| n%100>=20) ? 1 : 2);\n"
 "X-Generator: GlotPress/2.4.0-alpha\n"
-"Language: pl\n"
-"Project-Id-Version: Plugins - Custom Sidebars - Development (trunk)\n"
 
-#. Author URI of the plugin/theme
-msgid "http://premium.wpmudev.org/"
-msgstr "http://premium.wpmudev.org/"
+#: inc/class-custom-sidebars-checkup-notification.php:114
+msgid ""
+"<b>Warning:</b> Some of your plugins may be slowing down your site. Run a "
+"free security and performance scan with WP Checkup."
+msgstr ""
 
-#. Author of the plugin/theme
-msgid "WPMU DEV"
-msgstr "WPMU DEV"
+#: inc/class-custom-sidebars-checkup-notification.php:118
+msgid "Scan"
+msgstr "Skanuj"
 
-#. Description of the plugin/theme
-msgid "Allows you to create widgetized areas and custom sidebars. Replace whole sidebars or single widgets for specific posts and pages."
-msgstr "Pozwala na tworzenie stref z widgetami oraz niestandardowe paski boczne. Można podmieniać całe panele boczne lub pojedyncze widgety dla poszczególnych wpisów, czy stron."
+#: inc/class-custom-sidebars-checkup-notification.php:187
+msgid "Run site health check"
+msgstr "Sprawdź witrynę"
 
-#. Plugin URI of the plugin/theme
-msgid "http://premium.wpmudev.org/project/custom-sidebars/"
-msgstr "http://premium.wpmudev.org/project/custom-sidebars/"
+#: inc/class-custom-sidebars-checkup-notification.php:188
+msgid "Free performance, security and SEO report"
+msgstr "Darmowy raport wydajności, bezpieczeństwa i SEO"
 
-#: views/widgets.php:115
-msgid "Allow this sidebar to be replaced"
-msgstr "Zezwól na zastępowanie panelu bocznego "
+#: inc/class-custom-sidebars-checkup-notification.php:191
+msgid "Go"
+msgstr "Sprawdź"
 
-#: views/widgets.php:106
-msgid "This sidebar will always be same on all pages"
-msgstr "Panel boczny będzie zawsze wyglądał tak samo na wszystkich stronach"
+#: inc/class-custom-sidebars-checkup-notification.php:213
+msgid ""
+"Don’t just replace sidebars. Add new sidebars and footers anywhere with "
+"Upfront."
+msgstr "Nie podmieniaj tylko paneli. Dodawaj nowe, gdziekowliej w wtyczką Upfront."
 
-#: views/widgets.php:89 views/widgets.php:126
-msgid "Sidebar Location"
-msgstr "Położenie panelu"
+#: inc/class-custom-sidebars-checkup-notification.php:214
+msgid "get Upfront free"
+msgstr "pobierz Updated za darmo"
 
-#: views/widgets.php:87 views/widgets.php:124
-msgid "Where do you want to show the sidebar?"
-msgstr "Gdzie chcesz pokazać wybrany panel boczny?"
-
-#: views/widgets.php:80
-msgid "Edit"
-msgstr "Edytuj"
-
-#: views/widgets.php:78
-msgid "Edit this sidebar."
-msgstr "Edytuj panel boczny."
-
-#: views/widgets.php:69
-msgid "Delete this sidebar."
-msgstr "Skasuj panel boczny."
-
-#: views/widgets.php:53
-msgid "Filter..."
-msgstr "Filtruj..."
-
-#: views/widgets.php:52
-msgid "Activate this option to replace the sidebar with one of your custom sidebars."
-msgstr "Włącz tę opcję, żeby podmieniać panel boczny przez własny."
-
-#: views/widgets.php:51 views/widgets.php:105
-msgid "This sidebar can be replaced on certain pages"
-msgstr "Panel boczny może być podmieniany na wybranych stronach"
-
-#: views/widgets.php:50
-msgid "Couldn't load data from WordPress..."
-msgstr "Nie można wczytać danych z WordPressa..."
-
-#: views/widgets.php:49
-msgid "Theme Sidebars"
-msgstr "Panele boczne motywu"
-
-#: views/widgets.php:46
-msgid "Define where you want this sidebar to appear."
-msgstr "Określ gdzie chcesz wyświetlać wybrany panel boczny."
-
-#: views/widgets.php:45
-msgid "Delete Sidebar"
-msgstr "Usuń panel boczny"
-
-#: views/widgets.php:42
-msgid "New Custom Sidebar"
-msgstr "Nowy panel boczny"
-
-#: views/widgets.php:41
-msgid "Edit [Sidebar]"
-msgstr "Edytuj [panel boczny]"
-
-#: views/widgets.php:23 views/widgets.php:47
-msgid "Import / Export Sidebars"
-msgstr "Import / Eksport paneli bocznych"
-
-#: views/widgets.php:21
-msgid "Create a new sidebar"
-msgstr "Utwórz panel boczny"
-
-#: views/widgets-location.php:192 views/widgets.php:43
-msgid "Save Changes"
-msgstr "Zapisz zmiany"
-
-#: views/widgets-location.php:144
-msgid "Authors"
-msgstr "Autorzy"
-
-#: views/widgets-location.php:143 views/widgets-location.php:164
-msgid "Category Archives"
-msgstr "Archiwum kategorii"
-
-#: views/widgets-location.php:142 views/widgets-location.php:153
-msgid "Archive Types"
-msgstr "Typy archiwum"
-
-#: views/widgets-location.php:139
-msgid "These replacements will be applied to Archive Type posts and pages."
-msgstr "Podmiana zostanie zastosowana do archiwum wpisów i stron."
-
-#: views/widgets-location.php:136
-msgid "For Archives"
-msgstr "Archiwa"
-
-#: views/widgets-location.php:118
-msgid "Post Types"
-msgstr "Typy treści"
-
-#: views/widgets-location.php:106
-msgid "categories"
-msgstr "kategorie"
-
-#: views/widgets-location.php:98
-msgid "These replacements will be applied to every single post that matches a certain post type or category."
-msgstr "Podmiana zostanie zastosowana do wpisów odpowiednich typów treści lub należących do wybranych kategorii."
-
-#: views/widgets-location.php:95
-msgid "For all Single Entries matching selected criteria"
-msgstr "Dla wszystkich wpisów spełniających wybrane kryteria"
-
-#: views/widgets-location.php:94 views/widgets-location.php:135
-msgid "Click to toggle"
-msgstr "Kliknij, aby przełączyć"
-
-#: views/widgets-location.php:50
-msgid "Click here to pick available %1$s"
-msgstr "Kliknij, żeby wybrać z dostępnych %1$s"
-
-#: views/widgets-location.php:38
-msgid "As <strong>%1$s</strong> for selected %2$s"
-msgstr "<strong>%1$s</strong> dla wybranych %2$s"
-
-#: views/widgets-location.php:30
-msgid "Replaced by another sidebar:"
-msgstr "Zastąp przez inny panel boczny:"
-
-#: views/widgets-export.php:40
-msgid "Preview"
-msgstr "Podgląd"
-
-#: views/widgets-export.php:35
-msgid "Export file"
-msgstr "Eksportuj plik"
-
-#: views/widgets-export.php:31
-msgid "Import"
-msgstr "Importuj"
-
-#: views/widgets-export.php:21
-msgid "Optional description for the export file:"
-msgstr "Dodatkowy opis eksportowanego pliku:"
-
-#: views/widgets-export.php:10 views/widgets-export.php:26
-msgid "Export"
-msgstr "Eksportuj"
-
-#: views/widgets-editor.php:64 views/widgets.php:44
-msgid "Create Sidebar"
-msgstr "Dodaj panel boczny"
-
-#: views/widgets-editor.php:60
-msgid "Advanced - Edit custom wrapper code"
-msgstr "Zaawansowane - Edytuj kod wrappera"
-
-#: views/widgets-editor.php:53
-msgid "After Widget"
-msgstr "Po widżecie"
-
-#: views/widgets-editor.php:49
-msgid "Before Widget"
-msgstr "Przed widżetem"
-
-#: views/widgets-editor.php:43
-msgid "After Title"
-msgstr "Po tytule"
-
-#: views/widgets-editor.php:39
-msgid "Before Title"
-msgstr "Przed tytułem"
-
-#: views/widgets-editor.php:27
-msgid "Caution:"
-msgstr "Uwaga:"
-
-#: views/widgets-editor.php:21
-msgid "Sidebar description here..."
-msgstr "Wpisz opis panelu bocznego..."
-
-#: views/widgets-editor.php:20
-msgid "Description"
-msgstr "Opis"
-
-#: views/widgets-editor.php:17
-msgid "The name must be unique."
-msgstr "Nazwa musi być unikalna."
-
-#: views/widgets-editor.php:16
-msgid "Sidebar name here..."
-msgstr "Wpisz nazwę panelu bocznego..."
-
-#: views/widgets-editor.php:15
-msgid "Name"
-msgstr "Nazwa"
-
-#: views/widgets-delete.php:17
-msgid "Yes, delete it"
-msgstr "Tak, usuń"
-
-#: views/widgets-delete.php:16 views/widgets-editor.php:63
-#: views/widgets-location.php:191
-msgid "Cancel"
-msgstr "Anuluj"
-
-#: views/widgets-delete.php:11
-msgid "Please confirm that you want to delete the sidebar <strong class=\"name\"></strong>."
-msgstr "Proszę potwierdzić chęć usunięcia panelu bocznego <strong class=\"name\"></strong>."
-
-#: inc/class-custom-sidebars.php:729
-msgid "Pro Version Features"
-msgstr "Funkcje wersji PRO"
-
-#: inc/class-custom-sidebars.php:726
-msgid "Visibility"
-msgstr "Widoczność"
-
-#: inc/class-custom-sidebars.php:725
+#: inc/class-custom-sidebars-cloning.php:202
 msgid "Clone"
 msgstr "Klonuj"
 
-#: inc/class-custom-sidebars.php:102
+#: inc/class-custom-sidebars-editor.php:119
+#: inc/class-custom-sidebars-export.php:97
+msgid "You do not have permission for this"
+msgstr "Przepraszamy, nie posiadasz  uprawnień żeby to zrobić"
+
+#: inc/class-custom-sidebars-editor.php:194
+msgid "Sidebar-name cannot be empty"
+msgstr "Nazwa panelu bocznego nie może być pusta"
+
+#: inc/class-custom-sidebars-editor.php:218
+#: inc/class-custom-sidebars-editor.php:301
+msgid "The sidebar does not exist"
+msgstr "Wybrany panel boczny nie istnieje"
+
+#: inc/class-custom-sidebars-editor.php:249
+msgid "Created new sidebar <strong>%1$s</strong>"
+msgstr "Utworzono nowy panel boczny <strong>%1$s</strong>"
+
+#: inc/class-custom-sidebars-editor.php:257
+msgid "Updated sidebar <strong>%1$s</strong>"
+msgstr "Panel boczny <strong>%1$s</strong> został zaktualizowany"
+
+#: inc/class-custom-sidebars-editor.php:268
+#: inc/class-custom-sidebars-editor.php:321
+msgid "The sidebar was not found"
+msgstr "Panel boczny nie został znaleziony"
+
+#: inc/class-custom-sidebars-editor.php:310
+msgid "Deleted sidebar <strong>%1$s</strong>"
+msgstr "Panel boczny <strong>%1$s</strong> został usunięty"
+
+#: inc/class-custom-sidebars-editor.php:379
+msgid "Front Page"
+msgstr "Strona Główna"
+
+#: inc/class-custom-sidebars-editor.php:380
+msgid "Search Results"
+msgstr "Wyniki wyszukiwania"
+
+#: inc/class-custom-sidebars-editor.php:381
+msgid "Not found (404)"
+msgstr "Nie znaleziono (404)"
+
+#: inc/class-custom-sidebars-editor.php:382
+msgid "Any Author Archive"
+msgstr "Archiwum Autorów"
+
+#: inc/class-custom-sidebars-editor.php:383
+msgid "Tag Archives"
+msgstr "Archiwum Tagów"
+
+#: inc/class-custom-sidebars-editor.php:384
+msgid "Date Archives"
+msgstr "Archiwum Dat"
+
+#: inc/class-custom-sidebars-editor.php:425
+msgid "Post Index"
+msgstr "Lista wpisów"
+
+#: inc/class-custom-sidebars-editor.php:429
+msgid "%1$s Archives"
+msgstr "%1$s Archiwów"
+
+#: inc/class-custom-sidebars-editor.php:606
+msgid "Updated sidebar <strong>%1$s</strong> settings."
+msgstr "Ustawienia panelu bocznego <strong>%1$s</strong> zostały zapisane"
+
+#: inc/class-custom-sidebars-editor.php:642 views/widgets.php:17
+msgid "Sidebars"
+msgstr "Panele boczne"
+
+#: inc/class-custom-sidebars-editor.php:894 views/import.php:123
+#: views/widgets.php:47
+msgid "Custom Sidebars"
+msgstr "Niestandardowe Panele boczne"
+
+#: inc/class-custom-sidebars-export.php:61 views/widgets.php:46
+msgid "Import / Export Sidebars"
+msgstr "Import / Eksport paneli bocznych"
+
+#: inc/class-custom-sidebars-export.php:320
+#: inc/class-custom-sidebars-export.php:362
+msgid "No file was uploaded"
+msgstr ""
+
+#: inc/class-custom-sidebars-export.php:327
+msgid "Import file is too big"
+msgstr ""
+
+#: inc/class-custom-sidebars-export.php:333
+msgid "Something went wrong"
+msgstr ""
+
+#: inc/class-custom-sidebars-export.php:356
+msgid "Unexpected import format"
+msgstr ""
+
+#: inc/class-custom-sidebars-export.php:633
+#, fuzzy
+msgid "Imported %d custom sidebar(s)!"
+msgstr "Zaimportowano %d paneli bocznych!"
+
+#: inc/class-custom-sidebars-export.php:642
+msgid "Plugin options were imported!"
+msgstr "Zaimportowano opcje wtyczki!"
+
+#: inc/class-custom-sidebars-export.php:692
+msgid "Imported %d widget(s)!"
+msgstr "Zaimportowano %d widżetów!"
+
+#: inc/class-custom-sidebars-visibility.php:196
+msgid "Visibility"
+msgstr "Widoczność"
+
+#: inc/class-custom-sidebars-visibility.php:205
+msgid "<b>Show</b> widget if:"
+msgstr "<b>Pokaż</b> widżet gdy:"
+
+#: inc/class-custom-sidebars-visibility.php:206
+msgid "<b>Hide</b> widget if:"
+msgstr "<b>Ukryj</b> widżet gdy:"
+
+#: inc/class-custom-sidebars-visibility.php:210
+#, fuzzy
+msgid "Filters"
+msgstr "Filtruj..."
+
+#: inc/class-custom-sidebars-visibility.php:214
+msgid "Date"
+msgstr "Data"
+
+#: inc/class-custom-sidebars-visibility.php:219
+msgid "Guests"
+msgstr "Gość"
+
+#: inc/class-custom-sidebars-visibility.php:224
+msgid "Roles"
+msgstr "Role"
+
+#: inc/class-custom-sidebars-visibility.php:229
+msgid "Membership"
+msgstr "Membership"
+
+#: inc/class-custom-sidebars-visibility.php:235
+msgid "Membership2"
+msgstr "Membership2"
+
+#: inc/class-custom-sidebars-visibility.php:241 views/import.php:302
+msgid "Special pages"
+msgstr "Strony specjalne"
+
+#: inc/class-custom-sidebars-visibility.php:246
+msgid "For posttype"
+msgstr "Typy wpisów"
+
+#: inc/class-custom-sidebars-visibility.php:248
+msgid "Taxonomy"
+msgstr "Taksonomie"
+
+#: inc/class-custom-sidebars-visibility.php:265
+msgid "Always"
+msgstr "Zawsze"
+
+#: inc/class-custom-sidebars-visibility.php:290
+#: inc/class-custom-sidebars-visibility.php:295
+#: inc/class-custom-sidebars-visibility.php:304
+#: inc/class-custom-sidebars-visibility.php:323
+#: inc/class-custom-sidebars-visibility.php:343
+#: inc/class-custom-sidebars-visibility.php:362
+#: inc/class-custom-sidebars-visibility.php:381
+#: inc/class-custom-sidebars-visibility.php:472
+msgid "AND"
+msgstr "i"
+
+#: inc/class-custom-sidebars-visibility.php:291
+msgid "User is not logged-in (Guest)"
+msgstr "Użytkownik nie jest zalogowany (gość)"
+
+#: inc/class-custom-sidebars-visibility.php:296
+msgid "User is logged-in (Member)"
+msgstr "Użytkownik jest zalogowany (członek)"
+
+#: inc/class-custom-sidebars-visibility.php:305
+msgid "User has role"
+msgstr "Użytkownik ma rolę"
+
+#: inc/class-custom-sidebars-visibility.php:324
+msgid "User has Membership Level"
+msgstr "Użytkownik ma poziom Membership"
+
+#: inc/class-custom-sidebars-visibility.php:332
+#: inc/class-custom-sidebars-visibility.php:352
+msgid "(inactive)"
+msgstr "(nieaktywne)"
+
+#: inc/class-custom-sidebars-visibility.php:344
+msgid "User has Membership"
+msgstr "Użytkownik ma Membership"
+
+#: inc/class-custom-sidebars-visibility.php:363
+msgid "On these special pages"
+msgstr "Na specjalnych stronach"
+
+#: inc/class-custom-sidebars-visibility.php:382
+msgid "On any page of these types"
+msgstr "Na stronie tego typu"
+
+#: inc/class-custom-sidebars-visibility.php:400
+msgid "Only for specific %s"
+msgstr "Tylko dla %s"
+
+#: inc/class-custom-sidebars-visibility.php:401
+msgid "Only these %s:"
+msgstr "Tylko %s:"
+
+#: inc/class-custom-sidebars.php:111
 msgid ""
 "<strong>Accessibility mode is not supported by the\n"
 "\t\t\t\t\t\t%1$s plugin.</strong><br /><a href=\"%2$s\">Click here</a>\n"
@@ -256,80 +273,390 @@ msgid ""
 msgstr ""
 "<strong>Tryb ułatwionej dostępności nie jest obsługiwany przez wtyczkę \n"
 "\t \t \t \t \t \t%1$s</strong><br /><a href=\"%2$s\">Kliknij tutaj</a> \n"
-"\t \t \t \t \t \t, aby wyłączyć tryb ułatwionej dostępności i użyć wtyczki %1$s!"
+"\t \t \t \t \t \t, aby wyłączyć tryb ułatwionej dostępności i użyć wtyczki "
+"%1$s!"
 
-#. #-#-#-#-#  tmp-custom-sidebars.pot (Custom Sidebars 2.1.0.2)  #-#-#-#-#
-#. Plugin Name of the plugin/theme
-#: inc/class-custom-sidebars.php:84 views/widgets.php:48
-msgid "Custom Sidebars"
-msgstr "Niestandardowe Panele boczne"
+#: inc/class-custom-sidebars.php:902 views/import.php:140
+#, fuzzy
+msgid "Widgets"
+msgstr "Po widżecie"
 
-#: inc/class-custom-sidebars-editor.php:550 views/widgets.php:17
-msgid "Sidebars"
-msgstr "Panele boczne"
+#: inc/class-custom-sidebars.php:912
+#, fuzzy
+msgid "Support"
+msgstr "Importuj"
 
-#: inc/class-custom-sidebars-editor.php:514
-msgid "Updated sidebar <strong>%1$s</strong> settings."
-msgstr "Ustawienia panelu bocznego <strong>%1$s</strong> zostały zapisane"
+#: inc/class-custom-sidebars.php:929
+msgid "Create a custom sidebar to get started."
+msgstr "Utwórz panel boczny aby zacząć."
 
-#: inc/class-custom-sidebars-editor.php:381
-msgid "%1$s Archives"
-msgstr "%1$s Archiwów"
+#: views/col-sidebars.php:18
+msgid "(Not available for Home-Page)"
+msgstr "(Niedostępne dla strony głównej)"
 
-#: inc/class-custom-sidebars-editor.php:377
-msgid "Post Index"
-msgstr "Lista wpisów"
+#: views/col-sidebars.php:20
+msgid "(Not available for Blog-Page)"
+msgstr "(Niedostępne dla strony wpisów)"
 
-#: inc/class-custom-sidebars-editor.php:345
-msgid "Date Archives"
+#: views/import.php:60 views/widgets-export.php:33
+msgid "Import"
+msgstr "Importuj"
+
+#: views/import.php:67
+msgid "Filename"
+msgstr "Nazwa pliku"
+
+#: views/import.php:71
+#, fuzzy
+msgid "Exported on"
+msgstr "Eksportuj"
+
+#: views/import.php:77
+msgid "WordPress settings"
+msgstr "Ustawienia WordPressa"
+
+#: views/import.php:88
+msgid "WordPress version"
+msgstr "Wersja WordPressa"
+
+#: views/import.php:93
+msgid "Plugin version"
+msgstr "Wersja wtyczki"
+
+#: views/import.php:98
+msgid "Theme"
+msgstr "Motyw"
+
+#: views/import.php:125
+msgid "Mark the sidebars that you want to import."
+msgstr ""
+
+#: views/import.php:130
+msgid "Also import all widgets of the selected sidebars."
+msgstr ""
+
+#: views/import.php:137 views/widgets-editor.php:15
+msgid "Name"
+msgstr "Nazwa"
+
+#: views/import.php:138 views/widgets-editor.php:20
+msgid "Description"
+msgstr "Opis"
+
+#: views/import.php:139
+msgid "Note"
+msgstr ""
+
+#: views/import.php:147
+#, fuzzy
+msgid "New sidebar will be created"
+msgstr "Zezwól na zastępowanie panelu bocznego "
+
+#: views/import.php:149
+#, fuzzy
+msgid "Existing sidebar will be replaced!"
+msgstr "Zezwól na zastępowanie panelu bocznego "
+
+#: views/import.php:205
+#, fuzzy
+msgid "(Theme sidebar)"
+msgstr "Panele boczne motywu"
+
+#: views/import.php:233
+msgid "Configuration"
+msgstr ""
+
+#: views/import.php:237
+#, fuzzy
+msgid "Replaceable sidebars"
+msgstr "Zastąp przez inny panel boczny:"
+
+#: views/import.php:240
+#, fuzzy
+msgid "Replaceable Sidebars"
+msgstr "Usuń panel boczny"
+
+#: views/import.php:250
+#, fuzzy
+msgid "By post type"
+msgstr "Typy treści"
+
+#: views/import.php:263
+#, fuzzy
+msgid "Post-type archives"
 msgstr "Archiwum Dat"
 
-#: inc/class-custom-sidebars-editor.php:344
-msgid "Tag Archives"
-msgstr "Archiwum Tagów"
+#: views/import.php:276
+#, fuzzy
+msgid "By category"
+msgstr "kategorie"
 
-#: inc/class-custom-sidebars-editor.php:343
-msgid "Any Author Archive"
+#: views/import.php:289
+#, fuzzy
+msgid "Category archives"
+msgstr "Archiwum kategorii"
+
+#: views/import.php:305
+msgid "Main blog page"
+msgstr ""
+
+#: views/import.php:306
+#, fuzzy
+msgid "Date archives"
+msgstr "Archiwum Dat"
+
+#: views/import.php:307
+#, fuzzy
+msgid "Author archives"
 msgstr "Archiwum Autorów"
 
-#: inc/class-custom-sidebars-editor.php:342
-msgid "Not found (404)"
-msgstr "Nie znaleziono (404)"
+#: views/import.php:308
+#, fuzzy
+msgid "Tag archives"
+msgstr "Archiwum Tagów"
 
-#: inc/class-custom-sidebars-editor.php:341
-msgid "Search Results"
+#: views/import.php:309
+#, fuzzy
+msgid "Search results page"
 msgstr "Wyniki wyszukiwania"
 
-#: inc/class-custom-sidebars-editor.php:340
-msgid "Front Page"
-msgstr "Strona Główna"
+#: views/import.php:319
+msgid ""
+"Replace the current plugin configuration with the imported configuration."
+msgstr ""
 
-#: inc/class-custom-sidebars-editor.php:271
-msgid "Deleted sidebar <strong>%1$s</strong>"
-msgstr "Panel boczny <strong>%1$s</strong> został usunięty"
+#: views/widgets-delete.php:11
+msgid ""
+"Please confirm that you want to delete the sidebar <strong class=\"name\"></"
+"strong>."
+msgstr ""
+"Proszę potwierdzić chęć usunięcia panelu bocznego <strong class=\"name\"></"
+"strong>."
 
-#: inc/class-custom-sidebars-editor.php:233
-#: inc/class-custom-sidebars-editor.php:282
-msgid "The sidebar was not found"
-msgstr "Panel boczny nie został znaleziony"
+#: views/widgets-delete.php:16 views/widgets-editor.php:63
+#: views/widgets-location.php:186
+msgid "Cancel"
+msgstr "Anuluj"
 
-#: inc/class-custom-sidebars-editor.php:222
-msgid "Updated sidebar <strong>%1$s</strong>"
-msgstr "Panel boczny <strong>%1$s</strong> został zaktualizowany"
+#: views/widgets-delete.php:17
+msgid "Yes, delete it"
+msgstr "Tak, usuń"
 
-#: inc/class-custom-sidebars-editor.php:214
-msgid "Created new sidebar <strong>%1$s</strong>"
-msgstr "Utworzono nowy panel boczny <strong>%1$s</strong>"
+#: views/widgets-editor.php:16
+msgid "Sidebar name here..."
+msgstr "Wpisz nazwę panelu bocznego..."
 
-#: inc/class-custom-sidebars-editor.php:188
-#: inc/class-custom-sidebars-editor.php:262
-msgid "The sidebar does not exist"
-msgstr "Wybrany panel boczny nie istnieje"
+#: views/widgets-editor.php:17
+msgid "The name must be unique."
+msgstr "Nazwa musi być unikalna."
 
-#: inc/class-custom-sidebars-editor.php:164
-msgid "Sidebar-name cannot be empty"
-msgstr "Nazwa panelu bocznego nie może być pusta"
+#: views/widgets-editor.php:21
+msgid "Sidebar description here..."
+msgstr "Wpisz opis panelu bocznego..."
 
-#: inc/class-custom-sidebars-editor.php:89
-msgid "You do not have permission for this"
-msgstr "Przepraszamy, nie posiadasz  uprawnień żeby to zrobić"
+#: views/widgets-editor.php:27
+msgid "Caution:"
+msgstr "Uwaga:"
+
+#: views/widgets-editor.php:39
+msgid "Before Title"
+msgstr "Przed tytułem"
+
+#: views/widgets-editor.php:43
+msgid "After Title"
+msgstr "Po tytule"
+
+#: views/widgets-editor.php:49
+msgid "Before Widget"
+msgstr "Przed widżetem"
+
+#: views/widgets-editor.php:53
+msgid "After Widget"
+msgstr "Po widżecie"
+
+#: views/widgets-editor.php:60
+msgid "Advanced - Edit custom wrapper code"
+msgstr "Zaawansowane - Edytuj kod wrappera"
+
+#: views/widgets-editor.php:64 views/widgets.php:43
+msgid "Create Sidebar"
+msgstr "Dodaj panel boczny"
+
+#: views/widgets-export.php:10 views/widgets-export.php:28
+msgid "Export"
+msgstr "Eksportuj"
+
+#: views/widgets-export.php:23
+msgid "Optional description for the export file:"
+msgstr "Dodatkowy opis eksportowanego pliku:"
+
+#: views/widgets-export.php:37
+msgid "Export file"
+msgstr "Eksportuj plik"
+
+#: views/widgets-export.php:42
+msgid "Preview"
+msgstr "Podgląd"
+
+#: views/widgets-location.php:30
+msgid "Replaced by another sidebar:"
+msgstr "Zastąp przez inny panel boczny:"
+
+#: views/widgets-location.php:38
+msgid "As <strong>%1$s</strong> for selected %2$s"
+msgstr "<strong>%1$s</strong> dla wybranych %2$s"
+
+#: views/widgets-location.php:50
+msgid "Click here to pick available %1$s"
+msgstr "Kliknij, żeby wybrać z dostępnych %1$s"
+
+#: views/widgets-location.php:95 views/widgets-location.php:136
+msgid "Click to toggle"
+msgstr "Kliknij, aby przełączyć"
+
+#: views/widgets-location.php:96
+msgid "For all Single Entries matching selected criteria"
+msgstr "Dla wszystkich wpisów spełniających wybrane kryteria"
+
+#: views/widgets-location.php:99
+msgid ""
+"These replacements will be applied to every single post that matches a "
+"certain post type or category."
+msgstr ""
+"Podmiana zostanie zastosowana do wpisów odpowiednich typów treści lub "
+"należących do wybranych kategorii."
+
+#: views/widgets-location.php:107
+msgid "categories"
+msgstr "kategorie"
+
+#: views/widgets-location.php:119
+msgid "Post Types"
+msgstr "Typy treści"
+
+#: views/widgets-location.php:137
+msgid "For Archives"
+msgstr "Archiwa"
+
+#: views/widgets-location.php:140
+msgid "These replacements will be applied to Archive Type posts and pages."
+msgstr "Podmiana zostanie zastosowana do archiwum wpisów i stron."
+
+#: views/widgets-location.php:143 views/widgets-location.php:154
+msgid "Archive Types"
+msgstr "Typy archiwum"
+
+#: views/widgets-location.php:144 views/widgets-location.php:165
+msgid "Category Archives"
+msgstr "Archiwum kategorii"
+
+#: views/widgets-location.php:145
+msgid "Authors"
+msgstr "Autorzy"
+
+#: views/widgets-location.php:176
+#, fuzzy
+msgid "Author Archives"
+msgstr "Archiwum Autorów"
+
+#: views/widgets-location.php:187 views/widgets.php:42
+msgid "Save Changes"
+msgstr "Zapisz zmiany"
+
+#: views/widgets.php:21
+msgid "Create a new sidebar"
+msgstr "Utwórz panel boczny"
+
+#: views/widgets.php:40
+msgid "Edit [Sidebar]"
+msgstr "Edytuj [panel boczny]"
+
+#: views/widgets.php:41
+msgid "New Custom Sidebar"
+msgstr "Nowy panel boczny"
+
+#: views/widgets.php:44
+msgid "Delete Sidebar"
+msgstr "Usuń panel boczny"
+
+#: views/widgets.php:45
+msgid "Define where you want this sidebar to appear."
+msgstr "Określ gdzie chcesz wyświetlać wybrany panel boczny."
+
+#: views/widgets.php:48
+msgid "Theme Sidebars"
+msgstr "Panele boczne motywu"
+
+#: views/widgets.php:49
+msgid "Couldn't load data from WordPress..."
+msgstr "Nie można wczytać danych z WordPressa..."
+
+#: views/widgets.php:50 views/widgets.php:104
+msgid "This sidebar can be replaced on certain pages"
+msgstr "Panel boczny może być podmieniany na wybranych stronach"
+
+#: views/widgets.php:51
+msgid ""
+"Activate this option to replace the sidebar with one of your custom sidebars."
+msgstr "Włącz tę opcję, żeby podmieniać panel boczny przez własny."
+
+#: views/widgets.php:52
+msgid "Filter..."
+msgstr "Filtruj..."
+
+#: views/widgets.php:68
+msgid "Delete this sidebar."
+msgstr "Skasuj panel boczny."
+
+#: views/widgets.php:77
+msgid "Edit this sidebar."
+msgstr "Edytuj panel boczny."
+
+#: views/widgets.php:79
+msgid "Edit"
+msgstr "Edytuj"
+
+#: views/widgets.php:86 views/widgets.php:123
+msgid "Where do you want to show the sidebar?"
+msgstr "Gdzie chcesz pokazać wybrany panel boczny?"
+
+#: views/widgets.php:88 views/widgets.php:125
+msgid "Sidebar Location"
+msgstr "Położenie panelu"
+
+#: views/widgets.php:105
+msgid "This sidebar will always be same on all pages"
+msgstr "Panel boczny będzie zawsze wyglądał tak samo na wszystkich stronach"
+
+#: views/widgets.php:114
+msgid "Allow this sidebar to be replaced"
+msgstr "Zezwól na zastępowanie panelu bocznego "
+
+#. Plugin Name of the plugin/theme
+#, fuzzy
+msgid "Custom Sidebars Pro"
+msgstr "Niestandardowe Panele boczne"
+
+#. Plugin URI of the plugin/theme
+msgid "http://premium.wpmudev.org/project/custom-sidebars/"
+msgstr "http://premium.wpmudev.org/project/custom-sidebars/"
+
+#. Description of the plugin/theme
+msgid ""
+"Allows you to create widgetized areas and custom sidebars. Replace whole "
+"sidebars or single widgets for specific posts and pages."
+msgstr ""
+"Pozwala na tworzenie stref z widgetami oraz niestandardowe paski boczne. "
+"Można podmieniać całe panele boczne lub pojedyncze widgety dla "
+"poszczególnych wpisów, czy stron."
+
+#. Author of the plugin/theme
+msgid "WPMU DEV"
+msgstr "WPMU DEV"
+
+#. Author URI of the plugin/theme
+msgid "http://premium.wpmudev.org/"
+msgstr "http://premium.wpmudev.org/"
+
+#~ msgid "Pro Version Features"
+#~ msgstr "Funkcje wersji PRO"
