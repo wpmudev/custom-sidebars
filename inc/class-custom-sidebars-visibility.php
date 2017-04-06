@@ -484,11 +484,15 @@ class CustomSidebarsVisibility extends CustomSidebars {
 			);
 			$terms = get_terms( $tax_item->name, $args );
 			foreach ( $terms as $item ) {
-					< ?php $is_selected = in_array( $item->term_id, $sel ); ?>
-					<option <?php selected( $is_selected ); ?> value="<?php echo esc_attr( $item->term_id ); ?>">
-						<?php echo esc_html( $item->name ); ?>
-					</option>
-				<?php } ?>
+				$is_selected = in_array( $item->term_id, $sel );
+				printf(
+					'<option %s value="%s">%s</option>',
+					selected( $is_selected ),
+					esc_attr( $item->term_id ),
+					esc_html( $item->name )
+				);
+			}
+?>
 		</select>
 	</div>
 			<?php
