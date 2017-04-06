@@ -213,32 +213,92 @@
   padding: 90px 10px;
   text-align: center;
 }
-.widgets-php .sidebars-column-1 .inner .custom-sidebars-upfront {
+.widgets-php .sidebars-column-1 .inner .custom-sidebars-box {
   border-radius: 4px;
-  background-color: #f9c200;
   margin: 55px 0 16px 0;
 }
-.widgets-php .sidebars-column-1 .inner .custom-sidebars-upfront .devman {
+.widgets-php .sidebars-column-1 .inner .custom-sidebars-upfront {
+  background-color: #f9c200;
+}
+.widgets-php .sidebars-column-1 .inner .custom-sidebars-upfront .cs-inner {
   min-height: 145px;
   margin-right: -16px;
   background: url(../img/devman.png) no-repeat 100% 50%;
   padding: 50px 120px 45px 20px;
 }
-.widgets-php .sidebars-column-1 .inner .custom-sidebars-upfront .devman p {
+.widgets-php .sidebars-column-1 .inner .custom-sidebars-upfront .cs-inner p {
   font-size: 1.4em;
   color: #000;
   margin-top: 0;
 }
-.widgets-php .sidebars-column-1 .inner .custom-sidebars-upfront .devman p:last-of-type {
+.widgets-php .sidebars-column-1 .inner .custom-sidebars-upfront .cs-inner p:last-of-type {
   margin-bottom: 0;
 }
-.widgets-php .sidebars-column-1 .inner .custom-sidebars-upfront .devman .button {
+.widgets-php .sidebars-column-1 .inner .custom-sidebars-upfront .cs-inner .button {
   background-color: #00a7e6;
   color: #fff;
   font-weight: bold;
   height: auto;
   padding: 15px 16px;
   text-transform: uppercase;
+}
+.widgets-php .sidebars-column-1 .inner .custom-sidebars-checkup {
+  background-color: #fff;
+}
+.widgets-php .sidebars-column-1 .inner .custom-sidebars-checkup .cs-inner {
+  background: url(../img/hand-with-heart.png) no-repeat 100% 100%;
+  font-size: 1.2em;
+  min-height: 227px;
+  padding-bottom: 10px;
+}
+.widgets-php .sidebars-column-1 .inner .custom-sidebars-checkup .cs-inner h4, .widgets-php .sidebars-column-1 .inner .custom-sidebars-checkup .cs-inner p {
+  margin: 0;
+  padding: 0 120px 0 30px;
+  font-size: 1.1em;
+}
+.widgets-php .sidebars-column-1 .inner .custom-sidebars-checkup .cs-inner h4 {
+  color: #222;
+  font-size: 1.2em;
+  padding-top: 50px;
+}
+.widgets-php .sidebars-column-1 .inner .custom-sidebars-checkup .cs-inner p {
+  color: #c1272c;
+  padding-top: 16px;
+}
+.widgets-php .sidebars-column-1 .inner .custom-sidebars-checkup .cs-inner form {
+  border-radius: 4px;
+  background-color: #fafafa;
+  display: -ms-flexbox;
+  display: flex;
+  -ms-flex-wrap: nowrap;
+  flex-wrap: nowrap;
+  -ms-flex-pack: justify;
+  justify-content: space-between;
+  margin: 24px 30px 0 30px;
+  padding: 0;
+}
+.widgets-php .sidebars-column-1 .inner .custom-sidebars-checkup .cs-inner form input {
+  background-color: transparent;
+  border: 0;
+  font-size: 1em;
+  margin: 0;
+  padding: 10px 15px;
+  text-align: center;
+}
+.widgets-php .sidebars-column-1 .inner .custom-sidebars-checkup .cs-inner form input[type=submit] {
+  border-radius: 0 4px 4px 0;
+  background-color: #00a7e6;
+  color: #fff;
+  max-width: 4em;
+  text-transform: uppercase;
+}
+.widgets-php .sidebars-column-1 .inner .custom-sidebars-checkup .cs-inner form input[type=text] {
+  color: #aaa;
+  -ms-flex-positive: 1;
+  flex-grow: 1;
+}
+.widgets-php .sidebars-column-1 .inner .custom-sidebars-checkup .cs-inner form input[type=text]:active {
+  box-shadow: none;
 }
 
 #cs-options .cs-action {

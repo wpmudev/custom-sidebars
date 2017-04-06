@@ -48,6 +48,7 @@ module.exports = function( grunt ) {
 				'./inc/class-custom-sidebars-checkup-notification.php',
 				'./img/heart.png',
 				'./img/devman.png',
+				'./img/hand-with-heart.png',
 				'./css/cs-scan.css',
 				'./css/cs-scan.min.css'
 			],
