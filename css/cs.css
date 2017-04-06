@@ -656,7 +656,7 @@ body.appearance_page_customsidebars #poststuff h2 {
   right: auto;
   left: 0;
 }
-.rtl.widgets-php #wpcontent .wrap {
+.rtl.widgets-php #wpcontent .wrap .cs-wrap {
   margin-right: 2px;
   margin-left: 68%;
 }
