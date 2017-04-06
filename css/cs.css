@@ -289,7 +289,7 @@
   border-radius: 0 4px 4px 0;
   background-color: #00a7e6;
   color: #fff;
-  max-width: 4em;
+  min-width: 3em;
   text-transform: uppercase;
 }
 .widgets-php .sidebars-column-1 .inner .custom-sidebars-checkup .cs-inner form input[type=text] {
