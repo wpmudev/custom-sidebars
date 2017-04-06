@@ -242,11 +242,13 @@
 			}
 		}
 		.inner {
-			.custom-sidebars-upfront {
+			.custom-sidebars-box {
 				@include border-radius( 4px );
-				background-color: #f9c200;
 				margin: 55px 0 16px 0;
-				.devman {
+			}
+			.custom-sidebars-upfront {
+				background-color: #f9c200;
+				.cs-inner {
 					min-height: 145px;
 					margin-right: -16px;
 					background: url(../img/devman.png) no-repeat 100% 50%;
@@ -266,6 +268,60 @@
 						height: auto;
 						padding: 15px 16px;
 						text-transform: uppercase;
+					}
+				}
+			}
+			.custom-sidebars-checkup {
+				background-color: #fff;
+				.cs-inner {
+					background: url(../img/hand-with-heart.png) no-repeat 100% 100%;
+					font-size: 1.2em;
+					min-height: 227px;
+					padding-bottom: 10px;
+					h4, p {
+						margin: 0;
+						padding: 0 120px 0 30px;
+						font-size: 1.1em;
+					}
+					h4 {
+						color: #222;
+						font-size: 1.2em;
+						padding-top: 50px;
+					}
+					p {
+						color: #c1272c;
+						padding-top: 16px;
+					}
+					form {
+						@include border-radius( 4px );
+						background-color: #fafafa;
+						display: flex;
+						flex-wrap: nowrap;
+						justify-content: space-between;
+						margin: 24px 30px 0 30px;
+						padding: 0;
+						input {
+							background-color: transparent;
+							border: 0;
+							font-size: 1em;
+							margin: 0;
+							padding: 10px 15px;
+							text-align: center;
+							&[type=submit] {
+								@include border-radius( 0 4px 4px 0 );
+								background-color: #00a7e6;
+								color: #fff;
+								max-width: 4em;
+								text-transform: uppercase;
+							}
+							&[type=text] {
+								color: #aaa;
+								flex-grow: 1;
+								&:active {
+									@include box-shadow( none );
+								}
+							}
+						}
 					}
 				}
 			}
