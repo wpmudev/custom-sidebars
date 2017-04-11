@@ -448,8 +448,7 @@ class CustomSidebarsVisibility extends CustomSidebars {
 		foreach ( $tax_list as $tax_item ) {
 			$row_id = 'tax-' . $tax_item->name;
 			$ajax_url = admin_url( 'admin-ajax.php?action=cs-ajax&do=visibility&tag=' . $tax_item->name );
-			$sel = array();
-
+			$tags = array();
 			if ( ! empty( $cond[ $row_id ] ) ) {
 				$tags = get_terms(
 					$tax_item->name,
@@ -458,43 +457,27 @@ class CustomSidebarsVisibility extends CustomSidebars {
 						'hide_empty' => false,
 					)
 				);
-
-				foreach ( $tags as $tag ) {
-					$sel[] = $tag->term_id . '::' . str_replace( '::', ':', $tag->name );
-				}
-			}
-
-			?>
-			<div class="csb-option-row csb-<?php echo esc_attr( $row_id ); ?>"
-		<?php if ( empty( $cond[ $row_id ] ) ) : ?>style="display:none"<?php endif; ?>>
-
-		<label for="<?php echo esc_attr( $widget->id ); ?>-<?php echo esc_attr( $row_id ); ?>">
-			<span class="csb-and" style="display:none"><?php _e( 'AND', 'custom-sidebars' ); ?></span>
-			<?php echo esc_html( $tax_item->labels->name ); ?>
-			</label>
-		<i class="dashicons dashicons-trash clear-filter show-on-hover action"></i>
-		<select
-			id="<?php echo esc_attr( $widget->id ); ?>-<?php echo esc_attr( $row_id ); ?>"
-			name="<?php echo esc_attr( $block_name ); ?>[<?php echo esc_attr( $row_id ); ?>][]"
-			multiple="multiple"
-		>
-<?php
-			$args = array(
-				'hide_empty' => false,
-			);
-			$terms = get_terms( $tax_item->name, $args );
-			foreach ( $terms as $item ) {
-				$is_selected = in_array( $item->term_id, $sel );
-				printf(
-					'<option %s value="%s">%s</option>',
-					selected( $is_selected ),
-					esc_attr( $item->term_id ),
-					esc_html( $item->name )
-				);
 			}
 ?>
-		</select>
-	</div>
+			<div class="csb-option-row csb-<?php echo esc_attr( $row_id ); ?>"
+		<?php if ( empty( $cond[ $row_id ] ) ) : ?>style="display:none"<?php endif; ?>>
+				<label for="<?php echo esc_attr( $widget->id ); ?>-<?php echo esc_attr( $row_id ); ?>">
+					<span class="csb-and" style="display:none"><?php _e( 'AND', 'custom-sidebars' ); ?></span>
+					<?php echo esc_html( $tax_item->labels->name ); ?>
+					</label>
+				<i class="dashicons dashicons-trash clear-filter show-on-hover action"></i>
+				<select name="<?php echo esc_attr( $block_name ); ?>[<?php echo esc_attr( $row_id ); ?>][]" data-select-ajax="<?php echo esc_url( $ajax_url ); ?>" multiple="multiple">
+<?php
+foreach ( $tags as $one ) {
+	printf(
+		'<option value="%d" selected="selected">%s</option>',
+		esc_attr( $one->term_id ),
+		esc_html( $one->name )
+	);
+}
+?>
+</select>
+			</div>
 			<?php
 		}
 		?>
@@ -574,7 +557,6 @@ class CustomSidebarsVisibility extends CustomSidebars {
 	 */
 	public function admin_widget_update( $instance, $new_instance, $old_instance ) {
 		$data = $this->get_widget_data( $_POST );
-
 		foreach ( $data['conditions'] as $key => $list ) {
 			if ( ! is_array( $list ) ) {
 				$list = explode( ',', $list );
@@ -582,7 +564,6 @@ class CustomSidebarsVisibility extends CustomSidebars {
 			}
 		}
 		$instance['csb_visibility'] = $data;
-
 		return $instance;
 	}
 
@@ -993,8 +974,8 @@ class CustomSidebarsVisibility extends CustomSidebars {
 			$key = $tag->term_id;
 			$name = $tag->name;
 			$data[] = array(
-				'key' => $key,
-				'val' => esc_html( $name ),
+				'id' => $key,
+				'text' => esc_html( $name ),
 			);
 		}
 
