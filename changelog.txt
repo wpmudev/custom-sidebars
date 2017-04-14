@@ -8,6 +8,7 @@ Change Log:
 3.0.5 ( 2017-0x-xx )
 - Fixed a problem with taxonomies.
 - Fixed a css glitch on media library.
+- Prevented to load assets on front-end.
 
 3.0.4 ( 2017-04-11 )
 - Improved "Create a custom sidebar to get started." box.

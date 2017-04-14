@@ -76,6 +76,15 @@ class CustomSidebars {
 		/* start:pro */$plugin_title = 'Custom Sidebars Pro';/* end:pro */
 
 		/**
+		 * Check and do not anything more if we are not in admin area!
+		 */
+		if ( ! is_admin() ) {
+			// Extensions use this hook to initialize themselfs.
+			do_action( 'cs_init' );
+			return;
+		}
+
+		/**
 		 * ID of the WP-Pointer used to introduce the plugin upon activation
 		 *
 		 * ========== Pointer ==========
