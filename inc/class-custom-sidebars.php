@@ -928,7 +928,7 @@ class CustomSidebars {
 	 *
 	 * @since 3.0.1
 	 */
-    public function print_templates() {
+	public function print_templates() {
 		wp_enqueue_script( 'wp-util' );
 ?>
 	<script type="text/html" id="tmpl-custom-sidebars-new">
@@ -941,5 +941,5 @@ class CustomSidebars {
 		
 	</script>
 <?php
-    }
+	}
 };
