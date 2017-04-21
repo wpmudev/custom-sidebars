@@ -1420,7 +1420,7 @@ window.csSidebars = null;
 			if ( 0 === $(".sidebars-column-1 .inner .widgets-holder-wrap").length ) {
 				var template = wp.template('custom-sidebars-new');
 				$(".sidebars-column-1 .inner").before( template() );
-				$(".custom-sidebars-new").on( "click", function() {
+				$(".custom-sidebars-add-new").on( "click", function() {
 					$( "button.btn-create-sidebar" ).click();
 					$(this).detach();
 				});
