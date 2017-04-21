@@ -1422,7 +1422,6 @@ window.csSidebars = null;
 				$(".sidebars-column-1 .inner").before( template() );
 				$(".custom-sidebars-add-new").on( "click", function() {
 					$( "button.btn-create-sidebar" ).click();
-					$(this).detach();
 				});
 			}
 		}
