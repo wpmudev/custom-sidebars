@@ -72,18 +72,19 @@ class CustomSidebars {
 	 * We directly initialize sidebar options when class is created.
 	 */
 	private function __construct() {
+		add_action( 'admin_init', array( $this, 'admin_init' ) );
+		// Extensions use this hook to initialize themselfs.
+		do_action( 'cs_init' );
+	}
+
+	/**
+	 * Admin init
+	 *
+	 * @since 3.0.5
+	 */
+	public function admin_init() {
 		/* start:free */$plugin_title = 'Custom Sidebars';/* end:free */
 		/* start:pro */$plugin_title = 'Custom Sidebars Pro';/* end:pro */
-
-		/**
-		 * Check and do not anything more if we are not in admin area!
-		 */
-		if ( ! is_admin() ) {
-			// Extensions use this hook to initialize themselfs.
-			do_action( 'cs_init' );
-			return;
-		}
-
 		/**
 		 * ID of the WP-Pointer used to introduce the plugin upon activation
 		 *
@@ -138,9 +139,6 @@ class CustomSidebars {
 
 			// AJAX actions
 			add_action( 'wp_ajax_cs-ajax', array( $this, 'ajax_handler' ) );
-
-			// Extensions use this hook to initialize themselfs.
-			do_action( 'cs_init' );
 
 			// Display a message after import.
 			if ( ! empty( $_GET['cs-msg'] ) ) {
