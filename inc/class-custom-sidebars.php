@@ -83,6 +83,7 @@ class CustomSidebars {
 	 * @since 3.0.5
 	 */
 	public function admin_init() {
+
 		/* start:free */$plugin_title = 'Custom Sidebars';/* end:free */
 		/* start:pro */$plugin_title = 'Custom Sidebars Pro';/* end:pro */
 		/**

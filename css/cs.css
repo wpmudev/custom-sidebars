@@ -819,9 +819,6 @@ h2 .show-infos {
  * == Post list
  * =============================================================================
  */
-#wpbody-content .wp-list-table .column-cs_replacement {
-  width: 30%;
-}
 @media screen and (max-width: 782px) {
   #wpbody-content .wp-list-table.fixed .column-cs_replacement {
     display: none;

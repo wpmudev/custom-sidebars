@@ -6,6 +6,7 @@ Change Log:
 ----------------------------------------------------------------------
 
 3.0.5 ( 2017-0x-xx )
+- Improved columns display on post list screen - now "Custom Sidebars" column is hidden by default.
 - Fixed a problem with taxonomies.
 - Fixed a css glitch on media library.
 - Prevented to load assets on front-end.

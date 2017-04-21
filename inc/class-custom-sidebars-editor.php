@@ -61,6 +61,8 @@ class CustomSidebarsEditor extends CustomSidebars {
 					10, 2
 				);
 			}
+			/** This action is documented in wp-admin/includes/screen.php */
+			add_filter( 'default_hidden_columns', array( $this, 'default_hidden_columns' ), 10, 2 );
 
 			add_action(
 				'quick_edit_custom_box',
@@ -1002,5 +1004,21 @@ class CustomSidebarsEditor extends CustomSidebars {
 		//-->
 		</script>
 		<?php
+	}
+
+	/**
+	 * Hide column "Custom Sidebars" by default.
+	 *
+	 * @since 3.0.5
+	 *
+	 * @param array $hidden Array of hidden columns.
+	 * @param WP_Screen $screen Current WP screen.
+	 * @return array $hidden
+	 */
+	public function default_hidden_columns( $hidden, $screen ) {
+		if ( is_object( $screen ) && isset( $screen->post_type ) && 'post' == $screen->post_type ) {
+			$hidden[] = 'cs_replacement';
+		}
+		return $hidden;
 	}
 };
