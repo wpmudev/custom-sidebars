@@ -824,6 +824,9 @@ h2 .show-infos {
     display: none;
   }
 }
+#wpbody-content .wp-list-table .column-cs_replacement {
+  width: 10%;
+}
 #wpbody-content .wp-list-table td.cs_replacement {
   /* do not display sidebars that are not replaced */
 }
