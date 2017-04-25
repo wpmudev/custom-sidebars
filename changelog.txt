@@ -5,6 +5,8 @@ Buildtime: BUILDTIME
 Change Log:
 ----------------------------------------------------------------------
 
+3.0.6 ( 2017-0x-xx )
+
 3.0.5 ( 2017-04-25 )
 - Improved columns display on post list screen - now "Custom Sidebars" column is hidden by default.
 - Prevent to load assets on front-end.
