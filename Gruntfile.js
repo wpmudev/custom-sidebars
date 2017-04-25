@@ -50,7 +50,8 @@ module.exports = function( grunt ) {
 				'./img/devman.png',
 				'./img/hand-with-heart.png',
 				'./css/cs-scan.css',
-				'./css/cs-scan.min.css'
+				'./css/cs-scan.min.css',
+				'.inc/external/wdev-frash'
 			],
 			exclude_free: [
 				'./changelog.txt',

@@ -62,8 +62,10 @@ function inc_sidebars_init() {
 
 	// Include function library.
 	$modules[] = CSB_INC_DIR . 'external/wpmu-lib/core.php';
-	$modules[] = CSB_INC_DIR . 'external/wdev-frash/module.php';
 	$modules[] = CSB_INC_DIR . 'class-custom-sidebars.php';
+	/* start:free */
+	$modules[] = CSB_INC_DIR . 'external/wdev-frash/module.php';
+	/* end:free */
 
 	/* start:free */
 	// Free-version configuration - no drip campaign yet...
