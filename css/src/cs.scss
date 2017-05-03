@@ -905,6 +905,10 @@ h2 .show-infos {
 
 #wpbody-content .wp-list-table {
 
+	.column-cs_replacement {
+		width: 10%;
+	}
+
 	&.fixed {
 		@media screen and (max-width: 782px) {
 			.column-cs_replacement {
