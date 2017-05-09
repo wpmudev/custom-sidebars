@@ -5,6 +5,9 @@ Buildtime: BUILDTIME
 Change Log:
 ----------------------------------------------------------------------
 
+3.0.6 ( 2017-xx-xx )
+- Improved "Sidebar Location" popup - added a message when we do not have any replaceable sidebar.
+
 3.0.6 ( 2017-05-09 )
 - Added width to "Custom Sidebars" column on entries list screen to avoid uncontrolled column width.
 - Added ability to add new sidebar using the only keyboard, after you fill name just push enter to move to the description field. Hit enter on description field to add a new sidebar.

@@ -897,6 +897,14 @@ h2 .show-infos {
 	display: block;
 }
 
+.popup-content {
+	.message {
+		&.no-sidebars {
+			font-size: 1.4em;
+		}
+	}
+}
+
 /**
  * =============================================================================
  * == Post list

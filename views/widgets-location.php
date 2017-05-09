@@ -69,7 +69,7 @@ function _show_replaceable( $sidebar, $prefix, $cat_name, $class = '' ) {
 			<span class="sb-name">...</span>
 		</h3>
 	</div>
-	<p>
+	<p class="message unique-post">
 		<i class="dashicons dashicons-info light"></i>
 		<?php
 		printf(
@@ -84,6 +84,9 @@ function _show_replaceable( $sidebar, $prefix, $cat_name, $class = '' ) {
 		?>
 	</p>
 
+<div>
+    <p class="message no-sidebars"><?php _e( 'There is no replaceable sidebar. Please first allow at least one to be replaced.', 'custom-sidebars' ); ?></p>
+</div>
 	<?php
 	/**
 	 * =========================================================================
