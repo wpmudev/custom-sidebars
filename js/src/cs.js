@@ -1022,7 +1022,7 @@ window.csSidebars = null;
 				 */
 				if ( 0 === visible_sidebars ) {
 					popup.$().find( '.wpmui-box, .message, .button-primary' ).hide();
-					popup.$().find('.message.no-sidebars').show().parent().addClass('notice notice-error');
+					popup.$().find('.message.no-sidebars').show().parent().addClass('notice notice-error').removeClass('hidden');
 				}
 
 				// Add a new option to the replacement list.

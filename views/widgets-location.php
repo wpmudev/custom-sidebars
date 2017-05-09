@@ -84,8 +84,8 @@ function _show_replaceable( $sidebar, $prefix, $cat_name, $class = '' ) {
 		?>
 	</p>
 
-<div>
-    <p class="message no-sidebars"><?php _e( 'There is no replaceable sidebar. Please first allow at least one to be replaced.', 'custom-sidebars' ); ?></p>
+<div class="hidden">
+	<p class="message no-sidebars"><?php _e( 'There are no replaceable sidebars. Please allow at least one as replaceable.', 'custom-sidebars' ); ?></p>
 </div>
 	<?php
 	/**
