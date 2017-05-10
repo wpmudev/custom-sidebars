@@ -580,7 +580,8 @@ foreach ( $tags as $one ) {
 		static $Settings = array();
 		static $Result = array();
 
-		$expl = CustomSidebarsExplain::do_explain();
+		$custom_sidebars_explain = CustomSidebarsExplain::instance();
+		$expl = $custom_sidebars_explain->do_explain();
 
 		if ( ! did_action( 'cs_before_replace_sidebars' ) ) {
 			return $widget_areas;
@@ -644,7 +645,9 @@ foreach ( $tags as $one ) {
 		$condition_true = true;
 		$action = 'show';
 		$explain = ''; // This is used to explain why a widget is not displayed.
-		$expl = CustomSidebarsExplain::do_explain();
+
+		$custom_sidebars_explain = CustomSidebarsExplain::instance();
+		$expl = $custom_sidebars_explain->do_explain();
 
 		if ( empty( $instance['csb_visibility'] ) || empty( $instance['csb_visibility']['conditions'] ) ) {
 			return $show_widget;
