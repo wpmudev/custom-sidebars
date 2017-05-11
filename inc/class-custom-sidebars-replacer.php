@@ -126,10 +126,7 @@ class CustomSidebarsReplacer extends CustomSidebars {
 		// Legacy handler with camelCase
 		do_action( 'cs_predetermineReplacements', $defaults );
 
-        $replacements = $this->determine_replacements( $defaults );
-
-//l($replacements);
-
+		$replacements = $this->determine_replacements( $defaults );
 
 		foreach ( $replacements as $sb_id => $replace_info ) {
 			if ( ! is_array( $replace_info ) || count( $replace_info ) < 3 ) {
@@ -543,7 +540,6 @@ class CustomSidebarsReplacer extends CustomSidebars {
 			}
 		} elseif ( is_404() ) {
 			// 11 |== 404 not found ------------------------------------------------
-l('404');
 			$expl && do_action( 'cs_explain', 'Type 11: 404 not found' );
 
 			foreach ( $sidebars as $sb_id ) {
