@@ -316,7 +316,7 @@ class CustomSidebarsReplacer extends CustomSidebars {
 					);
 				}
 			}
-		} elseif ( ! is_category() && ! is_singular() && get_post_type() != 'post' ) {
+		} elseif ( ! is_404() && ! is_category() && ! is_singular() && get_post_type() != 'post' ) {
 			// 4 |== Post-Tpe Archive ----------------------------------------------
 			// `get_post_type() != 'post'` .. post-archive = post-index (see 7)
 
@@ -543,7 +543,6 @@ class CustomSidebarsReplacer extends CustomSidebars {
 			}
 		} elseif ( is_404() ) {
 			// 11 |== 404 not found ------------------------------------------------
-
 			$expl && do_action( 'cs_explain', 'Type 11: 404 not found' );
 
 			foreach ( $sidebars as $sb_id ) {
