@@ -8,10 +8,10 @@ Change Log:
 3.0.7 ( 2017-xx-xx )
 * Fixed a replacement problem on 404 pages.
 
-3.0.6 ( 2017-05-09 )
+3.0.6 ( 2017-05-11 )
 - Added width to "Custom Sidebars" column on entries list screen to avoid uncontrolled column width.
 - Added ability to add new sidebar using the only keyboard, after you fill name just push enter to move to the description field. Hit enter on description field to add a new sidebar.
-- Fixed frash message for pro version.
+- Fixed "WPMUDEV Frash" message for pro version.
 
 3.0.5 ( 2017-04-25 )
 - Improved columns display on post list screen - now "Custom Sidebars" column is hidden by default.

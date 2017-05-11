@@ -3,7 +3,7 @@ Contributors: WPMUDEV, marquex, WPMUDEV-Support2, WPMUDEV-Support1, WPMUDEV-Supp
 Tags: sidebar, widget, footer, custom, flexible layout, dynamic widgets, manage sidebars, replace widgets, custom widget area
 Requires at least: 3.3
 Tested up to: 4.7.4
-Stable tag: 3.0.5
+Stable tag: 3.0.6
 
 Flexible sidebars for custom widget configurations on every page, post and custom post type on your site.
 
@@ -123,7 +123,7 @@ If you are running a earlier version of WordPress download Custom Sidebars 0.8.2
 = 3.0.6 =
 * Added width to "Custom Sidebars" column on entries list screen to avoid uncontrolled column width.
 * Added ability to add new sidebar using the only keyboard, after you fill name just push enter to move to the description field. Hit enter on description field to add a new sidebar.
-* Fixed frash message for pro version.
+* Fixed "WPMUDEV Frash" message for pro version.
 
 = 3.0.5 =
 * Improved columns display on post list screen - now "Custom Sidebars" column is hidden by default.
