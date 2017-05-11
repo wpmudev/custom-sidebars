@@ -102,7 +102,8 @@ class CustomSidebarsReplacer extends CustomSidebars {
 			$wp_registered_sidebars,
 			$wp_registered_widgets;
 
-		$expl = CustomSidebarsExplain::do_explain();
+		$custom_sidebars_explain = CustomSidebarsExplain::instance();
+		$expl = $custom_sidebars_explain->do_explain();
 
 		$expl && do_action( 'cs_explain', '<h4>Replace sidebars</h4>', true );
 
@@ -185,7 +186,9 @@ class CustomSidebarsReplacer extends CustomSidebars {
 		$sidebars = self::get_options( 'modifiable' );
 		$replacements_todo = sizeof( $sidebars );
 		$replacements = array();
-		$expl = CustomSidebarsExplain::do_explain();
+
+		$custom_sidebars_explain = CustomSidebarsExplain::instance();
+		$expl = $custom_sidebars_explain->do_explain();
 
 		foreach ( $sidebars as $sb ) {
 			$replacements[ $sb ] = false;
@@ -313,7 +316,7 @@ class CustomSidebarsReplacer extends CustomSidebars {
 					);
 				}
 			}
-		} elseif ( ! is_category() && ! is_singular() && get_post_type() != 'post' ) {
+		} elseif ( ! is_404() && ! is_category() && ! is_singular() && get_post_type() != 'post' ) {
 			// 4 |== Post-Tpe Archive ----------------------------------------------
 			// `get_post_type() != 'post'` .. post-archive = post-index (see 7)
 
@@ -540,7 +543,6 @@ class CustomSidebarsReplacer extends CustomSidebars {
 			}
 		} elseif ( is_404() ) {
 			// 11 |== 404 not found ------------------------------------------------
-
 			$expl && do_action( 'cs_explain', 'Type 11: 404 not found' );
 
 			foreach ( $sidebars as $sb_id ) {
