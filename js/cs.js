@@ -997,6 +997,16 @@ window.csSidebars = null;
 				popup.$().find( '.sb-name' ).text( resp.sidebar.name );
 				var sb_id = resp.sidebar.id;
 
+				/**
+				 * hide message
+				 */
+				popup.$().find('.message.no-sidebars').hide();
+
+				/**
+				 * Count sidebars
+				 */
+				var visible_sidebars = 0;
+
 				// Only show settings for replaceable sidebars
 				var sidebars = popup.$().find( '.cs-replaceable' );
 				sidebars.hide();
@@ -1006,6 +1016,15 @@ window.csSidebars = null;
 						continue;
 					}
 					sidebars.filter( '.' + resp.replaceable[key0] ).show();
+					visible_sidebars++;
+				}
+
+				/**
+				 * no visible_sidebars - show information about it
+				 */
+				if ( 0 === visible_sidebars ) {
+					popup.$().find( '.wpmui-box, .message, .button-primary' ).hide();
+					popup.$().find('.message.no-sidebars').show().parent().addClass('notice notice-error').removeClass('hidden');
 				}
 
 				// Add a new option to the replacement list.
