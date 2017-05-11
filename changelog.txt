@@ -6,7 +6,8 @@ Change Log:
 ----------------------------------------------------------------------
 
 3.0.7 ( 2017-xx-xx )
-* Fixed a replacement problem on 404 pages.
+- Fixed a replacement problem on 404 pages.
+- Added ability to turn on Custom Sidebars Explain mode from Admin Bar.
 
 3.0.6 ( 2017-05-11 )
 - Added width to "Custom Sidebars" column on entries list screen to avoid uncontrolled column width.
