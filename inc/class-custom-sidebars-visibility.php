@@ -149,17 +149,17 @@ class CustomSidebarsVisibility extends CustomSidebars {
 			$membership_levels = $this->get_membership_levels();
 			$membership2_items = $this->get_membership2_items();
 			$pagetype_list = array(
-				'frontpage' => 'Front Page',
-				'home' => 'Post Index',
-				'single' => 'Single page',
-				//'posts' => 'Posts page',  "Posts page" is same as "Post Index"...
-				'archive' => 'Archives',
-				'search' => 'Search results',
-				'e404' => 'Not found (404)',
-				'preview' => 'Preview',
-				'day' => 'Archive: Day',
-				'month' => 'Archive: Month',
-				'year' => 'Archive: Year',
+				'frontpage' => __( 'aFront Page', 'custom-sidebars' ),
+				'home' => __( 'Post Index', 'custom-sidebars' ),
+				'single' => __( 'Single page', 'custom-sidebars' ),
+				//'posts' => __( 'Posts page', 'custom-sidebars' ),  "Posts page" is same as "Post Index"...
+				'archive' => __( 'Archives', 'custom-sidebars' ),
+				'search' => __( 'Search results', 'custom-sidebars' ),
+				'e404' => __( 'Not found (404)', 'custom-sidebars' ),
+				'preview' => __( 'Preview', 'custom-sidebars' ),
+				'day' => __( 'Archive: Day', 'custom-sidebars' ),
+				'month' => __( 'Archive: Month', 'custom-sidebars' ),
+				'year' => __( 'Archive: Year', 'custom-sidebars' ),
 			);
 
 			// Remove taxonomies without values.

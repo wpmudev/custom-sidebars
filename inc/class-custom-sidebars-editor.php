@@ -383,8 +383,14 @@ class CustomSidebarsEditor extends CustomSidebars {
 			'_404' => __( 'Not found (404)', 'custom-sidebars' ),
 			'_authors' => __( 'Any Author Archive', 'custom-sidebars' ),
 			'_tags' => __( 'Tag Archives', 'custom-sidebars' ),
+			'_cats' => __( 'Category Archives', 'custom-sidebars' ),
 			'_date' => __( 'Date Archives', 'custom-sidebars' ),
 		);
+
+		/**
+		 * sort array by values
+		 */
+		asort( $archive_type );
 
 		$raw_authors = array();
 		$raw_authors = get_users(
