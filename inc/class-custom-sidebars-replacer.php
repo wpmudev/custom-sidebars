@@ -285,19 +285,33 @@ class CustomSidebarsReplacer extends CustomSidebars {
 			$current_category = $category_object->term_id;
 			while ( 0 != $current_category && $replacements_todo > 0 ) {
 				foreach ( $sidebars as $sb_id ) {
-					if ( $replacements[ $sb_id ] ) { continue; }
-					if ( ! empty( $options['category_archive'][ $current_category ][ $sb_id ] ) ) {
+					if (
+						isset( $options['category_single'] )
+						&& isset( $options['category_single'][ $current_category ] )
+						&& isset( $options['category_single'][ $current_category ][ $sb_id ] )
+					) {
 						$replacements[ $sb_id ] = array(
-							$options['category_archive'][ $current_category ][ $sb_id ],
-							'category_archive',
+							$options['category_single'][ $current_category ][ $sb_id ],
+							'category_single',
 							$current_category,
 						);
-						$replacements_todo -= 1;
 					}
 				}
 				$current_category = $category_object->category_parent;
 				if ( 0 != $current_category ) {
 					$category_object = get_category( $current_category );
+				}
+			}
+			/**
+			 * Category archive
+			 */
+			foreach ( $sidebars as $sb_id ) {
+				if ( ! $replacements[ $sb_id ] && isset( $options['category_archive'][ $sb_id ] ) ) {
+					$replacements[ $sb_id ] = array(
+						$options['category_archive'][ $sb_id ],
+						'category_archive',
+						0,
+					);
 				}
 			}
 		} elseif ( is_search() ) {

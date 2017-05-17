@@ -5,7 +5,9 @@ Buildtime: BUILDTIME
 Change Log:
 ----------------------------------------------------------------------
 
-3.0.6 ( 2017-xx-xx )
+3.0.7 ( 2017-xx-xx )
+- Added ability to replace sidebars for category archive.
+- Added ability to replace sidebars for custom taxonomy archive.
 - Added ability to turn on Custom Sidebars Explain mode from Admin Bar.
 - Improved "Sidebar Location" popup - added a message when we do not have any replaceable sidebar.
 - Fixed a replacement problem on 404 pages.

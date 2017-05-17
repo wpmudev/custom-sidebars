@@ -516,6 +516,21 @@ class CustomSidebarsEditor extends CustomSidebars {
 			}
 		}
 
+		/**
+		 * Category archive.
+		 */
+		foreach ( $raw_taxonomies['_builtin'] as $t ) {
+			if ( 'category' == $t->name ) {
+				if ( isset( $defaults['category_archive'] ) ) {
+					$sel_archive = $defaults['category_archive'];
+					$archives[ $key ] = array(
+						'name' => sprintf( __( '%s Archives', 'custom-sidebars' ), $t->labels->singular_name ),
+						'archive' => self::get_array( $sel_archive ),
+					);
+				}
+			}
+		}
+
 		// Build a list of authors.
 		$authors = array();
 		foreach ( $raw_authors as $user ) {
@@ -689,6 +704,23 @@ class CustomSidebarsEditor extends CustomSidebars {
 				) {
 					unset( $options['taxonomies_archive'][ $taxonomy ][ $sb_id ] );
 				}
+			}
+			/**
+			 * category Archive
+			 *
+			 * @since 3.0.7
+			 */
+			if (
+				isset( $data['arc'][ $sb_id ] )
+				&& is_array( $data['arc'][ $sb_id ] )
+				&& in_array( '_category',  $data['arc'][ $sb_id ] )
+			) {
+				$options['category_archive'][ $sb_id ] = $req->id;
+			} elseif (
+				isset( $options['category_archive']['_category'][ $sb_id ] ) &&
+				$options['category_archive']['category_archive'][ $sb_id ] == $req->id
+			) {
+				unset( $options['category_archive'][ $sb_id ] );
 			}
 		}
 
