@@ -823,9 +823,6 @@ h2 .show-infos {
  * == Post list
  * =============================================================================
  */
-#wpbody-content .wp-list-table .column-cs_replacement {
-  width: 10%;
-}
 @media screen and (max-width: 782px) {
   #wpbody-content .wp-list-table.fixed .column-cs_replacement {
     display: none;
@@ -834,47 +831,15 @@ h2 .show-infos {
 #wpbody-content .wp-list-table .column-cs_replacement {
   width: 10%;
 }
-#wpbody-content .wp-list-table td.cs_replacement {
-  /* do not display sidebars that are not replaced */
-}
-#wpbody-content .wp-list-table td.cs_replacement .def,
-#wpbody-content .wp-list-table td.cs_replacement .cust {
+#wpbody-content .wp-list-table .column-cs_replacement dt {
   opacity: .8;
-  cursor: default;
-  position: relative;
-  padding-left: 110px;
-}
-#wpbody-content .wp-list-table td.cs_replacement .def:after,
-#wpbody-content .wp-list-table td.cs_replacement .cust:after {
-  content: ' ';
-  display: block;
-  clear: both;
-}
-#wpbody-content .wp-list-table td.cs_replacement .def:hover,
-#wpbody-content .wp-list-table td.cs_replacement .cust:hover {
-  opacity: 1;
-  background: rgba(0, 0, 0, 0.02);
-}
-#wpbody-content .wp-list-table td.cs_replacement .def {
-  display: none;
-}
-#wpbody-content .wp-list-table td.cs_replacement .cs-val,
-#wpbody-content .wp-list-table td.cs_replacement .cs-key {
-  white-space: nowrap;
-  text-overflow: ellipsis;
-  overflow: hidden;
-}
-#wpbody-content .wp-list-table td.cs_replacement .cs-key {
-  max-width: 100px;
   color: #666;
-  position: absolute;
-  left: 0;
 }
-#wpbody-content .wp-list-table td.cs_replacement .cs-val {
-  display: block;
+#wpbody-content .wp-list-table .column-cs_replacement dd {
+  margin-left: 10px;
 }
 #wpbody-content .wp-list-table .inline-edit-row fieldset.cs-quickedit {
-  border-top: 1px solid #EEE;
+  border-top: 1px solid #eee;
   margin-top: 10px;
   padding-top: 10px;
 }

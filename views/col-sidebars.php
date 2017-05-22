@@ -25,26 +25,31 @@ if ( $is_front || $is_blog ) {
 } else {
 	global $wp_registered_sidebars;
 	$available = CustomSidebars::sort_sidebars_by_name( $wp_registered_sidebars );
+	$content = '';
 	foreach ( $sidebars as $s ) {
 		$sb_name = $available[ $s ]['name'];
 		$replaced = ! empty( $available[ $selected[ $s ] ] );
 		$class = $replaced ? 'cust' : 'def';
 
-		?>
-		<div class="<?php echo esc_attr( $class, 'custom-sidebars' ); ?>"
-			data-sidebar="<?php echo esc_attr( $s ); ?>"
-			data-replaced="<?php echo esc_attr( @$selected[ $s ] ); ?>">
-			<small class="cs-key">
-				<?php echo esc_html( $sb_name ); ?>
-			</small>
-			<span class="cs-val">
-			<?php if ( $replaced ) : ?>
-				<?php echo esc_html( $available[ $selected[ $s ] ]['name'] ); ?>
-			<?php else : ?>
-				-
-			<?php endif; ?>
-			</span>
-		</div>
-		<?php
+		if ( $replaced ) {
+			$content .= sprintf(
+				'<dt data-sidebar="%s" data-replaced="%s" class="cs-key %s">',
+				esc_attr( $s ),
+				isset( $selected[ $s ] )? esc_attr( $selected[ $s ] ):'',
+				esc_attr( $class, 'custom-sidebars' )
+			);
+			$content .= esc_html( $sb_name );
+			$content .= '</dt>';
+			$content .= '<dd class="cs-val">';
+			$content .= esc_html( $available[ $selected[ $s ] ]['name'] );
+			$content .= '</dd>';
+		}
+	}
+	if ( empty( $content ) ) {
+		echo '-';
+	} else {
+		echo '<dl>';
+		echo $content;
+		echo '</dl>';
 	}
 }

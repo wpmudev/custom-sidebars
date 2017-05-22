@@ -912,11 +912,6 @@ h2 .show-infos {
  */
 
 #wpbody-content .wp-list-table {
-
-	.column-cs_replacement {
-		width: 10%;
-	}
-
 	&.fixed {
 		@media screen and (max-width: 782px) {
 			.column-cs_replacement {
@@ -924,76 +919,37 @@ h2 .show-infos {
 			}
 		}
 	}
-
 	.column-cs_replacement {
 		width: 10%;
-	}
-
-	td.cs_replacement {
-		/* do not display sidebars that are not replaced */
-		.def,
-		.cust {
+		dt {
 			opacity: .8;
-			cursor: default;
-			position: relative;
-			padding-left: 110px;
-
-			&:after {
-				content: ' ';
-				display: block;
-				clear: both;
-			}
-
-			&:hover {
-				opacity: 1;
-				background: rgba(0,0,0,0.02);
-			}
-		}
-
-		.def {
-			display: none;
-		}
-
-		.cs-val,
-		.cs-key {
-			white-space: nowrap;
-			text-overflow: ellipsis;
-			overflow: hidden;
-		}
-
-		.cs-key {
-			max-width: 100px;
 			color: #666;
-			position: absolute;
-			left: 0;
 		}
-
-		.cs-val {
-			display: block;
+		dd {
+			margin-left: 10px;
 		}
 	}
-
 	.inline-edit-row {
 		fieldset.cs-quickedit {
-			border-top: 1px solid #EEE;
+			border-top: 1px solid #eee;
 			margin-top: 10px;
 			padding-top: 10px;
-
-			label span.title {
-				display: block;
-				float: left;
-				min-width: 5em;
-				white-space: nowrap;
-				padding-right: 10px;
-				width: auto;
+			label {
+				span.title {
+					display: block;
+					float: left;
+					min-width: 5em;
+					white-space: nowrap;
+					padding-right: 10px;
+					width: auto;
+				}
 			}
 		}
 	}
-
-	.inline-edit-row-page .inline-edit-col-right {
-		float: right;
+	.inline-edit-row-page {
+		.inline-edit-col-right {
+			float: right;
+		}
 	}
 }
-
-
 
