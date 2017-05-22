@@ -699,6 +699,30 @@ class CustomSidebars {
 	}
 
 	/**
+	 * Returns a list of all taxonomies that support custom sidebars.
+	 *
+	 * @since 3.0.7
+	 *
+	 * @uses   self::supported_post_type()
+	 * @param  string $type [names|objects] Defines details of return data.
+	 * @return array List of posttype names or objects, depending on the param.
+	 */
+	static public function get_taxonomies( $type = 'names', $_builtin = true ) {
+		$Valid = array();
+		if ( 'objects' != $type ) {
+			$type = 'names';
+		}
+		if ( ! isset( $Valid[ $type ] ) ) {
+			$all = get_taxonomies( array( 'public' => true, '_builtin' => $_builtin ), $type );
+			$Valid[ $type ] = array();
+			foreach ( $all as $one ) {
+				$Valid[ $type ][] = $one;
+			}
+		}
+		return $Valid[ $type ];
+	}
+
+	/**
 	 * Returns an array of all categories.
 	 *
 	 * @since  2.0

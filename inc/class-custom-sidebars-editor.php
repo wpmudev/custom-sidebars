@@ -376,15 +376,53 @@ class CustomSidebarsEditor extends CustomSidebars {
 		$defaults = self::get_options();
 		$raw_posttype = self::get_post_types( 'objects' );
 		$raw_cat = self::get_all_categories();
+		$raw_taxonomies = array(
+			'_builtin' => self::get_taxonomies( 'objects', true ),
+			'custom' => self::get_taxonomies( 'objects', false ),
+		);
 
 		$archive_type = array(
 			'_blog' => __( 'Front Page', 'custom-sidebars' ),
 			'_search' => __( 'Search Results', 'custom-sidebars' ),
 			'_404' => __( 'Not found (404)', 'custom-sidebars' ),
 			'_authors' => __( 'Any Author Archive', 'custom-sidebars' ),
-			'_tags' => __( 'Tag Archives', 'custom-sidebars' ),
 			'_date' => __( 'Date Archives', 'custom-sidebars' ),
 		);
+
+		/**
+		 * taxonomies
+		 *
+		 * @since 3.0.7
+		 */
+		$default_taxonomies = array();
+		foreach ( $raw_taxonomies['_builtin'] as $taxonomy ) {
+			$default_taxonomies[] = $taxonomy->labels->singular_name;
+			switch ( $taxonomy->name ) {
+				case 'post_format':
+				break;
+				case 'post_tag':
+					/**
+				 * this a legacy and backward compatibility
+				 */
+					$archive_type['_tags'] = sprintf( __( '%s Archives', 'custom-sidebars' ), $taxonomy->labels->singular_name );
+				break;
+				case 'category':
+					$archive_type[ '_'.$taxonomy->name ] = sprintf( __( '%s Archives', 'custom-sidebars' ), $taxonomy->labels->singular_name );
+				break;
+			}
+		}
+		foreach ( $raw_taxonomies['custom'] as $taxonomy ) {
+			if ( in_array( $taxonomy->labels->singular_name, $default_taxonomies ) ) {
+				$archive_type[ '_taxonomy_'.$taxonomy->name ] = sprintf( __( '%s Archives', 'custom-sidebars' ), ucfirst( $taxonomy->name ) );
+			} else {
+				$archive_type[ '_taxonomy_'.$taxonomy->name ] = sprintf( __( '%s Archives', 'custom-sidebars' ), $taxonomy->labels->singular_name );
+			}
+		}
+
+		/**
+		 * sort array by values
+		 */
+		asort( $archive_type );
 
 		$raw_authors = array();
 		$raw_authors = get_users(
@@ -450,6 +488,45 @@ class CustomSidebarsEditor extends CustomSidebars {
 			);
 		}
 
+		/**
+		 * Custom taxonomies
+		 *
+		 * @since 3.0.7
+		 */
+		foreach ( $raw_taxonomies['custom'] as $t ) {
+			$taxonomy = $t->name;
+			if (
+				isset( $defaults['taxonomies_archive'] )
+				&& isset( $defaults['taxonomies_archive'][ $taxonomy ] )
+			) {
+				$name  = sprintf( __( '%s Archives', 'custom-sidebars' ), $t->labels->singular_name );
+				if ( in_array( $t->labels->singular_name, $default_taxonomies ) ) {
+					$name = sprintf( __( '%s Archives', 'custom-sidebars' ), ucfirst( $taxonomy ) );
+				}
+				$sel_archive = $defaults['taxonomies_archive'][ $taxonomy ];
+				$key = '_taxonomy_'.$taxonomy;
+				$archives[ $key ] = array(
+					'name' => $name,
+					'archive' => self::get_array( $sel_archive ),
+				);
+			}
+		}
+
+		/**
+		 * Category archive.
+		 */
+		foreach ( $raw_taxonomies['_builtin'] as $t ) {
+			if ( 'category' == $t->name ) {
+				if ( isset( $defaults['category_archive'] ) ) {
+					$sel_archive = $defaults['category_archive'];
+					$archives[ $key ] = array(
+						'name' => sprintf( __( '%s Archives', 'custom-sidebars' ), $t->labels->singular_name ),
+						'archive' => self::get_array( $sel_archive ),
+					);
+				}
+			}
+		}
+
 		// Build a list of authors.
 		$authors = array();
 		foreach ( $raw_authors as $user ) {
@@ -483,6 +560,7 @@ class CustomSidebarsEditor extends CustomSidebars {
 		$sidebars = $options['modifiable'];
 		$raw_posttype = self::get_post_types( 'objects' );
 		$raw_cat = self::get_all_categories();
+		$raw_taxonomies = self::get_taxonomies();
 		$data = array();
 
 		foreach ( $_POST as $key => $value ) {
@@ -601,6 +679,44 @@ class CustomSidebarsEditor extends CustomSidebars {
 				) {
 					unset( $options['author_archive'][ $key ][ $sb_id ] );
 				}
+			}
+
+			/**
+			 * Custom taxonomies
+			 *
+			 * @since 3.0.7
+			 */
+			foreach ( $raw_taxonomies as $taxonomy ) {
+				$key = '_taxonomy_'.$taxonomy;
+				if (
+					isset( $data['arc'][ $sb_id ] )
+					&& is_array( $data['arc'][ $sb_id ] )
+					&& in_array( $key,  $data['arc'][ $sb_id ] )
+				) {
+					$options['taxonomies_archive'][ $taxonomy ][ $sb_id ] = $req->id;
+				} elseif (
+					isset( $options['taxonomies_archive'][ $key ][ $sb_id ] ) &&
+					$options['taxonomies_archive'][ $key ][ $sb_id ] == $req->id
+				) {
+					unset( $options['taxonomies_archive'][ $taxonomy ][ $sb_id ] );
+				}
+			}
+			/**
+			 * category Archive
+			 *
+			 * @since 3.0.7
+			 */
+			if (
+				isset( $data['arc'][ $sb_id ] )
+				&& is_array( $data['arc'][ $sb_id ] )
+				&& in_array( '_category',  $data['arc'][ $sb_id ] )
+			) {
+				$options['category_archive'][ $sb_id ] = $req->id;
+			} elseif (
+				isset( $options['category_archive']['_category'][ $sb_id ] ) &&
+				$options['category_archive']['category_archive'][ $sb_id ] == $req->id
+			) {
+				unset( $options['category_archive'][ $sb_id ] );
 			}
 		}
 
