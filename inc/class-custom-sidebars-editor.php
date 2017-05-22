@@ -386,7 +386,6 @@ class CustomSidebarsEditor extends CustomSidebars {
 			'_search' => __( 'Search Results', 'custom-sidebars' ),
 			'_404' => __( 'Not found (404)', 'custom-sidebars' ),
 			'_authors' => __( 'Any Author Archive', 'custom-sidebars' ),
-		//          '_tags' => __( 'Tag Archives', 'custom-sidebars' ),
 			'_date' => __( 'Date Archives', 'custom-sidebars' ),
 		);
 
@@ -395,9 +394,6 @@ class CustomSidebarsEditor extends CustomSidebars {
 		 *
 		 * @since 3.0.7
 		 */
-		$args = array(
-			'public' => true,
-		);
 		$default_taxonomies = array();
 		foreach ( $raw_taxonomies['_builtin'] as $taxonomy ) {
 			$default_taxonomies[] = $taxonomy->labels->singular_name;
