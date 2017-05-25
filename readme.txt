@@ -1,8 +1,8 @@
 === Custom Sidebars - Dynamic Widget Area Manager ===
 Contributors: WPMUDEV, marquex, WPMUDEV-Support2, WPMUDEV-Support1, WPMUDEV-Support6, WPMUDEV-Support4, iworks
 Tags: sidebar, widget, footer, custom, flexible layout, dynamic widgets, manage sidebars, replace widgets, custom widget area
-Requires at least: 3.3
-Tested up to: 4.7.4
+Requires at least: 3.6
+Tested up to: 4.7.5
 Stable tag: 3.0.6
 
 Flexible sidebars for custom widget configurations on every page, post and custom post type on your site.
@@ -119,6 +119,14 @@ Custom Sidebars has the same license as WordPress, so you can use it wherever yo
 If you are running a earlier version of WordPress download Custom Sidebars 0.8.2.
 
 == Changelog ==
+
+3.0.7
+- Added ability to replace sidebars for category archive.
+- Added ability to replace sidebars for custom taxonomy archive.
+- Added ability to turn on Custom Sidebars Explain mode from Admin Bar.
+- Fixed a replacement problem on 404 pages.
+- Improved "Sidebar Location" popup - added a message when we do not have any replaceable sidebar.
+- Refactored "Column Sidebars" on post list screen.
 
 = 3.0.6 =
 * Added width to "Custom Sidebars" column on entries list screen to avoid uncontrolled column width.
