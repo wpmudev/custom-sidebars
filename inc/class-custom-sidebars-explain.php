@@ -109,7 +109,7 @@ class CustomSidebarsExplain extends CustomSidebars {
 		if ( ! isset( $_GET['cs-explain'] ) ) {
 			return;
 		}
-		if ( 'on' == $_GET['cs-explain'] ) {
+		if ( current_user_can( 'manage_options' ) && 'on' == $_GET['cs-explain'] ) {
 			$this->debug = true;
 			$result = add_user_meta( $this->current_user_id, 'custom_sidebars_explain', $this->debug, true );
 			if ( ! $result ) {
@@ -209,7 +209,7 @@ class CustomSidebarsExplain extends CustomSidebars {
 
 
 	public function admin_bar_menu( $wp_admin_bar ) {
-		if ( 0 == $this->current_user_id ) {
+		if ( ! current_user_can( 'manage_options' ) ) {
 			return;
 		}
 		$args = array(
