@@ -120,6 +120,9 @@ If you are running a earlier version of WordPress download Custom Sidebars 0.8.2
 
 == Changelog ==
 
+3.0.7.1
+- Fixed visibility of Custom Explain - now it is visible only for administrators.
+
 3.0.7
 - Added ability to replace sidebars for category archive.
 - Added ability to replace sidebars for custom taxonomy archive.
