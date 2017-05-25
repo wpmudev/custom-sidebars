@@ -5,6 +5,8 @@ Buildtime: BUILDTIME
 Change Log:
 ----------------------------------------------------------------------
 
+3.0.8 ( 2017-xx-xx )
+
 3.0.7 ( 2017-05-25 )
 - Added ability to replace sidebars for category archive.
 - Added ability to replace sidebars for custom taxonomy archive.
