@@ -80,10 +80,11 @@ class CustomSidebarsExplain extends CustomSidebars {
 		if ( is_admin() ) {
 			return;
 		}
-			add_action( 'cs_explain', array( $this, 'add_info' ), 10, 2 );
-			add_action( 'wp_footer', array( $this, 'show_infos' ) );
-			add_action( 'dynamic_sidebar_before', array( $this, 'before_sidebar' ), 0, 2 );
-			add_action( 'dynamic_sidebar_after', array( $this, 'after_sidebar' ), 0, 2 );
+		add_action( 'cs_explain', array( $this, 'add_info' ), 10, 2 );
+		add_action( 'wp_footer', array( $this, 'show_infos' ) );
+		add_action( 'dynamic_sidebar_before', array( $this, 'before_sidebar' ), 0, 2 );
+		add_action( 'dynamic_sidebar_after', array( $this, 'after_sidebar' ), 0, 2 );
+		add_action( 'wp_print_styles', array( $this, 'print_styles' ) );
 	}
 
 	/**
@@ -207,28 +208,47 @@ class CustomSidebarsExplain extends CustomSidebars {
 		<?php
 	}
 
-
+	/**
+	 * Added adminbar position for debug
+	 *
+	 * @since 3.0.7
+	 */
 	public function admin_bar_menu( $wp_admin_bar ) {
+		if ( is_admin() ) {
+			return;
+		}
 		if ( ! current_user_can( 'manage_options' ) ) {
 			return;
 		}
 		$args = array(
 			'id'    => 'cs-explain',
-			'title' => __( 'Turn on explanations', 'custom-sidebars' ),
+			'title' => __( 'Sidebar Debug', 'custom-sidebars' ),
 			'href'  => add_query_arg( 'cs-explain', 'on' ),
 			'parent' => 'top-secondary',
 			'meta' => array(
 				'title' => __( 'Turn on Custom Sidebars explain mode.', 'custom-sidebars' ),
+				'class' => 'debug-is-off',
 			),
 		);
 		if ( $this->debug ) {
 			$args['href'] = add_query_arg( 'cs-explain', 'off' );
-			$args['title'] = __( 'Turn off explanations', 'custom-sidebars' );
 			$args['meta'] = array(
 				'title' => __( 'Turn off Custom Sidebars explain mode.', 'custom-sidebars' ),
 				'class' => 'cs-explain-on',
 			);
 		}
 		$wp_admin_bar->add_node( $args );
+	}
+
+	/**
+	 * Print style for debug
+	 *
+	 * @since 3.0.8
+	 */
+	public function print_styles() {
+		echo '<style type="text/css" media="screen">';
+		echo '#wpadminbar .cs-explain-on{ background-color:#050}';
+		echo 'html body #wpadminbar .ab-top-menu .cs-explain-on:hover>.ab-item{background-color:#251}';
+		echo '</style>';
 	}
 };
