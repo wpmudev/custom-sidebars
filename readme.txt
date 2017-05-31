@@ -120,16 +120,16 @@ If you are running a earlier version of WordPress download Custom Sidebars 0.8.2
 
 == Changelog ==
 
-3.0.7.1
-- Fixed visibility of Custom Explain - now it is visible only for administrators.
+= 3.0.7.1 =
+* Fixed visibility of Custom Explain - now it is visible only for administrators.
 
-3.0.7
-- Added ability to replace sidebars for category archive.
-- Added ability to replace sidebars for custom taxonomy archive.
-- Added ability to turn on Custom Sidebars Explain mode from Admin Bar.
-- Fixed a replacement problem on 404 pages.
-- Improved "Sidebar Location" popup - added a message when we do not have any replaceable sidebar.
-- Refactored "Column Sidebars" on post list screen.
+= 3.0.7= 
+* Added ability to replace sidebars for category archive.
+* Added ability to replace sidebars for custom taxonomy archive.
+* Added ability to turn on Custom Sidebars Explain mode from Admin Bar.
+* Fixed a replacement problem on 404 pages.
+* Improved "Sidebar Location" popup - added a message when we do not have any replaceable sidebar.
+* Refactored "Column Sidebars" on post list screen.
 
 = 3.0.6 =
 * Added width to "Custom Sidebars" column on entries list screen to avoid uncontrolled column width.
