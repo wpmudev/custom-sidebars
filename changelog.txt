@@ -7,6 +7,8 @@ Change Log:
 
 3.0.8 ( 2017-xx-xx )
 - Added bulk sidebars edit.
+- Fixed category archive and entry in category replaceables.
+- Visibility of "Custom Explain" link is limited only to front-end.
 
 3.0.7.1 ( 2017-05-25 )
 - Fixed visibility of Custom Explain - now it is visible only for administrators.
