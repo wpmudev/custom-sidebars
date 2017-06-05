@@ -4,7 +4,7 @@ msgid ""
 msgstr ""
 "Project-Id-Version: Custom Sidebars Pro PLUGIN_VERSION\n"
 "Report-Msgid-Bugs-To: https://wordpress.org/support/plugin/customsidebars\n"
-"POT-Creation-Date: 2017-05-25 05:53:51+00:00\n"
+"POT-Creation-Date: 2017-06-05 08:19:24+00:00\n"
 "MIME-Version: 1.0\n"
 "Content-Type: text/plain; charset=utf-8\n"
 "Content-Transfer-Encoding: 8bit\n"
@@ -60,103 +60,99 @@ msgstr ""
 msgid "Clone"
 msgstr ""
 
-#: inc/class-custom-sidebars-editor.php:121
+#: inc/class-custom-sidebars-editor.php:127
 #: inc/class-custom-sidebars-export.php:97
 msgid "You do not have permission for this"
 msgstr ""
 
-#: inc/class-custom-sidebars-editor.php:196
+#: inc/class-custom-sidebars-editor.php:202
 msgid "Sidebar-name cannot be empty"
 msgstr ""
 
-#: inc/class-custom-sidebars-editor.php:220
-#: inc/class-custom-sidebars-editor.php:303
+#: inc/class-custom-sidebars-editor.php:226
+#: inc/class-custom-sidebars-editor.php:309
 msgid "The sidebar does not exist"
 msgstr ""
 
-#: inc/class-custom-sidebars-editor.php:251
+#: inc/class-custom-sidebars-editor.php:257
 msgid "Created new sidebar <strong>%1$s</strong>"
 msgstr ""
 
-#: inc/class-custom-sidebars-editor.php:259
+#: inc/class-custom-sidebars-editor.php:265
 msgid "Updated sidebar <strong>%1$s</strong>"
 msgstr ""
 
-#: inc/class-custom-sidebars-editor.php:270
-#: inc/class-custom-sidebars-editor.php:323
+#: inc/class-custom-sidebars-editor.php:276
+#: inc/class-custom-sidebars-editor.php:329
 msgid "The sidebar was not found"
 msgstr ""
 
-#: inc/class-custom-sidebars-editor.php:312
+#: inc/class-custom-sidebars-editor.php:318
 msgid "Deleted sidebar <strong>%1$s</strong>"
 msgstr ""
 
-#: inc/class-custom-sidebars-editor.php:385
+#: inc/class-custom-sidebars-editor.php:391
 msgid "Front Page"
 msgstr ""
 
-#: inc/class-custom-sidebars-editor.php:386
+#: inc/class-custom-sidebars-editor.php:392
 msgid "Search Results"
 msgstr ""
 
-#: inc/class-custom-sidebars-editor.php:387
+#: inc/class-custom-sidebars-editor.php:393
 #: inc/class-custom-sidebars-visibility.php:158
 msgid "Not found (404)"
 msgstr ""
 
-#: inc/class-custom-sidebars-editor.php:388
+#: inc/class-custom-sidebars-editor.php:394
 msgid "Any Author Archive"
 msgstr ""
 
-#: inc/class-custom-sidebars-editor.php:389
+#: inc/class-custom-sidebars-editor.php:395
 msgid "Date Archives"
 msgstr ""
 
-#: inc/class-custom-sidebars-editor.php:407
-#: inc/class-custom-sidebars-editor.php:410
+#: inc/class-custom-sidebars-editor.php:413
 #: inc/class-custom-sidebars-editor.php:416
-#: inc/class-custom-sidebars-editor.php:418
-#: inc/class-custom-sidebars-editor.php:502
-#: inc/class-custom-sidebars-editor.php:504
-#: inc/class-custom-sidebars-editor.php:523
+#: inc/class-custom-sidebars-editor.php:422
+#: inc/class-custom-sidebars-editor.php:424
+#: inc/class-custom-sidebars-editor.php:508
+#: inc/class-custom-sidebars-editor.php:510
+#: inc/class-custom-sidebars-editor.php:529
 msgid "%s Archives"
 msgstr ""
 
-#: inc/class-custom-sidebars-editor.php:465
+#: inc/class-custom-sidebars-editor.php:471
 #: inc/class-custom-sidebars-visibility.php:153
 msgid "Post Index"
 msgstr ""
 
-#: inc/class-custom-sidebars-editor.php:469
+#: inc/class-custom-sidebars-editor.php:475
 msgid "%1$s Archives"
 msgstr ""
 
-#: inc/class-custom-sidebars-editor.php:724
+#: inc/class-custom-sidebars-editor.php:730
 msgid "Updated sidebar <strong>%1$s</strong> settings."
 msgstr ""
 
-#: inc/class-custom-sidebars-editor.php:760 views/widgets.php:17
+#: inc/class-custom-sidebars-editor.php:766 views/widgets.php:17
 msgid "Sidebars"
 msgstr ""
 
-#: inc/class-custom-sidebars-editor.php:1012 views/import.php:123
-#: views/widgets.php:47
+#: inc/class-custom-sidebars-editor.php:1025 views/bulk-edit.php:23
+#: views/import.php:123 views/widgets.php:47
 msgid "Custom Sidebars"
 msgstr ""
 
-#: inc/class-custom-sidebars-explain.php:217
-msgid "Turn on explanations"
+#: inc/class-custom-sidebars-explain.php:225
+msgid "Sidebar Debug"
 msgstr ""
 
-#: inc/class-custom-sidebars-explain.php:221
+#: inc/class-custom-sidebars-explain.php:229
 msgid "Turn on Custom Sidebars explain mode."
 msgstr ""
 
-#: inc/class-custom-sidebars-explain.php:226
-msgid "Turn off explanations"
-msgstr ""
-
-#: inc/class-custom-sidebars-explain.php:228
+#: inc/class-custom-sidebars-explain.php:236
 msgid "Turn off Custom Sidebars explain mode."
 msgstr ""
 
@@ -346,6 +342,10 @@ msgstr ""
 
 #: inc/class-custom-sidebars.php:970
 msgid "Create a custom sidebar to get started."
+msgstr ""
+
+#: views/bulk-edit.php:35
+msgid "&mdash; No Change &mdash;"
 msgstr ""
 
 #: views/col-sidebars.php:18
