@@ -7,6 +7,8 @@ add_action( 'cs_init', array( 'CustomSidebarsEditor', 'instance' ) );
  */
 class CustomSidebarsEditor extends CustomSidebars {
 
+	private $modifiable = null;
+
 	/**
 	 * Returns the singleton object.
 	 *
@@ -28,54 +30,58 @@ class CustomSidebarsEditor extends CustomSidebars {
 	 * @since  2.0
 	 */
 	private function __construct() {
-		if ( is_admin() ) {
-			// Add the sidebar metabox to posts.
-			add_action(
-				'add_meta_boxes',
-				array( $this, 'add_meta_box' )
+		if ( ! is_admin() ) {
+			return;
+		}
+		// Add the sidebar metabox to posts.
+		add_action(
+			'add_meta_boxes',
+			array( $this, 'add_meta_box' )
+		);
+
+		// Save the options from the sidebars-metabox.
+		add_action(
+			'save_post',
+			array( $this, 'store_replacements' )
+		);
+
+		// Handle ajax requests.
+		add_action(
+			'cs_ajax_request',
+			array( $this, 'handle_ajax' )
+		);
+
+		// Add a custom column to post list.
+		$posttypes = self::get_post_types( 'objects' );
+		foreach ( $posttypes as $pt ) {
+			add_filter(
+				'manage_' . $pt->name . '_posts_columns',
+				array( $this, 'post_columns' )
 			);
 
-			// Save the options from the sidebars-metabox.
 			add_action(
-				'save_post',
-				array( $this, 'store_replacements' )
-			);
-
-			// Handle ajax requests.
-			add_action(
-				'cs_ajax_request',
-				array( $this, 'handle_ajax' )
-			);
-
-			// Add a custom column to post list.
-			$posttypes = self::get_post_types( 'objects' );
-			foreach ( $posttypes as $pt ) {
-				add_filter(
-					'manage_' . $pt->name . '_posts_columns',
-					array( $this, 'post_columns' )
-				);
-
-				add_action(
-					'manage_' . $pt->name . '_posts_custom_column',
-					array( $this, 'post_column_content' ),
-					10, 2
-				);
-			}
-			/** This action is documented in wp-admin/includes/screen.php */
-			add_filter( 'default_hidden_columns', array( $this, 'default_hidden_columns' ), 10, 2 );
-
-			add_action(
-				'quick_edit_custom_box',
-				array( $this, 'post_quick_edit' ),
+				'manage_' . $pt->name . '_posts_custom_column',
+				array( $this, 'post_column_content' ),
 				10, 2
 			);
-
-			add_action(
-				'admin_footer',
-				array( $this, 'post_quick_edit_js' )
-			);
-
 		}
+		/** This action is documented in wp-admin/includes/screen.php */
+		add_filter( 'default_hidden_columns', array( $this, 'default_hidden_columns' ), 10, 2 );
+
+		add_action( 'quick_edit_custom_box', array( $this, 'post_quick_edit' ), 10, 2 );
+		add_action( 'bulk_edit_custom_box', array( $this, 'post_bulk_edit' ), 10, 2 );
+
+		add_action(
+			'admin_footer',
+			array( $this, 'post_quick_edit_js' )
+		);
+
+		/**
+		 * Bulk Edit save
+		 *
+		 * @since 3.0.8
+		 */
+		add_action( 'save_post', array( $this, 'bulk_edit_save' ) );
 	}
 
 	/**
@@ -811,6 +817,13 @@ class CustomSidebarsEditor extends CustomSidebars {
 				include CSB_VIEWS_DIR . 'quick-edit.php';
 				break;
 
+			case 'bulk-edit':
+				/**
+				 * @since 3.0.8
+				 */
+				include CSB_VIEWS_DIR . 'bulk-edit.php';
+				break;
+
 			default:
 				include CSB_VIEWS_DIR . 'metabox.php';
 				break;
@@ -1136,5 +1149,64 @@ class CustomSidebarsEditor extends CustomSidebars {
 			$hidden[] = 'cs_replacement';
 		}
 		return $hidden;
+	}
+
+	/**
+	 * Adds a custom field to the bulk-edit box to select custom columns.
+	 *
+	 * @since  3.0.8
+	 * @param  string $column_name Column-Key defined in post_columns above.
+	 * @param  string $post_type Post-type that is currently edited.
+	 */
+	public function post_bulk_edit( $column_name, $post_type ) {
+		if ( ! self::supported_post_type( $post_type ) ) { return false; }
+		switch ( $column_name ) {
+			case 'cs_replacement':
+				$this->print_metabox_bulk();
+				break;
+		}
+	}
+
+	/**
+	 * Renders the sidebar-fields inside the bulk-edit form.
+	 *
+	 * @since 3.0.8
+	 */
+	public function print_metabox_bulk() {
+		$this->print_sidebars_form( 0, 'bulk-edit' );
+	}
+
+	/**
+	 * Bulk Edit save
+	 *
+	 * @since 3.0.8
+	 */
+	public function bulk_edit_save( $post_id ) {
+		if ( ! isset( $_REQUEST['custom-sidebars-editor-bulk-edit'] ) ) {
+			return;
+		}
+		if ( ! wp_verify_nonce( $_REQUEST['custom-sidebars-editor-bulk-edit'], 'bulk-edit-cs' ) ) {
+			return;
+		}
+		if ( null == $this->modifiable ) {
+			$this->modifiable = CustomSidebars::get_options( 'modifiable' );
+		}
+		if ( empty( $this->modifiable ) ) {
+			return;
+		}
+		$update = false;
+		$data = CustomSidebars::get_post_meta( $post_id );
+		foreach ( $this->modifiable as $key ) {
+			$k = sprintf( 'cs_replacement_%s', $key );
+			$value = isset( $_REQUEST[ $k ] )? $_REQUEST[ $k ]:'-';
+			if ( '-' != $value ) {
+				$update = true;
+				$data[ $key ] = $value;
+			}
+		}
+		if ( ! $update ) {
+			return;
+		}
+		CustomSidebars::set_post_meta( $post_id, $data );
 	}
 };
