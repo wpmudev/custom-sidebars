@@ -279,31 +279,8 @@ class CustomSidebarsReplacer extends CustomSidebars {
 			// 2 |== Category archive ----------------------------------------------
 
 			$expl && do_action( 'cs_explain', 'Type 2: Category Archive' );
-
-			// 2.1 Start at current category and travel up all parents
-			$category_object = get_queried_object();
-			$current_category = $category_object->term_id;
-			while ( 0 != $current_category && $replacements_todo > 0 ) {
-				foreach ( $sidebars as $sb_id ) {
-					if (
-						isset( $options['category_single'] )
-						&& isset( $options['category_single'][ $current_category ] )
-						&& isset( $options['category_single'][ $current_category ][ $sb_id ] )
-					) {
-						$replacements[ $sb_id ] = array(
-							$options['category_single'][ $current_category ][ $sb_id ],
-							'category_single',
-							$current_category,
-						);
-					}
-				}
-				$current_category = $category_object->category_parent;
-				if ( 0 != $current_category ) {
-					$category_object = get_category( $current_category );
-				}
-			}
 			/**
-			 * Category archive
+			 * 2.1 Category archive
 			 */
 			foreach ( $sidebars as $sb_id ) {
 				if ( ! $replacements[ $sb_id ] && isset( $options['category_archive'][ $sb_id ] ) ) {
@@ -312,6 +289,31 @@ class CustomSidebarsReplacer extends CustomSidebars {
 						'category_archive',
 						0,
 					);
+				}
+			}
+			/**
+			 *  2.2 Start at current category and travel up all parents
+			 */
+			$category_object = get_queried_object();
+			$current_category = $category_object->term_id;
+
+			if ( 0 != $current_category && $replacements_todo > 0 ) {
+				foreach ( $sidebars as $sb_id ) {
+					if (
+						isset( $options['category_archive'] )
+						&& isset( $options['category_archive'][ $current_category ] )
+						&& isset( $options['category_archive'][ $current_category ][ $sb_id ] )
+					) {
+						$replacements[ $sb_id ] = array(
+							$options['category_archive'][ $current_category ][ $sb_id ],
+							'category_archive',
+							$current_category,
+						);
+					}
+				}
+				$current_category = $category_object->category_parent;
+				if ( 0 != $current_category ) {
+					$category_object = get_category( $current_category );
 				}
 			}
 		} elseif ( is_search() ) {
