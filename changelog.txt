@@ -5,7 +5,7 @@ Buildtime: BUILDTIME
 Change Log:
 ----------------------------------------------------------------------
 
-3.0.8 ( 2017-06-05 )
+3.0.8 ( 2017-06-08 )
 - Added bulk sidebars edit.
 - Fixed category archive and entry in category replaceable.
 - Visibility of "Custom Explain" link is limited only to front-end.
