@@ -518,21 +518,6 @@ class CustomSidebarsEditor extends CustomSidebars {
 			}
 		}
 
-		/**
-		 * Category archive.
-		 */
-		foreach ( $raw_taxonomies['_builtin'] as $t ) {
-			if ( 'category' == $t->name ) {
-				if ( isset( $defaults['category_archive'] ) ) {
-					$sel_archive = $defaults['category_archive'];
-					$archives[ $key ] = array(
-						'name' => sprintf( __( '%s Archives', 'custom-sidebars' ), $t->labels->singular_name ),
-						'archive' => self::get_array( $sel_archive ),
-					);
-				}
-			}
-		}
-
 		// Build a list of authors.
 		$authors = array();
 		foreach ( $raw_authors as $user ) {
