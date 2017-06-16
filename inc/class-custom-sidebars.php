@@ -141,9 +141,16 @@ class CustomSidebars {
 				'widgets'
 			);
 		} else {
+			/**
+			 * Main JavaScript file
+			 */
+			$cs_js_url = 'cs.min.js';
+			if ( defined( 'WP_DEBUG' ) && WP_DEBUG ) {
+				$cs_js_url = 'cs.js';
+			}
 			// Load javascripts/css files
 			lib3()->ui->add( 'select', 'widgets.php' );
-			lib3()->ui->add( CSB_JS_URL . 'cs.min.js', 'widgets.php' );
+			lib3()->ui->add( CSB_JS_URL . $cs_js_url, 'widgets.php' );
 			lib3()->ui->add( CSB_CSS_URL . 'cs.css', 'widgets.php' );
 			lib3()->ui->add( CSB_CSS_URL . 'cs.css', 'edit.php' );
 
