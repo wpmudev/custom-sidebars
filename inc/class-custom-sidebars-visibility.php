@@ -52,7 +52,11 @@ class CustomSidebarsVisibility extends CustomSidebars {
 				$url = explode( '/', $_SERVER['SCRIPT_NAME'] );
 				$url = array_pop( $url );
 			}
-			lib3()->ui->add( CSB_JS_URL . 'cs-visibility.min.js', $url );
+			$javascript_file = 'cs-visibility.min.js';
+			if ( defined( 'WP_DEBUG' ) && WP_DEBUG ) {
+				$javascript_file = 'cs-visibility.js';
+			}
+			lib3()->ui->add( CSB_JS_URL . $javascript_file, $url );
 			lib3()->ui->add( CSB_CSS_URL . 'cs-visibility.css', $url );
 
 			// Custom Sidebars Ajax request.
