@@ -1262,7 +1262,7 @@ class CustomSidebarsEditor extends CustomSidebars {
 			$screen_settings .= wp_nonce_field( $this->metabox_roles_name, $this->metabox_roles_name, false, false );
 			$screen_settings .= sprintf( '<legend>%s</legend>', __( 'Custom sidebars configuration is allowed for:', 'custom-sidebars' ) );
 			foreach ( $roles as $role => $data ) {
-				if ( isset( $data['capabilities']['edit_posts'] ) && $data['capabilities']['edit_posts'] ) {
+				if ( isset( $data['capabilities'][self::$cap_required] ) && $data['capabilities'][self::$cap_required] ) {
 					$checked = false;
 					if ( is_string( $allowed ) && 'any' == $allowed ) {
 						$checked = true;
