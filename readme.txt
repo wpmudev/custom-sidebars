@@ -120,6 +120,11 @@ If you are running a earlier version of WordPress download Custom Sidebars 0.8.2
 
 == Changelog ==
 
+= 3.0.9 =
+* Added ability to turn off "Custom Sidebars" for certain roles.
+* Fixed a problem with category, category archive and post in category replacement.
+* Fixed build in taxonomies problem on "Sidebar Location" edit window.
+
 = 3.0.8 =
 * Added bulk sidebars edit.
 * Fixed category archive and entry in category replaceable.

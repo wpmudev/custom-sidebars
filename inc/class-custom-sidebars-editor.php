@@ -10,6 +10,13 @@ class CustomSidebarsEditor extends CustomSidebars {
 	private $modifiable = null;
 
 	/**
+	 * Metabox roles name
+	 *
+	 * @since 3.0.9
+	 */
+	private $metabox_roles_name = 'custom_sidebars_metabox_roles';
+
+	/**
 	 * Returns the singleton object.
 	 *
 	 * @since  2.0
@@ -51,37 +58,49 @@ class CustomSidebarsEditor extends CustomSidebars {
 			array( $this, 'handle_ajax' )
 		);
 
-		// Add a custom column to post list.
-		$posttypes = self::get_post_types( 'objects' );
-		foreach ( $posttypes as $pt ) {
-			add_filter(
-				'manage_' . $pt->name . '_posts_columns',
-				array( $this, 'post_columns' )
-			);
+		/**
+		 * Check settings
+		 */
+		$user_can_save = $this->current_user_can_update_custom_sidebars();
+		if ( $user_can_save ) {
+			// Add a custom column to post list.
+			$posttypes = self::get_post_types( 'objects' );
+			foreach ( $posttypes as $pt ) {
+				add_filter(
+					'manage_' . $pt->name . '_posts_columns',
+					array( $this, 'post_columns' )
+				);
+
+				add_action(
+					'manage_' . $pt->name . '_posts_custom_column',
+					array( $this, 'post_column_content' ),
+					10, 2
+				);
+			}
+			/** This action is documented in wp-admin/includes/screen.php */
+			add_filter( 'default_hidden_columns', array( $this, 'default_hidden_columns' ), 10, 2 );
+
+			add_action( 'quick_edit_custom_box', array( $this, 'post_quick_edit' ), 10, 2 );
+			add_action( 'bulk_edit_custom_box', array( $this, 'post_bulk_edit' ), 10, 2 );
 
 			add_action(
-				'manage_' . $pt->name . '_posts_custom_column',
-				array( $this, 'post_column_content' ),
-				10, 2
+				'admin_footer',
+				array( $this, 'post_quick_edit_js' )
 			);
+
+			/**
+			 * Bulk Edit save
+			 *
+			 * @since 3.0.8
+			 */
+			add_action( 'save_post', array( $this, 'bulk_edit_save' ) );
 		}
-		/** This action is documented in wp-admin/includes/screen.php */
-		add_filter( 'default_hidden_columns', array( $this, 'default_hidden_columns' ), 10, 2 );
-
-		add_action( 'quick_edit_custom_box', array( $this, 'post_quick_edit' ), 10, 2 );
-		add_action( 'bulk_edit_custom_box', array( $this, 'post_bulk_edit' ), 10, 2 );
-
-		add_action(
-			'admin_footer',
-			array( $this, 'post_quick_edit_js' )
-		);
 
 		/**
-		 * Bulk Edit save
-		 *
-		 * @since 3.0.8
+		 * metabox role
 		 */
-		add_action( 'save_post', array( $this, 'bulk_edit_save' ) );
+		add_filter( 'screen_settings', array( $this, 'add_capabilities_select_box' ), 10, 2 );
+		add_action( 'wp_ajax_custom_sidebars_metabox_roles', array( $this, 'update_custom_sidebars_metabox_roles' ) );
 	}
 
 	/**
@@ -744,6 +763,11 @@ class CustomSidebarsEditor extends CustomSidebars {
 			return false;
 		}
 
+		$show_meta_box = $this->current_user_can_update_custom_sidebars();
+		if ( ! $show_meta_box ) {
+			return false;
+		}
+
 		$pt_obj = get_post_type_object( $post_type );
 		if ( $pt_obj->publicly_queryable || $pt_obj->public ) {
 			add_meta_box(
@@ -778,6 +802,14 @@ class CustomSidebarsEditor extends CustomSidebars {
 	 * @param  string $type Which form to display. 'metabox/quick-edit/col-sidebars'.
 	 */
 	protected function print_sidebars_form( $post_id, $type = 'metabox' ) {
+		/**
+		 * Check settings
+		 */
+		$user_can_save = $this->current_user_can_update_custom_sidebars();
+		if ( ! $user_can_save ) {
+			return;
+		}
+
 		global $wp_registered_sidebars;
 		$available = CustomSidebars::sort_sidebars_by_name( $wp_registered_sidebars );
 		$replacements = self::get_replacements( $post_id );
@@ -834,9 +866,16 @@ class CustomSidebarsEditor extends CustomSidebars {
 		/*
 		 * 'editpost' .. Saved from full Post-Editor screen.
 		 * 'inline-save' .. Saved via the quick-edit form.
-		 * We do not (yet) offer a bulk-editing option for custom sidebars.
 		 */
-		if ( ( isset( $_POST['action'] ) && 'inline-save' == $_POST['action'] ) || 'editpost' != $action  ) {
+		if ( ( isset( $_POST['action'] ) && 'inline-save' != $_POST['action'] ) && 'editpost' != $action  ) {
+			return $post_id;
+		}
+
+		/**
+		 * Check settings
+		 */
+		$user_can_save = $this->current_user_can_update_custom_sidebars();
+		if ( ! $user_can_save ) {
 			return $post_id;
 		}
 
@@ -990,7 +1029,6 @@ class CustomSidebarsEditor extends CustomSidebars {
 
 		return $sidebar;
 	}
-
 
 	//
 	// ========== Custom column an Quick-Edit fields for post list.
@@ -1193,5 +1231,82 @@ class CustomSidebarsEditor extends CustomSidebars {
 			return;
 		}
 		CustomSidebars::set_post_meta( $post_id, $data );
+	}
+
+	/**
+	 * Add capabilities for options on widgets.php
+	 *
+	 * @param string    $screen_settings Screen settings.
+	 * @param WP_Screen $screen          WP_Screen object.
+	 */
+	public function add_capabilities_select_box( $screen_settings, $screen ) {
+		if ( 'widgets' == $screen->base && current_user_can( 'manage_options' ) ) {
+			$allowed = get_option( $this->metabox_roles_name, 'any' );
+			$roles = get_editable_roles();
+			$screen_settings .= '<fieldset class="metabox-prefs cs-roles">';
+			$screen_settings .= wp_nonce_field( $this->metabox_roles_name, $this->metabox_roles_name, false, false );
+			$screen_settings .= sprintf( '<legend>%s</legend>', __( 'Custom sidebars configuration is allowed for:', 'custom-sidebars' ) );
+			foreach ( $roles as $role => $data ) {
+				if ( isset( $data['capabilities'][self::$cap_required] ) && $data['capabilities'][self::$cap_required] ) {
+					$checked = false;
+					if ( is_string( $allowed ) && 'any' == $allowed ) {
+						$checked = true;
+					} else if ( is_array( $allowed ) && in_array( $role, $allowed ) ) {
+						$checked = true;
+					}
+					$screen_settings .= sprintf(
+						'<label><input type="checkbox" name="cs-roles[]" value="%s" %s /> %s</label>',
+						esc_attr( $role ),
+						checked( $checked, true, false ),
+						esc_html( $data['name'] )
+					);
+				}
+			}
+			$screen_settings .= '</fieldset>';
+		}
+		return $screen_settings;
+	}
+
+	/**
+	 * Update capabilities select box
+	 *
+	 * @since 3.0.9
+	 */
+	public function update_custom_sidebars_metabox_roles() {
+		if ( ! isset( $_REQUEST['_wpnonce'] ) || ! isset( $_REQUEST['fields'] ) ) {
+			wp_send_json_error();
+		}
+		$value = array();
+		foreach ( $_REQUEST['fields'] as $role => $status ) {
+			if ( 'true' == $status ) {
+				$value[] = $role;
+			}
+		}
+		$status = add_option( $this->metabox_roles_name, $value, '', 'no' );
+		if ( ! $status ) {
+			update_option( $this->metabox_roles_name, $value );
+		}
+		wp_send_json_success();
+	}
+
+	/**
+	 * Check ability to save sidebars
+	 *
+	 * @since 3.0.9
+	 */
+	public function current_user_can_update_custom_sidebars() {
+		$allowed = get_option( $this->metabox_roles_name, 'any' );
+		if ( is_string( $allowed ) && 'any' == $allowed ) {
+					return true;
+		} else {
+			$current_user = wp_get_current_user();
+			$current_user_roles = (array) $current_user->roles;
+			foreach ( $allowed as $role ) {
+				if ( in_array( $role, $current_user_roles ) ) {
+					return true;
+				}
+			}
+		}
+		return false;
 	}
 };

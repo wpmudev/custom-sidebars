@@ -25,7 +25,7 @@ module.exports = function( grunt ) {
 		js_files_concat: {
 			'js/cs-cloning.js':    ['js/src/cs-cloning.js'],
 			'js/cs-visibility.js': ['js/src/cs-visibility.js'],
-			'js/cs.js':            ['js/src/cs.js']
+			'js/cs.js':            ['js/src/cs.js', 'js/src/metabox-roles.js']
 		},
 
 		// SASS files to process. Resulting CSS files will be minified as well.
