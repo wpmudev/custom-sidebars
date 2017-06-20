@@ -153,7 +153,7 @@ class CustomSidebarsVisibility extends CustomSidebars {
 			$membership_levels = $this->get_membership_levels();
 			$membership2_items = $this->get_membership2_items();
 			$pagetype_list = array(
-				'frontpage' => __( 'aFront Page', 'custom-sidebars' ),
+				'frontpage' => __( 'Front Page', 'custom-sidebars' ),
 				'home' => __( 'Post Index', 'custom-sidebars' ),
 				'single' => __( 'Single page', 'custom-sidebars' ),
 				//'posts' => __( 'Posts page', 'custom-sidebars' ),  "Posts page" is same as "Post Index"...
