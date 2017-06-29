@@ -723,12 +723,13 @@ class CustomSidebarsEditor extends CustomSidebars {
 				) {
 					$options['taxonomies_archive'][ $taxonomy ][ $sb_id ] = $req->id;
 				} elseif (
-					isset( $options['taxonomies_archive'][ $key ][ $sb_id ] ) &&
-					$options['taxonomies_archive'][ $key ][ $sb_id ] == $req->id
+					isset( $options['taxonomies_archive'][ $taxonomy ][ $sb_id ] ) &&
+					$options['taxonomies_archive'][ $taxonomy ][ $sb_id ] == $req->id
 				) {
 					unset( $options['taxonomies_archive'][ $taxonomy ][ $sb_id ] );
 				}
 			}
+
 			/**
 			 * category Archive
 			 *
