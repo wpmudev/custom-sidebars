@@ -932,10 +932,9 @@ window.csSidebars = null;
 				popup.loading( true );
 				ajax.reset()
 					.data({
-						'do1': 'delete',
 						'do': 'delete',
 						'sb': id,
-                        '_wpnonce': $('#_wp_nonce_cs_delete_sidebar').val()
+						'_wpnonce': $('#_wp_nonce_cs_delete_sidebar').val()
 					})
 					.ondone( handle_done )
 					.load_json();
