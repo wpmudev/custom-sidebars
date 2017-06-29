@@ -4,7 +4,7 @@ msgid ""
 msgstr ""
 "Project-Id-Version: Custom Sidebars Pro PLUGIN_VERSION\n"
 "Report-Msgid-Bugs-To: https://wordpress.org/support/plugin/customsidebars\n"
-"POT-Creation-Date: 2017-06-05 08:19:24+00:00\n"
+"POT-Creation-Date: 2017-06-29 08:33:44+00:00\n"
 "MIME-Version: 1.0\n"
 "Content-Type: text/plain; charset=utf-8\n"
 "Content-Transfer-Encoding: 8bit\n"
@@ -56,92 +56,96 @@ msgstr ""
 msgid "get Upfront free"
 msgstr ""
 
-#: inc/class-custom-sidebars-cloning.php:202
+#: inc/class-custom-sidebars-cloning.php:206
 msgid "Clone"
 msgstr ""
 
-#: inc/class-custom-sidebars-editor.php:127
+#: inc/class-custom-sidebars-editor.php:146
 #: inc/class-custom-sidebars-export.php:97
 msgid "You do not have permission for this"
 msgstr ""
 
-#: inc/class-custom-sidebars-editor.php:202
+#: inc/class-custom-sidebars-editor.php:221
 msgid "Sidebar-name cannot be empty"
 msgstr ""
 
-#: inc/class-custom-sidebars-editor.php:226
-#: inc/class-custom-sidebars-editor.php:309
+#: inc/class-custom-sidebars-editor.php:245
+#: inc/class-custom-sidebars-editor.php:328
 msgid "The sidebar does not exist"
 msgstr ""
 
-#: inc/class-custom-sidebars-editor.php:257
+#: inc/class-custom-sidebars-editor.php:276
 msgid "Created new sidebar <strong>%1$s</strong>"
 msgstr ""
 
-#: inc/class-custom-sidebars-editor.php:265
+#: inc/class-custom-sidebars-editor.php:284
 msgid "Updated sidebar <strong>%1$s</strong>"
 msgstr ""
 
-#: inc/class-custom-sidebars-editor.php:276
-#: inc/class-custom-sidebars-editor.php:329
+#: inc/class-custom-sidebars-editor.php:295
+#: inc/class-custom-sidebars-editor.php:348
 msgid "The sidebar was not found"
 msgstr ""
 
-#: inc/class-custom-sidebars-editor.php:318
+#: inc/class-custom-sidebars-editor.php:337
 msgid "Deleted sidebar <strong>%1$s</strong>"
 msgstr ""
 
-#: inc/class-custom-sidebars-editor.php:391
+#: inc/class-custom-sidebars-editor.php:410
 msgid "Front Page"
 msgstr ""
 
-#: inc/class-custom-sidebars-editor.php:392
+#: inc/class-custom-sidebars-editor.php:411
 msgid "Search Results"
 msgstr ""
 
-#: inc/class-custom-sidebars-editor.php:393
-#: inc/class-custom-sidebars-visibility.php:158
+#: inc/class-custom-sidebars-editor.php:412
+#: inc/class-custom-sidebars-visibility.php:162
 msgid "Not found (404)"
 msgstr ""
 
-#: inc/class-custom-sidebars-editor.php:394
+#: inc/class-custom-sidebars-editor.php:413
 msgid "Any Author Archive"
 msgstr ""
 
-#: inc/class-custom-sidebars-editor.php:395
+#: inc/class-custom-sidebars-editor.php:414
 msgid "Date Archives"
 msgstr ""
 
-#: inc/class-custom-sidebars-editor.php:413
-#: inc/class-custom-sidebars-editor.php:416
-#: inc/class-custom-sidebars-editor.php:422
-#: inc/class-custom-sidebars-editor.php:424
-#: inc/class-custom-sidebars-editor.php:508
-#: inc/class-custom-sidebars-editor.php:510
+#: inc/class-custom-sidebars-editor.php:432
+#: inc/class-custom-sidebars-editor.php:435
+#: inc/class-custom-sidebars-editor.php:441
+#: inc/class-custom-sidebars-editor.php:443
+#: inc/class-custom-sidebars-editor.php:527
 #: inc/class-custom-sidebars-editor.php:529
+#: inc/class-custom-sidebars-editor.php:548
 msgid "%s Archives"
 msgstr ""
 
-#: inc/class-custom-sidebars-editor.php:471
-#: inc/class-custom-sidebars-visibility.php:153
+#: inc/class-custom-sidebars-editor.php:490
+#: inc/class-custom-sidebars-visibility.php:157
 msgid "Post Index"
 msgstr ""
 
-#: inc/class-custom-sidebars-editor.php:475
+#: inc/class-custom-sidebars-editor.php:494
 msgid "%1$s Archives"
 msgstr ""
 
-#: inc/class-custom-sidebars-editor.php:730
+#: inc/class-custom-sidebars-editor.php:749
 msgid "Updated sidebar <strong>%1$s</strong> settings."
 msgstr ""
 
-#: inc/class-custom-sidebars-editor.php:766 views/widgets.php:17
+#: inc/class-custom-sidebars-editor.php:790 views/widgets.php:17
 msgid "Sidebars"
 msgstr ""
 
-#: inc/class-custom-sidebars-editor.php:1025 views/bulk-edit.php:23
+#: inc/class-custom-sidebars-editor.php:1063 views/bulk-edit.php:23
 #: views/import.php:123 views/widgets.php:47
 msgid "Custom Sidebars"
+msgstr ""
+
+#: inc/class-custom-sidebars-editor.php:1263
+msgid "Custom sidebars configuration is allowed for:"
 msgstr ""
 
 #: inc/class-custom-sidebars-explain.php:225
@@ -189,139 +193,139 @@ msgstr ""
 msgid "Imported %d widget(s)!"
 msgstr ""
 
-#: inc/class-custom-sidebars-visibility.php:152
+#: inc/class-custom-sidebars-visibility.php:156
 msgid "aFront Page"
 msgstr ""
 
-#: inc/class-custom-sidebars-visibility.php:154
+#: inc/class-custom-sidebars-visibility.php:158
 msgid "Single page"
 msgstr ""
 
-#: inc/class-custom-sidebars-visibility.php:156
+#: inc/class-custom-sidebars-visibility.php:160
 msgid "Archives"
 msgstr ""
 
-#: inc/class-custom-sidebars-visibility.php:157
+#: inc/class-custom-sidebars-visibility.php:161
 msgid "Search results"
 msgstr ""
 
-#: inc/class-custom-sidebars-visibility.php:159 views/widgets-export.php:42
+#: inc/class-custom-sidebars-visibility.php:163 views/widgets-export.php:42
 msgid "Preview"
 msgstr ""
 
-#: inc/class-custom-sidebars-visibility.php:160
+#: inc/class-custom-sidebars-visibility.php:164
 msgid "Archive: Day"
 msgstr ""
 
-#: inc/class-custom-sidebars-visibility.php:161
+#: inc/class-custom-sidebars-visibility.php:165
 msgid "Archive: Month"
 msgstr ""
 
-#: inc/class-custom-sidebars-visibility.php:162
+#: inc/class-custom-sidebars-visibility.php:166
 msgid "Archive: Year"
 msgstr ""
 
-#: inc/class-custom-sidebars-visibility.php:196
+#: inc/class-custom-sidebars-visibility.php:200
 msgid "Visibility"
 msgstr ""
 
-#: inc/class-custom-sidebars-visibility.php:205
+#: inc/class-custom-sidebars-visibility.php:209
 msgid "<b>Show</b> widget if:"
 msgstr ""
 
-#: inc/class-custom-sidebars-visibility.php:206
+#: inc/class-custom-sidebars-visibility.php:210
 msgid "<b>Hide</b> widget if:"
 msgstr ""
 
-#: inc/class-custom-sidebars-visibility.php:210
+#: inc/class-custom-sidebars-visibility.php:214
 msgid "Filters"
 msgstr ""
 
-#: inc/class-custom-sidebars-visibility.php:214
+#: inc/class-custom-sidebars-visibility.php:218
 msgid "Date"
 msgstr ""
 
-#: inc/class-custom-sidebars-visibility.php:219
+#: inc/class-custom-sidebars-visibility.php:223
 msgid "Guests"
 msgstr ""
 
-#: inc/class-custom-sidebars-visibility.php:224
+#: inc/class-custom-sidebars-visibility.php:228
 msgid "Roles"
 msgstr ""
 
-#: inc/class-custom-sidebars-visibility.php:229
+#: inc/class-custom-sidebars-visibility.php:233
 msgid "Membership"
 msgstr ""
 
-#: inc/class-custom-sidebars-visibility.php:235
+#: inc/class-custom-sidebars-visibility.php:239
 msgid "Membership2"
 msgstr ""
 
-#: inc/class-custom-sidebars-visibility.php:241 views/import.php:302
+#: inc/class-custom-sidebars-visibility.php:245 views/import.php:302
 msgid "Special pages"
 msgstr ""
 
-#: inc/class-custom-sidebars-visibility.php:246
+#: inc/class-custom-sidebars-visibility.php:250
 msgid "For posttype"
 msgstr ""
 
-#: inc/class-custom-sidebars-visibility.php:248
+#: inc/class-custom-sidebars-visibility.php:252
 msgid "Taxonomy"
 msgstr ""
 
-#: inc/class-custom-sidebars-visibility.php:265
+#: inc/class-custom-sidebars-visibility.php:269
 msgid "Always"
 msgstr ""
 
-#: inc/class-custom-sidebars-visibility.php:290
-#: inc/class-custom-sidebars-visibility.php:295
-#: inc/class-custom-sidebars-visibility.php:304
-#: inc/class-custom-sidebars-visibility.php:323
-#: inc/class-custom-sidebars-visibility.php:343
-#: inc/class-custom-sidebars-visibility.php:362
-#: inc/class-custom-sidebars-visibility.php:381
-#: inc/class-custom-sidebars-visibility.php:465
+#: inc/class-custom-sidebars-visibility.php:294
+#: inc/class-custom-sidebars-visibility.php:299
+#: inc/class-custom-sidebars-visibility.php:308
+#: inc/class-custom-sidebars-visibility.php:327
+#: inc/class-custom-sidebars-visibility.php:347
+#: inc/class-custom-sidebars-visibility.php:366
+#: inc/class-custom-sidebars-visibility.php:385
+#: inc/class-custom-sidebars-visibility.php:469
 msgid "AND"
 msgstr ""
 
-#: inc/class-custom-sidebars-visibility.php:291
+#: inc/class-custom-sidebars-visibility.php:295
 msgid "User is not logged-in (Guest)"
 msgstr ""
 
-#: inc/class-custom-sidebars-visibility.php:296
+#: inc/class-custom-sidebars-visibility.php:300
 msgid "User is logged-in (Member)"
 msgstr ""
 
-#: inc/class-custom-sidebars-visibility.php:305
+#: inc/class-custom-sidebars-visibility.php:309
 msgid "User has role"
 msgstr ""
 
-#: inc/class-custom-sidebars-visibility.php:324
+#: inc/class-custom-sidebars-visibility.php:328
 msgid "User has Membership Level"
 msgstr ""
 
-#: inc/class-custom-sidebars-visibility.php:332
-#: inc/class-custom-sidebars-visibility.php:352
+#: inc/class-custom-sidebars-visibility.php:336
+#: inc/class-custom-sidebars-visibility.php:356
 msgid "(inactive)"
 msgstr ""
 
-#: inc/class-custom-sidebars-visibility.php:344
+#: inc/class-custom-sidebars-visibility.php:348
 msgid "User has Membership"
 msgstr ""
 
-#: inc/class-custom-sidebars-visibility.php:363
+#: inc/class-custom-sidebars-visibility.php:367
 msgid "On these special pages"
 msgstr ""
 
-#: inc/class-custom-sidebars-visibility.php:382
+#: inc/class-custom-sidebars-visibility.php:386
 msgid "On any page of these types"
 msgstr ""
 
-#: inc/class-custom-sidebars-visibility.php:400
+#: inc/class-custom-sidebars-visibility.php:404
 msgid "Only for specific %s"
 msgstr ""
 
-#: inc/class-custom-sidebars-visibility.php:401
+#: inc/class-custom-sidebars-visibility.php:405
 msgid "Only these %s:"
 msgstr ""
 
@@ -332,15 +336,15 @@ msgid ""
 "\t\t\t\t\t\tto disable accessibility mode and use the %1$s plugin!"
 msgstr ""
 
-#: inc/class-custom-sidebars.php:943 views/import.php:140
+#: inc/class-custom-sidebars.php:950 views/import.php:140
 msgid "Widgets"
 msgstr ""
 
-#: inc/class-custom-sidebars.php:953
+#: inc/class-custom-sidebars.php:960
 msgid "Support"
 msgstr ""
 
-#: inc/class-custom-sidebars.php:970
+#: inc/class-custom-sidebars.php:977
 msgid "Create a custom sidebar to get started."
 msgstr ""
 
