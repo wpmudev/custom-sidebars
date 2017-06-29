@@ -11,6 +11,9 @@ Change Log:
 - Fixed a problem with removed "Category Archive" from "For Archives" options.
 - Fixed build in taxonomies problem on "Sidebar Location" edit window.
 
+3.0.8.1 ( 2017-06-29 )
+- Fixed CSRF vulnerability. Props for [qasuar](https://wordpress.org/support/users/qasuar/)
+
 3.0.8 ( 2017-06-08 )
 - Added bulk sidebars edit.
 - Fixed category archive and entry in category replaceable.

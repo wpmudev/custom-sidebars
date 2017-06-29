@@ -15,5 +15,6 @@
 	<div class="buttons">
 		<button type="button" class="button-link btn-cancel"><?php _e( 'Cancel', 'custom-sidebars' ); ?></button>
 		<button type="button" class="button-primary btn-delete"><?php _e( 'Yes, delete it', 'custom-sidebars' ); ?></button>
+<?php wp_nonce_field( 'custom-sidebars-delete-sidebar', '_wp_nonce_cs_delete_sidebar' ); ?>
 	</div>
 </div>

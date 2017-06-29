@@ -930,11 +930,12 @@ window.csSidebars = null;
 			// Deletes the sidebar and closes the confirmation popup.
 			function delete_sidebar() {
 				popup.loading( true );
-
 				ajax.reset()
 					.data({
+						'do1': 'delete',
 						'do': 'delete',
-						'sb': id
+						'sb': id,
+                        '_wpnonce': $('#_wp_nonce_cs_delete_sidebar').val()
 					})
 					.ondone( handle_done )
 					.load_json();
