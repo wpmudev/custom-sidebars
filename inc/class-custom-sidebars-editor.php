@@ -436,6 +436,7 @@ class CustomSidebarsEditor extends CustomSidebars {
 				break;
 			}
 		}
+
 		foreach ( $raw_taxonomies['custom'] as $taxonomy ) {
 			if ( in_array( $taxonomy->labels->singular_name, $default_taxonomies ) ) {
 				$archive_type[ '_taxonomy_'.$taxonomy->name ] = sprintf( __( '%s Archives', 'custom-sidebars' ), ucfirst( $taxonomy->name ) );
@@ -544,7 +545,7 @@ class CustomSidebarsEditor extends CustomSidebars {
 			if ( 'category' == $t->name ) {
 				if ( isset( $defaults['category_archive'] ) ) {
 					$sel_archive = $defaults['category_archive'];
-					$archives[ $key ] = array(
+					$archives['_category'] = array(
 						'name' => sprintf( __( '%s Archives', 'custom-sidebars' ), $t->labels->singular_name ),
 						'archive' => self::get_array( $sel_archive ),
 					);
@@ -585,8 +586,10 @@ class CustomSidebarsEditor extends CustomSidebars {
 		$sidebars = $options['modifiable'];
 		$raw_posttype = self::get_post_types( 'objects' );
 		$raw_cat = self::get_all_categories();
-		$raw_taxonomies = self::get_taxonomies();
 		$data = array();
+		$raw_taxonomies = array(
+			'custom' => self::get_taxonomies( 'names', false ),
+		);
 
 		foreach ( $_POST as $key => $value ) {
 			if ( strlen( $key ) > 8 && '___cs___' == substr( $key, 0, 8 ) ) {
@@ -711,7 +714,7 @@ class CustomSidebarsEditor extends CustomSidebars {
 			 *
 			 * @since 3.0.7
 			 */
-			foreach ( $raw_taxonomies as $taxonomy ) {
+			foreach ( $raw_taxonomies['custom'] as $taxonomy ) {
 				$key = '_taxonomy_'.$taxonomy;
 				if (
 					isset( $data['arc'][ $sb_id ] )
@@ -738,8 +741,8 @@ class CustomSidebarsEditor extends CustomSidebars {
 			) {
 				$options['category_archive'][ $sb_id ] = $req->id;
 			} elseif (
-				isset( $options['category_archive']['_category'][ $sb_id ] ) &&
-				$options['category_archive']['category_archive'][ $sb_id ] == $req->id
+				isset( $options['category_archive'][ $sb_id ] ) &&
+				$options['category_archive'][ $sb_id ] == $req->id
 			) {
 				unset( $options['category_archive'][ $sb_id ] );
 			}
@@ -1262,7 +1265,7 @@ class CustomSidebarsEditor extends CustomSidebars {
 			$screen_settings .= wp_nonce_field( $this->metabox_roles_name, $this->metabox_roles_name, false, false );
 			$screen_settings .= sprintf( '<legend>%s</legend>', __( 'Custom sidebars configuration is allowed for:', 'custom-sidebars' ) );
 			foreach ( $roles as $role => $data ) {
-				if ( isset( $data['capabilities'][self::$cap_required] ) && $data['capabilities'][self::$cap_required] ) {
+				if ( isset( $data['capabilities'][ self::$cap_required ] ) && $data['capabilities'][ self::$cap_required ] ) {
 					$checked = false;
 					if ( is_string( $allowed ) && 'any' == $allowed ) {
 						$checked = true;
