@@ -4,7 +4,7 @@ msgid ""
 msgstr ""
 "Project-Id-Version: Custom Sidebars Pro PLUGIN_VERSION\n"
 "Report-Msgid-Bugs-To: https://wordpress.org/support/plugin/customsidebars\n"
-"POT-Creation-Date: 2017-06-19 06:37:30+00:00\n"
+"POT-Creation-Date: 2017-06-29 08:35:30+00:00\n"
 "MIME-Version: 1.0\n"
 "Content-Type: text/plain; charset=utf-8\n"
 "Content-Transfer-Encoding: 8bit\n"
@@ -92,6 +92,7 @@ msgid "Deleted sidebar <strong>%1$s</strong>"
 msgstr ""
 
 #: inc/class-custom-sidebars-editor.php:410
+#: inc/class-custom-sidebars-visibility.php:156
 msgid "Front Page"
 msgstr ""
 
@@ -190,10 +191,6 @@ msgstr ""
 
 #: inc/class-custom-sidebars-export.php:692
 msgid "Imported %d widget(s)!"
-msgstr ""
-
-#: inc/class-custom-sidebars-visibility.php:156
-msgid "aFront Page"
 msgstr ""
 
 #: inc/class-custom-sidebars-visibility.php:158
