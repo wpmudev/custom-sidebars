@@ -121,9 +121,10 @@ If you are running a earlier version of WordPress download Custom Sidebars 0.8.2
 == Changelog ==
 
 = 3.0.9 =
-* Added ability to turn off "Custom Sidebars" for certain roles.
-* Fixed a problem with category, category archive and post in category replacement.
-* Fixed build in taxonomies problem on "Sidebar Location" edit window.
+- Added ability to turn off "Custom Sidebars" for certain roles.
+- Fixed a problem with a category, category archive, and post in category replacement.
+- Fixed a problem with removed "Category Archive" from "For Archives" options.
+- Fixed build in taxonomies problem on "Sidebar Location" edit window.
 
 = 3.0.8.1 =
 * Fixed CSRF vulnerability. Props for [qasuar](https://wordpress.org/support/users/qasuar/)
