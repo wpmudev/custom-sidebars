@@ -58,49 +58,61 @@ class CustomSidebarsEditor extends CustomSidebars {
 			array( $this, 'handle_ajax' )
 		);
 
-		/**
-		 * Check settings
-		 */
-		$user_can_save = $this->current_user_can_update_custom_sidebars();
-		if ( $user_can_save ) {
-			// Add a custom column to post list.
-			$posttypes = self::get_post_types( 'objects' );
-			foreach ( $posttypes as $pt ) {
-				add_filter(
-					'manage_' . $pt->name . '_posts_columns',
-					array( $this, 'post_columns' )
-				);
+		add_action( 'admin_init', array( $this, 'settings' ) );
+	}
 
-				add_action(
-					'manage_' . $pt->name . '_posts_custom_column',
-					array( $this, 'post_column_content' ),
-					10, 2
-				);
-			}
-			/** This action is documented in wp-admin/includes/screen.php */
-			add_filter( 'default_hidden_columns', array( $this, 'default_hidden_columns' ), 10, 2 );
-
-			add_action( 'quick_edit_custom_box', array( $this, 'post_quick_edit' ), 10, 2 );
-			add_action( 'bulk_edit_custom_box', array( $this, 'post_bulk_edit' ), 10, 2 );
-
-			add_action(
-				'admin_footer',
-				array( $this, 'post_quick_edit_js' )
-			);
-
-			/**
-			 * Bulk Edit save
-			 *
-			 * @since 3.0.8
-			 */
-			add_action( 'save_post', array( $this, 'bulk_edit_save' ) );
-		}
-
+	/**
+	 * Settings function
+	 *
+	 * @since 3.1.0
+	 */
+	public function settings() {
 		/**
 		 * metabox role
 		 */
 		add_filter( 'screen_settings', array( $this, 'add_capabilities_select_box' ), 10, 2 );
 		add_action( 'wp_ajax_custom_sidebars_metabox_roles', array( $this, 'update_custom_sidebars_metabox_roles' ) );
+
+		/**
+		 * Check user privileges
+		 */
+		$user_can_save = $this->current_user_can_update_custom_sidebars();
+
+		if ( ! $user_can_save ) {
+			return;
+		}
+		// Add a custom column to post list.
+		$posttypes = self::get_post_types( 'objects' );
+		foreach ( $posttypes as $pt ) {
+			add_filter(
+				'manage_' . $pt->name . '_posts_columns',
+				array( $this, 'post_columns' )
+			);
+
+			add_action(
+				'manage_' . $pt->name . '_posts_custom_column',
+				array( $this, 'post_column_content' ),
+				10, 2
+			);
+		}
+		/** This action is documented in wp-admin/includes/screen.php */
+		add_filter( 'default_hidden_columns', array( $this, 'default_hidden_columns' ), 10, 2 );
+
+		add_action( 'quick_edit_custom_box', array( $this, 'post_quick_edit' ), 10, 2 );
+		add_action( 'bulk_edit_custom_box', array( $this, 'post_bulk_edit' ), 10, 2 );
+
+		add_action(
+			'admin_footer',
+			array( $this, 'post_quick_edit_js' )
+		);
+
+		/**
+		 * Bulk Edit save
+		 *
+		 * @since 3.0.8
+		 */
+		add_action( 'save_post', array( $this, 'bulk_edit_save' ) );
+
 	}
 
 	/**
@@ -331,9 +343,9 @@ class CustomSidebarsEditor extends CustomSidebars {
 	/**
 	 * Delete the specified sidebar and update the response object.
 	 *
-     * @since  2.0
-     * @since 3.0.8.1 Added the $data param.
-     *
+	 * @since  2.0
+	 * @since 3.0.8.1 Added the $data param.
+	 *
 	 * @param  object $req Initial response object.
 	 * @param  array $data Sidebar data to save (typically this is $_POST).
 	 * @return object Updated response object.
