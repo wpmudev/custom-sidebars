@@ -5,6 +5,8 @@ Buildtime: BUILDTIME
 Change Log:
 ----------------------------------------------------------------------
 
+- Added nonce check for: set location, import & export actions to avoid CSRF vulnerability.
+
 3.0.9 ( 2017-07-03 )
 - Added ability to turn off "Custom Sidebars" for certain roles.
 - Fixed a problem with a category, category archive, and post in category replacement.

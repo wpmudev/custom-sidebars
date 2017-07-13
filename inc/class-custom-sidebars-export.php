@@ -1,5 +1,6 @@
 <?php
 
+
 add_action( 'cs_init', array( 'CustomSidebarsExport', 'instance' ) );
 
 /**
@@ -271,6 +272,22 @@ class CustomSidebarsExport extends CustomSidebars {
 	 * @since  2.0
 	 */
 	private function download_export_file() {
+		/**
+		 * check nonce
+		 */
+		if (
+			! isset( $_POST['_wpnonce'] )
+			|| ! wp_verify_nonce( $_POST['_wpnonce'], 'custom-sidebars-export' )
+		) {
+			$req = (object) array(
+				'status' => 'ERR',
+			);
+			$req = self::req_err(
+				$req,
+				__( 'You do not have permission for export sidebars.', 'custom-sidebars' )
+			);
+			self::json_response( $req );
+		}
 		$data = $this->get_export_data();
 		$filename = 'sidebars.' . date( 'Y-m-d.H-i-s' ) . '.json';
 		$option = defined( 'JSON_PRETTY_PRINT' )? JSON_PRETTY_PRINT : null;
@@ -308,6 +325,23 @@ class CustomSidebarsExport extends CustomSidebars {
 	 * @return object Updated response object.
 	 */
 	private function read_import_file( $req ) {
+		/**
+		 * check nonce
+		 */
+		if (
+			! isset( $_POST['_wpnonce'] )
+			|| ! wp_verify_nonce( $_POST['_wpnonce'], 'custom-sidebars-import' )
+		) {
+			$req = (object) array(
+				'status' => 'ERR',
+			);
+			$req = self::req_err(
+				$req,
+				__( 'You do not have permission for export sidebars.', 'custom-sidebars' )
+			);
+			self::json_response( $req );
+		}
+
 		if ( is_array( $_FILES['data'] ) ) {
 			switch ( $_FILES['data']['error'] ) {
 				case UPLOAD_ERR_OK:
@@ -376,6 +410,23 @@ class CustomSidebarsExport extends CustomSidebars {
 	 * @return object Updated response object.
 	 */
 	private function prepare_import_data( $req ) {
+		/**
+		 * check nonce
+		 */
+		if (
+			! isset( $_POST['_wpnonce'] )
+			|| ! wp_verify_nonce( $_POST['_wpnonce'], 'custom-sidebars-import' )
+		) {
+			$req = (object) array(
+				'status' => 'ERR',
+			);
+			$req = self::req_err(
+				$req,
+				__( 'You do not have permission for import sidebars.', 'custom-sidebars' )
+			);
+			self::json_response( $req );
+		}
+
 		$data = json_decode( base64_decode( @$_POST['import_data'] ), true );
 
 		if (

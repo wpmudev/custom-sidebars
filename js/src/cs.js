@@ -633,7 +633,8 @@ window.csSidebars = null;
 				ajax.reset()
 					.data({
 						'do': 'get',
-						'sb': data.id
+						'sb': data.id,
+                        '_wpnonce': csSidebarsData._wpnonce_get
 					})
 					.ondone( set_values )
 					.load_json();

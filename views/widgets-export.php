@@ -27,7 +27,8 @@
 			<button class="button-primary">
 				<i class="dashicons dashicons-download"></i> <?php _e( 'Export', 'custom-sidebars' ); ?>
 			</button>
-		</p>
+        </p>
+        <?php wp_nonce_field( 'custom-sidebars-export' ); ?>
 	</form>
 	<hr />
 	<h2><?php _e( 'Import', 'custom-sidebars' ); ?></h2>
@@ -42,5 +43,6 @@
 				<i class="dashicons dashicons-upload"></i> <?php _e( 'Preview', 'custom-sidebars' ); ?>
 			</button>
 		</p>
+        <?php wp_nonce_field( 'custom-sidebars-import' ); ?>
 	</form>
 </div>

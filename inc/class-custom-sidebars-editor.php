@@ -149,36 +149,49 @@ class CustomSidebarsEditor extends CustomSidebars {
 			switch ( $action ) {
 				// Return details for the specified sidebar.
 				case 'get':
-					$req->sidebar = $sb_data;
-					break;
+					/**
+				 * check nonce
+				 */
+					if (
+					! isset( $_POST['_wpnonce'] )
+					|| ! wp_verify_nonce( $_POST['_wpnonce'], 'custom-sidebars-get' )
+					) {
+						$req = self::req_err(
+							$req,
+							__( 'You do not have permission for this', 'custom-sidebars' )
+						);
+					} else {
+						$req->sidebar = $sb_data;
+					}
+				break;
 
 				// Save or insert the specified sidebar.
 				case 'save':
 					$req = $this->save_item( $req, $_POST );
-					break;
+				break;
 
 				// Delete the specified sidebar.
 				case 'delete':
 					$req->sidebar = $sb_data;
 					$req = $this->delete_item( $req, $_POST );
-					break;
+				break;
 
 				// Get the location data.
 				case 'get-location':
 					$req->sidebar = $sb_data;
 					$req = $this->get_location_data( $req );
-					break;
+				break;
 
 				// Update the location data.
 				case 'set-location':
 					$req->sidebar = $sb_data;
 					$req = $this->set_location_data( $req );
-					break;
+				break;
 
 				// Toggle theme sidebar replaceable-flag.
 				case 'replaceable':
 					$req = $this->set_replaceable( $req );
-					break;
+				break;
 			}
 		}
 
@@ -331,9 +344,9 @@ class CustomSidebarsEditor extends CustomSidebars {
 	/**
 	 * Delete the specified sidebar and update the response object.
 	 *
-     * @since  2.0
-     * @since 3.0.8.1 Added the $data param.
-     *
+	 * @since  2.0
+	 * @since 3.0.8.1 Added the $data param.
+	 *
 	 * @param  object $req Initial response object.
 	 * @param  array $data Sidebar data to save (typically this is $_POST).
 	 * @return object Updated response object.
@@ -614,6 +627,18 @@ class CustomSidebarsEditor extends CustomSidebars {
 	 * @return object Updated response object.
 	 */
 	private function set_location_data( $req ) {
+		/**
+		 * check nonce
+		 */
+		if (
+			! isset( $_POST['_wpnonce'] )
+			|| ! wp_verify_nonce( $_POST['_wpnonce'], 'custom-sidebars-set-location' )
+		) {
+			return self::req_err(
+				$req,
+				__( 'You have no permission to do this operation.', 'custom-sidebars' )
+			);
+		}
 		$options = self::get_options();
 		$sidebars = $options['modifiable'];
 		$raw_posttype = self::get_post_types( 'objects' );
