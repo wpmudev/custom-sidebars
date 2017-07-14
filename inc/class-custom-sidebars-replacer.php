@@ -142,7 +142,7 @@ class CustomSidebarsReplacer extends CustomSidebars {
 
 			$check = $this->is_valid_replacement( $sb_id, $replacement, $replacement_type, $extra_index );
 
-			if ( $check ) {
+			if ( $check && isset( $original_widgets[ $replacement ] ) ) {
 				$expl && do_action( 'cs_explain', 'Replacement for "' . $sb_id . '": ' . $replacement );
 
 				if ( sizeof( $original_widgets[ $replacement ] ) == 0 ) {
