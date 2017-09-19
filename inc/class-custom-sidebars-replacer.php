@@ -142,7 +142,7 @@ class CustomSidebarsReplacer extends CustomSidebars {
 
 			$check = $this->is_valid_replacement( $sb_id, $replacement, $replacement_type, $extra_index );
 
-			if ( $check ) {
+			if ( $check && isset( $original_widgets[ $replacement ] ) ) {
 				$expl && do_action( 'cs_explain', 'Replacement for "' . $sb_id . '": ' . $replacement );
 
 				if ( sizeof( $original_widgets[ $replacement ] ) == 0 ) {
@@ -385,22 +385,27 @@ class CustomSidebarsReplacer extends CustomSidebars {
 			}
 
 			// 5.2 Try to use the parents metadata.
-			if ( $post->post_parent != 0 && $replacements_todo > 0 ) {
-				$reps = self::get_post_meta( $post->post_parent );
-				foreach ( $sidebars as $sb_id ) {
-					if ( $replacements[ $sb_id ] ) { continue; }
-					if ( is_array( $reps )
-						&& ! empty( $reps[ $sb_id ] )
-					) {
-						$replacements[ $sb_id ] = array(
-							$reps[ $sb_id ],
-							'particular',
-							-1,
-						);
-						$replacements_todo -= 1;
+			$post_orginal = $post;
+			while ( $replacements_todo > 0 ) {
+				if ( $post->post_parent != 0 && $replacements_todo > 0 ) {
+					$reps = self::get_post_meta( $post->post_parent );
+					foreach ( $sidebars as $sb_id ) {
+						if ( $replacements[ $sb_id ] ) { continue; }
+						if ( is_array( $reps )
+							&& ! empty( $reps[ $sb_id ] )
+						) {
+							$replacements[ $sb_id ] = array(
+								$reps[ $sb_id ],
+								'particular',
+								-1,
+							);
+							$replacements_todo -= 1;
+						}
 					}
+					$post = get_post( $post->post_parent );
 				}
 			}
+			$post = $post_orginal;
 
 			// 5.3 Look for post-type level replacements.
 			if ( $replacements_todo > 0 ) {

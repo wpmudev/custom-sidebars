@@ -35,7 +35,7 @@
 	<form class="frm-preview-import">
 		<input type="hidden" name="do" value="preview-import" />
 		<p>
-			<label for="import-file"><?php _e( 'Export file', 'custom-sidebars' ); ?></label>
+			<label for="import-file"><?php _e( 'Select a file to import', 'custom-sidebars' ); ?></label>
 			<input type="file" id="import-file" name="data" />
 		</p>
 		<p>
