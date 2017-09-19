@@ -8,8 +8,8 @@ Change Log:
 =======
 3.1.0 ( 2017-xx-xx )
 - Added a quick and a bulk edit to custom post types.
-- Added nonce check for: set location, import & export actions to avoid CSRF vulnerability.
-- Fixed a problem with gettings sidebars settings for nested pages with more than 2 levels.
+- Added nonce check for set location, import & export actions to avoid CSRF vulnerability.
+- Fixed a problem with getting sidebars settings for nested pages with more than 2 levels.
 - Fixed a problem with widget visibility on taxonomy archive page.
 - Fixed a typo on Import/Export screen.
 
