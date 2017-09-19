@@ -50,7 +50,8 @@
 		'lbl_replaceable': "<?php _e( 'This sidebar can be replaced on certain pages', 'custom-sidebars' ); ?>",
 		'replace_tip': "<?php _e( 'Activate this option to replace the sidebar with one of your custom sidebars.', 'custom-sidebars' ); ?>",
 		'filter': "<?php _e( 'Filter...', 'custom-sidebars' ); ?>",
-		'replaceable': <?php echo json_encode( (object) CustomSidebars::get_options( 'modifiable' ) ); ?>
+		'replaceable': <?php echo json_encode( (object) CustomSidebars::get_options( 'modifiable' ) ); ?>,
+		'_wpnonce_get': "<?php echo esc_attr( wp_create_nonce( 'custom-sidebars-get' ) ); ?>"
 	};
 	</script>
 

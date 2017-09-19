@@ -292,7 +292,12 @@ foreach ( $list as $key => $values ) {
 $list = @$import['options']['category_archive'];
 foreach ( $list as $key => $values ) {
 	$cat = get_category( $key );
-	if ( ! count( $values ) ) { continue; }
+	if ( ! is_a( $cat, 'WP_Term' ) ) {
+		continue;
+	}
+	if ( ! count( $values ) ) {
+		continue;
+	}
 	list_sidebar_replacement( $cat->name, $values );
 }
 ?>
@@ -325,6 +330,7 @@ list_sidebar_replacement( __( 'Search results page', 'custom-sidebars' ), $impor
         <button type="button" class="btn-cancel button-link">Cancel</button>
         <button class="button-primary btn-import"><i class="dashicons dashicons-migrate"></i> Import selected items</button>
     </p>
+        <?php wp_nonce_field( 'custom-sidebars-import' ); ?>
     </form>
 
     <?php endif; ?>
