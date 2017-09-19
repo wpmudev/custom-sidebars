@@ -651,7 +651,7 @@ class CustomSidebars {
 				array( 'public' => false ),
 				'names'
 			);
-			$Ignored_types[] = 'attachment';
+			$Ignored_types['attachment'] = 'attachment';
 		}
 
 		if ( is_object( $posttype ) ) {
@@ -673,7 +673,6 @@ class CustomSidebars {
 			$response = apply_filters( 'cs_support_posttype', $response, $posttype );
 			$Response[ $posttype ] = $response;
 		}
-
 		return $Response[ $posttype ];
 	}
 
@@ -696,7 +695,11 @@ class CustomSidebars {
 			$Valid[ $type ] = array();
 
 			foreach ( $all as $post_type ) {
-				if ( self::supported_post_type( $post_type ) ) {
+				$suports = self::supported_post_type( $post_type );
+
+				l( array( $post_type->name, $suports ) );
+
+				if ( $suports  ) {
 					$Valid[ $type ][] = $post_type;
 				}
 			}
