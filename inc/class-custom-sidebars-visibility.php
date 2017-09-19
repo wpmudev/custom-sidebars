@@ -848,23 +848,31 @@ foreach ( $tags as $one ) {
 
 		// Filter for POST-TYPE.
 		if ( $condition_true && ! empty( $cond['posttypes'] ) ) {
-			$posttype = get_post_type();
-			$expl && $explain .= '<br />POSTTYPE-' . strtoupper( $posttype ) . ' [';
-
-			if ( ! in_array( $posttype, $cond['posttypes'] ) ) {
-				$expl && $explain .= 'invalid posttype';
-				$condition_true = false;
-			} else {
-				// Filter for SPECIFIC POSTS.
-				if ( ! empty( $cond[ 'pt-' . $posttype ] ) ) {
-					if ( ! in_array( get_the_ID(), $cond[ 'pt-' . $posttype ] ) ) {
-						$expl && $explain .= 'invalid post_id';
-						$condition_true = false;
+			$expl && $explain .= '<br />POSTTYPE-';
+			/**
+			 * Check for is singular or post type archive
+			 */
+			if ( is_singular( $cond['posttypes'] ) || is_post_type_archive( $cond['posttypes'] ) ) {
+				$posttype = get_post_type();
+				$expl && $explain .= strtoupper( $posttype ) . ' [';
+				if ( ! in_array( $posttype, $cond['posttypes'] ) ) {
+					$expl && $explain .= 'invalid posttype';
+					$condition_true = false;
+				} else {
+					// Filter for SPECIFIC POSTS.
+					if ( ! empty( $cond[ 'pt-' . $posttype ] ) ) {
+						if ( ! in_array( get_the_ID(), $cond[ 'pt-' . $posttype ] ) ) {
+							$expl && $explain .= 'invalid post_id';
+							$condition_true = false;
+						}
 					}
 				}
-			}
-			if ( $condition_true ) {
-				$expl && $explain .= 'ok';
+				if ( $condition_true ) {
+					$expl && $explain .= 'ok';
+				}
+			} else {
+				$expl && $explain .= ' it is not singular or post type archive';
+				$condition_true = false;
 			}
 			$expl && $explain .= '] ';
 		}
