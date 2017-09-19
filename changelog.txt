@@ -5,7 +5,10 @@ Buildtime: BUILDTIME
 Change Log:
 ----------------------------------------------------------------------
 
+3.1.0 ( 2017-xx-xx )
 - Added a quick and a bulk edit to custom post types.
+- Fixed a typo on Import/Export screen.
+- Fixed a problem with gettings sidebars settings for nested pages with more than 2 levels.
 
 3.0.9 ( 2017-07-03 )
 - Added ability to turn off "Custom Sidebars" for certain roles.
