@@ -58,49 +58,61 @@ class CustomSidebarsEditor extends CustomSidebars {
 			array( $this, 'handle_ajax' )
 		);
 
-		/**
-		 * Check settings
-		 */
-		$user_can_save = $this->current_user_can_update_custom_sidebars();
-		if ( $user_can_save ) {
-			// Add a custom column to post list.
-			$posttypes = self::get_post_types( 'objects' );
-			foreach ( $posttypes as $pt ) {
-				add_filter(
-					'manage_' . $pt->name . '_posts_columns',
-					array( $this, 'post_columns' )
-				);
+		add_action( 'admin_init', array( $this, 'settings' ) );
+	}
 
-				add_action(
-					'manage_' . $pt->name . '_posts_custom_column',
-					array( $this, 'post_column_content' ),
-					10, 2
-				);
-			}
-			/** This action is documented in wp-admin/includes/screen.php */
-			add_filter( 'default_hidden_columns', array( $this, 'default_hidden_columns' ), 10, 2 );
-
-			add_action( 'quick_edit_custom_box', array( $this, 'post_quick_edit' ), 10, 2 );
-			add_action( 'bulk_edit_custom_box', array( $this, 'post_bulk_edit' ), 10, 2 );
-
-			add_action(
-				'admin_footer',
-				array( $this, 'post_quick_edit_js' )
-			);
-
-			/**
-			 * Bulk Edit save
-			 *
-			 * @since 3.0.8
-			 */
-			add_action( 'save_post', array( $this, 'bulk_edit_save' ) );
-		}
-
+	/**
+	 * Settings function
+	 *
+	 * @since 3.1.0
+	 */
+	public function settings() {
 		/**
 		 * metabox role
 		 */
 		add_filter( 'screen_settings', array( $this, 'add_capabilities_select_box' ), 10, 2 );
 		add_action( 'wp_ajax_custom_sidebars_metabox_roles', array( $this, 'update_custom_sidebars_metabox_roles' ) );
+
+		/**
+		 * Check user privileges
+		 */
+		$user_can_save = $this->current_user_can_update_custom_sidebars();
+
+		if ( ! $user_can_save ) {
+			return;
+		}
+		// Add a custom column to post list.
+		$posttypes = self::get_post_types( 'objects' );
+		foreach ( $posttypes as $pt ) {
+			add_filter(
+				'manage_' . $pt->name . '_posts_columns',
+				array( $this, 'post_columns' )
+			);
+
+			add_action(
+				'manage_' . $pt->name . '_posts_custom_column',
+				array( $this, 'post_column_content' ),
+				10, 2
+			);
+		}
+		/** This action is documented in wp-admin/includes/screen.php */
+		add_filter( 'default_hidden_columns', array( $this, 'default_hidden_columns' ), 10, 2 );
+
+		add_action( 'quick_edit_custom_box', array( $this, 'post_quick_edit' ), 10, 2 );
+		add_action( 'bulk_edit_custom_box', array( $this, 'post_bulk_edit' ), 10, 2 );
+
+		add_action(
+			'admin_footer',
+			array( $this, 'post_quick_edit_js' )
+		);
+
+		/**
+		 * Bulk Edit save
+		 *
+		 * @since 3.0.8
+		 */
+		add_action( 'save_post', array( $this, 'bulk_edit_save' ) );
+
 	}
 
 	/**
@@ -149,36 +161,49 @@ class CustomSidebarsEditor extends CustomSidebars {
 			switch ( $action ) {
 				// Return details for the specified sidebar.
 				case 'get':
-					$req->sidebar = $sb_data;
-					break;
+					/**
+				 * check nonce
+				 */
+					if (
+					! isset( $_POST['_wpnonce'] )
+					|| ! wp_verify_nonce( $_POST['_wpnonce'], 'custom-sidebars-get' )
+					) {
+						$req = self::req_err(
+							$req,
+							__( 'You do not have permission for this', 'custom-sidebars' )
+						);
+					} else {
+						$req->sidebar = $sb_data;
+					}
+				break;
 
 				// Save or insert the specified sidebar.
 				case 'save':
 					$req = $this->save_item( $req, $_POST );
-					break;
+				break;
 
 				// Delete the specified sidebar.
 				case 'delete':
 					$req->sidebar = $sb_data;
 					$req = $this->delete_item( $req, $_POST );
-					break;
+				break;
 
 				// Get the location data.
 				case 'get-location':
 					$req->sidebar = $sb_data;
 					$req = $this->get_location_data( $req );
-					break;
+				break;
 
 				// Update the location data.
 				case 'set-location':
 					$req->sidebar = $sb_data;
 					$req = $this->set_location_data( $req );
-					break;
+				break;
 
 				// Toggle theme sidebar replaceable-flag.
 				case 'replaceable':
 					$req = $this->set_replaceable( $req );
-					break;
+				break;
 			}
 		}
 
@@ -331,9 +356,9 @@ class CustomSidebarsEditor extends CustomSidebars {
 	/**
 	 * Delete the specified sidebar and update the response object.
 	 *
-     * @since  2.0
-     * @since 3.0.8.1 Added the $data param.
-     *
+	 * @since  2.0
+	 * @since 3.0.8.1 Added the $data param.
+	 *
 	 * @param  object $req Initial response object.
 	 * @param  array $data Sidebar data to save (typically this is $_POST).
 	 * @return object Updated response object.
@@ -614,6 +639,18 @@ class CustomSidebarsEditor extends CustomSidebars {
 	 * @return object Updated response object.
 	 */
 	private function set_location_data( $req ) {
+		/**
+		 * check nonce
+		 */
+		if (
+			! isset( $_POST['_wpnonce'] )
+			|| ! wp_verify_nonce( $_POST['_wpnonce'], 'custom-sidebars-set-location' )
+		) {
+			return self::req_err(
+				$req,
+				__( 'You have no permission to do this operation.', 'custom-sidebars' )
+			);
+		}
 		$options = self::get_options();
 		$sidebars = $options['modifiable'];
 		$raw_posttype = self::get_post_types( 'objects' );

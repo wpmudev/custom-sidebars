@@ -27,14 +27,15 @@
 			<button class="button-primary">
 				<i class="dashicons dashicons-download"></i> <?php _e( 'Export', 'custom-sidebars' ); ?>
 			</button>
-		</p>
+        </p>
+        <?php wp_nonce_field( 'custom-sidebars-export' ); ?>
 	</form>
 	<hr />
 	<h2><?php _e( 'Import', 'custom-sidebars' ); ?></h2>
 	<form class="frm-preview-import">
 		<input type="hidden" name="do" value="preview-import" />
 		<p>
-			<label for="import-file"><?php _e( 'Export file', 'custom-sidebars' ); ?></label>
+			<label for="import-file"><?php _e( 'Select a file to import', 'custom-sidebars' ); ?></label>
 			<input type="file" id="import-file" name="data" />
 		</p>
 		<p>
@@ -42,5 +43,6 @@
 				<i class="dashicons dashicons-upload"></i> <?php _e( 'Preview', 'custom-sidebars' ); ?>
 			</button>
 		</p>
+        <?php wp_nonce_field( 'custom-sidebars-import' ); ?>
 	</form>
 </div>
