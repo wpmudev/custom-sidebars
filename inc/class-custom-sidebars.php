@@ -685,26 +685,19 @@ class CustomSidebars {
 	 */
 	static public function get_post_types( $type = 'names' ) {
 		$Valid = array();
-
 		if ( 'objects' != $type ) {
 			$type = 'names';
 		}
-
 		if ( ! isset( $Valid[ $type ] ) ) {
 			$all = get_post_types( array(), $type );
 			$Valid[ $type ] = array();
-
 			foreach ( $all as $post_type ) {
 				$suports = self::supported_post_type( $post_type );
-
-				l( array( $post_type->name, $suports ) );
-
 				if ( $suports  ) {
 					$Valid[ $type ][] = $post_type;
 				}
 			}
 		}
-
 		return $Valid[ $type ];
 	}
 
