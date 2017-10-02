@@ -386,8 +386,7 @@ class CustomSidebarsReplacer extends CustomSidebars {
 
 			// 5.2 Try to use the parents metadata.
 			$post_orginal = $post;
-			$post_parent = $post->post_parent;
-			while ( $replacements_todo > 0 && $post_parent > 0 ) {
+			while ( $replacements_todo > 0 && $post->post_parent > 0 ) {
 				if ( $replacements_todo > 0 ) {
 					$reps = self::get_post_meta( $post->post_parent );
 					foreach ( $sidebars as $sb_id ) {
