@@ -120,11 +120,18 @@ If you are running a earlier version of WordPress download Custom Sidebars 0.8.2
 
 == Changelog ==
 
+= 3.1.0 =
+* Added a quick and a bulk edit to custom post types.
+* Added nonce check for set location, import & export actions to avoid CSRF vulnerability.
+* Fixed a problem with getting sidebars settings for nested pages with more than 2 levels.
+* Fixed a problem with widget visibility on taxonomy archive page.
+* Fixed a typo on Import/Export screen.
+
 = 3.0.9 =
-- Added ability to turn off "Custom Sidebars" for certain roles.
-- Fixed a problem with a category, category archive, and post in category replacement.
-- Fixed a problem with removed "Category Archive" from "For Archives" options.
-- Fixed build in taxonomies problem on "Sidebar Location" edit window.
+* Added ability to turn off "Custom Sidebars" for certain roles.
+* Fixed a problem with a category, category archive, and post in category replacement.
+* Fixed a problem with removed "Category Archive" from "For Archives" options.
+* Fixed build in taxonomies problem on "Sidebar Location" edit window.
 
 = 3.0.8.1 =
 * Fixed CSRF vulnerability. Props for [qasuar](https://wordpress.org/support/users/qasuar/)
