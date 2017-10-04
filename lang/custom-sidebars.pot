@@ -4,7 +4,7 @@ msgid ""
 msgstr ""
 "Project-Id-Version: Custom Sidebars Pro PLUGIN_VERSION\n"
 "Report-Msgid-Bugs-To: https://wordpress.org/support/plugin/customsidebars\n"
-"POT-Creation-Date: 2017-09-19 09:07:39+00:00\n"
+"POT-Creation-Date: 2017-10-04 13:18:37+00:00\n"
 "MIME-Version: 1.0\n"
 "Content-Type: text/plain; charset=utf-8\n"
 "Content-Transfer-Encoding: 8bit\n"
@@ -349,15 +349,15 @@ msgid ""
 "\t\t\t\t\t\tto disable accessibility mode and use the %1$s plugin!"
 msgstr ""
 
-#: inc/class-custom-sidebars.php:953 views/import.php:140
+#: inc/class-custom-sidebars.php:946 views/import.php:140
 msgid "Widgets"
 msgstr ""
 
-#: inc/class-custom-sidebars.php:963
+#: inc/class-custom-sidebars.php:956
 msgid "Support"
 msgstr ""
 
-#: inc/class-custom-sidebars.php:980
+#: inc/class-custom-sidebars.php:973
 msgid "Create a custom sidebar to get started."
 msgstr ""
 
