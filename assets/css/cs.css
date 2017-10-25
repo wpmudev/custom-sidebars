@@ -183,6 +183,12 @@
   padding-top: 1em;
   position: relative;
 }
+@media screen and (max-width: 480px) {
+  .widgets-php #wpcontent .wrap .cs-wrap {
+    position: static;
+    margin: 0;
+  }
+}
 .widgets-php #wpcontent #screen-meta-links {
   position: relative;
   z-index: 10;
@@ -309,6 +315,21 @@
   -webkit-box-shadow: none;
   -moz-box-shadow: none;
   box-shadow: none;
+}
+@media screen and (max-width: 590px) {
+  .widgets-php .sidebars-column-1 .inner .custom-sidebars-checkup .cs-inner form {
+    background-color: transparent;
+    display: block;
+  }
+  .widgets-php .sidebars-column-1 .inner .custom-sidebars-checkup .cs-inner form input[type=text] {
+    background-color: #fafafa;
+  }
+  .widgets-php .sidebars-column-1 .inner .custom-sidebars-checkup .cs-inner form input[type=submit] {
+    border-radius: 4px;
+    display: block;
+    margin: 10px 0 0 auto;
+    width: auto;
+  }
 }
 
 #cs-options .cs-action {
@@ -553,7 +574,7 @@ body.appearance_page_customsidebars #poststuff h2 {
   height: 40px;
   overflow: hidden;
   display: inline-block;
-  color: #DDD;
+  color: #ddd;
 }
 
 .cs-custom-sidebar .cs-tool,
@@ -577,51 +598,14 @@ body.appearance_page_customsidebars #poststuff h2 {
 
 .cs-toolbar .cs-tool.btn-replaceable {
   color: #555;
-  padding-left: 32px;
-  	/*
-  
-  	.icon {
-  		display: inline-block;
-  		width: 20px;
-  		height: 20px;
-  		font-size: 20px;
-  		line-height: 20px;
-  		font-family: "dashicons";
-  		font-weight: normal;
-  		font-style: normal;
-  		text-align: center;
-  		float: left;
-  		padding: 10px 5px 10px 0;
-  		-webkit-font-smoothing: antialiased;
-  		-moz-osx-font-smoothing: grayscale;
-  
-  		&:before {
-  			content: "\f160"; /* dashicons-lock * /
-  			color: #BBB;
-  		}
-  	}
-  	*/
 }
 .cs-toolbar .cs-tool.btn-replaceable:hover {
   color: #333 !important;
-}
-.cs-toolbar .cs-tool.btn-replaceable .chk-replaceable {
-  position: absolute;
-  top: 50%;
-  left: 10px;
-  height: 16px;
-  margin-top: -8px;
 }
 
 .replaceable .cs-toolbar .cs-tool.btn-replaceable {
   background: #edfff3;
   color: #333;
-  /*
-  .icon:before {
-  	content: "\f147"; /* dashicons-yes * /
-  	color: #080;
-  }
-  */
 }
 
 .replace-tip-box {
