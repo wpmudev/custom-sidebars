@@ -30,10 +30,10 @@ module.exports = function( grunt ) {
 
 		// SASS files to process. Resulting CSS files will be minified as well.
 		css_files_compile: {
-			'assets/css/cs-cloning.css':    'assets/css/src/cs-cloning.scss',
-			'assets/css/cs.css':            'assets/css/src/cs.scss',
-			'assets/css/cs-scan.css':       'assets/css/src/cs-scan.scss',
-			'assets/css/cs-visibility.css': 'assets/css/src/cs-visibility.scss'
+			'assets/css/cs-cloning.css':    'assets/sass/cs-cloning.scss',
+			'assets/css/cs.css':            'assets/sass/cs.scss',
+			'assets/css/cs-scan.css':       'assets/sass/cs-scan.scss',
+			'assets/css/cs-visibility.css': 'assets/sass/cs-visibility.scss'
 		},
 
 		// BUILD branches.
@@ -49,8 +49,9 @@ module.exports = function( grunt ) {
 				'./img/heart.png',
 				'./img/devman.png',
 				'./img/hand-with-heart.png',
-				'./css/cs-scan.css',
-				'./css/cs-scan.min.css',
+				'./assets/css/cs-scan.css',
+				'./assets/css/cs-scan.min.css',
+				'./assets/sass',
 				'.inc/external/wdev-frash'
 			],
 			exclude_free: [
@@ -60,18 +61,19 @@ module.exports = function( grunt ) {
 				'./Gruntfile.js',
 				'./package.json',
 				'./inc/external/wpmudev-dashboard',
+				'./assets/sass',
 			],
 			include_files: [
 				'**',
-				'!css/src/**',
-				'!js/src/**',
-				'!js/vendor/**',
-				'!img/src/**',
+				'!assets/sass/**',
+				'!assets/js/src/**',
+				'!assets/js/vendor/**',
+				'!assets/img/src/**',
 				'!node_modules/**',
 				'!build/**',
 				'!tests/**',
 				'!**/css/src/**',
-				'!**/css/sass/**',
+				'!**/sass/**',
 				'!**/js/src/**',
 				'!**/js/vendor/**',
 				'!**/img/src/**',
@@ -289,7 +291,7 @@ module.exports = function( grunt ) {
 		// WATCH - Watch filesystem for changes during development.
 		watch:  {
 			sass: {
-				files: ['assets/css/src/**/*.scss'],
+				files: ['assets/sass/**/*.scss'],
 				tasks: ['sass', 'autoprefixer'],
 				options: {
 					debounceDelay: 500
