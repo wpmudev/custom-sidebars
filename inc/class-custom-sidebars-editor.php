@@ -955,7 +955,7 @@ class CustomSidebarsEditor extends CustomSidebars {
 		 * 'editpost' .. Saved from full Post-Editor screen.
 		 * 'inline-save' .. Saved via the quick-edit form.
 		 */
-		if ( ( isset( $_POST['action'] ) && 'inline-save' != $_POST['action'] ) && 'editpost' != $action  ) {
+		if ( ( isset( $_REQUEST['action'] ) && 'inline-save' != $_REQUEST['action'] ) && 'editpost' != $action  ) {
 			return $post_id;
 		}
 
@@ -1318,7 +1318,7 @@ class CustomSidebarsEditor extends CustomSidebars {
 		if ( ! $update ) {
 			return;
 		}
-		CustomSidebars::set_post_meta( $post_id, $data );
+		self::set_post_meta( $post_id, $data );
 	}
 
 	/**

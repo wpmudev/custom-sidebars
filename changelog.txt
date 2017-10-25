@@ -5,6 +5,8 @@ Buildtime: BUILDTIME
 Change Log:
 ----------------------------------------------------------------------
 
+- Fixed bulk edit problem with reseting sidebars.
+
 3.1.0 ( 2017-10-04 )
 ----------------------------------------------------------------------
 - Added a quick and a bulk edit to custom post types.
