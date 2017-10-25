@@ -325,6 +325,9 @@
     background-color: #fafafa;
   }
   .widgets-php .sidebars-column-1 .inner .custom-sidebars-checkup .cs-inner form input[type=submit] {
+    -webkit-border-radius: 4px;
+    -moz-border-radius: 4px;
+    -ms-border-radius: 4px;
     border-radius: 4px;
     display: block;
     margin: 10px 0 0 auto;
