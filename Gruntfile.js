@@ -23,17 +23,17 @@ module.exports = function( grunt ) {
 
 		// Concatenate those JS files into a single file (target: [source, source, ...]).
 		js_files_concat: {
-			'js/cs-cloning.js':    ['js/src/cs-cloning.js'],
-			'js/cs-visibility.js': ['js/src/cs-visibility.js'],
-			'js/cs.js':            ['js/src/cs.js', 'js/src/metabox-roles.js']
+			'assets/js/cs-cloning.js':    ['assets/js/src/cs-cloning.js'],
+			'assets/js/cs-visibility.js': ['assets/js/src/cs-visibility.js'],
+			'assets/js/cs.js':            ['assets/js/src/cs.js', 'assets/js/src/metabox-roles.js']
 		},
 
 		// SASS files to process. Resulting CSS files will be minified as well.
 		css_files_compile: {
-			'css/cs-cloning.css':    'css/src/cs-cloning.scss',
-			'css/cs.css':            'css/src/cs.scss',
-			'css/cs-scan.css':       'css/src/cs-scan.scss',
-			'css/cs-visibility.css': 'css/src/cs-visibility.scss'
+			'assets/css/cs-cloning.css':    'assets/css/src/cs-cloning.scss',
+			'assets/css/cs.css':            'assets/css/src/cs.scss',
+			'assets/css/cs-scan.css':       'assets/css/src/cs-scan.scss',
+			'assets/css/cs-visibility.css': 'assets/css/src/cs-visibility.scss'
 		},
 
 		// BUILD branches.
@@ -174,7 +174,7 @@ module.exports = function( grunt ) {
 		jshint: {
 			all: [
 				'Gruntfile.js',
-				'js/src/**/*.js',
+				'assets/js/src/**/*.js',
 			],
 			options: {
 				curly:   true,
@@ -201,8 +201,8 @@ module.exports = function( grunt ) {
 				files: [{
 					expand: true,
 					src: ['*.js', '!*.min.js'],
-					cwd: 'js/',
-					dest: 'js/',
+					cwd: 'assets/js/',
+					dest: 'assets/js/',
 					ext: '.min.js',
 					extDot: 'last'
 				}],
@@ -218,28 +218,6 @@ module.exports = function( grunt ) {
 				}
 			}
 		},
-
-
-		// TEST - Run the PHPUnit tests.
-		/* -- Not used right now...
-		phpunit: {
-			classes: {
-				dir: ''
-			},
-			options: {
-				bin: 'phpunit',
-				bootstrap: 'tests/php/bootstrap.php',
-				testsuite: 'default',
-				configuration: 'tests/php/phpunit.xml',
-				colors: true,
-				//tap: true,
-				//testdox: true,
-				//stopOnError: true,
-				staticBackup: false,
-				noGlobalsBackup: false
-			}
-		},
-		*/
 
 
 		// CSS - Compile a .scss file into a normal .css file.
@@ -266,8 +244,8 @@ module.exports = function( grunt ) {
 				files: [{
 					expand: true,
 					src: ['**/*.css', '!**/*.min.css'],
-					cwd: 'css/',
-					dest: 'css/',
+					cwd: 'assets/css/',
+					dest: 'assets/css/',
 					ext: '.css',
 					extDot: 'last',
 					flatten: false
@@ -300,8 +278,8 @@ module.exports = function( grunt ) {
 			minify: {
 				expand: true,
 				src: ['*.css', '!*.min.css'],
-				cwd: 'css/',
-				dest: 'css/',
+				cwd: 'assets/css/',
+				dest: 'assets/css/',
 				ext: '.min.css',
 				extDot: 'last'
 			}
@@ -311,7 +289,7 @@ module.exports = function( grunt ) {
 		// WATCH - Watch filesystem for changes during development.
 		watch:  {
 			sass: {
-				files: ['css/src/**/*.scss'],
+				files: ['assets/css/src/**/*.scss'],
 				tasks: ['sass', 'autoprefixer'],
 				options: {
 					debounceDelay: 500
@@ -319,7 +297,7 @@ module.exports = function( grunt ) {
 			},
 
 			scripts: {
-				files: ['js/src/**/*.js', 'js/vendor/**/*.js'],
+				files: ['assets/js/src/**/*.js', 'assets/js/vendor/**/*.js'],
 				tasks: ['jshint', 'concat'],
 				options: {
 					debounceDelay: 500
@@ -497,11 +475,6 @@ module.exports = function( grunt ) {
 		} else {
 			build = ['pro', 'free'];
 		}
-
-		// First run unit tests.
-		/* -- Not used right now...
-		grunt.task.run( 'phpunit' );
-		*/
 
 		// Run the default tasks (js/css/php validation).
 		grunt.task.run( 'default' );
