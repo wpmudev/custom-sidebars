@@ -5,6 +5,9 @@ Buildtime: BUILDTIME
 Change Log:
 ----------------------------------------------------------------------
 
+3.1.1 ( 2017-xx-xx )
+----------------------------------------------------------------------
+- Improved widgets on very small screens.
 - Fixed few notices on import screen.
 
 3.1.0 ( 2017-10-04 )
