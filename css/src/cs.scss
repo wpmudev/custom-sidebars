@@ -203,6 +203,12 @@
 				padding-top: 1em;
 				position: relative;
 			}
+			@media screen and (max-width: 480px) {
+				.cs-wrap {
+					position: static;
+					margin: 0;
+				}
+			}
 		}
 
 		#screen-meta-links {
@@ -271,60 +277,7 @@
 					}
 				}
 			}
-			.custom-sidebars-checkup {
-				background-color: #fff;
-				.cs-inner {
-					background: url(../img/hand-with-heart.png) no-repeat 100% 100%;
-					font-size: 1.2em;
-					min-height: 227px;
-					padding-bottom: 10px;
-					h4, p {
-						margin: 0;
-						padding: 0 120px 0 30px;
-						font-size: 1.1em;
-					}
-					h4 {
-						color: #222;
-						font-size: 1.2em;
-						padding-top: 50px;
-					}
-					p {
-						color: #c1272c;
-						padding-top: 16px;
-					}
-					form {
-						@include border-radius( 4px );
-						background-color: #fafafa;
-						display: flex;
-						flex-wrap: nowrap;
-						justify-content: space-between;
-						margin: 24px 30px 0 30px;
-						padding: 0;
-						input {
-							background-color: transparent;
-							border: 0;
-							font-size: 1em;
-							margin: 0;
-							padding: 10px 15px;
-							text-align: center;
-							&[type=submit] {
-								@include border-radius( 0 4px 4px 0 );
-								background-color: #00a7e6;
-								color: #fff;
-								min-width: 3em;
-								text-transform: uppercase;
-							}
-							&[type=text] {
-								color: #aaa;
-								flex-grow: 1;
-								&:active {
-									@include box-shadow( none );
-								}
-							}
-						}
-					}
-				}
-			}
+			@import '_custom-sidebars-checkup'
 		}
 	}
 }
@@ -592,7 +545,7 @@ body.appearance_page_customsidebars #poststuff h2 {
 		height: 40px;
 		overflow: hidden;
 		display: inline-block;
-		color: #DDD;
+		color: #ddd;
 	}
 }
 
@@ -620,54 +573,15 @@ body.appearance_page_customsidebars #poststuff h2 {
 
 .cs-toolbar .cs-tool.btn-replaceable {
 	color: #555;
-	padding-left: 32px;
-
 	&:hover {
 		color: #333 !important;
 	}
-
-	.chk-replaceable {
-		position: absolute;
-		top: 50%;
-		left: 10px;
-		height: 16px;
-		margin-top: -8px;
-	}
-	/*
-
-	.icon {
-		display: inline-block;
-		width: 20px;
-		height: 20px;
-		font-size: 20px;
-		line-height: 20px;
-		font-family: "dashicons";
-		font-weight: normal;
-		font-style: normal;
-		text-align: center;
-		float: left;
-		padding: 10px 5px 10px 0;
-		-webkit-font-smoothing: antialiased;
-		-moz-osx-font-smoothing: grayscale;
-
-		&:before {
-			content: "\f160"; /* dashicons-lock * /
-			color: #BBB;
-		}
-	}
-	*/
 }
 
 .replaceable {
 	.cs-toolbar .cs-tool.btn-replaceable {
 		background: lighten(#05c944, 56%);
 		color: #333;
-		/*
-		.icon:before {
-			content: "\f147"; /* dashicons-yes * /
-			color: #080;
-		}
-		*/
 	}
 }
 
