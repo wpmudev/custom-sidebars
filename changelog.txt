@@ -7,9 +7,10 @@ Change Log:
 
 3.1.1 ( 2017-xx-xx )
 ----------------------------------------------------------------------
+- Improved assets directories.
 - Improved widgets on very small screens.
-- Fixed few notices on import screen.
 - Fixed bulk edit problem with reseting sidebars.
+- Fixed few notices on import screen.
 
 3.1.0 ( 2017-10-04 )
 ----------------------------------------------------------------------

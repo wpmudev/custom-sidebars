@@ -56,9 +56,9 @@ function inc_sidebars_init() {
 	define( 'CSB_LANG_DIR', $plugin_dir_rel . '/lang/' );
 	define( 'CSB_VIEWS_DIR', $plugin_dir . '/views/' );
 	define( 'CSB_INC_DIR', $plugin_dir . '/inc/' );
-	define( 'CSB_JS_URL', $plugin_url . 'js/' );
-	define( 'CSB_CSS_URL', $plugin_url . 'css/' );
-	define( 'CSB_IMG_URL', $plugin_url . 'img/' );
+	define( 'CSB_JS_URL', $plugin_url . 'assets/js/' );
+	define( 'CSB_CSS_URL', $plugin_url . 'assets/css/' );
+	define( 'CSB_IMG_URL', $plugin_url . 'assets/img/' );
 
 	// Include function library.
 	$modules[] = CSB_INC_DIR . 'external/wpmu-lib/core.php';
