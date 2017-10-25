@@ -56,6 +56,13 @@ function list_sidebar_replacement( $label, $list ) {
 	 * Show basic infos about the WordPress configuration at time of
 	 * the export.
 	 */
+	$filename = '';
+	if (
+	isset( $import['meta'] )
+	&& isset( $import['meta']['filename'] )
+	) {
+		$filename = $import['meta']['filename'];
+	}
 	?>
 	<h2 class="no-pad-top"><?php _e( 'Import', 'custom-sidebars' ); ?></h2>
 	<div class="show-infos">
@@ -65,7 +72,7 @@ function list_sidebar_replacement( $label, $list ) {
 				<tbody>
 					<tr>
 						<th><?php _e( 'Filename', 'custom-sidebars' ); ?></th>
-						<td colspan="2"><?php echo esc_html( @$import['meta']['filename'] ); ?></td>
+						<td colspan="2"><?php echo esc_html( $filename ); ?></td>
 					</tr>
 					<tr>
 						<th><?php _e( 'Exported on', 'custom-sidebars' ); ?></th>
@@ -92,7 +99,7 @@ function list_sidebar_replacement( $label, $list ) {
 					<tr>
 						<th><?php _e( 'Plugin version', 'custom-sidebars' ); ?></th>
 						<td><?php echo esc_html( $import['meta']['csb_version'] ); ?></td>
-						<td><?php echo esc_html( @$csb_info['Version'] ); ?></td>
+						<td><?php echo esc_html( isset( $csb_info['Version'] )? $csb_info['Version'] : __( 'Unknown', 'custom-sidebars' ) ); ?></td>
 					</tr>
 					<tr>
 						<th><?php _e( 'Theme', 'custom-sidebars' ); ?></th>
@@ -102,7 +109,7 @@ function list_sidebar_replacement( $label, $list ) {
 				</tbody>
 			</table>
 		</div>
-    </div>
+	</div>
 
 	<?php if ( ! empty( $import['meta']['description'] ) ) : ?>
 		<pre><?php echo esc_html( stripslashes( $import['meta']['description'] ) ); ?></pre>
@@ -148,20 +155,25 @@ foreach ( $import['sidebars'] as $sidebar ) {
 	if ( in_array( $sidebar['id'], $current_keys ) ) {
 		$note = __( 'Existing sidebar will be replaced!', 'custom-sidebars' );
 	}
-	$import_sidebar = @$import['widgets'][ $sidebar['id'] ];
-	if ( ! is_array( $import_sidebar ) ) {
-		$import_sidebar = array();
+	$import_sidebar = array();
+	if (
+		isset( $sidebar['id'] )
+		&& isset( $import['widgets'] )
+		&& isset( $import['widgets'][ $sidebar['id'] ] )
+		&& is_array( $import['widgets'][ $sidebar['id'] ] )
+	) {
+		$import_sidebar = $import['widgets'][ $sidebar['id'] ];
 	}
 	$id = sprintf( 'import_sb_id_%s', $sidebar['id'] );
 ?>
-        <tr class="<?php echo esc_attr( $alternate ); ?>">
-            <th scope="row" class="check-column">
-                <input type="checkbox" name="import_sb_<?php echo esc_attr( $sidebar['id'] ); ?>" id="<?php echo esc_attr( $id ); ?>"/>
-            </th>
-            <td class="name column-name"><label for="<?php echo esc_attr( $id ); ?>"><?php echo esc_html( $sidebar['name'] ); ?></label></td>
-            <td class="description column-description"><?php echo esc_html( $sidebar['description'] ); ?></td>
-            <td class="note column-note"><?php echo esc_html( $note ); ?></td>
-            <td class="widgets column-widgets" style="display:none">
+		<tr class="<?php echo esc_attr( $alternate ); ?>">
+			<th scope="row" class="check-column">
+				<input type="checkbox" name="import_sb_<?php echo esc_attr( $sidebar['id'] ); ?>" id="<?php echo esc_attr( $id ); ?>"/>
+			</th>
+			<td class="name column-name"><label for="<?php echo esc_attr( $id ); ?>"><?php echo esc_html( $sidebar['name'] ); ?></label></td>
+			<td class="description column-description"><?php echo esc_html( $sidebar['description'] ); ?></td>
+			<td class="note column-note"><?php echo esc_html( $note ); ?></td>
+			<td class="widgets column-widgets" style="display:none">
 <?php
 if ( count( $import_sidebar ) ) {
 	echo '<ul>';
@@ -173,8 +185,8 @@ if ( count( $import_sidebar ) ) {
 	echo '-';
 }
 ?>
-            </td>
-        </tr>
+			</td>
+		</tr>
 <?php
 }
 
@@ -187,7 +199,14 @@ if ( count( $import_sidebar ) ) {
 foreach ( $theme_sidebars as $sidebar ) {
 	if ( isset( $import['widgets'][ $sidebar['id'] ] ) ) {
 		$alternate = ('' == $alternate ? 'alternate' : '');
-		$import_sidebar = @$import['widgets'][ $sidebar['id'] ];
+		$import_sidebar = array();
+		if (
+			isset( $sidebar['id'] )
+			&& isset( $import['widgets'] )
+			&& isset( $import['widgets'][ $sidebar['id'] ] )
+		) {
+			$import_sidebar = $import['widgets'][ $sidebar['id'] ];
+		}
 		if ( ! is_array( $import_sidebar ) ) {
 			$import_sidebar = array();
 		}
@@ -245,51 +264,91 @@ if ( count( $import_sidebar ) ) {
             </td>
         </tr>
     </table>
-
-    <?php /* single-posttype */ ?>
-    <div class="section"><?php _e( 'By post type', 'custom-sidebars' ); ?></div>
-    <table cellspacing="1" cellpadding="4" class="csb-export-head">
 <?php
-$list = @$import['options']['post_type_single'];
+/**
+ * single-posttype
+ */
+if (
+	isset( $import['options'] )
+	&& isset( $import['options']['post_type_single'] )
+	&& is_array( $import['options']['post_type_single'] )
+) {
+	printf(
+		'<div class="section">%s/div>',
+		esc_html__( 'By post type', 'custom-sidebars' )
+	);
+	echo '<table cellspacing="1" cellpadding="4" class="csb-export-head">';
+	$list = $import['options']['post_type_single'];
+	$list['foo'] = array();
+	foreach ( $list as $key => $values ) {
+		if ( ! count( $values ) ) {
+			continue;
+		}
+		/**
+		 * check post type exists
+		 */
+		$type = get_post_type_object( $key );
+		if ( ! is_a( $type, 'WP_Post_Type' ) ) {
+			continue;
+		}
+		list_sidebar_replacement( $type->labels->name, $values );
+	}
+	echo '</table>';
+}
+/**
+ * archive-posttype
+ */
+if (
+	isset( $import['options'] )
+	&& isset( $import['options']['post_type_archive'] )
+	&& is_array( $import['options']['post_type_archive'] )
+) {
+?>
+	<div class="section"><?php _e( 'Post-type archives', 'custom-sidebars' ); ?></div>
+	<table cellspacing="1" cellpadding="4" class="csb-export-head">
+<?php
+	$list = $import['options']['post_type_archive'];
 foreach ( $list as $key => $values ) {
 	$type = get_post_type_object( $key );
 	if ( ! count( $values ) ) { continue; }
 	list_sidebar_replacement( $type->labels->name, $values );
 }
-?>
-    </table>
-
-    <?php /* archive-posttype */ ?>
-    <div class="section"><?php _e( 'Post-type archives', 'custom-sidebars' ); ?></div>
-    <table cellspacing="1" cellpadding="4" class="csb-export-head">
-<?php
-$list = @$import['options']['post_type_archive'];
-foreach ( $list as $key => $values ) {
-	$type = get_post_type_object( $key );
-	if ( ! count( $values ) ) { continue; }
-	list_sidebar_replacement( $type->labels->name, $values );
+	echo '</table>';
 }
-?>
-    </table>
+/*
+ * single-category
+ */
+if (
+	isset( $import['options'] )
+	&& isset( $import['options']['category_single'] )
+	&& is_array( $import['options']['category_single'] )
+) {
 
-    <?php /* single-category */ ?>
-    <div class="section"><?php _e( 'By category', 'custom-sidebars' ); ?></div>
-    <table cellspacing="1" cellpadding="4" class="csb-export-head">
+?>
+	<div class="section"><?php _e( 'By category', 'custom-sidebars' ); ?></div>
+	<table cellspacing="1" cellpadding="4" class="csb-export-head">
 <?php
-$list = @$import['options']['category_single'];
+$list = $import['options']['category_single'];
 foreach ( $list as $key => $values ) {
 	$cat = get_category( $key );
 	if ( ! count( $values ) ) { continue; }
 	list_sidebar_replacement( $cat->name, $values );
 }
+	echo '</table>';
+}
+/**
+ * archive-category
+ */
+if (
+	isset( $import['options'] )
+	&& isset( $import['options']['category_archive'] )
+	&& is_array( $import['options']['category_archive'] )
+) {
 ?>
-    </table>
-
-    <?php /* archive-category */ ?>
-    <div class="section"><?php _e( 'Category archives', 'custom-sidebars' ); ?></div>
-    <table cellspacing="1" cellpadding="4" class="csb-export-head">
+	<div class="section"><?php _e( 'Category archives', 'custom-sidebars' ); ?></div>
+	<table cellspacing="1" cellpadding="4" class="csb-export-head">
 <?php
-$list = @$import['options']['category_archive'];
+	$list = $import['options']['category_archive'];
 foreach ( $list as $key => $values ) {
 	$cat = get_category( $key );
 	if ( ! is_a( $cat, 'WP_Term' ) ) {
@@ -300,9 +359,9 @@ foreach ( $list as $key => $values ) {
 	}
 	list_sidebar_replacement( $cat->name, $values );
 }
+	echo '</table>';
+}
 ?>
-    </table>
-
     <?php /* special pages */ ?>
     <div class="section"><?php _e( 'Special pages', 'custom-sidebars' ); ?></div>
     <table cellspacing="1" cellpadding="4" class="csb-export-head">
