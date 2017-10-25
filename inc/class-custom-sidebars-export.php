@@ -699,40 +699,39 @@ class CustomSidebarsExport extends CustomSidebars {
 		$def_sidebars = wp_get_sidebars_widgets();
 		$widget_list = array();
 		$orig_POST = $_POST;
-		// First replace existing sidebars.
-		foreach ( $data['widgets'] as $sb_id => $sidebar ) {
-			// --- 1. Remove all widgets from the sidebar
-
-			// @see wp-admin/includes/ajax-actions.php : function wp_ajax_save_widget()
-			// Empty the sidebar, in case it contains widgets.
-			$old_widgets = @$def_sidebars[ $sb_id ];
-			$def_sidebars[ $sb_id ] = array();
-			wp_set_sidebars_widgets( $def_sidebars );
-
-			// Also remove the widget-instances from wp-option table.
-			if ( ! is_array( $old_widgets ) ) {
-				$old_widgets = array();
-			}
-			foreach ( $old_widgets as $widget_id ) {
-				$id_base = preg_replace( '/-[0-9]+$/', '', $widget_id );
-				$_POST = array(
-					'sidebar' => $sb_id,
-					'widget-' . $id_base => array(),
-					'the-widget-id' => $widget_id,
-					'delete_widget' => '1',
-				);
-				$this->_refresh_widget_settings( $id_base );
-			}
-
-			// --- 2. Import the new widgets to the sidebar
-
-			foreach ( $sidebar as $class => $widget ) {
-				$widget_base = $widget['id_base'];
-				$widget_name = $this->_add_new_widget( $widget_base, $widget['settings'] );
-
-				if ( ! empty( $widget_name ) ) {
-					$def_sidebars[ $sb_id ][] = $widget_name;
-					$widget_count += 1;
+		/**
+		 * First replace existing sidebars.
+		 */
+		if ( isset( $data['widgets'] ) && is_array( $data['widgets'] ) ) {
+			foreach ( $data['widgets'] as $sb_id => $sidebar ) {
+				// --- 1. Remove all widgets from the sidebar
+				// @see wp-admin/includes/ajax-actions.php : function wp_ajax_save_widget()
+				// Empty the sidebar, in case it contains widgets.
+				$old_widgets = @$def_sidebars[ $sb_id ];
+				$def_sidebars[ $sb_id ] = array();
+				wp_set_sidebars_widgets( $def_sidebars );
+				// Also remove the widget-instances from wp-option table.
+				if ( ! is_array( $old_widgets ) ) {
+					$old_widgets = array();
+				}
+				foreach ( $old_widgets as $widget_id ) {
+					$id_base = preg_replace( '/-[0-9]+$/', '', $widget_id );
+					$_POST = array(
+						'sidebar' => $sb_id,
+						'widget-' . $id_base => array(),
+						'the-widget-id' => $widget_id,
+						'delete_widget' => '1',
+					);
+					$this->_refresh_widget_settings( $id_base );
+				}
+				// --- 2. Import the new widgets to the sidebar
+				foreach ( $sidebar as $class => $widget ) {
+					$widget_base = $widget['id_base'];
+					$widget_name = $this->_add_new_widget( $widget_base, $widget['settings'] );
+					if ( ! empty( $widget_name ) ) {
+						$def_sidebars[ $sb_id ][] = $widget_name;
+						$widget_count += 1;
+					}
 				}
 			}
 		}
