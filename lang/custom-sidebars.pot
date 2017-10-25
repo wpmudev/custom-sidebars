@@ -4,7 +4,7 @@ msgid ""
 msgstr ""
 "Project-Id-Version: Custom Sidebars Pro PLUGIN_VERSION\n"
 "Report-Msgid-Bugs-To: https://wordpress.org/support/plugin/customsidebars\n"
-"POT-Creation-Date: 2017-10-04 13:18:37+00:00\n"
+"POT-Creation-Date: 2017-10-25 14:14:11+00:00\n"
 "MIME-Version: 1.0\n"
 "Content-Type: text/plain; charset=utf-8\n"
 "Content-Transfer-Encoding: 8bit\n"
@@ -148,7 +148,7 @@ msgid "Sidebars"
 msgstr ""
 
 #: inc/class-custom-sidebars-editor.php:1136 views/bulk-edit.php:23
-#: views/import.php:123 views/widgets.php:47
+#: views/import.php:130 views/widgets.php:47
 msgid "Custom Sidebars"
 msgstr ""
 
@@ -206,7 +206,7 @@ msgstr ""
 msgid "Plugin options were imported!"
 msgstr ""
 
-#: inc/class-custom-sidebars-export.php:743
+#: inc/class-custom-sidebars-export.php:742
 msgid "Imported %d widget(s)!"
 msgstr ""
 
@@ -274,7 +274,7 @@ msgstr ""
 msgid "Membership2"
 msgstr ""
 
-#: inc/class-custom-sidebars-visibility.php:245 views/import.php:307
+#: inc/class-custom-sidebars-visibility.php:245 views/import.php:366
 msgid "Special pages"
 msgstr ""
 
@@ -349,7 +349,7 @@ msgid ""
 "\t\t\t\t\t\tto disable accessibility mode and use the %1$s plugin!"
 msgstr ""
 
-#: inc/class-custom-sidebars.php:946 views/import.php:140
+#: inc/class-custom-sidebars.php:946 views/import.php:147
 msgid "Widgets"
 msgstr ""
 
@@ -373,115 +373,119 @@ msgstr ""
 msgid "(Not available for Blog-Page)"
 msgstr ""
 
-#: views/import.php:60 views/widgets-export.php:34
+#: views/import.php:67 views/widgets-export.php:34
 msgid "Import"
 msgstr ""
 
-#: views/import.php:67
+#: views/import.php:74
 msgid "Filename"
 msgstr ""
 
-#: views/import.php:71
+#: views/import.php:78
 msgid "Exported on"
 msgstr ""
 
-#: views/import.php:77
+#: views/import.php:84
 msgid "WordPress settings"
 msgstr ""
 
-#: views/import.php:88
+#: views/import.php:95
 msgid "WordPress version"
 msgstr ""
 
-#: views/import.php:93
+#: views/import.php:100
 msgid "Plugin version"
 msgstr ""
 
-#: views/import.php:98
+#: views/import.php:102
+msgid "Unknown"
+msgstr ""
+
+#: views/import.php:105
 msgid "Theme"
 msgstr ""
 
-#: views/import.php:125
+#: views/import.php:132
 msgid "Mark the sidebars that you want to import."
 msgstr ""
 
-#: views/import.php:130
+#: views/import.php:137
 msgid "Also import all widgets of the selected sidebars."
 msgstr ""
 
-#: views/import.php:137 views/widgets-editor.php:15
+#: views/import.php:144 views/widgets-editor.php:15
 msgid "Name"
 msgstr ""
 
-#: views/import.php:138 views/widgets-editor.php:20
+#: views/import.php:145 views/widgets-editor.php:20
 msgid "Description"
 msgstr ""
 
-#: views/import.php:139
+#: views/import.php:146
 msgid "Note"
 msgstr ""
 
-#: views/import.php:147
+#: views/import.php:154
 msgid "New sidebar will be created"
 msgstr ""
 
-#: views/import.php:149
+#: views/import.php:156
 msgid "Existing sidebar will be replaced!"
 msgstr ""
 
-#: views/import.php:205
+#: views/import.php:224
 msgid "(Theme sidebar)"
 msgstr ""
 
-#: views/import.php:233
+#: views/import.php:252
 msgid "Configuration"
 msgstr ""
 
-#: views/import.php:237
+#: views/import.php:256
 msgid "Replaceable sidebars"
 msgstr ""
 
-#: views/import.php:240
+#: views/import.php:259
 msgid "Replaceable Sidebars"
 msgstr ""
 
-#: views/import.php:250
+#: views/import.php:278
 msgid "By post type"
 msgstr ""
 
-#: views/import.php:263
+#: views/import.php:307
 msgid "Post-type archives"
 msgstr ""
 
-#: views/import.php:276
+#: views/import.php:328
 msgid "By category"
 msgstr ""
 
-#: views/import.php:289
+#: views/import.php:348
 msgid "Category archives"
 msgstr ""
 
-#: views/import.php:310
+#: views/import.php:369
 msgid "Main blog page"
 msgstr ""
 
-#: views/import.php:311
+#: views/import.php:370
 msgid "Date archives"
 msgstr ""
 
-#: views/import.php:312
+#: views/import.php:371
 msgid "Author archives"
 msgstr ""
 
-#: views/import.php:313
+#: views/import.php:372
 msgid "Tag archives"
 msgstr ""
 
-#: views/import.php:314
+#: views/import.php:373
 msgid "Search results page"
 msgstr ""
 
-#: views/import.php:324
+#: views/import.php:383
 msgid "Replace the current plugin configuration with the imported configuration."
 msgstr ""
 
