@@ -438,7 +438,7 @@ class CustomSidebarsVisibility extends CustomSidebars {
 						<select name="<?php echo esc_attr( $block_name ); ?>[<?php echo esc_attr( $row_id ); ?>][]" data-select-ajax="<?php echo esc_url( $ajax_url ); ?>" multiple="multiple">
 							<?php if ( ! empty( $posts ) ) : ?>
 								<?php foreach ( $posts as $post ) : ?>
-							<option value="<?php echo $post->ID; ?>" selected="selected"><?php echo $post->post_title; ?></option>
+							<option value="<?php echo esc_attr( $post->ID ); ?>" selected="selected"><?php echo esc_html( $post->post_title ); ?></option>
 								<?php endforeach; ?>
 							<?php endif; ?>
 						</select>
