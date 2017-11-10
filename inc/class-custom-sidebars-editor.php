@@ -1133,7 +1133,7 @@ class CustomSidebarsEditor extends CustomSidebars {
 	public function post_columns( $columns ) {
 		// This column is added.
 		$insert = array(
-			'cs_replacement' => __( 'Custom Sidebars', 'custom-sidebars' ),
+			'cs_replacement' => _x( 'Custom Sidebars', 'Column name on entries list.', 'custom-sidebars' ),
 		);
 
 		// Column is added after column 'title'.
