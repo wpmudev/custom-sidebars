@@ -5,6 +5,10 @@ Buildtime: BUILDTIME
 Change Log:
 ----------------------------------------------------------------------
 
+3.1.2 ( 20xx-xx-xx )
+----------------------------------------------------------------------
+- Added integration with WPML - now you can choose sidbar depend on WPML language.
+
 3.1.1 ( 2017-11-07 )
 ----------------------------------------------------------------------
 - Improved assets directories.

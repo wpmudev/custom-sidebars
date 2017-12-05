@@ -13,6 +13,11 @@ require_once CSB_INC_DIR . 'class-custom-sidebars-checkup-notification.php';
 /* end:free */
 
 /**
+ * 3rd party plugins integration
+ */
+require_once CSB_INC_DIR . 'integrations/class-custom-sidebars-integration-wpml.php';
+
+/**
  * Main plugin file.
  * The CustomSidebars class encapsulates all our plugin logic.
  */

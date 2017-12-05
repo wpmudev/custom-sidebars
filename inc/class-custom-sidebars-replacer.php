@@ -599,11 +599,13 @@ class CustomSidebarsReplacer extends CustomSidebars {
 		/**
 		 * Filter the replaced sidebars before they are processed by the plugin.
 		 *
-		 * @since  2.0
+		 * @since 2.0
+		 * @since 3.1.2 added param $options
 		 *
-		 * @param  array $replacements List of the final/replaced sidebars.
+		 * @param array $replacements List of the final/replaced sidebars.
+		 * @param array $options Custom Sidebars settings.
 		 */
-		$replacements = apply_filters( 'cs_replace_sidebars', $replacements );
+		$replacements = apply_filters( 'cs_replace_sidebars', $replacements, $options );
 
 		return $replacements;
 	}
