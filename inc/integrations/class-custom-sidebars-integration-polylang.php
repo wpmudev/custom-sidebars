@@ -1,15 +1,12 @@
 <?php
 require_once dirname( __FILE__ ).'/class-custom-sidebars-integration.php';
-add_action( 'cs_init', array( 'CustomSidebarsIntegrationWPML', 'instance' ) );
+add_action( 'cs_init', array( 'CustomSidebarsIntegrationPolylang', 'instance' ) );
 /**
- * Integrate sidebar locations with WPML
+ * Integrate sidebar locations with Polylang
  *
  * @since 3.1.2
  */
-class CustomSidebarsIntegrationWPML {
-
-	private $languages = array();
-	private $key_name = 'wpml';
+class CustomSidebarsIntegrationPolylang extends CustomSidebarsIntegration {
 
 	/**
 	 * Returns the singleton object.
@@ -19,7 +16,7 @@ class CustomSidebarsIntegrationWPML {
 	public static function instance() {
 		static $instance = null;
 		if ( null === $instance ) {
-			$instance = new CustomSidebarsIntegrationWPML();
+			$instance = new CustomSidebarsIntegrationPolylang();
 		}
 		return $instance;
 	}
@@ -30,16 +27,32 @@ class CustomSidebarsIntegrationWPML {
 	 * @since 3.1.2
 	 */
 	private function __construct() {
-		$languages = apply_filters( 'wpml_active_languages', array() );
-		if ( empty( $languages ) ) {
+		if ( ! defined( 'POLYLANG_VERSION' ) ) {
 			return;
 		}
-		$this->key_name = 'wpml';
-		$this->languages = $languages;
+		$this->key_name = 'polylang';
 		add_filter( 'custom_sidebars_integrations', array( $this, 'prepare' ) );
 		add_filter( 'custom_sidebars_get_location', array( $this, 'get_location' ), 10, 2 );
 		add_filter( 'custom_sidebars_set_location', array( $this, 'set_location' ), 10, 4 );
 		add_filter( 'cs_replace_sidebars', array( $this, 'replace' ), 10, 2 );
+	}
+
+	private function check() {
+		if ( ! function_exists( 'pll_the_languages' ) ) {
+			return false;
+		}
+		if ( ! empty( $this->languages ) ) {
+			return true;
+		}
+		$args = array(
+			'raw' => true,
+		);
+		$languages = pll_the_languages( $args );
+		if ( empty( $languages ) ) {
+			return false;
+		}
+		$this->languages = $languages;
+		return true;
 	}
 
 	/**
@@ -49,7 +62,7 @@ class CustomSidebarsIntegrationWPML {
 	 */
 	public function prepare( $tabs ) {
 		$tabs[ $this->key_name ] = array(
-			'title' => __( 'WPML', 'custom-sidebars' ),
+			'title' => __( 'Polylang', 'custom-sidebars' ),
 			'cat_name' => __( 'Language', 'custom-sidebars' ),
 		);
 		return $tabs;
@@ -61,17 +74,21 @@ class CustomSidebarsIntegrationWPML {
 	 * @since 3.1.2
 	 */
 	public function get_location( $req, $defaults ) {
-		$req->wpml = array();
+		$check = $this->check();
+		if ( ! $check ) {
+			return $req;
+		}
+		$req->polylang = array();
 		foreach ( $this->languages as $key => $lang ) {
-			$req->wpml[ $key ] = array(
-				'name' => $lang['display_name'],
+			$req->polylang[ $key ] = array(
+				'name' => $lang['name'],
 				'archive' => array(),
 			);
 			if (
 				isset( $defaults[ $this->key_name ] )
 				&& isset( $defaults[ $this->key_name ][ $key ] )
 			) {
-				$req->wpml[ $key ]['archive'] = $defaults[ $this->key_name ][ $key ];
+				$req->polylang[ $key ]['archive'] = $defaults[ $this->key_name ][ $key ];
 			}
 		}
 		return $req;
@@ -83,10 +100,17 @@ class CustomSidebarsIntegrationWPML {
 	 * @since 3.1.2
 	 */
 	public function replace( $replacements, $options ) {
+		$check = $this->check();
+		if ( ! $check ) {
+			return $replacements;
+		}
 		if ( ! isset( $options[ $this->key_name ] ) ) {
 			return $replacements;
 		}
-		$current_language = apply_filters( 'wpml_current_language', null );
+		if ( ! function_exists( 'pll_current_language' ) ) {
+			return $replacements;
+		}
+		$current_language = pll_current_language();
 		if ( empty( $current_language ) ) {
 			return $replacements;
 		}

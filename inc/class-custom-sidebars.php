@@ -13,9 +13,17 @@ require_once CSB_INC_DIR . 'class-custom-sidebars-checkup-notification.php';
 /* end:free */
 
 /**
- * 3rd party plugins integration
+ * 3rd party plugins integration: WPML
  */
-require_once CSB_INC_DIR . 'integrations/class-custom-sidebars-integration-wpml.php';
+if ( defined( 'ICL_SITEPRESS_VERSION' ) && ICL_SITEPRESS_VERSION ) {
+	require_once CSB_INC_DIR . 'integrations/class-custom-sidebars-integration-wpml.php';
+}
+/**
+ * 3rd party plugins integration: Polylang
+ */
+if ( defined( 'POLYLANG_VERSION' ) && POLYLANG_VERSION ) {
+	require_once CSB_INC_DIR . 'integrations/class-custom-sidebars-integration-polylang.php';
+}
 
 /**
  * Main plugin file.
