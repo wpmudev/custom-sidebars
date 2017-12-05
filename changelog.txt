@@ -7,8 +7,8 @@ Change Log:
 
 3.1.2 ( 20xx-xx-xx )
 ----------------------------------------------------------------------
-- Added integration with Polylang - now you can choose sidbar depend on Polylang language.
-- Added integration with WPML - now you can choose sidbar depend on WPML language.
+- Added integration with Polylang - now you can choose sidebar depend on Polylang language.
+- Added integration with WPML - now you can choose sidebar depend on WPML language.
 
 3.1.1 ( 2017-11-07 )
 ----------------------------------------------------------------------
