@@ -6,10 +6,7 @@ add_action( 'cs_init', array( 'CustomSidebarsIntegrationWPML', 'instance' ) );
  *
  * @since 3.1.2
  */
-class CustomSidebarsIntegrationWPML {
-
-	private $languages = array();
-	private $key_name = 'wpml';
+class CustomSidebarsIntegrationWPML extends CustomSidebarsIntegration {
 
 	/**
 	 * Returns the singleton object.
