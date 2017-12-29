@@ -1,6 +1,6 @@
 <?php
 require_once dirname( __FILE__ ).'/class-custom-sidebars-integration.php';
-add_action( 'cs_init', array( 'CustomSidebarsIntegrationPolylang', 'instance' ) );
+add_action( 'cs_integrations', array( 'CustomSidebarsIntegrationPolylang', 'instance' ) );
 /**
  * Integrate sidebar locations with Polylang
  *
@@ -46,6 +46,7 @@ class CustomSidebarsIntegrationPolylang extends CustomSidebarsIntegration {
 		}
 		$args = array(
 			'raw' => true,
+			'hide_if_empty' => false,
 		);
 		$languages = pll_the_languages( $args );
 		if ( empty( $languages ) ) {

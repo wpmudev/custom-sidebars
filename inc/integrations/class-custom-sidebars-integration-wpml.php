@@ -1,6 +1,6 @@
 <?php
 require_once dirname( __FILE__ ).'/class-custom-sidebars-integration.php';
-add_action( 'cs_init', array( 'CustomSidebarsIntegrationWPML', 'instance' ) );
+add_action( 'cs_integrations', array( 'CustomSidebarsIntegrationWPML', 'instance' ) );
 /**
  * Integrate sidebar locations with WPML
  *
@@ -61,7 +61,8 @@ class CustomSidebarsIntegrationWPML extends CustomSidebarsIntegration {
 		$req->wpml = array();
 		foreach ( $this->languages as $key => $lang ) {
 			$req->wpml[ $key ] = array(
-				'name' => $lang['display_name'],
+				'name' => isset( $lang['translated_name'] )? $lang['translated_name']:$key,
+				'native' => isset( $lang['native_name'] )? $lang['native_name'] : '',
 				'archive' => array(),
 			);
 			if (
