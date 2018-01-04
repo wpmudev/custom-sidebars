@@ -210,9 +210,6 @@
   padding: 15px;
 }
 .widgets-php .sidebars-column-1 .custom-sidebars-add-new p {
-  -webkit-border-radius: 4px;
-  -moz-border-radius: 4px;
-  -ms-border-radius: 4px;
   border-radius: 4px;
   border: 3px dashed #ddd;
   color: #777;
@@ -223,9 +220,6 @@
   text-align: center;
 }
 .widgets-php .sidebars-column-1 .inner .custom-sidebars-box {
-  -webkit-border-radius: 4px;
-  -moz-border-radius: 4px;
-  -ms-border-radius: 4px;
   border-radius: 4px;
   margin: 55px 0 16px 0;
 }
@@ -278,13 +272,13 @@
   padding-top: 16px;
 }
 .widgets-php .sidebars-column-1 .inner .custom-sidebars-checkup .cs-inner form {
-  -webkit-border-radius: 4px;
-  -moz-border-radius: 4px;
-  -ms-border-radius: 4px;
   border-radius: 4px;
   background-color: #fafafa;
+  display: -ms-flexbox;
   display: flex;
+  -ms-flex-wrap: nowrap;
   flex-wrap: nowrap;
+  -ms-flex-pack: justify;
   justify-content: space-between;
   margin: 24px 30px 0 30px;
   padding: 0;
@@ -298,9 +292,6 @@
   text-align: center;
 }
 .widgets-php .sidebars-column-1 .inner .custom-sidebars-checkup .cs-inner form input[type=submit] {
-  -webkit-border-radius: 0 4px 4px 0;
-  -moz-border-radius: 0 4px 4px 0;
-  -ms-border-radius: 0 4px 4px 0;
   border-radius: 0 4px 4px 0;
   background-color: #00a7e6;
   color: #fff;
@@ -309,11 +300,10 @@
 }
 .widgets-php .sidebars-column-1 .inner .custom-sidebars-checkup .cs-inner form input[type=text] {
   color: #aaa;
+  -ms-flex-positive: 1;
   flex-grow: 1;
 }
 .widgets-php .sidebars-column-1 .inner .custom-sidebars-checkup .cs-inner form input[type=text]:active {
-  -webkit-box-shadow: none;
-  -moz-box-shadow: none;
   box-shadow: none;
 }
 @media screen and (max-width: 590px) {
@@ -325,9 +315,6 @@
     background-color: #fafafa;
   }
   .widgets-php .sidebars-column-1 .inner .custom-sidebars-checkup .cs-inner form input[type=submit] {
-    -webkit-border-radius: 4px;
-    -moz-border-radius: 4px;
-    -ms-border-radius: 4px;
     border-radius: 4px;
     display: block;
     margin: 10px 0 0 auto;
@@ -634,9 +621,6 @@ body.appearance_page_customsidebars #poststuff h2 {
   opacity: .75;
   line-height: 26px;
   margin-right: 5px;
-  -webkit-transition: opacity .2s;
-  -moz-transition: opacity .2s;
-  -o-transition: opacity .2s;
   transition: opacity .2s;
 }
 
