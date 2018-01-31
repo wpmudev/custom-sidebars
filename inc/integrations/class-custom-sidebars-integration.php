@@ -9,10 +9,15 @@ abstract class CustomSidebarsIntegration {
 	protected $languages = array();
 	protected $key_name = '';
 
-	abstract public static function instance();
 	abstract public function prepare( $tabs );
 	abstract public function replace( $replacements, $options );
 	abstract public function get_location( $req, $defaults );
+
+	/**
+	 * It should be abstract static function, but ...
+	 * https://bugs.php.net/bug.php?id=53081
+	 */
+	public static function instance() {}
 
 	/**
 	 * Set languages
