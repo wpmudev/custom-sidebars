@@ -373,7 +373,6 @@ module.exports = function( grunt ) {
 			},
 		},
 
-
 		// BUILD - update the translation index .po file.
 		makepot: {
 			target: {
@@ -387,7 +386,9 @@ module.exports = function( grunt ) {
 						poedit: true, // Includes common Poedit headers.
 						'x-poedit-keywordslist': true // Include a list of all possible gettext functions.
 					},
-					type: 'wp-plugin' // wp-plugin or wp-theme
+					type: 'wp-plugin',
+					updateTimestamp: true,
+					updatePoFiles: true
 				}
 			}
 		},

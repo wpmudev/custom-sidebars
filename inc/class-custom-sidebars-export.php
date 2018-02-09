@@ -681,7 +681,12 @@ class CustomSidebarsExport extends CustomSidebars {
 		if ( $sidebar_count > 0 ) {
 			self::set_custom_sidebars( $sidebars );
 			$msg[] = sprintf(
-				__( 'Imported %d custom sidebar(s)!', 'custom-sidebars' ),
+				_n(
+					'Imported %d custom sidebar!',
+					'Imported %d custom sidebars!',
+					$sidebar_count,
+					'custom-sidebars'
+				),
 				$sidebar_count
 			);
 		}
@@ -739,7 +744,12 @@ class CustomSidebarsExport extends CustomSidebars {
 		if ( $widget_count > 0 ) {
 			wp_set_sidebars_widgets( $def_sidebars );
 			$msg[] = sprintf(
-				__( 'Imported %d widget(s)!', 'custom-sidebars' ),
+				_n(
+					'Imported %d widget!',
+					'Imported %d widgets!',
+					$widget_count,
+					'custom-sidebars'
+				),
 				$widget_count
 			);
 		}

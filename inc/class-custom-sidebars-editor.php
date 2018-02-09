@@ -626,7 +626,15 @@ class CustomSidebarsEditor extends CustomSidebars {
 		$req->posttypes = $posttypes;
 		$req->categories = $categories;
 		$req->archives = $archives;
-		return $req;
+		/**
+		 * Allow to change data of locations.
+		 *
+		 * @since 3.1.2
+		 *
+		 * @param object $req Object of avaialble data.
+		 * @pages $defaults Data from db.
+		 */
+		return apply_filters( 'custom_sidebars_get_location', $req, $defaults );
 	}
 
 	/**
@@ -822,6 +830,17 @@ class CustomSidebarsEditor extends CustomSidebars {
 			__( 'Updated sidebar <strong>%1$s</strong> settings.', 'custom-sidebars' ),
 			esc_html( $req->sidebar['name'] )
 		);
+		/**
+		 * Allow to change data of locations before save.
+		 *
+		 * @since 3.1.2
+		 *
+		 * @param array $options Current options to save.
+		 * @param string $req->id Sidebar
+		 * @param array $sidebars Allowed sidebars.
+		 * @oaram array $data Data send by request.
+		 */
+		$options = apply_filters( 'custom_sidebars_set_location', $options, $req->id, $sidebars, $data );
 		self::set_options( $options );
 		return $req;
 	}
@@ -1133,7 +1152,7 @@ class CustomSidebarsEditor extends CustomSidebars {
 	public function post_columns( $columns ) {
 		// This column is added.
 		$insert = array(
-			'cs_replacement' => __( 'Custom Sidebars', 'custom-sidebars' ),
+			'cs_replacement' => _x( 'Custom Sidebars', 'Column name on entries list.', 'custom-sidebars' ),
 		);
 
 		// Column is added after column 'title'.

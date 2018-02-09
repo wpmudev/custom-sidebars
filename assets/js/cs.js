@@ -1,6 +1,6 @@
-/*! Custom Sidebars - v3.1.1
+/*! Custom Sidebars - v3.1.2
  * https://premium.wpmudev.org/project/custom-sidebars-pro/
- * Copyright (c) 2017; * Licensed GPLv2+ */
+ * Copyright (c) 2018; * Licensed GPLv2+ */
 /*global window:false */
 /*global console:false */
 /*global document:false */
@@ -1110,7 +1110,6 @@ window.csSidebars = null;
 				for ( var key3 in data_pst ) {
 					opt = jQuery( '<option></option>' );
 					name = data_pst[ key3 ].name;
-
 					opt.attr( 'value', key3 ).text( name );
 					lst_pst.append( opt );
 				}
@@ -1138,7 +1137,6 @@ window.csSidebars = null;
 				for ( var key5 in data_arc ) {
 					opt = jQuery( '<option></option>' );
 					name = data_arc[ key5 ].name;
-
 					opt.attr( 'value', key5 ).text( name );
 					lst_arc.append( opt );
 				}
@@ -1184,6 +1182,33 @@ window.csSidebars = null;
 						}
 					}
 				}
+
+				// ----- 3rd part plugins ----------------------------------------------
+				var lst_3rd = popup.$().find( '.cs-3rd-part .cs-datalist' );
+				lst_3rd.each( function() {
+					var data_3rd = resp[$(this).data('id')];
+					$(this).empty();
+					// Add the options
+					for ( var key9 in data_3rd ) {
+						opt = jQuery( '<option></option>' );
+						name = data_3rd[ key9 ].name;
+						opt.attr( 'value', key9 ).text( name );
+						$(this).append( opt );
+					}
+					// Select options
+					for ( var key10 in data_3rd ) {
+						if ( data_3rd[ key10 ].archive ) {
+							for ( theme_sb in data_3rd[ key10 ].archive ) {
+								_select_option(
+									data_3rd[ key10 ].archive[ theme_sb ],
+									theme_sb,
+									key10,
+									$(this)
+								);
+							}
+						}
+					}
+				});
 
 			} // end: handle_done_load()
 

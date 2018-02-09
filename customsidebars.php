@@ -47,6 +47,13 @@ function inc_sidebars_init() {
 		return false;
 	}
 
+	/**
+	 * Do not load plugin when saving file in WP Editor
+	 */
+	if ( isset( $_REQUEST['action'] ) && 'edit-theme-plugin-file' == $_REQUEST['action'] ) {
+		return false;
+	}
+
 	$plugin_dir = dirname( __FILE__ );
 	$plugin_dir_rel = dirname( plugin_basename( __FILE__ ) );
 	$plugin_url = plugin_dir_url( __FILE__ );

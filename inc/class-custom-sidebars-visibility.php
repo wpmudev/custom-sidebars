@@ -903,6 +903,12 @@ foreach ( $tags as $one ) {
 						// Check if we did filter for the specific taxonomy.
 						foreach ( $tax_terms as $slug ) {
 							$term_data = get_term_by( 'slug', $slug, $tax_type );
+							/**
+							 * check if term exists
+							 */
+							if ( ! is_a( $term_data, 'WP_Term' ) ) {
+								continue;
+							}
 							if ( in_array( $term_data->term_id, $cond[ $tax_key ] ) ) {
 								$expl && $explain .= 'ok:' . $term_data->term_id;
 								$has_term = true;

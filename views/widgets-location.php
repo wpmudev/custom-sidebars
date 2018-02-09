@@ -42,6 +42,7 @@ function _show_replaceable( $sidebar, $prefix, $cat_name, $class = '' ) {
 		</label>
 		<div class="details">
 			<select
+				data-id="<?php echo esc_attr( $prefix ); ?>"
 				class="cs-datalist <?php echo esc_attr( $base_id ); ?>"
 				name="<?php echo esc_attr( $inp_name ); ?>[]"
 				multiple="multiple"
@@ -141,7 +142,6 @@ function _show_replaceable( $sidebar, $prefix, $cat_name, $class = '' ) {
 		</h3>
 		<div class="inside">
 			<p><?php _e( 'These replacements will be applied to Archive Type posts and pages.', 'custom-sidebars' ); ?>
-
 			<h3 class="wpmui-tabs">
 				<a href="#tab-arch" class="tab active"><?php _e( 'Archive Types', 'custom-sidebars' ); ?></a>
 				<a href="#tab-catg" class="tab"><?php _e( 'Category Archives', 'custom-sidebars' ); ?></a>
@@ -183,7 +183,60 @@ function _show_replaceable( $sidebar, $prefix, $cat_name, $class = '' ) {
 				</div>
 			</div>
 		</div>
-	</div>
+    </div>
+
+	<?php
+	/**
+	 * =========================================================================
+	 * Box 3: Plugin integration
+	 */
+					$integrations = apply_filters( 'custom_sidebars_integrations', array() );
+	if ( ! empty( $integrations )  ) {
+	?>
+	<div class="wpmui-box closed cs-3rd-part">
+<h3>
+<a href="#" class="toggle" title="<?php _e( 'Click to toggle' ); /* This is a Wordpress default language */ ?>"><br></a>
+<span><?php _e( '3rd party plugins', 'custom-sidebars' ); ?></span>
+</h3>
+<div class="inside">
+<p><?php _e( 'These replacements will be applied to 3rd party plugins.', 'custom-sidebars' ); ?>
+
+<h3 class="wpmui-tabs">
+<?php
+		$classes = array( 'tab', 'active' );
+foreach ( $integrations as $id => $one ) {
+	printf(
+		'<a href="#tab-%s" class="%s">%s</a>',
+		esc_attr( $id ),
+		esc_attr( implode( ' ', $classes ) ),
+		esc_html( $one['title'] )
+	);
+	$classes = array( 'tab' );
+}
+?>
+</h3>
+<div class="wpmui-tab-contents">
+<?php
+		$classes = array( 'tab', 'active' );
+foreach ( $integrations as $id => $one ) {
+	printf(
+		'<div id="tab-%s" class="%s">',
+		esc_attr( $id ),
+		esc_attr( implode( ' ', $classes ) )
+	);
+	foreach ( $sidebars as $sb_id => $details ) {
+		_show_replaceable( $details, $id, $one['cat_name'] );
+	}
+	echo '</div>';
+	$classes = array( 'tab' );
+}
+?>
+</div>
+</div>
+</div>
+<?php
+	}
+?>
 
 	<div class="buttons">
 		<button type="button" class="button-link btn-cancel"><?php _e( 'Cancel', 'custom-sidebars' ); ?></button>

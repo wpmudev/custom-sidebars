@@ -72,6 +72,7 @@ class CustomSidebars {
 	 * We directly initialize sidebar options when class is created.
 	 */
 	private function __construct() {
+		add_action( 'init', array( $this, 'integrations' ) );
 		add_action( 'admin_init', array( $this, 'admin_init' ) );
 		// Extensions use this hook to initialize themselfs.
 		do_action( 'cs_init' );
@@ -976,5 +977,26 @@ class CustomSidebars {
 		
 	</script>
 <?php
+	}
+
+	/**
+	 * Inicjalize integrations.
+	 *
+	 * @since 3.1.2
+	 */
+	public function integrations() {
+		/**
+		 * 3rd party plugins integration: WPML
+		 */
+		if ( function_exists( 'icl_object_id' ) && ! defined( 'POLYLANG_VERSION' ) ) {
+			require_once CSB_INC_DIR . 'integrations/class-custom-sidebars-integration-wpml.php';
+		}
+		/**
+		 * 3rd party plugins integration: Polylang
+		 */
+		if ( defined( 'POLYLANG_VERSION' ) && POLYLANG_VERSION ) {
+			require_once CSB_INC_DIR . 'integrations/class-custom-sidebars-integration-polylang.php';
+		}
+		do_action( 'cs_integrations' );
 	}
 };
