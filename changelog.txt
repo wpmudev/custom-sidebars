@@ -5,7 +5,7 @@ Buildtime: BUILDTIME
 Change Log:
 ----------------------------------------------------------------------
 
-3.1.2 ( 20xx-xx-xx )
+3.1.2 ( 2018-02-09 )
 ----------------------------------------------------------------------
 - Added integration with Polylang - now you can choose sidebar depend on Polylang language.
 - Added integration with WPML - now you can choose sidebar depend on WPML language.

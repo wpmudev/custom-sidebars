@@ -21,8 +21,7 @@
 
 /*
 Copyright Incsub (http://incsub.com)
-Author - Javier Marquez (http://arqex.com/)
-Contributor - Philipp Stracker (Incsub)
+
 This program is free software; you can redistribute it and/or modify
 it under the terms of the GNU General Public License (Version 2 - GPLv2) as published by
 the Free Software Foundation.
