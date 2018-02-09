@@ -7,9 +7,9 @@ Change Log:
 
 3.1.2 ( 2018-02-09 )
 ----------------------------------------------------------------------
-- Added integration with Polylang - now you can choose sidebar depend on Polylang language.
-- Added integration with WPML - now you can choose sidebar depend on WPML language.
-- Added check to avoid warnigs when user delete term which is assigned to "Sidebar Location".
+- Added integration with Polylang - now you can choose sidebar to depend on Polylang language.
+- Added integration with WPML - now you can choose sidebar to depend on WPML language.
+- Added check to avoid warning when a user deletes term which is assigned to "Sidebar Location".
 - Updated "WPMU Dev code library" to version 3.0.5.
 
 3.1.1 ( 2017-11-07 )
