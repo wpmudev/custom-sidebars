@@ -2,7 +2,7 @@ msgid ""
 msgstr ""
 "Project-Id-Version: Custom Sidebars\n"
 "Report-Msgid-Bugs-To: https://wordpress.org/support/plugin/customsidebars\n"
-"POT-Creation-Date: 2017-04-06 11:00:27+00:00\n"
+"POT-Creation-Date: 2018-02-09 06:13:10+00:00\n"
 "PO-Revision-Date: 2014-08-28 21:54+0100\n"
 "Last-Translator: Philipp Stracker <philipp@stracker.net>\n"
 "Language-Team: \n"
@@ -52,278 +52,371 @@ msgid "get Upfront free"
 msgstr ""
 
 # @ custom-sidebars
-#: inc/class-custom-sidebars-cloning.php:202
+#: inc/class-custom-sidebars-cloning.php:206
 msgid "Clone"
 msgstr "Clonar"
 
 #  custom-sidebars
 # @ custom-sidebars
-#: inc/class-custom-sidebars-editor.php:119
-#: inc/class-custom-sidebars-export.php:97
+#: inc/class-custom-sidebars-editor.php:158
+#: inc/class-custom-sidebars-editor.php:173
+#: inc/class-custom-sidebars-export.php:98
 msgid "You do not have permission for this"
 msgstr "No tiene permisos para hacer esto"
 
+#  custom-sidebars
 # @ custom-sidebars
-#: inc/class-custom-sidebars-editor.php:194
+#: inc/class-custom-sidebars-editor.php:242
+#: inc/class-custom-sidebars-editor.php:376
+#: inc/class-custom-sidebars-editor.php:659
+#, fuzzy
+msgid "You have no permission to do this operation."
+msgstr "No tiene permisos para hacer esto"
+
+# @ custom-sidebars
+#: inc/class-custom-sidebars-editor.php:263
 msgid "Sidebar-name cannot be empty"
 msgstr "El nombre de la barra lateral no puede ser vacío"
 
 # @ custom-sidebars
-#: inc/class-custom-sidebars-editor.php:218
-#: inc/class-custom-sidebars-editor.php:301
+#: inc/class-custom-sidebars-editor.php:287
+#: inc/class-custom-sidebars-editor.php:385
 #, fuzzy
 msgid "The sidebar does not exist"
 msgstr "Crear una barra"
 
 # @ custom-sidebars
-#: inc/class-custom-sidebars-editor.php:249
+#: inc/class-custom-sidebars-editor.php:318
 msgid "Created new sidebar <strong>%1$s</strong>"
 msgstr "Creada la barra <strong>%1$s</strong>"
 
 # @ custom-sidebars
-#: inc/class-custom-sidebars-editor.php:257
+#: inc/class-custom-sidebars-editor.php:326
 msgid "Updated sidebar <strong>%1$s</strong>"
 msgstr "Barra <strong>%1$s</strong> actualizada"
 
 # @ custom-sidebars
-#: inc/class-custom-sidebars-editor.php:268
-#: inc/class-custom-sidebars-editor.php:321
+#: inc/class-custom-sidebars-editor.php:337
+#: inc/class-custom-sidebars-editor.php:405
 #, fuzzy
 msgid "The sidebar was not found"
 msgstr "Crear una barra"
 
 # @ custom-sidebars
-#: inc/class-custom-sidebars-editor.php:310
+#: inc/class-custom-sidebars-editor.php:394
 msgid "Deleted sidebar <strong>%1$s</strong>"
 msgstr "Barra <strong>%1$s</strong> borrada"
 
 # @ custom-sidebars
-#: inc/class-custom-sidebars-editor.php:379
+#: inc/class-custom-sidebars-editor.php:467
+#: inc/class-custom-sidebars-visibility.php:156
 #, fuzzy
 msgid "Front Page"
 msgstr "Página principal del Blog"
 
 # @ custom-sidebars
-#: inc/class-custom-sidebars-editor.php:380
+#: inc/class-custom-sidebars-editor.php:468
 #, fuzzy
 msgid "Search Results"
 msgstr "Página de resultados de búsqueda"
 
-#: inc/class-custom-sidebars-editor.php:381
+#: inc/class-custom-sidebars-editor.php:469
+#: inc/class-custom-sidebars-visibility.php:162
 msgid "Not found (404)"
 msgstr ""
 
 # @ custom-sidebars
-#: inc/class-custom-sidebars-editor.php:382
+#: inc/class-custom-sidebars-editor.php:470
 #, fuzzy
 msgid "Any Author Archive"
 msgstr "Archivos de autores"
 
 # @ custom-sidebars
-#: inc/class-custom-sidebars-editor.php:383
-#, fuzzy
-msgid "Tag Archives"
-msgstr "Archivos de etiquetas"
-
-# @ custom-sidebars
-#: inc/class-custom-sidebars-editor.php:384
+#: inc/class-custom-sidebars-editor.php:471
 #, fuzzy
 msgid "Date Archives"
 msgstr "Archivos por fecha"
 
 # @ custom-sidebars
-#: inc/class-custom-sidebars-editor.php:425
+#: inc/class-custom-sidebars-editor.php:489
+#: inc/class-custom-sidebars-editor.php:492
+#: inc/class-custom-sidebars-editor.php:499
+#: inc/class-custom-sidebars-editor.php:501
+#: inc/class-custom-sidebars-editor.php:585
+#: inc/class-custom-sidebars-editor.php:587
+#: inc/class-custom-sidebars-editor.php:606
+#, fuzzy
+msgid "%s Archives"
+msgstr "Archivos %1$s"
+
+# @ custom-sidebars
+#: inc/class-custom-sidebars-editor.php:548
+#: inc/class-custom-sidebars-visibility.php:157
 #, fuzzy
 msgid "Post Index"
 msgstr "Por tipo de entrada"
 
 # @ custom-sidebars
-#: inc/class-custom-sidebars-editor.php:429
+#: inc/class-custom-sidebars-editor.php:552
 #, fuzzy
 msgid "%1$s Archives"
 msgstr "Archivos %1$s"
 
 # @ custom-sidebars
-#: inc/class-custom-sidebars-editor.php:606
+#: inc/class-custom-sidebars-editor.php:830
 msgid "Updated sidebar <strong>%1$s</strong> settings."
 msgstr "Actualizadas las opciones para la barra <strong>%1$s</strong>."
 
 # @ custom-sidebars
-#: inc/class-custom-sidebars-editor.php:642 views/widgets.php:17
+#: inc/class-custom-sidebars-editor.php:882 views/widgets.php:17
 msgid "Sidebars"
 msgstr "Barras Laterales"
 
+#: inc/class-custom-sidebars-editor.php:1355
+msgid "Custom sidebars configuration is allowed for:"
+msgstr ""
+
 # @ custom-sidebars
-#: inc/class-custom-sidebars-editor.php:894 views/import.php:123
-#: views/widgets.php:47
-msgid "Custom Sidebars"
+#: inc/class-custom-sidebars-explain.php:225
+#, fuzzy
+msgid "Sidebar Debug"
 msgstr "Barras Laterales"
 
 # @ custom-sidebars
-#: inc/class-custom-sidebars-export.php:61 views/widgets.php:46
+#: inc/class-custom-sidebars-explain.php:229
+#, fuzzy
+msgid "Turn on Custom Sidebars explain mode."
+msgstr "Barras Laterales"
+
+#: inc/class-custom-sidebars-explain.php:236
+msgid "Turn off Custom Sidebars explain mode."
+msgstr ""
+
+# @ custom-sidebars
+#: inc/class-custom-sidebars-export.php:62 views/widgets.php:46
 #, fuzzy
 msgid "Import / Export Sidebars"
 msgstr "Marque las barras que quiera importar."
 
+#  custom-sidebars
 # @ custom-sidebars
-#: inc/class-custom-sidebars-export.php:320
-#: inc/class-custom-sidebars-export.php:362
+#: inc/class-custom-sidebars-export.php:287
+#: inc/class-custom-sidebars-export.php:340
+#, fuzzy
+msgid "You do not have permission for export sidebars."
+msgstr "No tiene permisos para hacer esto"
+
+# @ custom-sidebars
+#: inc/class-custom-sidebars-export.php:354
+#: inc/class-custom-sidebars-export.php:396
 msgid "No file was uploaded"
 msgstr "No fue cargado ningún archivo"
 
 # @ custom-sidebars
-#: inc/class-custom-sidebars-export.php:327
+#: inc/class-custom-sidebars-export.php:361
 msgid "Import file is too big"
 msgstr "El archivo a importar es demasiado grande."
 
 # @ custom-sidebars
-#: inc/class-custom-sidebars-export.php:333
+#: inc/class-custom-sidebars-export.php:367
 msgid "Something went wrong"
 msgstr "Algo ha ido mal."
 
 # @ custom-sidebars
-#: inc/class-custom-sidebars-export.php:356
+#: inc/class-custom-sidebars-export.php:390
 msgid "Unexpected import format"
 msgstr "Formato de importación incorrecto."
 
+#  custom-sidebars
 # @ custom-sidebars
-#: inc/class-custom-sidebars-export.php:633
-msgid "Imported %d custom sidebar(s)!"
-msgstr "%d barras laterales importadas!"
+#: inc/class-custom-sidebars-export.php:425
+#, fuzzy
+msgid "You do not have permission for import sidebars."
+msgstr "No tiene permisos para hacer esto"
 
 # @ custom-sidebars
-#: inc/class-custom-sidebars-export.php:642
+#: inc/class-custom-sidebars-export.php:684
+#, fuzzy
+msgid "Imported %d custom sidebar!"
+msgid_plural "Imported %d custom sidebars!"
+msgstr[0] "%d barras laterales importadas!"
+msgstr[1] "%d barras laterales importadas!"
+
+# @ custom-sidebars
+#: inc/class-custom-sidebars-export.php:698
 msgid "Plugin options were imported!"
 msgstr "Las opciones del plugin fueron importadas."
 
 # @ custom-sidebars
-#: inc/class-custom-sidebars-export.php:692
-msgid "Imported %d widget(s)!"
-msgstr "Importados %d widget(s)!"
+#: inc/class-custom-sidebars-export.php:747
+#, fuzzy
+msgid "Imported %d widget!"
+msgid_plural "Imported %d widgets!"
+msgstr[0] "Importados %d widget(s)!"
+msgstr[1] "Importados %d widget(s)!"
 
 # @ custom-sidebars
-#: inc/class-custom-sidebars-visibility.php:196
+#: inc/class-custom-sidebars-visibility.php:158
+#, fuzzy
+msgid "Single page"
+msgstr "Páginas especiales"
+
+# @ custom-sidebars
+#: inc/class-custom-sidebars-visibility.php:160
+#, fuzzy
+msgid "Archives"
+msgstr "Archivos de etiquetas"
+
+# @ custom-sidebars
+#: inc/class-custom-sidebars-visibility.php:161
+#, fuzzy
+msgid "Search results"
+msgstr "Página de resultados de búsqueda"
+
+# @ custom-sidebars
+#: inc/class-custom-sidebars-visibility.php:163 views/widgets-export.php:43
+msgid "Preview"
+msgstr "Vista previa"
+
+# @ custom-sidebars
+#: inc/class-custom-sidebars-visibility.php:164
+#, fuzzy
+msgid "Archive: Day"
+msgstr "Tipos de archivo"
+
+#: inc/class-custom-sidebars-visibility.php:165
+msgid "Archive: Month"
+msgstr ""
+
+# @ custom-sidebars
+#: inc/class-custom-sidebars-visibility.php:166
+#, fuzzy
+msgid "Archive: Year"
+msgstr "Tipos de archivo"
+
+# @ custom-sidebars
+#: inc/class-custom-sidebars-visibility.php:200
 msgid "Visibility"
 msgstr "Visibilidad"
 
 # @ custom-sidebars
-#: inc/class-custom-sidebars-visibility.php:205
+#: inc/class-custom-sidebars-visibility.php:209
 msgid "<b>Show</b> widget if:"
 msgstr "<b>Mostrar</b> widget si:"
 
 # @ custom-sidebars
-#: inc/class-custom-sidebars-visibility.php:206
+#: inc/class-custom-sidebars-visibility.php:210
 msgid "<b>Hide</b> widget if:"
 msgstr "<b>Ocultar</b> widget si:"
 
-#: inc/class-custom-sidebars-visibility.php:210
+#: inc/class-custom-sidebars-visibility.php:214
 msgid "Filters"
 msgstr ""
 
-#: inc/class-custom-sidebars-visibility.php:214
+#: inc/class-custom-sidebars-visibility.php:218
 msgid "Date"
 msgstr ""
 
-#: inc/class-custom-sidebars-visibility.php:219
+#: inc/class-custom-sidebars-visibility.php:223
 msgid "Guests"
 msgstr ""
 
-#: inc/class-custom-sidebars-visibility.php:224
+#: inc/class-custom-sidebars-visibility.php:228
 msgid "Roles"
 msgstr ""
 
-#: inc/class-custom-sidebars-visibility.php:229
+#: inc/class-custom-sidebars-visibility.php:233
 msgid "Membership"
 msgstr ""
 
-#: inc/class-custom-sidebars-visibility.php:235
+#: inc/class-custom-sidebars-visibility.php:239
 msgid "Membership2"
 msgstr ""
 
 # @ custom-sidebars
-#: inc/class-custom-sidebars-visibility.php:241 views/import.php:302
+#: inc/class-custom-sidebars-visibility.php:245 views/import.php:366
 msgid "Special pages"
 msgstr "Páginas especiales"
 
 # @ custom-sidebars
-#: inc/class-custom-sidebars-visibility.php:246
+#: inc/class-custom-sidebars-visibility.php:250
 #, fuzzy
 msgid "For posttype"
 msgstr "Por tipo de entrada"
 
-#: inc/class-custom-sidebars-visibility.php:248
+#: inc/class-custom-sidebars-visibility.php:252
 msgid "Taxonomy"
 msgstr ""
 
 # @ custom-sidebars
-#: inc/class-custom-sidebars-visibility.php:265
+#: inc/class-custom-sidebars-visibility.php:269
 msgid "Always"
 msgstr "Siempre"
 
 # @ custom-sidebars
-#: inc/class-custom-sidebars-visibility.php:290
-#: inc/class-custom-sidebars-visibility.php:295
-#: inc/class-custom-sidebars-visibility.php:304
-#: inc/class-custom-sidebars-visibility.php:323
-#: inc/class-custom-sidebars-visibility.php:343
-#: inc/class-custom-sidebars-visibility.php:362
-#: inc/class-custom-sidebars-visibility.php:381
-#: inc/class-custom-sidebars-visibility.php:472
+#: inc/class-custom-sidebars-visibility.php:294
+#: inc/class-custom-sidebars-visibility.php:299
+#: inc/class-custom-sidebars-visibility.php:308
+#: inc/class-custom-sidebars-visibility.php:327
+#: inc/class-custom-sidebars-visibility.php:347
+#: inc/class-custom-sidebars-visibility.php:366
+#: inc/class-custom-sidebars-visibility.php:385
+#: inc/class-custom-sidebars-visibility.php:469
 msgid "AND"
 msgstr "Y"
 
-#: inc/class-custom-sidebars-visibility.php:291
+#: inc/class-custom-sidebars-visibility.php:295
 msgid "User is not logged-in (Guest)"
 msgstr ""
 
-#: inc/class-custom-sidebars-visibility.php:296
+#: inc/class-custom-sidebars-visibility.php:300
 msgid "User is logged-in (Member)"
 msgstr ""
 
 # @ custom-sidebars
-#: inc/class-custom-sidebars-visibility.php:305
+#: inc/class-custom-sidebars-visibility.php:309
 msgid "User has role"
 msgstr "El usuario tiene el rol"
 
 # @ custom-sidebars
-#: inc/class-custom-sidebars-visibility.php:324
+#: inc/class-custom-sidebars-visibility.php:328
 msgid "User has Membership Level"
 msgstr "El usuario tiene el nivel de miembro"
 
 # @ custom-sidebars
-#: inc/class-custom-sidebars-visibility.php:332
-#: inc/class-custom-sidebars-visibility.php:352
+#: inc/class-custom-sidebars-visibility.php:336
+#: inc/class-custom-sidebars-visibility.php:356
 msgid "(inactive)"
 msgstr "(inactivo)"
 
 # @ custom-sidebars
-#: inc/class-custom-sidebars-visibility.php:344
+#: inc/class-custom-sidebars-visibility.php:348
 #, fuzzy
 msgid "User has Membership"
 msgstr "El usuario tiene el nivel de miembro"
 
 # @ custom-sidebars
-#: inc/class-custom-sidebars-visibility.php:363
+#: inc/class-custom-sidebars-visibility.php:367
 msgid "On these special pages"
 msgstr "En estas páginas en especial"
 
 # @ custom-sidebars
-#: inc/class-custom-sidebars-visibility.php:382
+#: inc/class-custom-sidebars-visibility.php:386
 #, fuzzy
 msgid "On any page of these types"
 msgstr "Tipos de archivo"
 
 # @ custom-sidebars
-#: inc/class-custom-sidebars-visibility.php:400
+#: inc/class-custom-sidebars-visibility.php:404
 msgid "Only for specific %s"
 msgstr "Solo para %s específicos"
 
 # @ custom-sidebars
-#: inc/class-custom-sidebars-visibility.php:401
+#: inc/class-custom-sidebars-visibility.php:405
 msgid "Only these %s:"
 msgstr "Solo estos %s"
 
-#: inc/class-custom-sidebars.php:111
+#: inc/class-custom-sidebars.php:132
 msgid ""
 "<strong>Accessibility mode is not supported by the\n"
 "\t\t\t\t\t\t%1$s plugin.</strong><br /><a href=\"%2$s\">Click here</a>\n"
@@ -331,18 +424,40 @@ msgid ""
 msgstr ""
 
 # @ custom-sidebars
-#: inc/class-custom-sidebars.php:902 views/import.php:140
+#: inc/class-custom-sidebars.php:947 views/import.php:147
 msgid "Widgets"
 msgstr "Widgets"
 
 # @ custom-sidebars
-#: inc/class-custom-sidebars.php:912
+#: inc/class-custom-sidebars.php:957
 #, fuzzy
 msgid "Support"
 msgstr "Importar"
 
-#: inc/class-custom-sidebars.php:929
+#: inc/class-custom-sidebars.php:974
 msgid "Create a custom sidebar to get started."
+msgstr ""
+
+#: inc/integrations/class-custom-sidebars-integration-polylang.php:66
+msgid "Polylang"
+msgstr ""
+
+#: inc/integrations/class-custom-sidebars-integration-polylang.php:67
+#: inc/integrations/class-custom-sidebars-integration-wpml.php:50
+msgid "Language"
+msgstr ""
+
+#: inc/integrations/class-custom-sidebars-integration-wpml.php:49
+msgid "WPML"
+msgstr ""
+
+# @ custom-sidebars
+#: views/bulk-edit.php:23 views/import.php:130 views/widgets.php:47
+msgid "Custom Sidebars"
+msgstr "Barras Laterales"
+
+#: views/bulk-edit.php:35
+msgid "&mdash; No Change &mdash;"
 msgstr ""
 
 #: views/col-sidebars.php:18
@@ -354,146 +469,150 @@ msgid "(Not available for Blog-Page)"
 msgstr ""
 
 # @ custom-sidebars
-#: views/import.php:60 views/widgets-export.php:33
+#: views/import.php:67 views/widgets-export.php:34
 msgid "Import"
 msgstr "Importar"
 
 # @ custom-sidebars
-#: views/import.php:67
+#: views/import.php:74
 msgid "Filename"
 msgstr "Nombre del archivo"
 
 # @ custom-sidebars
-#: views/import.php:71
+#: views/import.php:78
 msgid "Exported on"
 msgstr "Exportado"
 
 # @ custom-sidebars
-#: views/import.php:77
+#: views/import.php:84
 msgid "WordPress settings"
 msgstr "Opciones de WordPress"
 
 # @ custom-sidebars
-#: views/import.php:88
+#: views/import.php:95
 msgid "WordPress version"
 msgstr "Versión de WordPress"
 
 # @ custom-sidebars
-#: views/import.php:93
+#: views/import.php:100
 msgid "Plugin version"
 msgstr "Versión del plugin"
 
+#: views/import.php:102
+msgid "Unknown"
+msgstr ""
+
 # @ custom-sidebars
-#: views/import.php:98
+#: views/import.php:105
 msgid "Theme"
 msgstr "Tema"
 
 # @ custom-sidebars
-#: views/import.php:125
+#: views/import.php:132
 msgid "Mark the sidebars that you want to import."
 msgstr "Marque las barras que quiera importar."
 
 # @ custom-sidebars
-#: views/import.php:130
+#: views/import.php:137
 msgid "Also import all widgets of the selected sidebars."
 msgstr "Importar también los widgets de las barras seleccionadas."
 
 # @ custom-sidebars
-#: views/import.php:137 views/widgets-editor.php:15
+#: views/import.php:144 views/widgets-editor.php:15
 msgid "Name"
 msgstr "Nombre"
 
 # @ custom-sidebars
-#: views/import.php:138 views/widgets-editor.php:20
+#: views/import.php:145 views/widgets-editor.php:20
 msgid "Description"
 msgstr "Descripción"
 
 # @ custom-sidebars
-#: views/import.php:139
+#: views/import.php:146
 msgid "Note"
 msgstr "Nota"
 
 # @ custom-sidebars
-#: views/import.php:147
+#: views/import.php:154
 #, fuzzy
 msgid "New sidebar will be created"
 msgstr "Una nueva barra será creada"
 
 # @ custom-sidebars
-#: views/import.php:149
+#: views/import.php:156
 #, fuzzy
 msgid "Existing sidebar will be replaced!"
 msgstr "Esta barra puede ser reemplazada"
 
 # @ custom-sidebars
-#: views/import.php:205
+#: views/import.php:224
 #, fuzzy
 msgid "(Theme sidebar)"
 msgstr "Tema"
 
 # @ custom-sidebars
-#: views/import.php:233
+#: views/import.php:252
 msgid "Configuration"
 msgstr "Configuración"
 
 # @ custom-sidebars
-#: views/import.php:237
+#: views/import.php:256
 #, fuzzy
 msgid "Replaceable sidebars"
 msgstr "Barras reemplazables"
 
 # @ custom-sidebars
-#: views/import.php:240
+#: views/import.php:259
 msgid "Replaceable Sidebars"
 msgstr "Barras reemplazables"
 
 # @ custom-sidebars
-#: views/import.php:250
+#: views/import.php:278
 msgid "By post type"
 msgstr "Por tipo de entrada"
 
 # @ custom-sidebars
-#: views/import.php:263
+#: views/import.php:307
 msgid "Post-type archives"
 msgstr "Archivos de tipos de entrada"
 
 # @ custom-sidebars
-#: views/import.php:276
+#: views/import.php:328
 msgid "By category"
 msgstr "Por categorías"
 
 # @ custom-sidebars
-#: views/import.php:289
+#: views/import.php:348
 msgid "Category archives"
 msgstr "Archivos de categorías"
 
 # @ custom-sidebars
-#: views/import.php:305
+#: views/import.php:369
 msgid "Main blog page"
 msgstr "Página principal del Blog"
 
 # @ custom-sidebars
-#: views/import.php:306
+#: views/import.php:370
 msgid "Date archives"
 msgstr "Archivos por fecha"
 
 # @ custom-sidebars
-#: views/import.php:307
+#: views/import.php:371
 msgid "Author archives"
 msgstr "Archivos de autores"
 
 # @ custom-sidebars
-#: views/import.php:308
+#: views/import.php:372
 msgid "Tag archives"
 msgstr "Archivos de etiquetas"
 
 # @ custom-sidebars
-#: views/import.php:309
+#: views/import.php:373
 msgid "Search results page"
 msgstr "Página de resultados de búsqueda"
 
 # @ custom-sidebars
-#: views/import.php:319
+#: views/import.php:383
 msgid ""
 "Replace the current plugin configuration with the imported configuration."
 msgstr ""
@@ -508,7 +627,7 @@ msgstr "Por favor, confirme que quiere borrar la barra lateral."
 
 # @ custom-sidebars
 #: views/widgets-delete.php:16 views/widgets-editor.php:63
-#: views/widgets-location.php:186
+#: views/widgets-location.php:242
 msgid "Cancel"
 msgstr "Cancelar"
 
@@ -581,15 +700,9 @@ msgstr "Exportar"
 msgid "Optional description for the export file:"
 msgstr "Exportar archivo"
 
-# @ custom-sidebars
-#: views/widgets-export.php:37
-msgid "Export file"
-msgstr "Exportar archivo"
-
-# @ custom-sidebars
-#: views/widgets-export.php:42
-msgid "Preview"
-msgstr "Vista previa"
+#: views/widgets-export.php:38
+msgid "Select a file to import"
+msgstr ""
 
 # @ custom-sidebars
 #: views/widgets-location.php:30
@@ -603,22 +716,28 @@ msgid "As <strong>%1$s</strong> for selected %2$s"
 msgstr "Como <strong>%1$s</strong> por la seleccionada %2$s"
 
 # @ custom-sidebars
-#: views/widgets-location.php:50
+#: views/widgets-location.php:51
 msgid "Click here to pick available %1$s"
 msgstr "Click aquí para seleccionar %1$s"
 
+#: views/widgets-location.php:89
+msgid ""
+"There are no replaceable sidebars. Please allow at least one as replaceable."
+msgstr ""
+
 # @ default
-#: views/widgets-location.php:95 views/widgets-location.php:136
+#: views/widgets-location.php:99 views/widgets-location.php:140
+#: views/widgets-location.php:198
 msgid "Click to toggle"
 msgstr ""
 
 # @ custom-sidebars
-#: views/widgets-location.php:96
+#: views/widgets-location.php:100
 msgid "For all Single Entries matching selected criteria"
 msgstr "Para todas entradas que cumplan con..."
 
 # @ custom-sidebars
-#: views/widgets-location.php:99
+#: views/widgets-location.php:103
 msgid ""
 "These replacements will be applied to every single post that matches a "
 "certain post type or category."
@@ -627,52 +746,62 @@ msgstr ""
 "pertenezcan a el tipo de entrada o categoría particular."
 
 # @ custom-sidebars
-#: views/widgets-location.php:107
+#: views/widgets-location.php:111
 msgid "categories"
 msgstr "categorías"
 
 # @ custom-sidebars
-#: views/widgets-location.php:119
+#: views/widgets-location.php:123
 #, fuzzy
 msgid "Post Types"
 msgstr "Tipos de archivo"
 
 # @ custom-sidebars
-#: views/widgets-location.php:137
+#: views/widgets-location.php:141
 #, fuzzy
 msgid "For Archives"
 msgstr "Archivos de categorías"
 
 # @ custom-sidebars
-#: views/widgets-location.php:140
+#: views/widgets-location.php:144
 msgid "These replacements will be applied to Archive Type posts and pages."
 msgstr "Estos barras serán mostradas en los archivos de entradas y páginas."
 
 # @ custom-sidebars
-#: views/widgets-location.php:143 views/widgets-location.php:154
+#: views/widgets-location.php:146 views/widgets-location.php:157
 msgid "Archive Types"
 msgstr "Tipos de archivo"
 
 # @ custom-sidebars
-#: views/widgets-location.php:144 views/widgets-location.php:165
+#: views/widgets-location.php:147 views/widgets-location.php:168
 #, fuzzy
 msgid "Category Archives"
 msgstr "Archivos de categorías"
 
 # @ custom-sidebars
-#: views/widgets-location.php:145
+#: views/widgets-location.php:148
 #, fuzzy
 msgid "Authors"
 msgstr "Archivos de autores"
 
 # @ custom-sidebars
-#: views/widgets-location.php:176
+#: views/widgets-location.php:179
 #, fuzzy
 msgid "Author Archives"
 msgstr "Archivos de autores"
 
+#: views/widgets-location.php:199
+msgid "3rd party plugins"
+msgstr ""
+
 # @ custom-sidebars
-#: views/widgets-location.php:187 views/widgets.php:42
+#: views/widgets-location.php:202
+#, fuzzy
+msgid "These replacements will be applied to 3rd party plugins."
+msgstr "Estos barras serán mostradas en los archivos de entradas y páginas."
+
+# @ custom-sidebars
+#: views/widgets-location.php:243 views/widgets.php:42
 msgid "Save Changes"
 msgstr "Guardar Cambios"
 
@@ -722,7 +851,7 @@ msgid "Couldn't load data from WordPress..."
 msgstr "No se pudo cargar datos de WordPress..."
 
 # @ custom-sidebars
-#: views/widgets.php:50 views/widgets.php:104
+#: views/widgets.php:50 views/widgets.php:105
 msgid "This sidebar can be replaced on certain pages"
 msgstr "Esta barra puede ser reemplazada"
 
@@ -739,40 +868,40 @@ msgid "Filter..."
 msgstr ""
 
 # @ custom-sidebars
-#: views/widgets.php:68
+#: views/widgets.php:69
 #, fuzzy
 msgid "Delete this sidebar."
 msgstr "Por favor, confirme que quiere borrar la barra lateral."
 
 # @ custom-sidebars
-#: views/widgets.php:77
+#: views/widgets.php:78
 #, fuzzy
 msgid "Edit this sidebar."
 msgstr "Editar"
 
 # @ custom-sidebars
-#: views/widgets.php:79
+#: views/widgets.php:80
 msgid "Edit"
 msgstr "Editar"
 
 # @ custom-sidebars
-#: views/widgets.php:86 views/widgets.php:123
+#: views/widgets.php:87 views/widgets.php:124
 msgid "Where do you want to show the sidebar?"
 msgstr "Dónde quiere mostrar esta barra?"
 
 # @ custom-sidebars
-#: views/widgets.php:88 views/widgets.php:125
+#: views/widgets.php:89 views/widgets.php:126
 #, fuzzy
 msgid "Sidebar Location"
 msgstr "Crear una barra"
 
 # @ custom-sidebars
-#: views/widgets.php:105
+#: views/widgets.php:106
 msgid "This sidebar will always be same on all pages"
 msgstr "Esta barra permanecerá en todas las páginas."
 
 # @ custom-sidebars
-#: views/widgets.php:114
+#: views/widgets.php:115
 #, fuzzy
 msgid "Allow this sidebar to be replaced"
 msgstr "Esta barra puede ser reemplazada"
@@ -800,6 +929,17 @@ msgstr ""
 #. Author URI of the plugin/theme
 msgid "http://premium.wpmudev.org/"
 msgstr ""
+
+# @ custom-sidebars
+#: inc/class-custom-sidebars-editor.php:1155
+#, fuzzy
+msgctxt "Column name on entries list."
+msgid "Custom Sidebars"
+msgstr "Barras Laterales"
+
+# @ custom-sidebars
+#~ msgid "Export file"
+#~ msgstr "Exportar archivo"
 
 # @ custom-sidebars
 #~ msgid ""
