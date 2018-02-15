@@ -1,4 +1,4 @@
-/*! Custom Sidebars - v3.1.2
+/*! Custom Sidebars - v3.1.3-beta.1
  * https://premium.wpmudev.org/project/custom-sidebars-pro/
  * Copyright (c) 2018; * Licensed GPLv2+ */
 /*global window:false */
@@ -572,6 +572,10 @@ window.csSidebars = null;
 				if ( data.button ) {
 					popup.$().find( '.btn-save' ).text( data.button );
 				}
+                if ( data.advance ) {
+                    popup.$().find( '#csb-more' ).prop( 'checked', true );
+                    show_extras();
+                }
 			}
 
 			// Close popup after ajax request
@@ -606,15 +610,19 @@ window.csSidebars = null;
 			// Submit the data via ajax.
 			function save_data() {
 				var form = popup.$().find( 'form' );
-
+                if ( 0 < popup.$('#csb-more:checked').length ) {
+                    jQuery('<input>').attr({
+                        type: 'hidden',
+                        value: 'show',
+                        name: 'advance'
+                    }).appendTo(form);
+                }
 				// Start loading-animation.
 				popup.loading( true );
-
 				ajax.reset()
 					.data( form )
 					.ondone( handle_done_save )
 					.load_json();
-
 				return false;
 			}
 
@@ -1257,7 +1265,6 @@ window.csSidebars = null;
 			// Submit the data and close the popup.
 			function save_data() {
 				popup.loading( true );
-
 				ajax.reset()
 					.data( form )
 					.ondone( handle_done_save )
@@ -1392,7 +1399,6 @@ window.csSidebars = null;
 			return false;
 		},
 
-
 		/*=============================*\
 		=================================
 		==                             ==
@@ -1400,7 +1406,6 @@ window.csSidebars = null;
 		==                             ==
 		=================================
 		\*=============================*/
-
 
 		/**
 		 * =====================================================================
@@ -1511,7 +1516,7 @@ window.csSidebars = null;
 	 */
 	jQuery(document).ready( function($) {
 		window.setTimeout( function() {
-            window.csSidebars.showGetStartedBox();
+			window.csSidebars.showGetStartedBox();
 		}, 1000);
 	});
 })(jQuery);
@@ -1539,49 +1544,35 @@ window.csSidebars = null;
  * @see http://james.padolsey.com/javascript/sorting-elements-with-jquery/
  */
 jQuery.fn.sortElements = (function(){
-
     var sort = [].sort;
-
     return function(comparator, getSortable) {
-
         getSortable = getSortable || function(){return this;};
-
         var placements = this.map(function(){
-
             var sortElement = getSortable.call(this),
-                parentNode = sortElement.parentNode,
-
-                // Since the element itself will change position, we have
-                // to have some way of storing its original position in
-                // the DOM. The easiest way is to have a 'flag' node:
-                nextSibling = parentNode.insertBefore(
+            parentNode = sortElement.parentNode,
+            // Since the element itself will change position, we have
+            // to have some way of storing its original position in
+            // the DOM. The easiest way is to have a 'flag' node:
+            nextSibling = parentNode.insertBefore(
                     document.createTextNode(''),
                     sortElement.nextSibling
-                );
-
+                    );
             return function() {
-
                 if (parentNode === this) {
                     throw new Error(
-                        "You can't sort elements if any one is a descendant of another."
-                    );
+                            "You can't sort elements if any one is a descendant of another."
+                            );
                 }
-
                 // Insert before flag:
                 parentNode.insertBefore(this, nextSibling);
                 // Remove flag:
                 parentNode.removeChild(nextSibling);
-
             };
-
         });
-
         return sort.call(this, comparator).each(function(i){
             placements[i].call(getSortable.call(this));
         });
-
     };
-
 })();
 
 

@@ -173,6 +173,14 @@ class CustomSidebarsEditor extends CustomSidebars {
 							__( 'You do not have permission for this', 'custom-sidebars' )
 						);
 					} else {
+						$sb_data['advance'] = false;
+						$user_id = get_current_user_id();
+						if ( $user_id ) {
+							$advance = get_user_option( 'custom-sidebars-editor-advance', $user_id );
+							if ( is_array( $advance ) && isset( $advance[ $sb_data['id'] ] ) ) {
+								$sb_data['advance'] = $advance[ $sb_data['id'] ];
+							}
+						}
 						$req->sidebar = $sb_data;
 					}
 				break;
@@ -349,6 +357,21 @@ class CustomSidebarsEditor extends CustomSidebars {
 		// Allow user to translate sidebar name/description via WPML.
 		self::wpml_update( $sidebars );
 		$req->data = self::wpml_translate( $sidebar );
+
+		/**
+		 * save user preferences (advance).
+		 *
+		 * @since 3.1.3
+		 */
+		$user_id = get_current_user_id();
+		if ( $user_id ) {
+			$advance = get_user_option( 'custom-sidebars-editor-advance', $user_id );
+			if ( ! is_array( $advance ) ) {
+				$advance = array();
+			}
+			$advance[ $req->id ] = isset( $_POST['advance'] ) && 'show' === $_POST['advance'];
+			update_user_option( $user_id, 'custom-sidebars-editor-advance', $advance );
+		}
 
 		return $req;
 	}
