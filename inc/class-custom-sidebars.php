@@ -84,7 +84,6 @@ class CustomSidebars {
 	 * @since 3.0.5
 	 */
 	public function admin_init() {
-
 		/* start:free */$plugin_title = 'Custom Sidebars';/* end:free */
 		/* start:pro */$plugin_title = 'Custom Sidebars Pro';/* end:pro */
 		/**
@@ -965,16 +964,15 @@ class CustomSidebars {
 	 * @since 3.0.1
 	 */
 	public function print_templates() {
+		if ( false == $this->check_screen() ) {
+			return;
+		}
 		wp_enqueue_script( 'wp-util' );
 ?>
 	<script type="text/html" id="tmpl-custom-sidebars-new">
-		
 		<div class="custom-sidebars-add-new">
-			
 			<p><?php esc_html_e( 'Create a custom sidebar to get started.', 'custom-sidebars' ); ?></p>
-			
 		</div>
-		
 	</script>
 <?php
 	}
@@ -998,5 +996,19 @@ class CustomSidebars {
 			require_once CSB_INC_DIR . 'integrations/class-custom-sidebars-integration-polylang.php';
 		}
 		do_action( 'cs_integrations' );
+	}
+
+	private function check_screen() {
+		if ( ! function_exists( 'get_current_screen' ) ) {
+			return false;
+		}
+		$screen = get_current_screen();
+		if ( ! is_a( $screen, 'WP_Screen' ) ) {
+			return false;
+		}
+		if ( 'widgets' != $screen->id ) {
+			return false;
+		}
+		return true;
 	}
 };
