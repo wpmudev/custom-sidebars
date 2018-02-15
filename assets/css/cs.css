@@ -162,6 +162,11 @@
   -ms-user-select: none;
   user-select: none;
 }
+@media screen and (max-width: 480px) {
+  .widgets-php .widget-liquid-right {
+    width: 100%;
+  }
+}
 .widgets-php .widget-liquid-right #widgets-right {
   margin: 20px;
 }
@@ -326,8 +331,17 @@
   line-height: 26px;
   margin-right: 20px;
 }
+#cs-options .cs-action.btn-export {
+  white-space: nowrap;
+}
 #cs-options .cs-filter {
   float: right;
+}
+@media screen and (max-width: 700px) {
+  #cs-options .cs-filter {
+    float: none;
+    margin-top: 5px;
+  }
 }
 
 .sidebar-form {

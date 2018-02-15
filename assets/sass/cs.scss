@@ -172,6 +172,9 @@
 		margin: -10px -214% 0 0;
 		width: 210%;
 		background: #e4e4e4;
+		@media screen and (max-width: 480px) {
+			width: 100%;
+		}
 
 		/* https://app.asana.com/0/11388810124414/15066782299785 */
 		-webkit-user-select: none;
@@ -283,14 +286,20 @@
 }
 
 #cs-options {
-	.cs-action {
-		line-height: 26px;
-		margin-right: 20px;
-	}
-
-	.cs-filter {
-		float: right;
-	}
+    .cs-action {
+        line-height: 26px;
+        margin-right: 20px;
+        &.btn-export {
+            white-space: nowrap;
+        }
+    }
+    .cs-filter {
+        float: right;
+        @media screen and (max-width: 700px) {
+            float: none;
+            margin-top: 5px;
+        }
+    }
 }
 
 .sidebar-form {
