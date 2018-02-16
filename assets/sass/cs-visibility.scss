@@ -6,8 +6,35 @@
 	display: none;
 }
 
-.widget-control-actions .csb-visibility-button {
-	margin: 0 5px 0 0;
+.widget-control-actions {
+    .button {
+        margin: 0 0 0 5px;
+    }
+    .csb-visibility-button {
+        @media screen and (max-width: 782px) {
+            .dashicons {
+                line-height: normal;
+                height: auto;
+                font-size: 19px;
+                @media screen and (max-width: 400px) {
+                    display: none;
+                }
+            }
+        }
+    }
+    @media screen and (max-width: 782px) {
+        .alignright,
+        .alignleft {
+            float: none;
+        }
+        .alignright {
+            padding-top: 10px;
+            text-align: right;
+            .button {
+                margin-bottom: 5px;
+            }
+        }
+    }
 }
 
 .csb-visibility {

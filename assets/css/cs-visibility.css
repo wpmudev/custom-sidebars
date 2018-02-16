@@ -5,8 +5,34 @@
   display: none;
 }
 
-.widget-control-actions .csb-visibility-button {
-  margin: 0 5px 0 0;
+.widget-control-actions .button {
+  margin: 0 0 0 5px;
+}
+@media screen and (max-width: 782px) {
+  .widget-control-actions .csb-visibility-button .dashicons {
+    line-height: normal;
+    height: auto;
+    font-size: 19px;
+  }
+}
+@media screen and (max-width: 782px) and (max-width: 400px) {
+  .widget-control-actions .csb-visibility-button .dashicons {
+    display: none;
+  }
+}
+
+@media screen and (max-width: 782px) {
+  .widget-control-actions .alignright,
+  .widget-control-actions .alignleft {
+    float: none;
+  }
+  .widget-control-actions .alignright {
+    padding-top: 10px;
+    text-align: right;
+  }
+  .widget-control-actions .alignright .button {
+    margin-bottom: 5px;
+  }
 }
 
 .csb-visibility {
