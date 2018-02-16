@@ -14,7 +14,7 @@
 		<div class="col-3">
 			<label for="csb-name"><?php _e( 'Name', 'custom-sidebars' ); ?></label>
 			<input type="text" name="name" id="csb-name" maxlength="40" placeholder="<?php _e( 'Sidebar name here...', 'custom-sidebars' ); ?>" />
-			<div class="hint"><?php _e( 'The name must be unique.', 'custom-sidebars' ); ?></div>
+			<div class="hint"><?php _e( 'The name should be unique.', 'custom-sidebars' ); ?></div>
 		</div>
 		<div class="col-5">
 			<label for="csb-description"><?php _e( 'Description', 'custom-sidebars' ); ?></label>
