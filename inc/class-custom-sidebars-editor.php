@@ -259,10 +259,12 @@ class CustomSidebarsEditor extends CustomSidebars {
 			$sb_desc = stripslashes( trim( $data['description'] ) );
 		}
 
+		$sb_name = isset( $data['name'] )? $data['name']:'';
+
 		if ( function_exists( 'mb_substr' ) ) {
-			$sb_name = mb_substr( stripslashes( trim( @$data['name'] ) ), 0, 40 );
+			$sb_name = mb_substr( stripslashes( trim( $sb_name ) ), 0, 40 );
 		} else {
-			$sb_name = substr( stripslashes( trim( @$data['name'] ) ), 0, 40 );
+			$sb_name = substr( stripslashes( trim( $sb_name ) ), 0, 40 );
 		}
 
 		if ( empty( $sb_name ) ) {
@@ -315,10 +317,16 @@ class CustomSidebarsEditor extends CustomSidebars {
 			$sidebar['name_lang'] = $sb_name;
 			$sidebar['description_lang'] = $sb_desc;
 		}
-		$sidebar['before_widget'] = stripslashes( trim( @$_POST['before_widget'] ) );
-		$sidebar['after_widget'] = stripslashes( trim( @$_POST['after_widget'] ) );
-		$sidebar['before_title'] = stripslashes( trim( @$_POST['before_title'] ) );
-		$sidebar['after_title'] = stripslashes( trim( @$_POST['after_title'] ) );
+
+		foreach ( array( 'before', 'after' ) as $prefix ) {
+			foreach ( array( 'widget', 'title' ) as $sufix ) {
+				$name = sprintf( '%s_%s', $prefix, $sufix );
+				$sidebar[ $name ] = '';
+				if ( isset( $_POST[ $name ] ) ) {
+					$sidebar[ $name ] = stripslashes( trim( $_POST[ $name ] ) );
+				}
+			}
+		}
 
 		if ( 'insert' == $action ) {
 			$sidebars[] = $sidebar;
@@ -369,7 +377,7 @@ class CustomSidebarsEditor extends CustomSidebars {
 			if ( ! is_array( $advance ) ) {
 				$advance = array();
 			}
-			$advance[ $req->id ] = isset( $_POST['advance'] ) && 'show' === $_POST['advance'];
+			$advance[ $req->data['id'] ] = isset( $_POST['advance'] ) && 'show' === $_POST['advance'];
 			update_user_option( $user_id, 'custom-sidebars-editor-advance', $advance );
 		}
 
