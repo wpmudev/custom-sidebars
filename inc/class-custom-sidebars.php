@@ -76,6 +76,23 @@ class CustomSidebars {
 		add_action( 'admin_init', array( $this, 'admin_init' ) );
 		// Extensions use this hook to initialize themselfs.
 		do_action( 'cs_init' );
+		/**
+		 * Add version to media files
+		 */
+		add_filter( 'wpmu_style_version', array( $this, 'wp_enqueue_add_version' ), 10, 2 );
+		add_filter( 'wpmu_script_version', array( $this, 'wp_enqueue_add_version' ), 10, 2 );
+	}
+
+	/**
+	 * Add version to media files
+	 *
+	 * @since 3.1.3
+	 */
+	public function wp_enqueue_add_version( $version, $handle ) {
+		if ( preg_match( '/^wpmu\-cs\-/', $handle ) ) {
+			return 'PLUGIN_VERSION';
+		}
+		return $version;
 	}
 
 	/**
