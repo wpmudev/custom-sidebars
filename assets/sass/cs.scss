@@ -827,6 +827,22 @@ h2 .show-infos {
 		}
 	}
 }
+@media screen and (max-width: 480px) {
+    .wpmui-popup {
+        .buttons {
+            height: 80px;
+            text-align: left;
+            label {
+                float: none;
+                display: block;
+                margin-bottom: .5em;
+            }
+            .btn-save {
+                float: right;
+            }
+        }
+    }
+}
 
 /**
  * =============================================================================
