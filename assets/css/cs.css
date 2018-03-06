@@ -816,6 +816,20 @@ h2 .show-infos {
   font-size: 1.4em;
 }
 
+@media screen and (max-width: 480px) {
+  .wpmui-popup .buttons {
+    height: 80px;
+    text-align: left;
+  }
+  .wpmui-popup .buttons label {
+    float: none;
+    display: block;
+    margin-bottom: .5em;
+  }
+  .wpmui-popup .buttons .btn-save {
+    float: right;
+  }
+}
 /**
  * =============================================================================
  * == Post list
