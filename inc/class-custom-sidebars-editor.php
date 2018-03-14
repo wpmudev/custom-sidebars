@@ -17,6 +17,13 @@ class CustomSidebarsEditor extends CustomSidebars {
 	private $metabox_roles_name = 'custom_sidebars_metabox_roles';
 
 	/**
+	 * Custom taxoniomies name
+	 *
+	 * @since 3.0.9
+	 */
+	private $custom_taxonomies_name = 'custom_sidebars_custom_taxonomies';
+
+	/**
 	 * Returns the singleton object.
 	 *
 	 * @since  2.0
@@ -1401,6 +1408,26 @@ class CustomSidebarsEditor extends CustomSidebars {
 				}
 			}
 			$screen_settings .= '</fieldset>';
+			/**
+			 * Custom taxonomies
+			 */
+			$taxonomies = CustomSidebars::get_custom_taxonomies();
+			if ( ! empty( $taxonomies ) ) {
+				$allowed = get_option( $this->custom_taxonomies_name, array() );
+				$screen_settings .= '<fieldset class="metabox-prefs cs-custom-taxonomies">';
+				$screen_settings .= wp_nonce_field( $this->custom_taxonomies_name, $this->custom_taxonomies_name, false, false );
+				$screen_settings .= sprintf( '<legend>%s</legend>', __( 'Allow Custom Taxonomies in Sidebar Location:', 'custom-sidebars' ) );
+				foreach ( $taxonomies as $taxonomy_slug => $taxonomy ) {
+					$checked = false;
+					$screen_settings .= sprintf(
+						'<label><input type="checkbox" name="cs-custom-taxonomy[]" value="%s" %s /> %s</label>',
+						esc_attr( $taxonomy_slug ),
+						checked( $checked, true, false ),
+						esc_html( $taxonomy->label )
+					);
+				}
+				$screen_settings .= '</fieldset>';
+			}
 		}
 		return $screen_settings;
 	}

@@ -124,8 +124,20 @@ function _show_replaceable( $sidebar, $prefix, $cat_name, $class = '' ) {
 				_show_replaceable( $details, 'pt', $cat_name );
 			}
 			?>
-			</div>
-
+            </div>
+<?php
+			/**
+			 * Custom Taxonomies
+			 */
+			$taxonomies = CustomSidebars::get_custom_taxonomies();
+foreach ( $taxonomies as $taxonomy_slug => $taxonomy ) {
+	echo '<div class="cs-half">';
+	foreach ( $sidebars as $sb_id => $details ) {
+		_show_replaceable( $details, $taxonomy_slug, $taxonomy->label );
+	}
+	echo '</div>';
+}
+?>
 		</div>
 	</div>
 

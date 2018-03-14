@@ -1028,4 +1028,30 @@ class CustomSidebars {
 		}
 		return true;
 	}
+
+	/**
+	 * get custom taxonomies
+	 *
+	 * @since 3.1.4
+	 *
+	 * @returns array Array of object of custom, public taxonomies
+	 */
+	public static function get_custom_taxonomies() {
+		$args = array(
+			'public'   => true,
+			'_builtin' => false,
+		);
+		$taxonomies = get_taxonomies( $args, 'objects' );
+		uasort( $taxonomies, array( __CLASS__, 'sort_by_label' ) );
+		return $taxonomies;
+	}
+
+	/**
+	 * Sort helper for get_custom_taxonomies() function.
+	 *
+	 * @since 3.1.4
+	 */
+	private static function sort_by_label( $a, $b ) {
+		return strcmp( $a->label, $b->label );
+	}
 };
