@@ -1216,6 +1216,36 @@ window.csSidebars = null;
 					}
 				});
 
+				/**
+				 * ----- Custom Taxomies ----------------------------------------------
+				 * @since 3.1.4
+				 */
+				var lst_custom_taxonomies = popup.$().find( '.cf-custom-taxonomies .cs-datalist' );
+				lst_custom_taxonomies.each( function() {
+					var data_custom_taxonomy = resp[$(this).data('id')];
+					$(this).empty();
+					// Add the options
+					for ( var key_custom_taxonomy in data_custom_taxonomy ) {
+						opt = jQuery( '<option></option>' );
+						name = data_custom_taxonomy[ key_custom_taxonomy ].name;
+						opt.attr( 'value', key_custom_taxonomy ).text( name );
+						$(this).append( opt );
+					}
+					// Select options
+					for ( var key_custom_tax in data_custom_taxonomy ) {
+						if ( data_custom_taxonomy[ key_custom_tax ].archive ) {
+							for ( theme_sb in data_custom_taxonomy[ key_custom_tax ].archive ) {
+								_select_option(
+									data_custom_taxonomy[ key_custom_tax ].archive[ theme_sb ],
+									theme_sb,
+									key_custom_tax,
+									$(this)
+								);
+							}
+						}
+					}
+				});
+
 			} // end: handle_done_load()
 
 			// User clicks on "replace <sidebar> for <category>" checkbox.

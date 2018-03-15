@@ -30,11 +30,9 @@ class CustomSidebarsEditor extends CustomSidebars {
 	 */
 	public static function instance() {
 		static $Inst = null;
-
 		if ( null === $Inst ) {
 			$Inst = new CustomSidebarsEditor();
 		}
-
 		return $Inst;
 	}
 
@@ -79,6 +77,7 @@ class CustomSidebarsEditor extends CustomSidebars {
 		 */
 		add_filter( 'screen_settings', array( $this, 'add_capabilities_select_box' ), 10, 2 );
 		add_action( 'wp_ajax_custom_sidebars_metabox_roles', array( $this, 'update_custom_sidebars_metabox_roles' ) );
+		add_action( 'wp_ajax_custom_sidebars_metabox_custom_taxonomies', array( $this, 'update_custom_sidebars_metabox_custom_taxonomies' ) );
 
 		/**
 		 * Check user privileges
@@ -460,7 +459,6 @@ class CustomSidebarsEditor extends CustomSidebars {
 	 */
 	private function set_replaceable( $req ) {
 		$state = @$_POST['state'];
-
 		$options = self::get_options();
 		if ( 'true' === $state ) {
 			$req->status = true;
@@ -610,7 +608,7 @@ class CustomSidebarsEditor extends CustomSidebars {
 		}
 
 		/**
-		 * Custom taxonomies
+		 * Custom taxonomies archive
 		 *
 		 * @since 3.0.7
 		 */
@@ -634,6 +632,42 @@ class CustomSidebarsEditor extends CustomSidebars {
 		}
 
 		/**
+		 * Custom taxonomies taxes
+		 *
+		 * @since 3.1.4
+		 */
+		$allowed = get_option( $this->custom_taxonomies_name, array() );
+		$args = array(
+			'hide_empty' => true,
+		);
+		foreach ( $allowed as $key ) {
+			$t = get_terms( $key, $args );
+			$terms = array();
+			foreach ( $t as $item ) {
+				$sel_single = $sel_archive = array();
+				if (
+					isset( $defaults[ $key.'_single' ] )
+					&&  isset( $defaults[ $key.'_single' ][ $item->term_id ] )
+				) {
+					$sel_single = $defaults[ $key.'_single' ][ $item->term_id ];
+				}
+				if (
+					isset( $defaults[ $key.'_archive' ] )
+					&&  isset( $defaults[ $key.'_archive' ][ $item->term_id ] )
+				) {
+					$sel_archive = $defaults[ $key.'_archive' ][ $item->term_id ];
+				}
+				$terms[ $item->term_id ] = array(
+					'name' => $item->name,
+					'count' => $item->count,
+					'single' => self::get_array( $sel_single ),
+					'archive' => self::get_array( $sel_archive ),
+				);
+			}
+			$req->$key = $terms;
+		}
+
+		/**
 		 * Category archive.
 		 */
 		foreach ( $raw_taxonomies['_builtin'] as $t ) {
@@ -652,7 +686,6 @@ class CustomSidebarsEditor extends CustomSidebars {
 		$authors = array();
 		foreach ( $raw_authors as $user ) {
 			$sel_archive = @$defaults['author_archive'][ @$user->ID ];
-
 			$authors[ @$user->ID ] = array(
 				'name' => @$user->display_name,
 				'archive' => self::get_array( $sel_archive ),
@@ -1154,13 +1187,10 @@ class CustomSidebarsEditor extends CustomSidebars {
 	 */
 	static protected function wpml_translate( $sidebar ) {
 		if ( ! function_exists( 'icl_t' ) ) { return $sidebar; }
-
 		$context = 'Sidebar';
-
 		// Translate the name and description.
 		// Note: When changing a translation the icl_t() function will not
 		// return the updated value due to caching.
-
 		if ( isset( $sidebar['name_lang'] ) ) {
 			$sidebar['name'] = $sidebar['name_lang'];
 		} else {
@@ -1418,7 +1448,7 @@ class CustomSidebarsEditor extends CustomSidebars {
 				$screen_settings .= wp_nonce_field( $this->custom_taxonomies_name, $this->custom_taxonomies_name, false, false );
 				$screen_settings .= sprintf( '<legend>%s</legend>', __( 'Allow Custom Taxonomies in Sidebar Location:', 'custom-sidebars' ) );
 				foreach ( $taxonomies as $taxonomy_slug => $taxonomy ) {
-					$checked = false;
+					$checked = in_array( $taxonomy_slug, $allowed );
 					$screen_settings .= sprintf(
 						'<label><input type="checkbox" name="cs-custom-taxonomy[]" value="%s" %s /> %s</label>',
 						esc_attr( $taxonomy_slug ),
@@ -1438,7 +1468,34 @@ class CustomSidebarsEditor extends CustomSidebars {
 	 * @since 3.0.9
 	 */
 	public function update_custom_sidebars_metabox_roles() {
+		$this->update_option_field( $this->metabox_roles_name );
+	}
+
+	/**
+	 * Update custom taxoniomies select box
+	 *
+	 * @since 3.1.4
+	 */
+	public function update_custom_sidebars_metabox_custom_taxonomies() {
+		$this->update_option_field( $this->custom_taxonomies_name );
+	}
+
+	/**
+	 * Helper for update metabox functions.
+	 *
+	 * @since 3.1.4
+	 */
+	private function update_option_field( $name ) {
+		/**
+		 * check required data
+		 */
 		if ( ! isset( $_REQUEST['_wpnonce'] ) || ! isset( $_REQUEST['fields'] ) ) {
+			wp_send_json_error();
+		}
+		/**
+		 * check nonce value
+		 */
+		if ( ! wp_verify_nonce( $_REQUEST['_wpnonce'], $name ) ) {
 			wp_send_json_error();
 		}
 		$value = array();
@@ -1447,9 +1504,9 @@ class CustomSidebarsEditor extends CustomSidebars {
 				$value[] = $role;
 			}
 		}
-		$status = add_option( $this->metabox_roles_name, $value, '', 'no' );
+		$status = add_option( $name, $value, '', 'no' );
 		if ( ! $status ) {
-			update_option( $this->metabox_roles_name, $value );
+			update_option( $name, $value );
 		}
 		wp_send_json_success();
 	}
@@ -1473,5 +1530,18 @@ class CustomSidebarsEditor extends CustomSidebars {
 			}
 		}
 		return false;
+	}
+
+	/**
+	 * Get allowed taxoniomies.
+	 *
+	 * @since 3.1.4
+	 */
+	public function get_allowed_custom_taxonmies() {
+		$value = get_option( $this->custom_taxonomies_name );
+		if ( empty( $value ) || ! is_array( $value ) ) {
+			return array();
+		}
+		return $value;
 	}
 };

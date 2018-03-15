@@ -58,9 +58,7 @@ function _show_replaceable( $sidebar, $prefix, $cat_name, $class = '' ) {
 	</div>
 	<?php
 }
-
 ?>
-
 <form class="frm-location wpmui-form">
 	<input type="hidden" name="do" value="set-location" />
 	<input type="hidden" name="sb" class="sb-id" value="" />
@@ -129,19 +127,18 @@ function _show_replaceable( $sidebar, $prefix, $cat_name, $class = '' ) {
 			/**
 			 * Custom Taxonomies
 			 */
-			$taxonomies = CustomSidebars::get_custom_taxonomies();
+			$taxonomies = CustomSidebarsEditor::get_custom_taxonomies( 'allowed' );
 foreach ( $taxonomies as $taxonomy_slug => $taxonomy ) {
-	echo '<div class="cs-half">';
+	echo '<div class="cs-half cf-custom-taxonomies">';
 	foreach ( $sidebars as $sb_id => $details ) {
 		_show_replaceable( $details, $taxonomy_slug, $taxonomy->label );
 	}
 	echo '</div>';
 }
 ?>
-		</div>
-	</div>
-
-	<?php
+        </div>
+    </div>
+<?php
 	/**
 	 * =========================================================================
 	 * Box 2: ARCHIVE pages
