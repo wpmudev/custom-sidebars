@@ -767,9 +767,7 @@ class CustomSidebarsEditor extends CustomSidebars {
 				'who' => 'authors',
 			)
 		);
-
 		// == Update the options
-
 		foreach ( $sidebars as $sb_id ) {
 			// Post-type settings.
 			foreach ( $raw_posttype as $item ) {
@@ -875,6 +873,30 @@ class CustomSidebarsEditor extends CustomSidebars {
 					$options['taxonomies_archive'][ $taxonomy ][ $sb_id ] == $req->id
 				) {
 					unset( $options['taxonomies_archive'][ $taxonomy ][ $sb_id ] );
+				}
+				/**
+				 * single custom taxonomy
+				 *
+				 * @since 3.1.4
+				 */
+				foreach ( $raw_taxonomies['custom'] as $taxonomy ) {
+					$key = '_taxonomy_'.$taxonomy.'_single';
+					$terms = get_terms( $taxonomy, array( 'hide_empty' => false ) );
+					foreach ( $terms as $term ) {
+						$term_id = $term->term_id;
+						if (
+							isset( $data[ $taxonomy ][ $sb_id ] )
+							&& is_array( $data[ $taxonomy ][ $sb_id ] )
+							&& in_array( $term_id,  $data[ $taxonomy ][ $sb_id ] )
+						) {
+							$options['taxonomies_single'][ $taxonomy ][ $term_id ][ $sb_id ] = $req->id;
+						} elseif (
+							isset( $options['taxonomies_single'][ $taxonomy ][ $term_id ][ $sb_id ] ) &&
+							$options['taxonomies_single'][ $taxonomy ][ $term_id ][ $sb_id ] == $req->id
+						) {
+							unset( $options['taxonomies_single'][ $taxonomy ][ $term_id ][ $sb_id ] );
+						}
+					}
 				}
 			}
 
@@ -1457,6 +1479,7 @@ class CustomSidebarsEditor extends CustomSidebars {
 					);
 				}
 				$screen_settings .= '</fieldset>';
+				$screen_settings .= sprintf( '<p class="description">%s</p>', __( 'After turn on any Custom Taxonomy you need to reload this screen to be able choose it in Sidebar Location.', 'ub' ) );
 			}
 		}
 		return $screen_settings;
