@@ -9,12 +9,11 @@ Change Log:
 ----------------------------------------------------------------------
 - Handle custom taxonomies.
 
-3.1.3 ( 2018-xx-xx )
-----------------------------------------------------------------------
-- Load JavaScript templates only on the widgets page.
-- Improved custom sidebar edit modal, now it remembers "Advanced Edit" status.
-- Fixed problems with widgets alignment on mobiles.
+3.1.3 ( 2018-03-21 )
 - Added version to scripts, to avoid browser cache problem.
+- Fixed problems with widgets alignment on mobiles.
+- Improved custom sidebar edit modal, now it remembers "Advanced Edit" status.
+- Load JavaScript templates only on the widgets page.
 
 3.1.2 ( 2018-02-09 )
 ----------------------------------------------------------------------
