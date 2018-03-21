@@ -646,10 +646,11 @@ class CustomSidebarsEditor extends CustomSidebars {
 			foreach ( $t as $item ) {
 				$sel_single = $sel_archive = array();
 				if (
-					isset( $defaults[ $key.'_single' ] )
-					&&  isset( $defaults[ $key.'_single' ][ $item->term_id ] )
+					isset( $defaults['taxonomies_single'] )
+					&& isset( $defaults['taxonomies_single'][ $key ] )
+					&& isset( $defaults['taxonomies_single'][ $key ][ $item->term_id ] )
 				) {
-					$sel_single = $defaults[ $key.'_single' ][ $item->term_id ];
+					$sel_single = $defaults['taxonomies_single'][ $key ][ $item->term_id ];
 				}
 				if (
 					isset( $defaults[ $key.'_archive' ] )
@@ -666,7 +667,6 @@ class CustomSidebarsEditor extends CustomSidebars {
 			}
 			$req->$key = $terms;
 		}
-
 		/**
 		 * Category archive.
 		 */
