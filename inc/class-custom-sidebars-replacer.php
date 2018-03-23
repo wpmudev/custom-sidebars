@@ -277,7 +277,6 @@ class CustomSidebarsReplacer extends CustomSidebars {
 			}
 		} elseif ( is_category() ) {
 			// 2 |== Category archive ----------------------------------------------
-
 			$expl && do_action( 'cs_explain', 'Type 2: Category Archive' );
 			/**
 			 * 2.1 Category archive
@@ -587,9 +586,26 @@ class CustomSidebarsReplacer extends CustomSidebars {
 				   && isset( $options['taxonomies_archive'][ $taxonomy ] )
 				   && isset( $options['taxonomies_archive'][ $taxonomy ][ $sb_id ] )
 				) {
+					$expl && do_action( 'cs_explain', 'Replacement for custom taxonomy archive"' . $taxonomy );
 					$replacements[ $sb_id ] = array(
 						$options['taxonomies_archive'][ $taxonomy ][ $sb_id ],
 						'taxonomies_archive',
+						-1,
+					);
+				}
+				/**
+				 * replace for single taxonomy
+				 */
+				if (
+				   isset( $options['taxonomies_single'] )
+				   && isset( $options['taxonomies_single'][ $taxonomy ] )
+				   && isset( $options['taxonomies_single'][ $taxonomy ][ $current_term->term_id ] )
+				   && isset( $options['taxonomies_single'][ $taxonomy ][ $current_term->term_id ][ $sb_id ] )
+				) {
+					$expl && do_action( 'cs_explain', 'Replacement for custom taxonomy ("' . $taxonomy . ') - '.$current_term->name );
+					$replacements[ $sb_id ] = array(
+						$options['taxonomies_single'][ $taxonomy ][ $current_term->term_id ][ $sb_id ],
+						'taxonomies_single',
 						-1,
 					);
 				}

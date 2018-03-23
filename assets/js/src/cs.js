@@ -1170,7 +1170,6 @@ window.csSidebars = null;
 				for ( var key7 in data_aut ) {
 					opt = jQuery( '<option></option>' );
 					name = data_aut[ key7 ].name;
-
 					opt.attr( 'value', key7 ).text( name );
 					lst_aut.append( opt );
 				}
@@ -1233,10 +1232,10 @@ window.csSidebars = null;
 					}
 					// Select options
 					for ( var key_custom_tax in data_custom_taxonomy ) {
-						if ( data_custom_taxonomy[ key_custom_tax ].archive ) {
-							for ( theme_sb in data_custom_taxonomy[ key_custom_tax ].archive ) {
+						if ( data_custom_taxonomy[ key_custom_tax ].single ) {
+							for ( theme_sb in data_custom_taxonomy[ key_custom_tax ].single ) {
 								_select_option(
-									data_custom_taxonomy[ key_custom_tax ].archive[ theme_sb ],
+									data_custom_taxonomy[ key_custom_tax ].single[ theme_sb ],
 									theme_sb,
 									key_custom_tax,
 									$(this)
