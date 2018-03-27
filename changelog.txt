@@ -8,6 +8,7 @@ Change Log:
 3.1.4 ( 2018-xx-xx )
 ----------------------------------------------------------------------
 - Handle custom taxonomies.
+- Fixed a problem with widgets display on IE11.
 
 3.1.3 ( 2018-03-21 )
 - Added version to scripts, to avoid browser cache problem.

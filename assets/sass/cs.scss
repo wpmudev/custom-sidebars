@@ -167,6 +167,16 @@
 		width: 100%;
 	}
 
+	.cs-wrap {
+		.widget-liquid-right {
+			.widget {
+				&.open {
+					z-index: 9999 !important;
+				}
+			}
+		}
+	}
+
 	.widget-liquid-right {
 		padding: 0 0 75px 0;
 		margin: -10px -214% 0 0;
