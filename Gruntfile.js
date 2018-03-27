@@ -66,6 +66,8 @@ module.exports = function( grunt ) {
 				'./package.json',
 				'./inc/external/wpmudev-dashboard',
 				'./assets/sass',
+				'./languages/*.po',
+				'./languages/*.mo',
 			],
 			include_files: [
 				'**',
@@ -148,7 +150,7 @@ module.exports = function( grunt ) {
 				'release/.*',      // Temp release files.
 				'tests/.*',        // Unit testing.
 			],
-			pot_dir: 'lang/', // With trailing slash.
+			pot_dir: 'languages/', // With trailing slash.
 			textdomain: 'custom-sidebars',
 		},
 

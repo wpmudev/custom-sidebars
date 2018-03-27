@@ -59,7 +59,6 @@ function inc_sidebars_init() {
 
 	define( 'CSB_PLUGIN', __FILE__ );
 	define( 'CSB_IS_PRO', /* start:pro */true,/* end:pro */false );
-	define( 'CSB_LANG_DIR', $plugin_dir_rel . '/lang/' );
 	define( 'CSB_VIEWS_DIR', $plugin_dir . '/views/' );
 	define( 'CSB_INC_DIR', $plugin_dir . '/inc/' );
 	define( 'CSB_JS_URL', $plugin_url . 'assets/js/' );
@@ -137,12 +136,6 @@ if ( ! class_exists( 'CustomSidebarsEmptyPlugin' ) ) {
 
 // Translation.
 function inc_sidebars_init_translation() {
-	if ( defined( 'CSB_LANG_DIR' ) ) {
-		load_plugin_textdomain(
-			'custom-sidebars',
-			false,
-			CSB_LANG_DIR
-		);
-	}
+    load_plugin_textdomain( 'custom-sidebars', false, basename( dirname( __FILE__ ) ) . '/languages');
 }
 add_action( 'plugins_loaded', 'inc_sidebars_init_translation' );
