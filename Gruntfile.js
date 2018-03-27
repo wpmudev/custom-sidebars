@@ -506,6 +506,7 @@ module.exports = function( grunt ) {
 
 		// Generate all translation files (same for pro and free).
 		grunt.task.run( 'makepot' );
+		grunt.task.run( 'potomo' );
 
 		for ( i in build ) {
 			branch = build[i];
