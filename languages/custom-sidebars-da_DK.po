@@ -1,14 +1,14 @@
-# Translation of Custom Sidebars Pro in Dutch
+# Translation of Custom Sidebars Pro in Danish
 # This file is distributed under the same license as the Custom Sidebars Pro package.
 msgid ""
 msgstr ""
-"PO-Revision-Date: 2017-06-05 11:53:15+0000\n"
+"PO-Revision-Date: 2017-07-21 17:24:35+0000\n"
 "MIME-Version: 1.0\n"
 "Content-Type: text/plain; charset=UTF-8\n"
 "Content-Transfer-Encoding: 8bit\n"
 "Plural-Forms: nplurals=2; plural=n != 1;\n"
 "X-Generator: GlotPress/2.3.1\n"
-"Language: nl\n"
+"Language: da_DK\n"
 "Project-Id-Version: Custom Sidebars Pro\n"
 
 #: inc/class-custom-sidebars-editor.php:1186
@@ -144,7 +144,7 @@ msgstr "WPMU DEV"
 
 #. Description of the plugin/theme
 msgid "Allows you to create widgetized areas and custom sidebars. Replace whole sidebars or single widgets for specific posts and pages."
-msgstr ""
+msgstr "Tillader dig at oprette widgetiserede områder og brugerdefinerede sidebjælker. Udskift hele sidebjælker eller enkelt widgets til bestemte indlæg og sider."
 
 #. Plugin URI of the plugin/theme
 msgid "http://premium.wpmudev.org/project/custom-sidebars/"
@@ -156,15 +156,15 @@ msgstr "Filter..."
 
 #: views/widgets-location.php:148
 msgid "Authors"
-msgstr "Auteurs"
+msgstr "Forfattere"
 
 #: views/col-sidebars.php:20
 msgid "(Not available for Blog-Page)"
-msgstr ""
+msgstr "(Ikke tilgængelig for Blog-Page)"
 
 #: views/col-sidebars.php:18
 msgid "(Not available for Home-Page)"
-msgstr ""
+msgstr "(Ikke tilgængelig for Home-Page)"
 
 #: inc/class-custom-sidebars.php:973
 msgid "Support"
@@ -172,23 +172,23 @@ msgstr "Support"
 
 #: inc/class-custom-sidebars-visibility.php:348
 msgid "User has Membership"
-msgstr "Gebruiker heeft Lidmaatschap"
+msgstr "Bruger har medlemskab"
 
 #: inc/class-custom-sidebars-visibility.php:300
 msgid "User is logged-in (Member)"
-msgstr ""
+msgstr "Bruger er logget ind (Medlem)"
 
 #: inc/class-custom-sidebars-visibility.php:295
 msgid "User is not logged-in (Guest)"
-msgstr ""
+msgstr "Bruger er ikke logget ind (Gæst)"
 
 #: inc/class-custom-sidebars-visibility.php:252
 msgid "Taxonomy"
-msgstr "Taxonomie"
+msgstr "Taksonomi"
 
 #: inc/class-custom-sidebars-visibility.php:250
 msgid "For posttype"
-msgstr ""
+msgstr "For posttype"
 
 #: inc/class-custom-sidebars-visibility.php:239
 msgid "Membership2"
@@ -196,19 +196,19 @@ msgstr "Membership2"
 
 #: inc/class-custom-sidebars-visibility.php:233
 msgid "Membership"
-msgstr "Lidmaatschap"
+msgstr "Medlemskab"
 
 #: inc/class-custom-sidebars-visibility.php:228
 msgid "Roles"
-msgstr "Rollen"
+msgstr "Roller"
 
 #: inc/class-custom-sidebars-visibility.php:223
 msgid "Guests"
-msgstr "Gasten"
+msgstr "Gæster"
 
 #: inc/class-custom-sidebars-visibility.php:218
 msgid "Date"
-msgstr "Datum"
+msgstr "Dato"
 
 #: inc/class-custom-sidebars-visibility.php:214
 msgid "Filters"
@@ -216,189 +216,189 @@ msgstr "Filters"
 
 #: inc/class-custom-sidebars-editor.php:501
 msgid "Any Author Archive"
-msgstr ""
+msgstr "Enhver forfatterarkiv"
 
 #: inc/class-custom-sidebars-editor.php:500
 #: inc/class-custom-sidebars-visibility.php:162
 msgid "Not found (404)"
-msgstr "Niet gevonden (404)"
+msgstr "Ikke fundet (404)"
 
 #: inc/class-custom-sidebars-checkup-notification.php:118
 msgid "Scan"
-msgstr "Scan"
+msgstr "Skan"
 
 #: inc/class-custom-sidebars-checkup-notification.php:114
 msgid "<b>Warning:</b> Some of your plugins may be slowing down your site. Run a free security and performance scan with WP Checkup."
-msgstr ""
+msgstr "<b>Advarsel:</b> Nogle af dine plugins kan sænke dit websted. Kør en gratis sikkerheds- og ydescanning med WP Checkup."
 
 #: inc/class-custom-sidebars-checkup-notification.php:214
 msgid "get Upfront free"
-msgstr ""
+msgstr "Få Upfront gratis"
 
 #: inc/class-custom-sidebars-checkup-notification.php:213
 msgid "Don’t just replace sidebars. Add new sidebars and footers anywhere with Upfront."
-msgstr ""
+msgstr "Udskift ikke bare sidebjælker. Tilføj nye sidebjælker og footers hvor som helst med Upfront."
 
 #: views/widgets.php:115
 msgid "Allow this sidebar to be replaced"
-msgstr "Toestaan dat deze sidebar kan worden vervangen"
+msgstr "Tillad at denne sidebar bliver udskiftet"
 
 #: views/widgets.php:106
 msgid "This sidebar will always be same on all pages"
-msgstr "Deze sidebar zal altijd hetzelfde zijn op alle pagina's"
+msgstr "Denne sidebar vil altid være ens på alle sider"
 
 #: views/widgets.php:89 views/widgets.php:126
 msgid "Sidebar Location"
-msgstr "Sidebar Locatie"
+msgstr "Sidebar placering"
 
 #: views/widgets.php:87 views/widgets.php:124
 msgid "Where do you want to show the sidebar?"
-msgstr "Waar wil je de sidebar tonen?"
+msgstr "Hvor vil du gerne vise sidebaren?"
 
 #: views/widgets.php:80
 msgid "Edit"
-msgstr "Bewerk"
+msgstr "Rediger"
 
 #: views/widgets.php:78
 msgid "Edit this sidebar."
-msgstr "Bewerk deze sidebar."
+msgstr "Rediger denne sidebar."
 
 #: views/widgets.php:69
 msgid "Delete this sidebar."
-msgstr "Verwijder deze sidebar."
+msgstr "Slet denne sidebar."
 
 #: views/widgets.php:51
 msgid "Activate this option to replace the sidebar with one of your custom sidebars."
-msgstr "Activeer deze optie om de sidebar te vervangen met een van je aangepaste sidebars."
+msgstr "Aktivér denne indstilling for at erstatte sidebaren med en af dine brugerdefinerede sidebarer."
 
 #: views/widgets.php:50 views/widgets.php:105
 msgid "This sidebar can be replaced on certain pages"
-msgstr "Deze sidebar kan vervangen worden op bepaalde pagina's"
+msgstr "Denne sidebar kan udskiftes på visse sider"
 
 #: views/widgets.php:49
 msgid "Couldn't load data from WordPress..."
-msgstr "Kon geen data laden van WordPress..."
+msgstr "Kunne ikke indlæse data fra systemet ..."
 
 #: views/widgets.php:48
 msgid "Theme Sidebars"
-msgstr "Thema Sidebars"
+msgstr "Tema Sidebarer"
 
 #: views/widgets.php:45
 msgid "Define where you want this sidebar to appear."
-msgstr "Bepaal waar je deze sidebar wilt tonen."
+msgstr "Definer hvor du vil have at denne sidebar skal vises."
 
 #: views/widgets.php:44
 msgid "Delete Sidebar"
-msgstr "Sidebar Verwijderen"
+msgstr "Slet sidebar"
 
 #: views/widgets.php:41
 msgid "New Custom Sidebar"
-msgstr "Nieuwe Aangepaste Sidebar"
+msgstr "Ny brugerdefineret sidebar"
 
 #: views/widgets.php:40
 msgid "Edit [Sidebar]"
-msgstr "Bewerk [Sidebar]"
+msgstr "Rediger [Sidebar]"
 
 #: views/widgets.php:21
 msgid "Create a new sidebar"
-msgstr "Een nieuwe sidebar aanmaken"
+msgstr "Opret en ny sidebar"
 
 #: views/widgets-location.php:243 views/widgets.php:42
 msgid "Save Changes"
-msgstr "Wijzigingen Opslaan"
+msgstr "Gem ændringer"
 
 #: views/widgets-location.php:147 views/widgets-location.php:168
 msgid "Category Archives"
-msgstr "Categorie Archieven"
+msgstr "Kategori Arkiver"
 
 #: views/widgets-location.php:146 views/widgets-location.php:157
 msgid "Archive Types"
-msgstr "Archief Types"
+msgstr "Aktiv typer"
 
 #: views/widgets-location.php:144
 msgid "These replacements will be applied to Archive Type posts and pages."
-msgstr "Deze vervangingen zullen worden toegepast op Archief Type berichten en pagina's."
+msgstr "Disse udskiftninger vil blive anvendt til at arkivere type indlæg og sider."
 
 #: views/widgets-location.php:141
 msgid "For Archives"
-msgstr "Voor Archieven"
+msgstr "For arkiver"
 
 #: views/widgets-location.php:123
 msgid "Post Types"
-msgstr "Berichttypes"
+msgstr "Indlæg Typer"
 
 #: views/widgets-location.php:111
 msgid "categories"
-msgstr "categorieën "
+msgstr "Kategorier"
 
 #: views/widgets-location.php:103
 msgid "These replacements will be applied to every single post that matches a certain post type or category."
-msgstr "Deze vervangingen zullen worden toegepast op elk bericht die overeenkomt met een bepaald berichttype of categorie."
+msgstr "Disse udskiftninger vil blive anvendt til hvert eneste indlæg, der matcher en bestemt indlægs type eller kategori."
 
 #: views/widgets-location.php:100
 msgid "For all Single Entries matching selected criteria"
-msgstr "Voor alle Enkele Entries die overeenkomen met de geselecteerde criteria"
+msgstr "For alle enkelte indlæg som matcher valgte kriterier"
 
 #: views/widgets-location.php:99 views/widgets-location.php:140
 #: views/widgets-location.php:198
 msgid "Click to toggle"
-msgstr "Klik om te schakelen"
+msgstr "Klik for at skifte"
 
 #: views/widgets-location.php:51
 msgid "Click here to pick available %1$s"
-msgstr "Klik hier om beschikbare %1$s te kiezen"
+msgstr "Klik her for at vælge ledige %1$s"
 
 #: views/widgets-location.php:38
 msgid "As <strong>%1$s</strong> for selected %2$s"
-msgstr "Als <strong>%1$s</strong> voor geselecteerde %2$s"
+msgstr "Som <strong>%1$s</strong> for valgte %2$s"
 
 #: views/widgets-location.php:30
 msgid "Replaced by another sidebar:"
-msgstr "Vervangen door een andere sidebar:"
+msgstr "Erstattes af en anden sidebar:"
 
 #: inc/class-custom-sidebars-visibility.php:163 views/widgets-export.php:43
 msgid "Preview"
-msgstr "Voorvertoning"
+msgstr "Forhåndsvis"
 
 #: views/widgets-export.php:23
 msgid "Optional description for the export file:"
-msgstr "Optionele beschrijving voor het exportbestand:"
+msgstr "Valgfri beskrivelse for eksport fil:"
 
 #: views/widgets-export.php:10 views/widgets-export.php:28
 msgid "Export"
-msgstr "Exporteer"
+msgstr "Eksport"
 
 #: views/widgets-editor.php:64 views/widgets.php:43
 msgid "Create Sidebar"
-msgstr "Sidebar Aanmaken"
+msgstr "Opret Sidebar"
 
 #: views/widgets-editor.php:60
 msgid "Advanced - Edit custom wrapper code"
-msgstr "Geavanceerd - Bewerk aangepaste wrapper-code"
+msgstr "Avanceret - Edit custom wrapper kode"
 
 #: views/widgets-editor.php:53
 msgid "After Widget"
-msgstr "Na Widget"
+msgstr "Efter Widget"
 
 #: views/widgets-editor.php:49
 msgid "Before Widget"
-msgstr "Voor Widget"
+msgstr "Før Widget"
 
 #: views/widgets-editor.php:43
 msgid "After Title"
-msgstr "Na Titel"
+msgstr "Efter titel"
 
 #: views/widgets-editor.php:39
 msgid "Before Title"
-msgstr "Voor Titel"
+msgstr "Før titel"
 
 #: views/widgets-editor.php:27
 msgid "Caution:"
-msgstr "Opgelet:"
+msgstr "Forsigtig:"
 
 #: views/widgets-editor.php:21
 msgid "Sidebar description here..."
-msgstr "Sidebar beschrijving hier..."
+msgstr "Sidebar beskrivelse her..."
 
 #: views/widgets-editor.php:17
 msgid "The name should be unique."
@@ -406,88 +406,88 @@ msgstr ""
 
 #: views/widgets-editor.php:16
 msgid "Sidebar name here..."
-msgstr "Sidebar naam hier..."
+msgstr "Sidebar navn her..."
 
 #: views/widgets-delete.php:17
 msgid "Yes, delete it"
-msgstr "Ja, verwijderen"
+msgstr "Ja, slet det"
 
 #: views/widgets-delete.php:16 views/widgets-editor.php:63
 #: views/widgets-location.php:242
 msgid "Cancel"
-msgstr "Annuleer"
+msgstr "Anuller"
 
 #: views/widgets-delete.php:11
 msgid "Please confirm that you want to delete the sidebar <strong class=\"name\"></strong>."
-msgstr "Bevestig dat je de sidebar wilt verwijderen <strong class=\"name\"></strong>."
+msgstr "Bekræft venligst at du vil slette sidebaren <strong class=\"name\"></strong>."
 
 #: views/import.php:383
 msgid "Replace the current plugin configuration with the imported configuration."
-msgstr "Vervang de huidige plugin configuratie met de geïmporteerde configuratie."
+msgstr "Erstat det aktuelle plugin konfiguration med den importerede konfiguration."
 
 #: views/import.php:373
 msgid "Search results page"
-msgstr "Zoekresultaten pagina"
+msgstr "Søgeresultat side"
 
 #: views/import.php:372
 msgid "Tag archives"
-msgstr "Tag archieven"
+msgstr "Tag arkiver"
 
 #: views/import.php:371
 msgid "Author archives"
-msgstr "Auteur archieven"
+msgstr "Forfatter arkiver"
 
 #: views/import.php:370
 msgid "Date archives"
-msgstr "Datum archieven"
+msgstr "Dato arkiver"
 
 #: views/import.php:369
 msgid "Main blog page"
-msgstr "Hoofd blog pagina"
+msgstr "Hoved blog side"
 
 #: inc/class-custom-sidebars-visibility.php:245 views/import.php:366
 msgid "Special pages"
-msgstr "Speciale pagina's"
+msgstr "Specielle sider"
 
 #: views/import.php:348
 msgid "Category archives"
-msgstr "Categorie archieven"
+msgstr "Kategori arkiver"
 
 #: views/import.php:328
 msgid "By category"
-msgstr "Op categorie"
+msgstr "Efter kategori"
 
 #: views/import.php:307
 msgid "Post-type archives"
-msgstr "Berichttype archieven"
+msgstr "Indlægstype arkiver"
 
 #: views/import.php:278
 msgid "By post type"
-msgstr "Op berichttype"
+msgstr "Efter indlægs type"
 
 #: views/import.php:259
 msgid "Replaceable Sidebars"
-msgstr "Vervangbare Sidebars"
+msgstr "Udskiftelige Sidebarer"
 
 #: views/import.php:256
 msgid "Replaceable sidebars"
-msgstr "Vervangbare sidebars"
+msgstr "Udskiftelige sidebarer"
 
 #: views/import.php:252
 msgid "Configuration"
-msgstr "Configuratie"
+msgstr "Konfiguration"
 
 #: views/import.php:224
 msgid "(Theme sidebar)"
-msgstr "(Thema sidebar)"
+msgstr "(tema sidebar)"
 
 #: views/import.php:154
 msgid "New sidebar will be created"
-msgstr "Nieuwe sidebar zal worden aangemaakt"
+msgstr "Ny sidebar vil blive oprettet"
 
 #: views/import.php:156
 msgid "Existing sidebar will be replaced!"
-msgstr "Bestaande sidebar zal worden vervangen!"
+msgstr "Eksisterende sidebar vil blive erstattet!"
 
 #: inc/class-custom-sidebars.php:963 views/import.php:147
 msgid "Widgets"
@@ -495,95 +495,98 @@ msgstr "Widgets"
 
 #: views/import.php:146
 msgid "Note"
-msgstr "Notitie"
+msgstr "Bemærkning"
 
 #: views/import.php:145 views/widgets-editor.php:20
 msgid "Description"
-msgstr "Beschrijving"
+msgstr "Beskrivelse"
 
 #: views/import.php:144 views/widgets-editor.php:15
 msgid "Name"
-msgstr "Naam"
+msgstr "Navn"
 
 #: views/import.php:137
 msgid "Also import all widgets of the selected sidebars."
-msgstr "Importeer ook alle widgets van de geselecteerde sidebars."
+msgstr "Importer også alle widgets fra de valgte sidebarer."
 
 #: views/import.php:132
 msgid "Mark the sidebars that you want to import."
-msgstr "Markeer de sidebars die je wilt importeren."
+msgstr "Markér de sidebarer, som du vil importere."
 
 #: views/bulk-edit.php:23 views/import.php:130 views/widgets.php:47
 msgid "Custom Sidebars"
-msgstr "Aangepaste Sidebars"
+msgstr "Brugerdefinerede Sidebarer"
 
 #: views/import.php:105
 msgid "Theme"
-msgstr "Thema"
+msgstr "Tema"
 
 #: views/import.php:100
 msgid "Plugin version"
-msgstr "Plugin versie"
+msgstr "Plugin version"
 
 #: views/import.php:95
 msgid "WordPress version"
-msgstr "WordPress versie"
+msgstr "Hjemmeside version"
 
 #: views/import.php:84
 msgid "WordPress settings"
-msgstr "WordPress instellingen"
+msgstr "Hjemmeside indstillinger"
 
 #: views/import.php:78
 msgid "Exported on"
-msgstr "Geëxporteerd op"
+msgstr "Eksporteret d. "
 
 #: views/import.php:74
 msgid "Filename"
-msgstr "Bestandsnaam"
+msgstr "Filnavn"
 
 #: views/import.php:67 views/widgets-export.php:34
 msgid "Import"
-msgstr "Importeer"
+msgstr "Import"
 
 #: inc/class-custom-sidebars.php:148
 msgid ""
 "<strong>Accessibility mode is not supported by the\n"
 "\t\t\t\t\t\t%1$s plugin.</strong><br /><a href=\"%2$s\">Click here</a>\n"
 "\t\t\t\t\t\tto disable accessibility mode and use the %1$s plugin!"
-msgstr "<strong>Toegankelijkheidsmodus wordt niet ondersteund door de %1$s plugin.</strong><br /><a href=\"%2$s\">Klik hier</a> om toegankelijkheidsmodus te deactiveren en de %1$s plugin te gebruiken!"
+msgstr ""
+"<strong>Tilgængeligheds tilstanden understøttes ikke af den\n"
+"→ → → → → → %1$s plugin.</strong><br /><a href=\"%2$s\">Klik her</a>\n"
+"→ → → → → → for at deaktivere tilgængeligheden, og brug%1$s plugin!"
 
 #. Plugin Name of the plugin/theme
 msgid "Custom Sidebars Pro"
-msgstr "Custom Sidebars Pro"
+msgstr "Brugerdefinerede Sidebarer"
 
 #: inc/class-custom-sidebars-visibility.php:405
 msgid "Only these %s:"
-msgstr "Alleen deze %s:"
+msgstr "Kun disse %s:"
 
 #: inc/class-custom-sidebars-visibility.php:404
 msgid "Only for specific %s"
-msgstr "Alleen voor specifieke %s"
+msgstr "Kun for %s"
 
 #: inc/class-custom-sidebars-visibility.php:386
 msgid "On any page of these types"
-msgstr "Op elke pagina van deze typen"
+msgstr "På en side af disse typer"
 
 #: inc/class-custom-sidebars-visibility.php:367
 msgid "On these special pages"
-msgstr "Op deze speciale pagina's"
+msgstr "På disse specielle sider"
 
 #: inc/class-custom-sidebars-visibility.php:336
 #: inc/class-custom-sidebars-visibility.php:356
 msgid "(inactive)"
-msgstr "(inactief)"
+msgstr "(inaktiv) "
 
 #: inc/class-custom-sidebars-visibility.php:328
 msgid "User has Membership Level"
-msgstr "Gebruiker heeft Lidmaatschap Level"
+msgstr "Bruger har medlemskab niveau"
 
 #: inc/class-custom-sidebars-visibility.php:309
 msgid "User has role"
-msgstr "Gebruiker heeft rol"
+msgstr "Bruger har rolle"
 
 #: inc/class-custom-sidebars-visibility.php:294
 #: inc/class-custom-sidebars-visibility.php:299
@@ -594,23 +597,23 @@ msgstr "Gebruiker heeft rol"
 #: inc/class-custom-sidebars-visibility.php:385
 #: inc/class-custom-sidebars-visibility.php:469
 msgid "AND"
-msgstr "EN"
+msgstr "OG"
 
 #: inc/class-custom-sidebars-visibility.php:269
 msgid "Always"
-msgstr "Altijd"
+msgstr "Altid"
 
 #: inc/class-custom-sidebars-visibility.php:210
 msgid "<b>Hide</b> widget if:"
-msgstr "<b>Verberg</b> widget als:"
+msgstr "<b>Gem</b> widget, hvis:"
 
 #: inc/class-custom-sidebars-visibility.php:209
 msgid "<b>Show</b> widget if:"
-msgstr "<b>Toon</b> widget als:"
+msgstr "<b>Vis</b> widget, hvis:"
 
 #: inc/class-custom-sidebars-visibility.php:200
 msgid "Visibility"
-msgstr "Zichtbaarheid"
+msgstr "Synlighed"
 
 #: inc/class-custom-sidebars-export.php:747
 msgid "Imported %d widget!"
@@ -620,7 +623,7 @@ msgstr[1] ""
 
 #: inc/class-custom-sidebars-export.php:698
 msgid "Plugin options were imported!"
-msgstr "Plugin opties geïmporteerd!"
+msgstr "Plugin muligheder blev importeret!"
 
 #: inc/class-custom-sidebars-export.php:684
 msgid "Imported %d custom sidebar!"
@@ -630,91 +633,91 @@ msgstr[1] ""
 
 #: inc/class-custom-sidebars-export.php:390
 msgid "Unexpected import format"
-msgstr "Onverwachte importindeling "
+msgstr "Uventet import format"
 
 #: inc/class-custom-sidebars-export.php:367
 msgid "Something went wrong"
-msgstr "Er ging iets fout"
+msgstr "Noget gik galt"
 
 #: inc/class-custom-sidebars-export.php:361
 msgid "Import file is too big"
-msgstr "Importbestand is te groot"
+msgstr "Importeret fil er for stor"
 
 #: inc/class-custom-sidebars-export.php:354
 #: inc/class-custom-sidebars-export.php:396
 msgid "No file was uploaded"
-msgstr "Er was geen bestand geüpload "
+msgstr "Ingen filer blev uploadet"
 
 #: inc/class-custom-sidebars-export.php:62 views/widgets.php:46
 msgid "Import / Export Sidebars"
-msgstr "Importeer / Exporteer Sidebars"
+msgstr "Importer / Exporter Sidebarer"
 
 #: inc/class-custom-sidebars-editor.php:913 views/widgets.php:17
 msgid "Sidebars"
-msgstr "Sidebars"
+msgstr "Sidebarer"
 
 #: inc/class-custom-sidebars-editor.php:861
 msgid "Updated sidebar <strong>%1$s</strong> settings."
-msgstr "Sidebar instellingen bijgewerkt <strong>%1$s</strong>."
+msgstr "Opdateret sidebar <strong>%1$s</strong> indstillinger."
 
 #: inc/class-custom-sidebars-editor.php:583
 msgid "%1$s Archives"
-msgstr "%1$s Archieven"
+msgstr "%1$s Arkiver"
 
 #: inc/class-custom-sidebars-editor.php:579
 #: inc/class-custom-sidebars-visibility.php:157
 msgid "Post Index"
-msgstr "Bericht Index"
+msgstr "Indlæg indeks"
 
 #: inc/class-custom-sidebars-editor.php:502
 msgid "Date Archives"
-msgstr "Datum Archieven"
+msgstr "Dato arkiver"
 
 #: views/widgets-location.php:179
 msgid "Author Archives"
-msgstr "Auteur Archieven"
+msgstr "Forfatter Arkiver"
 
 #: inc/class-custom-sidebars-editor.php:499
 msgid "Search Results"
-msgstr "Zoekresultaten"
+msgstr "Søgeresultater"
 
 #: inc/class-custom-sidebars-editor.php:498
 #: inc/class-custom-sidebars-visibility.php:156
 msgid "Front Page"
-msgstr "Voorpagina"
+msgstr "Forside"
 
 #: inc/class-custom-sidebars-editor.php:425
 msgid "Deleted sidebar <strong>%1$s</strong>"
-msgstr "Sidebar Verwijderd <strong>%1$s</strong>"
+msgstr "Slettet sidebar <strong>%1$s</strong>"
 
 #: inc/class-custom-sidebars-editor.php:353
 #: inc/class-custom-sidebars-editor.php:436
 msgid "The sidebar was not found"
-msgstr "De sidebar was niet gevonden"
+msgstr "Sidebaren blev ikke fundet"
 
 #: inc/class-custom-sidebars-editor.php:342
 msgid "Updated sidebar <strong>%1$s</strong>"
-msgstr "Sidebar bijgewerkt <strong>%1$s</strong>"
+msgstr "Opdateret sidebar <strong>%1$s</strong>"
 
 #: inc/class-custom-sidebars-editor.php:334
 msgid "Created new sidebar <strong>%1$s</strong>"
-msgstr "Nieuwe sidebar aangemaakt <strong>%1$s</strong>"
+msgstr "Opret ny sidebar <strong>%1$s</strong>"
 
 #: inc/class-custom-sidebars-editor.php:297
 #: inc/class-custom-sidebars-editor.php:416
 msgid "The sidebar does not exist"
-msgstr "De sidebar bestaat niet"
+msgstr "Sidebaren eksisterer ikke. "
 
 #: inc/class-custom-sidebars-editor.php:273
 msgid "Sidebar-name cannot be empty"
-msgstr "Sidebar-naam kan niet leeg zijn"
+msgstr "Sidebar-navn kan ikke være tomt"
 
 #: inc/class-custom-sidebars-editor.php:158
 #: inc/class-custom-sidebars-editor.php:173
 #: inc/class-custom-sidebars-export.php:98
 msgid "You do not have permission for this"
-msgstr "Je hebt hier geen toestemming voor"
+msgstr "Du har ikke tilladelse til dette"
 
 #: inc/class-custom-sidebars-cloning.php:206
 msgid "Clone"
-msgstr "Kloon"
+msgstr "Klon"
