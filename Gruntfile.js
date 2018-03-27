@@ -399,6 +399,22 @@ module.exports = function( grunt ) {
 			}
 		},
 
+        potomo: {
+            dist: {
+                options: {
+                    poDel: false
+                },
+                files: [{
+                    expand: true,
+                    cwd: conf.translation.pot_dir,
+                    src: ['*.po'],
+                    dest: conf.translation.pot_dir,
+                    ext: '.mo',
+                    nonull: true
+                }]
+            }
+        },
+
 		// BUILD: Replace conditional tags in code.
 		replace: {
 			pro: {
@@ -517,7 +533,7 @@ module.exports = function( grunt ) {
 
 	// Default task.
 
-	grunt.registerTask( 'default', ['clean:temp', 'jshint', 'concat', 'uglify', 'sass', 'autoprefixer', 'cssmin'] );
+	grunt.registerTask( 'default', ['clean:temp', 'jshint', 'concat', 'uglify', 'sass', 'autoprefixer', 'cssmin', 'makepot', 'potomo' ] );
 	//grunt.registerTask( 'test', ['phpunit', 'jshint'] );
 
 	grunt.task.run( 'clear' );

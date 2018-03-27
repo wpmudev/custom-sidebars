@@ -4,7 +4,7 @@ msgid ""
 msgstr ""
 "Project-Id-Version: Custom Sidebars Pro PLUGIN_VERSION\n"
 "Report-Msgid-Bugs-To: https://wordpress.org/support/plugin/customsidebars\n"
-"POT-Creation-Date: 2018-02-16 07:39:23+00:00\n"
+"POT-Creation-Date: 2018-03-27 11:52:55+00:00\n"
 "MIME-Version: 1.0\n"
 "Content-Type: text/plain; charset=utf-8\n"
 "Content-Transfer-Encoding: 8bit\n"
@@ -60,95 +60,105 @@ msgstr ""
 msgid "Clone"
 msgstr ""
 
-#: inc/class-custom-sidebars-editor.php:158
-#: inc/class-custom-sidebars-editor.php:173
+#: inc/class-custom-sidebars-editor.php:164
+#: inc/class-custom-sidebars-editor.php:179
 #: inc/class-custom-sidebars-export.php:98
 msgid "You do not have permission for this"
 msgstr ""
 
-#: inc/class-custom-sidebars-editor.php:250
-#: inc/class-custom-sidebars-editor.php:399
-#: inc/class-custom-sidebars-editor.php:682
+#: inc/class-custom-sidebars-editor.php:256
+#: inc/class-custom-sidebars-editor.php:413
+#: inc/class-custom-sidebars-editor.php:730
 msgid "You have no permission to do this operation."
 msgstr ""
 
-#: inc/class-custom-sidebars-editor.php:271
+#: inc/class-custom-sidebars-editor.php:279
 msgid "Sidebar-name cannot be empty"
 msgstr ""
 
-#: inc/class-custom-sidebars-editor.php:295
-#: inc/class-custom-sidebars-editor.php:408
+#: inc/class-custom-sidebars-editor.php:303
+#: inc/class-custom-sidebars-editor.php:422
 msgid "The sidebar does not exist"
 msgstr ""
 
-#: inc/class-custom-sidebars-editor.php:326
+#: inc/class-custom-sidebars-editor.php:340
 msgid "Created new sidebar <strong>%1$s</strong>"
 msgstr ""
 
-#: inc/class-custom-sidebars-editor.php:334
+#: inc/class-custom-sidebars-editor.php:348
 msgid "Updated sidebar <strong>%1$s</strong>"
 msgstr ""
 
-#: inc/class-custom-sidebars-editor.php:345
-#: inc/class-custom-sidebars-editor.php:428
+#: inc/class-custom-sidebars-editor.php:359
+#: inc/class-custom-sidebars-editor.php:442
 msgid "The sidebar was not found"
 msgstr ""
 
-#: inc/class-custom-sidebars-editor.php:417
+#: inc/class-custom-sidebars-editor.php:431
 msgid "Deleted sidebar <strong>%1$s</strong>"
 msgstr ""
 
-#: inc/class-custom-sidebars-editor.php:490
+#: inc/class-custom-sidebars-editor.php:503
 #: inc/class-custom-sidebars-visibility.php:156
 msgid "Front Page"
 msgstr ""
 
-#: inc/class-custom-sidebars-editor.php:491
+#: inc/class-custom-sidebars-editor.php:504
 msgid "Search Results"
 msgstr ""
 
-#: inc/class-custom-sidebars-editor.php:492
+#: inc/class-custom-sidebars-editor.php:505
 #: inc/class-custom-sidebars-visibility.php:162
 msgid "Not found (404)"
 msgstr ""
 
-#: inc/class-custom-sidebars-editor.php:493
+#: inc/class-custom-sidebars-editor.php:506
 msgid "Any Author Archive"
 msgstr ""
 
-#: inc/class-custom-sidebars-editor.php:494
+#: inc/class-custom-sidebars-editor.php:507
 msgid "Date Archives"
 msgstr ""
 
-#: inc/class-custom-sidebars-editor.php:512
-#: inc/class-custom-sidebars-editor.php:515
-#: inc/class-custom-sidebars-editor.php:522
-#: inc/class-custom-sidebars-editor.php:524
-#: inc/class-custom-sidebars-editor.php:608
-#: inc/class-custom-sidebars-editor.php:610
-#: inc/class-custom-sidebars-editor.php:629
+#: inc/class-custom-sidebars-editor.php:525
+#: inc/class-custom-sidebars-editor.php:528
+#: inc/class-custom-sidebars-editor.php:535
+#: inc/class-custom-sidebars-editor.php:537
+#: inc/class-custom-sidebars-editor.php:621
+#: inc/class-custom-sidebars-editor.php:623
+#: inc/class-custom-sidebars-editor.php:678
 msgid "%s Archives"
 msgstr ""
 
-#: inc/class-custom-sidebars-editor.php:571
+#: inc/class-custom-sidebars-editor.php:584
 #: inc/class-custom-sidebars-visibility.php:157
 msgid "Post Index"
 msgstr ""
 
-#: inc/class-custom-sidebars-editor.php:575
+#: inc/class-custom-sidebars-editor.php:588
 msgid "%1$s Archives"
 msgstr ""
 
-#: inc/class-custom-sidebars-editor.php:853
+#: inc/class-custom-sidebars-editor.php:923
 msgid "Updated sidebar <strong>%1$s</strong> settings."
 msgstr ""
 
-#: inc/class-custom-sidebars-editor.php:905 views/widgets.php:17
+#: inc/class-custom-sidebars-editor.php:975 views/widgets.php:17
 msgid "Sidebars"
 msgstr ""
 
-#: inc/class-custom-sidebars-editor.php:1378
+#: inc/class-custom-sidebars-editor.php:1445
 msgid "Custom sidebars configuration is allowed for:"
+msgstr ""
+
+#: inc/class-custom-sidebars-editor.php:1471
+msgid "Allow Custom Taxonomies in Sidebar Location:"
+msgstr ""
+
+#: inc/class-custom-sidebars-editor.php:1482
+msgid ""
+"After turn on any Custom Taxonomy you need to reload this screen to be able "
+"choose it in Sidebar Location."
 msgstr ""
 
 #: inc/class-custom-sidebars-explain.php:225
@@ -341,22 +351,22 @@ msgstr ""
 msgid "Only these %s:"
 msgstr ""
 
-#: inc/class-custom-sidebars.php:131
+#: inc/class-custom-sidebars.php:148
 msgid ""
 "<strong>Accessibility mode is not supported by the\n"
 "\t\t\t\t\t\t%1$s plugin.</strong><br /><a href=\"%2$s\">Click here</a>\n"
 "\t\t\t\t\t\tto disable accessibility mode and use the %1$s plugin!"
 msgstr ""
 
-#: inc/class-custom-sidebars.php:946 views/import.php:147
+#: inc/class-custom-sidebars.php:961 views/import.php:147
 msgid "Widgets"
 msgstr ""
 
-#: inc/class-custom-sidebars.php:956
+#: inc/class-custom-sidebars.php:971
 msgid "Support"
 msgstr ""
 
-#: inc/class-custom-sidebars.php:974
+#: inc/class-custom-sidebars.php:989
 msgid "Create a custom sidebar to get started."
 msgstr ""
 
@@ -512,7 +522,7 @@ msgid ""
 msgstr ""
 
 #: views/widgets-delete.php:16 views/widgets-editor.php:63
-#: views/widgets-location.php:242
+#: views/widgets-location.php:251
 msgid "Cancel"
 msgstr ""
 
@@ -584,66 +594,66 @@ msgstr ""
 msgid "Click here to pick available %1$s"
 msgstr ""
 
-#: views/widgets-location.php:89
+#: views/widgets-location.php:87
 msgid "There are no replaceable sidebars. Please allow at least one as replaceable."
 msgstr ""
 
-#: views/widgets-location.php:99 views/widgets-location.php:140
-#: views/widgets-location.php:198
+#: views/widgets-location.php:97 views/widgets-location.php:149
+#: views/widgets-location.php:207
 msgid "Click to toggle"
 msgstr ""
 
-#: views/widgets-location.php:100
+#: views/widgets-location.php:98
 msgid "For all Single Entries matching selected criteria"
 msgstr ""
 
-#: views/widgets-location.php:103
+#: views/widgets-location.php:101
 msgid ""
 "These replacements will be applied to every single post that matches a "
 "certain post type or category."
 msgstr ""
 
-#: views/widgets-location.php:111
+#: views/widgets-location.php:109
 msgid "categories"
 msgstr ""
 
-#: views/widgets-location.php:123
+#: views/widgets-location.php:121
 msgid "Post Types"
 msgstr ""
 
-#: views/widgets-location.php:141
+#: views/widgets-location.php:150
 msgid "For Archives"
 msgstr ""
 
-#: views/widgets-location.php:144
+#: views/widgets-location.php:153
 msgid "These replacements will be applied to Archive Type posts and pages."
 msgstr ""
 
-#: views/widgets-location.php:146 views/widgets-location.php:157
+#: views/widgets-location.php:155 views/widgets-location.php:166
 msgid "Archive Types"
 msgstr ""
 
-#: views/widgets-location.php:147 views/widgets-location.php:168
+#: views/widgets-location.php:156 views/widgets-location.php:177
 msgid "Category Archives"
 msgstr ""
 
-#: views/widgets-location.php:148
+#: views/widgets-location.php:157
 msgid "Authors"
 msgstr ""
 
-#: views/widgets-location.php:179
+#: views/widgets-location.php:188
 msgid "Author Archives"
 msgstr ""
 
-#: views/widgets-location.php:199
+#: views/widgets-location.php:208
 msgid "3rd party plugins"
 msgstr ""
 
-#: views/widgets-location.php:202
+#: views/widgets-location.php:211
 msgid "These replacements will be applied to 3rd party plugins."
 msgstr ""
 
-#: views/widgets-location.php:243 views/widgets.php:42
+#: views/widgets-location.php:252 views/widgets.php:42
 msgid "Save Changes"
 msgstr ""
 
@@ -739,7 +749,7 @@ msgstr ""
 msgid "http://premium.wpmudev.org/"
 msgstr ""
 
-#: inc/class-custom-sidebars-editor.php:1178
+#: inc/class-custom-sidebars-editor.php:1245
 msgctxt "Column name on entries list."
 msgid "Custom Sidebars"
 msgstr ""

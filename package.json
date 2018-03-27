@@ -33,7 +33,8 @@
     "grunt-replace": "^0.11.0",
     "grunt-phplint": "^0.0.8",
     "grunt-phpcs": "^0.4.0",
-    "grunt-jsvalidate": "^0.2.2"
+    "grunt-jsvalidate": "^0.2.2",
+    "grunt-potomo": "^3"
   },
   "keywords": [],
   "repository": {
