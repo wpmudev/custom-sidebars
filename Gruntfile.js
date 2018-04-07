@@ -67,7 +67,7 @@ module.exports = function( grunt ) {
 				'./inc/external/wpmudev-dashboard',
 				'./assets/sass',
 				'./languages/*.po',
-				'./languages/*.mo',
+				'./languages/*.mo'
 			],
 			include_files: [
 				'**',
@@ -98,7 +98,7 @@ module.exports = function( grunt ) {
 				'!.git',
 				'!.log',
 			],
-			base: 'master',
+			base: 'development',
 			pro: 'customsidebars-pro',
 			free: 'customsidebars-free',
 		},

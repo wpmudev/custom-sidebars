@@ -2,7 +2,7 @@
 Contributors: WPMUDEV, marquex, WPMUDEV-Support2, WPMUDEV-Support1, WPMUDEV-Support6, WPMUDEV-Support4, iworks
 Tags: sidebar, widget, footer, custom, flexible layout, dynamic widgets, manage sidebars, replace widgets, custom widget area
 Requires at least: 3.6
-Tested up to: 4.9.4
+Tested up to: 4.9.5
 Stable tag: 3.1.3
 
 Flexible sidebars for custom widget configurations on every page, post and custom post type on your site.
@@ -119,6 +119,11 @@ Custom Sidebars has the same license as WordPress, so you can use it wherever yo
 If you are running a earlier version of WordPress download Custom Sidebars 0.8.2.
 
 == Changelog ==
+
+= 3.1.4 =
+* Fixed a problem with widgets display on IE11.
+* Handle custom taxonomies.
+* Updated "WPMU Dev code library" to version 3.0.6.
 
 = 3.1.3 =
 * Added version to scripts, to avoid browser cache problem.
