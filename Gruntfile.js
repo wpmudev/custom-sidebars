@@ -62,6 +62,8 @@ module.exports = function( grunt ) {
 				'./package.json',
 				'./inc/external/wpmudev-dashboard',
 				'./assets/sass',
+				'./lang/*po',
+				'./lang/*mo'
 			],
 			include_files: [
 				'**',
