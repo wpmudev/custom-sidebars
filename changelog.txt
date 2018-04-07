@@ -11,6 +11,7 @@ Change Log:
 - Fixed problems with widgets alignment on mobiles.
 - Improved custom sidebar edit modal, now it remembers "Advanced Edit" status.
 - Load JavaScript templates only on the widgets page.
+- Updated "WPMU Dev code library" to version 3.0.6.
 
 3.1.2 ( 2018-02-09 )
 ----------------------------------------------------------------------
