@@ -5,7 +5,7 @@ Buildtime: BUILDTIME
 Change Log:
 ----------------------------------------------------------------------
 
-3.1.4 ( 2018-xx-xx )
+3.1.4 ( 2018-05-02 )
 ----------------------------------------------------------------------
 - Fixed a problem with widgets display on IE11.
 - Handle custom taxonomies.

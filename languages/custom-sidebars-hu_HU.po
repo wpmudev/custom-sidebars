@@ -2,591 +2,291 @@
 # This file is distributed under the same license as the Custom Sidebars Pro package.
 msgid ""
 msgstr ""
+"Project-Id-Version: Custom Sidebars Pro\n"
+"Report-Msgid-Bugs-To: https://wordpress.org/support/plugin/customsidebars\n"
+"POT-Creation-Date: 2018-05-02 05:27:35+00:00\n"
 "PO-Revision-Date: 2014-10-20 22:02:58+0000\n"
+"Language: hu\n"
 "MIME-Version: 1.0\n"
 "Content-Type: text/plain; charset=UTF-8\n"
 "Content-Transfer-Encoding: 8bit\n"
 "Plural-Forms: nplurals=2; plural=n != 1;\n"
 "X-Generator: GlotPress/2.3.1\n"
-"Language: hu\n"
-"Project-Id-Version: Custom Sidebars Pro\n"
 
-#: inc/class-custom-sidebars-editor.php:1186
-msgctxt "Column name on entries list."
-msgid "Custom Sidebars"
-msgstr ""
-
-#: views/widgets-location.php:202
-msgid "These replacements will be applied to 3rd party plugins."
-msgstr ""
-
-#: views/widgets-location.php:199
-msgid "3rd party plugins"
-msgstr ""
-
-#: views/widgets-location.php:89
-msgid "There are no replaceable sidebars. Please allow at least one as replaceable."
-msgstr ""
-
-#: views/widgets-export.php:38
-msgid "Select a file to import"
-msgstr ""
-
-#: views/import.php:102
-msgid "Unknown"
-msgstr ""
-
-#: views/bulk-edit.php:35
-msgid "&mdash; No Change &mdash;"
-msgstr ""
-
-#: inc/integrations/class-custom-sidebars-integration-wpml.php:49
-msgid "WPML"
-msgstr ""
-
-#: inc/integrations/class-custom-sidebars-integration-polylang.php:67
-#: inc/integrations/class-custom-sidebars-integration-wpml.php:50
-msgid "Language"
-msgstr ""
-
-#: inc/integrations/class-custom-sidebars-integration-polylang.php:66
-msgid "Polylang"
-msgstr ""
-
-#: inc/class-custom-sidebars.php:991
-msgid "Create a custom sidebar to get started."
-msgstr ""
-
-#: inc/class-custom-sidebars-visibility.php:166
-msgid "Archive: Year"
-msgstr ""
-
-#: inc/class-custom-sidebars-visibility.php:165
-msgid "Archive: Month"
-msgstr ""
-
-#: inc/class-custom-sidebars-visibility.php:164
-msgid "Archive: Day"
-msgstr ""
-
-#: inc/class-custom-sidebars-visibility.php:161
-msgid "Search results"
-msgstr ""
-
-#: inc/class-custom-sidebars-visibility.php:160
-msgid "Archives"
-msgstr ""
-
-#: inc/class-custom-sidebars-visibility.php:158
-msgid "Single page"
-msgstr ""
-
-#: inc/class-custom-sidebars-export.php:425
-msgid "You do not have permission for import sidebars."
-msgstr ""
-
-#: inc/class-custom-sidebars-export.php:287
-#: inc/class-custom-sidebars-export.php:340
-msgid "You do not have permission for export sidebars."
-msgstr ""
-
-#: inc/class-custom-sidebars-explain.php:236
-msgid "Turn off Custom Sidebars explain mode."
-msgstr ""
-
-#: inc/class-custom-sidebars-explain.php:229
-msgid "Turn on Custom Sidebars explain mode."
-msgstr ""
-
-#: inc/class-custom-sidebars-explain.php:225
-msgid "Sidebar Debug"
-msgstr ""
-
-#: inc/class-custom-sidebars-editor.php:1386
-msgid "Custom sidebars configuration is allowed for:"
-msgstr ""
-
-#: inc/class-custom-sidebars-editor.php:520
-#: inc/class-custom-sidebars-editor.php:523
-#: inc/class-custom-sidebars-editor.php:530
-#: inc/class-custom-sidebars-editor.php:532
-#: inc/class-custom-sidebars-editor.php:616
-#: inc/class-custom-sidebars-editor.php:618
-#: inc/class-custom-sidebars-editor.php:637
-msgid "%s Archives"
-msgstr ""
-
-#: inc/class-custom-sidebars-editor.php:250
-#: inc/class-custom-sidebars-editor.php:407
-#: inc/class-custom-sidebars-editor.php:690
-msgid "You have no permission to do this operation."
-msgstr ""
-
-#: inc/class-custom-sidebars-checkup-notification.php:191
-msgid "Go"
-msgstr ""
-
-#: inc/class-custom-sidebars-checkup-notification.php:188
-msgid "Free performance, security and SEO report"
-msgstr ""
-
-#: inc/class-custom-sidebars-checkup-notification.php:187
-msgid "Run site health check"
-msgstr ""
-
-#. Author URI of the plugin/theme
-msgid "http://premium.wpmudev.org/"
-msgstr ""
-
-#. Author of the plugin/theme
-msgid "WPMU DEV"
-msgstr ""
-
-#. Description of the plugin/theme
-msgid "Allows you to create widgetized areas and custom sidebars. Replace whole sidebars or single widgets for specific posts and pages."
-msgstr ""
-
-#. Plugin URI of the plugin/theme
-msgid "http://premium.wpmudev.org/project/custom-sidebars/"
-msgstr ""
-
-#: views/widgets.php:52
-msgid "Filter..."
-msgstr ""
-
-#: views/widgets-location.php:148
-msgid "Authors"
-msgstr ""
-
-#: views/col-sidebars.php:20
-msgid "(Not available for Blog-Page)"
-msgstr ""
-
-#: views/col-sidebars.php:18
-msgid "(Not available for Home-Page)"
-msgstr ""
-
-#: inc/class-custom-sidebars.php:973
-msgid "Support"
-msgstr ""
-
-#: inc/class-custom-sidebars-visibility.php:348
-msgid "User has Membership"
-msgstr ""
-
-#: inc/class-custom-sidebars-visibility.php:300
-msgid "User is logged-in (Member)"
-msgstr ""
-
-#: inc/class-custom-sidebars-visibility.php:295
-msgid "User is not logged-in (Guest)"
-msgstr ""
-
-#: inc/class-custom-sidebars-visibility.php:252
-msgid "Taxonomy"
-msgstr ""
-
-#: inc/class-custom-sidebars-visibility.php:250
-msgid "For posttype"
-msgstr ""
-
-#: inc/class-custom-sidebars-visibility.php:239
-msgid "Membership2"
-msgstr ""
-
-#: inc/class-custom-sidebars-visibility.php:233
-msgid "Membership"
-msgstr ""
-
-#: inc/class-custom-sidebars-visibility.php:228
-msgid "Roles"
-msgstr ""
-
-#: inc/class-custom-sidebars-visibility.php:223
-msgid "Guests"
-msgstr ""
-
-#: inc/class-custom-sidebars-visibility.php:218
-msgid "Date"
-msgstr ""
-
-#: inc/class-custom-sidebars-visibility.php:214
-msgid "Filters"
-msgstr ""
-
-#: inc/class-custom-sidebars-editor.php:501
-msgid "Any Author Archive"
-msgstr ""
-
-#: inc/class-custom-sidebars-editor.php:500
-#: inc/class-custom-sidebars-visibility.php:162
-msgid "Not found (404)"
+#: inc/class-custom-sidebars-checkup-notification.php:114
+msgid ""
+"<b>Warning:</b> Some of your plugins may be slowing down your site. Run a "
+"free security and performance scan with WP Checkup."
 msgstr ""
 
 #: inc/class-custom-sidebars-checkup-notification.php:118
 msgid "Scan"
 msgstr ""
 
-#: inc/class-custom-sidebars-checkup-notification.php:114
-msgid "<b>Warning:</b> Some of your plugins may be slowing down your site. Run a free security and performance scan with WP Checkup."
+#: inc/class-custom-sidebars-checkup-notification.php:187
+msgid "Run site health check"
+msgstr ""
+
+#: inc/class-custom-sidebars-checkup-notification.php:188
+msgid "Free performance, security and SEO report"
+msgstr ""
+
+#: inc/class-custom-sidebars-checkup-notification.php:191
+msgid "Go"
+msgstr ""
+
+#: inc/class-custom-sidebars-checkup-notification.php:213
+msgid ""
+"Don’t just replace sidebars. Add new sidebars and footers anywhere with "
+"Upfront."
 msgstr ""
 
 #: inc/class-custom-sidebars-checkup-notification.php:214
 msgid "get Upfront free"
 msgstr ""
 
-#: inc/class-custom-sidebars-checkup-notification.php:213
-msgid "Don’t just replace sidebars. Add new sidebars and footers anywhere with Upfront."
+#: inc/class-custom-sidebars-cloning.php:206
+msgid "Clone"
+msgstr "Klónoz"
+
+#: inc/class-custom-sidebars-editor.php:164
+#: inc/class-custom-sidebars-editor.php:179
+#: inc/class-custom-sidebars-export.php:98
+msgid "You do not have permission for this"
+msgstr "Nincs megfelelő jogosultsága."
+
+#: inc/class-custom-sidebars-editor.php:256
+#: inc/class-custom-sidebars-editor.php:413
+#: inc/class-custom-sidebars-editor.php:730
+msgid "You have no permission to do this operation."
 msgstr ""
 
-#: views/widgets.php:115
-msgid "Allow this sidebar to be replaced"
-msgstr "Ez az oldalsáv lecserélhető"
+#: inc/class-custom-sidebars-editor.php:279
+msgid "Sidebar-name cannot be empty"
+msgstr "Az oldalsáv neve nem lehet üres."
 
-#: views/widgets.php:106
-msgid "This sidebar will always be same on all pages"
-msgstr "Ez az oldalsáv minden oldalon ugyanúgy fog kinézni."
+#: inc/class-custom-sidebars-editor.php:303
+#: inc/class-custom-sidebars-editor.php:422
+msgid "The sidebar does not exist"
+msgstr "Az oldalsáv nem létezik."
 
-#: views/widgets.php:89 views/widgets.php:126
-msgid "Sidebar Location"
-msgstr "Oldalsáv helye"
+#: inc/class-custom-sidebars-editor.php:340
+msgid "Created new sidebar <strong>%1$s</strong>"
+msgstr "Új oldalsáv létrehozva: <strong>%1$s</strong>"
 
-#: views/widgets.php:87 views/widgets.php:124
-msgid "Where do you want to show the sidebar?"
-msgstr "Hol jelenjen meg az oldalsáv?"
+#: inc/class-custom-sidebars-editor.php:348
+msgid "Updated sidebar <strong>%1$s</strong>"
+msgstr "Oldalsáv frissítve: <strong>%1$s</strong>"
 
-#: views/widgets.php:80
-msgid "Edit"
-msgstr "Szerkeszt"
+#: inc/class-custom-sidebars-editor.php:359
+#: inc/class-custom-sidebars-editor.php:442
+msgid "The sidebar was not found"
+msgstr "Az oldalsáv nem található."
 
-#: views/widgets.php:78
-msgid "Edit this sidebar."
-msgstr "Oldalsáv szerkesztése..."
+#: inc/class-custom-sidebars-editor.php:431
+msgid "Deleted sidebar <strong>%1$s</strong>"
+msgstr "Oldalsáv törölve: <strong>%1$s</strong>"
 
-#: views/widgets.php:69
-msgid "Delete this sidebar."
-msgstr "Oldalsáv törlése..."
+#: inc/class-custom-sidebars-editor.php:503
+#: inc/class-custom-sidebars-visibility.php:156
+msgid "Front Page"
+msgstr "Nyitó oldal"
 
-#: views/widgets.php:51
-msgid "Activate this option to replace the sidebar with one of your custom sidebars."
-msgstr "Engedélyezze ezt az opciót az oldalsáv másik, egyed oldalsávval történő lecseréléséhez."
+#: inc/class-custom-sidebars-editor.php:504
+msgid "Search Results"
+msgstr "Keresés eredményei"
 
-#: views/widgets.php:50 views/widgets.php:105
-msgid "This sidebar can be replaced on certain pages"
-msgstr "Ezt az oldalsávot bizonyos oldalakon le lehet cserélni."
+#: inc/class-custom-sidebars-editor.php:505
+#: inc/class-custom-sidebars-visibility.php:162
+msgid "Not found (404)"
+msgstr ""
 
-#: views/widgets.php:49
-msgid "Couldn't load data from WordPress..."
-msgstr "Nem sikerült az adatok betöltése a WordPressből..."
+#: inc/class-custom-sidebars-editor.php:506
+msgid "Any Author Archive"
+msgstr ""
 
-#: views/widgets.php:48
-msgid "Theme Sidebars"
-msgstr "A sablon oldalsávjai"
+#: inc/class-custom-sidebars-editor.php:507
+msgid "Date Archives"
+msgstr "Dátum archívumok"
 
-#: views/widgets.php:45
-msgid "Define where you want this sidebar to appear."
-msgstr "Adja meg, hol jelenjen meg ez az oldalsáv!"
+#: inc/class-custom-sidebars-editor.php:525
+#: inc/class-custom-sidebars-editor.php:528
+#: inc/class-custom-sidebars-editor.php:535
+#: inc/class-custom-sidebars-editor.php:537
+#: inc/class-custom-sidebars-editor.php:621
+#: inc/class-custom-sidebars-editor.php:623
+#: inc/class-custom-sidebars-editor.php:678
+msgid "%s Archives"
+msgstr ""
 
-#: views/widgets.php:44
-msgid "Delete Sidebar"
-msgstr "Oldalsáv törlése"
+#: inc/class-custom-sidebars-editor.php:584
+#: inc/class-custom-sidebars-visibility.php:157
+msgid "Post Index"
+msgstr "Bejegyzés index"
 
-#: views/widgets.php:41
-msgid "New Custom Sidebar"
-msgstr "Új egyedi oldalsáv"
+#: inc/class-custom-sidebars-editor.php:588
+msgid "%1$s Archives"
+msgstr "%1$s archívum"
 
-#: views/widgets.php:40
-msgid "Edit [Sidebar]"
-msgstr "Szerkesztés: [Sidebar]"
+#: inc/class-custom-sidebars-editor.php:923
+msgid "Updated sidebar <strong>%1$s</strong> settings."
+msgstr "<strong>%1$s</strong> oldalsáv beállításai frissítve."
 
-#: views/widgets.php:21
-msgid "Create a new sidebar"
-msgstr "Új oldalsáv létrehozása"
+#: inc/class-custom-sidebars-editor.php:975 views/widgets.php:17
+msgid "Sidebars"
+msgstr "Oldalsávok"
 
-#: views/widgets-location.php:243 views/widgets.php:42
-msgid "Save Changes"
-msgstr "Mentés"
+#: inc/class-custom-sidebars-editor.php:1445
+msgid "Custom sidebars configuration is allowed for:"
+msgstr ""
 
-#: views/widgets-location.php:147 views/widgets-location.php:168
-msgid "Category Archives"
-msgstr "Kategória archívumok"
+#: inc/class-custom-sidebars-editor.php:1471
+msgid "Allow Custom Taxonomies in Sidebar Location:"
+msgstr ""
 
-#: views/widgets-location.php:146 views/widgets-location.php:157
-msgid "Archive Types"
-msgstr "Archívum típusok"
+#: inc/class-custom-sidebars-editor.php:1482
+msgid ""
+"After turn on any Custom Taxonomy you need to reload this screen to be able "
+"choose it in Sidebar Location."
+msgstr ""
 
-#: views/widgets-location.php:144
-msgid "These replacements will be applied to Archive Type posts and pages."
-msgstr "Ezek a helyettesítések az archívumokra fognak vonatkozni."
+#: inc/class-custom-sidebars-explain.php:225
+msgid "Sidebar Debug"
+msgstr ""
 
-#: views/widgets-location.php:141
-msgid "For Archives"
-msgstr "Archívumokhoz"
+#: inc/class-custom-sidebars-explain.php:229
+msgid "Turn on Custom Sidebars explain mode."
+msgstr ""
 
-#: views/widgets-location.php:123
-msgid "Post Types"
-msgstr "Bejegyzés típusok"
+#: inc/class-custom-sidebars-explain.php:236
+msgid "Turn off Custom Sidebars explain mode."
+msgstr ""
 
-#: views/widgets-location.php:111
-msgid "categories"
-msgstr "kategóriák"
+#: inc/class-custom-sidebars-export.php:62 views/widgets.php:46
+msgid "Import / Export Sidebars"
+msgstr "Oldalsávok importálása/exportálása"
 
-#: views/widgets-location.php:103
-msgid "These replacements will be applied to every single post that matches a certain post type or category."
-msgstr "Ezek a cserék minden bejegyzésnél végre lesznek hajtva, amik adott típusúak vagy adott kategória elemei."
+#: inc/class-custom-sidebars-export.php:287
+#: inc/class-custom-sidebars-export.php:340
+msgid "You do not have permission for export sidebars."
+msgstr ""
 
-#: views/widgets-location.php:100
-msgid "For all Single Entries matching selected criteria"
-msgstr "Minden elemhez, ami megfelel a megadott feltételeknek"
+#: inc/class-custom-sidebars-export.php:354
+#: inc/class-custom-sidebars-export.php:396
+msgid "No file was uploaded"
+msgstr "Nem lett fájl feltöltve"
 
-#: views/widgets-location.php:99 views/widgets-location.php:140
-#: views/widgets-location.php:198
-msgid "Click to toggle"
-msgstr "Kattintson a váltáshoz"
+#: inc/class-custom-sidebars-export.php:361
+msgid "Import file is too big"
+msgstr "Az import fájl túl nagy"
 
-#: views/widgets-location.php:51
-msgid "Click here to pick available %1$s"
-msgstr "Kattintson ide az elérhető %1$s kiválasztásához"
+#: inc/class-custom-sidebars-export.php:367
+msgid "Something went wrong"
+msgstr "Valami balul sült el"
 
-#: views/widgets-location.php:38
-msgid "As <strong>%1$s</strong> for selected %2$s"
-msgstr "<strong>%1$s</strong> oldalsáv ehhez: %2$s"
+#: inc/class-custom-sidebars-export.php:390
+msgid "Unexpected import format"
+msgstr "Váratlan import formátum"
 
-#: views/widgets-location.php:30
-msgid "Replaced by another sidebar:"
-msgstr "Lecserélte egy másik oldalsáv:"
+#: inc/class-custom-sidebars-export.php:425
+msgid "You do not have permission for import sidebars."
+msgstr ""
+
+#: inc/class-custom-sidebars-export.php:684
+msgid "Imported %d custom sidebar!"
+msgid_plural "Imported %d custom sidebars!"
+msgstr[0] ""
+msgstr[1] ""
+
+#: inc/class-custom-sidebars-export.php:698
+msgid "Plugin options were imported!"
+msgstr "Bővítmény beállítások importálva."
+
+#: inc/class-custom-sidebars-export.php:747
+msgid "Imported %d widget!"
+msgid_plural "Imported %d widgets!"
+msgstr[0] ""
+msgstr[1] ""
+
+#: inc/class-custom-sidebars-visibility.php:158
+msgid "Single page"
+msgstr ""
+
+#: inc/class-custom-sidebars-visibility.php:160
+msgid "Archives"
+msgstr ""
+
+#: inc/class-custom-sidebars-visibility.php:161
+msgid "Search results"
+msgstr ""
 
 #: inc/class-custom-sidebars-visibility.php:163 views/widgets-export.php:43
 msgid "Preview"
 msgstr "Előnézet"
 
-#: views/widgets-export.php:23
-msgid "Optional description for the export file:"
-msgstr "Az export fájl opcionális leírása:"
-
-#: views/widgets-export.php:10 views/widgets-export.php:28
-msgid "Export"
-msgstr "Exportálás"
-
-#: views/widgets-editor.php:64 views/widgets.php:43
-msgid "Create Sidebar"
-msgstr "Oldalsáv létrehozása"
-
-#: views/widgets-editor.php:60
-msgid "Advanced - Edit custom wrapper code"
-msgstr "Haladó - egyedi befoglaló kód megadása"
-
-#: views/widgets-editor.php:53
-msgid "After Widget"
-msgstr "Widget után"
-
-#: views/widgets-editor.php:49
-msgid "Before Widget"
-msgstr "Widget előtt"
-
-#: views/widgets-editor.php:43
-msgid "After Title"
-msgstr "Cím után"
-
-#: views/widgets-editor.php:39
-msgid "Before Title"
-msgstr "Cím előtt"
-
-#: views/widgets-editor.php:27
-msgid "Caution:"
-msgstr "Vigyázat:"
-
-#: views/widgets-editor.php:21
-msgid "Sidebar description here..."
-msgstr "Ide kell írni az oldalsáv leírását..."
-
-#: views/widgets-editor.php:17
-msgid "The name should be unique."
+#: inc/class-custom-sidebars-visibility.php:164
+msgid "Archive: Day"
 msgstr ""
 
-#: views/widgets-editor.php:16
-msgid "Sidebar name here..."
-msgstr "Ide kell írni az oldalsáv nevét..."
+#: inc/class-custom-sidebars-visibility.php:165
+msgid "Archive: Month"
+msgstr ""
 
-#: views/widgets-delete.php:17
-msgid "Yes, delete it"
-msgstr "Igen, törlés!"
+#: inc/class-custom-sidebars-visibility.php:166
+msgid "Archive: Year"
+msgstr ""
 
-#: views/widgets-delete.php:16 views/widgets-editor.php:63
-#: views/widgets-location.php:242
-msgid "Cancel"
-msgstr "Mégse"
+#: inc/class-custom-sidebars-visibility.php:200
+msgid "Visibility"
+msgstr "Láthatóság"
 
-#: views/widgets-delete.php:11
-msgid "Please confirm that you want to delete the sidebar <strong class=\"name\"></strong>."
-msgstr "Kérem, erősítse meg, hogy ezt az oldalsávot törölni szeretné: <strong class=\"name\"></strong>."
+#: inc/class-custom-sidebars-visibility.php:209
+msgid "<b>Show</b> widget if:"
+msgstr "Widget <b>mutatása</b> ha:"
 
-#: views/import.php:383
-msgid "Replace the current plugin configuration with the imported configuration."
-msgstr "A bővítmény aktuális beállításainak cseréje a most importált beállításokra."
+#: inc/class-custom-sidebars-visibility.php:210
+msgid "<b>Hide</b> widget if:"
+msgstr "Widget <b>elrejtése</b> ha:"
 
-#: views/import.php:373
-msgid "Search results page"
-msgstr "Keresési találatok oldal"
+#: inc/class-custom-sidebars-visibility.php:214
+msgid "Filters"
+msgstr ""
 
-#: views/import.php:372
-msgid "Tag archives"
-msgstr "Címke archívumok"
+#: inc/class-custom-sidebars-visibility.php:218
+msgid "Date"
+msgstr ""
 
-#: views/import.php:371
-msgid "Author archives"
-msgstr "Szerző archívumok"
+#: inc/class-custom-sidebars-visibility.php:223
+msgid "Guests"
+msgstr ""
 
-#: views/import.php:370
-msgid "Date archives"
-msgstr "Dátum archívumok"
+#: inc/class-custom-sidebars-visibility.php:228
+msgid "Roles"
+msgstr ""
 
-#: views/import.php:369
-msgid "Main blog page"
-msgstr "Fő blog oldal"
+#: inc/class-custom-sidebars-visibility.php:233
+msgid "Membership"
+msgstr ""
+
+#: inc/class-custom-sidebars-visibility.php:239
+msgid "Membership2"
+msgstr ""
 
 #: inc/class-custom-sidebars-visibility.php:245 views/import.php:366
 msgid "Special pages"
 msgstr "Különleges oldalak"
 
-#: views/import.php:348
-msgid "Category archives"
-msgstr "Kategória archívumok"
-
-#: views/import.php:328
-msgid "By category"
-msgstr "kategória szerint"
-
-#: views/import.php:307
-msgid "Post-type archives"
-msgstr "Bejegyzés-típus archívumok"
-
-#: views/import.php:278
-msgid "By post type"
-msgstr "bejegyzés típus szerint"
-
-#: views/import.php:259
-msgid "Replaceable Sidebars"
-msgstr "Lecserélhető oldalsávok"
-
-#: views/import.php:256
-msgid "Replaceable sidebars"
-msgstr "Lecserélhető oldalsávok"
-
-#: views/import.php:252
-msgid "Configuration"
-msgstr "Beállítások"
-
-#: views/import.php:224
-msgid "(Theme sidebar)"
-msgstr "(Sablon oldalsáv)"
-
-#: views/import.php:154
-msgid "New sidebar will be created"
-msgstr "Új oldalsáv lesz létrehozva"
-
-#: views/import.php:156
-msgid "Existing sidebar will be replaced!"
-msgstr "A létező oldalsáv le lesz cserélve!"
-
-#: inc/class-custom-sidebars.php:963 views/import.php:147
-msgid "Widgets"
-msgstr "Widgetek"
-
-#: views/import.php:146
-msgid "Note"
-msgstr "Megjegyzés"
-
-#: views/import.php:145 views/widgets-editor.php:20
-msgid "Description"
-msgstr "Leírás"
-
-#: views/import.php:144 views/widgets-editor.php:15
-msgid "Name"
-msgstr "Név"
-
-#: views/import.php:137
-msgid "Also import all widgets of the selected sidebars."
-msgstr "A kiválasztott oldalsáv(ok) widgetjei is legyenek importálva."
-
-#: views/import.php:132
-msgid "Mark the sidebars that you want to import."
-msgstr "Jelölje ki az importálandó oldalsávokat!"
-
-#: views/bulk-edit.php:23 views/import.php:130 views/widgets.php:47
-msgid "Custom Sidebars"
-msgstr "Egyedi oldalsávok"
-
-#: views/import.php:105
-msgid "Theme"
-msgstr "Sablon"
-
-#: views/import.php:100
-msgid "Plugin version"
-msgstr "Bővítmény verzió"
-
-#: views/import.php:95
-msgid "WordPress version"
-msgstr "WordPress verzió"
-
-#: views/import.php:84
-msgid "WordPress settings"
-msgstr "WordPress beállítások"
-
-#: views/import.php:78
-msgid "Exported on"
-msgstr "Exportálva"
-
-#: views/import.php:74
-msgid "Filename"
-msgstr "Fájlnév"
-
-#: views/import.php:67 views/widgets-export.php:34
-msgid "Import"
-msgstr "Importálás"
-
-#: inc/class-custom-sidebars.php:148
-msgid ""
-"<strong>Accessibility mode is not supported by the\n"
-"\t\t\t\t\t\t%1$s plugin.</strong><br /><a href=\"%2$s\">Click here</a>\n"
-"\t\t\t\t\t\tto disable accessibility mode and use the %1$s plugin!"
+#: inc/class-custom-sidebars-visibility.php:250
+msgid "For posttype"
 msgstr ""
-"Az <strong>accessibility módot nem támogatja a\n"
-"→ → → → → → %1$s bővítmény.</strong><br /><a href=\"%2$s\">Katt. ide</a>\n"
-"→ → → → → → az accessibility mód kikapcsolásához és a %1$s bővítmény használatához!"
 
-#. Plugin Name of the plugin/theme
-msgid "Custom Sidebars Pro"
-msgstr "Custom Sidebars Pro"
+#: inc/class-custom-sidebars-visibility.php:252
+msgid "Taxonomy"
+msgstr ""
 
-#: inc/class-custom-sidebars-visibility.php:405
-msgid "Only these %s:"
-msgstr "Csak ezen %s:"
-
-#: inc/class-custom-sidebars-visibility.php:404
-msgid "Only for specific %s"
-msgstr "Csak adott %s"
-
-#: inc/class-custom-sidebars-visibility.php:386
-msgid "On any page of these types"
-msgstr "Bármely oldalon, amelyik ilyen típusú"
-
-#: inc/class-custom-sidebars-visibility.php:367
-msgid "On these special pages"
-msgstr "Ezeken a különleges oldalakon"
-
-#: inc/class-custom-sidebars-visibility.php:336
-#: inc/class-custom-sidebars-visibility.php:356
-msgid "(inactive)"
-msgstr "(inaktív)"
-
-#: inc/class-custom-sidebars-visibility.php:328
-msgid "User has Membership Level"
-msgstr "Felhasználó tagsági szintje"
-
-#: inc/class-custom-sidebars-visibility.php:309
-msgid "User has role"
-msgstr "Felhasználó szerepköre"
+#: inc/class-custom-sidebars-visibility.php:269
+msgid "Always"
+msgstr "Mindig"
 
 #: inc/class-custom-sidebars-visibility.php:294
 #: inc/class-custom-sidebars-visibility.php:299
@@ -599,125 +299,458 @@ msgstr "Felhasználó szerepköre"
 msgid "AND"
 msgstr "ÉS"
 
-#: inc/class-custom-sidebars-visibility.php:269
-msgid "Always"
-msgstr "Mindig"
+#: inc/class-custom-sidebars-visibility.php:295
+msgid "User is not logged-in (Guest)"
+msgstr ""
 
-#: inc/class-custom-sidebars-visibility.php:210
-msgid "<b>Hide</b> widget if:"
-msgstr "Widget <b>elrejtése</b> ha:"
+#: inc/class-custom-sidebars-visibility.php:300
+msgid "User is logged-in (Member)"
+msgstr ""
 
-#: inc/class-custom-sidebars-visibility.php:209
-msgid "<b>Show</b> widget if:"
-msgstr "Widget <b>mutatása</b> ha:"
+#: inc/class-custom-sidebars-visibility.php:309
+msgid "User has role"
+msgstr "Felhasználó szerepköre"
 
-#: inc/class-custom-sidebars-visibility.php:200
-msgid "Visibility"
-msgstr "Láthatóság"
+#: inc/class-custom-sidebars-visibility.php:328
+msgid "User has Membership Level"
+msgstr "Felhasználó tagsági szintje"
 
-#: inc/class-custom-sidebars-export.php:747
-msgid "Imported %d widget!"
-msgid_plural "Imported %d widgets!"
-msgstr[0] ""
-msgstr[1] ""
+#: inc/class-custom-sidebars-visibility.php:336
+#: inc/class-custom-sidebars-visibility.php:356
+msgid "(inactive)"
+msgstr "(inaktív)"
 
-#: inc/class-custom-sidebars-export.php:698
-msgid "Plugin options were imported!"
-msgstr "Bővítmény beállítások importálva."
+#: inc/class-custom-sidebars-visibility.php:348
+msgid "User has Membership"
+msgstr ""
 
-#: inc/class-custom-sidebars-export.php:684
-msgid "Imported %d custom sidebar!"
-msgid_plural "Imported %d custom sidebars!"
-msgstr[0] ""
-msgstr[1] ""
+#: inc/class-custom-sidebars-visibility.php:367
+msgid "On these special pages"
+msgstr "Ezeken a különleges oldalakon"
 
-#: inc/class-custom-sidebars-export.php:390
-msgid "Unexpected import format"
-msgstr "Váratlan import formátum"
+#: inc/class-custom-sidebars-visibility.php:386
+msgid "On any page of these types"
+msgstr "Bármely oldalon, amelyik ilyen típusú"
 
-#: inc/class-custom-sidebars-export.php:367
-msgid "Something went wrong"
-msgstr "Valami balul sült el"
+#: inc/class-custom-sidebars-visibility.php:404
+msgid "Only for specific %s"
+msgstr "Csak adott %s"
 
-#: inc/class-custom-sidebars-export.php:361
-msgid "Import file is too big"
-msgstr "Az import fájl túl nagy"
+#: inc/class-custom-sidebars-visibility.php:405
+msgid "Only these %s:"
+msgstr "Csak ezen %s:"
 
-#: inc/class-custom-sidebars-export.php:354
-#: inc/class-custom-sidebars-export.php:396
-msgid "No file was uploaded"
-msgstr "Nem lett fájl feltöltve"
+#: inc/class-custom-sidebars.php:148
+msgid ""
+"<strong>Accessibility mode is not supported by the\n"
+"\t\t\t\t\t\t%1$s plugin.</strong><br /><a href=\"%2$s\">Click here</a>\n"
+"\t\t\t\t\t\tto disable accessibility mode and use the %1$s plugin!"
+msgstr ""
+"Az <strong>accessibility módot nem támogatja a\n"
+"→ → → → → → %1$s bővítmény.</strong><br /><a href=\"%2$s\">Katt. ide</a>\n"
+"→ → → → → → az accessibility mód kikapcsolásához és a %1$s bővítmény "
+"használatához!"
 
-#: inc/class-custom-sidebars-export.php:62 views/widgets.php:46
-msgid "Import / Export Sidebars"
-msgstr "Oldalsávok importálása/exportálása"
+#: inc/class-custom-sidebars.php:961 views/import.php:147
+msgid "Widgets"
+msgstr "Widgetek"
 
-#: inc/class-custom-sidebars-editor.php:913 views/widgets.php:17
-msgid "Sidebars"
-msgstr "Oldalsávok"
+#: inc/class-custom-sidebars.php:971
+msgid "Support"
+msgstr ""
 
-#: inc/class-custom-sidebars-editor.php:861
-msgid "Updated sidebar <strong>%1$s</strong> settings."
-msgstr "<strong>%1$s</strong> oldalsáv beállításai frissítve."
+#: inc/class-custom-sidebars.php:989
+msgid "Create a custom sidebar to get started."
+msgstr ""
 
-#: inc/class-custom-sidebars-editor.php:583
-msgid "%1$s Archives"
-msgstr "%1$s archívum"
+#: inc/integrations/class-custom-sidebars-integration-polylang.php:66
+msgid "Polylang"
+msgstr ""
 
-#: inc/class-custom-sidebars-editor.php:579
-#: inc/class-custom-sidebars-visibility.php:157
-msgid "Post Index"
-msgstr "Bejegyzés index"
+#: inc/integrations/class-custom-sidebars-integration-polylang.php:67
+#: inc/integrations/class-custom-sidebars-integration-wpml.php:50
+msgid "Language"
+msgstr ""
 
-#: inc/class-custom-sidebars-editor.php:502
-msgid "Date Archives"
+#: inc/integrations/class-custom-sidebars-integration-wpml.php:49
+msgid "WPML"
+msgstr ""
+
+#: views/bulk-edit.php:23 views/import.php:130 views/widgets.php:47
+msgid "Custom Sidebars"
+msgstr "Egyedi oldalsávok"
+
+#: views/bulk-edit.php:35
+msgid "&mdash; No Change &mdash;"
+msgstr ""
+
+#: views/col-sidebars.php:18
+msgid "(Not available for Home-Page)"
+msgstr ""
+
+#: views/col-sidebars.php:20
+msgid "(Not available for Blog-Page)"
+msgstr ""
+
+#: views/import.php:67 views/widgets-export.php:34
+msgid "Import"
+msgstr "Importálás"
+
+#: views/import.php:74
+msgid "Filename"
+msgstr "Fájlnév"
+
+#: views/import.php:78
+msgid "Exported on"
+msgstr "Exportálva"
+
+#: views/import.php:84
+msgid "WordPress settings"
+msgstr "WordPress beállítások"
+
+#: views/import.php:95
+msgid "WordPress version"
+msgstr "WordPress verzió"
+
+#: views/import.php:100
+msgid "Plugin version"
+msgstr "Bővítmény verzió"
+
+#: views/import.php:102
+msgid "Unknown"
+msgstr ""
+
+#: views/import.php:105
+msgid "Theme"
+msgstr "Sablon"
+
+#: views/import.php:132
+msgid "Mark the sidebars that you want to import."
+msgstr "Jelölje ki az importálandó oldalsávokat!"
+
+#: views/import.php:137
+msgid "Also import all widgets of the selected sidebars."
+msgstr "A kiválasztott oldalsáv(ok) widgetjei is legyenek importálva."
+
+#: views/import.php:144 views/widgets-editor.php:15
+msgid "Name"
+msgstr "Név"
+
+#: views/import.php:145 views/widgets-editor.php:20
+msgid "Description"
+msgstr "Leírás"
+
+#: views/import.php:146
+msgid "Note"
+msgstr "Megjegyzés"
+
+#: views/import.php:154
+msgid "New sidebar will be created"
+msgstr "Új oldalsáv lesz létrehozva"
+
+#: views/import.php:156
+msgid "Existing sidebar will be replaced!"
+msgstr "A létező oldalsáv le lesz cserélve!"
+
+#: views/import.php:224
+msgid "(Theme sidebar)"
+msgstr "(Sablon oldalsáv)"
+
+#: views/import.php:252
+msgid "Configuration"
+msgstr "Beállítások"
+
+#: views/import.php:256
+msgid "Replaceable sidebars"
+msgstr "Lecserélhető oldalsávok"
+
+#: views/import.php:259
+msgid "Replaceable Sidebars"
+msgstr "Lecserélhető oldalsávok"
+
+#: views/import.php:278
+msgid "By post type"
+msgstr "bejegyzés típus szerint"
+
+#: views/import.php:307
+msgid "Post-type archives"
+msgstr "Bejegyzés-típus archívumok"
+
+#: views/import.php:328
+msgid "By category"
+msgstr "kategória szerint"
+
+#: views/import.php:348
+msgid "Category archives"
+msgstr "Kategória archívumok"
+
+#: views/import.php:369
+msgid "Main blog page"
+msgstr "Fő blog oldal"
+
+#: views/import.php:370
+msgid "Date archives"
 msgstr "Dátum archívumok"
 
-#: views/widgets-location.php:179
+#: views/import.php:371
+msgid "Author archives"
+msgstr "Szerző archívumok"
+
+#: views/import.php:372
+msgid "Tag archives"
+msgstr "Címke archívumok"
+
+#: views/import.php:373
+msgid "Search results page"
+msgstr "Keresési találatok oldal"
+
+#: views/import.php:383
+msgid ""
+"Replace the current plugin configuration with the imported configuration."
+msgstr ""
+"A bővítmény aktuális beállításainak cseréje a most importált beállításokra."
+
+#: views/widgets-delete.php:11
+msgid ""
+"Please confirm that you want to delete the sidebar <strong class=\"name\"></"
+"strong>."
+msgstr ""
+"Kérem, erősítse meg, hogy ezt az oldalsávot törölni szeretné: <strong class="
+"\"name\"></strong>."
+
+#: views/widgets-delete.php:16 views/widgets-editor.php:63
+#: views/widgets-location.php:251
+msgid "Cancel"
+msgstr "Mégse"
+
+#: views/widgets-delete.php:17
+msgid "Yes, delete it"
+msgstr "Igen, törlés!"
+
+#: views/widgets-editor.php:16
+msgid "Sidebar name here..."
+msgstr "Ide kell írni az oldalsáv nevét..."
+
+#: views/widgets-editor.php:17
+msgid "The name should be unique."
+msgstr ""
+
+#: views/widgets-editor.php:21
+msgid "Sidebar description here..."
+msgstr "Ide kell írni az oldalsáv leírását..."
+
+#: views/widgets-editor.php:27
+msgid "Caution:"
+msgstr "Vigyázat:"
+
+#: views/widgets-editor.php:39
+msgid "Before Title"
+msgstr "Cím előtt"
+
+#: views/widgets-editor.php:43
+msgid "After Title"
+msgstr "Cím után"
+
+#: views/widgets-editor.php:49
+msgid "Before Widget"
+msgstr "Widget előtt"
+
+#: views/widgets-editor.php:53
+msgid "After Widget"
+msgstr "Widget után"
+
+#: views/widgets-editor.php:60
+msgid "Advanced - Edit custom wrapper code"
+msgstr "Haladó - egyedi befoglaló kód megadása"
+
+#: views/widgets-editor.php:64 views/widgets.php:43
+msgid "Create Sidebar"
+msgstr "Oldalsáv létrehozása"
+
+#: views/widgets-export.php:10 views/widgets-export.php:28
+msgid "Export"
+msgstr "Exportálás"
+
+#: views/widgets-export.php:23
+msgid "Optional description for the export file:"
+msgstr "Az export fájl opcionális leírása:"
+
+#: views/widgets-export.php:38
+msgid "Select a file to import"
+msgstr ""
+
+#: views/widgets-location.php:30
+msgid "Replaced by another sidebar:"
+msgstr "Lecserélte egy másik oldalsáv:"
+
+#: views/widgets-location.php:38
+msgid "As <strong>%1$s</strong> for selected %2$s"
+msgstr "<strong>%1$s</strong> oldalsáv ehhez: %2$s"
+
+#: views/widgets-location.php:51
+msgid "Click here to pick available %1$s"
+msgstr "Kattintson ide az elérhető %1$s kiválasztásához"
+
+#: views/widgets-location.php:87
+msgid ""
+"There are no replaceable sidebars. Please allow at least one as replaceable."
+msgstr ""
+
+#: views/widgets-location.php:97 views/widgets-location.php:149
+#: views/widgets-location.php:207
+msgid "Click to toggle"
+msgstr "Kattintson a váltáshoz"
+
+#: views/widgets-location.php:98
+msgid "For all Single Entries matching selected criteria"
+msgstr "Minden elemhez, ami megfelel a megadott feltételeknek"
+
+#: views/widgets-location.php:101
+msgid ""
+"These replacements will be applied to every single post that matches a "
+"certain post type or category."
+msgstr ""
+"Ezek a cserék minden bejegyzésnél végre lesznek hajtva, amik adott típusúak "
+"vagy adott kategória elemei."
+
+#: views/widgets-location.php:109
+msgid "categories"
+msgstr "kategóriák"
+
+#: views/widgets-location.php:121
+msgid "Post Types"
+msgstr "Bejegyzés típusok"
+
+#: views/widgets-location.php:150
+msgid "For Archives"
+msgstr "Archívumokhoz"
+
+#: views/widgets-location.php:153
+msgid "These replacements will be applied to Archive Type posts and pages."
+msgstr "Ezek a helyettesítések az archívumokra fognak vonatkozni."
+
+#: views/widgets-location.php:155 views/widgets-location.php:166
+msgid "Archive Types"
+msgstr "Archívum típusok"
+
+#: views/widgets-location.php:156 views/widgets-location.php:177
+msgid "Category Archives"
+msgstr "Kategória archívumok"
+
+#: views/widgets-location.php:157
+msgid "Authors"
+msgstr ""
+
+#: views/widgets-location.php:188
 msgid "Author Archives"
 msgstr "Szerző archívumok"
 
-#: inc/class-custom-sidebars-editor.php:499
-msgid "Search Results"
-msgstr "Keresés eredményei"
+#: views/widgets-location.php:208
+msgid "3rd party plugins"
+msgstr ""
 
-#: inc/class-custom-sidebars-editor.php:498
-#: inc/class-custom-sidebars-visibility.php:156
-msgid "Front Page"
-msgstr "Nyitó oldal"
+#: views/widgets-location.php:211
+msgid "These replacements will be applied to 3rd party plugins."
+msgstr ""
 
-#: inc/class-custom-sidebars-editor.php:425
-msgid "Deleted sidebar <strong>%1$s</strong>"
-msgstr "Oldalsáv törölve: <strong>%1$s</strong>"
+#: views/widgets-location.php:252 views/widgets.php:42
+msgid "Save Changes"
+msgstr "Mentés"
 
-#: inc/class-custom-sidebars-editor.php:353
-#: inc/class-custom-sidebars-editor.php:436
-msgid "The sidebar was not found"
-msgstr "Az oldalsáv nem található."
+#: views/widgets.php:21
+msgid "Create a new sidebar"
+msgstr "Új oldalsáv létrehozása"
 
-#: inc/class-custom-sidebars-editor.php:342
-msgid "Updated sidebar <strong>%1$s</strong>"
-msgstr "Oldalsáv frissítve: <strong>%1$s</strong>"
+#: views/widgets.php:40
+msgid "Edit [Sidebar]"
+msgstr "Szerkesztés: [Sidebar]"
 
-#: inc/class-custom-sidebars-editor.php:334
-msgid "Created new sidebar <strong>%1$s</strong>"
-msgstr "Új oldalsáv létrehozva: <strong>%1$s</strong>"
+#: views/widgets.php:41
+msgid "New Custom Sidebar"
+msgstr "Új egyedi oldalsáv"
 
-#: inc/class-custom-sidebars-editor.php:297
-#: inc/class-custom-sidebars-editor.php:416
-msgid "The sidebar does not exist"
-msgstr "Az oldalsáv nem létezik."
+#: views/widgets.php:44
+msgid "Delete Sidebar"
+msgstr "Oldalsáv törlése"
 
-#: inc/class-custom-sidebars-editor.php:273
-msgid "Sidebar-name cannot be empty"
-msgstr "Az oldalsáv neve nem lehet üres."
+#: views/widgets.php:45
+msgid "Define where you want this sidebar to appear."
+msgstr "Adja meg, hol jelenjen meg ez az oldalsáv!"
 
-#: inc/class-custom-sidebars-editor.php:158
-#: inc/class-custom-sidebars-editor.php:173
-#: inc/class-custom-sidebars-export.php:98
-msgid "You do not have permission for this"
-msgstr "Nincs megfelelő jogosultsága."
+#: views/widgets.php:48
+msgid "Theme Sidebars"
+msgstr "A sablon oldalsávjai"
 
-#: inc/class-custom-sidebars-cloning.php:206
-msgid "Clone"
-msgstr "Klónoz"
+#: views/widgets.php:49
+msgid "Couldn't load data from WordPress..."
+msgstr "Nem sikerült az adatok betöltése a WordPressből..."
+
+#: views/widgets.php:50 views/widgets.php:105
+msgid "This sidebar can be replaced on certain pages"
+msgstr "Ezt az oldalsávot bizonyos oldalakon le lehet cserélni."
+
+#: views/widgets.php:51
+msgid ""
+"Activate this option to replace the sidebar with one of your custom sidebars."
+msgstr ""
+"Engedélyezze ezt az opciót az oldalsáv másik, egyed oldalsávval történő "
+"lecseréléséhez."
+
+#: views/widgets.php:52
+msgid "Filter..."
+msgstr ""
+
+#: views/widgets.php:69
+msgid "Delete this sidebar."
+msgstr "Oldalsáv törlése..."
+
+#: views/widgets.php:78
+msgid "Edit this sidebar."
+msgstr "Oldalsáv szerkesztése..."
+
+#: views/widgets.php:80
+msgid "Edit"
+msgstr "Szerkeszt"
+
+#: views/widgets.php:87 views/widgets.php:124
+msgid "Where do you want to show the sidebar?"
+msgstr "Hol jelenjen meg az oldalsáv?"
+
+#: views/widgets.php:89 views/widgets.php:126
+msgid "Sidebar Location"
+msgstr "Oldalsáv helye"
+
+#: views/widgets.php:106
+msgid "This sidebar will always be same on all pages"
+msgstr "Ez az oldalsáv minden oldalon ugyanúgy fog kinézni."
+
+#: views/widgets.php:115
+msgid "Allow this sidebar to be replaced"
+msgstr "Ez az oldalsáv lecserélhető"
+
+#. Plugin Name of the plugin/theme
+msgid "Custom Sidebars Pro"
+msgstr "Custom Sidebars Pro"
+
+#. Plugin URI of the plugin/theme
+msgid "http://premium.wpmudev.org/project/custom-sidebars/"
+msgstr ""
+
+#. Description of the plugin/theme
+msgid ""
+"Allows you to create widgetized areas and custom sidebars. Replace whole "
+"sidebars or single widgets for specific posts and pages."
+msgstr ""
+
+#. Author of the plugin/theme
+msgid "WPMU DEV"
+msgstr ""
+
+#. Author URI of the plugin/theme
+msgid "http://premium.wpmudev.org/"
+msgstr ""
+
+#: inc/class-custom-sidebars-editor.php:1245
+msgctxt "Column name on entries list."
+msgid "Custom Sidebars"
+msgstr ""

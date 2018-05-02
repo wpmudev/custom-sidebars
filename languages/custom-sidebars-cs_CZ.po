@@ -2,588 +2,295 @@
 # This file is distributed under the same license as the Custom Sidebars Pro package.
 msgid ""
 msgstr ""
+"Project-Id-Version: Custom Sidebars Pro\n"
+"Report-Msgid-Bugs-To: https://wordpress.org/support/plugin/customsidebars\n"
+"POT-Creation-Date: 2018-05-02 05:27:35+00:00\n"
 "PO-Revision-Date: 2017-12-12 11:44:10+0000\n"
+"Language: cs_CZ\n"
 "MIME-Version: 1.0\n"
 "Content-Type: text/plain; charset=UTF-8\n"
 "Content-Transfer-Encoding: 8bit\n"
 "Plural-Forms: nplurals=3; plural=(n==1) ? 0 : (n>=2 && n<=4) ? 1 : 2;\n"
 "X-Generator: GlotPress/2.3.1\n"
-"Language: cs_CZ\n"
-"Project-Id-Version: Custom Sidebars Pro\n"
 
-#: inc/class-custom-sidebars-editor.php:1186
-msgctxt "Column name on entries list."
-msgid "Custom Sidebars"
+#: inc/class-custom-sidebars-checkup-notification.php:114
+msgid ""
+"<b>Warning:</b> Some of your plugins may be slowing down your site. Run a "
+"free security and performance scan with WP Checkup."
 msgstr ""
+"<b>Upozornění</b> Je možné, že některý plugin zpomaluje chod stránky. "
+"Proveďte zdarma bezpečnostní sken pomocí WP Checkup"
 
-#: views/widgets-location.php:202
-msgid "These replacements will be applied to 3rd party plugins."
-msgstr ""
+#: inc/class-custom-sidebars-checkup-notification.php:118
+msgid "Scan"
+msgstr "Sken"
 
-#: views/widgets-location.php:199
-msgid "3rd party plugins"
-msgstr ""
-
-#: views/widgets-location.php:89
-msgid "There are no replaceable sidebars. Please allow at least one as replaceable."
-msgstr ""
-
-#: views/widgets-export.php:38
-msgid "Select a file to import"
-msgstr ""
-
-#: views/import.php:102
-msgid "Unknown"
-msgstr ""
-
-#: views/bulk-edit.php:35
-msgid "&mdash; No Change &mdash;"
-msgstr ""
-
-#: inc/integrations/class-custom-sidebars-integration-wpml.php:49
-msgid "WPML"
-msgstr ""
-
-#: inc/integrations/class-custom-sidebars-integration-polylang.php:67
-#: inc/integrations/class-custom-sidebars-integration-wpml.php:50
-msgid "Language"
-msgstr ""
-
-#: inc/integrations/class-custom-sidebars-integration-polylang.php:66
-msgid "Polylang"
-msgstr ""
-
-#: inc/class-custom-sidebars.php:991
-msgid "Create a custom sidebar to get started."
-msgstr ""
-
-#: inc/class-custom-sidebars-visibility.php:166
-msgid "Archive: Year"
-msgstr ""
-
-#: inc/class-custom-sidebars-visibility.php:165
-msgid "Archive: Month"
-msgstr ""
-
-#: inc/class-custom-sidebars-visibility.php:164
-msgid "Archive: Day"
-msgstr ""
-
-#: inc/class-custom-sidebars-visibility.php:161
-msgid "Search results"
-msgstr ""
-
-#: inc/class-custom-sidebars-visibility.php:160
-msgid "Archives"
-msgstr ""
-
-#: inc/class-custom-sidebars-visibility.php:158
-msgid "Single page"
-msgstr ""
-
-#: inc/class-custom-sidebars-export.php:425
-msgid "You do not have permission for import sidebars."
-msgstr ""
-
-#: inc/class-custom-sidebars-export.php:287
-#: inc/class-custom-sidebars-export.php:340
-msgid "You do not have permission for export sidebars."
-msgstr ""
-
-#: inc/class-custom-sidebars-explain.php:236
-msgid "Turn off Custom Sidebars explain mode."
-msgstr ""
-
-#: inc/class-custom-sidebars-explain.php:229
-msgid "Turn on Custom Sidebars explain mode."
-msgstr ""
-
-#: inc/class-custom-sidebars-explain.php:225
-msgid "Sidebar Debug"
-msgstr ""
-
-#: inc/class-custom-sidebars-editor.php:1386
-msgid "Custom sidebars configuration is allowed for:"
-msgstr ""
-
-#: inc/class-custom-sidebars-editor.php:520
-#: inc/class-custom-sidebars-editor.php:523
-#: inc/class-custom-sidebars-editor.php:530
-#: inc/class-custom-sidebars-editor.php:532
-#: inc/class-custom-sidebars-editor.php:616
-#: inc/class-custom-sidebars-editor.php:618
-#: inc/class-custom-sidebars-editor.php:637
-msgid "%s Archives"
-msgstr ""
-
-#: inc/class-custom-sidebars-editor.php:250
-#: inc/class-custom-sidebars-editor.php:407
-#: inc/class-custom-sidebars-editor.php:690
-msgid "You have no permission to do this operation."
-msgstr ""
-
-#: inc/class-custom-sidebars-checkup-notification.php:191
-msgid "Go"
+#: inc/class-custom-sidebars-checkup-notification.php:187
+msgid "Run site health check"
 msgstr ""
 
 #: inc/class-custom-sidebars-checkup-notification.php:188
 msgid "Free performance, security and SEO report"
 msgstr ""
 
-#: inc/class-custom-sidebars-checkup-notification.php:187
-msgid "Run site health check"
+#: inc/class-custom-sidebars-checkup-notification.php:191
+msgid "Go"
 msgstr ""
 
-#. Author URI of the plugin/theme
-msgid "http://premium.wpmudev.org/"
-msgstr "http://premium.wpmudev.org/"
-
-#. Author of the plugin/theme
-msgid "WPMU DEV"
-msgstr "WPMU DEV"
-
-#. Description of the plugin/theme
-msgid "Allows you to create widgetized areas and custom sidebars. Replace whole sidebars or single widgets for specific posts and pages."
-msgstr "Vytvořte si vlastní postraní panely nebo widgety. Upravujte celý panel nebo jeden widget vždy pro konkrétní stránku."
-
-#. Plugin URI of the plugin/theme
-msgid "http://premium.wpmudev.org/project/custom-sidebars/"
-msgstr "http://premium.wpmudev.org/project/custom-sidebars/"
-
-#: views/widgets.php:52
-msgid "Filter..."
-msgstr "Filr"
-
-#: views/widgets-location.php:148
-msgid "Authors"
-msgstr "Autoři"
-
-#: views/col-sidebars.php:20
-msgid "(Not available for Blog-Page)"
-msgstr "(Nedostupné pro stránky blogu)"
-
-#: views/col-sidebars.php:18
-msgid "(Not available for Home-Page)"
-msgstr "(Nedostupné pro domovskou stránku)"
-
-#: inc/class-custom-sidebars.php:973
-msgid "Support"
-msgstr "Podpora"
-
-#: inc/class-custom-sidebars-visibility.php:348
-msgid "User has Membership"
-msgstr "Uživatel je členem"
-
-#: inc/class-custom-sidebars-visibility.php:300
-msgid "User is logged-in (Member)"
-msgstr "Uživatel je přihlášen (člen)"
-
-#: inc/class-custom-sidebars-visibility.php:295
-msgid "User is not logged-in (Guest)"
-msgstr "Uživatel není přihlášen (host)"
-
-#: inc/class-custom-sidebars-visibility.php:252
-msgid "Taxonomy"
-msgstr "Taxonomie"
-
-#: inc/class-custom-sidebars-visibility.php:250
-msgid "For posttype"
-msgstr "Pro typ příspěvku"
-
-#: inc/class-custom-sidebars-visibility.php:239
-msgid "Membership2"
-msgstr "Členství2"
-
-#: inc/class-custom-sidebars-visibility.php:233
-msgid "Membership"
-msgstr "Členství"
-
-#: inc/class-custom-sidebars-visibility.php:228
-msgid "Roles"
-msgstr "Role"
-
-#: inc/class-custom-sidebars-visibility.php:223
-msgid "Guests"
-msgstr "Hosté"
-
-#: inc/class-custom-sidebars-visibility.php:218
-msgid "Date"
-msgstr "Datum"
-
-#: inc/class-custom-sidebars-visibility.php:214
-msgid "Filters"
-msgstr "Filtr"
-
-#: inc/class-custom-sidebars-editor.php:501
-msgid "Any Author Archive"
-msgstr ""
-
-#: inc/class-custom-sidebars-editor.php:500
-#: inc/class-custom-sidebars-visibility.php:162
-msgid "Not found (404)"
-msgstr "Nenalezeno (404)"
-
-#: inc/class-custom-sidebars-checkup-notification.php:118
-msgid "Scan"
-msgstr "Sken"
-
-#: inc/class-custom-sidebars-checkup-notification.php:114
-msgid "<b>Warning:</b> Some of your plugins may be slowing down your site. Run a free security and performance scan with WP Checkup."
-msgstr "<b>Upozornění</b> Je možné, že některý plugin zpomaluje chod stránky. Proveďte zdarma bezpečnostní sken pomocí WP Checkup"
+#: inc/class-custom-sidebars-checkup-notification.php:213
+msgid ""
+"Don’t just replace sidebars. Add new sidebars and footers anywhere with "
+"Upfront."
+msgstr "Nepřesouvejte jen panely a lišty. Přidávejte nové díky Upfront."
 
 #: inc/class-custom-sidebars-checkup-notification.php:214
 msgid "get Upfront free"
 msgstr "získat Upfront zdarma"
 
-#: inc/class-custom-sidebars-checkup-notification.php:213
-msgid "Don’t just replace sidebars. Add new sidebars and footers anywhere with Upfront."
-msgstr "Nepřesouvejte jen panely a lišty. Přidávejte nové díky Upfront."
+#: inc/class-custom-sidebars-cloning.php:206
+msgid "Clone"
+msgstr "Klon"
 
-#: views/widgets.php:115
-msgid "Allow this sidebar to be replaced"
-msgstr "Povolit přemístění panelu."
+#: inc/class-custom-sidebars-editor.php:164
+#: inc/class-custom-sidebars-editor.php:179
+#: inc/class-custom-sidebars-export.php:98
+msgid "You do not have permission for this"
+msgstr "Nedostatečná oprávnění"
 
-#: views/widgets.php:106
-msgid "This sidebar will always be same on all pages"
-msgstr "Panel bude na všech stránkách stejný"
-
-#: views/widgets.php:89 views/widgets.php:126
-msgid "Sidebar Location"
-msgstr "Pozice panelu"
-
-#: views/widgets.php:87 views/widgets.php:124
-msgid "Where do you want to show the sidebar?"
-msgstr "Kde se má panel zobrazit?"
-
-#: views/widgets.php:80
-msgid "Edit"
-msgstr "Upravit"
-
-#: views/widgets.php:78
-msgid "Edit this sidebar."
-msgstr "Upravit panel"
-
-#: views/widgets.php:69
-msgid "Delete this sidebar."
-msgstr "Odstranit panel"
-
-#: views/widgets.php:51
-msgid "Activate this option to replace the sidebar with one of your custom sidebars."
-msgstr "Aktivací této volby umožníte nahrazení panelu vaším vlastním panelem."
-
-#: views/widgets.php:50 views/widgets.php:105
-msgid "This sidebar can be replaced on certain pages"
-msgstr "Panel může být nahrazen na určitých stránkách"
-
-#: views/widgets.php:49
-msgid "Couldn't load data from WordPress..."
-msgstr "Data z WordPress nelze načíst..."
-
-#: views/widgets.php:48
-msgid "Theme Sidebars"
-msgstr "Panely šablony"
-
-#: views/widgets.php:45
-msgid "Define where you want this sidebar to appear."
-msgstr "Určete místa, kde se bude panel zobrazovat"
-
-#: views/widgets.php:44
-msgid "Delete Sidebar"
-msgstr "Odstranit panel"
-
-#: views/widgets.php:41
-msgid "New Custom Sidebar"
-msgstr "Nový vlastní panel"
-
-#: views/widgets.php:40
-msgid "Edit [Sidebar]"
-msgstr "Upravit [Panel]"
-
-#: views/widgets.php:21
-msgid "Create a new sidebar"
-msgstr "Vytvořit nový panel"
-
-#: views/widgets-location.php:243 views/widgets.php:42
-msgid "Save Changes"
-msgstr "Uložit změny"
-
-#: views/widgets-location.php:147 views/widgets-location.php:168
-msgid "Category Archives"
-msgstr "Archiv kategorie"
-
-#: views/widgets-location.php:146 views/widgets-location.php:157
-msgid "Archive Types"
-msgstr "Typ archivu"
-
-#: views/widgets-location.php:144
-msgid "These replacements will be applied to Archive Type posts and pages."
+#: inc/class-custom-sidebars-editor.php:256
+#: inc/class-custom-sidebars-editor.php:413
+#: inc/class-custom-sidebars-editor.php:730
+msgid "You have no permission to do this operation."
 msgstr ""
 
-#: views/widgets-location.php:141
-msgid "For Archives"
+#: inc/class-custom-sidebars-editor.php:279
+msgid "Sidebar-name cannot be empty"
+msgstr "Název panelu nemůže zůstat prázdný"
+
+#: inc/class-custom-sidebars-editor.php:303
+#: inc/class-custom-sidebars-editor.php:422
+msgid "The sidebar does not exist"
+msgstr "Panel neexistuje"
+
+#: inc/class-custom-sidebars-editor.php:340
+msgid "Created new sidebar <strong>%1$s</strong>"
+msgstr "Vytvořit nový panel  <strong>%1$s</strong>"
+
+#: inc/class-custom-sidebars-editor.php:348
+msgid "Updated sidebar <strong>%1$s</strong>"
+msgstr "Aktualizovat panel <strong>%1$s</strong>"
+
+#: inc/class-custom-sidebars-editor.php:359
+#: inc/class-custom-sidebars-editor.php:442
+msgid "The sidebar was not found"
+msgstr "Panel nenalezen"
+
+#: inc/class-custom-sidebars-editor.php:431
+msgid "Deleted sidebar <strong>%1$s</strong>"
+msgstr "Smazat panel <strong>%1$s</strong>"
+
+#: inc/class-custom-sidebars-editor.php:503
+#: inc/class-custom-sidebars-visibility.php:156
+msgid "Front Page"
 msgstr ""
 
-#: views/widgets-location.php:123
-msgid "Post Types"
-msgstr "Typ příspěvku"
-
-#: views/widgets-location.php:111
-msgid "categories"
-msgstr "kategorie"
-
-#: views/widgets-location.php:103
-msgid "These replacements will be applied to every single post that matches a certain post type or category."
-msgstr "Nastavení se provede na každý příspěvek který je v dané kategorii nebo odpovídá danému typu příspěvku."
-
-#: views/widgets-location.php:100
-msgid "For all Single Entries matching selected criteria"
+#: inc/class-custom-sidebars-editor.php:504
+msgid "Search Results"
 msgstr ""
 
-#: views/widgets-location.php:99 views/widgets-location.php:140
-#: views/widgets-location.php:198
-msgid "Click to toggle"
-msgstr "Kliknutím přepnete"
+#: inc/class-custom-sidebars-editor.php:505
+#: inc/class-custom-sidebars-visibility.php:162
+msgid "Not found (404)"
+msgstr "Nenalezeno (404)"
 
-#: views/widgets-location.php:51
-msgid "Click here to pick available %1$s"
-msgstr "Kliknutím vyberete dostupné %1$s"
-
-#: views/widgets-location.php:38
-msgid "As <strong>%1$s</strong> for selected %2$s"
+#: inc/class-custom-sidebars-editor.php:506
+msgid "Any Author Archive"
 msgstr ""
 
-#: views/widgets-location.php:30
-msgid "Replaced by another sidebar:"
+#: inc/class-custom-sidebars-editor.php:507
+msgid "Date Archives"
+msgstr ""
+
+#: inc/class-custom-sidebars-editor.php:525
+#: inc/class-custom-sidebars-editor.php:528
+#: inc/class-custom-sidebars-editor.php:535
+#: inc/class-custom-sidebars-editor.php:537
+#: inc/class-custom-sidebars-editor.php:621
+#: inc/class-custom-sidebars-editor.php:623
+#: inc/class-custom-sidebars-editor.php:678
+msgid "%s Archives"
+msgstr ""
+
+#: inc/class-custom-sidebars-editor.php:584
+#: inc/class-custom-sidebars-visibility.php:157
+msgid "Post Index"
+msgstr ""
+
+#: inc/class-custom-sidebars-editor.php:588
+msgid "%1$s Archives"
+msgstr ""
+
+#: inc/class-custom-sidebars-editor.php:923
+msgid "Updated sidebar <strong>%1$s</strong> settings."
+msgstr ""
+
+#: inc/class-custom-sidebars-editor.php:975 views/widgets.php:17
+msgid "Sidebars"
+msgstr "Panely"
+
+#: inc/class-custom-sidebars-editor.php:1445
+msgid "Custom sidebars configuration is allowed for:"
+msgstr ""
+
+#: inc/class-custom-sidebars-editor.php:1471
+msgid "Allow Custom Taxonomies in Sidebar Location:"
+msgstr ""
+
+#: inc/class-custom-sidebars-editor.php:1482
+msgid ""
+"After turn on any Custom Taxonomy you need to reload this screen to be able "
+"choose it in Sidebar Location."
+msgstr ""
+
+#: inc/class-custom-sidebars-explain.php:225
+msgid "Sidebar Debug"
+msgstr ""
+
+#: inc/class-custom-sidebars-explain.php:229
+msgid "Turn on Custom Sidebars explain mode."
+msgstr ""
+
+#: inc/class-custom-sidebars-explain.php:236
+msgid "Turn off Custom Sidebars explain mode."
+msgstr ""
+
+#: inc/class-custom-sidebars-export.php:62 views/widgets.php:46
+msgid "Import / Export Sidebars"
+msgstr "Import / Export panelů"
+
+#: inc/class-custom-sidebars-export.php:287
+#: inc/class-custom-sidebars-export.php:340
+msgid "You do not have permission for export sidebars."
+msgstr ""
+
+#: inc/class-custom-sidebars-export.php:354
+#: inc/class-custom-sidebars-export.php:396
+msgid "No file was uploaded"
+msgstr "Nebyl nahrát žádný soubor"
+
+#: inc/class-custom-sidebars-export.php:361
+msgid "Import file is too big"
+msgstr "Importovaný soubor je příliš veliký"
+
+#: inc/class-custom-sidebars-export.php:367
+msgid "Something went wrong"
+msgstr "Něco se pokazilo"
+
+#: inc/class-custom-sidebars-export.php:390
+msgid "Unexpected import format"
+msgstr "Neočekávaný formát pro import"
+
+#: inc/class-custom-sidebars-export.php:425
+msgid "You do not have permission for import sidebars."
+msgstr ""
+
+#: inc/class-custom-sidebars-export.php:684
+msgid "Imported %d custom sidebar!"
+msgid_plural "Imported %d custom sidebars!"
+msgstr[0] ""
+msgstr[1] ""
+msgstr[2] ""
+
+#: inc/class-custom-sidebars-export.php:698
+msgid "Plugin options were imported!"
+msgstr "Nastavení pluginu bylo importováno"
+
+#: inc/class-custom-sidebars-export.php:747
+msgid "Imported %d widget!"
+msgid_plural "Imported %d widgets!"
+msgstr[0] ""
+msgstr[1] ""
+msgstr[2] ""
+
+#: inc/class-custom-sidebars-visibility.php:158
+msgid "Single page"
+msgstr ""
+
+#: inc/class-custom-sidebars-visibility.php:160
+msgid "Archives"
+msgstr ""
+
+#: inc/class-custom-sidebars-visibility.php:161
+msgid "Search results"
 msgstr ""
 
 #: inc/class-custom-sidebars-visibility.php:163 views/widgets-export.php:43
 msgid "Preview"
 msgstr "Náhled"
 
-#: views/widgets-export.php:23
-msgid "Optional description for the export file:"
-msgstr "Popis souboru pro export:"
-
-#: views/widgets-export.php:10 views/widgets-export.php:28
-msgid "Export"
-msgstr "Export"
-
-#: views/widgets-editor.php:64 views/widgets.php:43
-msgid "Create Sidebar"
-msgstr "Vytvořit panel"
-
-#: views/widgets-editor.php:60
-msgid "Advanced - Edit custom wrapper code"
+#: inc/class-custom-sidebars-visibility.php:164
+msgid "Archive: Day"
 msgstr ""
 
-#: views/widgets-editor.php:53
-msgid "After Widget"
-msgstr "Po widgetu"
-
-#: views/widgets-editor.php:49
-msgid "Before Widget"
-msgstr "Před widgetem"
-
-#: views/widgets-editor.php:43
-msgid "After Title"
-msgstr "Po nadpisu"
-
-#: views/widgets-editor.php:39
-msgid "Before Title"
-msgstr "Před nadpisem"
-
-#: views/widgets-editor.php:27
-msgid "Caution:"
-msgstr "Upozornění:"
-
-#: views/widgets-editor.php:21
-msgid "Sidebar description here..."
-msgstr "Popis panelu zde..."
-
-#: views/widgets-editor.php:17
-msgid "The name should be unique."
+#: inc/class-custom-sidebars-visibility.php:165
+msgid "Archive: Month"
 msgstr ""
 
-#: views/widgets-editor.php:16
-msgid "Sidebar name here..."
-msgstr "Název panelu zde..."
-
-#: views/widgets-delete.php:17
-msgid "Yes, delete it"
-msgstr "Ano, smazat"
-
-#: views/widgets-delete.php:16 views/widgets-editor.php:63
-#: views/widgets-location.php:242
-msgid "Cancel"
-msgstr "Zrušit"
-
-#: views/widgets-delete.php:11
-msgid "Please confirm that you want to delete the sidebar <strong class=\"name\"></strong>."
-msgstr "Potvrďte smazání panelu <strong class=\"name\"></strong>."
-
-#: views/import.php:383
-msgid "Replace the current plugin configuration with the imported configuration."
+#: inc/class-custom-sidebars-visibility.php:166
+msgid "Archive: Year"
 msgstr ""
 
-#: views/import.php:373
-msgid "Search results page"
-msgstr "Stránka s výsledky vyhledávání"
+#: inc/class-custom-sidebars-visibility.php:200
+msgid "Visibility"
+msgstr "Viditelnost"
 
-#: views/import.php:372
-msgid "Tag archives"
-msgstr "Archiv tagů"
+#: inc/class-custom-sidebars-visibility.php:209
+msgid "<b>Show</b> widget if:"
+msgstr "<b>Zobrazit</b> widget pokud:"
 
-#: views/import.php:371
-msgid "Author archives"
-msgstr "Archiv autora"
+#: inc/class-custom-sidebars-visibility.php:210
+msgid "<b>Hide</b> widget if:"
+msgstr "<b>Skrýt</b> widget pokud:"
 
-#: views/import.php:370
-msgid "Date archives"
-msgstr "Archiv datumů"
+#: inc/class-custom-sidebars-visibility.php:214
+msgid "Filters"
+msgstr "Filtr"
 
-#: views/import.php:369
-msgid "Main blog page"
-msgstr "Hlavní stránka blogu"
+#: inc/class-custom-sidebars-visibility.php:218
+msgid "Date"
+msgstr "Datum"
+
+#: inc/class-custom-sidebars-visibility.php:223
+msgid "Guests"
+msgstr "Hosté"
+
+#: inc/class-custom-sidebars-visibility.php:228
+msgid "Roles"
+msgstr "Role"
+
+#: inc/class-custom-sidebars-visibility.php:233
+msgid "Membership"
+msgstr "Členství"
+
+#: inc/class-custom-sidebars-visibility.php:239
+msgid "Membership2"
+msgstr "Členství2"
 
 #: inc/class-custom-sidebars-visibility.php:245 views/import.php:366
 msgid "Special pages"
 msgstr "Speciální stránky"
 
-#: views/import.php:348
-msgid "Category archives"
-msgstr "Archiv kategorie"
+#: inc/class-custom-sidebars-visibility.php:250
+msgid "For posttype"
+msgstr "Pro typ příspěvku"
 
-#: views/import.php:328
-msgid "By category"
-msgstr "Dle kategorie"
+#: inc/class-custom-sidebars-visibility.php:252
+msgid "Taxonomy"
+msgstr "Taxonomie"
 
-#: views/import.php:307
-msgid "Post-type archives"
-msgstr "Archiv dle typu příspěvku"
-
-#: views/import.php:278
-msgid "By post type"
-msgstr "Dle typu příspěvku"
-
-#: views/import.php:259
-msgid "Replaceable Sidebars"
-msgstr ""
-
-#: views/import.php:256
-msgid "Replaceable sidebars"
-msgstr ""
-
-#: views/import.php:252
-msgid "Configuration"
-msgstr "Nastavení"
-
-#: views/import.php:224
-msgid "(Theme sidebar)"
-msgstr ""
-
-#: views/import.php:154
-msgid "New sidebar will be created"
-msgstr "Bude vytvořen nový panel"
-
-#: views/import.php:156
-msgid "Existing sidebar will be replaced!"
-msgstr "Již existující panel bude přesunut!"
-
-#: inc/class-custom-sidebars.php:963 views/import.php:147
-msgid "Widgets"
-msgstr "Widgety"
-
-#: views/import.php:146
-msgid "Note"
-msgstr "Poznámka"
-
-#: views/import.php:145 views/widgets-editor.php:20
-msgid "Description"
-msgstr "Popis"
-
-#: views/import.php:144 views/widgets-editor.php:15
-msgid "Name"
-msgstr "Jméno"
-
-#: views/import.php:137
-msgid "Also import all widgets of the selected sidebars."
-msgstr ""
-
-#: views/import.php:132
-msgid "Mark the sidebars that you want to import."
-msgstr "Označte panely které chcete importovat"
-
-#: views/bulk-edit.php:23 views/import.php:130 views/widgets.php:47
-msgid "Custom Sidebars"
-msgstr "Vlastní panely"
-
-#: views/import.php:105
-msgid "Theme"
-msgstr "Šablona"
-
-#: views/import.php:100
-msgid "Plugin version"
-msgstr "Verze pluginu"
-
-#: views/import.php:95
-msgid "WordPress version"
-msgstr "Verze WordPress"
-
-#: views/import.php:84
-msgid "WordPress settings"
-msgstr "Nastavení WordPress"
-
-#: views/import.php:78
-msgid "Exported on"
-msgstr "Exportovat"
-
-#: views/import.php:74
-msgid "Filename"
-msgstr "Název souboru"
-
-#: views/import.php:67 views/widgets-export.php:34
-msgid "Import"
-msgstr "Import"
-
-#: inc/class-custom-sidebars.php:148
-msgid ""
-"<strong>Accessibility mode is not supported by the\n"
-"\t\t\t\t\t\t%1$s plugin.</strong><br /><a href=\"%2$s\">Click here</a>\n"
-"\t\t\t\t\t\tto disable accessibility mode and use the %1$s plugin!"
-msgstr ""
-
-#. Plugin Name of the plugin/theme
-msgid "Custom Sidebars Pro"
-msgstr ""
-
-#: inc/class-custom-sidebars-visibility.php:405
-msgid "Only these %s:"
-msgstr ""
-
-#: inc/class-custom-sidebars-visibility.php:404
-msgid "Only for specific %s"
-msgstr ""
-
-#: inc/class-custom-sidebars-visibility.php:386
-msgid "On any page of these types"
-msgstr ""
-
-#: inc/class-custom-sidebars-visibility.php:367
-msgid "On these special pages"
-msgstr ""
-
-#: inc/class-custom-sidebars-visibility.php:336
-#: inc/class-custom-sidebars-visibility.php:356
-msgid "(inactive)"
-msgstr "(neaktivní)"
-
-#: inc/class-custom-sidebars-visibility.php:328
-msgid "User has Membership Level"
-msgstr "Uživatel je člen"
-
-#: inc/class-custom-sidebars-visibility.php:309
-msgid "User has role"
-msgstr "Uživatel má roli"
+#: inc/class-custom-sidebars-visibility.php:269
+msgid "Always"
+msgstr "Vždy"
 
 #: inc/class-custom-sidebars-visibility.php:294
 #: inc/class-custom-sidebars-visibility.php:299
@@ -596,127 +303,451 @@ msgstr "Uživatel má roli"
 msgid "AND"
 msgstr "a"
 
-#: inc/class-custom-sidebars-visibility.php:269
-msgid "Always"
-msgstr "Vždy"
+#: inc/class-custom-sidebars-visibility.php:295
+msgid "User is not logged-in (Guest)"
+msgstr "Uživatel není přihlášen (host)"
 
-#: inc/class-custom-sidebars-visibility.php:210
-msgid "<b>Hide</b> widget if:"
-msgstr "<b>Skrýt</b> widget pokud:"
+#: inc/class-custom-sidebars-visibility.php:300
+msgid "User is logged-in (Member)"
+msgstr "Uživatel je přihlášen (člen)"
 
-#: inc/class-custom-sidebars-visibility.php:209
-msgid "<b>Show</b> widget if:"
-msgstr "<b>Zobrazit</b> widget pokud:"
+#: inc/class-custom-sidebars-visibility.php:309
+msgid "User has role"
+msgstr "Uživatel má roli"
 
-#: inc/class-custom-sidebars-visibility.php:200
-msgid "Visibility"
-msgstr "Viditelnost"
+#: inc/class-custom-sidebars-visibility.php:328
+msgid "User has Membership Level"
+msgstr "Uživatel je člen"
 
-#: inc/class-custom-sidebars-export.php:747
-msgid "Imported %d widget!"
-msgid_plural "Imported %d widgets!"
-msgstr[0] ""
-msgstr[1] ""
-msgstr[2] ""
+#: inc/class-custom-sidebars-visibility.php:336
+#: inc/class-custom-sidebars-visibility.php:356
+msgid "(inactive)"
+msgstr "(neaktivní)"
 
-#: inc/class-custom-sidebars-export.php:698
-msgid "Plugin options were imported!"
-msgstr "Nastavení pluginu bylo importováno"
+#: inc/class-custom-sidebars-visibility.php:348
+msgid "User has Membership"
+msgstr "Uživatel je členem"
 
-#: inc/class-custom-sidebars-export.php:684
-msgid "Imported %d custom sidebar!"
-msgid_plural "Imported %d custom sidebars!"
-msgstr[0] ""
-msgstr[1] ""
-msgstr[2] ""
-
-#: inc/class-custom-sidebars-export.php:390
-msgid "Unexpected import format"
-msgstr "Neočekávaný formát pro import"
-
-#: inc/class-custom-sidebars-export.php:367
-msgid "Something went wrong"
-msgstr "Něco se pokazilo"
-
-#: inc/class-custom-sidebars-export.php:361
-msgid "Import file is too big"
-msgstr "Importovaný soubor je příliš veliký"
-
-#: inc/class-custom-sidebars-export.php:354
-#: inc/class-custom-sidebars-export.php:396
-msgid "No file was uploaded"
-msgstr "Nebyl nahrát žádný soubor"
-
-#: inc/class-custom-sidebars-export.php:62 views/widgets.php:46
-msgid "Import / Export Sidebars"
-msgstr "Import / Export panelů"
-
-#: inc/class-custom-sidebars-editor.php:913 views/widgets.php:17
-msgid "Sidebars"
-msgstr "Panely"
-
-#: inc/class-custom-sidebars-editor.php:861
-msgid "Updated sidebar <strong>%1$s</strong> settings."
+#: inc/class-custom-sidebars-visibility.php:367
+msgid "On these special pages"
 msgstr ""
 
-#: inc/class-custom-sidebars-editor.php:583
-msgid "%1$s Archives"
+#: inc/class-custom-sidebars-visibility.php:386
+msgid "On any page of these types"
 msgstr ""
 
-#: inc/class-custom-sidebars-editor.php:579
-#: inc/class-custom-sidebars-visibility.php:157
-msgid "Post Index"
+#: inc/class-custom-sidebars-visibility.php:404
+msgid "Only for specific %s"
 msgstr ""
 
-#: inc/class-custom-sidebars-editor.php:502
-msgid "Date Archives"
+#: inc/class-custom-sidebars-visibility.php:405
+msgid "Only these %s:"
 msgstr ""
 
-#: views/widgets-location.php:179
+#: inc/class-custom-sidebars.php:148
+msgid ""
+"<strong>Accessibility mode is not supported by the\n"
+"\t\t\t\t\t\t%1$s plugin.</strong><br /><a href=\"%2$s\">Click here</a>\n"
+"\t\t\t\t\t\tto disable accessibility mode and use the %1$s plugin!"
+msgstr ""
+
+#: inc/class-custom-sidebars.php:961 views/import.php:147
+msgid "Widgets"
+msgstr "Widgety"
+
+#: inc/class-custom-sidebars.php:971
+msgid "Support"
+msgstr "Podpora"
+
+#: inc/class-custom-sidebars.php:989
+msgid "Create a custom sidebar to get started."
+msgstr ""
+
+#: inc/integrations/class-custom-sidebars-integration-polylang.php:66
+msgid "Polylang"
+msgstr ""
+
+#: inc/integrations/class-custom-sidebars-integration-polylang.php:67
+#: inc/integrations/class-custom-sidebars-integration-wpml.php:50
+msgid "Language"
+msgstr ""
+
+#: inc/integrations/class-custom-sidebars-integration-wpml.php:49
+msgid "WPML"
+msgstr ""
+
+#: views/bulk-edit.php:23 views/import.php:130 views/widgets.php:47
+msgid "Custom Sidebars"
+msgstr "Vlastní panely"
+
+#: views/bulk-edit.php:35
+msgid "&mdash; No Change &mdash;"
+msgstr ""
+
+#: views/col-sidebars.php:18
+msgid "(Not available for Home-Page)"
+msgstr "(Nedostupné pro domovskou stránku)"
+
+#: views/col-sidebars.php:20
+msgid "(Not available for Blog-Page)"
+msgstr "(Nedostupné pro stránky blogu)"
+
+#: views/import.php:67 views/widgets-export.php:34
+msgid "Import"
+msgstr "Import"
+
+#: views/import.php:74
+msgid "Filename"
+msgstr "Název souboru"
+
+#: views/import.php:78
+msgid "Exported on"
+msgstr "Exportovat"
+
+#: views/import.php:84
+msgid "WordPress settings"
+msgstr "Nastavení WordPress"
+
+#: views/import.php:95
+msgid "WordPress version"
+msgstr "Verze WordPress"
+
+#: views/import.php:100
+msgid "Plugin version"
+msgstr "Verze pluginu"
+
+#: views/import.php:102
+msgid "Unknown"
+msgstr ""
+
+#: views/import.php:105
+msgid "Theme"
+msgstr "Šablona"
+
+#: views/import.php:132
+msgid "Mark the sidebars that you want to import."
+msgstr "Označte panely které chcete importovat"
+
+#: views/import.php:137
+msgid "Also import all widgets of the selected sidebars."
+msgstr ""
+
+#: views/import.php:144 views/widgets-editor.php:15
+msgid "Name"
+msgstr "Jméno"
+
+#: views/import.php:145 views/widgets-editor.php:20
+msgid "Description"
+msgstr "Popis"
+
+#: views/import.php:146
+msgid "Note"
+msgstr "Poznámka"
+
+#: views/import.php:154
+msgid "New sidebar will be created"
+msgstr "Bude vytvořen nový panel"
+
+#: views/import.php:156
+msgid "Existing sidebar will be replaced!"
+msgstr "Již existující panel bude přesunut!"
+
+#: views/import.php:224
+msgid "(Theme sidebar)"
+msgstr ""
+
+#: views/import.php:252
+msgid "Configuration"
+msgstr "Nastavení"
+
+#: views/import.php:256
+msgid "Replaceable sidebars"
+msgstr ""
+
+#: views/import.php:259
+msgid "Replaceable Sidebars"
+msgstr ""
+
+#: views/import.php:278
+msgid "By post type"
+msgstr "Dle typu příspěvku"
+
+#: views/import.php:307
+msgid "Post-type archives"
+msgstr "Archiv dle typu příspěvku"
+
+#: views/import.php:328
+msgid "By category"
+msgstr "Dle kategorie"
+
+#: views/import.php:348
+msgid "Category archives"
+msgstr "Archiv kategorie"
+
+#: views/import.php:369
+msgid "Main blog page"
+msgstr "Hlavní stránka blogu"
+
+#: views/import.php:370
+msgid "Date archives"
+msgstr "Archiv datumů"
+
+#: views/import.php:371
+msgid "Author archives"
+msgstr "Archiv autora"
+
+#: views/import.php:372
+msgid "Tag archives"
+msgstr "Archiv tagů"
+
+#: views/import.php:373
+msgid "Search results page"
+msgstr "Stránka s výsledky vyhledávání"
+
+#: views/import.php:383
+msgid ""
+"Replace the current plugin configuration with the imported configuration."
+msgstr ""
+
+#: views/widgets-delete.php:11
+msgid ""
+"Please confirm that you want to delete the sidebar <strong class=\"name\"></"
+"strong>."
+msgstr "Potvrďte smazání panelu <strong class=\"name\"></strong>."
+
+#: views/widgets-delete.php:16 views/widgets-editor.php:63
+#: views/widgets-location.php:251
+msgid "Cancel"
+msgstr "Zrušit"
+
+#: views/widgets-delete.php:17
+msgid "Yes, delete it"
+msgstr "Ano, smazat"
+
+#: views/widgets-editor.php:16
+msgid "Sidebar name here..."
+msgstr "Název panelu zde..."
+
+#: views/widgets-editor.php:17
+msgid "The name should be unique."
+msgstr ""
+
+#: views/widgets-editor.php:21
+msgid "Sidebar description here..."
+msgstr "Popis panelu zde..."
+
+#: views/widgets-editor.php:27
+msgid "Caution:"
+msgstr "Upozornění:"
+
+#: views/widgets-editor.php:39
+msgid "Before Title"
+msgstr "Před nadpisem"
+
+#: views/widgets-editor.php:43
+msgid "After Title"
+msgstr "Po nadpisu"
+
+#: views/widgets-editor.php:49
+msgid "Before Widget"
+msgstr "Před widgetem"
+
+#: views/widgets-editor.php:53
+msgid "After Widget"
+msgstr "Po widgetu"
+
+#: views/widgets-editor.php:60
+msgid "Advanced - Edit custom wrapper code"
+msgstr ""
+
+#: views/widgets-editor.php:64 views/widgets.php:43
+msgid "Create Sidebar"
+msgstr "Vytvořit panel"
+
+#: views/widgets-export.php:10 views/widgets-export.php:28
+msgid "Export"
+msgstr "Export"
+
+#: views/widgets-export.php:23
+msgid "Optional description for the export file:"
+msgstr "Popis souboru pro export:"
+
+#: views/widgets-export.php:38
+msgid "Select a file to import"
+msgstr ""
+
+#: views/widgets-location.php:30
+msgid "Replaced by another sidebar:"
+msgstr ""
+
+#: views/widgets-location.php:38
+msgid "As <strong>%1$s</strong> for selected %2$s"
+msgstr ""
+
+#: views/widgets-location.php:51
+msgid "Click here to pick available %1$s"
+msgstr "Kliknutím vyberete dostupné %1$s"
+
+#: views/widgets-location.php:87
+msgid ""
+"There are no replaceable sidebars. Please allow at least one as replaceable."
+msgstr ""
+
+#: views/widgets-location.php:97 views/widgets-location.php:149
+#: views/widgets-location.php:207
+msgid "Click to toggle"
+msgstr "Kliknutím přepnete"
+
+#: views/widgets-location.php:98
+msgid "For all Single Entries matching selected criteria"
+msgstr ""
+
+#: views/widgets-location.php:101
+msgid ""
+"These replacements will be applied to every single post that matches a "
+"certain post type or category."
+msgstr ""
+"Nastavení se provede na každý příspěvek který je v dané kategorii nebo "
+"odpovídá danému typu příspěvku."
+
+#: views/widgets-location.php:109
+msgid "categories"
+msgstr "kategorie"
+
+#: views/widgets-location.php:121
+msgid "Post Types"
+msgstr "Typ příspěvku"
+
+#: views/widgets-location.php:150
+msgid "For Archives"
+msgstr ""
+
+#: views/widgets-location.php:153
+msgid "These replacements will be applied to Archive Type posts and pages."
+msgstr ""
+
+#: views/widgets-location.php:155 views/widgets-location.php:166
+msgid "Archive Types"
+msgstr "Typ archivu"
+
+#: views/widgets-location.php:156 views/widgets-location.php:177
+msgid "Category Archives"
+msgstr "Archiv kategorie"
+
+#: views/widgets-location.php:157
+msgid "Authors"
+msgstr "Autoři"
+
+#: views/widgets-location.php:188
 msgid "Author Archives"
 msgstr ""
 
-#: inc/class-custom-sidebars-editor.php:499
-msgid "Search Results"
+#: views/widgets-location.php:208
+msgid "3rd party plugins"
 msgstr ""
 
-#: inc/class-custom-sidebars-editor.php:498
-#: inc/class-custom-sidebars-visibility.php:156
-msgid "Front Page"
+#: views/widgets-location.php:211
+msgid "These replacements will be applied to 3rd party plugins."
 msgstr ""
 
-#: inc/class-custom-sidebars-editor.php:425
-msgid "Deleted sidebar <strong>%1$s</strong>"
-msgstr "Smazat panel <strong>%1$s</strong>"
+#: views/widgets-location.php:252 views/widgets.php:42
+msgid "Save Changes"
+msgstr "Uložit změny"
 
-#: inc/class-custom-sidebars-editor.php:353
-#: inc/class-custom-sidebars-editor.php:436
-msgid "The sidebar was not found"
-msgstr "Panel nenalezen"
+#: views/widgets.php:21
+msgid "Create a new sidebar"
+msgstr "Vytvořit nový panel"
 
-#: inc/class-custom-sidebars-editor.php:342
-msgid "Updated sidebar <strong>%1$s</strong>"
-msgstr "Aktualizovat panel <strong>%1$s</strong>"
+#: views/widgets.php:40
+msgid "Edit [Sidebar]"
+msgstr "Upravit [Panel]"
 
-#: inc/class-custom-sidebars-editor.php:334
-msgid "Created new sidebar <strong>%1$s</strong>"
-msgstr "Vytvořit nový panel  <strong>%1$s</strong>"
+#: views/widgets.php:41
+msgid "New Custom Sidebar"
+msgstr "Nový vlastní panel"
 
-#: inc/class-custom-sidebars-editor.php:297
-#: inc/class-custom-sidebars-editor.php:416
-msgid "The sidebar does not exist"
-msgstr "Panel neexistuje"
+#: views/widgets.php:44
+msgid "Delete Sidebar"
+msgstr "Odstranit panel"
 
-#: inc/class-custom-sidebars-editor.php:273
-msgid "Sidebar-name cannot be empty"
-msgstr "Název panelu nemůže zůstat prázdný"
+#: views/widgets.php:45
+msgid "Define where you want this sidebar to appear."
+msgstr "Určete místa, kde se bude panel zobrazovat"
 
-#: inc/class-custom-sidebars-editor.php:158
-#: inc/class-custom-sidebars-editor.php:173
-#: inc/class-custom-sidebars-export.php:98
-msgid "You do not have permission for this"
-msgstr "Nedostatečná oprávnění"
+#: views/widgets.php:48
+msgid "Theme Sidebars"
+msgstr "Panely šablony"
 
-#: inc/class-custom-sidebars-cloning.php:206
-msgid "Clone"
-msgstr "Klon"
+#: views/widgets.php:49
+msgid "Couldn't load data from WordPress..."
+msgstr "Data z WordPress nelze načíst..."
+
+#: views/widgets.php:50 views/widgets.php:105
+msgid "This sidebar can be replaced on certain pages"
+msgstr "Panel může být nahrazen na určitých stránkách"
+
+#: views/widgets.php:51
+msgid ""
+"Activate this option to replace the sidebar with one of your custom sidebars."
+msgstr "Aktivací této volby umožníte nahrazení panelu vaším vlastním panelem."
+
+#: views/widgets.php:52
+msgid "Filter..."
+msgstr "Filr"
+
+#: views/widgets.php:69
+msgid "Delete this sidebar."
+msgstr "Odstranit panel"
+
+#: views/widgets.php:78
+msgid "Edit this sidebar."
+msgstr "Upravit panel"
+
+#: views/widgets.php:80
+msgid "Edit"
+msgstr "Upravit"
+
+#: views/widgets.php:87 views/widgets.php:124
+msgid "Where do you want to show the sidebar?"
+msgstr "Kde se má panel zobrazit?"
+
+#: views/widgets.php:89 views/widgets.php:126
+msgid "Sidebar Location"
+msgstr "Pozice panelu"
+
+#: views/widgets.php:106
+msgid "This sidebar will always be same on all pages"
+msgstr "Panel bude na všech stránkách stejný"
+
+#: views/widgets.php:115
+msgid "Allow this sidebar to be replaced"
+msgstr "Povolit přemístění panelu."
+
+#. Plugin Name of the plugin/theme
+msgid "Custom Sidebars Pro"
+msgstr ""
+
+#. Plugin URI of the plugin/theme
+msgid "http://premium.wpmudev.org/project/custom-sidebars/"
+msgstr "http://premium.wpmudev.org/project/custom-sidebars/"
+
+#. Description of the plugin/theme
+msgid ""
+"Allows you to create widgetized areas and custom sidebars. Replace whole "
+"sidebars or single widgets for specific posts and pages."
+msgstr ""
+"Vytvořte si vlastní postraní panely nebo widgety. Upravujte celý panel nebo "
+"jeden widget vždy pro konkrétní stránku."
+
+#. Author of the plugin/theme
+msgid "WPMU DEV"
+msgstr "WPMU DEV"
+
+#. Author URI of the plugin/theme
+msgid "http://premium.wpmudev.org/"
+msgstr "http://premium.wpmudev.org/"
+
+#: inc/class-custom-sidebars-editor.php:1245
+msgctxt "Column name on entries list."
+msgid "Custom Sidebars"
+msgstr ""
