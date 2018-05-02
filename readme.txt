@@ -114,10 +114,6 @@ Any user that can switch themes, can create sidebars. Switch_themes is the capab
 
 Custom Sidebars has the same license as WordPress, so you can use it wherever you want for free. Yay!
 
-= I like the plugin, but what can I do if my website is based in a WP version older than 3.3 =
-
-If you are running a earlier version of WordPress download Custom Sidebars 0.8.2.
-
 == Changelog ==
 
 = 3.1.4 =
@@ -134,7 +130,7 @@ If you are running a earlier version of WordPress download Custom Sidebars 0.8.2
 = 3.1.2 =
 * Added integration with Polylang - now you can choose sidebar depend on Polylang language.
 * Added integration with WPML - now you can choose sidebar depend on WPML language.
-* Added check to avoid warnigs when user delete term which is assigned to "Sidebar Location".
+* Added check to avoid warnings when user delete term which is assigned to "Sidebar Location".
 * Updated "WPMU Dev code library" to version 3.0.5.
 
 = 3.1.1 =
@@ -210,7 +206,7 @@ If you are running a earlier version of WordPress download Custom Sidebars 0.8.2
 * Show advertising for "WP Checkup" in the whole admin area.
 
 = 3.0.0.1 =
-* Fixed a problem with wp_enqueue_script which was called too early.
+* Fixed a problem with `wp_enqueue_script()` which was called too early.
 * Fixed a problem with advertising, which should stay close when you close it.
 
 = 3.0.0.0 =
@@ -248,7 +244,7 @@ If you are running a earlier version of WordPress download Custom Sidebars 0.8.2
 * Fixed problem with sorting and filtering.
 
 = 2.1.1.3 =
-* Added check if there the function "mb_strtolower".
+* Added check if there the function `mb_strtolower()`.
 
 = 2.1.1.2 =
 * Sidebars are now sorted by name.
