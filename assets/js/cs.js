@@ -1,4 +1,4 @@
-/*! Custom Sidebars - v3.1.4
+/*! Custom Sidebars - v3.1.5-beta.1
  * https://premium.wpmudev.org/project/custom-sidebars-pro/
  * Copyright (c) 2018; * Licensed GPLv2+ */
 /*global window:false */
@@ -1608,22 +1608,14 @@ jQuery.fn.sortElements = (function(){
 /*global console:false */
 /*global document:false */
 /*global ajaxurl:false */
-
-/**
- * Handle "Custom sidebars configuration is allowed for:" option on
- * widgets screen options.
- */
 (function($){
     jQuery(document).ready( function($) {
-        $('#screen-options-wrap .cs-roles input[type=checkbox]').on( 'change', function() {
+        $('#screen-options-wrap .cs-allow-author input[type=checkbox]').on( 'change', function() {
             var data = {
-                'action': 'custom_sidebars_metabox_roles',
-                '_wpnonce': $('#custom_sidebars_metabox_roles').val(),
-                'fields': {}
+                'action': 'custom_sidebars_allow_author',
+                '_wpnonce': $('#custom_sidebars_allow_author').val(),
+                'value': this.checked
             };
-            $('#screen-options-wrap .cs-roles input[type=checkbox]').each( function() {
-                data.fields[$(this).val()] = this.checked;
-            });
             $.post( ajaxurl, data );
         });
     });
@@ -1646,6 +1638,30 @@ jQuery.fn.sortElements = (function(){
                 'fields': {}
             };
             $('#screen-options-wrap .cs-custom-taxonomies input[type=checkbox]').each( function() {
+                data.fields[$(this).val()] = this.checked;
+            });
+            $.post( ajaxurl, data );
+        });
+    });
+})(jQuery);
+
+/*global console:false */
+/*global document:false */
+/*global ajaxurl:false */
+
+/**
+ * Handle "Custom sidebars configuration is allowed for:" option on
+ * widgets screen options.
+ */
+(function($){
+    jQuery(document).ready( function($) {
+        $('#screen-options-wrap .cs-roles input[type=checkbox]').on( 'change', function() {
+            var data = {
+                'action': 'custom_sidebars_metabox_roles',
+                '_wpnonce': $('#custom_sidebars_metabox_roles').val(),
+                'fields': {}
+            };
+            $('#screen-options-wrap .cs-roles input[type=checkbox]').each( function() {
                 data.fields[$(this).val()] = this.checked;
             });
             $.post( ajaxurl, data );
