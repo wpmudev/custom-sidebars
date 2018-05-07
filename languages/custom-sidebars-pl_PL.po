@@ -4,8 +4,8 @@ msgid ""
 msgstr ""
 "Project-Id-Version: Custom Sidebars Pro\n"
 "Report-Msgid-Bugs-To: https://wordpress.org/support/plugin/customsidebars\n"
-"POT-Creation-Date: 2018-05-02 05:33:09+00:00\n"
-"PO-Revision-Date: 2018-05-02 05:32:32+0000\n"
+"POT-Creation-Date: 2018-05-07 07:48:42+00:00\n"
+"PO-Revision-Date: 2018-05-07 07:48:09+0000\n"
 "Language: pl\n"
 "MIME-Version: 1.0\n"
 "Content-Type: text/plain; charset=UTF-8\n"
@@ -54,102 +54,110 @@ msgstr "Pobierz Upfront za darmo"
 msgid "Clone"
 msgstr "Klonuj"
 
-#: inc/class-custom-sidebars-editor.php:164
-#: inc/class-custom-sidebars-editor.php:179
+#: inc/class-custom-sidebars-editor.php:146
+#: inc/class-custom-sidebars-editor.php:161
 #: inc/class-custom-sidebars-export.php:98
 msgid "You do not have permission for this"
 msgstr "Przepraszamy, nie posiadasz  uprawnień żeby to zrobić"
 
-#: inc/class-custom-sidebars-editor.php:256
-#: inc/class-custom-sidebars-editor.php:413
-#: inc/class-custom-sidebars-editor.php:730
+#: inc/class-custom-sidebars-editor.php:231
+#: inc/class-custom-sidebars-editor.php:371
+#: inc/class-custom-sidebars-editor.php:664
 msgid "You have no permission to do this operation."
 msgstr "Nie masz uprawnień do wykonania tej operacji."
 
-#: inc/class-custom-sidebars-editor.php:279
+#: inc/class-custom-sidebars-editor.php:249
 msgid "Sidebar-name cannot be empty"
 msgstr "Nazwa panelu bocznego nie może być pusta"
 
-#: inc/class-custom-sidebars-editor.php:303
-#: inc/class-custom-sidebars-editor.php:422
+#: inc/class-custom-sidebars-editor.php:270
+#: inc/class-custom-sidebars-editor.php:379
 msgid "The sidebar does not exist"
 msgstr "Wybrany panel boczny nie istnieje"
 
-#: inc/class-custom-sidebars-editor.php:340
+#: inc/class-custom-sidebars-editor.php:303
 msgid "Created new sidebar <strong>%1$s</strong>"
 msgstr "Utworzono nowy panel boczny <strong>%1$s</strong>"
 
-#: inc/class-custom-sidebars-editor.php:348
+#: inc/class-custom-sidebars-editor.php:311
 msgid "Updated sidebar <strong>%1$s</strong>"
 msgstr "Panel boczny <strong>%1$s</strong> został zaktualizowany"
 
-#: inc/class-custom-sidebars-editor.php:359
-#: inc/class-custom-sidebars-editor.php:442
+#: inc/class-custom-sidebars-editor.php:322
+#: inc/class-custom-sidebars-editor.php:397
 msgid "The sidebar was not found"
 msgstr "Panel boczny nie został znaleziony"
 
-#: inc/class-custom-sidebars-editor.php:431
+#: inc/class-custom-sidebars-editor.php:387
 msgid "Deleted sidebar <strong>%1$s</strong>"
 msgstr "Panel boczny <strong>%1$s</strong> został usunięty"
 
-#: inc/class-custom-sidebars-editor.php:503
+#: inc/class-custom-sidebars-editor.php:454
 #: inc/class-custom-sidebars-visibility.php:156
 msgid "Front Page"
 msgstr "Strona Główna"
 
-#: inc/class-custom-sidebars-editor.php:504
+#: inc/class-custom-sidebars-editor.php:455
 msgid "Search Results"
 msgstr "Wyniki wyszukiwania"
 
-#: inc/class-custom-sidebars-editor.php:505
+#: inc/class-custom-sidebars-editor.php:456
 #: inc/class-custom-sidebars-visibility.php:162
 msgid "Not found (404)"
 msgstr "Nie znaleziono (404)"
 
-#: inc/class-custom-sidebars-editor.php:506
+#: inc/class-custom-sidebars-editor.php:457
 msgid "Any Author Archive"
 msgstr "Archiwum Autorów"
 
-#: inc/class-custom-sidebars-editor.php:507
+#: inc/class-custom-sidebars-editor.php:458
 msgid "Date Archives"
 msgstr "Archiwum Dat"
 
-#: inc/class-custom-sidebars-editor.php:525
-#: inc/class-custom-sidebars-editor.php:528
-#: inc/class-custom-sidebars-editor.php:535
-#: inc/class-custom-sidebars-editor.php:537
-#: inc/class-custom-sidebars-editor.php:621
-#: inc/class-custom-sidebars-editor.php:623
-#: inc/class-custom-sidebars-editor.php:678
+#: inc/class-custom-sidebars-editor.php:475
+#: inc/class-custom-sidebars-editor.php:478
+#: inc/class-custom-sidebars-editor.php:484
+#: inc/class-custom-sidebars-editor.php:486
+#: inc/class-custom-sidebars-editor.php:558
+#: inc/class-custom-sidebars-editor.php:560
+#: inc/class-custom-sidebars-editor.php:614
 msgid "%s Archives"
 msgstr "%s archiwum"
 
-#: inc/class-custom-sidebars-editor.php:584
+#: inc/class-custom-sidebars-editor.php:526
 #: inc/class-custom-sidebars-visibility.php:157
 msgid "Post Index"
 msgstr "Lista wpisów"
 
-#: inc/class-custom-sidebars-editor.php:588
+#: inc/class-custom-sidebars-editor.php:530
 msgid "%1$s Archives"
 msgstr "%1$s Archiwów"
 
-#: inc/class-custom-sidebars-editor.php:923
+#: inc/class-custom-sidebars-editor.php:845
 msgid "Updated sidebar <strong>%1$s</strong> settings."
 msgstr "Ustawienia panelu bocznego <strong>%1$s</strong> zostały zapisane"
 
-#: inc/class-custom-sidebars-editor.php:975 views/widgets.php:17
+#: inc/class-custom-sidebars-editor.php:900 views/widgets.php:17
 msgid "Sidebars"
 msgstr "Panele boczne"
 
-#: inc/class-custom-sidebars-editor.php:1445
+#: inc/class-custom-sidebars-editor.php:1322
 msgid "Custom sidebars configuration is allowed for:"
 msgstr "Umożliwiaj konfigurację paneli bocznych:"
 
-#: inc/class-custom-sidebars-editor.php:1471
+#: inc/class-custom-sidebars-editor.php:1345
+msgid "Allowed to replace sidebars:"
+msgstr "Pozwalaj na zmianę paneli bocznych:"
+
+#: inc/class-custom-sidebars-editor.php:1351
+msgid "Allow entry author to change sidebars"
+msgstr "Pozwalaj autorowy wpisu na zmianę paneli bocznych"
+
+#: inc/class-custom-sidebars-editor.php:1362
 msgid "Allow Custom Taxonomies in Sidebar Location:"
 msgstr "Pozwalaj na własne taxonomie w lokalizacjach pasków bocznych."
 
-#: inc/class-custom-sidebars-editor.php:1482
+#: inc/class-custom-sidebars-editor.php:1373
 msgid ""
 "After turn on any Custom Taxonomy you need to reload this screen to be able "
 "choose it in Sidebar Location."
@@ -760,7 +768,7 @@ msgstr "WPMU DEV"
 msgid "http://premium.wpmudev.org/"
 msgstr "http://premium.wpmudev.org/"
 
-#: inc/class-custom-sidebars-editor.php:1245
+#: inc/class-custom-sidebars-editor.php:1137
 msgctxt "Column name on entries list."
 msgid "Custom Sidebars"
 msgstr "Własne panele boczne"

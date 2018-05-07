@@ -2,7 +2,7 @@ msgid ""
 msgstr ""
 "Project-Id-Version: Custom Sidebars\n"
 "Report-Msgid-Bugs-To: https://wordpress.org/support/plugin/customsidebars\n"
-"POT-Creation-Date: 2018-03-27 11:45:09+00:00\n"
+"POT-Creation-Date: 2018-05-07 07:46:41+00:00\n"
 "PO-Revision-Date: 2014-08-28 21:54+0100\n"
 "Last-Translator: Philipp Stracker <philipp@stracker.net>\n"
 "Language-Team: \n"
@@ -56,120 +56,130 @@ msgid "Clone"
 msgstr ""
 
 # @ custom-sidebars
-#: inc/class-custom-sidebars-editor.php:164
-#: inc/class-custom-sidebars-editor.php:179
+#: inc/class-custom-sidebars-editor.php:146
+#: inc/class-custom-sidebars-editor.php:161
 #: inc/class-custom-sidebars-export.php:98
 msgid "You do not have permission for this"
 msgstr ""
 
-#: inc/class-custom-sidebars-editor.php:256
-#: inc/class-custom-sidebars-editor.php:413
-#: inc/class-custom-sidebars-editor.php:730
+#: inc/class-custom-sidebars-editor.php:231
+#: inc/class-custom-sidebars-editor.php:371
+#: inc/class-custom-sidebars-editor.php:664
 msgid "You have no permission to do this operation."
 msgstr ""
 
-#: inc/class-custom-sidebars-editor.php:279
+#: inc/class-custom-sidebars-editor.php:249
 msgid "Sidebar-name cannot be empty"
 msgstr ""
 
 # @ custom-sidebars
-#: inc/class-custom-sidebars-editor.php:303
-#: inc/class-custom-sidebars-editor.php:422
+#: inc/class-custom-sidebars-editor.php:270
+#: inc/class-custom-sidebars-editor.php:379
 #, fuzzy
 msgid "The sidebar does not exist"
 msgstr "יצר סיידבר"
 
-#: inc/class-custom-sidebars-editor.php:340
+#: inc/class-custom-sidebars-editor.php:303
 msgid "Created new sidebar <strong>%1$s</strong>"
 msgstr ""
 
-#: inc/class-custom-sidebars-editor.php:348
+#: inc/class-custom-sidebars-editor.php:311
 msgid "Updated sidebar <strong>%1$s</strong>"
 msgstr ""
 
 # @ custom-sidebars
-#: inc/class-custom-sidebars-editor.php:359
-#: inc/class-custom-sidebars-editor.php:442
+#: inc/class-custom-sidebars-editor.php:322
+#: inc/class-custom-sidebars-editor.php:397
 #, fuzzy
 msgid "The sidebar was not found"
 msgstr "יצר סיידבר"
 
-#: inc/class-custom-sidebars-editor.php:431
+#: inc/class-custom-sidebars-editor.php:387
 msgid "Deleted sidebar <strong>%1$s</strong>"
 msgstr ""
 
-#: inc/class-custom-sidebars-editor.php:503
+#: inc/class-custom-sidebars-editor.php:454
 #: inc/class-custom-sidebars-visibility.php:156
 #, fuzzy
 msgid "Front Page"
 msgstr "עמוד בלוג ראשי"
 
 # @ custom-sidebars
-#: inc/class-custom-sidebars-editor.php:504
+#: inc/class-custom-sidebars-editor.php:455
 #, fuzzy
 msgid "Search Results"
 msgstr "עמוד תוצאות חיפוש"
 
-#: inc/class-custom-sidebars-editor.php:505
+#: inc/class-custom-sidebars-editor.php:456
 #: inc/class-custom-sidebars-visibility.php:162
 msgid "Not found (404)"
 msgstr ""
 
 # @ custom-sidebars
-#: inc/class-custom-sidebars-editor.php:506
+#: inc/class-custom-sidebars-editor.php:457
 #, fuzzy
 msgid "Any Author Archive"
 msgstr "ארכיוני כותבים"
 
 # @ custom-sidebars
-#: inc/class-custom-sidebars-editor.php:507
+#: inc/class-custom-sidebars-editor.php:458
 #, fuzzy
 msgid "Date Archives"
 msgstr "ארכיונים לפי תאריך"
 
 # @ custom-sidebars
-#: inc/class-custom-sidebars-editor.php:525
-#: inc/class-custom-sidebars-editor.php:528
-#: inc/class-custom-sidebars-editor.php:535
-#: inc/class-custom-sidebars-editor.php:537
-#: inc/class-custom-sidebars-editor.php:621
-#: inc/class-custom-sidebars-editor.php:623
-#: inc/class-custom-sidebars-editor.php:678
+#: inc/class-custom-sidebars-editor.php:475
+#: inc/class-custom-sidebars-editor.php:478
+#: inc/class-custom-sidebars-editor.php:484
+#: inc/class-custom-sidebars-editor.php:486
+#: inc/class-custom-sidebars-editor.php:558
+#: inc/class-custom-sidebars-editor.php:560
+#: inc/class-custom-sidebars-editor.php:614
 #, fuzzy
 msgid "%s Archives"
 msgstr "ארכיוני קטגוריה"
 
 # @ custom-sidebars
-#: inc/class-custom-sidebars-editor.php:584
+#: inc/class-custom-sidebars-editor.php:526
 #: inc/class-custom-sidebars-visibility.php:157
 #, fuzzy
 msgid "Post Index"
 msgstr "לפי סוג פוסט"
 
 # @ custom-sidebars
-#: inc/class-custom-sidebars-editor.php:588
+#: inc/class-custom-sidebars-editor.php:530
 #, fuzzy
 msgid "%1$s Archives"
 msgstr "ארכיוני קטגוריה"
 
-#: inc/class-custom-sidebars-editor.php:923
+#: inc/class-custom-sidebars-editor.php:845
 msgid "Updated sidebar <strong>%1$s</strong> settings."
 msgstr ""
 
 # @ custom-sidebars
-#: inc/class-custom-sidebars-editor.php:975 views/widgets.php:17
+#: inc/class-custom-sidebars-editor.php:900 views/widgets.php:17
 msgid "Sidebars"
 msgstr "סיידברים"
 
-#: inc/class-custom-sidebars-editor.php:1445
+#: inc/class-custom-sidebars-editor.php:1322
 msgid "Custom sidebars configuration is allowed for:"
 msgstr ""
 
-#: inc/class-custom-sidebars-editor.php:1471
+# @ custom-sidebars
+#: inc/class-custom-sidebars-editor.php:1345
+#, fuzzy
+msgid "Allowed to replace sidebars:"
+msgstr "סיידברים חלופיים"
+
+#: inc/class-custom-sidebars-editor.php:1351
+msgid "Allow entry author to change sidebars"
+msgstr ""
+
+#: inc/class-custom-sidebars-editor.php:1362
 msgid "Allow Custom Taxonomies in Sidebar Location:"
 msgstr ""
 
-#: inc/class-custom-sidebars-editor.php:1482
+#: inc/class-custom-sidebars-editor.php:1373
 msgid ""
 "After turn on any Custom Taxonomy you need to reload this screen to be able "
 "choose it in Sidebar Location."
@@ -852,7 +862,7 @@ msgid "http://premium.wpmudev.org/"
 msgstr ""
 
 # @ custom-sidebars
-#: inc/class-custom-sidebars-editor.php:1245
+#: inc/class-custom-sidebars-editor.php:1137
 #, fuzzy
 msgctxt "Column name on entries list."
 msgid "Custom Sidebars"
