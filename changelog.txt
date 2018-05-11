@@ -5,6 +5,10 @@ Buildtime: BUILDTIME
 Change Log:
 ----------------------------------------------------------------------
 
+3.1.6 ( 2018-xx-xx )
+----------------------------------------------------------------------
+- Fixed an export problem on PHP 5.2, json_encode() have only one parameter.
+
 3.1.5 ( 2018-05-14 )
 ----------------------------------------------------------------------
 - Fixed a problem with saving an entry sidebars replacement.

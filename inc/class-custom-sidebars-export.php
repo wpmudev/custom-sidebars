@@ -16,6 +16,10 @@ class CustomSidebarsExport extends CustomSidebars {
 	// Used after preview. This holds only the items that were selected for import.
 	private $selected_data = null;
 
+	/**
+	 * CSB version
+	 */
+	private $version = '';
 
 	/**
 	 * Returns the singleton object.
@@ -38,17 +42,17 @@ class CustomSidebarsExport extends CustomSidebars {
 	 * @since  2.0
 	 */
 	private function __construct() {
-		if ( is_admin() ) {
-			add_action(
-				'cs_widget_header',
-				array( $this, 'widget_header' )
-			);
+		add_action( 'admin_init', array( $this, 'admin_init' ) );
+	}
 
-			add_action(
-				'cs_ajax_request',
-				array( $this, 'handle_ajax' )
-			);
-		}
+	/**
+	 * Admin Init
+	 *
+	 * @since 3.1.6
+	 */
+	public function admin_init() {
+		add_action( 'cs_widget_header', array( $this, 'widget_header' ) );
+		add_action( 'cs_ajax_request', array( $this, 'handle_ajax' ) );
 	}
 
 	/**
@@ -147,17 +151,15 @@ class CustomSidebarsExport extends CustomSidebars {
 	 */
 	private function get_export_data() {
 		global $wp_registered_widgets, $wp_version;
-
 		$theme = wp_get_theme();
-
 		$csb_info = get_plugin_data( CSB_PLUGIN );
-
+		$this->version = $csb_info['Version'];
 		$data = array();
 		// Add some meta-details to the export file.
 		$data['meta'] = array(
 			'created' => time(),
 			'wp_version' => $wp_version,
-			'csb_version' => @$csb_info['Version'],
+			'csb_version' => $csb_info['Version'],
 			'theme_name' => $theme->get( 'Name' ),
 			'theme_version' => $theme->get( 'Version' ),
 			'description' => htmlspecialchars( @$_POST['export-description'] ),
@@ -288,10 +290,25 @@ class CustomSidebarsExport extends CustomSidebars {
 			);
 			self::json_response( $req );
 		}
+		/**
+		 * build filename
+		 */
+		$filename = $this->get_file_name();
 		$data = $this->get_export_data();
-		$filename = 'sidebars.' . date( 'Y-m-d.H-i-s' ) . '.json';
-		$option = defined( 'JSON_PRETTY_PRINT' )? JSON_PRETTY_PRINT : null;
-		$content = json_encode( (object) $data, $option );
+		$content = '';
+		/**
+		 * Check PHP version, for PHP < 5.3 do not add options
+		 *
+		 * @since 3.1.6
+		 */
+		$version = phpversion();
+		$compare = version_compare( $version, '5.3', '<' );
+		if ( $compare ) {
+			$content = json_encode( $data );
+		} else {
+			$option = defined( 'JSON_PRETTY_PRINT' )? JSON_PRETTY_PRINT : null;
+			$content = json_encode( $data, $option );
+		}
 		// Send the download headers.
 		header( 'Pragma: public' );
 		header( 'Expires: 0' );
@@ -301,9 +318,41 @@ class CustomSidebarsExport extends CustomSidebars {
 		header( 'Content-Disposition: attachment; filename="' . $filename . '"' );
 		header( 'Content-Transfer-Encoding: binary' );
 		header( 'Content-Length: ' . strlen( $content ) );
-		// Finally send the export-file content.
-		echo '' . $content;
-		die();
+		/**
+		 * Finally send the export-file content.
+		 */
+		echo $content;
+		exit;
+	}
+
+	/**
+	 * Generate export file name dynamically.
+	 *
+	 * Generate a unique file name to export in json.
+	 *
+	 * @since 3.1.6
+	 *
+	 * @return string File name.
+	 */
+	private function get_file_name() {
+		/**
+		 * get version if it is needded
+		 */
+		if ( empty( $this->version ) ) {
+			$csb_info = get_plugin_data( CSB_PLUGIN );
+			$this->version = $csb_info['Version'];
+		}
+		// Get site name.
+		$site_name = sanitize_key( get_bloginfo( 'name' ) );
+		$site_name = empty( $site_name ) ? '' : $site_name . '.';
+		// Create export file name.
+		$filename = sprintf(
+			'%s.sidebars.%s.%s.json',
+			$site_name,
+			$this->version,
+			date( 'Y-m-d.H-i-s' )
+		);
+		return $filename;
 	}
 
 	/*=============================*\
