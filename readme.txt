@@ -47,7 +47,7 @@ Every part of Custom Sidebars integrates seamlessly with the Widgets menu for si
 If you run a design agency, or just want to get rid of the ads, checkout [Custom Sidebars Pro](https://premium.wpmudev.org/project/custom-sidebars-pro):
 
 * Ad free
-* [24/7 support(https://premium.wpmudev.org/support/) for all things WordPress
+* [24/7 support](https://premium.wpmudev.org/support/) for all things WordPress
 * [Upfront themes, 100+ premium plugins and WPMU DEV services](http://premium.wpmudev.org/join/) – Including speed optimization, managed backups with 10GB cloud storage and security hardening
 
 Get [Custom Sidebars Pro](https://premium.wpmudev.org/project/custom-sidebars-pro/) for targeted marketing, better widgets for each level of your membership site, or just to clean up bloated content on each page. Download and try it for free!
