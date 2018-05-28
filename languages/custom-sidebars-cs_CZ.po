@@ -4,7 +4,7 @@ msgid ""
 msgstr ""
 "Project-Id-Version: Custom Sidebars Pro\n"
 "Report-Msgid-Bugs-To: https://wordpress.org/support/plugin/customsidebars\n"
-"POT-Creation-Date: 2018-05-07 07:46:41+00:00\n"
+"POT-Creation-Date: 2018-05-28 05:08:33+00:00\n"
 "PO-Revision-Date: 2017-12-12 11:44:10+0000\n"
 "Language: cs_CZ\n"
 "MIME-Version: 1.0\n"
@@ -53,7 +53,7 @@ msgstr "Klon"
 
 #: inc/class-custom-sidebars-editor.php:146
 #: inc/class-custom-sidebars-editor.php:161
-#: inc/class-custom-sidebars-export.php:98
+#: inc/class-custom-sidebars-export.php:102
 msgid "You do not have permission for this"
 msgstr "Nedostatečná oprávnění"
 
@@ -172,48 +172,48 @@ msgstr ""
 msgid "Turn off Custom Sidebars explain mode."
 msgstr ""
 
-#: inc/class-custom-sidebars-export.php:62 views/widgets.php:46
+#: inc/class-custom-sidebars-export.php:66 views/widgets.php:46
 msgid "Import / Export Sidebars"
 msgstr "Import / Export panelů"
 
-#: inc/class-custom-sidebars-export.php:287
-#: inc/class-custom-sidebars-export.php:340
+#: inc/class-custom-sidebars-export.php:289
+#: inc/class-custom-sidebars-export.php:389
 msgid "You do not have permission for export sidebars."
 msgstr ""
 
-#: inc/class-custom-sidebars-export.php:354
-#: inc/class-custom-sidebars-export.php:396
+#: inc/class-custom-sidebars-export.php:403
+#: inc/class-custom-sidebars-export.php:445
 msgid "No file was uploaded"
 msgstr "Nebyl nahrát žádný soubor"
 
-#: inc/class-custom-sidebars-export.php:361
+#: inc/class-custom-sidebars-export.php:410
 msgid "Import file is too big"
 msgstr "Importovaný soubor je příliš veliký"
 
-#: inc/class-custom-sidebars-export.php:367
+#: inc/class-custom-sidebars-export.php:416
 msgid "Something went wrong"
 msgstr "Něco se pokazilo"
 
-#: inc/class-custom-sidebars-export.php:390
+#: inc/class-custom-sidebars-export.php:439
 msgid "Unexpected import format"
 msgstr "Neočekávaný formát pro import"
 
-#: inc/class-custom-sidebars-export.php:425
+#: inc/class-custom-sidebars-export.php:474
 msgid "You do not have permission for import sidebars."
 msgstr ""
 
-#: inc/class-custom-sidebars-export.php:684
+#: inc/class-custom-sidebars-export.php:733
 msgid "Imported %d custom sidebar!"
 msgid_plural "Imported %d custom sidebars!"
 msgstr[0] ""
 msgstr[1] ""
 msgstr[2] ""
 
-#: inc/class-custom-sidebars-export.php:698
+#: inc/class-custom-sidebars-export.php:747
 msgid "Plugin options were imported!"
 msgstr "Nastavení pluginu bylo importováno"
 
-#: inc/class-custom-sidebars-export.php:747
+#: inc/class-custom-sidebars-export.php:796
 msgid "Imported %d widget!"
 msgid_plural "Imported %d widgets!"
 msgstr[0] ""
