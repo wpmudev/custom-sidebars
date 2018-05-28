@@ -295,39 +295,39 @@ Custom Sidebars has the same license as WordPress, so you can use it wherever yo
 * New: Assign a Sidebar to 404 pages via the Sidebar Location dialog.
 
 = 2.0.9.6 =
-* Fix: In some browsers the "Add sidebar" popup was partially hidden.
-* Fix: Sometimes the dropdown list of a multiselect list stayed open.
-* Fix: Plugin now correctly loads the .po files to translate to other languages.
+* Fixed: In some browsers the "Add sidebar" popup was partially hidden.
+* Fixed: Sometimes the dropdown list of a multiselect list stayed open.
+* Fixed: Plugin now correctly loads the .po files to translate to other languages.
 * Some other small improvements.
 
 = 2.0.9.4 =
-* Fix: For some users the plugin was not loading anymore after updating to 2.0.9.1.
+* Fixed: For some users the plugin was not loading anymore after updating to 2.0.9.1.
 
 = 2.0.9.3 =
-* Fix: Z-index issue in Dashboard where wide widgets where covered by the main-menu.
-* Fix: Added compatibility for static front-page sidebars with version 2.0.9.
+* Fixed: Z-index issue in Dashboard where wide widgets where covered by the main-menu.
+* Fixed: Added compatibility for static front-page sidebars with version 2.0.9.
 
 = 2.0.9.2 =
-* Fix: Sidebar Locations "Front Page" and "Post Index" now work correctly.
+* Fixed: Sidebar Locations "Front Page" and "Post Index" now work correctly.
 
 = 2.0.9.1 =
-* Fix: Sidebars now support unicode-text in name/description.
+* Fixed: Sidebars now support unicode-text in name/description.
 * Minor: New debugging output that explains why a sidebar/widget is displayed.
 
 
 = 2.0.9 =
-* Fix: Fixed issue with WP sidebar chooser right after creating a new sidebar.
-* Fix: Fixed various issues when flagging a sidebar s replaceable.
-* Fix: Plugin will not load in accessibility mode but display a notice instead.
+* Fixed: Fixed issue with WP sidebar chooser right after creating a new sidebar.
+* Fixed: Fixed various issues when flagging a sidebar s replaceable.
+* Fixed: Plugin will not load in accessibility mode but display a notice instead.
 * Minor fix: Make code compatible with PHP 5.2.4.
 * Minor fix: Slight improvement of AJAX stability.
 * Minor fix: Plugin now requires capability "edit_theme_options".
 
 = 2.0.8 =
-* Fix: Fixed issue with settings not being saved correctly.
+* Fixed: Fixed issue with settings not being saved correctly.
 
 = 2.0.7 =
-* Fix: Fixed issue with some people losing some sidebar settings after update.
+* Fixed: Fixed issue with some people losing some sidebar settings after update.
 
 = 2.0.6.1 =
 * Minor fix: Use WordPress core functions to get URL to JavaScript files.
