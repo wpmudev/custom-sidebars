@@ -9,7 +9,7 @@ Flexible sidebars for custom widget configurations on every page, post and custo
 
 == Description ==
 
-<strong>Manage and replace sidebars and other widget areas on your site with Custom Sidebars, a flexible widget area manager.</strong>
+** Manage and replace sidebars and other widget areas on your site with Custom Sidebars, a flexible widget area manager. **
 
 Make custom sidebar configurations and be able to choose what widgets display on each page or post of your site.
 
@@ -21,41 +21,36 @@ Custom Sidebars allows you to dynamically display custom widget configurations o
 
 Custom Sidebars allows you to display custom widget configurations on any page, post, category, post type, or archive page.
 
-★★★★★ <br>
-"Custom Sidebars will go on my "essential plugins" list from now on. I am pleased by how easy it was to figure out and by how many options are available in the free version." - <a href="https://profiles.wordpress.org/monkeyhateclean">monkeyhateclean</a>
+★★★★★
+> "Custom Sidebars will go on my "essential plugins" list from now on. I am pleased by how easy it was to figure out and by how many options are available in the free version." - [monkeyhateclean](https://profiles.wordpress.org/monkeyhateclean)
 
-★★★★★ <br>
-"This plugin does exactly what it says. It's light, integrates well into WordPress and gives you tons of possibilities." - <a href="https://profiles.wordpress.org/darknova11">DarkNova</a>
+★★★★★
+> "This plugin does exactly what it says. It's light, integrates well into WordPress and gives you tons of possibilities." - [DarkNova](https://profiles.wordpress.org/darknova11)
 
 Every part of Custom Sidebars integrates seamlessly with the Widgets menu for simplicity and control. No confusing settings pages or added menu items, just simple core integration.
 
-<blockquote><h4>A Simple Flexible Sidebar Manager</h4>
-<br>
-<strong>Custom Sidebars Includes:</strong>
-<ul>
-  <li>Unlimited custom widget configurations</li>
-  <li>Set custom widgets for individual posts and pages, categories, post types, and archives</li>
-  <li>Seamless integration with the WordPress Widgets menu</li>
-  <li>Works with well-coded themes and doesn't slow down your site</li>
-  <li>Set individual widget visibility – for guests, by user role, by post type, for special pages or categories</li>
-  <li>Author specific sidebars – display a custom sidebar for each of your authors</li>
-  <li>Clone and sync widget settings – quickly edit complex configurations</li>
-  <li>Import and export custom sidebars – backup and share sidebars</li>
-</ul>
+> #### A Simple Flexible Sidebar Manager
+> ** Custom Sidebars Includes: **
+> * Unlimited custom widget configurations
+> * Set custom widgets for individual posts and pages, categories, post types, and archives
+> * Seamless integration with the WordPress Widgets menu
+> * Works with well-coded themes and doesn't slow down your site
+> * Set individual widget visibility – for guests, by user role, by post type, for special pages or categories
+> * Author specific sidebars – display a custom sidebar for each of your authors
+> * Clone and sync widget settings – quickly edit complex configurations
+> * Import and export custom sidebars – backup and share sidebars
+>
+> Install Custom Sidebars and see for yourself why it's the most popular widget extension plugin available for WordPress with over 200,000 active installs.
 
-Install Custom Sidebars and see for yourself why it's the most popular widget extension plugin available for WordPress with over 200,000 active installs.
-<br>
-</blockquote>
+#### Custom Sidebars Is Fully-Loaded
 
-<h4>Custom Sidebars Is Fully-Loaded</h4>
-<br>
-If you run a design agency, or just want to get rid of the ads, checkout <a href="https://premium.wpmudev.org/project/custom-sidebars-pro/">Custom Sidebars Pro:</a>
-<ul>
-	<li>Ad free</li>
-	<li><a href="https://premium.wpmudev.org/support/">24/7 support</a> for all things WordPress</li>
-	<li><a href="http://premium.wpmudev.org/join/">Upfront themes, 100+ premium plugins and WPMU DEV services</a> – Including speed optimization, managed backups with 10GB cloud storage and security hardening</li>
-</ul>
-Get <a href="https://premium.wpmudev.org/project/custom-sidebars-pro/">Custom Sidebars</a> for targeted marketing, better widgets for each level of your membership site, or just to clean up bloated content on each page. Download and try it for free!
+If you run a design agency, or just want to get rid of the ads, checkout [Custom Sidebars Pro](https://premium.wpmudev.org/project/custom-sidebars-pro):
+
+* Ad free
+* [24/7 support(https://premium.wpmudev.org/support/) for all things WordPress
+* [Upfront themes, 100+ premium plugins and WPMU DEV services](http://premium.wpmudev.org/join/) – Including speed optimization, managed backups with 10GB cloud storage and security hardening
+
+Get [Custom Sidebars Pro](https://premium.wpmudev.org/project/custom-sidebars-pro/) for targeted marketing, better widgets for each level of your membership site, or just to clean up bloated content on each page. Download and try it for free!
 
 == Screenshots ==
 
@@ -88,7 +83,7 @@ Find more usage information on the [Custom Sidebars Pro page](https://premium.wp
 
 = How do I begin working with this plugin? =
 
-Please refer to <a href="https://premium.wpmudev.org/project/custom-sidebars-pro/#usage">the usage section of Custom Sidebars Pro</a>
+Please refer to [the usage section of Custom Sidebars Pro](https://premium.wpmudev.org/project/custom-sidebars-pro/#usage).
 
 = Why can't I see a widget menu? =
 
@@ -466,8 +461,8 @@ This version adds several options for customize the sidebars by categories and r
 
 == Contact and Credits ==
 
-Custom sidebars is maintained and developed by <a href="http://premium.wpmudev.org">WPMU DEV</a>.
+Custom sidebars is maintained and developed by [WPMU DEV](http://premium.wpmudev.org).
 
-Original development completed by <a href="http://marquex.es/">Javier Marquez</a>
+Original development completed by [Javier Marquez](http://marquex.es/).
 
 Custom Sidebars uses the great jQuery plugin [Tiny Scrollbar](http://www.baijs.nl/tinyscrollbar/) by Maarten Baijs.
