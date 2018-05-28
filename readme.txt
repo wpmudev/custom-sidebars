@@ -377,7 +377,6 @@ Custom Sidebars has the same license as WordPress, so you can use it wherever yo
 * Fixed: Searches with no results shows default sidebar.
 * Added: RTL support (thanks to Dvir http://foxy.co.il/blog/)
 * Improved: Minor enhancements in the interface to adapt it to wp3.
-* Added: French and Hebrew translations
 * Fixed: Slashes are added to the attributes of before and after title/widget
 
 = 1.1 =
@@ -391,11 +390,9 @@ Custom Sidebars has the same license as WordPress, so you can use it wherever yo
 * Added: Child/parent pages support
 * Improved interface to handle hundreds of sidebars easily
 * Added: Ajax support for creating an editing sidebars from the widget page
-* Added: Italian translation
 
 = 0.8.2 =
 * Fixed: Problems with Spanish translation
-* Added: Dutch and German language files
 * Fixed: Some CSS issues with WP3.3
 
 = 0.8.1 =
