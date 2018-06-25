@@ -5,6 +5,10 @@ Buildtime: BUILDTIME
 Change Log:
 ----------------------------------------------------------------------
 
+3.1.7 ( 2018-xx-xx )
+----------------------------------------------------------------------
+- Updated "WPMU Dev code library" to version 3.0.8.
+
 3.1.6 ( 2018-05-28 )
 ----------------------------------------------------------------------
 - Fixed an export problem on PHP 5.2, json_encode() have only one parameter.
