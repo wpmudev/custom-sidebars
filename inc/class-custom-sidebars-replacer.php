@@ -150,6 +150,33 @@ class CustomSidebarsReplacer extends CustomSidebars {
 					$wp_registered_widgets['csemptywidget'] = $this->get_empty_widget();
 					$_wp_sidebars_widgets[ $sb_id ] = array( 'csemptywidget' );
 				} else {
+					/**
+					 * styles
+					 */
+					if (
+						isset( $defaults['screen'] )
+						&& isset( $defaults['screen'][ $replacement ] )
+					) {
+						$css = '';
+						foreach ( $defaults['screen'][ $replacement ] as $css_minmax => $css_data ) {
+							foreach ( $css_data as $css_size => $css_mode ) {
+								if ( empty( $css_size ) ) {
+									continue;
+								}
+								$css .= sprintf(
+									'@media screen and ( %s-width: %dpx ) { display: %s; }',
+									esc_attr( $css_minmax ),
+									$css_size,
+									'hide' === $css_mode ? 'none':'initial'
+								);
+								$css .= PHP_EOL;
+							}
+						}
+						if ( ! empty( $css ) ) {
+							wp_add_inline_style( $replacement, $css );
+						}
+					}
+
 					$_wp_sidebars_widgets[ $sb_id ] = $original_widgets[ $replacement ];
 
 					/**

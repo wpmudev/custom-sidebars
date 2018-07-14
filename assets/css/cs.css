@@ -54,6 +54,9 @@
   background: #1E8CBE;
   color: #FFF;
 }
+.frm-location table.form-table td {
+  padding: 5px;
+}
 
 .csb-pro-layer {
   float: left;

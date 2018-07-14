@@ -494,6 +494,7 @@ window.csSidebars = null;
 		 *           or a CsSidebar object.
 		 */
 		showEditor: function( data ) {
+
 			var popup = null,
 				ajax = null;
 
@@ -1245,6 +1246,23 @@ window.csSidebars = null;
 					}
 				});
 
+				/**
+				 * ----- @media screen width ------------------------------------------
+                 *
+				 * @since 3.2.0
+				 */
+				var table = popup.$().find('.csb-media-screen-width table' );
+                $.each( resp.screen, function( minmax, v ) {
+                    $.each( v, function( index, value ) {
+                        var data = {
+                            minmax: minmax,
+                            mode: value,
+                            size: index
+                        };
+                        _add_new_rule( data, table );
+                    });
+                });
+
 			} // end: handle_done_load()
 
 			// User clicks on "replace <sidebar> for <category>" checkbox.
@@ -1298,6 +1316,32 @@ window.csSidebars = null;
 					.load_json();
 			}
 
+            /**
+             * add new rule
+                 *
+				 * @since 3.2.0
+             */
+            function add_new_rule() {
+                var table = $('table', $(this).parent());
+                var data = {
+                    minmax: 'max',
+                    mode: 'hide',
+                    size: 0
+                };
+                _add_new_rule( data, table );
+            }
+            /**
+             * (_) add new rule
+                 *
+				 * @since 3.2.0
+             */
+            function _add_new_rule( data, table ) {
+				var template = wp.template('custom-sidebars-new-rule-row');
+                $('tbody', table ).append( template( data ) );
+                $('tfoot', table).hide();
+                return false;
+            }
+
 			// Show the LOCATION popup.
 			popup = wpmUi.popup()
 				.modal( true )
@@ -1324,6 +1368,7 @@ window.csSidebars = null;
 			popup.$().on( 'click', '.detail-toggle', toggle_details );
 			popup.$().on( 'click', '.btn-save', save_data );
 			popup.$().on( 'click', '.btn-cancel', popup.destroy );
+			popup.$().on( 'click', '.btn-add-rule', add_new_rule );
 
 			return true;
 		},
