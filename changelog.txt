@@ -9,6 +9,8 @@ Change Log:
 ----------------------------------------------------------------------
 - Updated "WPMU Dev code library" to version 3.0.9.
 - Allow to use categories and tags for pages.
+- Improved UX for Custom Sidebars metabox on special pages: "Front Page", "Blog Page" and "WooCommerce Shop Page".
+- Improved plugin initialization now, plugin classes are loaden only on nessary admin pages.
 
 3.1.6 ( 2018-05-28 )
 ----------------------------------------------------------------------
