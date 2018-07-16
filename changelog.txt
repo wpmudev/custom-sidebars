@@ -7,10 +7,11 @@ Change Log:
 
 3.1.7 ( 2018-xx-xx )
 ----------------------------------------------------------------------
-- Updated "WPMU Dev code library" to version 3.0.9.
+- Added ability show/hide widgets depend on screen size, using css media query.
 - Allow to use categories and tags for pages.
-- Improved UX for Custom Sidebars metabox on special pages: "Front Page", "Blog Page" and "WooCommerce Shop Page".
 - Improved plugin initialization now, plugin classes are loaden only on nessary admin pages.
+- Improved UX for Custom Sidebars metabox on special pages: "Front Page", "Blog Page" and "WooCommerce Shop Page".
+- Updated "WPMU Dev code library" to version 3.0.9.
 
 3.1.6 ( 2018-05-28 )
 ----------------------------------------------------------------------

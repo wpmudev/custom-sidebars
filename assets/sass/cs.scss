@@ -64,8 +64,22 @@
     }
     table {
         &.form-table {
-            td {
+            margin-bottom: 10px;
+            td, th {
                 padding: 5px;
+            }
+            td {
+                &.num {
+                    .dashicons-trash {
+                        cursor: pointer;
+                        color: $red;
+                    }
+                }
+            }
+            .num {
+                width: 3em;
+                text-align: center;
+
             }
         }
     }
@@ -589,7 +603,7 @@ body.appearance_page_customsidebars #poststuff h2 {
 
 .cs-toolbar {
 	.delete-sidebar {
-		color: #A00;
+		color: $red;
 	}
 
 	.delete-sidebar:hover,

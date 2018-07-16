@@ -32,28 +32,77 @@ class CustomSidebarsReplacer extends CustomSidebars {
 	 * @since  2.0
 	 */
 	private function __construct() {
-		add_action(
-			'widgets_init',
-			array( $this, 'register_custom_sidebars' )
-		);
+		add_action( 'widgets_init', array( $this, 'register_custom_sidebars' ) );
 
 		// Support translation via WPML plugin.
-		add_action(
-			'register_sidebar',
-			array( $this, 'translate_sidebar' )
-		);
+		add_action( 'register_sidebar', array( $this, 'translate_sidebar' ) );
 
 		if ( ! is_admin() ) {
 			// Frontend hooks.
-			add_action(
-				'wp_head',
-				array( $this, 'replace_sidebars' )
-			);
+			add_action( 'wp_head', array( $this, 'replace_sidebars' ) );
+			add_action( 'wp', array( $this, 'store_original_post_id' ) );
+			/**
+			 * print styles for media query
+			 *
+			 * @since 3.1.7
+			 */
+			add_action( 'wp_print_styles', array( $this, 'add_custom_css_for_media' ) );
+		}
+	}
 
-			add_action(
-				'wp',
-				array( $this, 'store_original_post_id' )
-			);
+	/**
+	 * Add css styles for custom media width
+	 *
+	 * @since 3.1.7
+	 */
+	public function add_custom_css_for_media() {
+		global $wp_registered_sidebars, $_wp_sidebars_widgets;
+		$defaults = self::get_options();
+		$replacements = $this->determine_replacements( $defaults );
+		foreach ( $replacements as $sb_id => $replace_info ) {
+			if ( empty( $replace_info ) || ! is_array( $replace_info ) ) {
+				continue;
+			}
+			$replacement = array_shift( $replace_info );
+			if (
+				isset( $defaults['screen'] )
+				&& isset( $defaults['screen'][ $replacement ] )
+			) {
+				$css = '';
+				foreach ( $defaults['screen'][ $replacement ] as $css_size => $css_data ) {
+					if ( empty( $css_data ) ) {
+						continue;
+					}
+					foreach ( $css_data as $css_minmax => $css_mode ) {
+						if ( empty( $css_size ) ) {
+							continue;
+						}
+						if (
+							! isset( $_wp_sidebars_widgets[ $replacement ] )
+							|| empty( $_wp_sidebars_widgets[ $replacement ] )
+						) {
+							continue;
+						}
+						$css_selectors = array_map( array( $this, 'convert_do_css_id' ), $_wp_sidebars_widgets[ $replacement ] );
+						$css .= sprintf(
+							'@media screen and ( %s-width: %dpx ) { %s { display: %s; } }',
+							esc_attr( $css_minmax ),
+							esc_attr( $css_size ),
+							implode( ', ', $css_selectors ),
+							'hide' === $css_mode ? 'none':'initial'
+						);
+						$css .= PHP_EOL;
+					}
+				}
+				if ( ! empty( $css ) ) {
+					echo '<style type="text/css" media="screen">';
+					echo PHP_EOL;
+					echo $css;
+					echo '</style>';
+					echo PHP_EOL;
+
+				}
+			}
 		}
 	}
 
@@ -150,32 +199,6 @@ class CustomSidebarsReplacer extends CustomSidebars {
 					$wp_registered_widgets['csemptywidget'] = $this->get_empty_widget();
 					$_wp_sidebars_widgets[ $sb_id ] = array( 'csemptywidget' );
 				} else {
-					/**
-					 * styles
-					 */
-					if (
-						isset( $defaults['screen'] )
-						&& isset( $defaults['screen'][ $replacement ] )
-					) {
-						$css = '';
-						foreach ( $defaults['screen'][ $replacement ] as $css_minmax => $css_data ) {
-							foreach ( $css_data as $css_size => $css_mode ) {
-								if ( empty( $css_size ) ) {
-									continue;
-								}
-								$css .= sprintf(
-									'@media screen and ( %s-width: %dpx ) { display: %s; }',
-									esc_attr( $css_minmax ),
-									$css_size,
-									'hide' === $css_mode ? 'none':'initial'
-								);
-								$css .= PHP_EOL;
-							}
-						}
-						if ( ! empty( $css ) ) {
-							wp_add_inline_style( $replacement, $css );
-						}
-					}
 
 					$_wp_sidebars_widgets[ $sb_id ] = $original_widgets[ $replacement ];
 
@@ -454,10 +477,10 @@ class CustomSidebarsReplacer extends CustomSidebars {
 			// 6 |== Front Page ----------------------------------------------------
 
 			/*
-			 * The front-page of the site. Either
-			 * - the post-index (default) or
-			 * - a static front-page.
-			 */
+             * The front-page of the site. Either
+             * - the post-index (default) or
+             * - a static front-page.
+             */
 
 			$expl && do_action( 'cs_explain', 'Type 6: Front Page' );
 
@@ -510,13 +533,13 @@ class CustomSidebarsReplacer extends CustomSidebars {
 			// 7 |== Post Index ----------------------------------------------------
 
 			/*
-			 * The post-index of the site. Either
-			 * - the front-page (default)
-			 * - when a static front page is used the post-index page.
-			 *
-			 * Note: When the default front-page is used the condition 6
-			 * "is_front_page" above is used and this node is never executed.
-			 */
+             * The post-index of the site. Either
+             * - the front-page (default)
+             * - when a static front page is used the post-index page.
+             *
+             * Note: When the default front-page is used the condition 6
+             * "is_front_page" above is used and this node is never executed.
+             */
 
 			$expl && do_action( 'cs_explain', 'Type 7: Post Index' );
 
@@ -609,9 +632,9 @@ class CustomSidebarsReplacer extends CustomSidebars {
 			$expl && do_action( 'cs_explain', 'Type 12: ' . ucfirst( $taxonomy ) . ' Archive' );
 			foreach ( $sidebars as $sb_id ) {
 				if (
-				   isset( $options['taxonomies_archive'] )
-				   && isset( $options['taxonomies_archive'][ $taxonomy ] )
-				   && isset( $options['taxonomies_archive'][ $taxonomy ][ $sb_id ] )
+					isset( $options['taxonomies_archive'] )
+					&& isset( $options['taxonomies_archive'][ $taxonomy ] )
+					&& isset( $options['taxonomies_archive'][ $taxonomy ][ $sb_id ] )
 				) {
 					$expl && do_action( 'cs_explain', 'Replacement for custom taxonomy archive"' . $taxonomy );
 					$replacements[ $sb_id ] = array(
@@ -624,10 +647,10 @@ class CustomSidebarsReplacer extends CustomSidebars {
 				 * replace for single taxonomy
 				 */
 				if (
-				   isset( $options['taxonomies_single'] )
-				   && isset( $options['taxonomies_single'][ $taxonomy ] )
-				   && isset( $options['taxonomies_single'][ $taxonomy ][ $current_term->term_id ] )
-				   && isset( $options['taxonomies_single'][ $taxonomy ][ $current_term->term_id ][ $sb_id ] )
+					isset( $options['taxonomies_single'] )
+					&& isset( $options['taxonomies_single'][ $taxonomy ] )
+					&& isset( $options['taxonomies_single'][ $taxonomy ][ $current_term->term_id ] )
+					&& isset( $options['taxonomies_single'][ $taxonomy ][ $current_term->term_id ][ $sb_id ] )
 				) {
 					$expl && do_action( 'cs_explain', 'Replacement for custom taxonomy ("' . $taxonomy . ') - '.$current_term->name );
 					$replacements[ $sb_id ] = array(
@@ -676,9 +699,9 @@ class CustomSidebarsReplacer extends CustomSidebars {
 		}
 
 		/*
-		 * The replacement sidebar was not registered. Something's wrong, so we
-		 * update the options and not try to replace this sidebar again.
-		 */
+         * The replacement sidebar was not registered. Something's wrong, so we
+         * update the options and not try to replace this sidebar again.
+         */
 		if ( 'particular' == $method ) {
 			// Invalid replacement was found in post-meta data.
 			$sidebars = self::get_post_meta( $this->original_post_id );
@@ -765,15 +788,23 @@ class CustomSidebarsReplacer extends CustomSidebars {
 	 * @param  array $sidebar The sidebar that was registered
 	 */
 	public function translate_sidebar( $sidebar ) {
-		if ( ! function_exists( 'icl_t' ) ) { return false; }
-
+		if ( ! function_exists( 'icl_t' ) ) {
+			return false;
+		}
 		global $wp_registered_sidebars;
 		$context = 'Sidebar';
-
 		// Translate the name and description.
 		$sidebar['name'] = icl_t( $context, $sidebar['id'] . '-name', $sidebar['name'] );
 		$sidebar['description'] = icl_t( $context, $sidebar['id'] . '-description', $sidebar['description'] );
-
 		$wp_registered_sidebars[ $sidebar['id'] ] = $sidebar;
+	}
+
+	/**
+	 * Convert to CSS ID.
+	 *
+	 * @since 3.1.7
+	 */
+	private function convert_do_css_id( $v ) {
+		return sprintf( '#%s', esc_attr( $v ) );
 	}
 };

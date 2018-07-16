@@ -634,10 +634,7 @@ class CustomSidebarsEditor extends CustomSidebars {
 		/**
 		 * screen
 		 */
-		$screen = array(
-			'min' => array(),
-			'max' => array(),
-		);
+		$screen = array();
 		if (
 			isset( $defaults['screen'] )
 			&& isset( $defaults['screen'][ $req->id ] )
@@ -872,11 +869,10 @@ class CustomSidebarsEditor extends CustomSidebars {
 			$screen_size = $_POST['cs-screen'];
 			for ( $i = 0; $i < count( $screen_size['size'] ); $i++ ) {
 				if ( ! empty( $screen_size['size'][ $i ] ) ) {
-					$size[ $screen_size['minmax'][ $i ] ][ $screen_size['size'][ $i ] ] = $screen_size['mode'][ $i ];
+					$size[ $screen_size['size'][ $i ] ][ $screen_size['minmax'][ $i ] ] = $screen_size['mode'][ $i ];
 				}
 			}
-			krsort( $size['min'] );
-			ksort( $size['max'] );
+			krsort( $size );
 		}
 		$options['screen'][ $req->id ] = $size;
 		$req->message = sprintf(
