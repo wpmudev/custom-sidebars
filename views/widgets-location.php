@@ -210,9 +210,9 @@ foreach ( $taxonomies as $taxonomy_slug => $taxonomy ) {
             <table class="form-table">
                 <thead>
                     <tr>
-                        <th><?php esc_attr_e( 'Statement', 'custom-sidebars' ); ?></th>
-                        <th><?php esc_attr_e( 'State', 'custom-sidebars' ); ?></th>
-                        <th><?php esc_attr_e( 'Width', 'custom-sidebars' ); ?></th>
+                        <th><?php echo esc_attr_x( 'Screen', 'media screen width table', 'custom-sidebars' ); ?></th>
+                        <th><?php echo esc_attr_x( 'Show',  'media screen width table', 'custom-sidebars' ); ?></th>
+                        <th><?php echo esc_attr_x( 'Screen width', 'media screen width table',  'custom-sidebars' ); ?></th>
                         <th class="num"><span class="dashicons dashicons-trash"></span></th>
                     </tr>
                 </thead>
