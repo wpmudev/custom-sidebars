@@ -54,6 +54,20 @@
   background: #1E8CBE;
   color: #FFF;
 }
+.frm-location table.form-table {
+  margin-bottom: 10px;
+}
+.frm-location table.form-table td, .frm-location table.form-table th {
+  padding: 5px;
+}
+.frm-location table.form-table td.num .dashicons-trash {
+  cursor: pointer;
+  color: #a00;
+}
+.frm-location table.form-table .num {
+  width: 3em;
+  text-align: center;
+}
 
 .csb-pro-layer {
   float: left;
@@ -595,7 +609,7 @@ body.appearance_page_customsidebars #poststuff h2 {
 }
 
 .cs-toolbar .delete-sidebar {
-  color: #A00;
+  color: #a00;
 }
 .cs-toolbar .delete-sidebar:hover,
 .cs-toolbar .delete-sidebar:focus,
