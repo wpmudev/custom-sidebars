@@ -1029,6 +1029,12 @@ class CustomSidebars {
 		if ( defined( 'POLYLANG_VERSION' ) && POLYLANG_VERSION ) {
 			require_once CSB_INC_DIR . 'integrations/class-custom-sidebars-integration-polylang.php';
 		}
+		/**
+		 * 3rd party plugins integration: WP Multilang
+		 */
+		if ( defined( 'WPM_PLUGIN_FILE' ) && WPM_PLUGIN_FILE && file_exists( WPM_PLUGIN_FILE ) ) {
+			require_once CSB_INC_DIR . 'integrations/class-custom-sidebars-integration-wml.php';
+		}
 		do_action( 'cs_integrations' );
 	}
 

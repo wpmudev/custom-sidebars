@@ -8,6 +8,7 @@ Change Log:
 3.1.7 ( 2018-xx-xx )
 ----------------------------------------------------------------------
 - Added ability show/hide widgets depend on screen size, using css media query.
+- Added integration with WP Multilang - now you can choose sidebar to depend on WP Multilang language.
 - Allow to use categories and tags for pages.
 - Improved plugin initialization now, plugin classes are loaden only on nessary admin pages.
 - Improved UX for Custom Sidebars metabox on special pages: "Front Page", "Blog Page" and "WooCommerce Shop Page".
