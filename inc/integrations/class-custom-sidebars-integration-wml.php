@@ -4,14 +4,14 @@ add_action( 'cs_integrations', array( 'CustomSidebarsIntegrationWML', 'instance'
 /**
  * Integrate sidebar locations with WML
  *
- * @since 3.1.7
+ * @since 3.2.0
  */
 class CustomSidebarsIntegrationWML extends CustomSidebarsIntegration {
 
 	/**
 	 * Returns the singleton object.
 	 *
-	 * @since 3.1.7
+	 * @since 3.2.0
 	 */
 	public static function instance() {
 		static $instance = null;
@@ -24,7 +24,7 @@ class CustomSidebarsIntegrationWML extends CustomSidebarsIntegration {
 	/**
 	 * Constructor is private -> singleton.
 	 *
-	 * @since 3.1.7
+	 * @since 3.2.0
 	 */
 	private function __construct() {
 		if ( ! function_exists( 'wpm_get_languages' ) ) {
@@ -45,7 +45,7 @@ class CustomSidebarsIntegrationWML extends CustomSidebarsIntegration {
 	/**
 	 * Save dismiss decision, no more show it.
 	 *
-	 * @since 3.1.7
+	 * @since 3.2.0
 	 */
 	public function prepare( $tabs ) {
 		$tabs[ $this->key_name ] = array(
@@ -58,7 +58,7 @@ class CustomSidebarsIntegrationWML extends CustomSidebarsIntegration {
 	/**
 	 * Add languages
 	 *
-	 * @since 3.1.7
+	 * @since 3.2.0
 	 */
 	public function get_location( $req, $defaults ) {
 		$req->wml = array();
@@ -81,7 +81,7 @@ class CustomSidebarsIntegrationWML extends CustomSidebarsIntegration {
 	/**
 	 * Replace sidebar
 	 *
-	 * @since 3.1.7
+	 * @since 3.2.0
 	 */
 	public function replace( $replacements, $options ) {
 		if ( ! isset( $options[ $this->key_name ] ) ) {

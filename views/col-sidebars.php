@@ -23,7 +23,7 @@ if ( ! function_exists( 'custom_sidebars_col_sideber_not_available' ) ) {
 	/**
 	 * local display helper
 	 *
-	 * @since 3.1.7
+	 * @since 3.2.0
 	 *
 	 * @param string $page_name Page Name to display.
 	 */

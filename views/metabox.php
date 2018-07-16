@@ -20,7 +20,7 @@ $is_woo_shop = intval( $post_id ) === ( function_exists( 'wc_get_page_id' )? int
 /**
  * local display helper
  *
- * @since 3.1.7
+ * @since 3.2.0
  *
  * @param string $page_name Page Name to display.
  * @param string $img Image to display.

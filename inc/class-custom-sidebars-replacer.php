@@ -44,7 +44,7 @@ class CustomSidebarsReplacer extends CustomSidebars {
 			/**
 			 * print styles for media query
 			 *
-			 * @since 3.1.7
+			 * @since 3.2.0
 			 */
 			add_action( 'wp_print_styles', array( $this, 'add_custom_css_for_media' ) );
 		}
@@ -53,7 +53,7 @@ class CustomSidebarsReplacer extends CustomSidebars {
 	/**
 	 * Add css styles for custom media width
 	 *
-	 * @since 3.1.7
+	 * @since 3.2.0
 	 */
 	public function add_custom_css_for_media() {
 		global $wp_registered_sidebars, $_wp_sidebars_widgets;
@@ -802,7 +802,7 @@ class CustomSidebarsReplacer extends CustomSidebars {
 	/**
 	 * Convert to CSS ID.
 	 *
-	 * @since 3.1.7
+	 * @since 3.2.0
 	 */
 	private function convert_do_css_id( $v ) {
 		return sprintf( '#%s', esc_attr( $v ) );
