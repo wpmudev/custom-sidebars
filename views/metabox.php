@@ -109,8 +109,11 @@ if ( $is_front  ) {
 <?php
 		}
 	} else {
-		echo '<p id="message" class="updated">';
-		_e( 'All sidebars have been locked, you cannot replace them. Go to <a href="widgets.php">the widgets page</a> to unlock a sidebar.', 'custom-sidebars' );
+        echo '<p id="message" class="updated">';
+        printf(
+            __( 'All sidebars have been locked, you cannot replace them. Go to <a href="%s">the widgets page</a> to unlock a sidebar.', 'custom-sidebars' ),
+            admin_url( 'widgets.php' )
+        );
 		echo '</p>';
 	}
 }
