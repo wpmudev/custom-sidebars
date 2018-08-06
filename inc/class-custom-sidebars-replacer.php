@@ -69,6 +69,7 @@ class CustomSidebarsReplacer extends CustomSidebars {
 				&& isset( $defaults['screen'][ $replacement ] )
 			) {
 				$css = '';
+				$css_before = array();
 				foreach ( $defaults['screen'][ $replacement ] as $css_size => $css_data ) {
 					if ( empty( $css_data ) ) {
 						continue;
@@ -84,18 +85,35 @@ class CustomSidebarsReplacer extends CustomSidebars {
 							continue;
 						}
 						$css_selectors = array_map( array( $this, 'convert_do_css_id' ), $_wp_sidebars_widgets[ $replacement ] );
-						$css .= sprintf(
-							'@media screen and ( %s-width: %dpx ) { %s { display: %s; } }',
-							esc_attr( $css_minmax ),
-							esc_attr( $css_size ),
-							implode( ', ', $css_selectors ),
-							'hide' === $css_mode ? 'none':'initial'
-						);
-						$css .= PHP_EOL;
+						$css_before[] = sprintf( '%s { display: none }', implode( ', ', $css_selectors ) );
+
+						if ( 'max' === $css_minmax ) {
+							$css .= sprintf(
+								'@media screen and ( %s-width: %dpx ) { %s { display: %s; } }',
+								esc_attr( $css_minmax ),
+								esc_attr( $css_size ),
+								implode( ', ', $css_selectors ),
+								'hide' === $css_mode ? 'none':'initial'
+							);
+							$css .= PHP_EOL;
+						} else {
+							$css = sprintf(
+								'@media screen and ( %s-width: %dpx ) { %s { display: %s; } }%s%s',
+								esc_attr( $css_minmax ),
+								esc_attr( $css_size ),
+								implode( ', ', $css_selectors ),
+								'hide' === $css_mode ? 'none':'initial',
+								PHP_EOL,
+								$css
+							);
+						}
 					}
 				}
 				if ( ! empty( $css ) ) {
+					$css_before = array_unique( $css_before );
 					echo '<style type="text/css" media="screen">';
+					echo PHP_EOL;
+					echo implode( PHP_EOL, $css_before );
 					echo PHP_EOL;
 					echo $css;
 					echo '</style>';
