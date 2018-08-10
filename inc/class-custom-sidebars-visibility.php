@@ -44,7 +44,7 @@ class CustomSidebarsVisibility extends CustomSidebars {
 			add_filter(
 				'widget_update_callback',
 				array( $this, 'admin_widget_update' ),
-				10, 3
+				999, 3
 			);
 
 			$url = 'widgets.php';

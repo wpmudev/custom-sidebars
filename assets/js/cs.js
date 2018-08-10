@@ -1,4 +1,4 @@
-/*! Custom Sidebars - v3.1.6
+/*! Custom Sidebars - v3.2.0-beta.1
  * https://premium.wpmudev.org/project/custom-sidebars-pro/
  * Copyright (c) 2018; * Licensed GPLv2+ */
 /*global window:false */
@@ -496,6 +496,7 @@ window.csSidebars = null;
 		 *           or a CsSidebar object.
 		 */
 		showEditor: function( data ) {
+
 			var popup = null,
 				ajax = null;
 
@@ -572,10 +573,10 @@ window.csSidebars = null;
 				if ( data.button ) {
 					popup.$().find( '.btn-save' ).text( data.button );
 				}
-                if ( data.advance ) {
-                    popup.$().find( '#csb-more' ).prop( 'checked', true );
-                    show_extras();
-                }
+				if ( data.advance ) {
+					popup.$().find( '#csb-more' ).prop( 'checked', true );
+					show_extras();
+				}
 			}
 
 			// Close popup after ajax request
@@ -610,13 +611,13 @@ window.csSidebars = null;
 			// Submit the data via ajax.
 			function save_data() {
 				var form = popup.$().find( 'form' );
-                if ( 0 < popup.$('#csb-more:checked').length ) {
-                    jQuery('<input>').attr({
-                        type: 'hidden',
-                        value: 'show',
-                        name: 'advance'
-                    }).appendTo(form);
-                }
+				if ( 0 < popup.$('#csb-more:checked').length ) {
+					jQuery('<input>').attr({
+						type: 'hidden',
+						value: 'show',
+						name: 'advance'
+					}).appendTo(form);
+				}
 				// Start loading-animation.
 				popup.loading( true );
 				ajax.reset()
@@ -644,7 +645,7 @@ window.csSidebars = null;
 					.data({
 						'do': 'get',
 						'sb': data.id,
-                        '_wpnonce': csSidebarsData._wpnonce_get
+						'_wpnonce': csSidebarsData._wpnonce_get
 					})
 					.ondone( set_values )
 					.load_json();
@@ -1247,6 +1248,23 @@ window.csSidebars = null;
 					}
 				});
 
+				/**
+				 * ----- @media screen width ------------------------------------------
+                 *
+				 * @since 3.2.0
+				 */
+				var table = popup.$().find('.csb-media-screen-width table' );
+				$.each( resp.screen, function( size, value ) {
+					$.each( value, function( minmax, mode ) {
+						var data = {
+							minmax: minmax,
+							mode: mode,
+							size: size
+						};
+						_add_new_rule( data, table );
+					});
+				});
+
 			} // end: handle_done_load()
 
 			// User clicks on "replace <sidebar> for <category>" checkbox.
@@ -1300,6 +1318,40 @@ window.csSidebars = null;
 					.load_json();
 			}
 
+			/**
+			 * add new rule
+			 *
+			 * @since 3.2.0
+			 */
+			function add_new_rule() {
+				var table = $('table', $(this).parent());
+				var data = {
+					minmax: 'max',
+					mode: 'hide',
+					size: 0
+				};
+				_add_new_rule( data, table );
+				return false;
+			}
+
+			/**
+			 * (_) add new rule
+			 *
+			 * @since 3.2.0
+			 */
+			function _add_new_rule( data, table ) {
+				var template = wp.template('custom-sidebars-new-rule-row');
+				$('tbody', table ).append( template( data ) );
+				$('tfoot', table).hide();
+				$('tbody .dashicons-trash', table).on( 'click', function() {
+					$(this).closest('tr').detach();
+					if ( 0 === $('tbody tr', table ).length ) {
+						$('tfoot', table).show();
+					}
+				});
+				return false;
+			}
+
 			// Show the LOCATION popup.
 			popup = wpmUi.popup()
 				.modal( true )
@@ -1326,6 +1378,7 @@ window.csSidebars = null;
 			popup.$().on( 'click', '.detail-toggle', toggle_details );
 			popup.$().on( 'click', '.btn-save', save_data );
 			popup.$().on( 'click', '.btn-cancel', popup.destroy );
+			popup.$().on( 'click', '.btn-add-rule', add_new_rule );
 
 			return true;
 		},
@@ -1573,35 +1626,35 @@ window.csSidebars = null;
  * @see http://james.padolsey.com/javascript/sorting-elements-with-jquery/
  */
 jQuery.fn.sortElements = (function(){
-    var sort = [].sort;
-    return function(comparator, getSortable) {
-        getSortable = getSortable || function(){return this;};
-        var placements = this.map(function(){
-            var sortElement = getSortable.call(this),
-            parentNode = sortElement.parentNode,
-            // Since the element itself will change position, we have
-            // to have some way of storing its original position in
-            // the DOM. The easiest way is to have a 'flag' node:
-            nextSibling = parentNode.insertBefore(
-                    document.createTextNode(''),
-                    sortElement.nextSibling
-                    );
-            return function() {
-                if (parentNode === this) {
-                    throw new Error(
-                            "You can't sort elements if any one is a descendant of another."
-                            );
-                }
-                // Insert before flag:
-                parentNode.insertBefore(this, nextSibling);
-                // Remove flag:
-                parentNode.removeChild(nextSibling);
-            };
-        });
-        return sort.call(this, comparator).each(function(i){
-            placements[i].call(getSortable.call(this));
-        });
-    };
+	var sort = [].sort;
+	return function(comparator, getSortable) {
+		getSortable = getSortable || function(){return this;};
+		var placements = this.map(function(){
+			var sortElement = getSortable.call(this),
+			parentNode = sortElement.parentNode,
+			// Since the element itself will change position, we have
+			// to have some way of storing its original position in
+			// the DOM. The easiest way is to have a 'flag' node:
+			nextSibling = parentNode.insertBefore(
+					document.createTextNode(''),
+					sortElement.nextSibling
+					);
+			return function() {
+				if (parentNode === this) {
+					throw new Error(
+							"You can't sort elements if any one is a descendant of another."
+							);
+				}
+				// Insert before flag:
+				parentNode.insertBefore(this, nextSibling);
+				// Remove flag:
+				parentNode.removeChild(nextSibling);
+			};
+		});
+		return sort.call(this, comparator).each(function(i){
+			placements[i].call(getSortable.call(this));
+		});
+	};
 })();
 
 

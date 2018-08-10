@@ -36,30 +36,53 @@
 	color: #FFF;
 }
 
-.frm-location .pro-layer {
-	padding: 10px;
-	text-align: center;
-	font-size: 26px;
-	font-weight: 100;
-	line-height: 1.5;
+.frm-location {
+    .pro-layer {
+        padding: 10px;
+        text-align: center;
+        font-size: 26px;
+        font-weight: 100;
+        line-height: 1.5;
 
-	a {
-		margin-top: 20px;
-		display: inline-block;
-		background: #2EA2CC;
-		color: #FAFAFA;
-		text-decoration: none;
-		padding: 10px 20px;
-		font-size: 18px;
-		font-weight: bold;
+        a {
+            margin-top: 20px;
+            display: inline-block;
+            background: #2EA2CC;
+            color: #FAFAFA;
+            text-decoration: none;
+            padding: 10px 20px;
+            font-size: 18px;
+            font-weight: bold;
 
-		&:hover,
-		&:focus,
-		&:active {
-			background: #1E8CBE;
-			color: #FFF;
-		}
-	}
+            &:hover,
+            &:focus,
+            &:active {
+                background: #1E8CBE;
+                color: #FFF;
+            }
+        }
+    }
+    table {
+        &.form-table {
+            margin-bottom: 10px;
+            td, th {
+                padding: 5px;
+            }
+            td {
+                &.num {
+                    .dashicons-trash {
+                        cursor: pointer;
+                        color: $red;
+                    }
+                }
+            }
+            .num {
+                width: 3em;
+                text-align: center;
+
+            }
+        }
+    }
 }
 
 .csb-pro-layer {
@@ -580,7 +603,7 @@ body.appearance_page_customsidebars #poststuff h2 {
 
 .cs-toolbar {
 	.delete-sidebar {
-		color: #A00;
+		color: $red;
 	}
 
 	.delete-sidebar:hover,

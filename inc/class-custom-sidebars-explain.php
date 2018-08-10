@@ -128,7 +128,7 @@ class CustomSidebarsExplain extends CustomSidebars {
 	 * @since 2.0.9.1
 	 */
 	public function add_info( $info, $new_item = false ) {
-		if ( $new_item ) {
+		if ( $new_item || 0 === count( $this->infos ) ) {
 			$this->infos[] = $info;
 		} else {
 			$this->infos[ count( $this->infos ) - 1 ] .= '<br />' . $info;

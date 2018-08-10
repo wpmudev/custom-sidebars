@@ -2,7 +2,7 @@ msgid ""
 msgstr ""
 "Project-Id-Version: Custom Sidebars\n"
 "Report-Msgid-Bugs-To: https://wordpress.org/support/plugin/customsidebars\n"
-"POT-Creation-Date: 2018-05-28 05:08:33+00:00\n"
+"POT-Creation-Date: 2018-07-16 15:42:19+00:00\n"
 "PO-Revision-Date: 2014-08-28 21:54+0100\n"
 "Last-Translator: Philipp Stracker <philipp@stracker.net>\n"
 "Language-Team: \n"
@@ -64,7 +64,7 @@ msgstr ""
 
 #: inc/class-custom-sidebars-editor.php:231
 #: inc/class-custom-sidebars-editor.php:371
-#: inc/class-custom-sidebars-editor.php:664
+#: inc/class-custom-sidebars-editor.php:675
 msgid "You have no permission to do this operation."
 msgstr ""
 
@@ -99,7 +99,7 @@ msgid "Deleted sidebar <strong>%1$s</strong>"
 msgstr ""
 
 #: inc/class-custom-sidebars-editor.php:454
-#: inc/class-custom-sidebars-visibility.php:156
+#: inc/class-custom-sidebars-visibility.php:156 views/metabox.php:74
 #, fuzzy
 msgid "Front Page"
 msgstr "עמוד בלוג ראשי"
@@ -134,14 +134,14 @@ msgstr "ארכיונים לפי תאריך"
 #: inc/class-custom-sidebars-editor.php:486
 #: inc/class-custom-sidebars-editor.php:558
 #: inc/class-custom-sidebars-editor.php:560
-#: inc/class-custom-sidebars-editor.php:614
+#: inc/class-custom-sidebars-editor.php:614 views/metabox.php:83
 #, fuzzy
 msgid "%s Archives"
 msgstr "ארכיוני קטגוריה"
 
 # @ custom-sidebars
 #: inc/class-custom-sidebars-editor.php:526
-#: inc/class-custom-sidebars-visibility.php:157
+#: inc/class-custom-sidebars-visibility.php:157 views/metabox.php:78
 #, fuzzy
 msgid "Post Index"
 msgstr "לפי סוג פוסט"
@@ -152,34 +152,34 @@ msgstr "לפי סוג פוסט"
 msgid "%1$s Archives"
 msgstr "ארכיוני קטגוריה"
 
-#: inc/class-custom-sidebars-editor.php:845
+#: inc/class-custom-sidebars-editor.php:879
 msgid "Updated sidebar <strong>%1$s</strong> settings."
 msgstr ""
 
 # @ custom-sidebars
-#: inc/class-custom-sidebars-editor.php:900 views/widgets.php:17
+#: inc/class-custom-sidebars-editor.php:934 views/widgets.php:17
 msgid "Sidebars"
 msgstr "סיידברים"
 
-#: inc/class-custom-sidebars-editor.php:1322
+#: inc/class-custom-sidebars-editor.php:1356
 msgid "Custom sidebars configuration is allowed for:"
 msgstr ""
 
 # @ custom-sidebars
-#: inc/class-custom-sidebars-editor.php:1345
+#: inc/class-custom-sidebars-editor.php:1379
 #, fuzzy
 msgid "Allowed to replace sidebars:"
 msgstr "סיידברים חלופיים"
 
-#: inc/class-custom-sidebars-editor.php:1351
+#: inc/class-custom-sidebars-editor.php:1385
 msgid "Allow entry author to change sidebars"
 msgstr ""
 
-#: inc/class-custom-sidebars-editor.php:1362
+#: inc/class-custom-sidebars-editor.php:1396
 msgid "Allow Custom Taxonomies in Sidebar Location:"
 msgstr ""
 
-#: inc/class-custom-sidebars-editor.php:1373
+#: inc/class-custom-sidebars-editor.php:1407
 msgid ""
 "After turn on any Custom Taxonomy you need to reload this screen to be able "
 "choose it in Sidebar Location."
@@ -398,16 +398,32 @@ msgid ""
 msgstr ""
 
 # @ custom-sidebars
-#: inc/class-custom-sidebars.php:961 views/import.php:147
+#: inc/class-custom-sidebars.php:962 views/import.php:147
 msgid "Widgets"
 msgstr ""
 
-#: inc/class-custom-sidebars.php:971
+#: inc/class-custom-sidebars.php:972
 msgid "Support"
 msgstr ""
 
-#: inc/class-custom-sidebars.php:989
+#: inc/class-custom-sidebars.php:990
 msgid "Create a custom sidebar to get started."
+msgstr ""
+
+#: inc/class-custom-sidebars.php:997
+msgid "max"
+msgstr ""
+
+#: inc/class-custom-sidebars.php:998
+msgid "min"
+msgstr ""
+
+#: inc/class-custom-sidebars.php:1003
+msgid "Hide"
+msgstr ""
+
+#: inc/class-custom-sidebars.php:1004
+msgid "Show"
 msgstr ""
 
 #: inc/integrations/class-custom-sidebars-integration-polylang.php:66
@@ -415,8 +431,13 @@ msgid "Polylang"
 msgstr ""
 
 #: inc/integrations/class-custom-sidebars-integration-polylang.php:67
+#: inc/integrations/class-custom-sidebars-integration-wml.php:53
 #: inc/integrations/class-custom-sidebars-integration-wpml.php:50
 msgid "Language"
+msgstr ""
+
+#: inc/integrations/class-custom-sidebars-integration-wml.php:52
+msgid "WP Multilang"
 msgstr ""
 
 #: inc/integrations/class-custom-sidebars-integration-wpml.php:49
@@ -432,12 +453,22 @@ msgstr "סיידברים מותאים אישית"
 msgid "&mdash; No Change &mdash;"
 msgstr ""
 
-#: views/col-sidebars.php:18
-msgid "(Not available for Home-Page)"
+#: views/col-sidebars.php:32
+msgid "Not available for %s"
 msgstr ""
 
-#: views/col-sidebars.php:20
-msgid "(Not available for Blog-Page)"
+#: views/col-sidebars.php:45
+#, fuzzy
+msgid "Home Page"
+msgstr "עמוד בלוג ראשי"
+
+#: views/col-sidebars.php:47 views/metabox.php:77
+#, fuzzy
+msgid "Blog Page"
+msgstr "עמוד בלוג ראשי"
+
+#: views/col-sidebars.php:49 views/metabox.php:81
+msgid "WooCommerce Shop"
 msgstr ""
 
 #: views/import.php:67 views/widgets-export.php:34
@@ -577,6 +608,39 @@ msgid ""
 "Replace the current plugin configuration with the imported configuration."
 msgstr ""
 
+#: views/metabox.php:34
+msgid "To change the sidebar for %s"
+msgstr ""
+
+#: views/metabox.php:42
+msgid "Go to the <a href=\"%1$s\">Widgets page</a>"
+msgstr ""
+
+#: views/metabox.php:48
+#, fuzzy
+msgid "Click on \"Sidebar Location\""
+msgstr "יצר סיידבר"
+
+#: views/metabox.php:52
+msgid "Open the \"Archive-Types\" tab"
+msgstr ""
+
+#: views/metabox.php:57
+msgid "Choose \"%s\""
+msgstr ""
+
+#: views/metabox.php:87
+msgid ""
+"Here you can replace the default sidebars. Simply select what sidebar you "
+"want to show for this post!"
+msgstr ""
+
+#: views/metabox.php:114
+msgid ""
+"All sidebars have been locked, you cannot replace them. Go to <a href=\"%s"
+"\">the widgets page</a> to unlock a sidebar."
+msgstr ""
+
 # @ custom-sidebars
 #: views/widgets-delete.php:11
 msgid ""
@@ -586,7 +650,7 @@ msgstr ""
 
 # @ custom-sidebars
 #: views/widgets-delete.php:16 views/widgets-editor.php:63
-#: views/widgets-location.php:251
+#: views/widgets-location.php:283
 msgid "Cancel"
 msgstr "בטל"
 
@@ -676,7 +740,7 @@ msgstr ""
 
 # @ custom-sidebars
 #: views/widgets-location.php:97 views/widgets-location.php:149
-#: views/widgets-location.php:207
+#: views/widgets-location.php:205 views/widgets-location.php:239
 msgid "Click to toggle"
 msgstr ""
 
@@ -735,18 +799,36 @@ msgstr "ארכיוני כותבים"
 msgid "Author Archives"
 msgstr "ארכיוני כותבים"
 
-#: views/widgets-location.php:208
+#: views/widgets-location.php:206
+msgid "For Screen Sizes"
+msgstr ""
+
+#: views/widgets-location.php:209
+msgid ""
+"Those settings do not load unload sidebars, it only hide or show widgets, "
+"NOT SIDEBARS, depend on media screen width."
+msgstr ""
+
+#: views/widgets-location.php:222
+msgid "There is no defined rules."
+msgstr ""
+
+#: views/widgets-location.php:225
+msgid "Add new rule"
+msgstr ""
+
+#: views/widgets-location.php:240
 msgid "3rd party plugins"
 msgstr ""
 
 # @ custom-sidebars
-#: views/widgets-location.php:211
+#: views/widgets-location.php:243
 #, fuzzy
 msgid "These replacements will be applied to 3rd party plugins."
 msgstr "חלופות אלה יהיו שמישות לכל פוסט ספציפי שמתאים לפוסט-טייפ או קטגוריה"
 
 # @ custom-sidebars
-#: views/widgets-location.php:252 views/widgets.php:42
+#: views/widgets-location.php:284 views/widgets.php:42
 msgid "Save Changes"
 msgstr "שמור שינויים"
 
@@ -862,11 +944,26 @@ msgid "http://premium.wpmudev.org/"
 msgstr ""
 
 # @ custom-sidebars
-#: inc/class-custom-sidebars-editor.php:1137
+#: inc/class-custom-sidebars-editor.php:1171
 #, fuzzy
 msgctxt "Column name on entries list."
 msgid "Custom Sidebars"
 msgstr "סיידברים מותאים אישית"
+
+#: views/widgets-location.php:213
+msgctxt "media screen width table"
+msgid "Screen"
+msgstr ""
+
+#: views/widgets-location.php:214
+msgctxt "media screen width table"
+msgid "Show"
+msgstr ""
+
+#: views/widgets-location.php:215
+msgctxt "media screen width table"
+msgid "Screen width"
+msgstr ""
 
 # @ custom-sidebars
 #, fuzzy

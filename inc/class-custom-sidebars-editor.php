@@ -91,7 +91,7 @@ class CustomSidebarsEditor extends CustomSidebars {
 		// Add a custom column to post list.
 		$posttypes = self::get_post_types( 'objects' );
 		foreach ( $posttypes as $pt ) {
-			add_filter( 'manage_' . $pt->name . '_posts_columns', array( $this, 'post_columns' ));
+			add_filter( 'manage_' . $pt->name . '_posts_columns', array( $this, 'post_columns' ) );
 			add_action( 'manage_' . $pt->name . '_posts_custom_column', array( $this, 'post_column_content' ), 10, 2
 			);
 		}
@@ -99,7 +99,7 @@ class CustomSidebarsEditor extends CustomSidebars {
 		add_filter( 'default_hidden_columns', array( $this, 'default_hidden_columns' ), 10, 2 );
 		add_action( 'quick_edit_custom_box', array( $this, 'post_quick_edit' ), 10, 2 );
 		add_action( 'bulk_edit_custom_box', array( $this, 'post_bulk_edit' ), 10, 2 );
-		add_action( 'admin_footer', array( $this, 'post_quick_edit_js' ));
+		add_action( 'admin_footer', array( $this, 'post_quick_edit_js' ) );
 		/**
 		 * Bulk Edit save
 		 *
@@ -632,6 +632,17 @@ class CustomSidebarsEditor extends CustomSidebars {
 		$req->categories = $categories;
 		$req->archives = $archives;
 		/**
+		 * screen
+		 */
+		$screen = array();
+		if (
+			isset( $defaults['screen'] )
+			&& isset( $defaults['screen'][ $req->id ] )
+		) {
+			$screen = $defaults['screen'][ $req->id ];
+		}
+		$req->screen = $screen;
+		/**
 		 * Allow to change data of locations.
 		 *
 		 * @since 3.1.2
@@ -841,6 +852,29 @@ class CustomSidebarsEditor extends CustomSidebars {
 				unset( $options['category_archive'][ $sb_id ] );
 			}
 		}
+
+		/**
+		 * screen size
+		 */
+			$size = array();
+		if (
+			isset( $_POST['cs-screen'] )
+			&& isset( $_POST['cs-screen']['mode'] )
+			&& isset( $_POST['cs-screen']['minmax'] )
+			&& isset( $_POST['cs-screen']['size'] )
+			&& is_array( $_POST['cs-screen']['mode'] )
+			&& is_array( $_POST['cs-screen']['minmax'] )
+			&& is_array( $_POST['cs-screen']['size'] )
+		) {
+			$screen_size = $_POST['cs-screen'];
+			for ( $i = 0; $i < count( $screen_size['size'] ); $i++ ) {
+				if ( ! empty( $screen_size['size'][ $i ] ) ) {
+					$size[ $screen_size['size'][ $i ] ][ $screen_size['minmax'][ $i ] ] = $screen_size['mode'][ $i ];
+				}
+			}
+			krsort( $size );
+		}
+		$options['screen'][ $req->id ] = $size;
 		$req->message = sprintf(
 			__( 'Updated sidebar <strong>%1$s</strong> settings.', 'custom-sidebars' ),
 			esc_html( $req->sidebar['name'] )

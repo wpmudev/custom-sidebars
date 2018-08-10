@@ -9,7 +9,7 @@ Flexible sidebars for custom widget configurations on every page, post and custo
 
 == Description ==
 
-<strong>Manage and replace sidebars and other widget areas on your site with Custom Sidebars, a flexible widget area manager.</strong>
+** Manage and replace sidebars and other widget areas on your site with Custom Sidebars, a flexible widget area manager. **
 
 Make custom sidebar configurations and be able to choose what widgets display on each page or post of your site.
 
@@ -21,41 +21,36 @@ Custom Sidebars allows you to dynamically display custom widget configurations o
 
 Custom Sidebars allows you to display custom widget configurations on any page, post, category, post type, or archive page.
 
-★★★★★ <br>
-"Custom Sidebars will go on my "essential plugins" list from now on. I am pleased by how easy it was to figure out and by how many options are available in the free version." - <a href="https://profiles.wordpress.org/monkeyhateclean">monkeyhateclean</a>
+★★★★★
+> "Custom Sidebars will go on my "essential plugins" list from now on. I am pleased by how easy it was to figure out and by how many options are available in the free version." - [monkeyhateclean](https://profiles.wordpress.org/monkeyhateclean)
 
-★★★★★ <br>
-"This plugin does exactly what it says. It's light, integrates well into WordPress and gives you tons of possibilities." - <a href="https://profiles.wordpress.org/darknova11">DarkNova</a>
+★★★★★
+> "This plugin does exactly what it says. It's light, integrates well into WordPress and gives you tons of possibilities." - [DarkNova](https://profiles.wordpress.org/darknova11)
 
 Every part of Custom Sidebars integrates seamlessly with the Widgets menu for simplicity and control. No confusing settings pages or added menu items, just simple core integration.
 
-<blockquote><h4>A Simple Flexible Sidebar Manager</h4>
-<br>
-<strong>Custom Sidebars Includes:</strong>
-<ul>
-  <li>Unlimited custom widget configurations</li>
-  <li>Set custom widgets for individual posts and pages, categories, post types, and archives</li>
-  <li>Seamless integration with the WordPress Widgets menu</li>
-  <li>Works with well-coded themes and doesn't slow down your site</li>
-  <li>Set individual widget visibility – for guests, by user role, by post type, for special pages or categories</li>
-  <li>Author specific sidebars – display a custom sidebar for each of your authors</li>
-  <li>Clone and sync widget settings – quickly edit complex configurations</li>
-  <li>Import and export custom sidebars – backup and share sidebars</li>
-</ul>
+> #### A Simple Flexible Sidebar Manager
+> ** Custom Sidebars Includes: **
+> * Unlimited custom widget configurations
+> * Set custom widgets for individual posts and pages, categories, post types, and archives
+> * Seamless integration with the WordPress Widgets menu
+> * Works with well-coded themes and doesn't slow down your site
+> * Set individual widget visibility – for guests, by user role, by post type, for special pages or categories
+> * Author specific sidebars – display a custom sidebar for each of your authors
+> * Clone and sync widget settings – quickly edit complex configurations
+> * Import and export custom sidebars – backup and share sidebars
+>
+> Install Custom Sidebars and see for yourself why it's the most popular widget extension plugin available for WordPress with over 200,000 active installs.
 
-Install Custom Sidebars and see for yourself why it's the most popular widget extension plugin available for WordPress with over 200,000 active installs.
-<br>
-</blockquote>
+#### Custom Sidebars Is Fully-Loaded
 
-<h4>Custom Sidebars Is Fully-Loaded</h4>
-<br>
-If you run a design agency, or just want to get rid of the ads, checkout <a href="https://premium.wpmudev.org/project/custom-sidebars-pro/">Custom Sidebars Pro:</a>
-<ul>
-	<li>Ad free</li>
-	<li><a href="https://premium.wpmudev.org/support/">24/7 support</a> for all things WordPress</li>
-	<li><a href="http://premium.wpmudev.org/join/">Upfront themes, 100+ premium plugins and WPMU DEV services</a> – Including speed optimization, managed backups with 10GB cloud storage and security hardening</li>
-</ul>
-Get <a href="https://premium.wpmudev.org/project/custom-sidebars-pro/">Custom Sidebars</a> for targeted marketing, better widgets for each level of your membership site, or just to clean up bloated content on each page. Download and try it for free!
+If you run a design agency, or just want to get rid of the ads, checkout [Custom Sidebars Pro](https://premium.wpmudev.org/project/custom-sidebars-pro):
+
+* Ad free
+* [24/7 support](https://premium.wpmudev.org/support/) for all things WordPress
+* [Upfront themes, 100+ premium plugins and WPMU DEV services](http://premium.wpmudev.org/join/) – Including speed optimization, managed backups with 10GB cloud storage and security hardening
+
+Get [Custom Sidebars Pro](https://premium.wpmudev.org/project/custom-sidebars-pro/) for targeted marketing, better widgets for each level of your membership site, or just to clean up bloated content on each page. Download and try it for free!
 
 == Screenshots ==
 
@@ -88,7 +83,7 @@ Find more usage information on the [Custom Sidebars Pro page](https://premium.wp
 
 = How do I begin working with this plugin? =
 
-Please refer to <a href="https://premium.wpmudev.org/project/custom-sidebars-pro/#usage">the usage section of Custom Sidebars Pro</a>
+Please refer to [the usage section of Custom Sidebars Pro](https://premium.wpmudev.org/project/custom-sidebars-pro/#usage).
 
 = Why can't I see a widget menu? =
 
@@ -160,7 +155,7 @@ Custom Sidebars has the same license as WordPress, so you can use it wherever yo
 * Fixed build in taxonomies problem on "Sidebar Location" edit window.
 
 = 3.0.8.1 =
-* Fixed CSRF vulnerability. Props for [qasuar](https://wordpress.org/support/users/qasuar/)
+* Fixed CSRF vulnerability. Props for [qasuar](https://wordpress.org/support/users/qasuar/).
 
 = 3.0.8 =
 * Added bulk sidebars edit.
@@ -271,16 +266,16 @@ Custom Sidebars has the same license as WordPress, so you can use it wherever yo
 * Small improvements in code.
 
 = 2.1.0.4 =
-* Fix missing text-domain in translation
+* Fix missing text-domain in translation.
 
 = 2.1.0.3 =
-* Fix incompatibility with PopUp plugin
+* Fix incompatibility with PopUp plugin.
 
 = 2.1.0.2 =
-* Close possible security hole (XSS vulnerability)
+* Close possible security hole (XSS vulnerability).
 
 = 2.1.0.1 =
-* Fix incompatibility with PopUp plugin
+* Fix incompatibility with PopUp plugin.
 
 = 2.1.0.0 =
 * Fixed: Sidebars could not be created on certain webserver setups.
@@ -295,53 +290,53 @@ Custom Sidebars has the same license as WordPress, so you can use it wherever yo
 * New: Assign a Sidebar to 404 pages via the Sidebar Location dialog.
 
 = 2.0.9.6 =
-* Fix: In some browsers the "Add sidebar" popup was partially hidden.
-* Fix: Sometimes the dropdown list of a multiselect list stayed open.
-* Fix: Plugin now correctly loads the .po files to translate to other languages.
+* Fixed: In some browsers the "Add sidebar" popup was partially hidden.
+* Fixed: Sometimes the dropdown list of a multiselect list stayed open.
+* Fixed: Plugin now correctly loads the .po files to translate to other languages.
 * Some other small improvements.
 
 = 2.0.9.4 =
-* Fix: For some users the plugin was not loading anymore after updating to 2.0.9.1.
+* Fixed: For some users the plugin was not loading anymore after updating to 2.0.9.1.
 
 = 2.0.9.3 =
-* Fix: Z-index issue in Dashboard where wide widgets where covered by the main-menu.
-* Fix: Added compatibility for static front-page sidebars with version 2.0.9
+* Fixed: Z-index issue in Dashboard where wide widgets where covered by the main-menu.
+* Fixed: Added compatibility for static front-page sidebars with version 2.0.9.
 
 = 2.0.9.2 =
-* Fix: Sidebar Locations "Front Page" and "Post Index" now work correctly.
+* Fixed: Sidebar Locations "Front Page" and "Post Index" now work correctly.
 
 = 2.0.9.1 =
-* Fix: Sidebars now support unicode-text in name/description.
+* Fixed: Sidebars now support unicode-text in name/description.
 * Minor: New debugging output that explains why a sidebar/widget is displayed.
 
 
 = 2.0.9 =
-* Fix: Fixed issue with WP sidebar chooser right after creating a new sidebar.
-* Fix: Fixed various issues when flagging a sidebar s replaceable.
-* Fix: Plugin will not load in accessibility mode but display a notice instead.
-* Minor fix: Make code compatible with PHP 5.2.4
-* Minor fix: Slight improvement of AJAX stability
-* Minor fix: Plugin now requires capability "edit_theme_options"
+* Fixed: Fixed issue with WP sidebar chooser right after creating a new sidebar.
+* Fixed: Fixed various issues when flagging a sidebar s replaceable.
+* Fixed: Plugin will not load in accessibility mode but display a notice instead.
+* Minor fix: Make code compatible with PHP 5.2.4.
+* Minor fix: Slight improvement of AJAX stability.
+* Minor fix: Plugin now requires capability "edit_theme_options".
 
 = 2.0.8 =
-* Fix: Fixed issue with settings not being saved correctly.
+* Fixed: Fixed issue with settings not being saved correctly.
 
 = 2.0.7 =
-* Fix: Fixed issue with some people losing some sidebar settings after update.
+* Fixed: Fixed issue with some people losing some sidebar settings after update.
 
 = 2.0.6.1 =
 * Minor fix: Use WordPress core functions to get URL to JavaScript files.
 * Minor fix: Refactor function name to avoid misunderstandings.
 
 = 2.0.5 =
-* Fixed: Meta box in post editor did show missing sidebars (e.g. after switching the theme)
+* Fixed: Meta box in post editor did show missing sidebars (e.g. after switching the theme).
 * Fixed: PHP warning about strict standards.
 
 = 2.0.3 =
 * Fixed: JavaScript errors on Windows servers are fixed.
 
 = 2.0.2 =
-* Fixed: Dashboard notification is now removed when clicking "dismiss"
+* Fixed: Dashboard notification is now removed when clicking "dismiss".
 
 = 2.0.1 =
 * PHP 5.2 compatibility layer.
@@ -358,45 +353,42 @@ Custom Sidebars has the same license as WordPress, so you can use it wherever yo
 * Added: Custom sidebars now works with BuddyPress pages.
 
 = 1.4 =
-* Fixed: Individual post sidebar selection when default sidebars for single posts are defined
-* Fixed: Category sidebars sorting
-* Added: WP 3.8 new admin design (MP6) support
+* Fixed: Individual post sidebar selection when default sidebars for single posts are defined.
+* Fixed: Category sidebars sorting.
+* Added: WP 3.8 new admin design (MP6) support.
 
 = 1.3.1 =
-* Fixed: Absolute paths that leaded to the outdated browser error
-* Fixed: Stripped slashes for the pre/post widget/title fields
+* Fixed: Absolute paths that leaded to the outdated browser error.
+* Fixed: Stripped slashes for the pre/post widget/title fields.
 
 = 1.3 =
-* Fixed: A lot of warnings with the PHP debug mode on
-* Improved: Styles to make them compatible with WP 3.6
-* Fixed: Creation of sidebars from the custom sidebars option
-* Fixed: Missing loading icons in the admin area
+* Fixed: A lot of warnings with the PHP debug mode on.
+* Improved: Styles to make them compatible with WP 3.6.
+* Fixed: Creation of sidebars from the custom sidebars option.
+* Fixed: Missing loading icons in the admin area.
 * Removed: Donate banner. Thanks to the ones that have be supporting Custom Sidebar so far.
 
 = 1.2 =
 * Fixed: Searches with no results shows default sidebar.
-* Added: RTL support (thanks to Dvir http://foxy.co.il/blog/)
-* Improved: Minor enhancements in the interface to adapt it to wp3.
-* Added: French and Hebrew translations
-* Fixed: Slashes are added to the attributes of before and after title/widget
+* Added: RTL support (thanks to Dvir http://foxy.co.il/blog/).
+* Improved: Minor enhancements in the interface to adapt it to WordPress 3.x.
+* Fixed: Slashes are added to the attributes of before and after title/widget.
 
 = 1.1 =
-* Fixed: Where lightbox not showing for everybody (Thanks to Robert Utnehmer)
-* Added: Default sidebar for search results pages
-* Added: Default sidebar for date archives
-* Added: Default sidebar for Uncategorized posts
+* Fixed: Where lightbox not showing for everybody (Thanks to Robert Utnehmer).
+* Added: Default sidebar for search results pages.
+* Added: Default sidebar for date archives.
+* Added: Default sidebar for Uncategorized posts.
 
 = 1.0 =
-* Fixed: Special characters make sidebars undeletable
-* Added: Child/parent pages support
-* Improved interface to handle hundreds of sidebars easily
-* Added: Ajax support for creating an editing sidebars from the widget page
-* Added: Italian translation
+* Fixed: Special characters make sidebars undeletable.
+* Added: Child/parent pages support.
+* Improved interface to handle hundreds of sidebars easily.
+* Added: Ajax support for creating an editing sidebars from the widget page.
 
 = 0.8.2 =
-* Fixed: Problems with Spanish translation
-* Added: Dutch and German language files
-* Fixed: Some CSS issues with WP3.3
+* Fixed: Problems with Spanish translation.
+* Fixed: Some CSS issues with WordPress 3.3.
 
 = 0.8.1 =
 * Fixed: You can assign sidebars to your pages again.
@@ -417,11 +409,11 @@ Custom Sidebars has the same license as WordPress, so you can use it wherever yo
 
 = 0.6 =
 
-* New interface, more user friendly
-* Added the possibility of customize the main blog page sidebars
-* Added the sidebars by category, so now you can personalize all the post that belongs to a category easily in a hierarchical way
-* Added the possibility of customize the authors page sidebars
-* Added the possibility of customize the tags page sidebars
+* New interface, more user friendly.
+* Added the possibility of customize the main blog page sidebars.
+* Added the sidebars by category, so now you can personalize all the post that belongs to a category easily in a hierarchical way.
+* Added the possibility of customize the authors page sidebars.
+* Added the possibility of customize the tags page sidebars.
 * Added, now it is possible to edit the sidebars names, as well as the pre-widget, post-widget, pre-title, post-title for a sidebar.
 * Added the possibility of customize the sidebars of posts list by category or post-type.
 
@@ -429,7 +421,7 @@ Custom Sidebars has the same license as WordPress, so you can use it wherever yo
 = 0.5 =
 
 * Fixed a bug that didn't allow to create new bars when every previous bars were deleted.
-* Fixed a bug introduced in v0.4 that did not allow to assign bars per post-types properly
+* Fixed a bug introduced in v0.4 that did not allow to assign bars per post-types properly.
 * Added an option to remove all the Custom Sidebars data from the database easily.
 
 = 0.4 =
@@ -438,8 +430,8 @@ Custom Sidebars has the same license as WordPress, so you can use it wherever yo
 
 = 0.3 =
 
-* PHP 4 Compatible (Thanks to Kay Larmer)
-* Fixed a bug introduced in v0.2 that did not allow to save the replaceable bars options
+* PHP 4 Compatible (Thanks to Kay Larmer).
+* Fixed a bug introduced in v0.2 that did not allow to save the replaceable bars options.
 
 = 0.2 =
 
@@ -450,7 +442,7 @@ Custom Sidebars has the same license as WordPress, so you can use it wherever yo
 
 = 0.1 =
 
-* Initial release
+* Initial release.
 
 == Upgrade Notice ==
 
@@ -469,8 +461,8 @@ This version adds several options for customize the sidebars by categories and r
 
 == Contact and Credits ==
 
-Custom sidebars is maintained and developed by <a href="http://premium.wpmudev.org">WPMU DEV</a>.
+Custom sidebars is maintained and developed by [WPMU DEV](http://premium.wpmudev.org).
 
-Original development completed by <a href="http://marquex.es/">Javier Marquez</a>
+Original development completed by [Javier Marquez](http://marquex.es/).
 
 Custom Sidebars uses the great jQuery plugin [Tiny Scrollbar](http://www.baijs.nl/tinyscrollbar/) by Maarten Baijs.

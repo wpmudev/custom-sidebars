@@ -350,6 +350,7 @@ class CustomSidebars {
 				'post_type_single',
 				'search',
 				'tags',
+				'screen',
 			);
 
 			foreach ( $keys as $k ) {
@@ -989,6 +990,24 @@ class CustomSidebars {
 			<p><?php esc_html_e( 'Create a custom sidebar to get started.', 'custom-sidebars' ); ?></p>
 		</div>
 	</script>
+    <script type="text/html" id="tmpl-custom-sidebars-new-rule-row">
+        <tr>
+            <td>
+                <select name="cs-screen[minmax][]">
+                    <option value="max"<# if( 'max' == data.minmax ) { #> selected="selected"<# } #>><?php esc_html_e( 'max', 'custom-sidebars' ); ?></option>
+                    <option value="min"<# if( 'min' == data.minmax ) { #> ' selected="selected"<# } #>><?php esc_html_e( 'min', 'custom-sidebars' ); ?></option>
+                </select>
+            </td>
+            <td>
+                <select name="cs-screen[mode][]">
+                    <option value="hide"<# if( 'hide' == data.mode ) { #> selected="selected"<# } #>><?php esc_html_e( 'Hide', 'custom-sidebars' ); ?></option>
+                    <option value="show"<# if( 'show' == data.mode ) { #> selected="selected"<# } #>><?php esc_html_e( 'Show', 'custom-sidebars' ); ?></option>
+                </select>
+            </td>
+            <td><input type="number" name="cs-screen[size][]" min="0" value="{{{data.size}}}" class="textright" /></td>
+            <td class="num"><span class="dashicons dashicons-trash"></span></td>
+        </tr>
+	</script>
 <?php
 	}
 
@@ -1009,6 +1028,12 @@ class CustomSidebars {
 		 */
 		if ( defined( 'POLYLANG_VERSION' ) && POLYLANG_VERSION ) {
 			require_once CSB_INC_DIR . 'integrations/class-custom-sidebars-integration-polylang.php';
+		}
+		/**
+		 * 3rd party plugins integration: WP Multilang
+		 */
+		if ( defined( 'WPM_PLUGIN_FILE' ) && WPM_PLUGIN_FILE && file_exists( WPM_PLUGIN_FILE ) ) {
+			require_once CSB_INC_DIR . 'integrations/class-custom-sidebars-integration-wml.php';
 		}
 		do_action( 'cs_integrations' );
 	}

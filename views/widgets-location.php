@@ -194,10 +194,42 @@ foreach ( $taxonomies as $taxonomy_slug => $taxonomy ) {
 		</div>
     </div>
 
+<?php
+	/**
+	 * =========================================================================
+	 * Box 3: SCREEN size
+	 */
+	?>
+	<div class="wpmui-box closed csb-media-screen-width">
+		<h3>
+			<a href="#" class="toggle" title="<?php _e( 'Click to toggle' ); /* This is a Wordpress default language */ ?>"><br></a>
+			<span><?php _e( 'For Screen Sizes', 'custom-sidebars' ); ?></span>
+        </h3>
+        <div class="inside">
+            <p class="description"><?php _e( 'Those settings do not load unload sidebars, it only hide or show widgets, NOT SIDEBARS, depend on media screen width.', 'custom-sidebars' ); ?></p>
+            <table class="form-table">
+                <thead>
+                    <tr>
+                        <th><?php echo esc_attr_x( 'Screen', 'media screen width table', 'custom-sidebars' ); ?></th>
+                        <th><?php echo esc_attr_x( 'Show',  'media screen width table', 'custom-sidebars' ); ?></th>
+                        <th><?php echo esc_attr_x( 'Screen width', 'media screen width table',  'custom-sidebars' ); ?></th>
+                        <th class="num"><span class="dashicons dashicons-trash"></span></th>
+                    </tr>
+                </thead>
+                <tbody>
+                </tbody>
+                <tfoot>
+                    <tr><td colspan="3"><div class="notice notice-info inline"><p><?php esc_html_e( 'There is no defined rules.', 'custom-sidebars' ); ?></p></div></td></tr>
+                </tfoot>
+            </table>
+            <button class="button btn-add-rule"><?php esc_html_e( 'Add new rule', 'custom-sidebars' ); ?></button>
+        </div>
+    </div>
+
 	<?php
 	/**
 	 * =========================================================================
-	 * Box 3: Plugin integration
+	 * Box 4: Plugin integration
 	 */
 					$integrations = apply_filters( 'custom_sidebars_integrations', array() );
 	if ( ! empty( $integrations )  ) {
