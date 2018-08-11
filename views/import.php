@@ -366,11 +366,11 @@ foreach ( $list as $key => $values ) {
     <div class="section"><?php _e( 'Special pages', 'custom-sidebars' ); ?></div>
     <table cellspacing="1" cellpadding="4" class="csb-export-head">
 <?php
-list_sidebar_replacement( __( 'Main blog page', 'custom-sidebars' ), $import['options']['blog'] );
-list_sidebar_replacement( __( 'Date archives', 'custom-sidebars' ), $import['options']['date'] );
-list_sidebar_replacement( __( 'Author archives', 'custom-sidebars' ), $import['options']['authors'] );
-list_sidebar_replacement( __( 'Tag archives', 'custom-sidebars' ), $import['options']['tags'] );
-list_sidebar_replacement( __( 'Search results page', 'custom-sidebars' ), $import['options']['search'] );
+list_sidebar_replacement( __( 'Main Blog Page', 'custom-sidebars' ), $import['options']['blog'] );
+list_sidebar_replacement( __( 'Date Archives', 'custom-sidebars' ), $import['options']['date'] );
+list_sidebar_replacement( __( 'Author Archives', 'custom-sidebars' ), $import['options']['authors'] );
+list_sidebar_replacement( __( 'Tag Archives', 'custom-sidebars' ), $import['options']['tags'] );
+list_sidebar_replacement( __( 'Search Results Page', 'custom-sidebars' ), $import['options']['search'] );
 ?>
     </table>
     </div>
