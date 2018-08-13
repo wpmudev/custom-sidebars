@@ -1,7 +1,7 @@
 === Custom Sidebars - Dynamic Widget Area Manager ===
 Contributors: WPMUDEV, marquex, WPMUDEV-Support2, WPMUDEV-Support1, WPMUDEV-Support6, WPMUDEV-Support4, iworks
 Tags: sidebar, widget, footer, custom, flexible layout, dynamic widgets, manage sidebars, replace widgets, custom widget area
-Requires at least: 3.7
+Requires at least: 3.8
 Tested up to: 4.9.8
 Stable tag: 3.1.6
 
@@ -110,6 +110,14 @@ Any user that can switch themes, can create sidebars. Switch_themes is the capab
 Custom Sidebars has the same license as WordPress, so you can use it wherever you want for free. Yay!
 
 == Changelog ==
+
+= 3.2.0 =
+- Added ability show/hide widgets depend on screen size, using CSS media queries.
+- Added integration with "WP Multilang" - now you can choose a sidebar to depend on "WP Multilang" language.
+- Allow using categories and tags for pages.
+- Improved plugin initialization now, plugin classes are loaded only on necessary admin pages.
+- Improved UX for Custom Sidebars Metabox on special pages: "Front Page", "Blog Page" and "WooCommerce Shop Page".
+- Updated "WPMU Dev code library" to version 3.0.9.
 
 = 3.1.6 =
 * Fixed an export problem on PHP 5.2, json_encode() have only one parameter.
