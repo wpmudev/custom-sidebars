@@ -155,11 +155,11 @@ class CustomSidebarsVisibility extends CustomSidebars {
 			$pagetype_list = array(
 				'frontpage' => __( 'Front Page', 'custom-sidebars' ),
 				'home' => __( 'Post Index', 'custom-sidebars' ),
-				'single' => __( 'Single page', 'custom-sidebars' ),
+				'single' => __( 'Single Page', 'custom-sidebars' ),
 				//'posts' => __( 'Posts page', 'custom-sidebars' ),  "Posts page" is same as "Post Index"...
 				'archive' => __( 'Archives', 'custom-sidebars' ),
-				'search' => __( 'Search results', 'custom-sidebars' ),
-				'e404' => __( 'Not found (404)', 'custom-sidebars' ),
+				'search' => __( 'Search Results', 'custom-sidebars' ),
+				'e404' => __( 'Not Found (404)', 'custom-sidebars' ),
 				'preview' => __( 'Preview', 'custom-sidebars' ),
 				'day' => __( 'Archive: Day', 'custom-sidebars' ),
 				'month' => __( 'Archive: Month', 'custom-sidebars' ),
@@ -242,12 +242,12 @@ class CustomSidebarsVisibility extends CustomSidebars {
 				<li class="add-filter"
 					data-for=".csb-pagetypes"
 					<?php if ( ! empty( $cond['pagetypes'] ) ) : ?>style="display:none"<?php endif; ?>>
-					<?php _e( 'Special pages', 'custom-sidebars' ); ?>
+					<?php _e( 'Special Pages', 'custom-sidebars' ); ?>
 				</li>
 				<li class="add-filter"
 					data-for=".csb-posttypes"
 					<?php if ( ! empty( $cond['posttypes'] ) ) : ?>style="display:none"<?php endif; ?>>
-					<?php _e( 'For posttype', 'custom-sidebars' ); ?>
+					<?php _e( 'For Post Type', 'custom-sidebars' ); ?>
 				</li>
 				<li class="csb-group"><?php _e( 'Taxonomy', 'custom-sidebars' ); ?></li>
 				<?php foreach ( $tax_list as $tax_item ) :

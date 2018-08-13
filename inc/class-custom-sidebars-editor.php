@@ -453,7 +453,7 @@ class CustomSidebarsEditor extends CustomSidebars {
 		$archive_type = array(
 			'_blog' => __( 'Front Page', 'custom-sidebars' ),
 			'_search' => __( 'Search Results', 'custom-sidebars' ),
-			'_404' => __( 'Not found (404)', 'custom-sidebars' ),
+			'_404' => __( 'Not Found (404)', 'custom-sidebars' ),
 			'_authors' => __( 'Any Author Archive', 'custom-sidebars' ),
 			'_date' => __( 'Date Archives', 'custom-sidebars' ),
 		);

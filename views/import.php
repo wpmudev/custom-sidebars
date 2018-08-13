@@ -81,7 +81,7 @@ function list_sidebar_replacement( $label, $list ) {
 				</tbody>
 			</table>
 
-			<div class="section"><?php _e( 'WordPress settings', 'custom-sidebars' ); ?></div>
+			<div class="section"><?php _e( 'WordPress Settings', 'custom-sidebars' ); ?></div>
 			<table cellspacing="1" cellpadding="4" class="csb-export-head">
 				<thead>
 					<tr>
@@ -92,12 +92,12 @@ function list_sidebar_replacement( $label, $list ) {
 				</thead>
 				<tbody>
 					<tr>
-						<th><?php _e( 'WordPress version', 'custom-sidebars' ); ?></th>
+						<th><?php _e( 'WordPress Version', 'custom-sidebars' ); ?></th>
 						<td><?php echo esc_html( $import['meta']['wp_version'] ); ?></td>
 						<td><?php echo esc_html( $wp_version ); ?></td>
 					</tr>
 					<tr>
-						<th><?php _e( 'Plugin version', 'custom-sidebars' ); ?></th>
+						<th><?php _e( 'Plugin Version', 'custom-sidebars' ); ?></th>
 						<td><?php echo esc_html( $import['meta']['csb_version'] ); ?></td>
 						<td><?php echo esc_html( isset( $csb_info['Version'] )? $csb_info['Version'] : __( 'Unknown', 'custom-sidebars' ) ); ?></td>
 					</tr>
@@ -115,10 +115,8 @@ function list_sidebar_replacement( $label, $list ) {
 		<pre><?php echo esc_html( stripslashes( $import['meta']['description'] ) ); ?></pre>
 	<?php endif; ?>
 
-
 	<form class="frm-import csb-form">
 	<input type="hidden" name="do" value="import" />
-
 
 	<?php
 	/* *****************************************************************
@@ -253,7 +251,7 @@ if ( count( $import_sidebar ) ) {
     <div class="show-infos">
         <i class="dashicons dashicons-info"></i>
         <div class="export-infos" style="display:none">
-    <div class="section"><?php _e( 'Replaceable sidebars', 'custom-sidebars' ); ?></div>
+    <div class="section"><?php _e( 'Replaceable Sidebars', 'custom-sidebars' ); ?></div>
     <table cellspacing="1" cellpadding="4" class="csb-export-head">
         <tr>
             <th scope="row"><?php _e( 'Replaceable Sidebars', 'custom-sidebars' ); ?></th>
@@ -275,7 +273,7 @@ if (
 ) {
 	printf(
 		'<div class="section">%s/div>',
-		esc_html__( 'By post type', 'custom-sidebars' )
+		esc_html__( 'By Post Type', 'custom-sidebars' )
 	);
 	echo '<table cellspacing="1" cellpadding="4" class="csb-export-head">';
 	$list = $import['options']['post_type_single'];
@@ -304,7 +302,7 @@ if (
 	&& is_array( $import['options']['post_type_archive'] )
 ) {
 ?>
-	<div class="section"><?php _e( 'Post-type archives', 'custom-sidebars' ); ?></div>
+	<div class="section"><?php _e( 'Post-Type Archives', 'custom-sidebars' ); ?></div>
 	<table cellspacing="1" cellpadding="4" class="csb-export-head">
 <?php
 	$list = $import['options']['post_type_archive'];
@@ -325,7 +323,7 @@ if (
 ) {
 
 ?>
-	<div class="section"><?php _e( 'By category', 'custom-sidebars' ); ?></div>
+	<div class="section"><?php _e( 'By Category', 'custom-sidebars' ); ?></div>
 	<table cellspacing="1" cellpadding="4" class="csb-export-head">
 <?php
 $list = $import['options']['category_single'];
@@ -345,7 +343,7 @@ if (
 	&& is_array( $import['options']['category_archive'] )
 ) {
 ?>
-	<div class="section"><?php _e( 'Category archives', 'custom-sidebars' ); ?></div>
+	<div class="section"><?php _e( 'Category Archives', 'custom-sidebars' ); ?></div>
 	<table cellspacing="1" cellpadding="4" class="csb-export-head">
 <?php
 	$list = $import['options']['category_archive'];
@@ -363,14 +361,14 @@ foreach ( $list as $key => $values ) {
 }
 ?>
     <?php /* special pages */ ?>
-    <div class="section"><?php _e( 'Special pages', 'custom-sidebars' ); ?></div>
+    <div class="section"><?php _e( 'Special Pages', 'custom-sidebars' ); ?></div>
     <table cellspacing="1" cellpadding="4" class="csb-export-head">
 <?php
-list_sidebar_replacement( __( 'Main blog page', 'custom-sidebars' ), $import['options']['blog'] );
-list_sidebar_replacement( __( 'Date archives', 'custom-sidebars' ), $import['options']['date'] );
-list_sidebar_replacement( __( 'Author archives', 'custom-sidebars' ), $import['options']['authors'] );
-list_sidebar_replacement( __( 'Tag archives', 'custom-sidebars' ), $import['options']['tags'] );
-list_sidebar_replacement( __( 'Search results page', 'custom-sidebars' ), $import['options']['search'] );
+list_sidebar_replacement( __( 'Main Blog Page', 'custom-sidebars' ), $import['options']['blog'] );
+list_sidebar_replacement( __( 'Date Archives', 'custom-sidebars' ), $import['options']['date'] );
+list_sidebar_replacement( __( 'Author Archives', 'custom-sidebars' ), $import['options']['authors'] );
+list_sidebar_replacement( __( 'Tag Archives', 'custom-sidebars' ), $import['options']['tags'] );
+list_sidebar_replacement( __( 'Search Results Page', 'custom-sidebars' ), $import['options']['search'] );
 ?>
     </table>
     </div>
