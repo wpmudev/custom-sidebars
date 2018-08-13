@@ -4,7 +4,7 @@ msgid ""
 msgstr ""
 "Project-Id-Version: Custom Sidebars Pro\n"
 "Report-Msgid-Bugs-To: https://wordpress.org/support/plugin/customsidebars\n"
-"POT-Creation-Date: 2018-07-16 15:42:19+00:00\n"
+"POT-Creation-Date: 2018-08-13 06:45:44+00:00\n"
 "PO-Revision-Date: 2018-03-27 12:00:43+0000\n"
 "Language: es\n"
 "MIME-Version: 1.0\n"
@@ -93,19 +93,21 @@ msgid "Front Page"
 msgstr "Página principal"
 
 #: inc/class-custom-sidebars-editor.php:455
+#: inc/class-custom-sidebars-visibility.php:161
 msgid "Search Results"
 msgstr "Resultados de búsqueda"
 
 #: inc/class-custom-sidebars-editor.php:456
 #: inc/class-custom-sidebars-visibility.php:162
-msgid "Not found (404)"
+#, fuzzy
+msgid "Not Found (404)"
 msgstr "No se ha encontrado (404)"
 
 #: inc/class-custom-sidebars-editor.php:457
 msgid "Any Author Archive"
 msgstr "Cualquier archivo de autor"
 
-#: inc/class-custom-sidebars-editor.php:458
+#: inc/class-custom-sidebars-editor.php:458 views/import.php:368
 msgid "Date Archives"
 msgstr "Archivos por fecha"
 
@@ -217,15 +219,11 @@ msgstr[0] ""
 msgstr[1] ""
 
 #: inc/class-custom-sidebars-visibility.php:158
-msgid "Single page"
+msgid "Single Page"
 msgstr ""
 
 #: inc/class-custom-sidebars-visibility.php:160
 msgid "Archives"
-msgstr ""
-
-#: inc/class-custom-sidebars-visibility.php:161
-msgid "Search results"
 msgstr ""
 
 #: inc/class-custom-sidebars-visibility.php:163 views/widgets-export.php:43
@@ -280,13 +278,15 @@ msgstr ""
 msgid "Membership2"
 msgstr ""
 
-#: inc/class-custom-sidebars-visibility.php:245 views/import.php:366
-msgid "Special pages"
+#: inc/class-custom-sidebars-visibility.php:245 views/import.php:364
+#, fuzzy
+msgid "Special Pages"
 msgstr "Páginas especiales"
 
 #: inc/class-custom-sidebars-visibility.php:250
-msgid "For posttype"
-msgstr ""
+#, fuzzy
+msgid "For Post Type"
+msgstr "Por tipo de entrada"
 
 #: inc/class-custom-sidebars-visibility.php:252
 msgid "Taxonomy"
@@ -360,7 +360,7 @@ msgstr ""
 "→\t→\t→\t→\t→\t→\tdeshabille el modo de Accesibilidad para usar este %1$s "
 "componente!"
 
-#: inc/class-custom-sidebars.php:962 views/import.php:147
+#: inc/class-custom-sidebars.php:962 views/import.php:145
 msgid "Widgets"
 msgstr "Widgets"
 
@@ -406,7 +406,7 @@ msgstr ""
 msgid "WPML"
 msgstr ""
 
-#: views/bulk-edit.php:23 views/import.php:130 views/widgets.php:47
+#: views/bulk-edit.php:23 views/import.php:128 views/widgets.php:47
 msgid "Custom Sidebars"
 msgstr "Barras Laterales"
 
@@ -443,15 +443,18 @@ msgid "Exported on"
 msgstr "Exportado"
 
 #: views/import.php:84
-msgid "WordPress settings"
+#, fuzzy
+msgid "WordPress Settings"
 msgstr "Opciones de WordPress"
 
 #: views/import.php:95
-msgid "WordPress version"
+#, fuzzy
+msgid "WordPress Version"
 msgstr "Versión de WordPress"
 
 #: views/import.php:100
-msgid "Plugin version"
+#, fuzzy
+msgid "Plugin Version"
 msgstr "Versión del plugin"
 
 #: views/import.php:102
@@ -462,87 +465,86 @@ msgstr ""
 msgid "Theme"
 msgstr "Tema"
 
-#: views/import.php:132
+#: views/import.php:130
 msgid "Mark the sidebars that you want to import."
 msgstr "Marque las barras que quiera importar."
 
-#: views/import.php:137
+#: views/import.php:135
 msgid "Also import all widgets of the selected sidebars."
 msgstr "Importar también los widgets de las barras seleccionadas."
 
-#: views/import.php:144 views/widgets-editor.php:15
+#: views/import.php:142 views/widgets-editor.php:15
 msgid "Name"
 msgstr "Nombre"
 
-#: views/import.php:145 views/widgets-editor.php:20
+#: views/import.php:143 views/widgets-editor.php:20
 msgid "Description"
 msgstr "Descripción"
 
-#: views/import.php:146
+#: views/import.php:144
 msgid "Note"
 msgstr "Nota"
 
-#: views/import.php:154
+#: views/import.php:152
 msgid "New sidebar will be created"
 msgstr "La Nueva Barra Lateral sera reemplazada"
 
-#: views/import.php:156
+#: views/import.php:154
 msgid "Existing sidebar will be replaced!"
 msgstr "La Barra lateral existente sera reemplazada!"
 
-#: views/import.php:224
+#: views/import.php:222
 msgid "(Theme sidebar)"
 msgstr "(Tema de la Barra Lateral)"
 
-#: views/import.php:252
+#: views/import.php:250
 msgid "Configuration"
 msgstr "Configuración"
 
-#: views/import.php:256
-msgid "Replaceable sidebars"
-msgstr "Barras Laterales Reemplazables"
-
-#: views/import.php:259
+#: views/import.php:254 views/import.php:257
 msgid "Replaceable Sidebars"
 msgstr "Barras reemplazables"
 
-#: views/import.php:278
-msgid "By post type"
+#: views/import.php:276
+#, fuzzy
+msgid "By Post Type"
 msgstr "Por tipo de entrada"
 
-#: views/import.php:307
-msgid "Post-type archives"
+#: views/import.php:305
+#, fuzzy
+msgid "Post-Type Archives"
 msgstr "Archivos de tipos de entrada"
 
-#: views/import.php:328
-msgid "By category"
+#: views/import.php:326
+#, fuzzy
+msgid "By Category"
 msgstr "Por categorías"
 
-#: views/import.php:348
-msgid "Category archives"
+#: views/import.php:346 views/widgets-location.php:156
+#: views/widgets-location.php:177
+msgid "Category Archives"
 msgstr "Archivos de categorías"
 
-#: views/import.php:369
-msgid "Main blog page"
+#: views/import.php:367
+#, fuzzy
+msgid "Main Blog Page"
 msgstr "Página principal del Blog"
 
+#: views/import.php:369 views/widgets-location.php:188
+msgid "Author Archives"
+msgstr "Archivos de Autores"
+
 #: views/import.php:370
-msgid "Date archives"
-msgstr "Archivos por fecha"
-
-#: views/import.php:371
-msgid "Author archives"
-msgstr "Archivos de autores"
-
-#: views/import.php:372
-msgid "Tag archives"
+#, fuzzy
+msgid "Tag Archives"
 msgstr "Archivos de etiquetas"
 
-#: views/import.php:373
-msgid "Search results page"
+#: views/import.php:371
+#, fuzzy
+msgid "Search Results Page"
 msgstr "Página de resultados de búsqueda"
 
-#: views/import.php:383
+#: views/import.php:381
 msgid ""
 "Replace the current plugin configuration with the imported configuration."
 msgstr ""
@@ -703,17 +705,9 @@ msgstr "Estos barras serán mostradas en los archivos de entradas y páginas."
 msgid "Archive Types"
 msgstr "Tipos de archivo"
 
-#: views/widgets-location.php:156 views/widgets-location.php:177
-msgid "Category Archives"
-msgstr "Archivos de categorías"
-
 #: views/widgets-location.php:157
 msgid "Authors"
 msgstr "Autores"
-
-#: views/widgets-location.php:188
-msgid "Author Archives"
-msgstr "Archivos de Autores"
 
 #: views/widgets-location.php:206
 msgid "For Screen Sizes"
@@ -860,3 +854,21 @@ msgstr ""
 msgctxt "media screen width table"
 msgid "Screen width"
 msgstr ""
+
+#~ msgid "Not found (404)"
+#~ msgstr "No se ha encontrado (404)"
+
+#~ msgid "Special pages"
+#~ msgstr "Páginas especiales"
+
+#~ msgid "Replaceable sidebars"
+#~ msgstr "Barras Laterales Reemplazables"
+
+#~ msgid "Category archives"
+#~ msgstr "Archivos de categorías"
+
+#~ msgid "Date archives"
+#~ msgstr "Archivos por fecha"
+
+#~ msgid "Author archives"
+#~ msgstr "Archivos de autores"
