@@ -263,7 +263,7 @@ class CustomSidebarsReplacer extends CustomSidebars {
 		}
 
 		// 1 |== Single posts/pages --------------------------------------------
-		if ( is_singular() ) {
+		if ( is_singular() && ! is_home() && ! is_front_page() ) {
 			$post_type = get_post_type();
 			$post_type = apply_filters( 'cs_replace_post_type', $post_type, 'single' );
 			$expl && do_action( 'cs_explain', 'Type 1: Single ' . ucfirst( $post_type ) );

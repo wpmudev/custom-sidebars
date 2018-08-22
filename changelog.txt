@@ -5,6 +5,10 @@ Buildtime: BUILDTIME
 Change Log:
 ----------------------------------------------------------------------
 
+3.2.1 ( 2018-08-22 )
+----------------------------------------------------------------------
+- Fixed a problem with sidebar replacement on front page.
+
 3.2.0 ( 2018-08-13 )
 ----------------------------------------------------------------------
 - Added ability show/hide widgets depend on screen size, using CSS media queries.
