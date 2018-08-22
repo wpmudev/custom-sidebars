@@ -1,0 +1,64 @@
+/**
+ * CSS rules for the cloning module.
+ */
+.inactive-sidebar .csb-clone {
+  display: none;
+}
+
+.widget-control-actions .csb-clone-button {
+  margin: 0 5px 0 0;
+}
+
+.csb-marker {
+  position: relative;
+  box-shadow: 0 0 0px 1px rgba(0, 0, 0, 0.3);
+}
+
+.csb-marker .widget-top,
+.csb-marker .widget-inside {
+  opacity: .5;
+}
+
+.csb-marker:before {
+  content: attr(data-group);
+  position: absolute;
+  top: 50%;
+  left: 5px;
+  right: 5px;
+  text-align: center;
+  margin-top: -1em;
+  line-height: 2em;
+  height: 2em;
+  font-size: 20px;
+  z-index: 1001;
+  background: rgba(255, 255, 255, 0.2);
+}
+
+.csb-marker:after {
+  content: '';
+  position: absolute;
+  left: 1px;
+  top: 1px;
+  right: 1px;
+  bottom: 1px;
+  background: url(../img/stripes.png);
+  opacity: .05;
+  z-index: 1000;
+  cursor: default;
+}
+
+h4.csb-group {
+  padding-left: 45px;
+  position: relative;
+}
+h4 .btn-clone-group {
+  position: absolute;
+  top: 50%;
+  margin-top: -10px;
+  left: 15px;
+  cursor: pointer;
+  opacity: .6;
+}
+h4 .btn-clone-group:hover {
+  opacity: 1;
+}

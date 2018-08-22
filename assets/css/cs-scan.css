@@ -1,0 +1,37 @@
+.custom-sidebars-wp-checkup {
+  border-radius: 4px;
+  -ms-flex-align: center;
+      align-items: center;
+  background: #fff url(../img/heart.png) no-repeat 0 50%;
+  border: 0;
+  display: -ms-flexbox;
+  display: flex;
+  min-height: 100px;
+  padding-left: 135px;
+  -ms-flex-pack: justify;
+      justify-content: space-between;
+}
+.custom-sidebars-wp-checkup form {
+  white-space: nowrap;
+}
+.custom-sidebars-wp-checkup form input {
+  border: 0;
+  border-radius: 4px;
+}
+.custom-sidebars-wp-checkup form input[type=text] {
+  background-color: #f2f2f2;
+  padding: 15px 14px;
+}
+.custom-sidebars-wp-checkup form input[type=submit] {
+  background-color: #17a8e3;
+  color: #fff;
+  padding: 15px 35px;
+  text-transform: uppercase;
+  margin-left: 10px;
+}
+.custom-sidebars-wp-checkup p {
+  font-size: 1.2em;
+}
+.custom-sidebars-wp-checkup p b {
+  color: #840006;
+}

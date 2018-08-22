@@ -1,0 +1,885 @@
+/**
+ * =============================================================================
+ * == FREE VERSION ONLY
+ * =============================================================================
+ */
+.module-export .pro-layer {
+  position: absolute;
+  left: 0;
+  top: 0;
+  right: 0;
+  bottom: 0;
+  z-index: 99999;
+  background: rgba(255, 255, 255, 0.8);
+  text-align: center;
+  font-size: 26px;
+  font-weight: 100;
+  padding-top: 120px;
+  line-height: 1.5;
+}
+.module-export .pro-layer a {
+  margin-top: 20px;
+  display: inline-block;
+  background: #2EA2CC;
+  color: #FAFAFA;
+  text-decoration: none;
+  padding: 10px 20px;
+  font-size: 18px;
+  font-weight: bold;
+}
+
+.module-export .pro-layer a:hover, .module-export .pro-layer a:focus, .module-export .pro-layer a:active {
+  background: #1E8CBE;
+  color: #FFF;
+}
+
+.frm-location .pro-layer {
+  padding: 10px;
+  text-align: center;
+  font-size: 26px;
+  font-weight: 100;
+  line-height: 1.5;
+}
+.frm-location .pro-layer a {
+  margin-top: 20px;
+  display: inline-block;
+  background: #2EA2CC;
+  color: #FAFAFA;
+  text-decoration: none;
+  padding: 10px 20px;
+  font-size: 18px;
+  font-weight: bold;
+}
+.frm-location .pro-layer a:hover, .frm-location .pro-layer a:focus, .frm-location .pro-layer a:active {
+  background: #1E8CBE;
+  color: #FFF;
+}
+.frm-location table.form-table {
+  margin-bottom: 10px;
+}
+.frm-location table.form-table td, .frm-location table.form-table th {
+  padding: 5px;
+}
+.frm-location table.form-table td.num .dashicons-trash {
+  cursor: pointer;
+  color: #a00;
+}
+.frm-location table.form-table .num {
+  width: 3em;
+  text-align: center;
+}
+
+.csb-pro-layer {
+  float: left;
+  position: relative;
+  opacity: .5;
+  margin-right: 10px;
+}
+.csb-pro-layer .pro-info {
+  position: absolute;
+  left: 0;
+  top: 0;
+  right: 0;
+  bottom: 0;
+  opacity: 0;
+  background: rgba(96, 96, 96, 0.75);
+  z-index: 99999;
+  text-align: center;
+  text-decoration: none;
+  line-height: 28px;
+  font-size: 16px;
+  font-weight: 100;
+  color: #FFF;
+  text-decoration: underline;
+  padding: 0;
+  margin: 0;
+  overflow: hidden;
+}
+.csb-pro-layer:hover {
+  opacity: 1;
+}
+.csb-pro-layer:hover .pro-info,
+.csb-pro-layer:hover .pro-info:hover,
+.csb-pro-layer:hover .pro-info:active,
+.csb-pro-layer:hover .pro-info:focus {
+  line-height: 48px;
+  left: -10px;
+  top: -10px;
+  right: -5px;
+  bottom: -10px;
+  opacity: 1;
+}
+.csb-pro-layer .button {
+  margin: 0 5px 0 0;
+  float: left;
+}
+.csb-pro-layer .button .dashicons {
+  line-height: 26px;
+  height: 26px;
+  float: left;
+  margin-right: 6px;
+}
+
+/**
+ * =============================================================================
+ * == PLUGIN STYLES
+ * =============================================================================
+ */
+#defaultsidebarspage p.submit {
+  padding: 0 0 10px;
+  clear: both;
+}
+
+#poststuff.defaultsdetailscontainer h2 {
+  border-bottom: 0;
+  margin-bottom: 5px;
+}
+
+#defaultsforposts,
+#defaultsforpages {
+  padding: 0 10px;
+  background: #fcfcfc;
+  overflow: hidden;
+}
+
+.defaultsSelector {
+  margin-bottom: 30px;
+}
+
+.cscolright {
+  clear: right;
+  float: right;
+  margin: 0;
+  overflow: hidden;
+  padding: 0;
+  width: 49%;
+}
+
+.cscolleft {
+  margin: 0;
+  overflow: hidden;
+  padding: 0;
+  width: 49%;
+}
+
+.widgets-php .widget-liquid-left {
+  width: 100%;
+}
+.widgets-php .cs-wrap .widget-liquid-right .widget.open {
+  z-index: 9999 !important;
+}
+.widgets-php .widget-liquid-right {
+  padding: 0 0 75px 0;
+  margin: -10px -214% 0 0;
+  width: 210%;
+  background: #e4e4e4;
+  /* https://app.asana.com/0/11388810124414/15066782299785 */
+  -webkit-user-select: none;
+  -moz-user-select: none;
+  -ms-user-select: none;
+  user-select: none;
+}
+@media screen and (max-width: 480px) {
+  .widgets-php .widget-liquid-right {
+    width: 100%;
+  }
+}
+.widgets-php .widget-liquid-right #widgets-right {
+  margin: 20px;
+}
+.widgets-php .widget-liquid-right .overview {
+  list-style: none;
+  position: absolute;
+  left: 0;
+  top: 0;
+  width: auto;
+  right: 0;
+  padding-left: 20px;
+  border-left: 1px solid #DDD;
+}
+.widgets-php #wpcontent {
+  position: relative;
+}
+.widgets-php #wpcontent .wrap .cs-wrap {
+  margin-right: 68%;
+  padding-top: 1em;
+  position: relative;
+}
+@media screen and (max-width: 480px) {
+  .widgets-php #wpcontent .wrap .cs-wrap {
+    position: static;
+    margin: 0;
+  }
+}
+.widgets-php #wpcontent #screen-meta-links {
+  position: relative;
+  z-index: 10;
+}
+.widgets-php #wpcontent #screen-meta {
+  position: relative;
+  z-index: 10;
+}
+.widgets-php #widgets-left {
+  margin-right: 0 !important;
+}
+.widgets-php #footer {
+  background: #fff;
+  margin-right: 0px;
+  padding-right: 20px;
+}
+.widgets-php .sidebars-column-1 .custom-sidebars-add-new {
+  background-color: #fff;
+  padding: 15px;
+}
+.widgets-php .sidebars-column-1 .custom-sidebars-add-new p {
+  border-radius: 4px;
+  border: 3px dashed #ddd;
+  color: #777;
+  cursor: pointer;
+  font-weight: bold;
+  margin: 0;
+  padding: 90px 10px;
+  text-align: center;
+}
+.widgets-php .sidebars-column-1 .inner .custom-sidebars-box {
+  border-radius: 4px;
+  margin: 55px 0 16px 0;
+}
+.widgets-php .sidebars-column-1 .inner .custom-sidebars-upfront {
+  background-color: #f9c200;
+}
+.widgets-php .sidebars-column-1 .inner .custom-sidebars-upfront .cs-inner {
+  min-height: 145px;
+  margin-right: -16px;
+  background: url(../img/devman.png) no-repeat 100% 50%;
+  padding: 50px 120px 45px 20px;
+}
+.widgets-php .sidebars-column-1 .inner .custom-sidebars-upfront .cs-inner p {
+  font-size: 1.4em;
+  color: #000;
+  margin-top: 0;
+}
+.widgets-php .sidebars-column-1 .inner .custom-sidebars-upfront .cs-inner p:last-of-type {
+  margin-bottom: 0;
+}
+.widgets-php .sidebars-column-1 .inner .custom-sidebars-upfront .cs-inner .button {
+  background-color: #00a7e6;
+  color: #fff;
+  font-weight: bold;
+  height: auto;
+  padding: 15px 16px;
+  text-transform: uppercase;
+}
+.widgets-php .sidebars-column-1 .inner .custom-sidebars-checkup {
+  background-color: #fff;
+}
+.widgets-php .sidebars-column-1 .inner .custom-sidebars-checkup .cs-inner {
+  background: url(../img/hand-with-heart.png) no-repeat 100% 100%;
+  font-size: 1.2em;
+  min-height: 227px;
+  padding-bottom: 10px;
+}
+.widgets-php .sidebars-column-1 .inner .custom-sidebars-checkup .cs-inner h4, .widgets-php .sidebars-column-1 .inner .custom-sidebars-checkup .cs-inner p {
+  margin: 0;
+  padding: 0 120px 0 30px;
+  font-size: 1.1em;
+}
+.widgets-php .sidebars-column-1 .inner .custom-sidebars-checkup .cs-inner h4 {
+  color: #222;
+  font-size: 1.2em;
+  padding-top: 50px;
+}
+.widgets-php .sidebars-column-1 .inner .custom-sidebars-checkup .cs-inner p {
+  color: #c1272c;
+  padding-top: 16px;
+}
+.widgets-php .sidebars-column-1 .inner .custom-sidebars-checkup .cs-inner form {
+  border-radius: 4px;
+  background-color: #fafafa;
+  display: -ms-flexbox;
+  display: flex;
+  -ms-flex-wrap: nowrap;
+      flex-wrap: nowrap;
+  -ms-flex-pack: justify;
+      justify-content: space-between;
+  margin: 24px 30px 0 30px;
+  padding: 0;
+}
+.widgets-php .sidebars-column-1 .inner .custom-sidebars-checkup .cs-inner form input {
+  background-color: transparent;
+  border: 0;
+  font-size: 1em;
+  margin: 0;
+  padding: 10px 15px;
+  text-align: center;
+}
+.widgets-php .sidebars-column-1 .inner .custom-sidebars-checkup .cs-inner form input[type=submit] {
+  border-radius: 0 4px 4px 0;
+  background-color: #00a7e6;
+  color: #fff;
+  min-width: 3em;
+  text-transform: uppercase;
+}
+.widgets-php .sidebars-column-1 .inner .custom-sidebars-checkup .cs-inner form input[type=text] {
+  color: #aaa;
+  -ms-flex-positive: 1;
+      flex-grow: 1;
+}
+.widgets-php .sidebars-column-1 .inner .custom-sidebars-checkup .cs-inner form input[type=text]:active {
+  box-shadow: none;
+}
+@media screen and (max-width: 590px) {
+  .widgets-php .sidebars-column-1 .inner .custom-sidebars-checkup .cs-inner form {
+    background-color: transparent;
+    display: block;
+  }
+  .widgets-php .sidebars-column-1 .inner .custom-sidebars-checkup .cs-inner form input[type=text] {
+    background-color: #fafafa;
+  }
+  .widgets-php .sidebars-column-1 .inner .custom-sidebars-checkup .cs-inner form input[type=submit] {
+    border-radius: 4px;
+    display: block;
+    margin: 10px 0 0 auto;
+    width: auto;
+  }
+}
+
+#cs-options .cs-action {
+  line-height: 26px;
+  margin-right: 20px;
+}
+#cs-options .cs-action.btn-export {
+  white-space: nowrap;
+}
+#cs-options .cs-filter {
+  float: right;
+}
+@media screen and (max-width: 700px) {
+  #cs-options .cs-filter {
+    float: none;
+    margin-top: 5px;
+  }
+}
+
+.sidebar-form {
+  margin: 0 15px;
+}
+
+.sidebar-form label {
+  display: block;
+}
+
+.sidebar-form .submit {
+  text-align: right;
+  margin: 0;
+  padding: 1em 0;
+}
+
+.sidebar-form .description {
+  margin-top: 5px;
+  text-align: right;
+}
+
+.sidebar_name, .sidebar_description {
+  width: 100%;
+}
+
+div#widgets-right .sidebar-name > h3 {
+  padding: 15px;
+}
+
+div#widgets-right .widgets-sortables .sidebar-name > h3 {
+  padding: 15px 7px;
+}
+
+.widgets-holder-wrap.closed > div:nth-child(2) {
+  display: none;
+}
+
+#defaultsidebarspage .hndle {
+  cursor: pointer;
+}
+
+#customsidebarspage #col-right {
+  width: 62%;
+}
+
+.widgets_access .widget-liquid-right {
+  position: static;
+}
+
+#oldbrowsererror {
+  display: none;
+}
+
+#defaultsidebarspage .postbox {
+  position: static;
+}
+
+#defaultsidebarspage .inside {
+  position: static;
+}
+
+body.appearance_page_customsidebars .wrap h2 {
+  float: none;
+}
+
+body.appearance_page_customsidebars #poststuff h2 {
+  margin-top: 0;
+}
+
+.widget.ui-draggable-dragging {
+  z-index: 10001 !important;
+}
+
+/**
+ * =============================================================================
+ * == POPUP WINDOW: Add/Edit sidebar
+ * =============================================================================
+ */
+.csb-more-content {
+  display: none;
+}
+
+.csb-has-more .csb-more-content {
+  display: block;
+}
+
+/**
+ * =============================================================================
+ * == Custom elements on widget screen
+ * =============================================================================
+ */
+#cs-widgets-extra {
+  display: none;
+}
+
+#cs-title-options {
+  zoom: 1;
+  background: #E8E8E8;
+  margin: -20px -20px 0 -20px;
+  padding: 10px 20px 20px;
+  border-bottom: 1px solid #DDD;
+}
+
+.cs-title h3 {
+  font-weight: 100;
+}
+.cs-title h3 .cs-icon {
+  margin-left: 10px;
+  color: #999;
+}
+
+.replaceable {
+  position: relative;
+}
+.replaceable .replace-marker {
+  position: absolute;
+  left: 0;
+  top: 0;
+  bottom: 0;
+  width: 5px;
+  margin: 0 5px 0 0;
+  border-left: 2px solid #05c944;
+  z-index: 10;
+}
+.replaceable .replace-marker:hover:before {
+  content: attr(data-label);
+  background: #333;
+  color: #EEE;
+  font-size: 13px;
+  white-space: nowrap;
+  padding: 5px;
+  position: absolute;
+  top: 7px;
+  right: 13px;
+  line-height: 20px;
+}
+.replaceable .replace-marker:hover:after {
+  content: '';
+  position: absolute;
+  top: 16px;
+  right: 3px;
+  border: 6px solid transparent;
+  border-left-color: #333;
+}
+
+/**
+ * =============================================================================
+ * == Message box
+ *
+ * @todo: Check if this is used at all??
+ *
+ * =============================================================================
+ */
+.cs-message {
+  margin: .5em 0;
+  padding: 10px;
+  position: absolute;
+  left: 0;
+  right: 0;
+  box-shadow: 0 1px 10px rgba(0, 0, 0, 0.2);
+  z-index: 100;
+}
+
+.cs-message .close {
+  position: absolute;
+  top: .5em;
+  right: .5em;
+  opacity: .3;
+  color: #000;
+  cursor: pointer;
+  text-decoration: none;
+  font-size: 14px;
+  line-height: 26px;
+  width: 26px;
+  text-align: center;
+  background: rgba(0, 0, 0, 0.1);
+}
+
+.cs-message .close:hover,
+.cs-message .close:focus,
+.cs-message .close:active {
+  opacity: 1;
+}
+
+.cs-update {
+  background: lightYellow;
+  border: 1px solid #E6DB55;
+}
+
+.cs-error {
+  background: #FFEBE8;
+  border: 1px solid #C00;
+}
+
+/**
+ * =============================================================================
+ * == Toolbar
+ * =============================================================================
+ */
+.cs-toolbar {
+  color: #333;
+  padding: 0;
+  background: #FCFCFC;
+  border-top: 1px solid #E5E5E5;
+}
+.cs-toolbar:after {
+  display: table;
+  content: '';
+  clear: both;
+}
+
+.closed .cs-toolbar {
+  display: none;
+}
+
+.cs-toolbar .cs-tool {
+  text-decoration: none;
+  line-height: 40px;
+  height: 40px;
+  padding: 0 10px;
+  white-space: nowrap;
+  background: #FFF;
+  position: relative;
+  overflow: hidden;
+}
+.cs-toolbar .dashicons {
+  line-height: 40px;
+}
+.cs-toolbar .cs-separator {
+  border-left: 1px solid #E5E5E5;
+  width: 1px;
+  padding: 0;
+  margin: 0;
+  height: 40px;
+  overflow: hidden;
+  display: inline-block;
+  color: #ddd;
+}
+
+.cs-custom-sidebar .cs-tool,
+.cs-custom-sidebar .cs-separator {
+  float: right;
+}
+
+.cs-theme-sidebar .cs-tool,
+.cs-theme-sidebar .cs-separator {
+  float: left;
+}
+
+.cs-toolbar .delete-sidebar {
+  color: #a00;
+}
+.cs-toolbar .delete-sidebar:hover,
+.cs-toolbar .delete-sidebar:focus,
+.cs-toolbar .delete-sidebar:active {
+  color: #F00;
+}
+
+.cs-toolbar .cs-tool.btn-replaceable {
+  color: #555;
+}
+.cs-toolbar .cs-tool.btn-replaceable:hover {
+  color: #333 !important;
+}
+
+.replaceable .cs-toolbar .cs-tool.btn-replaceable {
+  background: #edfff3;
+  color: #333;
+}
+
+.replace-tip-box {
+  float: left;
+}
+
+.replace-tip {
+  width: 200px;
+}
+
+/**
+ * =============================================================================
+ * == Button styles
+ * =============================================================================
+ */
+.csb .button {
+  outline: 0;
+}
+
+.csb .button > .dashicons,
+.csb .button-primary > .dashicons,
+.csb .button-secondary > .dashicons {
+  opacity: .75;
+  line-height: 26px;
+  margin-right: 5px;
+  transition: opacity .2s;
+}
+
+.csb .button:hover > .dashicons,
+.csb .button-primary:hover > .dashicons,
+.csb .button-secondary:hover > .dashicons {
+  opacity: 1;
+}
+
+/**
+ * =============================================================================
+ * == RTL Styles
+ * =============================================================================
+ */
+.rtl div.widget-liquid-right {
+  float: left;
+  right: auto;
+  left: 0;
+}
+.rtl.widgets-php #wpcontent .wrap .cs-wrap {
+  margin-right: 2px;
+  margin-left: 68%;
+}
+.rtl.widgets-php .widget-liquid-right {
+  margin: -10px 0 0 -214%;
+}
+.rtl.widgets-php #widgets-left {
+  margin-left: 0 !important;
+}
+.rtl.widgets-php.folded #wpcontent,
+.rtl.widgets-php.folded #wpfooter {
+  margin-left: 325px;
+  margin-right: 52px;
+}
+.rtl #cs-title-options h2 {
+  margin-right: 5px;
+}
+.rtl #cs-options .cs-filter {
+  float: left;
+}
+.rtl #cs-options .cs-action {
+  margin-right: 0;
+  margin-left: 20px;
+}
+.rtl .sidebar-form .submit {
+  text-align: left;
+}
+.rtl #TB_ajaxWindowTitle {
+  float: right;
+}
+.rtl #TB_closeAjaxWindow {
+  float: left;
+}
+
+/**
+ * =============================================================================
+ * == Export/Import
+ * =============================================================================
+ */
+.csb-export-head {
+  min-width: 450px;
+}
+
+.csb-export-head th {
+  vertical-align: top;
+  text-align: right;
+  color: #679;
+  width: 150px;
+}
+
+.csb-export-head tr:hover {
+  background: #FAFAFA;
+}
+
+.csb-export-head ul {
+  margin: 0;
+}
+
+.csb-export-head .dashicons.hint {
+  font-size: 12px;
+  line-height: 22px;
+}
+
+.csb-form {
+  padding-left: 15px;
+}
+
+.csb-form h2,
+.csb-form h3,
+.csb-form .form-buttons,
+#poststuff .csb-form h2,
+#poststuff .csb-form h3,
+#poststuff .csb-form .form-buttons {
+  padding-left: 0;
+  margin-left: -15px;
+}
+
+.form-buttons {
+  clear: both;
+}
+
+.show-infos {
+  position: relative;
+  display: inline-block;
+  margin: 0 5px;
+}
+
+h2 .show-infos {
+  top: 4px;
+}
+
+.show-infos .export-infos {
+  position: absolute;
+  top: -5px;
+  left: 30px;
+  font-size: 13px;
+  line-height: 1.4em;
+  font-weight: normal;
+  background: #FFF;
+  box-shadow: 0 1px 8px rgba(0, 0, 0, 0.2);
+  border: 3px solid #FAFAFA;
+  padding: 5px;
+  z-index: 10;
+}
+
+.show-infos .export-infos:before,
+.show-infos .export-infos:after {
+  content: '';
+  position: absolute;
+  left: -17px;
+  top: 5px;
+  border: 7px solid transparent;
+  border-right-color: #FAFAFA;
+  z-index: 1;
+}
+
+.show-infos .export-infos:after {
+  left: -18px;
+  top: 5px;
+  border-right-color: rgba(0, 0, 0, 0.15);
+  z-index: 0;
+}
+
+.show-infos:hover .export-infos {
+  display: block !important;
+}
+
+.export-infos .section {
+  font-weight: bold;
+  margin: 10px 0 5px -2px;
+  color: #666;
+}
+
+/**
+ * =============================================================================
+ * == Location popup
+ * =============================================================================
+ */
+.cs-half {
+  float: left;
+  width: 49%;
+  margin-right: 1%;
+}
+
+.cs-replaceable {
+  margin-bottom: 5px;
+}
+
+.cs-replaceable > .details {
+  display: none;
+  margin: 5px 0;
+}
+
+.cs-replaceable.open > .details {
+  display: block;
+}
+
+.popup-content .message.no-sidebars {
+  font-size: 1.4em;
+}
+
+@media screen and (max-width: 480px) {
+  .wpmui-popup .buttons {
+    height: 80px;
+    text-align: left;
+  }
+  .wpmui-popup .buttons label {
+    float: none;
+    display: block;
+    margin-bottom: .5em;
+  }
+  .wpmui-popup .buttons .btn-save {
+    float: right;
+  }
+}
+/**
+ * =============================================================================
+ * == Post list
+ * =============================================================================
+ */
+@media screen and (max-width: 782px) {
+  #wpbody-content .wp-list-table.fixed .column-cs_replacement {
+    display: none;
+  }
+}
+#wpbody-content .wp-list-table .column-cs_replacement {
+  width: 10%;
+}
+#wpbody-content .wp-list-table .column-cs_replacement dt {
+  opacity: .8;
+  color: #666;
+}
+#wpbody-content .wp-list-table .column-cs_replacement dd {
+  margin-left: 10px;
+}
+#wpbody-content .wp-list-table .inline-edit-row fieldset.cs-quickedit {
+  border-top: 1px solid #eee;
+  margin-top: 10px;
+  padding-top: 10px;
+}
+#wpbody-content .wp-list-table .inline-edit-row fieldset.cs-quickedit label span.title {
+  display: block;
+  float: left;
+  min-width: 5em;
+  white-space: nowrap;
+  padding-right: 10px;
+  width: auto;
+}
+#wpbody-content .wp-list-table .inline-edit-row-page .inline-edit-col-right {
+  float: right;
+}

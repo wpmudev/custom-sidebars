@@ -13,150 +13,15 @@ jQuery(function init_cloning() {
 		is_cloning = false;
 
 	/**
-	 * Moves the "Clone" button next to the save button.
-	 */
-	var init_widget = function init_widget( ev, el ) {
-		var $widget = jQuery( el ).closest( '.widget' ),
-			$btn = $widget.find( '.csb-clone-button' ),
-			$target = $widget.find( '.widget-control-actions .widget-control-save' ),
-			$spinner = $widget.find( '.widget-control-actions .spinner' ),
-			$btn_save = $widget.find( '.widget-control-save' );
-
-		if ( $widget.data( '_csb_cloning' ) ) {
-			return;
-		}
-
-		$spinner.insertBefore( $target ).css({ 'float': 'left' });
-		$btn.insertBefore( $target ).click( clone_widget );
-		$btn_save.click( prepare_update_group );
-
-		$widget.data( '_csb_cloning', true );
-	};
-
-	/**
-	 * Updates the group-counter when a widget is added.
-	 */
-	var update_group_counter = function update_group_counter( ev, el ) {
-		// We do NOT want to change the group-id when we clone a widget...
-		if ( is_cloning ) { return false; }
-
-		var $widget = jQuery( el ).closest( '.widget' ),
-			$widget_group = $widget.find( 'input.csb-clone-group' ),
-			group_id = parseInt( $widget_group.val() ),
-			check = null;
-
-		do {
-			check = $all.find( 'input.csb-clone-group[value="' + group_id + '"]' );
-			if ( ! check.length || ( 1 === check.length && check[0] === $widget_group[0] ) ) {
-				break;
-			} else {
-				group_id += 1;
-			}
-		}
-		while ( true );
-
-		$widget_group.val( group_id );
-		update_template_groups();
-	};
-
-	/**
 	 * Updates all group_id values for the widget-templates to the next free id.
 	 */
 	var update_template_groups = function update_template_groups() {
 		var $groups = jQuery( '#widgets-left input.csb-clone-group' ),
 			next_id = parseInt( $groups.first().val() );
-
 		while ( $all.find( 'input.csb-clone-group[value="' + next_id + '"]' ).length ) {
 			next_id += 1;
 		}
-
 		$groups.val( next_id );
-	};
-
-	/**
-	 * Viually highlights all widgets of the same group.
-	 */
-	var mark_group = function mark_group( ev ) {
-		var $widget = jQuery( this ).closest( '.widget' ),
-			group_id = $widget.find( 'input.csb-clone-group' ).val(),
-			$members = $all.find( 'input.csb-clone-group[value="' + group_id + '"]' ).closest( '.widget' );
-
-		if ( isNaN( group_id ) || group_id < 1 ) {
-			return;
-		}
-
-		$members.addClass('csb-marker');
-		$widget.removeClass('csb-marker');
-	};
-
-	/**
-	 * Removes the visual highlighting of group widgets.
-	 */
-	var unmark_group = function unmark_group( ev ) {
-		var $marked = jQuery( '.widget.csb-marker' );
-		$marked.removeClass('csb-marker');
-	};
-
-	/**
-	 * Adds icons to all widgets that are inside a group.
-	 */
-	var init_group_icons = function init_group_icons() {
-		var $groups = $all.find( 'input.csb-clone-group' );
-
-		$groups.each(function() {
-			var group_id = jQuery( this ).val(),
-				$members = $all.find( 'input.csb-clone-group[value="' + group_id + '"]' ).closest( '.widget' ),
-				$titles = $members.find( '.widget-title h4, .widget-title h3' ),
-				action = 'add';
-
-			if ( isNaN( group_id ) || group_id < 1 ) {
-				action = 'remove';
-			}
-			if ( $members.length < 2 ) {
-				action = 'remove';
-			}
-
-			// Always remove the icons from the group.
-			$titles.removeClass( 'csb-group group-active' )
-				.find( '.btn-clone-group' ).remove();
-			$members.removeAttr( 'data-csb-icon' );
-
-			// If action is "add" then we add the icons again.
-			if ( action === 'add' ) {
-				$titles.addClass( 'csb-group group-active' )
-					.prepend( '<i class="dashicons dashicons-admin-links btn-clone-group"></i> ' );
-				$titles.find( '.btn-clone-group' )
-					.hover( mark_group, unmark_group )
-					.click( toggle_group );
-			}
-		});
-	};
-
-	/**
-	 * Remove widget from group/assign to group again (only works until widget
-	 * was saved.)
-	 */
-	var toggle_group = function toggle_group( ev ) {
-		var $widget = jQuery( this ).closest( '.widget' ),
-			$title = $widget.find( '.widget-title h4' ),
-			$icon = $title.find( '.btn-clone-group' ),
-			$group = $widget.find( 'input.csb-clone-group' );
-
-		ev.preventDefault();
-		ev.stopPropagation();
-		if ( $title.hasClass( 'group-active' ) ) {
-			$title.removeClass( 'group-active' );
-			$icon.removeClass('dashicons-admin-links').addClass('dashicons-editor-unlink');
-			$group.data( 'group', $group.val() );
-			$group.val( 0 );
-			unmark_group();
-		} else {
-			$title.addClass( 'group-active' );
-			$icon.addClass('dashicons-admin-links').removeClass('dashicons-editor-unlink');
-			$group.val( $group.data( 'group' ) );
-			mark_group.call( this, [ev] );
-		}
-		return false;
 	};
 
 	/**
@@ -225,6 +90,149 @@ jQuery(function init_cloning() {
 	};
 
 	/**
+	 * Update all widgets belonging to the same group.
+	 */
+	var prepare_update_group = function prepare_update_group( ev ) {
+		var $widget = jQuery( this ).closest( '.widget' ),
+			group_id = $widget.find( 'input.csb-clone-group' ).val(),
+			$members = $all.find( 'input.csb-clone-group[value="' + group_id + '"]' ).closest( '.widget' ).not( $widget );
+		$members.each(function() {
+			var $item = jQuery( this ),
+				$state = $item.find( 'input.csb-clone-state' );
+			$item.addClass('wpmui-loading').attr( 'data-reload', true );
+		});
+	};
+
+	/**
+	 * Moves the "Clone" button next to the save button.
+	 */
+	var init_widget = function init_widget( ev, el ) {
+		var $widget = jQuery( el ).closest( '.widget' ),
+			$btn = $widget.find( '.csb-clone-button' ),
+			$target = $widget.find( '.widget-control-actions .widget-control-save' ),
+			$spinner = $widget.find( '.widget-control-actions .spinner' ),
+			$btn_save = $widget.find( '.widget-control-save' );
+
+		if ( $widget.data( '_csb_cloning' ) ) {
+			return;
+		}
+
+		$spinner.insertBefore( $target ).css({ 'float': 'left' });
+		$btn.insertBefore( $target ).click( clone_widget );
+		$btn_save.click( prepare_update_group );
+
+		$widget.data( '_csb_cloning', true );
+	};
+
+	/**
+	 * Updates the group-counter when a widget is added.
+	 */
+	var update_group_counter = function update_group_counter( ev, el ) {
+		// We do NOT want to change the group-id when we clone a widget...
+		if ( is_cloning ) {
+			return false;
+		}
+		var $widget = jQuery( el ).closest( '.widget' ),
+			$widget_group = $widget.find( 'input.csb-clone-group' ),
+			group_id = parseInt( $widget_group.val() ),
+			check = null;
+		do {
+			check = $all.find( 'input.csb-clone-group[value="' + group_id + '"]' );
+			if ( ! check.length || ( 1 === check.length && check[0] === $widget_group[0] ) ) {
+				break;
+			} else {
+				group_id += 1;
+			}
+		}
+		while ( true );
+
+		$widget_group.val( group_id );
+		update_template_groups();
+	};
+
+
+	/**
+	 * Viually highlights all widgets of the same group.
+	 */
+	var mark_group = function mark_group( ev ) {
+		var $widget = jQuery( this ).closest( '.widget' ),
+			group_id = $widget.find( 'input.csb-clone-group' ).val(),
+			$members = $all.find( 'input.csb-clone-group[value="' + group_id + '"]' ).closest( '.widget' );
+
+		if ( isNaN( group_id ) || group_id < 1 ) {
+			return;
+		}
+
+		$members.addClass('csb-marker');
+		$widget.removeClass('csb-marker');
+	};
+
+	/**
+	 * Removes the visual highlighting of group widgets.
+	 */
+	var unmark_group = function unmark_group( ev ) {
+		var $marked = jQuery( '.widget.csb-marker' );
+		$marked.removeClass('csb-marker');
+	};
+
+	/**
+	 * Remove widget from group/assign to group again (only works until widget
+	 * was saved.)
+	 */
+	var toggle_group = function toggle_group( ev ) {
+		var $widget = jQuery( this ).closest( '.widget' ),
+			$title = $widget.find( '.widget-title h4' ),
+			$icon = $title.find( '.btn-clone-group' ),
+			$group = $widget.find( 'input.csb-clone-group' );
+		ev.preventDefault();
+		ev.stopPropagation();
+		if ( $title.hasClass( 'group-active' ) ) {
+			$title.removeClass( 'group-active' );
+			$icon.removeClass('dashicons-admin-links').addClass('dashicons-editor-unlink');
+			$group.data( 'group', $group.val() );
+			$group.val( 0 );
+			unmark_group();
+		} else {
+			$title.addClass( 'group-active' );
+			$icon.addClass('dashicons-admin-links').removeClass('dashicons-editor-unlink');
+			$group.val( $group.data( 'group' ) );
+			mark_group.call( this, [ev] );
+		}
+		return false;
+	};
+
+	/**
+	 * Adds icons to all widgets that are inside a group.
+	 */
+	var init_group_icons = function init_group_icons() {
+		var $groups = $all.find( 'input.csb-clone-group' );
+		$groups.each(function() {
+			var group_id = jQuery( this ).val(),
+				$members = $all.find( 'input.csb-clone-group[value="' + group_id + '"]' ).closest( '.widget' ),
+				$titles = $members.find( '.widget-title h4, .widget-title h3' ),
+				action = 'add';
+			if ( isNaN( group_id ) || group_id < 1 ) {
+				action = 'remove';
+			}
+			if ( $members.length < 2 ) {
+				action = 'remove';
+			}
+			// Always remove the icons from the group.
+			$titles.removeClass( 'csb-group group-active' )
+				.find( '.btn-clone-group' ).remove();
+			$members.removeAttr( 'data-csb-icon' );
+			// If action is "add" then we add the icons again.
+			if ( action === 'add' ) {
+				$titles.addClass( 'csb-group group-active' )
+					.prepend( '<i class="dashicons dashicons-admin-links btn-clone-group"></i> ' );
+				$titles.find( '.btn-clone-group' )
+					.hover( mark_group, unmark_group )
+					.click( toggle_group );
+			}
+		});
+	};
+
+	/**
 	 * Saves the specified widget if the clone-state is "empty".
 	 */
 	var populate_widget = function populate_widget( $widget ) {
@@ -234,22 +242,6 @@ jQuery(function init_cloning() {
 			$widget.addClass( 'wpmui-loading' );
 			window.wpWidgets.save( $widget, 0, 1, 0 );
 		}
-	};
-
-	/**
-	 * Update all widgets belonging to the same group.
-	 */
-	var prepare_update_group = function prepare_update_group( ev ) {
-		var $widget = jQuery( this ).closest( '.widget' ),
-			group_id = $widget.find( 'input.csb-clone-group' ).val(),
-			$members = $all.find( 'input.csb-clone-group[value="' + group_id + '"]' ).closest( '.widget' ).not( $widget );
-
-		$members.each(function() {
-			var $item = jQuery( this ),
-				$state = $item.find( 'input.csb-clone-state' );
-
-			$item.addClass('wpmui-loading').attr( 'data-reload', true );
-		});
 	};
 
 	/**
