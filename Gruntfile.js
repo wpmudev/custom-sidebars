@@ -99,7 +99,7 @@ module.exports = function( grunt ) {
 				'!.git',
 				'!.log',
 			],
-			base: 'development',
+			base: 'master',
 			pro: 'customsidebars-pro',
 			free: 'customsidebars-free',
 		},
