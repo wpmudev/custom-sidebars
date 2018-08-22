@@ -11,32 +11,6 @@ jQuery(function init_visibility() {
 	var $doc = jQuery( document );
 
 	/**
-	 * Moves the "Visibility" button next to the save button.
-	 */
-	var init_widget = function init_widget( ev, el ) {
-		var $widget = jQuery( el ).closest( '.widget' ),
-			$btn = $widget.find( '.csb-visibility-button' ),
-			$target = $widget.find( '.widget-control-actions .widget-control-save' ),
-			$spinner = $widget.find( '.widget-control-actions .spinner' );
-
-		if ( $widget.data( '_csb_visibility' ) ) {
-			return;
-		}
-
-		$spinner.insertBefore( $target ).css({ 'float': 'left' });
-		$btn.insertBefore( $target ).click( toggle_section );
-		$widget.on( 'click', '.toggle-action b', toggle_action );
-		$widget.on( 'csb:update', update_display );
-		$widget.on( 'click', '.clear-filter', remove_filter );
-		$widget.on( 'click', '.choose-filters', show_filter_menu );
-		$widget.on( 'click', '.add-filter', add_filter );
-		$widget.on( 'change', 'input[data-lbl-all][data-lbl-single]', toggle_label );
-		$widget.on( 'change', 'select.posttype', update_posttypes );
-
-		$widget.data( '_csb_visibility', true );
-	};
-
-	/**
 	 * Removes the current filter row from the conditions
 	 */
 	var remove_filter = function remove_filter( ev ) {
@@ -55,6 +29,13 @@ jQuery(function init_visibility() {
 			$widget.trigger('csb:update');
 		} );
 		return false;
+	};
+
+	/**
+	 * Close the filter menu again.
+	 */
+	var hide_filter_menu = function hide_filter_menu( ev ) {
+		jQuery( '.csb-action .dropdown:visible' ).hide();
 	};
 
 	/**
@@ -107,13 +88,6 @@ jQuery(function init_visibility() {
 		$menu.show();
 		$doc.one( 'click', hide_filter_menu );
 		return false;
-	};
-
-	/**
-	 * Close the filter menu again.
-	 */
-	var hide_filter_menu = function hide_filter_menu( ev ) {
-		jQuery( '.csb-action .dropdown:visible' ).hide();
 	};
 
 	/**
@@ -215,6 +189,32 @@ jQuery(function init_visibility() {
 				$detail.show();
 			}
 		});
+	};
+
+	/**
+	 * Moves the "Visibility" button next to the save button.
+	 */
+	var init_widget = function init_widget( ev, el ) {
+		var $widget = jQuery( el ).closest( '.widget' ),
+			$btn = $widget.find( '.csb-visibility-button' ),
+			$target = $widget.find( '.widget-control-actions .widget-control-save' ),
+			$spinner = $widget.find( '.widget-control-actions .spinner' );
+
+		if ( $widget.data( '_csb_visibility' ) ) {
+			return;
+		}
+
+		$spinner.insertBefore( $target ).css({ 'float': 'left' });
+		$btn.insertBefore( $target ).click( toggle_section );
+		$widget.on( 'click', '.toggle-action b', toggle_action );
+		$widget.on( 'csb:update', update_display );
+		$widget.on( 'click', '.clear-filter', remove_filter );
+		$widget.on( 'click', '.choose-filters', show_filter_menu );
+		$widget.on( 'click', '.add-filter', add_filter );
+		$widget.on( 'change', 'input[data-lbl-all][data-lbl-single]', toggle_label );
+		$widget.on( 'change', 'select.posttype', update_posttypes );
+
+		$widget.data( '_csb_visibility', true );
 	};
 
 	jQuery( '#widgets-right .widget' ).each( init_widget );

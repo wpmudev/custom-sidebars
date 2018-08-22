@@ -1,4 +1,4 @@
-/*! Custom Sidebars - v3.2.0-beta.1
+/*! Custom Sidebars - v3.2.1
  * https://premium.wpmudev.org/project/custom-sidebars-pro/
  * Copyright (c) 2018; * Licensed GPLv2+ */
 /*global window:false */
@@ -991,6 +991,24 @@ window.csSidebars = null;
 				form = null,
 				id = sb.getID();
 
+			/**
+			 * (_) add new rule
+			 *
+			 * @since 3.2.0
+			 */
+			function _add_new_rule( data, table ) {
+				var template = wp.template('custom-sidebars-new-rule-row');
+				$('tbody', table ).append( template( data ) );
+				$('tfoot', table).hide();
+				$('tbody .dashicons-trash', table).on( 'click', function() {
+					$(this).closest('tr').detach();
+					if ( 0 === $('tbody tr', table ).length ) {
+						$('tfoot', table).show();
+					}
+				});
+				return false;
+			}
+
 			// Display the location data after it was loaded by ajax.
 			function handle_done_load( resp, okay, xhr ) {
 				var theme_sb, opt, name, msg = {}; // Only used in error case.
@@ -1331,24 +1349,6 @@ window.csSidebars = null;
 					size: 0
 				};
 				_add_new_rule( data, table );
-				return false;
-			}
-
-			/**
-			 * (_) add new rule
-			 *
-			 * @since 3.2.0
-			 */
-			function _add_new_rule( data, table ) {
-				var template = wp.template('custom-sidebars-new-rule-row');
-				$('tbody', table ).append( template( data ) );
-				$('tfoot', table).hide();
-				$('tbody .dashicons-trash', table).on( 'click', function() {
-					$(this).closest('tr').detach();
-					if ( 0 === $('tbody tr', table ).length ) {
-						$('tfoot', table).show();
-					}
-				});
 				return false;
 			}
 

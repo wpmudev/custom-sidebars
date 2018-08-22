@@ -299,9 +299,9 @@
   display: -ms-flexbox;
   display: flex;
   -ms-flex-wrap: nowrap;
-  flex-wrap: nowrap;
+      flex-wrap: nowrap;
   -ms-flex-pack: justify;
-  justify-content: space-between;
+      justify-content: space-between;
   margin: 24px 30px 0 30px;
   padding: 0;
 }
@@ -323,7 +323,7 @@
 .widgets-php .sidebars-column-1 .inner .custom-sidebars-checkup .cs-inner form input[type=text] {
   color: #aaa;
   -ms-flex-positive: 1;
-  flex-grow: 1;
+      flex-grow: 1;
 }
 .widgets-php .sidebars-column-1 .inner .custom-sidebars-checkup .cs-inner form input[type=text]:active {
   box-shadow: none;
