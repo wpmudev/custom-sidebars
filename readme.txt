@@ -111,7 +111,7 @@ Custom Sidebars has the same license as WordPress, so you can use it wherever yo
 
 == Changelog ==
 
-3.2.2 ( 2018-10-25 )
+= 3.2.2 =
 * Fixed a unclosed A tag.
 
 = 3.2.1 =
