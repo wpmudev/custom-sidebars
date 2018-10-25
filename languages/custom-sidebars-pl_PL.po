@@ -5,8 +5,8 @@ msgstr ""
 "Project-Id-Version: Custom Sidebars Pro\n"
 "Report-Msgid-Bugs-To: https://wordpress.org/support/plugin/custom-sidebars-"
 "pro\n"
-"POT-Creation-Date: 2018-08-22 20:11:52+00:00\n"
-"PO-Revision-Date: 2018-07-16 15:43:13+0000\n"
+"POT-Creation-Date: 2018-10-25 07:09:39+00:00\n"
+"PO-Revision-Date: 2018-08-13 06:59:23+0000\n"
 "Language: pl\n"
 "MIME-Version: 1.0\n"
 "Content-Type: text/plain; charset=UTF-8\n"
@@ -105,7 +105,6 @@ msgstr "Wyniki wyszukiwania"
 
 #: inc/class-custom-sidebars-editor.php:456
 #: inc/class-custom-sidebars-visibility.php:162
-#, fuzzy
 msgid "Not Found (404)"
 msgstr "Nie znaleziono (404)"
 
@@ -229,7 +228,6 @@ msgstr[1] "Zaimportowano %d widżety!"
 msgstr[2] "Zaimportowano %d widżetów!"
 
 #: inc/class-custom-sidebars-visibility.php:158
-#, fuzzy
 msgid "Single Page"
 msgstr "Pojedyncza strona"
 
@@ -290,14 +288,12 @@ msgid "Membership2"
 msgstr "Membership2"
 
 #: inc/class-custom-sidebars-visibility.php:245 views/import.php:364
-#, fuzzy
 msgid "Special Pages"
 msgstr "Strony specjalne"
 
 #: inc/class-custom-sidebars-visibility.php:250
-#, fuzzy
 msgid "For Post Type"
-msgstr "Typ treści"
+msgstr "Typy treści"
 
 #: inc/class-custom-sidebars-visibility.php:252
 msgid "Taxonomy"
@@ -453,17 +449,14 @@ msgid "Exported on"
 msgstr "Data eksportu"
 
 #: views/import.php:84
-#, fuzzy
 msgid "WordPress Settings"
 msgstr "Ustawienia WordPressa"
 
 #: views/import.php:95
-#, fuzzy
 msgid "WordPress Version"
 msgstr "Wersja WordPressa"
 
 #: views/import.php:100
-#, fuzzy
 msgid "Plugin Version"
 msgstr "Wersja wtyczki"
 
@@ -516,17 +509,14 @@ msgid "Replaceable Sidebars"
 msgstr "Podmienialne panele boczne"
 
 #: views/import.php:276
-#, fuzzy
 msgid "By Post Type"
 msgstr "Typ treści"
 
 #: views/import.php:305
-#, fuzzy
 msgid "Post-Type Archives"
 msgstr "Archiwum typów treści"
 
 #: views/import.php:326
-#, fuzzy
 msgid "By Category"
 msgstr "Kategoria"
 
@@ -536,7 +526,6 @@ msgid "Category Archives"
 msgstr "Archiwum kategorii"
 
 #: views/import.php:367
-#, fuzzy
 msgid "Main Blog Page"
 msgstr "Strona główna"
 
@@ -545,12 +534,10 @@ msgid "Author Archives"
 msgstr "Archiwum autora"
 
 #: views/import.php:370
-#, fuzzy
 msgid "Tag Archives"
-msgstr "Archiwum tagu"
+msgstr "Archiwum Tagów"
 
 #: views/import.php:371
-#, fuzzy
 msgid "Search Results Page"
 msgstr "Strona wyników wyszukiwania"
 
@@ -869,27 +856,3 @@ msgstr "Wyświetlaj"
 msgctxt "media screen width table"
 msgid "Screen width"
 msgstr "Długość ekranu"
-
-#~ msgid "Not found (404)"
-#~ msgstr "Nie znaleziono (404)"
-
-#~ msgid "Special pages"
-#~ msgstr "Strony specjalne"
-
-#~ msgid "For posttype"
-#~ msgstr "Dla typów treści"
-
-#~ msgid "Search results"
-#~ msgstr "Wyniki wyszukiwania"
-
-#~ msgid "Replaceable sidebars"
-#~ msgstr "Podmienialne panele boczne"
-
-#~ msgid "Category archives"
-#~ msgstr "Archiwum kategorii"
-
-#~ msgid "Date archives"
-#~ msgstr "Archiwum dat"
-
-#~ msgid "Author archives"
-#~ msgstr "Archiwum autora"
