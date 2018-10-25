@@ -62,9 +62,9 @@ function custom_sidebars_replace_not_allowed( $page_name, $img, $archive = null 
 	echo '</p>';
 	$url = esc_url( CSB_IMG_URL . 'metabox/' . $img . '?version=PLUGIN_VERSION' );
 	printf(
-		'<a href="%s" target="_blank"><img src="%s" style="width:100%%" /><a>',
-		$url,
-		$url
+		'<a href="%s" target="_blank"><img src="%s" style="width:100%%" /></a>',
+		esc_url( $url ),
+		esc_url( $url )
 	);
 }
 /**
@@ -109,11 +109,11 @@ if ( $is_front  ) {
 <?php
 		}
 	} else {
-        echo '<p id="message" class="updated">';
-        printf(
-            __( 'All sidebars have been locked, you cannot replace them. Go to <a href="%s">the widgets page</a> to unlock a sidebar.', 'custom-sidebars' ),
-            admin_url( 'widgets.php' )
-        );
+		echo '<p id="message" class="updated">';
+		printf(
+			__( 'All sidebars have been locked, you cannot replace them. Go to <a href="%s">the widgets page</a> to unlock a sidebar.', 'custom-sidebars' ),
+			admin_url( 'widgets.php' )
+		);
 		echo '</p>';
 	}
 }
