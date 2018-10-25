@@ -3,7 +3,7 @@ Contributors: WPMUDEV, marquex, WPMUDEV-Support2, WPMUDEV-Support1, WPMUDEV-Supp
 Tags: sidebar, widget, footer, custom, flexible layout, dynamic widgets, manage sidebars, replace widgets, custom widget area
 Requires at least: 3.8
 Tested up to: 4.9.8
-Stable tag: 3.2.0
+Stable tag: 3.2.2
 
 Flexible sidebars for custom widget configurations on every page, post and custom post type on your site.
 
@@ -110,6 +110,9 @@ Any user that can switch themes, can create sidebars. Switch_themes is the capab
 Custom Sidebars has the same license as WordPress, so you can use it wherever you want for free. Yay!
 
 == Changelog ==
+
+3.2.2 ( 2018-10-25 )
+* Fixed a unclosed A tag.
 
 = 3.2.1 =
 * Fixed a problem with sidebar replacement on front page.
