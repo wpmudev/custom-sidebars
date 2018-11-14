@@ -65,6 +65,16 @@ function inc_sidebars_init() {
 			'post-new.php',
 			'widgets.php',
 		);
+		/**
+		 * Allowed pages array.
+		 *
+		 * To change where Custom Sidebars is loaded, use this filter.
+		 *
+		 * @since 3.2.3
+		 *
+		 * @param array $allowed Allowed pages list.
+		 */
+		$allowed = apply_filters( 'custom_sidebars_allowed_pages_array', $allowed );
 		if ( ! in_array( $file, $allowed ) ) {
 			return;
 		}
