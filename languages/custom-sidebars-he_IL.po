@@ -3,7 +3,7 @@ msgstr ""
 "Project-Id-Version: Custom Sidebars\n"
 "Report-Msgid-Bugs-To: https://wordpress.org/support/plugin/custom-sidebars-"
 "pro\n"
-"POT-Creation-Date: 2018-08-22 20:11:52+00:00\n"
+"POT-Creation-Date: 2018-11-20 07:21:51+00:00\n"
 "PO-Revision-Date: 2014-08-28 21:54+0100\n"
 "Last-Translator: Philipp Stracker <philipp@stracker.net>\n"
 "Language-Team: \n"
@@ -100,7 +100,7 @@ msgid "Deleted sidebar <strong>%1$s</strong>"
 msgstr ""
 
 #: inc/class-custom-sidebars-editor.php:454
-#: inc/class-custom-sidebars-visibility.php:156 views/metabox.php:74
+#: inc/class-custom-sidebars-visibility.php:156 views/metabox.php:76
 #, fuzzy
 msgid "Front Page"
 msgstr "עמוד בלוג ראשי"
@@ -136,14 +136,14 @@ msgstr "ארכיונים לפי תאריך"
 #: inc/class-custom-sidebars-editor.php:486
 #: inc/class-custom-sidebars-editor.php:558
 #: inc/class-custom-sidebars-editor.php:560
-#: inc/class-custom-sidebars-editor.php:614 views/metabox.php:83
+#: inc/class-custom-sidebars-editor.php:614 views/metabox.php:85
 #, fuzzy
 msgid "%s Archives"
 msgstr "ארכיוני קטגוריה"
 
 # @ custom-sidebars
 #: inc/class-custom-sidebars-editor.php:526
-#: inc/class-custom-sidebars-visibility.php:157 views/metabox.php:78
+#: inc/class-custom-sidebars-visibility.php:157 views/metabox.php:80
 #, fuzzy
 msgid "Post Index"
 msgstr "לפי סוג פוסט"
@@ -458,12 +458,12 @@ msgstr ""
 msgid "Home Page"
 msgstr "עמוד בלוג ראשי"
 
-#: views/col-sidebars.php:47 views/metabox.php:77
+#: views/col-sidebars.php:47 views/metabox.php:79
 #, fuzzy
 msgid "Blog Page"
 msgstr "עמוד בלוג ראשי"
 
-#: views/col-sidebars.php:49 views/metabox.php:81
+#: views/col-sidebars.php:49 views/metabox.php:83
 msgid "WooCommerce Shop"
 msgstr ""
 
@@ -602,34 +602,34 @@ msgid ""
 "Replace the current plugin configuration with the imported configuration."
 msgstr ""
 
-#: views/metabox.php:34
+#: views/metabox.php:35
 msgid "To change the sidebar for %s"
 msgstr ""
 
-#: views/metabox.php:42
+#: views/metabox.php:43
 msgid "Go to the <a href=\"%1$s\">Widgets page</a>"
 msgstr ""
 
-#: views/metabox.php:48
+#: views/metabox.php:49
 #, fuzzy
 msgid "Click on \"Sidebar Location\""
 msgstr "יצר סיידבר"
 
-#: views/metabox.php:52
+#: views/metabox.php:53
 msgid "Open the \"Archive-Types\" tab"
 msgstr ""
 
-#: views/metabox.php:57
+#: views/metabox.php:58
 msgid "Choose \"%s\""
 msgstr ""
 
-#: views/metabox.php:87
+#: views/metabox.php:89
 msgid ""
 "Here you can replace the default sidebars. Simply select what sidebar you "
 "want to show for this post!"
 msgstr ""
 
-#: views/metabox.php:114
+#: views/metabox.php:116
 msgid ""
 "All sidebars have been locked, you cannot replace them. Go to <a href=\"%s"
 "\">the widgets page</a> to unlock a sidebar."

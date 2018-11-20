@@ -5,7 +5,7 @@ msgstr ""
 "Project-Id-Version: Custom Sidebars Pro\n"
 "Report-Msgid-Bugs-To: https://wordpress.org/support/plugin/custom-sidebars-"
 "pro\n"
-"POT-Creation-Date: 2018-10-25 07:09:39+00:00\n"
+"POT-Creation-Date: 2018-11-20 07:21:51+00:00\n"
 "PO-Revision-Date: 2018-08-13 06:59:23+0000\n"
 "Language: pl\n"
 "MIME-Version: 1.0\n"
@@ -94,7 +94,7 @@ msgid "Deleted sidebar <strong>%1$s</strong>"
 msgstr "Panel boczny <strong>%1$s</strong> został usunięty"
 
 #: inc/class-custom-sidebars-editor.php:454
-#: inc/class-custom-sidebars-visibility.php:156 views/metabox.php:74
+#: inc/class-custom-sidebars-visibility.php:156 views/metabox.php:76
 msgid "Front Page"
 msgstr "Strona Główna"
 
@@ -122,12 +122,12 @@ msgstr "Archiwum Dat"
 #: inc/class-custom-sidebars-editor.php:486
 #: inc/class-custom-sidebars-editor.php:558
 #: inc/class-custom-sidebars-editor.php:560
-#: inc/class-custom-sidebars-editor.php:614 views/metabox.php:83
+#: inc/class-custom-sidebars-editor.php:614 views/metabox.php:85
 msgid "%s Archives"
 msgstr "%s archiwum"
 
 #: inc/class-custom-sidebars-editor.php:526
-#: inc/class-custom-sidebars-visibility.php:157 views/metabox.php:78
+#: inc/class-custom-sidebars-visibility.php:157 views/metabox.php:80
 msgid "Post Index"
 msgstr "Lista wpisów"
 
@@ -428,11 +428,11 @@ msgstr "Niedostępne dla %s"
 msgid "Home Page"
 msgstr "Strona główna"
 
-#: views/col-sidebars.php:47 views/metabox.php:77
+#: views/col-sidebars.php:47 views/metabox.php:79
 msgid "Blog Page"
 msgstr "Strona wpisów"
 
-#: views/col-sidebars.php:49 views/metabox.php:81
+#: views/col-sidebars.php:49 views/metabox.php:83
 msgid "WooCommerce Shop"
 msgstr "Sklep WooCommerce"
 
@@ -546,27 +546,27 @@ msgid ""
 "Replace the current plugin configuration with the imported configuration."
 msgstr "Niech importowana konfiguracja zastąpi aktualną."
 
-#: views/metabox.php:34
+#: views/metabox.php:35
 msgid "To change the sidebar for %s"
 msgstr "Aby ustawić panele boczne dla %s"
 
-#: views/metabox.php:42
+#: views/metabox.php:43
 msgid "Go to the <a href=\"%1$s\">Widgets page</a>"
 msgstr "Przejdź na tronę <a href=\"%1$s\">Widgety</a>"
 
-#: views/metabox.php:48
+#: views/metabox.php:49
 msgid "Click on \"Sidebar Location\""
 msgstr "Kliknij w \"Położenie panelu\""
 
-#: views/metabox.php:52
+#: views/metabox.php:53
 msgid "Open the \"Archive-Types\" tab"
 msgstr "Otwórz zakładkę \"Typy archiwum\""
 
-#: views/metabox.php:57
+#: views/metabox.php:58
 msgid "Choose \"%s\""
 msgstr "Wybierz \"%s\""
 
-#: views/metabox.php:87
+#: views/metabox.php:89
 msgid ""
 "Here you can replace the default sidebars. Simply select what sidebar you "
 "want to show for this post!"
@@ -574,7 +574,7 @@ msgstr ""
 "Tutaj można zastąpić domyślne panele boczne. Po prostu proszę wybrać, który "
 "panel boczny ma zostać wyświetlony dla wpisu!"
 
-#: views/metabox.php:114
+#: views/metabox.php:116
 msgid ""
 "All sidebars have been locked, you cannot replace them. Go to <a href=\"%s"
 "\">the widgets page</a> to unlock a sidebar."
