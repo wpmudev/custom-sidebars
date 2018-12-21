@@ -22,19 +22,19 @@ $csb_info = get_plugin_data( CSB_PLUGIN );
  * Helper function used only in this view.
  * It renders a list with sidebar-replacement details
  */
-function list_sidebar_replacement( $label, $list ) {
-	$import = CustomSidebarsExport::get_import_data();
-	$theme_sidebars = CustomSidebars::get_sidebars();
-
-	if ( is_array( $list ) ) {
-		foreach ( $list as $from_id => $to_id ) {
-			$from = $theme_sidebars[ $from_id ];
-			$to = array();
-			if ( isset( $theme_sidebars[ $to_id ] ) ) {
-				$to = $theme_sidebars[ $to_id ];
-			} else {
-				$to = $import['sidebars'][ $to_id ];
-			}
+if ( ! function_exists( 'list_sidebar_replacement' ) ) {
+	function list_sidebar_replacement( $label, $list ) {
+		$import = CustomSidebarsExport::get_import_data();
+		$theme_sidebars = CustomSidebars::get_sidebars();
+		if ( is_array( $list ) ) {
+			foreach ( $list as $from_id => $to_id ) {
+				$from = $theme_sidebars[ $from_id ];
+				$to = array();
+				if ( isset( $theme_sidebars[ $to_id ] ) ) {
+					$to = $theme_sidebars[ $to_id ];
+				} else {
+					$to = $import['sidebars'][ $to_id ];
+				}
 ?>
         <tr>
             <th scope="row"><?php echo esc_html( $label ); ?></th>
@@ -43,6 +43,7 @@ function list_sidebar_replacement( $label, $list ) {
             <td><?php echo esc_html( $to['name'] ); ?></td>
         </tr>
 <?php
+			}
 		}
 	}
 }
