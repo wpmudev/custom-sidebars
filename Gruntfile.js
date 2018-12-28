@@ -486,7 +486,7 @@ module.exports = function( grunt ) {
 
 		checktextdomain: {
 			options: {
-				text_domain: 'custom-sidebars',
+				text_domain: [ 'custom-sidebars', 'wdev_frash', ],
 				keywords: [ //List keyword specifications
 					'__:1,2d',
 					'_e:1,2d',
@@ -505,7 +505,7 @@ module.exports = function( grunt ) {
 				]
 			},
 			files: {
-				src: ['inc/**/*.php', 'views/**/*.php', '!inc/external/**' ],
+				src: ['inc/**/*.php', 'views/**/*.php', '!inc/external/wpmu-lib/inc/class-thelib*', ],
 				expand: true,
 			},
 		},
