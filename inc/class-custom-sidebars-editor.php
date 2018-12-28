@@ -1404,7 +1404,7 @@ class CustomSidebarsEditor extends CustomSidebars {
 					);
 				}
 				$screen_settings .= '</fieldset>';
-				$screen_settings .= sprintf( '<p class="description">%s</p>', __( 'After turn on any Custom Taxonomy you need to reload this screen to be able choose it in Sidebar Location.', 'ub' ) );
+				$screen_settings .= sprintf( '<p class="description">%s</p>', __( 'After turn on any Custom Taxonomy you need to reload this screen to be able choose it in Sidebar Location.', 'custom-sidebars' ) );
 			}
 		}
 		return $screen_settings;

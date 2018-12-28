@@ -95,7 +95,7 @@ if ( ! function_exists( '_show_replaceable' ) ) {
 	?>
 	<div class="wpmui-box">
 		<h3>
-			<a href="#" class="toggle" title="<?php _e( 'Click to toggle' ); /* This is a Wordpress default language */ ?>"><br></a>
+			<a href="#" class="toggle" title="<?php _e( 'Click to toggle', 'custom-sidebars' ); ?>"><br></a>
 			<span><?php _e( 'For all Single Entries matching selected criteria', 'custom-sidebars' ); ?></span>
 		</h3>
 		<div class="inside">
@@ -147,7 +147,7 @@ foreach ( $taxonomies as $taxonomy_slug => $taxonomy ) {
 	?>
 	<div class="wpmui-box closed">
 		<h3>
-			<a href="#" class="toggle" title="<?php _e( 'Click to toggle' ); /* This is a Wordpress default language */ ?>"><br></a>
+			<a href="#" class="toggle" title="<?php _e( 'Click to toggle', 'custom-sidebars' );?>"><br></a>
 			<span><?php _e( 'For Archives', 'custom-sidebars' ); ?></span>
 		</h3>
 		<div class="inside">
@@ -203,7 +203,7 @@ foreach ( $taxonomies as $taxonomy_slug => $taxonomy ) {
 	?>
 	<div class="wpmui-box closed csb-media-screen-width">
 		<h3>
-			<a href="#" class="toggle" title="<?php _e( 'Click to toggle' ); /* This is a Wordpress default language */ ?>"><br></a>
+			<a href="#" class="toggle" title="<?php _e( 'Click to toggle', 'custom-sidebars' ); ?>"><br></a>
 			<span><?php _e( 'For Screen Sizes', 'custom-sidebars' ); ?></span>
         </h3>
         <div class="inside">
@@ -237,7 +237,7 @@ foreach ( $taxonomies as $taxonomy_slug => $taxonomy ) {
 	?>
 	<div class="wpmui-box closed cs-3rd-part">
 <h3>
-<a href="#" class="toggle" title="<?php _e( 'Click to toggle' ); /* This is a Wordpress default language */ ?>"><br></a>
+<a href="#" class="toggle" title="<?php _e( 'Click to toggle', 'custom-sidebars' ); ?>"><br></a>
 <span><?php _e( '3rd party plugins', 'custom-sidebars' ); ?></span>
 </h3>
 <div class="inside">

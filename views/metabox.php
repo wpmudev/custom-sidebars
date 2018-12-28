@@ -40,7 +40,7 @@ if ( ! function_exists( 'custom_sidebars_replace_not_allowed' ) ) {
 		printf(
 			'<li>%s</li>',
 			sprintf(
-				__( 'Go to the <a href="%1$s">Widgets page</a>' ),
+				__( 'Go to the <a href="%1$s">Widgets page</a>', 'custom-sidebars' ),
 				admin_url( 'widgets.php' )
 			)
 		);
