@@ -115,18 +115,6 @@
 				<?php _e( 'Allow this sidebar to be replaced', 'custom-sidebars' ); ?>
 			</span>
 		</label>
-		<span class="cs-separator">|</span>
-		<span class="">
-			<a
-				class="cs-tool"
-				data-action="location"
-				href="#"
-				title="<?php _e( 'Where do you want to show the sidebar?', 'custom-sidebars' ); ?>"
-				>
-				<?php _e( 'Sidebar Location', 'custom-sidebars' ); ?>
-			</a>
-			<span class="cs-separator">|</span>
-		</span>
 	</div>
 
 

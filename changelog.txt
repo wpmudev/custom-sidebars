@@ -9,6 +9,7 @@ Change Log:
 ----------------------------------------------------------------------
 - Added "custom_sidebars_allowed_pages_array" filter to allow pages where Custom Sidebars can be loaded.
 - Fixed problem with double function declaration when Gutenberg is in use.
+- Removed "Sidebar Location" from build-in/theme sidebars to avoid misunderstandings.
 
 3.2.2 ( 2018-10-25 )
 ----------------------------------------------------------------------
