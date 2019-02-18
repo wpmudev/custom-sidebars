@@ -1,8 +1,8 @@
 === Custom Sidebars - Dynamic Widget Area Manager ===
 Contributors: WPMUDEV, marquex, WPMUDEV-Support2, WPMUDEV-Support1, WPMUDEV-Support6, WPMUDEV-Support4, iworks
 Tags: sidebar, widget, footer, custom, flexible layout, dynamic widgets, manage sidebars, replace widgets, custom widget area
-Requires at least: 3.8
-Tested up to: 4.9.8
+Requires at least: 4.4
+Tested up to: 5.1.0
 Stable tag: 3.2.2
 
 Flexible sidebars for custom widget configurations on every page, post and custom post type on your site.
