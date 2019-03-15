@@ -1,15 +1,15 @@
-# Copyright (C) 2018 WPMU DEV
+# Copyright (C) 2019 WPMU DEV
 # This file is distributed under the same license as the Custom Sidebars Pro package.
 msgid ""
 msgstr ""
 "Project-Id-Version: Custom Sidebars Pro PLUGIN_VERSION\n"
 "Report-Msgid-Bugs-To: "
 "https://wordpress.org/support/plugin/custom-sidebars-pro\n"
-"POT-Creation-Date: 2018-12-28 08:52:54+00:00\n"
+"POT-Creation-Date: 2019-03-15 20:37:24+00:00\n"
 "MIME-Version: 1.0\n"
 "Content-Type: text/plain; charset=utf-8\n"
 "Content-Transfer-Encoding: 8bit\n"
-"PO-Revision-Date: 2018-MO-DA HO:MI+ZONE\n"
+"PO-Revision-Date: 2019-MO-DA HO:MI+ZONE\n"
 "Last-Translator: FULL NAME <EMAIL@ADDRESS>\n"
 "Language-Team: LANGUAGE <LL@li.org>\n"
 "Language: en\n"
