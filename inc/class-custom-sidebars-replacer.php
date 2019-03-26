@@ -65,6 +65,12 @@ class CustomSidebarsReplacer extends CustomSidebars {
 			}
 			$replacement = array_shift( $replace_info );
 			if (
+				empty( $replacement )
+				|| ! is_string( $replacement )
+			) {
+				continue;
+			}
+			if (
 				isset( $defaults['screen'] )
 				&& isset( $defaults['screen'][ $replacement ] )
 			) {
