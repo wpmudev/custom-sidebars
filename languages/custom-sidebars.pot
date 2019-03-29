@@ -1,15 +1,15 @@
-# Copyright (C) 2018 WPMU DEV
+# Copyright (C) 2019 WPMU DEV
 # This file is distributed under the same license as the Custom Sidebars Pro package.
 msgid ""
 msgstr ""
 "Project-Id-Version: Custom Sidebars Pro PLUGIN_VERSION\n"
 "Report-Msgid-Bugs-To: "
 "https://wordpress.org/support/plugin/custom-sidebars-pro\n"
-"POT-Creation-Date: 2018-10-25 07:09:39+00:00\n"
+"POT-Creation-Date: 2019-03-29 07:49:07+00:00\n"
 "MIME-Version: 1.0\n"
 "Content-Type: text/plain; charset=utf-8\n"
 "Content-Transfer-Encoding: 8bit\n"
-"PO-Revision-Date: 2018-MO-DA HO:MI+ZONE\n"
+"PO-Revision-Date: 2019-MO-DA HO:MI+ZONE\n"
 "Last-Translator: FULL NAME <EMAIL@ADDRESS>\n"
 "Language-Team: LANGUAGE <LL@li.org>\n"
 "Language: en\n"
@@ -100,7 +100,7 @@ msgid "Deleted sidebar <strong>%1$s</strong>"
 msgstr ""
 
 #: inc/class-custom-sidebars-editor.php:454
-#: inc/class-custom-sidebars-visibility.php:156 views/metabox.php:74
+#: inc/class-custom-sidebars-visibility.php:156 views/metabox.php:76
 msgid "Front Page"
 msgstr ""
 
@@ -118,7 +118,7 @@ msgstr ""
 msgid "Any Author Archive"
 msgstr ""
 
-#: inc/class-custom-sidebars-editor.php:458 views/import.php:368
+#: inc/class-custom-sidebars-editor.php:458 views/import.php:369
 msgid "Date Archives"
 msgstr ""
 
@@ -128,12 +128,12 @@ msgstr ""
 #: inc/class-custom-sidebars-editor.php:486
 #: inc/class-custom-sidebars-editor.php:558
 #: inc/class-custom-sidebars-editor.php:560
-#: inc/class-custom-sidebars-editor.php:614 views/metabox.php:83
+#: inc/class-custom-sidebars-editor.php:614 views/metabox.php:85
 msgid "%s Archives"
 msgstr ""
 
 #: inc/class-custom-sidebars-editor.php:526
-#: inc/class-custom-sidebars-visibility.php:157 views/metabox.php:78
+#: inc/class-custom-sidebars-visibility.php:157 views/metabox.php:80
 msgid "Post Index"
 msgstr ""
 
@@ -289,7 +289,7 @@ msgstr ""
 msgid "Membership2"
 msgstr ""
 
-#: inc/class-custom-sidebars-visibility.php:245 views/import.php:364
+#: inc/class-custom-sidebars-visibility.php:245 views/import.php:365
 msgid "Special Pages"
 msgstr ""
 
@@ -364,7 +364,7 @@ msgid ""
 "\t\t\t\t\t\tto disable accessibility mode and use the %1$s plugin!"
 msgstr ""
 
-#: inc/class-custom-sidebars.php:962 views/import.php:145
+#: inc/class-custom-sidebars.php:962 views/import.php:146
 msgid "Widgets"
 msgstr ""
 
@@ -410,7 +410,7 @@ msgstr ""
 msgid "WPML"
 msgstr ""
 
-#: views/bulk-edit.php:23 views/import.php:128 views/widgets.php:47
+#: views/bulk-edit.php:23 views/import.php:129 views/widgets.php:47
 msgid "Custom Sidebars"
 msgstr ""
 
@@ -426,150 +426,150 @@ msgstr ""
 msgid "Home Page"
 msgstr ""
 
-#: views/col-sidebars.php:47 views/metabox.php:77
+#: views/col-sidebars.php:47 views/metabox.php:79
 msgid "Blog Page"
 msgstr ""
 
-#: views/col-sidebars.php:49 views/metabox.php:81
+#: views/col-sidebars.php:49 views/metabox.php:83
 msgid "WooCommerce Shop"
 msgstr ""
 
-#: views/import.php:67 views/widgets-export.php:34
+#: views/import.php:68 views/widgets-export.php:34
 msgid "Import"
 msgstr ""
 
-#: views/import.php:74
+#: views/import.php:75
 msgid "Filename"
 msgstr ""
 
-#: views/import.php:78
+#: views/import.php:79
 msgid "Exported on"
 msgstr ""
 
-#: views/import.php:84
+#: views/import.php:85
 msgid "WordPress Settings"
 msgstr ""
 
-#: views/import.php:95
+#: views/import.php:96
 msgid "WordPress Version"
 msgstr ""
 
-#: views/import.php:100
+#: views/import.php:101
 msgid "Plugin Version"
 msgstr ""
 
-#: views/import.php:102
+#: views/import.php:103
 msgid "Unknown"
 msgstr ""
 
-#: views/import.php:105
+#: views/import.php:106
 msgid "Theme"
 msgstr ""
 
-#: views/import.php:130
+#: views/import.php:131
 msgid "Mark the sidebars that you want to import."
 msgstr ""
 
-#: views/import.php:135
+#: views/import.php:136
 msgid "Also import all widgets of the selected sidebars."
 msgstr ""
 
-#: views/import.php:142 views/widgets-editor.php:15
+#: views/import.php:143 views/widgets-editor.php:15
 msgid "Name"
 msgstr ""
 
-#: views/import.php:143 views/widgets-editor.php:20
+#: views/import.php:144 views/widgets-editor.php:20
 msgid "Description"
 msgstr ""
 
-#: views/import.php:144
+#: views/import.php:145
 msgid "Note"
 msgstr ""
 
-#: views/import.php:152
+#: views/import.php:153
 msgid "New sidebar will be created"
 msgstr ""
 
-#: views/import.php:154
+#: views/import.php:155
 msgid "Existing sidebar will be replaced!"
 msgstr ""
 
-#: views/import.php:222
+#: views/import.php:223
 msgid "(Theme sidebar)"
 msgstr ""
 
-#: views/import.php:250
+#: views/import.php:251
 msgid "Configuration"
 msgstr ""
 
-#: views/import.php:254 views/import.php:257
+#: views/import.php:255 views/import.php:258
 msgid "Replaceable Sidebars"
 msgstr ""
 
-#: views/import.php:276
+#: views/import.php:277
 msgid "By Post Type"
 msgstr ""
 
-#: views/import.php:305
+#: views/import.php:306
 msgid "Post-Type Archives"
 msgstr ""
 
-#: views/import.php:326
+#: views/import.php:327
 msgid "By Category"
 msgstr ""
 
-#: views/import.php:346 views/widgets-location.php:156
-#: views/widgets-location.php:177
+#: views/import.php:347 views/widgets-location.php:157
+#: views/widgets-location.php:178
 msgid "Category Archives"
 msgstr ""
 
-#: views/import.php:367
+#: views/import.php:368
 msgid "Main Blog Page"
 msgstr ""
 
-#: views/import.php:369 views/widgets-location.php:188
+#: views/import.php:370 views/widgets-location.php:189
 msgid "Author Archives"
 msgstr ""
 
-#: views/import.php:370
+#: views/import.php:371
 msgid "Tag Archives"
 msgstr ""
 
-#: views/import.php:371
+#: views/import.php:372
 msgid "Search Results Page"
 msgstr ""
 
-#: views/import.php:381
+#: views/import.php:382
 msgid "Replace the current plugin configuration with the imported configuration."
 msgstr ""
 
-#: views/metabox.php:34
+#: views/metabox.php:35
 msgid "To change the sidebar for %s"
 msgstr ""
 
-#: views/metabox.php:42
+#: views/metabox.php:43
 msgid "Go to the <a href=\"%1$s\">Widgets page</a>"
 msgstr ""
 
-#: views/metabox.php:48
+#: views/metabox.php:49
 msgid "Click on \"Sidebar Location\""
 msgstr ""
 
-#: views/metabox.php:52
+#: views/metabox.php:53
 msgid "Open the \"Archive-Types\" tab"
 msgstr ""
 
-#: views/metabox.php:57
+#: views/metabox.php:58
 msgid "Choose \"%s\""
 msgstr ""
 
-#: views/metabox.php:87
+#: views/metabox.php:89
 msgid ""
 "Here you can replace the default sidebars. Simply select what sidebar you "
 "want to show for this post!"
 msgstr ""
 
-#: views/metabox.php:114
+#: views/metabox.php:116
 msgid ""
 "All sidebars have been locked, you cannot replace them. Go to <a "
 "href=\"%s\">the widgets page</a> to unlock a sidebar."
@@ -582,7 +582,7 @@ msgid ""
 msgstr ""
 
 #: views/widgets-delete.php:16 views/widgets-editor.php:63
-#: views/widgets-location.php:283
+#: views/widgets-location.php:284
 msgid "Cancel"
 msgstr ""
 
@@ -654,76 +654,76 @@ msgstr ""
 msgid "Click here to pick available %1$s"
 msgstr ""
 
-#: views/widgets-location.php:87
+#: views/widgets-location.php:88
 msgid "There are no replaceable sidebars. Please allow at least one as replaceable."
 msgstr ""
 
-#: views/widgets-location.php:97 views/widgets-location.php:149
-#: views/widgets-location.php:205 views/widgets-location.php:239
+#: views/widgets-location.php:98 views/widgets-location.php:150
+#: views/widgets-location.php:206 views/widgets-location.php:240
 msgid "Click to toggle"
 msgstr ""
 
-#: views/widgets-location.php:98
+#: views/widgets-location.php:99
 msgid "For all Single Entries matching selected criteria"
 msgstr ""
 
-#: views/widgets-location.php:101
+#: views/widgets-location.php:102
 msgid ""
 "These replacements will be applied to every single post that matches a "
 "certain post type or category."
 msgstr ""
 
-#: views/widgets-location.php:109
+#: views/widgets-location.php:110
 msgid "categories"
 msgstr ""
 
-#: views/widgets-location.php:121
+#: views/widgets-location.php:122
 msgid "Post Types"
 msgstr ""
 
-#: views/widgets-location.php:150
+#: views/widgets-location.php:151
 msgid "For Archives"
 msgstr ""
 
-#: views/widgets-location.php:153
+#: views/widgets-location.php:154
 msgid "These replacements will be applied to Archive Type posts and pages."
 msgstr ""
 
-#: views/widgets-location.php:155 views/widgets-location.php:166
+#: views/widgets-location.php:156 views/widgets-location.php:167
 msgid "Archive Types"
 msgstr ""
 
-#: views/widgets-location.php:157
+#: views/widgets-location.php:158
 msgid "Authors"
 msgstr ""
 
-#: views/widgets-location.php:206
+#: views/widgets-location.php:207
 msgid "For Screen Sizes"
 msgstr ""
 
-#: views/widgets-location.php:209
+#: views/widgets-location.php:210
 msgid ""
 "Those settings do not load unload sidebars, it only hide or show widgets, "
 "NOT SIDEBARS, depend on media screen width."
 msgstr ""
 
-#: views/widgets-location.php:222
+#: views/widgets-location.php:223
 msgid "There is no defined rules."
 msgstr ""
 
-#: views/widgets-location.php:225
+#: views/widgets-location.php:226
 msgid "Add new rule"
 msgstr ""
 
-#: views/widgets-location.php:240
+#: views/widgets-location.php:241
 msgid "3rd party plugins"
 msgstr ""
 
-#: views/widgets-location.php:243
+#: views/widgets-location.php:244
 msgid "These replacements will be applied to 3rd party plugins."
 msgstr ""
 
-#: views/widgets-location.php:284 views/widgets.php:42
+#: views/widgets-location.php:285 views/widgets.php:42
 msgid "Save Changes"
 msgstr ""
 
@@ -781,11 +781,11 @@ msgstr ""
 msgid "Edit"
 msgstr ""
 
-#: views/widgets.php:87 views/widgets.php:124
+#: views/widgets.php:87
 msgid "Where do you want to show the sidebar?"
 msgstr ""
 
-#: views/widgets.php:89 views/widgets.php:126
+#: views/widgets.php:89
 msgid "Sidebar Location"
 msgstr ""
 
@@ -824,17 +824,17 @@ msgctxt "Column name on entries list."
 msgid "Custom Sidebars"
 msgstr ""
 
-#: views/widgets-location.php:213
+#: views/widgets-location.php:214
 msgctxt "media screen width table"
 msgid "Screen"
 msgstr ""
 
-#: views/widgets-location.php:214
+#: views/widgets-location.php:215
 msgctxt "media screen width table"
 msgid "Show"
 msgstr ""
 
-#: views/widgets-location.php:215
+#: views/widgets-location.php:216
 msgctxt "media screen width table"
 msgid "Screen width"
 msgstr ""
