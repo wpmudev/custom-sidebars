@@ -485,4 +485,3 @@ Custom sidebars is maintained and developed by [WPMU DEV](http://premium.wpmudev
 
 Original development completed by [Javier Marquez](http://marquex.es/).
 
-Custom Sidebars uses the great jQuery plugin [Tiny Scrollbar](http://www.baijs.nl/tinyscrollbar/) by Maarten Baijs.
