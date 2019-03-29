@@ -486,7 +486,7 @@ module.exports = function( grunt ) {
 
 		checktextdomain: {
 			options: {
-				text_domain: [ 'custom-sidebars', 'wdev_frash', ],
+				text_domain: [ 'custom-sidebars', 'wdev_frash', 'wpmudev' ],
 				keywords: [ //List keyword specifications
 					'__:1,2d',
 					'_e:1,2d',

@@ -1,8 +1,8 @@
 === Custom Sidebars - Dynamic Widget Area Manager ===
 Contributors: WPMUDEV, marquex, WPMUDEV-Support2, WPMUDEV-Support1, WPMUDEV-Support6, WPMUDEV-Support4, iworks
 Tags: sidebar, widget, footer, custom, flexible layout, dynamic widgets, manage sidebars, replace widgets, custom widget area
-Requires at least: 4.4
-Tested up to: 5.1.0
+Requires at least: 4.6
+Tested up to: 5.1.1
 Stable tag: 3.2.2
 
 Flexible sidebars for custom widget configurations on every page, post and custom post type on your site.
@@ -110,6 +110,12 @@ Any user that can switch themes, can create sidebars. Switch_themes is the capab
 Custom Sidebars has the same license as WordPress, so you can use it wherever you want for free. Yay!
 
 == Changelog ==
+
+= 3.2.3 =
+* Added "custom_sidebars_allowed_pages_array" filter to allow pages where Custom Sidebars can be loaded.
+* Fixed problem with double function declaration when Gutenberg is in use.
+* Removed "Sidebar Location" from build-in/theme sidebars to avoid misunderstandings.
+* Updated "WPMU Dev code library" to version 3.1.0.
 
 = 3.2.2 =
 * Fixed a unclosed A tag.
